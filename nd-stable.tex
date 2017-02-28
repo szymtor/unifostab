@@ -678,6 +678,75 @@ depth $2$ here.
 
 \section{Bounds on the $k$-order property}\label{sec:stable}
 
+\begin{theorem}
+Let $\psi(\tup{x})$ be a formula and let $v_1,\ldots, v_m\in V(G)$. 
+There is a formula $\vartheta(\tup{x})$ 
+of the same quantifier rank as $\psi$ over a signature extended 
+with $m$ colors such that for all $\tup{a}$ which do not
+contain elements from $v_1,\ldots, v_m$ it holds that
+$G\models\psi(\tup{a})\Leftrightarrow G\models\vartheta(\tup{a})$. 
+\end{theorem}
+\begin{proof}
+As a preliminary step, we introduce $m$ constant symbols 
+$c_1,\ldots, c_m$. We replace in $\psi$ all quantifiers 
+$\exists x\xi(x,\tup{y})$ by $\exists x((x=c \wedge \xi^*(x,\tup{y})
+\vee (x\neq c\wedge \xi^*(x,\tup{y}))$, 
+where $\xi^*$ is the formula obtained by inductively continuing the
+construction and similarly for the universal quantifier. Furthermore, 
+we replace every atomic formula $E(c_i,c_j)$ by the truth value of
+$E(v_i,v_j)$. Then we have
+\[(G,v_1,\ldots, v_m)\models\psi^*(\tup{a})\Leftrightarrow G\models\psi(\tup{a}).\]
+Obviously, the quantifier rank of $\psi^*$ is the same as that of $\psi$. 
+
+We now build the formula $\psi^{**}$ as follows. We replace
+every subformula $\exists x((x=c_i \wedge \xi^*(x,\tup{y}) \vee 
+(x\neq c_i \wedge \xi^*(x,\tup{y}))$ by the formula
+$\exists x(\xi^{***}(\tup{y}) \vee \xi^{**}(x,\tup{y}))$, 
+where $\xi^{***}(\tup{y})$ is obtained from $\xi^{*}$ by
+replacing every atom $E(c_i,y)$ by the atom $R_i(y)$. Here, 
+$R_i$ is a new unary predicate which holds true exactly for 
+the neighbors of $c_i$ in $G$. Note that $c_i$ occurs only together
+with variables in atoms because we eliminated all other occurrences
+before. Then we have 
+\[G-\{v_1,\ldots, v_m\}\models \psi^{**}(\tup{a})
+\Leftrightarrow (G,v_1,\ldots, v_m)\models\psi^*(\tup{a}).\]
+We let $\vartheta(\tup{x})\coloneqq \psi^{**}(\tup{x})$ and conclude. 
+\end{proof}
+
+We can now translate $\vartheta(\tup{a})$ to Gaifman normal form. 
+Note that the locality radius of the resulting formula does not depend
+on the number $m$ of elements we delete. Only the number of local types
+depends on this number, as the signature of the new formula is changed
+depending on $m$. 
+
+\begin{theorem}
+Let $\psi(\tup{x})$ be a formula and let $v_1,\ldots, v_m\in V(G)$. 
+There is an $r$-local formula $\vartheta(\tup{x})$ 
+over a signature extended 
+with $m$ colors such that for all $\tup{a}$ which do not
+contain elements from $v_1,\ldots, v_m$ it holds that
+$G\models\psi(\tup{a})\Leftrightarrow G\models\vartheta(\tup{a})$. 
+Here, $r=2^{q+|\tup{x}|}$ by Gaifman's Theorem.
+\end{theorem}
+
+We now prove a tuple-wise uniform quasi-wideness, as Podewski and Ziegler 
+prove in the infinite. For a set $S$ and two tuples $\tup{a},\tup{b}\in V(G)^k$
+we write $\dist_{G-S}(\tup{a},\tup{b})>r$ if $\dist_{G-S}(x,y)>r$ for all $x,y\in 
+(\tup{a}\cup\tup{b})\setminus S$. 
+
+\begin{lemma}
+For all $k,m,r\in \N$, there exist $M(k,m,r)\in \N$ and 
+$s(k,m,r)\in \N$ such that if $A$ is a set of $k$-tuples
+with $|A|>M$, then there exists a set $S\subseteq V(G)$
+with $|S|\leq s$ such that $\dist_{G-S}(\tup{a},\tup{b})>r$
+for all $\tup{a},\tup{b}\in A$. 
+\end{lemma}
+\begin{proof}
+
+\end{proof}
+
+ 
+
 \section{VC-dimension of power graphs}\label{sec:vc}
 
 We now prove \cref{thm:new-vc}. 
@@ -699,37 +768,27 @@ that $\max\{\dist_G(v_{ij},a_i), \dist_G(v_{ij},a_j)\}$ is
 minimised. 
 
 A \emph{central walk} $W_{ij}$ is the concatenation of a minimum length
-path from $a_i$ to $v_{ij}$ and a minimum length path from $v_{ij}$ to $a_j$. 
-Note that a central walk is possibly not a path. 
+path $P_{ij}^i$ from $a_i$ to $v_{ij}$ and a minimum length path $P_{ij}^j$ from $v_{ij}$ to $a_j$. 
+Note that a central walk is possibly not a path. For each pair $a_i,a_j$ fix
+a central walk $W_{ij}$ and the corresponding paths $P_{ij}^i$ and $P_{ij}^j$. 
 
-\begin{claim}
-If a vertex $x$ belongs to two distinct central walks $W_{ij}$, $W_{i'j'}$. 
-Assume that $\dist(v_{ij}, a_i)\leq \dist(v_{ij},a_j)$ and 
-$\dist(v_{i'j'}, a_{i'})\leq \dist(v_{i'j'},a_{j'})$
-Then it holds that $i=i'$ and
-$\dist(x,a_i)< \dist(x,a_j)$ and $\dist(x,a_i)<\dist(x,a_{j'})$. 
-\end{claim}
-\noindent\textit{Proof.} Assume that $x$ lies on the minimum length path
-from $a_i$ to $v_{ij}$ and on the minimum length path from $a_{i'}$ to 
-$v_{i'j'}$. Without loss of generality we may assume that 
-$\dist(x,a_i)\leq \dist(x,a_{i'})$. Then $v_{i'j'}$ is within distance $r$ of
-$a_i,a_{i'}$ and $b_{i'}$, which implies that $b_{j'}=a_{i}$ and the claim follows.  
-All other cases are similar. 
-%
-%Let $a_1\in A$ be the vertex closest to $x$. 
-%
-%
-%If this vertex is unique, then $a_1=a_i=a_{i'}$ and the claim follows. 
-%Otherwise, there is another vertex $a_2$ with the same distance. 
-%In this case we have $i=i'=1$ and $j=j'=2$ and the claim follows. \marginpar{not yet correct}
-\hfill$\lrcorner$
+Now assume that a vertex $x$ belongs to two distinct central 
+walks $W_{ij}$, $W_{i'j'}$. Assume that $x$ lies on $P_{ij}^i$ and $P_{ij}^{i'}$,
+otherwise, rename the elements. First, observe that if $\dist(x,a_i)=\dist(x,a_{i'})$, 
+then $a_i=a_{i'}$. Otherwise, $\dist(v_{ij},a_{i})=\dist(v_{ij},a_{i'})$ and hence 
+$a_j=a_i$, and analogously, $a_{j'}=a_j$, contradicting the assumption 
+that $W_{ij}$ and $W_{i'j'}$ are distinct. By the same argument we have 
+$\dist(x,a_i)<\dist(x,a_j)$ and $\dist(x,a_{i'})<\dist(x,a_{j'})$. 
+Now assume that $\dist(x,a_i)<\dist(x,a_{i'})$. By the same argument as 
+above we have $a_{j'}=a_i$, hence $W_{i'j'}=W_{ij'}$. Here, we have
+$\dist(x,a_i)<\dist(x,a_j)$ and $\dist(x,a_{i})<\dist(x,a_{i'})$, 
+otherwise the walks are not distinct. 
 
-\bigskip
 Let us now construct connected subsets $X_i$ for all $1\leq i\leq t$. 
 For every walk $W_{ij}$ the vertices of $W_{ij}$ closer to $a_i$ than to $a_j$ 
 are added to $X_i$, the vertices of $W_{ij}$ closer to $a_j$ than to $a_i$ 
 are added to $X_j$, ties are broken arbitrary.
-Then the sets $X_i$ are pairwise disjoint by the above claim. If a vertex $x$
+Then the sets $X_i$ are pairwise disjoint by what we proved above. If a vertex $x$
 appears in two distinct central walks, these are $W_{ij}$ and $W_{i\ell}$ for some
 $i,j,\ell$ with $\dist(x,a_i)<\dist(x,a_j)$ and $\dist(x,a_i)<\dist(x,a_\ell)$. 
 In both cases $x$ belongs to $X_i$. By construction, the sets $X_i$ are connected, 
