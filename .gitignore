@@ -1,0 +1,14 @@
+sparsity.pdf
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.thm
+*.ai
+*.lb
+*.watcher_pid
+nd-stable.pdf
