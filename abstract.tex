@@ -1,31 +1,38 @@
 
 \begin{abstract}
 \noindent 
+Nowhere dense classes of graphs were introduced 
+by Nešetřil and Ossona de 
+Mendez~\cite{nevsetvril2010first,nevsetvril2011nowhere} as a model
+for uniform sparseness in graphs. The concept of nowhere denseness
+turns out to be very robust as witnessed by the fact that it is equivalent 
+to multiple other concepts studied in different areas of mathematics. 
+In this work we revisit the connections between the notion of nowhere 
+denseness and notions from (finite) model theory.
+
 Based on work of Podewski and Zieger~\cite{podewski1978stable}, 
 Adler and Adler~\cite{adler2014interpreting}
 proved that every nowhere dense class $\CCC$ of graphs is stable, that is, 
-every fixed first-order interpretation of a graph $G\in \CCC$ has 
-ladder index bounded by a constant depending only on $\CCC$ and 
-the interpretation. The proof of this fact is based on an infinite
-Ramsey argument and explicit ladder indices were never given. 
-In this work, we give a combinatorial proof of Adler and Adler's result in 
-the finite and work out the explicit bounds for ladder indices arising
-by first-order interpretations of nowhere dense classes of graphs. 
-
+the ladder index of every first-order formula $\phi(\tup{x},\tup{y})$ over
+graphs from $\CCC$ is bounded by a constant depending only on $\phi$ and
+$\CCC$. The original proof of this fact is based on an infinite
+Ramsey argument and explicit bounds on ladder indices were never given. 
+We give a combinatorial proof of Adler and Adler's result in 
+the finite and work out the explicit bounds for ladder indices of
+first-order formulas on nowhere dense classes of graphs. 
 
 A class $\CCC$ of graphs if uniformly quasi-wide if there are functions 
 $N:\N\times\N\rightarrow\N$ and $s:\N\rightarrow\N$ such 
-that for all $G\in \CCC$ and all $r,m\in \N$, if $A\subseteq V(G)$
+that for all $G\in \CCC$ and all $r,m\in \N$, if $A\subseteq V(G)$ is
 of size at least $N(r,m)$ then there is a set $S$ of size at most $s(r)$
 such that there is a subset $B\subseteq A\setminus S$ which is
-$r$-independent in $G-S$. We proved in~\cite{siebertz2016polynomial} 
-that we can always choose $N(r,m)\leq m^{f(r)}$. The existence of the 
-function $f(r)$ follows 
-from the earlier non-constructive argument of Podewski and Ziegler. 
-We give a simpler proof of our earlier result with much improved bounds 
-on the function $f(r)$.
+$r$-independent in $G-S$. It was proved in~\cite{siebertz2016polynomial} 
+that we can always choose $N(r,m)\leq m^{f(r)}$, for a function $f$ whose
+existence follows from the earlier non-constructive argument of Podewski 
+and Ziegler. We give a simpler proof of this result with much improved bounds 
+on $f(r)$.
 
-Finally, we observe that a construction of Bousquet and 
+Finally, we observe that an argument of Bousquet and 
 Thomasse\'e~\cite{BousquetT15} can be slightly modified to prove that 
 the VC-dimension of the $r$-power graph $G^r$ of a graph $G$
 with $K_t\not\minor_r G$ is bounded by $t-1$.
