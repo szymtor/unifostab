@@ -1,0 +1,164 @@
+
+
+\section{Uniform quasi-wideness}\label{sec:uqw}
+
+The $k$-order property of a formula is strongly related
+to its branching index. The largest $k$ such that 
+$\psi$ has the $k$-order property over $G$ is
+also called the \emph{ladder-index} of $\psi$ over $G$. 
+
+If $\tau$ is a word over an alphabet $\Sigma$ and
+$a\in \Sigma$, then $\tau\cdot a$ denotes the concatenation of~$\tau$
+and $a$.  The \emph{branching index} of a formula $\psi(\tup{x},\tup{y}$
+over a graph $G$ is the largest number
+$\ell$ such that there are tuples of elements
+$\tup{u}_{\sigma_1},\ldots, \tup{u}_{\sigma_{2^\ell}}\in V(G)$, indexed by the
+words over the alphabet $\{0,1\}$ of length exactly $\ell$, and
+tuples of elements $\tup{v}_{\tau_1},\ldots, \tup{v}_{\tau_{2^\ell-1}}$, indexed by the
+words over $\{0,1\}$ of length strictly smaller than $\ell$, such that
+if $\tau_j\cdot a$ is a (not necessarily proper) prefix of~$\sigma_i$, then
+$G\models \psi(\tup{u}_{\sigma_i},\tup{v}_{\tau_j})$ if, and only if, $a=1$. The tuples
+$\tup{u}_{\sigma_1},\ldots, \tup{u}_{\sigma_{2^\ell}}\in V(G)$ are called the 
+\emph{leaves} of the tree, the tuples $\tup{v}_{\tau_1},\ldots, \tup{v}_{\tau_{2^\ell-1}}$
+are its \emph{inner nodes}. Intuitively, a leaf $\tup{u}$ is connected to its 
+predecessors~$\tup{v}$ such
+that $\tup{u}$ is a \emph{right successor} of $\tup{v}$ and not to its predecessors such that 
+it is a \emph{left
+successor}. 
+     
+
+\begin{lemma}[\cite{hodges1993model}, Lemma 6.7.9, p.\
+  313]\label{lem:branching}
+  Let $\psi(\tup{x},\tup{y})$ be a formula and let $G$ be a graph. 
+  If $\psi$ has branching index~$k$ over $G$, 
+  then~$\psi$ has ladder index smaller than $2^{k+1}$ over $G$. 
+  If $\psi$ has  has
+  ladder index $k$ over $G$, then $\psi$ has branching index smaller than
+  $2^{k+2}-2$ over $G$.
+ \end{lemma}
+
+In the proof of~\cref{thm:malshelah} we construct a type tree, in which
+elements are iteratively classified according to their types. The depth of 
+the type tree is directly related to the branching index of the formula. 
+Our first theorem shows that we can avoid the exponential dependency 
+between branching index and ladder index if we consider formulas $\psi(x,y)$
+with exactly two free variables. 
+
+
+Let $\psi(x,y)$ be a formula with $2$ free variables and let $(v_1,\ldots, v_n)$
+be a sequence of vertices of $G$. The \emph{type tree}
+of $\psi$ over $(v_1,\ldots,v_n)$ is constructed as 
+follows. We make $v_1$ the root of the tree. Assume that $v_1,\ldots, v_i$
+have been inserted to the tree. We follow a root-leaf path to find the
+position for the next vertex $v_{i+1}$. If $G\models\psi(v_j,v_{i+1})$, we
+go the right branch of the tree, otherwise we go to the left branch of 
+the tree. 
+
+
+\begin{theorem}
+Let $\phi(x,y)$ be a formula with $2$ free variables and let
+$(v_1,\ldots, v_n)$ be a sequence of elements of $G$. Then the 
+largest complete binary subtree that is found as a topological minor 
+of the type tree of $\psi$ over
+$(v_1,\ldots, v_n)$ has depth at most twice the ladder
+index of $\psi$. 
+\end{theorem}
+\begin{proof}
+Consider the alternating path in the tree. 
+\end{proof}
+
+The following is implicit in~\cite{malliaris2014regularity}. 
+
+\begin{lemma}[reference?]\label{lem:depth}
+If a tree with $n$ vertices does not contain a complete binary 
+tree of depth $k$ as a topological minor, then it has depth at most 
+$x$. 
+\end{lemma}
+
+\begin{lemma}\label{lem:minor-to-tree}
+Let $\phi(x,y)$ be a formula with $2$ free variables and let
+$(v_1,\ldots, v_n)$ be a sequence of elements of $G$. Let $H$
+be the topological minor model of a complete binary subtree in the
+type tree of $\psi$ over $(v_1,\ldots, v_n)$. Denote the 
+principal vertices of $H$ by $(w_1,\ldots, w_m)$. Then the type
+tree of $\psi$ over $(w_1,\ldots, w_m)$ is a complete binary
+tree. 
+\end{lemma}
+
+For the proof of our theorem we will use the formula 
+$\dist_G(x,y)\leq 2$, for which we can give an explicit 
+bound on the depth of the largest binary subtree.
+
+\begin{theorem}
+Let $\CCC$ be a nowhere dense class of graphs. Let 
+$(v_1,\ldots, v_n)$ be the enumeration of an independent set 
+in $G$. Assume that $K_t\not\minor_2G$. 
+Then the largest complete binary subtree that is found as a topological minor 
+of the type tree of $\psi$ over
+$(v_1,\ldots, v_n)$ has depth at most $2(t-1)$. 
+\end{theorem}
+\begin{proof}
+According to \cref{lem:minor-to-tree} we may assume that we find
+the largest complete binary tree as a subgraph. We consider the
+vertices $a_1,b_1,\ldots, a_k,b_k$ of the alternating path in the
+type tree. Because $(v_1,\ldots, v_n)$ is independent in $G$, 
+none of these vertices is adjacent and all of the vertices on the
+paths of length $2$ which cause the creation of edges in the type
+tree are distinct from $a_1,\ldots, b_k$. 
+
+\begin{claim}
+Every vertex $a_i$ is connected to every $b_j$, $j\geq i$,
+via a vertex $z_{ij}$ which is not connected to any~$b_\ell$, $\ell\neq j$. 
+\end{claim}
+
+\noindent\textit{Proof.} Because $b_j$, $j\geq i$, is right of $a_i$, there is 
+an element $z_{ij}$ connected to $a_i$ and $b_j$. If $z_{ij}$ was 
+connected to $b_\ell$, $\ell\neq j$, then $b_\ell$ would be adjacent 
+to $b_j$ in the type tree, which it is not. \hfill$\lrcorner$
+
+\bigskip
+We now contract $b_j$ and all $z_{ij}$ as well as $a_j$ to a single 
+vertex for all $1\leq j\leq k$, $1\leq i\leq j$. We obtain a complete
+graph $K_k$ as a depth-$2$ minor. 
+\end{proof}
+
+Note that the above proof does not give a proof that the ladder
+index of the distance-$2$ formula is at most $2(t-1)$. In the type
+tree we have the stronger statement that the vertices $b_i$
+are not connected by a path of length $2$. 
+We make no statement about the connections
+of these elements in the ladder. 
+
+\begin{theorem}
+The function $N$ in the definition of uniform quasi-wideness
+is small.
+\end{theorem}
+\begin{proof}
+Assume $K_t\not\minor_2G$, in particular, $G$ excludes $K_t$
+as a subgraph. We take a large independent subset $A'$ of $A$ and
+enumerate it as $(a_1,\ldots, a_m)$. We build the type
+tree, which has depth at least $x$ according to \cref{lem:depth}. 
+We consider the longest branch of the type tree. On this branch, 
+we take a set $X$ of maximum length such that every vertex has 
+all its successors on the same side. This set has size at least
+half the length of the branch. 
+
+Either, $X$ is a set with all its successors on the left, then $X$ 
+is a $2$-independent set and we are done with this step and
+continue with $X$. Otherwise, all vertices of $X$ are at distance
+$2$. Let $m=X$ and assume that $m$ is larger than $n_0$ to
+be defined for neighbourhood complexity.
+We claim that we find an element which is connected to at least $m^{1/3}$
+of the vertices of $X$. Otherwise, every vertex
+can create only $m^{2/3}$ connections, however, we need
+to create $m^2$ connections. Hence, we need $m^{4/3}$ vertices
+to create all connections. We have neighbourhood complexity
+$m^{1+\epsilon}$ though, a contradiction. 
+
+We delete the element of degree $m^{1/3}$ 
+and continue with the subsequence
+induced by its neighbours. This can happen at most 
+$t(2)$ times, as we are constructing a complete minor at 
+depth $2$ here. 
+\end{proof}
+

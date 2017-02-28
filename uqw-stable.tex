@@ -1,0 +1,69 @@
+
+\section{Bounds on the $k$-order property}\label{sec:stable}
+
+\begin{theorem}
+Let $\psi(\tup{x})$ be a formula and let $v_1,\ldots, v_m\in V(G)$. 
+There is a formula $\vartheta(\tup{x})$ 
+of the same quantifier rank as $\psi$ over a signature extended 
+with $m$ colors such that for all $\tup{a}$ which do not
+contain elements from $v_1,\ldots, v_m$ it holds that
+$G\models\psi(\tup{a})\Leftrightarrow G\models\vartheta(\tup{a})$. 
+\end{theorem}
+\begin{proof}
+As a preliminary step, we introduce $m$ constant symbols 
+$c_1,\ldots, c_m$. We replace in $\psi$ all quantifiers 
+$\exists x\xi(x,\tup{y})$ by $\exists x((x=c \wedge \xi^*(x,\tup{y})
+\vee (x\neq c\wedge \xi^*(x,\tup{y}))$, 
+where $\xi^*$ is the formula obtained by inductively continuing the
+construction and similarly for the universal quantifier. Furthermore, 
+we replace every atomic formula $E(c_i,c_j)$ by the truth value of
+$E(v_i,v_j)$. Then we have
+\[(G,v_1,\ldots, v_m)\models\psi^*(\tup{a})\Leftrightarrow G\models\psi(\tup{a}).\]
+Obviously, the quantifier rank of $\psi^*$ is the same as that of $\psi$. 
+
+We now build the formula $\psi^{**}$ as follows. We replace
+every subformula $\exists x((x=c_i \wedge \xi^*(x,\tup{y}) \vee 
+(x\neq c_i \wedge \xi^*(x,\tup{y}))$ by the formula
+$\exists x(\xi^{***}(\tup{y}) \vee \xi^{**}(x,\tup{y}))$, 
+where $\xi^{***}(\tup{y})$ is obtained from $\xi^{*}$ by
+replacing every atom $E(c_i,y)$ by the atom $R_i(y)$. Here, 
+$R_i$ is a new unary predicate which holds true exactly for 
+the neighbors of $c_i$ in $G$. Note that $c_i$ occurs only together
+with variables in atoms because we eliminated all other occurrences
+before. Then we have 
+\[G-\{v_1,\ldots, v_m\}\models \psi^{**}(\tup{a})
+\Leftrightarrow (G,v_1,\ldots, v_m)\models\psi^*(\tup{a}).\]
+We let $\vartheta(\tup{x})\coloneqq \psi^{**}(\tup{x})$ and conclude. 
+\end{proof}
+
+We can now translate $\vartheta(\tup{a})$ to Gaifman normal form. 
+Note that the locality radius of the resulting formula does not depend
+on the number $m$ of elements we delete. Only the number of local types
+depends on this number, as the signature of the new formula is changed
+depending on $m$. 
+
+\begin{theorem}
+Let $\psi(\tup{x})$ be a formula and let $v_1,\ldots, v_m\in V(G)$. 
+There is an $r$-local formula $\vartheta(\tup{x})$ 
+over a signature extended 
+with $m$ colors such that for all $\tup{a}$ which do not
+contain elements from $v_1,\ldots, v_m$ it holds that
+$G\models\psi(\tup{a})\Leftrightarrow G\models\vartheta(\tup{a})$. 
+Here, $r=2^{q+|\tup{x}|}$ by Gaifman's Theorem.
+\end{theorem}
+
+We now prove a tuple-wise uniform quasi-wideness, as Podewski and Ziegler 
+prove in the infinite. For a set $S$ and two tuples $\tup{a},\tup{b}\in V(G)^k$
+we write $\dist_{G-S}(\tup{a},\tup{b})>r$ if $\dist_{G-S}(x,y)>r$ for all $x,y\in 
+(\tup{a}\cup\tup{b})\setminus S$. 
+
+\begin{lemma}
+For all $k,m,r\in \N$, there exist $M(k,m,r)\in \N$ and 
+$s(k,m,r)\in \N$ such that if $A$ is a set of $k$-tuples
+with $|A|>M$, then there exists a set $S\subseteq V(G)$
+with $|S|\leq s$ such that $\dist_{G-S}(\tup{a},\tup{b})>r$
+for all $\tup{a},\tup{b}\in A$. 
+\end{lemma}
+\begin{proof}
+
+\end{proof}
