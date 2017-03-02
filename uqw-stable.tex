@@ -1,14 +1,138 @@
 
-\section{Bounds on the $k$-order property}\label{sec:stable}
+\section{From uniform quasi-wideness to stability}\label{sec:stable}
 
-\begin{theorem}
+\subsection{Uniform quasi-widness for tuples}
+Fix a graph $G$, a number $d\in\N$ (the dimension) and a number $r\in \N$ (the radius).
+If $S\subset V(G)$ is a set of vertices and $A\subset V(G)^d$ is a set of $d$-tuples of vertices,
+then we say that $A$ is $r$-\emph{totally independent} in $G-S$ 
+if the set of all vertices $v$ which appear on some coordinate of some tuple $\bar a\in A$
+is $r$-independent in $G-S$. 
+
+
+\begin{proposition}\label{prop:uqw-tuples}
+	Let $\cal C$ be a uniformly quasi-wide class of graphs and $d\in\N$ a number.
+	There are functions $N^d:\N\times\N\to\N,s^d:\N\to \N$
+	such that for all $r,m\in\N$ and all subsets $A\subset V(G)^d$
+	such that $|A|\ge N^d(r,m)$ there  is a set $S\subset V(G)$
+	of size $|S|\le s^d(r)$ and a subset $B$ which is totally $r$-independent in $G-S$.	
+\end{proposition}
+\begin{proof}We fix a uniformly quasi-wide class $\cal C$ and functions $N:\N\times\N\to \N$
+	and $s:\N\to\N$ as in the definition of uniform quasi-wideness.
+	
+	Fix a graph $G\in \cal C$ and numbers $r,m,d\in\N$.
+	For a coordinate $i=1..d$, let $\pi_i$ denote the projection from $V(G)^d$ onto the $i$th coordinate.
+	We start with a set $A\subset V(G)^d$, and the aim is to construct 
+	set $S\subset V(G)$ and  subset $B\subset A$ such that $B$ is totally $r$-independent in $G-S$, and such that the size of $S$ is bounded by a number depending on $r,d$ only. The construction 
+	should work assuming that the size of $A$ is at least some number depending on $r,m,d$ only.
+	
+\medskip
+	The construction proceeds in two steps.	
+
+
+\begin{lemma}\label{lem:step1} For any $r,m\in \N$ there is a number $K(r,m)$ such that
+	for any given $A\subset V(G)^d$ with $|A|\ge K(r,m)$,
+	there is a set $B\subset A$ with $|B|\ge m$, and a set $S\subset V(G)$ with $|S|\le s(r)$, 
+	such that for each coordinate $i=1..d$, 
+ $\pi_i(B)$ is $r$-independent in $G-S$. 
+\end{lemma}
+\begin{proof}
+
+Let $f$ be the function defined so that $f(m)=N(r,m)\cdot m$ for $m'\in\N$.
+
+\begin{claim}\label{claim:ith-coord}
+Fix a coordinate $i\in\set{1,\ldots,d}$, a number $m'\in\N$ and a  set $A\subset V(G)^d$ with  $|A|\ge f_r(m')$.
+There is a set $B\subset A$ such that $|B|\ge m'$
+and $S\subset V(G)$ such that $|S|\le s(r)$,
+so that  $\pi_i(B)$ is $r$-independent in $G-S$.	
+\end{claim}
+\begin{proof}\label{pf:}
+We consider two cases.
+If $\pi_i(A)\subset V(G)$ has at least $N(r,m')$ elements, then we apply the definition of uniform quasi-wideness to $\pi_i(A)\subset V(G)$. Let $S\subset V(G)$ and $B'\subset \pi_i(A)$
+be as in the definition, i.e., $B'$ is $r$-independent in $G-S$,
+$|B'|\ge m'$ and $|S|\le s(r)$. Let $B\subset A$ be the set of all tuples 
+whose $i$th coordinate belongs to the set $B'$, i.e., $B=\pi_i^{-1}(B')\cap A$.
+Clearly, $|B|\ge |B'|\ge m'$, and $|S|\le s(r)$.
+
+If $\pi_i(A)$ has less than $N(r,m')$ elements, then choose the element $a\in\pi_i(A)$ whose inverse image $\pi_i^{-1}(\set a)\cap A$ has the largest cardinality. Let $S=\set{a}$ 
+and let $B=\pi_i^{-1}(\set a)$. Then $|B|\ge \frac{|A|}{|\pi_i(A)|}\ge \frac{|A|}{N(r,m')}\ge \frac {f(m')}{N(r,m')}=m'$,
+and $|S|=1$.
+
+\end{proof}
+
+
+To prove Lemma~\ref{lem:step1} 
+assume that $|A|\ge f^d(m)$. 
+Start from $A_0=A$, $S_0=\emptyset$, and for $i=1..d$,
+let $A_{i}$ and $S_i$ be the $B$ and $S$ obtained from  Claim~\ref{claim:ith-coord} applied to $A_{i-1}$ and $m'=f^{d-i}(m)$.  The invariant is that $|A_i|\ge f^{d-i}(m)$.
+In particular, 
+taking $B=A_d$ and $S=S_1\cup\ldots \cup S_d$, we obtain that $|B|\ge m$ and $|S|\le d\cdot s(r)$, and, by construction, $\pi_i(B)$
+is $r$-independent in $G-S$.
+
+The lemma therefore holds for $K(r,m)=f^d(m).$
+\end{proof}
+
+
+\begin{lemma}\label{lem:step2}
+	Let $B\subset V(G)^d$ and $S\subset V(G)$ be such that for each $i=1..d$,
+	$\pi_i(B)$ is $2r$-independent in $G-S$.
+	Then there is a set $C$ with $C\subset B$ 
+	such that $C$ is totally $r$-independent in $G-S$
+	and $|C|> \lceil\frac{|B|}{d^2-1}\rceil$.
+\end{lemma}
+\begin{proof}
+We construct a sequence of sets $C_0\subset C_1\subset \ldots\subset B$ which are totally $2r$-independent in $G-S$, as follows.
+
+We start with $C_0=\emptyset$. Suppose that $C_s\subset B$ is 
+ already constructed for some $s\ge 0$
+ and is totally $2r$-independent in $G-S$; we construct $C_{s+1}$.  To each element $a\in B-C_s$,
+we associate any function $f_a:\set{1,\ldots,d}^2\to C_s\cup \set{\bot}$,
+with the following properties:
+\begin{itemize}
+	\item If $f_a(i,j)=b$ then the $i$th coordinate of $a$
+	and the $j$th coordinate of $b$ are at distance at most $r$
+	in $G-S$;
+	\item If $f_a(i,j)=\bot$ then there is no element $b\in C_s$ 
+	such that the $i$th coordinate of $a$ and the $j$th coordinate of $b$ are at distance at most $r$ in $G-S$.	
+\end{itemize}
+Observe that whenever $a_1, a_2$ are two distinct elements of $B-C_s$,
+then for all $i,j\in \set{1,\ldots,d}^2$, the values $f_{a_1}(i,j)$ and $f_{a_2}(i,j)$
+cannot be equal to the same element $b\in C_s$:
+otherwise, we would have that the $i$th coordinate of $a_1$
+and the $i$th coordinate of $a_2$ are at distance at most $2r$
+in $G-S$, which is impossible by the assumption on $B$.
+
+In particular, if $|B-C_s|> |C_s|\cdot d^2$
+then there must be some element  $a\in B-C_s$  
+such that $f_a(i,j)=\bot$  for all $i,j\in\set{1,\ldots,d}$.
+Let $C_{s+1}=C_s\cup \set s$.
+By construction, $C_{s+1}$ is totally $2r$-independent in $G-S$.
+
+We may repeat the construction as long as $|B|>|C_s|\cdot (d^2-1)=s\cdot (d^2-1)$, and we stop when this inequality no longer holds. Define the set $C$ as the last constructed set $C_s$.
+By construction, $|C_s|=s>
+\lceil\frac{|B|}{d^2-1}\rceil$.	
+\end{proof}
+
+To finish the proof of Proposition~\ref{prop:uqw-tuples},
+given a set $A\subset V(G)^d$ and numbers $r,m\in\N$,
+first apply Lemma~\ref{lem:step1} 
+  with $r'=2r$ and
+ $m'=\lceil m\cdot ({d^2-1})\rceil$.
+ Assuming that $|A|\ge K(r',m')$, 
+we obtain a set $B\subset A$ with $|B|\ge \lceil m\cdot {(d^2-1)}\rceil$ and a set $S\subset V(G)$ with $|S|\le s(2r)$.
+To $B$ and $S$, apply Lemma~\ref{lem:step2}, yielding a set $C\subset B$ which is totally $r$-independent in $G-S$ and has size at least $m$. This yields the proposition, for $N^d(r,m)=K(r',m')$ and $s^d(r)=s(r')$.
+\end{proof}
+
+
+\subsection{Excluding long ladders}
+
+\begin{lemma}
 Let $\psi(\tup{x})$ be a formula and let $v_1,\ldots, v_m\in V(G)$. 
 There is a formula $\vartheta(\tup{x})$ 
 of the same quantifier rank as $\psi$ over a signature extended 
 with $m$ colors such that for all $\tup{a}$ which do not
 contain elements from $v_1,\ldots, v_m$ it holds that
 $G\models\psi(\tup{a})\Leftrightarrow G\models\vartheta(\tup{a})$. 
-\end{theorem}
+\end{lemma}
 \begin{proof}
 As a preliminary step, we introduce $m$ constant symbols 
 $c_1,\ldots, c_m$. We replace in $\psi$ all quantifiers 
