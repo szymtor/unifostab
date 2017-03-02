@@ -27,7 +27,7 @@ is $r$-independent in $G-S$.
 
 \begin{lemma}\label{lem:step1} For any $r,m\in \N$ there is a number $K(r,m)$ such that
 	for any given $A\subset V(G)^d$ with $|A|\ge K(r,m)$,
-	there is a set $B\subset A$ with $|B|\ge m$, and a set $S\subset V(G)$ with $|S|\le s(r)$, 
+	there is a set $B\subset A$ with $|B|\ge m$, and a set $S\subset V(G)$ with $|S|\le d\cdot s(r)$, 
 	such that for each coordinate $i=1..d$, 
  $\pi_i(B)$ is $r$-independent in $G-S$. 
 \end{lemma}
@@ -38,7 +38,7 @@ Let $f$ be the function defined so that $f(m)=N(r,m)\cdot m$ for $m\in\N$.
 \begin{claim}\label{claim:ith-coord}
 Fix a coordinate $i\in\set{1,\ldots,d}$, a number $m'\in\N$ and a  set $A\subset V(G)^d$ with  $|A|\ge f_r(m')$.
 There is a set $B\subset A$ such that $|B|\ge m'$
-and $S\subset V(G)$ such that $|S|\le s(r)$,
+and $S\subset V(G)$ such that $|S|\le  s(r)$,
 so that  $\pi_i(B)$ is $r$-independent in $G-S$.	
 \end{claim}
 To prove the claim, 
@@ -100,7 +100,7 @@ Let $C_{s+1}=C_s\cup \set s$.
 By construction, $C_{s+1}$ is totally $2r$-independent in $G-S$.
 
 We may repeat the construction as long as $|B|>|C_s|\cdot (d^2-1)=s\cdot (d^2-1)$, and we stop when this inequality no longer holds. Define the set $C$ as the last constructed set $C_s$.
-By construction, $|C_s|=s>
+By construction, $|C_s|=s\ge 
 \frac{|B|}{d^2-1}>\frac{|B|}{d^2}$.	
 \end{proof}
 
@@ -111,7 +111,7 @@ first apply Lemma~\ref{lem:step1}
  $m'= m\cdot d^2$.
  Assuming that $|A|\ge K(r',m')$, 
 we obtain a set $B\subset A$ with $|B|\ge m\cdot d^2$ and a set $S\subset V(G)$ with $|S|\le s(2r)$.
-To $B$ and $S$, apply Lemma~\ref{lem:step2}, yielding a set $C\subset B$ which is totally $r$-independent in $G-S$ and has size at least $m$. This yields the proposition, for $N^d(r,m)=K(r',m')$ and $s^d(r)=s(r')$.
+To $B$ and $S$, apply Lemma~\ref{lem:step2}, yielding a set $C\subset B$ which is totally $r$-independent in $G-S$ and has size at least $m$. This yields the proposition, for $N^d(r,m)=K(r',m')=K(2r,m\cdot d^2)$ and $s^d(r)=d\cdot s(r')=d\cdot s(2r)$.
 \end{proof}
 
 
