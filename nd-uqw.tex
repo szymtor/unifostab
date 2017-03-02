@@ -1,4 +1,4 @@
-\section{Uniform quasi-wideness}\label{sec:uqw}
+\section{From nowhere denseness to uniform quasi-wideness}\label{sec:uqw}
 
 This section is devoted to the proof of~\cref{thm:new-uqw}. 
 Even though we prove a purely graph theoretic statement, 
@@ -56,7 +56,7 @@ if and only if $a_{i+2}$ is a right successor of $a_{i+1}$, $1\leq i\leq k-2$.
 The \emph{alternation rank} of $T$ is the largest number $t$ such that 
 $T$ contains a $t$-alternating path of length $t$.
 
-\begin{lemma}
+\begin{lemma}\label{lem:number-of-nodes}
 Let $T$ be a tree of alternation rank $t$. If
 $T$ has height at most~$h$, then $T$ has at most $(2h+2)^{t+1}$
 vertices. 
@@ -118,18 +118,17 @@ We now consider the formula
 $\phi_2(x,y)\coloneqq \dist_G(x,y)\leq 2$, for which we can give an explicit 
 bound on the alternation rank in its type tree. 
 
-\begin{theorem}
+\begin{theorem}\label{thm:alternation-rank-type-tree}
 Let $G$ be a graph such that $K_t\not\minor_2G$ and let
 $(v_1,\ldots, v_n)$ be an enumeration of an independent set 
 in $G$. Then the alternation rank of the type tree of $\phi$ 
-over $(v_1,\ldots, v_n)$ is at most $2t-1$. 
+over $(v_1,\ldots, v_n)$ is at most~$2t$. 
 \end{theorem}
 \begin{proof}
-According to \cref{lem:minor-to-tree} we may assume that we find
-the largest complete binary tree as a subgraph. We consider the
-vertices $a_1,b_1,\ldots, a_k,b_k$ of the alternating path in the
-type tree. Because $(v_1,\ldots, v_n)$ is independent in $G$, 
-none of these vertices is adjacent and all of the vertices on the
+Assume that we find an alternating path $a_1,b_1,\ldots, a_k,b_k$ 
+in the type tree, where $b_1$ is right of $a_1$. Otherwise, we consider
+the path $b_1,a_2,b_2,\ldots,a_k, b_k$. Because $(v_1,\ldots, v_n)$ is independent in $G$, 
+none of these vertices are adjacent and all of the vertices on the
 paths of length $2$ which cause the creation of edges in the type
 tree are distinct from $a_1,\ldots, b_k$. 
 
@@ -144,9 +143,11 @@ connected to $b_\ell$, $\ell\neq j$, then $b_\ell$ would be adjacent
 to $b_j$ in the type tree, which it is not. \hfill$\lrcorner$
 
 \bigskip
-We now contract $b_j$ and all $z_{ij}$ as well as $a_j$ to a single 
-vertex for all $1\leq j\leq k$, $1\leq i\leq j$. We obtain a complete
-graph $K_k$ as a depth-$2$ minor. 
+Now let $X_j\coloneqq \{b_j\}\cup\{a_j\}\cup\{z_{ij} : 1\leq i\leq j\}$
+for all $1\leq j\leq k$. $X_j$ is connected and has radius $2$. As $a_i$
+is connected to $z_{ij}$ and $a_i\in X_i$ and $z_{ij}\in X_j$ for $i\neq j$, 
+we have constructed a complete graph $K_k$ as depth-$2$ minor. Hence 
+$k\leq t-1$, which proves the claim. 
 \end{proof}
 
 Note that the above proof does not give a proof that the ladder
@@ -156,23 +157,37 @@ are not connected by a path of length $2$.
 We make no statement about the connections
 of these elements in the ladder. 
 
-\begin{theorem}
-The function $N$ in the definition of uniform quasi-wideness
-is small.
-\end{theorem}
+We need one more lemma. 
+
+\begin{lemma}[\cite{gajarsky2013kernelization}]\label{lem:diversity}
+  Let $\CCC$ be a nowhere dense class of graphs. For every
+  $\epsilon>0$ there is an integer~$n_0$ such that if
+  $A\subseteq V(G)$ for $G\in \CCC$ with $\abs{A}\geq n_0$,
+  then \[\abs{\{N(v)\cap A : v\in V(G)\}}\leq \abs{A}^{1+\epsilon}.\]
+\end{lemma}
+
+\begin{lemma}
+Let $G$ be a graph such that $K_t\not\minor_2 G$ and let $m\in \N$. 
+Let $\epsilon>0$ and let $n_0$ be the corresponding constant 
+of~\cref{lem:diversity}.
+Let $A$ be an independent set in $G$ of size at least $(m+n_0)^x$. 
+Then either $A$ contains a $2$-independent set of size $m$ or
+there is a subset $A'\subseteq A$ of size at least~$m$ and
+a vertex $v\in V(G)$ which is adjacent to all vertices of $A'$. 
+\end{lemma}
 \begin{proof}
-Assume $K_t\not\minor_2G$, in particular, $G$ excludes $K_t$
-as a subgraph. We take a large independent subset $A'$ of $A$ and
-enumerate it as $(a_1,\ldots, a_m)$. We build the type
-tree, which has depth at least $x$ according to \cref{lem:depth}. 
-We consider the longest branch of the type tree. On this branch, 
-we take a set $X$ of maximum length such that every vertex has 
-all its successors on the same side. This set has size at least
-half the length of the branch. 
+Fix any enumeration $(v_1,\ldots, v_{m^x})$ of $A$ and
+build the type tree $T$ of the formula $\dist(x,y)\leq 2$ over
+$(v_1,\ldots, v_{m^x})$. According to~\cref{thm:alternation-rank-type-tree}, 
+the alternation rank of $T$ is at most $2t$. According 
+to~\cref{lem:number-of-nodes}, $T$ has depth at least $h$, hence, 
+a path of length at least $m^{3t}$. We choose the longest set $X$
+of vertices on that path without alternations, which has hence length
+at least $m^{3t}$. 
 
 Either, $X$ is a set with all its successors on the left, then $X$ 
-is a $2$-independent set and we are done with this step and
-continue with $X$. Otherwise, all vertices of $X$ are at distance
+is a $2$-independent set and we are done.
+Otherwise, all vertices of $X$ are at distance
 $2$. Let $m=X$ and assume that $m$ is larger than $n_0$ to
 be defined for neighbourhood complexity.
 We claim that we find an element which is connected to at least $m^{1/3}$
@@ -182,10 +197,7 @@ to create $m^2$ connections. Hence, we need $m^{4/3}$ vertices
 to create all connections. We have neighbourhood complexity
 $m^{1+\epsilon}$ though, a contradiction. 
 
-We delete the element of degree $m^{1/3}$ 
-and continue with the subsequence
-induced by its neighbours. This can happen at most 
-$t(2)$ times, as we are constructing a complete minor at 
-depth $2$ here. 
 \end{proof}
+
+
 
