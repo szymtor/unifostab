@@ -1,58 +1,79 @@
-
-
 \section{Uniform quasi-wideness}\label{sec:uqw}
 
-The $k$-order property of a formula is strongly related
-to its branching index. The largest $k$ such that 
-$\psi$ has the $k$-order property over $G$ is
-also called the \emph{ladder-index} of $\psi$ over $G$. 
+This section is devoted to the proof of~\cref{thm:new-uqw}. 
+Even though we prove a purely graph theoretic statement, 
+it is useful to see our methods in a more general model-theoretic context. 
 
-If $\tau$ is a word over an alphabet $\Sigma$ and
-$a\in \Sigma$, then $\tau\cdot a$ denotes the concatenation of~$\tau$
-and $a$.  The \emph{branching index} of a formula $\psi(\tup{x},\tup{y}$
-over a graph $G$ is the largest number
-$\ell$ such that there are tuples of elements
-$\tup{u}_{\sigma_1},\ldots, \tup{u}_{\sigma_{2^\ell}}\in V(G)$, indexed by the
-words over the alphabet $\{0,1\}$ of length exactly $\ell$, and
-tuples of elements $\tup{v}_{\tau_1},\ldots, \tup{v}_{\tau_{2^\ell-1}}$, indexed by the
-words over $\{0,1\}$ of length strictly smaller than $\ell$, such that
-if $\tau_j\cdot a$ is a (not necessarily proper) prefix of~$\sigma_i$, then
-$G\models \psi(\tup{u}_{\sigma_i},\tup{v}_{\tau_j})$ if, and only if, $a=1$. The tuples
-$\tup{u}_{\sigma_1},\ldots, \tup{u}_{\sigma_{2^\ell}}\in V(G)$ are called the 
-\emph{leaves} of the tree, the tuples $\tup{v}_{\tau_1},\ldots, \tup{v}_{\tau_{2^\ell-1}}$
-are its \emph{inner nodes}. Intuitively, a leaf $\tup{u}$ is connected to its 
-predecessors~$\tup{v}$ such
-that $\tup{u}$ is a \emph{right successor} of $\tup{v}$ and not to its predecessors such that 
-it is a \emph{left
-successor}. 
+
+%\begin{definition}
+%If $\tau$ is a word over an alphabet $\Sigma$ and
+%$a\in \Sigma$, then $\tau\cdot a$ denotes the concatenation of~$\tau$
+%and $a$.  The \emph{branching index} of a formula $\psi(\tup{x},\tup{y}$
+%over a graph $G$ is the largest number
+%$\ell$ such that there are tuples of elements
+%$\tup{u}_{\sigma_1},\ldots, \tup{u}_{\sigma_{2^\ell}}\in V(G)$, indexed by the
+%words over the alphabet $\{0,1\}$ of length exactly $\ell$, and
+%tuples of elements $\tup{v}_{\tau_1},\ldots, \tup{v}_{\tau_{2^\ell-1}}$, indexed by the
+%words over $\{0,1\}$ of length strictly smaller than $\ell$, such that
+%if $\tau_j\cdot a$ is a (not necessarily proper) prefix of~$\sigma_i$, then
+%$G\models \psi(\tup{u}_{\sigma_i},\tup{v}_{\tau_j})$ if, and only if, $a=1$. The tuples
+%$\tup{u}_{\sigma_1},\ldots, \tup{u}_{\sigma_{2^\ell}}\in V(G)$ are called the 
+%\emph{leaves} of the tree, the tuples $\tup{v}_{\tau_1},\ldots, \tup{v}_{\tau_{2^\ell-1}}$
+%are its \emph{inner nodes}. Intuitively, a leaf $\tup{u}$ is connected to its 
+%predecessors~$\tup{v}$ such
+%that $\tup{u}$ is a \emph{right successor} of $\tup{v}$ and not to its predecessors such that 
+%it is a \emph{left
+%successor}. 
+%\end{definition}
      
 
-\begin{lemma}[\cite{hodges1993model}, Lemma 6.7.9, p.\
-  313]\label{lem:branching}
-  Let $\psi(\tup{x},\tup{y})$ be a formula and let $G$ be a graph. 
-  If $\psi$ has branching index~$k$ over $G$, 
-  then~$\psi$ has ladder index smaller than $2^{k+1}$ over $G$. 
-  If $\psi$ has  has
-  ladder index $k$ over $G$, then $\psi$ has branching index smaller than
-  $2^{k+2}-2$ over $G$.
- \end{lemma}
+%\begin{lemma}[\cite{hodges1993model}, Lemma 6.7.9, p.\
+%  313]\label{lem:branching}
+%  Let $\psi(\tup{x},\tup{y})$ be a formula and let $G$ be a graph. 
+%  If $\psi$ has branching index~$k$ over $G$, 
+%  then~$\psi$ has ladder index smaller than $2^{k+1}$ over $G$. 
+%  If $\psi$ has  has
+%  ladder index $k$ over $G$, then $\psi$ has branching index smaller than
+%  $2^{k+2}-2$ over $G$.
+% \end{lemma}
 
-In the proof of~\cref{thm:malshelah} we construct a type tree, in which
+In the proof of~\cref{thm:malshelah} one constructs a tree, in which
 elements are iteratively classified according to their types. The depth of 
-the type tree is directly related to the branching index of the formula. 
-Our first theorem shows that we can avoid the exponential dependency 
-between branching index and ladder index if we consider formulas $\psi(x,y)$
-with exactly two free variables. 
+the type tree is directly related to the ladder index of the formula, 
+more precisely to the \emph{branching index} of the formula. We refrain
+from defining the branching index here and refer to~\cite{malliaris2014regularity}
+and to Lemma 6.7.9 of the textbook \cite{hodges1993model}, which relates
+ladder index and branching index. In this section we will be working with 
+formula $\phi(x,y)$ with exactly two free variables only. 
+
+Let $T$ be a binary tree, where each vertex (except the root) is 
+marked as a left or right successor of its predecessor. We call $w$ 
+a \emph{left (right) descendant} of $v$ if the first successor on the unique
+$v$-$w$ path in $T$ is a left (right) successor. A root-leaf path in $T$ is called
+$k$-alternating if it contains $k+1$ nodes $a_1,\ldots, a_{k+1}$ (which appear
+in that order on the path) such that $a_{i+1}$ is a left successor of $a_i$
+if and only if $a_{i+2}$ is a right successor of $a_{i+1}$, $1\leq i\leq k-2$. 
+
+\begin{lemma}
+Let $T$ be a tree which does not contain a $k$-alternating path. If
+$T$ has $m^k$ vertices, then $T$ contains a root-leaf path of length
+$m$. 
+\end{lemma}
+\begin{proof}
+
+\end{proof}
 
 
-Let $\psi(x,y)$ be a formula with $2$ free variables and let $(v_1,\ldots, v_n)$
+Let $\phi(x,y)$ be a formula with $2$ free variables and let $(v_1,\ldots, v_n)$
 be a sequence of vertices of $G$. The \emph{type tree}
-of $\psi$ over $(v_1,\ldots,v_n)$ is constructed as 
+of $\phi$ over $(v_1,\ldots,v_n)$ is a binary tree which is constructed recursively as 
 follows. We make $v_1$ the root of the tree. Assume that $v_1,\ldots, v_i$
 have been inserted to the tree. We follow a root-leaf path to find the
 position for the next vertex $v_{i+1}$. If $G\models\psi(v_j,v_{i+1})$, we
-go the right branch of the tree, otherwise we go to the left branch of 
-the tree. 
+follow the right branch of the tree, otherwise we follow the left branch of 
+the tree. Finally, if we arrive at a leaf $v_t$ of the tree, we insert $v_{i+1}$
+as a right child of $v_t$ if $G\models\psi(v_t,v_{i+1})$ and as a left 
+child, otherwise. 
 
 
 \begin{theorem}
