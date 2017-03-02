@@ -51,72 +51,78 @@ marked as a left or right successor of its predecessor. We call $w$
 a \emph{left (right) descendant} of $v$ if the first successor on the unique
 $v$-$w$ path in $T$ is a left (right) successor. A root-leaf path in $T$ is called
 $k$-alternating if it contains $k+1$ nodes $a_1,\ldots, a_{k+1}$ (which appear
-in that order on the path) such that $a_{i+1}$ is a left successor of $a_i$
+in that order on the path, possibly not consecutively) such that $a_{i+1}$ is a left successor of $a_i$
 if and only if $a_{i+2}$ is a right successor of $a_{i+1}$, $1\leq i\leq k-2$. 
+The \emph{alternation rank} of $T$ is the largest number $t$ such that 
+$T$ contains a $t$-alternating path of length $t$.
 
 \begin{lemma}
-Let $T$ be a tree which does not contain a $k$-alternating path. If
-$T$ has $m^k$ vertices, then $T$ contains a root-leaf path of length
-$m$. 
+Let $T$ be a tree of alternation rank $t$. If
+$T$ has height at most~$h$, then $T$ has at most $(2h+2)^{t+1}$
+vertices. 
 \end{lemma}
 \begin{proof}
-
+Denote by $n_\ell^s$ the number of vertices a binary tree without a 
+an $s$-alternating path can have. Then we have $n_0^s\leq 1$ for all $s\geq 1$
+and $n_\ell^1\leq 2\ell-1$ for all $\ell$, and 
+\begin{align*}
+n_\ell^s\leq 2(n_{\ell-2}^{s-1}+n_{\ell-3}^{s-1}+\ldots + n_{0}^{s-1})+2\ell-1
+\end{align*}
+for all $s\geq 2,\ell\geq 1$. In the last inequality, we count the two paths of length
+$\ell$ staring in the root which have no alternations. All nodes branching from 
+these paths have one less alternation available. 
+Now it is easy to check that the function $(2\ell+2)^s$ satisfies these requirements. 
 \end{proof}
-
 
 Let $\phi(x,y)$ be a formula with $2$ free variables and let $(v_1,\ldots, v_n)$
 be a sequence of vertices of $G$. The \emph{type tree}
 of $\phi$ over $(v_1,\ldots,v_n)$ is a binary tree which is constructed recursively as 
 follows. We make $v_1$ the root of the tree. Assume that $v_1,\ldots, v_i$
 have been inserted to the tree. We follow a root-leaf path to find the
-position for the next vertex $v_{i+1}$. If $G\models\psi(v_j,v_{i+1})$, we
-follow the right branch of the tree, otherwise we follow the left branch of 
-the tree. Finally, if we arrive at a leaf $v_t$ of the tree, we insert $v_{i+1}$
-as a right child of $v_t$ if $G\models\psi(v_t,v_{i+1})$ and as a left 
-child, otherwise. 
+position for the next vertex $v_{i+1}$. If $G\models\phi(v_j,v_{i+1})$, we
+follow the right branch at $v_j$, otherwise we follow the left branch. If there is
+no such successor, we insert $v_{i+1}$ as a right or left child of $v_j$, 
+accordingly. 
 
-
-\begin{theorem}
+\begin{lemma}
 Let $\phi(x,y)$ be a formula with $2$ free variables and let
 $(v_1,\ldots, v_n)$ be a sequence of elements of $G$. Then the 
-largest complete binary subtree that is found as a topological minor 
-of the type tree of $\psi$ over
-$(v_1,\ldots, v_n)$ has depth at most twice the ladder
-index of $\psi$. 
-\end{theorem}
+alternation rank of the type tree of $\phi$ over $(v_1,\ldots, v_n)$
+is at most twice the ladder index of $\psi$. 
+\end{lemma}
 \begin{proof}
-Consider the alternating path in the tree. 
+An alternating path in $T$ is a $\phi$-ladder.
 \end{proof}
 
-The following is implicit in~\cite{malliaris2014regularity}. 
+We are now ready to prove~\cref{thm:new-uqw}. As in the 
+original proof of Ne\v{s}et\v{r}il and Ossona de Mendez, the main 
+idea is to find a few elements to delete such that a large
+subset $A'\subseteq A$ is $2$-independent. We can then 
+contract the disjoint neighborhoods of these elements and
+continue with the depth-$1$ minor $G'$, where we 
+identify $A'$ in $G$ with a set of vertices in $G'$. A $2$-independent
+subset of $A'$ in $G'$ will be a $4$-independent set in $G$, 
+and so on, until we finally arrive at an $r$-independent set. 
 
-\begin{lemma}[reference?]\label{lem:depth}
-If a tree with $n$ vertices does not contain a complete binary 
-tree of depth $k$ as a topological minor, then it has depth at most 
-$x$. 
+We can use Ramsey's Theorem to first find an independent subset
+of $A$. 
+
+\begin{lemma}
+Let $G$ be a graph such that $K_t\not\subseteq G$. If $A$
+has size at least $\binom{m+t-2}{t-1}$, then there exists
+a subset $B\subseteq A$ of size at least $m$ which is an
+independent set. 
 \end{lemma}
 
-\begin{lemma}\label{lem:minor-to-tree}
-Let $\phi(x,y)$ be a formula with $2$ free variables and let
-$(v_1,\ldots, v_n)$ be a sequence of elements of $G$. Let $H$
-be the topological minor model of a complete binary subtree in the
-type tree of $\psi$ over $(v_1,\ldots, v_n)$. Denote the 
-principal vertices of $H$ by $(w_1,\ldots, w_m)$. Then the type
-tree of $\psi$ over $(w_1,\ldots, w_m)$ is a complete binary
-tree. 
-\end{lemma}
-
-For the proof of our theorem we will use the formula 
-$\dist_G(x,y)\leq 2$, for which we can give an explicit 
-bound on the depth of the largest binary subtree.
+We now consider the formula 
+$\phi_2(x,y)\coloneqq \dist_G(x,y)\leq 2$, for which we can give an explicit 
+bound on the alternation rank in its type tree. 
 
 \begin{theorem}
-Let $\CCC$ be a nowhere dense class of graphs. Let 
-$(v_1,\ldots, v_n)$ be the enumeration of an independent set 
-in $G$. Assume that $K_t\not\minor_2G$. 
-Then the largest complete binary subtree that is found as a topological minor 
-of the type tree of $\psi$ over
-$(v_1,\ldots, v_n)$ has depth at most $2(t-1)$. 
+Let $G$ be a graph such that $K_t\not\minor_2G$ and let
+$(v_1,\ldots, v_n)$ be an enumeration of an independent set 
+in $G$. Then the alternation rank of the type tree of $\phi$ 
+over $(v_1,\ldots, v_n)$ is at most $2t-1$. 
 \end{theorem}
 \begin{proof}
 According to \cref{lem:minor-to-tree} we may assume that we find
