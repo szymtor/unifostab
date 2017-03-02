@@ -186,7 +186,8 @@ Let $\Delta$ be a set of $L$-formulas, let $\strA$ be an $L$-structure and let
 $A$ be a set of elements of $\strA$. Let $a$ be an element of $\strA$. The 
 \emph{$\Delta$-type of~$a$ in $\strA$ over the parameters $A$} is the set
 \begin{align*}
-  \mathrm{tp}_\Delta(\strA, A, a) & \coloneqq  \{ \phi(x_1,a_1,\ldots, a_k) :
+  \mathrm{tp}_\Delta(\strA, A, a) & \coloneqq  \{ \phi(x_1,a_1,\ldots, a_k)  : &\\
+  &  \hspace{3.1cm}
                                 \phi(x_1,y_1,\ldots, y_k)\in \Delta,
                                 a_1,\ldots, a_k\in A,
                                 \strA\models\phi(a,a_1,\ldots, a_k)\}.
@@ -195,52 +196,44 @@ The set of \emph{$\Delta$-types realised} in $\strA$ over $A$ is the set
 $S_\Delta(\strA,A) \coloneqq \{ \mathrm{tp}_\Delta(\strA, A, a) \sth a$ element of $\strA\}$.
 \end{definition}
 
-Obviously, the number of realised types over a parameter set of cardinality
-$\kappa$ can be anything between $0$ and $2^\kappa$. Shelah proved that
+We usually assume that $\Delta$ is closed under negations. 
+The number of realised types over a parameter set of cardinality
+$\kappa$ can be anything between $0$ and $\abs{\Delta}\cdot 2^\kappa$. 
+Shelah proved that
 in a \emph{dependent} theory the number of realised types will always be
 at most polynomial, and also this theorem carries over to the finite. 
 
+\begin{definition}
+Let $T$ be a complete theory in a first-order language $L$. Let 
+$\phi(\tup{x},\tup{y})$ be an $L$-formula with the free variables
+divided into two groups $\tup{x}, \tup{y}$. The formula $\phi$ has
+the \emph{$n$-independence property} if in some model $\strA$
+of $T$, there are tuples $\tup{a}_0,\ldots, \tup{a}_{n-1}$ and
+$\tup{b}_J$ for $J\subseteq \{0,\ldots, n-1\}$ such that
+\[\strA\models\phi(\tup{a}_i,\tup{b}_J)\Longleftrightarrow i\in J. \]
+A formula $\phi$ is \emph{dependent} (for $T$, or for $\strA$) if there is 
+some $n\in \N$ such that $\phi$ does not have the $n$-independence property. 
+A class $\CCC$ of structures is \emph{dependent} or has the \emph{non-independence property}, 
+short \emph{NIP}, if for every formula~$\phi$ there is constant $n=n(\CCC,\phi)$
+such that $\phi$ does not have the $n$-independence property on all $\strA\in \CCC$.
+\end{definition}
 
+\begin{theorem}[\cite{shelah1990classification}, Theorem II.4.10(4) and II.4.11(4)]
+Let $\Delta$ be a finite set of first-order formulas which are 
+dependent on $\strA$. Then there exists a positive integer $k$ such that 
+for any set~$A$ of elements of $\strA$ with $\abs{A}\geq 2$ it holds that
+$\abs{S_\Delta(\strA,A)}\leq \abs{A}^k$. 
+\end{theorem}
 
+The independence property of a formula can be understood as its 
+\emph{VC-dimension}~\cite{vapnik2015uniform,laskowski1992vapnik}, 
+a concept with many applications in computational
+learning theory, see e.g.~\cite{}. 
 
+We now come to the definition of nowhere dense classes, which is based
+on excluded bounded-depth minors. 
 
-
-\subsection{Wideness}
-
-\subsection{Types}
-
-\subsection{Indiscernible sequences}
-
-
-1) Wideness
-
-2) In a combinatorial setting, finite or infinite, stability implies that for arbitrarily large sets, 
-the number of types over a set is polynomial in the cardinality of the set.
-
-3) Indiscernible sequences. 
-
-
-
-\smallskip
-
-
-
-
-In this work we revisit the connections between the notion of nowhere 
-denseness and notions from (finite) model theory.
-
-All graphs in this paper are finite, undirected and simple, that is, 
-they do not have loops or parallel edges. Our notation is standard,
-we refer to~\cite{diestel2012graph} for more background on 
-graph theory. 
-We write $V(G)$ for the vertex set of a graph $G$ and
-$E(G)$ for its edge set. 
-The {\em{distance}} between vertices $u$ and $v$ in $G$, denoted $\dist_G(u,v)$, is the length of a shortest path between $u$ and $v$ in~$G$.
-
-The \emph{$r$th power of a graph $G$} is the graph $G^r$
-with vertex set $V(G)$, where there is an edge between two 
-vertices $u$ and $v$ if and only if their distance in $G$ is at most $r$. 
-
+\begin{definition}
 A {\em{minor model}} of a graph $H$ in $G$ is a family $(I_u)_{u\in V(H)}$ of pairwise vertex-disjoint connected subgraphs of $G$
 such that whenever $uv$ is an edge in~$H$, there are $u'\in I_u$ and $v'\in I_v$ for which $u'v'$ 
 is an edge in $G$.
@@ -255,17 +248,32 @@ if $e=(u,v)\in E(H)$, then $\delta(e)$ is a path from
 $\delta(u)$ to $\delta(v)$ in~$G$ which is internally vertex disjoint from all 
 $\delta(e')$ with $e'\in E(H)$, $e'\neq e$. 
 For $r\geq 0$, $H$ is a \emph{topological depth-$r$ minor} of $G$, 
-written $H\minor_r^tG$, if it is a topological minor and all paths $\delta(e)$
-have length at most $2r$. 
+written $H\minor_r^tG$, if it is a topological minor and all paths~$\delta(e)$
+have length at most $2r$. If all paths~$\delta(e)$ have length exactly
+$r$, we say that $G$ contains an \emph{$r$-subdivision} of $H$ (as a 
+subgraph). 
+\end{definition}
 
+\begin{definition}
 A class $\CCC$ of graphs is \emph{nowhere dense} if there is a function 
 $f:\N\rightarrow \N$ such that for all $r\in \N$ it holds that $K_{f(r)}\not\minor_r G$
-for all $G\in \CCC$. Nowhere dense classes of graphs were introduced by
-Ne\v{s}et\v{r}il and Ossona de Mendez in~\cite{nevsetvril2010first,nevsetvril2011nowhere}.
+for all $G\in \CCC$. 
+\end{definition}
 
-Nowhere dense classes of graphs admit many equivalent characterisations, 
-one of them being uniform quasi-wideness, a notion studied in 
-finite model theory~\cite{dawar2010homomorphism}.  
+Equivalently, a 
+class $\CCC$ of graphs is nowhere dense if there is a function 
+$g:\N\rightarrow \N$ such that for all $r\in \N$ it holds that 
+$K_{g(r)}\not\minor_r^t G$ for all $G\in \CCC$, or that the
+$r$-subdivision of $K_{g(r)}$ is not a subgraph of all $G\in \CCC$. 
+The latter is in fact the definition of \emph{superflat classes of graphs}, 
+given by Podewski and Zieger~\cite{podewski1978stable}, who also
+proved that superflat classes of graphs are stable. 
+The notion of uniform
+quasi-wideness introduced by Dawar~\cite{dawar2010homomorphism}
+can be seen as a finite analogue of the property 
+$(\ast)$ introduced by Podewski and Ziegler. 
+
+\begin{definition}
 A set $B\subseteq V(G)$ is called {\em{$r$-independent}} in $G$ if for all
 distinct $u,v\in B$ we have $\dist_G(u,v)>r$.
 A class $\CCC$ of graphs is \emph{uniformly quasi-wide} if there are
@@ -275,234 +283,64 @@ $G\in \CCC$ of size $\abs{A}\geq N(r,m)$ there is a set
 $S\subseteq V(G)$ of size $\abs{S}\leq s(r)$ and a set
 $B\subseteq A\setminus S$ of size $\abs{B}\geq m$ which is $r$-independent in
 $G-S$. 
+\end{definition}
 
-\begin{theorem}[Ne\v{s}et\v{r}il and Ossona de Mendez~\cite{nevsetvril2010first}]
-A class $\CCC$ of graphs is nowhere dense if and only if it
-is uniformly quasi-wide. 
-\end{theorem}
+As shown by Ne\v{s}et\v{r}il and Ossona de Mendez~\cite{nevsetvril2010first},
+a class $\CCC$ of graphs is nowhere dense if and only if it
+is uniformly quasi-wide.
 
-The proof of Ne\v{s}et\v{r}il and Ossona de Mendez goes back to a construction
+\paragraph{Our contributions.} In this work we revisit the 
+connections between nowhere denseness, quasi-wideness and
+stability. 
+
+Our first result is the presentation of a new proof of 
+Ne\v{s}et\v{r}il and Ossona de Mendez's result~\cite{nevsetvril2010first},
+that a class $\CCC$ of graphs is nowhere dense if and only if it
+is uniformly quasi-wide. The proof of Ne\v{s}et\v{r}il 
+and Ossona de Mendez goes back to a construction
 of Kreidler and Seese~\cite{kreidler1998monadic} (see also Atserias et al.~\cite{atserias2006preservation}), 
-and uses iterated
-Ramsey arguments. Hence the bounds on the function $N$ are huge. Recently, 
-we proved that we may always choose $N$ to be a polynomial 
-function~\cite{siebertz2016polynomial}. 
-
-\begin{theorem}[Kreutzer, Rabinovich, and Siebertz \cite{siebertz2016polynomial}]\label{thm:uqw}
-  Let $\CCC$ be a nowhere dense class of graphs and let 
-  $t\,\colon\,\N\rightarrow \N$ be the function such that
-  $K_{t(r)}\not\minor_r G$ for all $r\in \N$ and all $G\in \CCC$.  
-  For every $r\in \N$
-  there exist constants~$p(r)$ and $s(r)\leq t(r)$ such that
-  for all $m\in \N$, all $G\in\CCC$ and all sets $A\subseteq V(G)$ of size at 
-  least~$m^{p(r)}$, there is a set $S\subseteq V(G)$ of size at
-  most $s(r)$ such that there is a set $B\subseteq A\setminus S$ of size at
-  least~$m$ which is $r$-independent in $G-S$.
-  
-  Furthermore, there is an algorithm, that given an $n$-vertex graph
-  $G\in \CCC$, $\epsilon>0$, $r\in \N$ and $A\subseteq V(G)$ of size at least
-  $m^{p(r)}$, computes sets $S$ and $B\subseteq A$ as described above
-  in
-  time $\Oof(r\cdot t\cdot |A|^{t+1}\cdot n^{1+\epsilon})$.
-\end{theorem}
-
-We remark that the running time of the algorithm of~\Cref{thm:uqw}
-is stated in the SODA version~\cite{siebertz2016polynomial} only as 
-$\Oof(r\cdot t\cdot n^{t+6})$. A finer analysis with the running
-times as stated above can be found in the arXiv version of that paper.
-
-In order to prove the above bounds, we used methods from model
-theory, more precisely, from stability theory. Stability is a strong tameness
-property of first-order formulas, on which Shelah built his famous 
-classification theory~\cite{shelah1990classification}.
-
-
-\paragraph{First-order logic and stability.}
-For extensive background on first-order logic, we refer the reader
-to~\cite{hodges1993model}. For our purpose, it suffices to define
-first-order logic over the vocabulary of graphs (with constant symbols
-from a given parameter set).
- 
-Let $A$ be a set. We call $L(A)\coloneqq\{E\hspace{0.3mm}\}\cup A$ the \emph{vocabulary}
-of graphs with parameters from $A$. \emph{First-order formulas} over $L(A)$ are
-formed from atomic formulas~$x=y$ and $E(x,y)$, where $x,y$ are variables (we
-assume that we have an infinite supply of variables) or elements of $A$ treated
-as constant symbols, by the usual Boolean
-connectives~$\neg$~(negation),~$\wedge$ (conjunction), and~$\vee$ (disjunction)
-and existential and universal quantification~$\exists x,\forall x$,
-respectively.  The free variables of a formula are those not in the scope of a
-quantifier, and we write~$\phi(x_1,\ldots,x_k)$ to indicate that the free
-variables of the formula~$\phi$ are among $x_1,\ldots,x_k$.
-
-To define the semantics, we inductively define a satisfaction
-relation~$\models$. Let $G$ be a graph and $A\subseteq V(G)$. For an
-$L(A)$-formula~$\phi(x_1,\ldots,x_k)$, and
-$v_1,\ldots,v_k\in V(G)$, $G\models\phi(v_1,\ldots,v_k)$
-means that~$G$ satisfies~$\phi$ if the free variables~$x_1,\ldots,x_k$
-are interpreted by~$v_1,\ldots,v_k$ and the parameters $a\in A$
-(formally treated as constant symbols) used in the formula are
-interpreted by the corresponding element of $A$ in $G$, respectively. If
-$\phi(x_1,x_2)=E(x_1,x_2)$ is atomic, then $G\models\phi(v_1,v_2)$
-if~$(v_1,v_2)\in E(G)$. The meaning of the equality symbol, the
-Boolean connectives, and the quantifiers is as expected. For a
-formula $\phi(x_1,\ldots, x_k, y_1,\ldots, y_\ell)$ and
-$v_1,\ldots, v_\ell\in V(G)$ (treated as a sequence of parameters), we
-write $\phi(x_1,\ldots, x_k, v_1,\ldots, v_\ell)$ for the formula with
-free variables $x_1,\ldots, x_k$ where each occurrence of the variable
-$y_i$ in $\phi$ is replaced by the constant symbol $v_i$.
-
-We usually write $\tup{x}$ for a tuple $(x_1,\ldots, x_k)$ of variables. 
-Usually, the length of the tuple is understood from the context. 
-
-A first-order formula $\psi(\tup{x},\tup{y})$ has the \emph{$k$-order property}
-over a graph $G$ if there are tuples $\tup{a}_1,\ldots, \tup{a}_k, \tup{b}_1,\ldots, \tup{b}_k$
-of elements of $G$ such that \[\psi(\tup{a}_i,\tup{b}_j)\Longleftrightarrow i\leq j.\]
-A class of graph $\CCC$ is \emph{stable} if for every formula $\psi(\tup{x},\tup{y})$ there
-is a number $k$ such that for every graph $G\in \CCC$, $\psi$ does not have the $k$-order 
-property.
-
-Adler and Adler~\cite{adler2014interpreting} observed that nowhere density 
-is essentially the stability theoretic notion of super flatness, introduced by
-Podewski and Ziegler~\cite{podewski1978stable}. Based on the construction of 
-Podewski and Ziegler they proved that every nowhere dense class of graphs is
-stable. 
-
-\begin{theorem}[Adler and Adler~\cite{adler2014interpreting}]\label{thm:adleradler}
-If $\CCC$ is nowhere dense, then $\CCC$ is stable. 
-\end{theorem}
-
-Let $G$ be a graph and let $\Delta$ be a set of formulas. A sequence
-$(v_1,\ldots, v_\ell)$ of vertices of~$G$ is
-\emph{$\Delta$-indiscernible} if for every formula
-$\phi(x_1,\ldots, x_k)\in \Delta$ with $k$ free variables and any two
-increasing sequences
-$1\leq i_1<\ldots <i_k\leq \ell, 1\leq j_1< \ldots< j_k\leq \ell$ of
-integers, it holds that
-\[G\models\phi(v_{i_1},\ldots, v_{i_k})\Leftrightarrow G\models\phi(v_{j_1},
-\ldots, v_{j_k}).\]
-
-The next theorem shows that we can find long indiscernible
-sequences in stable classes of graphs. 
-
-\begin{theorem}[Malliaris and Shelah~\cite{malliaris2014regularity}, Theorem 3.5, Item (2)]\label{thm:malshelah}
-  Let $\CCC$ be a stable class of graphs and let $\Delta$ be a finite
-  set of first-order formulas.  There is a polynomial $p(x)$ such that
-  for all $G\in \CCC$, every positive integer $m$ and every sequence
-  $(v_1,\ldots, v_\ell)$ of vertices of $G$ of length $\ell=p(m)$, there
-  exists a sub-sequence $(v_{i_1},\ldots, v_{i_m})$ of
-  $(v_1,\ldots, v_\ell)$ of length $m$ which is
-  $\Delta$-indiscernible, $1\leq i_1<\ldots <i_m\leq \ell$.
-\end{theorem}
-
-
-\begin{theorem}\label{thm:extract_indiscernibles}
-  Let $\CCC$ be a stable class of graphs and let $\Delta$ be a finite
-  set of first-order formulas.  There is a polynomial $p(x)$ such that
-  for all $G\in \CCC$, every positive integer $m$ and every sequence
-  $(v_1,\ldots, v_\ell)$ of vertices of $G$ of length $\ell=p(m)$, there
-  exists a sub-sequence $(v_{i_1},\ldots, v_{i_m})$ of
-  $(v_1,\ldots, v_\ell)$ of length $m$ which is
-  $\Delta$-indiscernible, $1\leq i_1<\ldots <i_m\leq \ell$.
-\end{theorem}
-
-As shown in~\cite{siebertz2016polynomial}, we can also compute
-such sequences in polynomial time. More precisely, there is an algorithm running in time
-  $\Oof(\abs{\Delta}\cdot k \cdot \ell^{k+1}
-    \cdot n^{q})$, where $k$ is the maximal number of 
-    free variables and $q$ is 
-    the maximal quantifier-rank of a formula of $\Delta$, 
-    that given an $n$-vertex graph $G\in \CCC$ and a sequence
-  $(v_1,\ldots, v_\ell)\subseteq V(G)$, computes a
-  $\Delta$-indiscernible sub-sequence of $(v_1,\ldots, v_\ell)$ 
-  of length at least $m$.
-
-We used the algorithmic version of~\cref{thm:extract_indiscernibles} 
-to prove~\cref{thm:uqw}.
-
-\paragraph{VC-dimension.}
-
-Let $\FFF\subseteq 2^A$ be a family of
-subsets of a set $A$. For a set $X\subseteq A$, we denote $X\cap \FFF=\{X\cap F : F\in \FFF\}$.
-The set $X$ is \emph{shattered by $\FFF$} if $X\cap \FFF=2^X$.
-The \emph{Vapnik-Chervonenkis dimension}~\cite{chervonenkis1971theory}, 
-short \emph{VC-dimension},
-of $\FFF$ is the maximum size of a set $X$ that is shattered by
-$\FFF$. Note that if $X$ is shattered by $\FFF$, then also every
-subset of $X$ is shattered by~$\FFF$.
-
-For a graph $G$, the VC-dimension of $G$ is defined as the VC-dimension
-of the set family $\{N[v]\colon v\in V(G)\}$ over the set $V(G)$.
-
-Adler and Adler's result implies that any class of structures
-obtained from $\CCC$ by means of a first-order interpretation has VC-dimension
-bounded by a constant depending only on $\CCC$ and the interpretation.
-In particular, the following is an immediate corollary of the results of Adler and Adler.
-
-\begin{theorem}[\cite{adler2014interpreting}]\label{thm:adler}
-  Let $\CCC$ be a nowhere dense class of graphs and let $\phi(x,y)$ be
-  a first-order formula over the signature of graphs,
-  such that for all $G \in \CCC$ and $u,v\in
-  V(G)$ it holds that $G\models\phi(u,v)$ if and only if $G\models\phi(v,u)$. 
-  For $G\in \CCC$, let $G_\phi$ be the graph with
-  vertex set $V(G_\phi)=V(G)$ and edge set $E(G_\phi)=\{uv \colon
-  G\models\phi(u,v)\}$. Then there is an integer $c$ depending only on
-  $\CCC$ and $\phi$ such that $G_\phi$ has VC-dimension at most $c$.
-\end{theorem}
-
-By applying \Cref{thm:adler} to the first-order formula 
-expressing that $\dist(u,v)\leq r$,
-we immediately obtain the following.
-
-\begin{corollary}\label[corollary]{crl:Gr}
-  Let $\CCC$ be a nowhere dense class of graphs and let $r\in\N$. 
-  Then there is an integer $c(r)$ such that $G^r$ 
-  has VC-dimension at most~$c(r)$ for every $G\in \CCC$.
-\end{corollary}
-
-\paragraph{Our contributions.}
-
-We give a new proof of~\cref{thm:uqw} which is simpler than 
-the original proof and gives explicit bounds on the function $N$. 
-Furthermore, the new proof leads to a much simpler algorithm 
-with drastically improved running times.
+and uses iterated Ramsey arguments. Hence the original bounds on 
+the function $N$ are huge. Recently, 
+it was proved that we may always choose $N$ to be a polynomial 
+function~\cite{siebertz2016polynomial}. The degree of the polynomial 
+in~\cite{siebertz2016polynomial} was  not specified, its existence 
+depends on Adler and Adler's result that nowhere dense classes of graphs
+are stable and hence every fixed formula has bounded ladder index 
+on every nowhere dense class of graphs. We give a new construction 
+which is considerably simpler than that of~\cite{siebertz2016polynomial}
+and which gives explicit bounds on the degree of the polynomial. 
+We prove the following theorem. 
 
 \begin{theorem}\label{thm:new-uqw}
-  Let $\CCC$ be a nowhere dense class of graphs and let 
-  $t\,\colon\,\N\rightarrow \N$ be the function such that
-  $K_{t(r)}\not\minor_r G$ for all $r\in \N$ and all $G\in \CCC$.  
-  For every $r\in \N$
-  there exist constants~$p(r)\leq t(r)^{t(r)}$ and $s(r)\leq t(r)$ such that
-  for all $m\in \N$, all $G\in\CCC$ and all sets $A\subseteq V(G)$ of size at 
-  least~$m^{p(r)}$, there is a set $S\subseteq V(G)$ of size at
-  most $s(r)$ such that there is a set $B\subseteq A\setminus S$ of size at
-  least~$m$ which is $r$-independent in $G-S$.
-  
-  Furthermore, there is an algorithm, that given an $n$-vertex graph
-  $G\in \CCC$, $\epsilon>0$, $r\in \N$ and $A\subseteq V(G)$ of size at least
-  $m^{p(r)}$, computes sets $S$ and $B\subseteq A$ as described above
-  in
-  time $\Oof(r\cdot t\cdot |A|^2\cdot n^{1+\epsilon})$.
+Let $G$ be a graph such that $K_t\not\minor_r G$ and let $A\subseteq V(G)$. 
+There is a number $g(t)$ such that if $|A|\geq m^{g(t)}$, then we can find a set
+$S\subseteq V(G)$ of size $|S|\leq t$ and a set $B\subseteq A\setminus S$ 
+of size $|B|\geq m$ which is $r$-independent in $G-S$.  
 \end{theorem}
 
-We give an explicit proof of~\cref{thm:adler} in the finite, 
-which in combination with~\cref{thm:new-uqw} for the first time
-gives explicit bounds for the $k$-order property of a formula
-on a nowhere dense class of graphs. 
+Podewski and Ziegler's proof that flat graphs are stable uses an 
+infinite Ramsey argument. Based on Gaifman's Locality Theorem for
+first-order logic~\cite{gaifman1982local}, we give a combinatorial 
+proof that every first-order formula has finite ladder index on every
+nowhere dense class of graphs. Our proof gives explicit bounds for the
+ladder indices of formulas. 
 
 \begin{theorem}\label{thm:new-stable}
-If $\CCC$ is nowhere dense then $\CCC$ is stable. Furthermore, 
-if $K_t\not\minor_{r(\phi)} G$, then $\phi$ does not have
-the $k(\phi)$-order property.
+Let $\phi(x_1,\ldots, x_k)$ be a formula of quantifer rank $q$. 
+Let $G$ be a graph such that $K_t\not\minor_{2^{q+k}} G$. Then 
+The ladder index of $\phi$ on $G$ is at most $x$. 
 \end{theorem}
 
-Finally, we give an explicit proof of~\cref{crl:Gr} by slightly
-changing a construction of Bousquet and 
-Thomasse\'e~\cite{BousquetT15}. 
+Finally, we again consider the formula stating that the distance
+between two elements is at most $r$. 
+We observe that an argument of Bousquet and 
+Thomasse\'e~\cite{BousquetT15} can be slightly modified to prove that 
+the VC-dimension of the $r$-power graph $G^r$ of a graph $G$
+with $K_t\not\minor_r G$ is bounded by $t-1$.
 
 \begin{theorem}\label{thm:new-vc}
-Let $G$ be a graph with $K_t\not\minor_r G$. Then 
-the VC-dimension of $G^r$ is
-bounded by $t-1$. 
+Let $G$ be a graph such that $K_t\not\minor_r G$. Then the
+VC-dimension of the $r$-power graph~$G^r$ is bounded by $t-1$. 
 \end{theorem}
 
 \paragraph{Organisation.}
