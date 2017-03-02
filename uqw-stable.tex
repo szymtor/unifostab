@@ -5,28 +5,24 @@
 Fix a graph $G$, a number $d\in\N$ (the dimension) and a number $r\in \N$ (the radius).
 If $S\subset V(G)$ is a set of vertices and $A\subset V(G)^d$ is a set of $d$-tuples of vertices,
 then we say that $A$ is $r$-\emph{totally independent} in $G-S$ 
-if the set of all vertices $v$ which appear on some coordinate of some tuple $\bar a\in A$
+if the set of all vertices $v\in G-S$ which appear on some coordinate of some tuple $\bar a\in A$
 is $r$-independent in $G-S$. 
 
 
 \begin{proposition}\label{prop:uqw-tuples}
 	Let $\cal C$ be a uniformly quasi-wide class of graphs and $d\in\N$ a number.
-	There are functions $N^d:\N\times\N\to\N,s^d:\N\to \N$
+	There are functions $N^d:\N\times\N\to\N$ and $s^d:\N\to \N$
 	such that for all $r,m\in\N$ and all subsets $A\subset V(G)^d$
 	such that $|A|\ge N^d(r,m)$ there  is a set $S\subset V(G)$
-	of size $|S|\le s^d(r)$ and a subset $B$ which is totally $r$-independent in $G-S$.	
+	of size $|S|\le s^d(r)$ and a subset $B\subset A$ of size $|B|\ge m$ which is totally $r$-independent in $G-S$.
 \end{proposition}
 \begin{proof}We fix a uniformly quasi-wide class $\cal C$ and functions $N:\N\times\N\to \N$
 	and $s:\N\to\N$ as in the definition of uniform quasi-wideness.
+	Let $d\in \N$ be a fixed dimension.
+		For a fixed graph $G\in \cal C$  and
+	  coordinate $i\in\set{1,\ldots,d}$, let $\pi_i$ denote the projection from $V(G)^d$ onto the $i$th coordinate.
+
 	
-	Fix a graph $G\in \cal C$ and numbers $r,m,d\in\N$.
-	For a coordinate $i=1..d$, let $\pi_i$ denote the projection from $V(G)^d$ onto the $i$th coordinate.
-	We start with a set $A\subset V(G)^d$, and the aim is to construct 
-	set $S\subset V(G)$ and  subset $B\subset A$ such that $B$ is totally $r$-independent in $G-S$, and such that the size of $S$ is bounded by a number depending on $r,d$ only. The construction 
-	should work assuming that the size of $A$ is at least some number depending on $r,m,d$ only.
-	
-\medskip
-	The construction proceeds in two steps.	
 
 
 \begin{lemma}\label{lem:step1} For any $r,m\in \N$ there is a number $K(r,m)$ such that
@@ -37,7 +33,7 @@ is $r$-independent in $G-S$.
 \end{lemma}
 \begin{proof}
 
-Let $f$ be the function defined so that $f(m)=N(r,m)\cdot m$ for $m'\in\N$.
+Let $f$ be the function defined so that $f(m)=N(r,m)\cdot m$ for $m\in\N$.
 
 \begin{claim}\label{claim:ith-coord}
 Fix a coordinate $i\in\set{1,\ldots,d}$, a number $m'\in\N$ and a  set $A\subset V(G)^d$ with  $|A|\ge f_r(m')$.
@@ -45,8 +41,8 @@ There is a set $B\subset A$ such that $|B|\ge m'$
 and $S\subset V(G)$ such that $|S|\le s(r)$,
 so that  $\pi_i(B)$ is $r$-independent in $G-S$.	
 \end{claim}
-\begin{proof}\label{pf:}
-We consider two cases.
+To prove the claim, 
+we consider two cases.
 If $\pi_i(A)\subset V(G)$ has at least $N(r,m')$ elements, then we apply the definition of uniform quasi-wideness to $\pi_i(A)\subset V(G)$. Let $S\subset V(G)$ and $B'\subset \pi_i(A)$
 be as in the definition, i.e., $B'$ is $r$-independent in $G-S$,
 $|B'|\ge m'$ and $|S|\le s(r)$. Let $B\subset A$ be the set of all tuples 
@@ -55,32 +51,28 @@ Clearly, $|B|\ge |B'|\ge m'$, and $|S|\le s(r)$.
 
 If $\pi_i(A)$ has less than $N(r,m')$ elements, then choose the element $a\in\pi_i(A)$ whose inverse image $\pi_i^{-1}(\set a)\cap A$ has the largest cardinality. Let $S=\set{a}$ 
 and let $B=\pi_i^{-1}(\set a)$. Then $|B|\ge \frac{|A|}{|\pi_i(A)|}\ge \frac{|A|}{N(r,m')}\ge \frac {f(m')}{N(r,m')}=m'$,
-and $|S|=1$.
-
-\end{proof}
+and $|S|=1$. This proves Claim~\ref{claim:ith-coord}.
 
 
-To prove Lemma~\ref{lem:step1} 
-assume that $|A|\ge f^d(m)$. 
-Start from $A_0=A$, $S_0=\emptyset$, and for $i=1..d$,
-let $A_{i}$ and $S_i$ be the $B$ and $S$ obtained from  Claim~\ref{claim:ith-coord} applied to $A_{i-1}$ and $m'=f^{d-i}(m)$.  The invariant is that $|A_i|\ge f^{d-i}(m)$.
+We now prove Lemma~\ref{lem:step1}.
+Let $A\subset V(G)^d$ be such that $|A|\ge f^d(m)$. 
+Define $B_0=A$, $S_0=\emptyset$, and for $i=1..d$,
+let $B_{i}$ and $S_i$ be the $B$ and $S$ obtained from  Claim~\ref{claim:ith-coord} applied to the se of tuples $B_{i-1}\subset V(G)^d$, the coordinate $i$, and $m'=f^{d-i}(m)$.  The invariant is that $|B_i|\ge f^{d-i}(m)$.
 In particular, 
-taking $B=A_d$ and $S=S_1\cup\ldots \cup S_d$, we obtain that $|B|\ge m$ and $|S|\le d\cdot s(r)$, and, by construction, $\pi_i(B)$
-is $r$-independent in $G-S$.
-
-The lemma therefore holds for $K(r,m)=f^d(m).$
+taking $B=B_d$ and $S=S_1\cup\ldots \cup S_d$, we obtain that $|B|\ge m$ and $|S|\le d\cdot s(r)$, and, by construction, $\pi_i(B)$
+is $r$-independent in $G-S$, for every coordinate $i\in\set{1,\ldots,d}$. Letting $K(r,m)=f^d(m)$ yields the lemma.
 \end{proof}
 
 
 \begin{lemma}\label{lem:step2}
-	Let $B\subset V(G)^d$ and $S\subset V(G)$ be such that for each $i=1..d$,
+	Let $B\subset V(G)^d$ and $S\subset V(G)$ be such that for  $i=1..d$,
 	$\pi_i(B)$ is $2r$-independent in $G-S$.
 	Then there is a set $C$ with $C\subset B$ 
 	such that $C$ is totally $r$-independent in $G-S$
-	and $|C|> \lceil\frac{|B|}{d^2-1}\rceil$.
+	and $|C|> \frac{|B|}{d^2}$.
 \end{lemma}
 \begin{proof}
-We construct a sequence of sets $C_0\subset C_1\subset \ldots\subset B$ which are totally $2r$-independent in $G-S$, as follows.
+We construct a sequence of sets $C_0\subset C_1\subset \ldots$ of subsets of $B$ which are totally $2r$-independent in $G-S$, as follows.
 
 We start with $C_0=\emptyset$. Suppose that $C_s\subset B$ is 
  already constructed for some $s\ge 0$
@@ -109,16 +101,16 @@ By construction, $C_{s+1}$ is totally $2r$-independent in $G-S$.
 
 We may repeat the construction as long as $|B|>|C_s|\cdot (d^2-1)=s\cdot (d^2-1)$, and we stop when this inequality no longer holds. Define the set $C$ as the last constructed set $C_s$.
 By construction, $|C_s|=s>
-\lceil\frac{|B|}{d^2-1}\rceil$.	
+\frac{|B|}{d^2-1}>\frac{|B|}{d^2}$.	
 \end{proof}
 
 To finish the proof of Proposition~\ref{prop:uqw-tuples},
 given a set $A\subset V(G)^d$ and numbers $r,m\in\N$,
 first apply Lemma~\ref{lem:step1} 
   with $r'=2r$ and
- $m'=\lceil m\cdot ({d^2-1})\rceil$.
+ $m'= m\cdot d^2$.
  Assuming that $|A|\ge K(r',m')$, 
-we obtain a set $B\subset A$ with $|B|\ge \lceil m\cdot {(d^2-1)}\rceil$ and a set $S\subset V(G)$ with $|S|\le s(2r)$.
+we obtain a set $B\subset A$ with $|B|\ge m\cdot d^2$ and a set $S\subset V(G)$ with $|S|\le s(2r)$.
 To $B$ and $S$, apply Lemma~\ref{lem:step2}, yielding a set $C\subset B$ which is totally $r$-independent in $G-S$ and has size at least $m$. This yields the proposition, for $N^d(r,m)=K(r',m')$ and $s^d(r)=s(r')$.
 \end{proof}
 
