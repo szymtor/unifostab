@@ -27,7 +27,7 @@ is $r$-independent in $G-S$.
 
 \begin{lemma}\label{lem:step1} For any $r,m\in \N$ there is a number $K(r,m)$ such that
 	for any given $A\subset V(G)^d$ with $|A|\ge K(r,m)$,
-	there is a set $B\subset A$ with $|B|\ge m$, and a set $S\subset V(G)$ with $|S|\le s(r)$, 
+	there is a set $B\subset A$ with $|B|\ge m$, and a set $S\subset V(G)$ with $|S|\le d\cdot s(r)$, 
 	such that for each coordinate $i=1..d$, 
  $\pi_i(B)$ is $r$-independent in $G-S$. 
 \end{lemma}
@@ -38,7 +38,7 @@ Let $f$ be the function defined so that $f(m)=N(r,m)\cdot m$ for $m\in\N$.
 \begin{claim}\label{claim:ith-coord}
 Fix a coordinate $i\in\set{1,\ldots,d}$, a number $m'\in\N$ and a  set $A\subset V(G)^d$ with  $|A|\ge f_r(m')$.
 There is a set $B\subset A$ such that $|B|\ge m'$
-and $S\subset V(G)$ such that $|S|\le d\cdot s(r)$,
+and $S\subset V(G)$ such that $|S|\le  s(r)$,
 so that  $\pi_i(B)$ is $r$-independent in $G-S$.	
 \end{claim}
 To prove the claim, 
