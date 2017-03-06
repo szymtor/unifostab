@@ -1,8 +1,55 @@
 \section{From nowhere denseness to uniform quasi-wideness}\label{sec:uqw}
 
 This section is devoted to the proof of~\cref{thm:new-uqw}. 
-Even though we prove a purely graph theoretic statement, 
-it is useful to see our methods in a more general model-theoretic context. 
+Observe that we can use Ramsey's Theorem to find large independent
+sets in $G$. 
+
+\begin{lemma}\label{lem:ramsey1}
+Let $G$ be a graph such that $K_t\not\subseteq G$. If $A\subseteq V(G)$
+has size at least $\binom{m+t-2}{t-1}$, then there exists
+a subset $B\subseteq A$ of size at least $m$ which is an
+independent set. 
+\end{lemma}
+
+The difficulty, as in the 
+original proof of Ne\v{s}et\v{r}il and Ossona de Mendez, 
+is to find a few elements to delete such that a large
+subset $A'\subseteq A$ is $2$-independent. Once we have 
+found such a set, we can 
+contract the disjoint neighborhoods of these elements and
+continue with the depth-$1$ minor $G'$, where we 
+identify $A'$ in $G$ with a set of vertices in $G'$. A $2$-independent
+subset of $A'$ in $G'$ will be a $4$-independent set in $G$, 
+and so on, until we finally arrive at an $r$-independent set. 
+
+We will employ one more lemma, which is based on the fact that
+nowhere dense classes of graphs do not have dense 
+shallow minors~\cite{dvorak2007asymptotical,jiang2011compact}. 
+
+\begin{lemma}[adaptation of Lemma 4.11 in \cite{gajarsky2017kernelization}]\label{lem:diversity}\label{lem:gajarsky}
+Let $\CCC$ be a nowhere dense class of graphs. Let $G\in \CCC$ and let $A\subseteq V(G)$. 
+Then for every $\epsilon>0$ there exists $n_0$ such that if $|A|\geq n_0$, then 
+\[\abs{\{N(v)\cap A : v\in V(G)\}}\leq\abs{A}^{1+\epsilon}.\]
+\end{lemma}
+
+We can now state the main building block of our proof as a lemma. 
+
+\begin{lemma}\label{lem:apex}
+Let $\CCC$ be a nowhere dense class of graphs and assume $K_t\not\minor_2 G$. 
+Let $n_0$ be the constant of \cref{lem:gajarsky} for $\epsilon=1/3$ 
+and let $m\geq n_0$ be an integer. 
+If $A$ is an independent set in $G$ of size at least $(4(m+1)^3+2)^{2t+1}$ 
+then either 
+\begin{itemize}
+\item $A$ contains a $2$-independent set of size $m$, or
+\item there is a subset $A'\subseteq A$ of size at least~$m$ and
+a vertex $v\in V(G)$ which is adjacent to all vertices of $A'$. 
+\end{itemize}
+\end{lemma}
+
+
+%Even though we prove a purely graph theoretic statement, 
+%it is useful to see our methods in a more general model-theoretic context. 
 
 
 %\begin{definition}
@@ -37,22 +84,33 @@ it is useful to see our methods in a more general model-theoretic context.
 %  $2^{k+2}-2$ over $G$.
 % \end{lemma}
 
-In the proof of~\cref{thm:malshelah} one constructs a tree, in which
-elements are iteratively classified according to their types. The depth of 
-the type tree is directly related to the ladder index of the formula, 
-more precisely to the \emph{branching index} of the formula. We refrain
-from defining the branching index here and refer to~\cite{malliaris2014regularity}
-and to Lemma 6.7.9 of the textbook \cite{hodges1993model}, which relates
-ladder index and branching index. In this section we will be working with 
-formula $\phi(x,y)$ with exactly two free variables only. 
+%In the proof of~\cref{thm:malshelah} one constructs a tree, in which
+%elements are iteratively classified according to their types. The depth of 
+%the type tree is directly related to the ladder index of the formula, 
+%more precisely to the \emph{branching index} of the formula. We refrain
+%from defining the branching index here and refer to~\cite{malliaris2014regularity}
+%and to Lemma 6.7.9 of the textbook \cite{hodges1993model}, which relates
+%ladder index and branching index. In this section we will be working with 
+%formula $\phi(x,y)$ with exactly two free variables only. 
 
-Let $T$ be a binary tree, where each vertex (except the root) is 
+Let $T$ be a (rooted) binary tree, where each vertex (except the root) is 
 marked as a left or right successor of its predecessor. We call $w$ 
 a \emph{left (right) descendant} of $v$ if the first successor on the unique
-$v$-$w$ path in $T$ is a left (right) successor. A root-leaf path in $T$ is called
+$v$-$w$ path in $T$ is a left (right) successor.
+
+Fix an enumeration $a_1,\ldots, a_{\ell}$ of $A$. The \emph{distance-$2$ tree}
+of $(a_1,\ldots,a_{\ell})$ is a binary tree which is constructed recursively as 
+follows. We make $a_1$ the root of the tree. Assume that $a_1,\ldots, a_i$
+have been inserted to the tree. We follow a root-leaf path to find the
+position for the next element $a_{i+1}$. If $\dist(a_j,a_{i+1})\leq 2$, we
+follow the right branch at a point $v_j$, otherwise we follow the left branch. If 
+there is no right successor (or left successor, respectively), we insert $a_{i+1}$ 
+as a right (or left child, respectively) of $a_j$. 
+
+A root-leaf path in $T$ is called
 $k$-alternating if it contains $k+1$ nodes $a_1,\ldots, a_{k+1}$ (which appear
-in that order on the path, possibly not consecutively) such that $a_{i+1}$ is a left successor of $a_i$
-if and only if $a_{i+2}$ is a right successor of $a_{i+1}$, $1\leq i\leq k-2$. 
+in that order on the path, possibly not consecutively) such that $a_{i+1}$ is a left descendant of $a_i$
+if and only if $a_{i+2}$ is a right descendant of $a_{i+1}$, $1\leq i\leq k-2$. 
 The \emph{alternation rank} of $T$ is the largest number $t$ such that 
 $T$ contains a $t$-alternating path of length $t$.
 
@@ -74,62 +132,28 @@ these paths have one less alternation available.
 Now it is easy to check that the function $(2\ell+2)^s$ satisfies these requirements. 
 \end{proof}
 
-Let $\phi(x,y)$ be a formula with $2$ free variables and let $(v_1,\ldots, v_n)$
-be a sequence of vertices of $G$. The \emph{type tree}
-of $\phi$ over $(v_1,\ldots,v_n)$ is a binary tree which is constructed recursively as 
-follows. We make $v_1$ the root of the tree. Assume that $v_1,\ldots, v_i$
-have been inserted to the tree. We follow a root-leaf path to find the
-position for the next vertex $v_{i+1}$. If $G\models\phi(v_j,v_{i+1})$, we
-follow the right branch at $v_j$, otherwise we follow the left branch. If there is
-no such successor, we insert $v_{i+1}$ as a right or left child of $v_j$, 
-accordingly. 
 
-\begin{lemma}
-Let $\phi(x,y)$ be a formula with $2$ free variables and let
-$(v_1,\ldots, v_n)$ be a sequence of elements of $G$. Then the 
-alternation rank of the type tree of $\phi$ over $(v_1,\ldots, v_n)$
-is at most twice the ladder index of $\phi$. 
-\end{lemma}
-\begin{proof}
-An alternating path in $T$ is a $\phi$-ladder.
-\end{proof}
-
-We are now ready to prove~\cref{thm:new-uqw}. As in the 
-original proof of Ne\v{s}et\v{r}il and Ossona de Mendez, the main 
-idea is to find a few elements to delete such that a large
-subset $A'\subseteq A$ is $2$-independent. We can then 
-contract the disjoint neighborhoods of these elements and
-continue with the depth-$1$ minor $G'$, where we 
-identify $A'$ in $G$ with a set of vertices in $G'$. A $2$-independent
-subset of $A'$ in $G'$ will be a $4$-independent set in $G$, 
-and so on, until we finally arrive at an $r$-independent set. 
-
-We can use Ramsey's Theorem to first find an independent subset
-of $A$. 
-
-\begin{lemma}\label{lem:ramsey1}
-Let $G$ be a graph such that $K_t\not\subseteq G$. If $A$
-has size at least $\binom{m+t-2}{t-1}$, then there exists
-a subset $B\subseteq A$ of size at least $m$ which is an
-independent set. 
-\end{lemma}
-
-We now consider the formula 
-$\phi_2(x,y)\coloneqq \dist_G(x,y)\leq 2$, for which we can give an explicit 
-bound on the alternation rank in its type tree. 
+We now give an explicit bound on the alternation rank of the distance-$2$ 
+tree of $(a_1,\ldots, a_\ell)$. 
 
 \begin{lemma}\label{thm:alternation-rank-type-tree}
 Let $G$ be a graph such that $K_t\not\minor_2G$ and let
-$(v_1,\ldots, v_n)$ be an enumeration of an independent set 
-in $G$. Then the alternation rank of the type tree of $\phi_2$ 
-over $(v_1,\ldots, v_n)$ is at most~$2t$. 
+$(v_1,\ldots, v_\ell)$ be an enumeration of an independent set 
+in $G$. Then the alternation rank of the distance-$2$ tree of 
+$(v_1,\ldots, v_\ell)$ is at most~$2t$. 
 \end{lemma}
 \begin{proof}
-Assume that we find an alternating path $a_1,b_1,\ldots, a_k,b_k$ 
-in the type tree, where $b_1$ is right of $a_1$. Otherwise, we consider
-the path $b_1,a_2,b_2,\ldots,a_k, b_k$. Because $(v_1,\ldots, v_n)$ is independent in $G$, 
+Assume that we find a path which is $2k$ alternating, 
+containing the nodes $v_{i_1},\ldots, v_{i_{2k+1}}$, $1=i_1<i_2<\ldots <i_{2k+1}$, such that $v_{j+1}$ is a left descendant of $v_j$
+if and only if $v_{j+2}$ is a right descendant of $v_{j+1}$, $1\leq j\leq 2k-1$ in
+the distance-$2$ tree.. 
+For readability, we rename the elements as $a_1,b_1,\ldots, a_k,b_k$ in the 
+obvious way. We assume that $b_1$ is right of $a_1$ in the distance-$2$ 
+tree, otherwise, we consider
+the path $b_1,a_2,b_2,\ldots,a_k, b_k$. Because $(v_1,\ldots, v_n)$ is 
+independent in~$G$, 
 none of these vertices are adjacent and all of the vertices on the
-paths of length $2$ which cause the creation of edges in the type
+paths of length $2$ which cause the creation of edges in the distance-$2$
 tree are distinct from $a_1,\ldots, b_k$. 
 
 \begin{claim}
@@ -150,38 +174,20 @@ we have constructed a complete graph $K_k$ as depth-$2$ minor. Hence
 $k\leq t-1$, which proves the claim. 
 \end{proof}
 
-Note that the above proof does not give a proof that the ladder
-index of the distance-$2$ formula is at most $2(t-1)$. In the type
-tree we have the stronger statement that the vertices $b_i$
-are not connected by a path of length $2$. 
-We make no statement about the connections
-of these elements in the ladder. 
+%
+%Note that the above proof does not give a proof that the ladder
+%index of the distance-$2$ formula is at most $2(t-1)$. In the type
+%tree we have the stronger statement that the vertices $b_i$
+%are not connected by a path of length $2$. 
+%We make no statement about the connections
+%of these elements in the ladder. 
 
-We need more lemma, which is based on the fact that
-nowhere dense classes of graphs do not have dense 
-shallow minors~\cite{dvorak2007asymptotical,jiang2011compact}. 
 
-\begin{lemma}[adaptation of Lemma 4.11 in \cite{gajarsky2017kernelization}]\label{lem:diversity}\label{lem:gajarsky}
-Let $\CCC$ be a nowhere dense class of graphs. Let $G\in \CCC$ and let $A\subseteq V(G)$. 
-Then for every $\epsilon>0$ there exists $n_0$ such that if $|A|\geq n_0$, then 
-\[\abs{\{N(v)\cap A : v\in V(G)\}}\leq\abs{A}^{1+\epsilon}.\]
-\end{lemma}
+We can now prove \cref{lem:apex}. 
 
-The following lemma is the main building block of our proof. 
-
-\begin{lemma}\label{lem:apex}
-Let $\CCC$ be a nowhere dense class of graphs. 
-Let $n_0$ be the constant of for $\epsilon=1/3$. 
-Assume $K_t\not\minor_2 G$. 
-Let $m\geq n_0$ be an integer. 
-Let $A$ be an independent set in $G$ of size at least $(4(m+1)^3+2)^{2t+1}$. 
-Then either $A$ contains a $2$-independent set of size $m$ or
-there is a subset $A'\subseteq A$ of size at least~$m$ and
-a vertex $v\in V(G)$ which is adjacent to all vertices of $A'$. 
-\end{lemma}
-\begin{proof}
+\begin{proof}[of \cref{lem:apex}]
 Fix any enumeration $v_1,\ldots$ of $A$ and
-build the type tree $T$ of the formula $\dist(x,y)\leq 2$ over
+build the distance-$2$ tree $T$ for
 $v_1,\ldots$. According to~\cref{thm:alternation-rank-type-tree}, 
 the alternation rank of $T$ is at most~$2t$. 
 
@@ -194,7 +200,7 @@ at least $(m+1)^3$.
 Either, $X$ is a set with all its successors in $T$ on the left, 
 then $X$ is a $2$-independent set and we let $A'=X$ and finish the proof.
 
-Otherwise, all vertices of $X$ are at distance $2$. Let $\ell+1=|X|$. 
+Otherwise, the vertices of $X$ are pairwise at distance $2$. Let $\ell+1=|X|$. 
 We claim that we find an element which is connected to at least $\ell^{1/3}$
 of the vertices of $X$. There are $\binom{\ell+1}{2}\geq \ell^2/2$ pairs in $X$ which 
 must be connected via an intermediate vertex. A vertex of degree
@@ -297,4 +303,8 @@ After iterating \cref{lem:ramsey2} and \cref{lem:distance-apex}
 alternatingly
 for $r$ times, we have found the desired $r$-independent set. Note
 that throughout the process we delete a set $S$ of size at most
-$t-1$, if $K_t\not\minor_{r+1} G$. This proves \cref{thm:new-uqw}. 
+$t-1$, if $K_t\not\minor_{r+1} G$. For a convenient presentation
+assume that $\binom{m+t-2}{t-1}\leq (4(m+1)^3+2)^{2t+1}$. 
+Then, if we start with a set $A$ of order at least 
+$R(m,r+t)\in\Oof(m^{(6t+3)^{t+3}})$ for fixed $t$, the 
+subset $B\subseteq A$ will have size $m$. This proves \cref{thm:new-uqw}. 
