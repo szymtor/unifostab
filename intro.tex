@@ -98,7 +98,10 @@ graphs~\cite{nevsetvril2011nowhere}. The second result is by
 Adler and Adler~\cite{adler2014interpreting}, who observed that 
 nowhere denseness essentially corresponds to the stability theoretic notion 
 of \emph{superflatness} introduced by Podewski and 
-Ziegler in~\cite{podewski1978stable}. Before we can give an 
+Ziegler in~\cite{podewski1978stable}. In fact, Adler and Adler observed 
+that on subgraph closed classes of graphs, the notions of nowhere denseness, 
+stability and the non-independence property (NIP) are equivalent. 
+Before we can give an 
 overview of some of the techniques that can be brought down from 
 the uncountable to the finite and state our contributions, we need some
 definitions. 
@@ -129,34 +132,40 @@ there exist a structure $\strA\in \CCC$ and tuples $\tup{a}_0,\ldots, \tup{a}_{n
 of elements of $\strA$ such that $\strA\models\psi(\tup{a}_i,\tup{a}_j)\Leftrightarrow i<j$,
 that is, $\psi$ orders the tuples linearly. 
 
-The first application of stability theory concerns the existence of indiscernible sequences. 
+The first application of stability theory concerns the existence of long
+indiscernible sequences. If $\tup{a}=(a_0,\ldots)$ is a non-repeating sequence of elements of $\strA$, we write \[[\tup{a}]^k\coloneqq \{\tup{b}=(a_{i_1},\ldots, a_{i_k}) \sth 0\leq i_1<\ldots <i_k\}\] for the set of of all subsequences
+of $\tup{a}$ of length $k$. When we speak of a subsequence $\tup{a}'$
+of a sequence $\tup{a}$, we always mean an increasing subsequence. 
 
 \begin{definition}
-Let $A$ be a linearly ordered set and let $k\in \N$. We write $[A]^k$ for the set
-of all strictly increasing $k$-tuples of elements of $A$. Let $f$ be a map with
-domain $[A]^k$. A subset $B\subseteq A$ is \emph{$f$-indiscernible} if for
-any two strictly increasing $k$-tuples $\tup{a},\tup{b}$ of elements from $B$
-it holds that $f(\tup{a})=f(\tup{b})$, that is, $f$ is constant on $[B]^k$. 
+Let $\tup{a}=(a_0,\ldots)$ be a non-repeating sequence of elements of $\strA$.
+Let $f$ be a map with domain $[\tup{a}]^k$. A subsequence $\tup{a}'$ 
+of $\tup{a}$ is \emph{$f$-indiscernible} if for any two 
+subsequences $\tup{v},\tup{w}\in [\tup{a}']^k$ 
+it holds that $f(\tup{w})=f(\tup{w})$.
 
 If $\Phi$ is a set of formulas of the form $\phi(x_0,\ldots, x_{k-1})$, 
-we say that $B$ is \emph{$\Phi$-indiscernible} (in a structure $\strA$)
-if for every $\phi\in \Phi$ and every pair $\tup{a},\tup{b}\in [B]^k$ it
+we say that $\tup{a}'$ 
+is \emph{$\Phi$-indiscernible} (in a structure $\strA$)
+if for every $\phi\in \Phi$ and any two 
+subsequences $\tup{v},\tup{w}\in [\tup{a}]^k$ it
 holds that $\strA\models\phi(\tup{a})\Leftrightarrow\strA\models\phi(\tup{b})$. 
 \end{definition}
 
-We often identify ordered sets with sequences of elements. 
-A sequence $(a_1,\ldots, a_\ell)$ of elements of~$\strA$ is
-\emph{$\Phi$-indiscernible} if for every formula
-$\phi(x_1,\ldots, x_k)\in \Phi$ with $k$ free variables and any two
-increasing sequences
-$1\leq i_1<\ldots <i_k\leq \ell, 1\leq j_1< \ldots< j_k\leq \ell$ of
-integers, it holds that
-\[\strA\models\phi(a_{i_1},\ldots, a_{i_k})\Leftrightarrow \strA\models\phi(a_{j_1},
-\ldots, a_{j_k}).\]
+%We often identify ordered sets with sequences of elements. 
+%A sequence $(a_1,\ldots, a_\ell)$ of elements of~$\strA$ is
+%\emph{$\Phi$-indiscernible} if for every formula
+%$\phi(x_1,\ldots, x_k)\in \Phi$ with $k$ free variables and any two
+%increasing sequences
+%$1\leq i_1<\ldots <i_k\leq \ell, 1\leq j_1< \ldots< j_k\leq \ell$ of
+%integers, it holds that
+%\[\strA\models\phi(a_{i_1},\ldots, a_{i_k})\Leftrightarrow \strA\models\phi(a_{j_1},
+%\ldots, a_{j_k}).\]
 
 Results about the existence of indiscernible sequences are known as 
 \emph{partition theorems}, because the map $f$ induces a partition
-on the set $[A]^k$. Partitioning theorems play an important role in 
+on the set $[\tup{a}]^k$ (which can be identified with the ordered 
+set $A=\{a_0,\ldots\}$). Partitioning theorems play an important role in 
 combinatorics and graph theory, and also in stability theory. The 
 crucial distinction in stability theory is between \emph{Ramsey type 
 theorems}, which hold
@@ -170,11 +179,11 @@ e.g.~\cite{siebertz2016polynomial}.
 \begin{theorem}[Malliaris and Shelah~\cite{malliaris2014regularity}, Theorem 3.5, Item (2)]\label{thm:malshelah}
   Let  $\Delta$ be a finite
   set of stable first-order formulas.  There is a polynomial $p(x)$ such that
-  for all $\strA\in \CCC$, every positive integer $m$ and every sequence
-  $(a_1,\ldots, a_\ell)$ of elements of $\strA$ of length $\ell=p(m)$, there
-  exists a sub-sequence $(a_{i_1},\ldots, a_{i_m})$ of
-  $(a_1,\ldots, a_\ell)$ of length $m$ which is
-  $\Delta$-indiscernible, $1\leq i_1<\ldots <i_m\leq \ell$.
+  for all $\strA\in \CCC$, every positive integer $m$ and every non-repeating sequence
+  $\tup{a}=(a_0,\ldots, a_{\ell-1})$ of elements of $\strA$ of length $\ell=p(m)$, there
+  exists a sub-sequence $\tup{a}'$ of
+  $\tup{a}$ of length $m$ which is
+  $\Delta$-indiscernible.
 \end{theorem}
 
 Another perspective on stability theory is to see it as a way of 
@@ -265,7 +274,8 @@ class $\CCC$ of graphs is nowhere dense if there is a function
 $g:\N\rightarrow \N$ such that for all $r\in \N$ it holds that 
 $K_{g(r)}\not\minor_r^t G$ for all $G\in \CCC$, or that the
 $r$-subdivision of $K_{g(r)}$ is not a subgraph of all $G\in \CCC$. 
-The latter is in fact the definition of \emph{superflat classes of graphs}, 
+The latter is in fact the definition of \emph{superflat classes of graphs}
+(for classes of finite and infinite graphs), 
 given by Podewski and Zieger~\cite{podewski1978stable}, who also
 proved that superflat classes of graphs are stable. 
 The notion of uniform
@@ -312,12 +322,19 @@ and which gives explicit bounds on the degree of the polynomial.
 We prove the following theorem. 
 
 \begin{theorem}\label{thm:new-uqw}
-Let $G$ be a graph such that $K_t\not\minor_r G$ and let $A\subseteq V(G)$. 
-There is a number $g(t)$ such that if $|A|\geq m^{g(t)}$, then we can find a set
+Let $G$ be a graph such that $K_t\not\minor_{r+2} G$. 
+If $A\subseteq V(G)$ of size $\Omega(m^{(6t+3)^r})$, then we can find a set
 $S\subseteq V(G)$ of size $|S|\leq t$ and a set $B\subseteq A\setminus S$ 
 of size $|B|\geq m$ which is $r$-independent in $G-S$.  
 \end{theorem}
 
+We prove \cref{thm:new-uqw} in \cref{sec:uqw}. We want to highlight
+that even though our methods are the methods from stability theory, 
+we use only very simple graph theoretic notions. In particular, the
+proof can easily be turned into an efficient algorithm which does not
+call a model-checking algorithm as a subroutine. 
+
+\bigskip
 Podewski and Ziegler's proof that flat graphs are stable uses an 
 infinite Ramsey argument. Based on Gaifman's Locality Theorem for
 first-order logic~\cite{gaifman1982local}, we give a combinatorial 
@@ -331,6 +348,10 @@ Let $G$ be a graph such that $K_t\not\minor_{2^{q+k}} G$. Then
 The ladder index of $\phi$ on $G$ is at most $x$. 
 \end{theorem}
 
+We prove \cref{thm:new-stable} in \cref{sec:stable}. 
+
+\bigskip
+
 Finally, we again consider the formula stating that the distance
 between two elements is at most $r$. 
 We observe that an argument of Bousquet and 
@@ -343,7 +364,4 @@ Let $G$ be a graph such that $K_t\not\minor_r G$. Then the
 VC-dimension of the $r$-power graph~$G^r$ is bounded by $t-1$. 
 \end{theorem}
 
-\paragraph{Organisation.}
-We prove \cref{thm:new-uqw} in \cref{sec:uqw}, 
-\cref{thm:new-stable} in \cref{sec:stable} and
-\cref{thm:new-vc} in \cref{sec:vc}. 
+We prove \cref{thm:new-vc} in \cref{sec:vc}. 
