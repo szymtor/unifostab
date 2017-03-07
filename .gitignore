@@ -6,9 +6,9 @@ sparsity.pdf
 *.fls
 *.log
 *.out
-*.synctex.gz
+*.synctex*.gz
 *.thm
 *.ai
 *.lb
 *.watcher_pid
-nd-stable.pdf
+nd-stable*.pdf
