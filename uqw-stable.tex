@@ -4,14 +4,13 @@ The main result of this section is Theorem~\ref{thm:uqw-stable},
 which states 
 that a class of graphs which is uniformly quasi-wide is stable.
 In Section~\ref{sec:uqw-tuples} we formulate a consequence of the uniform quasi-wideness which
-holds for tuples of vertices. In Section~\ref{sec:uqw-stable} we prove Theorem~\ref{thm:uqw-stable}
-using Gaifman's Locality Theorem.
+holds for tuples of vertices. Using this and  Gaifman's Locality Theorem, we prove Theorem~\ref{thm:uqw-stable} in Section~\ref{sec:uqw-stable}.
 
 
 \subsection{Uniform quasi-widness for tuples}\label{sec:uqw-tuples}
 Fix a graph $G$, a number $d\in\N$ (the dimension) and a number $r\in \N$ (the radius).
 If $S\subset V(G)$ is a set of vertices and $A\subset V(G)^d$ is a set of $d$-tuples of vertices,
-then we say that $A$ is $r$-\emph{totally independent} in $G-S$ 
+then we say that $A$ is \emph{totally $r$-independent} in $G-S$ 
 if the set of all vertices $v\in G-S$ which appear on some coordinate of some tuple $\bar a\in A$
 is $r$-independent in $G-S$. 
 
@@ -105,6 +104,7 @@ then there must be some element  $a\in B-C_s$
 such that $f_a(i,j)=\bot$  for all $i,j\in\set{1,\ldots,d}$.
 Let $C_{s+1}=C_s\cup \set s$.
 By construction, $C_{s+1}$ is totally $2r$-independent in $G-S$.
+[CORRECT THIS ARGUMENT! 2r should be r (?); the set $\set s$ should be totally $r$-independent itself]
 
 We may repeat the construction as long as $|B|>|C_s|\cdot (d^2-1)=s\cdot (d^2-1)$, and we stop when this inequality no longer holds. Define the set $C$ as the last constructed set $C_s$.
 By construction, $|C_s|=s\ge 
@@ -125,10 +125,14 @@ and $s^d(r)=d\cdot s(2r)$.
 
 \subsection{Excluding long ladders}
 \label{sec:uqw-stable}
+
+Before stating and proving Theorem~\ref{thm:uqw-stable}, we recall some notions from logic, namely quantifier ranks, Gaifman's Locality Theorem.
+
+
 By a \emph{colored graph} we mean a graph  in which 
 every vertex is assigned zero or more colors from a fixed set of colors. We view a colored graph as a relational structure as usual, by viewing each color as a unary predicate. 
 
-The \emph{quantifier rank} of a formula $\phi$ is the maximal number of nested quantifiers. Fix a set of colors $C$.
+The \emph{quantifier rank} of a formula $\phi$ is the maximal number of nested quantifiers in $\phi$. Fix a set of colors $C$.
 Let $(G_1,\bar v_1)$ and $(G_2,\bar v_2)$ be two
 colored graphs with distinguished tuples of vertices of the same length $d$. We say that $(G_1,v_1)$ and $(G_2,v_2)$
 have the same \emph{quantifier rank $q$ type}
@@ -144,15 +148,6 @@ The following lemma is standard~(see e.g.~\cite{libkin}).
 \end{lemma}
 
 
-The following theorem is the main result of Section~\ref{sec:uqw-stable}.
-
-
-\begin{theorem}\label{thm:uqw-stable}
-	Let $\cal C$ be a uniformly quasi-wide class of graphs.
-	Then $\cal C$ is stable. More precisely, if $\phi(\bar u,\bar v)$ is a formula with $d$ free variables and quantifier rank $q$, and $N^d(r,m)$ and $s^d(r)$ are as in Proposition~\ref{prop:uqw-tuples}, then for all graphs $G\in\cal C$,  the ladder index of $\phi$ is at most $N^d(2r,(2T)^d)$,
-where $r= 7^q$,
- $T$ is the number of all quantifier rank $q$ types with one free  variable over the signature of  graphs colored with $s^d(2r)$ colors.
-\end{theorem}
 Before giving a proof of Theorem~\ref{thm:uqw-stable},
 we state a consequence of Gaifman's Locality Theorem.
  If $G$ is a colored graph, $r\in\N$  a number and $\bar a$ a tuple of vertices $a_1,\ldots,a_d$  of vertices of $G$, then  $N^G_r[\bar a]$ denotes the pair $(H,\bar a)$, where $H$ is the colored subgraph of $G$
@@ -249,15 +244,23 @@ satisfies the required condition.
 
 Again, let $G$ be a graph and  $S\subset V(G)$ a set of vertices.
 To each  vertex $v$ of $G$ 
-assign a color which is equal to $v$ if $v\in S$,
-and otherwise, the color of $v$ is the quantifier rank $q$ type of  $N^r_{G^S}[v]$. %Note that this coloring uses $T'+s^d(2r)$ colors.
-If $\bar w$ is a tuple of vertices of $G$, then its \emph{color tuple} is the tuple of colors assigned to the components of $\bar w$.
+assign a \emph{color} which is equal to $v$ if $v\in S$,
+and otherwise, the color of $v$ is the quantifier rank $q$ type of  $N^r_{G^S}[v]$.
+The \emph{equality type} of a tuple $w_1,\ldots,w_d$
+is a partition $\cal P$ of the set $\set{1,\ldots,d}$
+defined so that $i$ and $j$ are in the same part if and only if $w_i=w_j$.
+The \emph{local type} of $w_1,\ldots,w_d$
+is the pair $((c_1,\ldots,c_d),\sim)$,
+where $\sim$ is the equality type of the tuple $w_1,\ldots,w_d$
+and $c_i$ is the color of the vertex $w_i$.
 
 
 
 \begin{lemma}\label{lem:coloring}
-	Suppose that $\bar w_1$ and $\bar w_2$ are two  $\bar x$-tuples of 
-	vertices of $V(G)$ such that $\set{\bar w_1}$ and $\set{\bar w_2}$ are both totally $2r$-independent in $G-S$, and  $\bar w_1$ and $\bar w_2$ have the same color tuples. Then $$G,\bar w_1\models \phi(\bar x)\iff G,\bar w_2\models \phi(\bar x).$$
+	Let $\phi(\bar x)$ be a formula with
+	 $d$ free variables and of quantifier rank $q$, and let $r=7^q$.
+	Suppose that $\bar w_1$ and $\bar w_2$ are two  $d$-tuples of 
+	vertices of $V(G)$ such that $\set{\bar w_1}$ and $\set{\bar w_2}$ are both totally $2r$-independent in $G-S$, and  $\bar w_1$ and $\bar w_2$ have the same local types. Then $$G,\bar w_1\models \phi(\bar x)\iff G,\bar w_2\models \phi(\bar x).$$
 	% For each $1\le i,j\le m$, whether $\phi(\bar u_i,\bar v_j)$
 	% holds in $G$ depends only on the color tuple  of~$\bar u_i\bar v_j$.
 \end{lemma}
@@ -265,10 +268,20 @@ If $\bar w$ is a tuple of vertices of $G$, then its \emph{color tuple} is the tu
  % The claim will then follow by taking $\bar w_1$ and $\bar w_2$ to be of the form $\bar u_i\bar v_j$.
  %
  %	
-	Define a tuple $\bar \alpha$ as follows. For $j=1..|x|$, if the $j$th element in the tuple $\bar w_1$ is an element $s$ belonging to $S$, then the $j$th element of $\bar \alpha$ is $s$;
-	otherwise, the $j$th element of $\bar \alpha$ is the $j$th variable in the tuple $\bar x$. Note that using $\bar w_2$ in place of $\bar w_1$ in the above definition would yield the same tuple $\bar \alpha$. 	For $i=1,2$, let $\bar w_i^S$ denote the tuple obtained from $\bar w_i$ by removing those elements which belong to $S$.
+ Let $((c_1,\ldots,c_d),\cal P)$ be the local type of the tuples $\bar w_1$ and $\bar w_2$.
+  Let $\cal P^S$ be the set of those parts of the partition $\cal P$  which do not contain an element $i$ such that $c_i$ is a vertex belonging to $S$.  
+  
+  Let $\bar y$ be a tuple of variables of length $|\cal P^S|$,
+  and fix a bijection between the elements of $\bar y$ and the set $U^S$.
+ 	Define a tuple $\bar \alpha$ as follows. For $j=1..|x|$, if 
+	$c_j\in S$, then let $\alpha_j=s$;
+	otherwise, the $j$th element of $\bar \alpha$ is the 
+	variable in the tuple $\bar y$ which corresponds to the part in the set $\cal P^S$ which contains the element $j$.
+	For $i=1,2$, let $\bar w_i^S$ denote the tuple of length $|\bar y|$, which on position corresponding to the part $P\in \cal P^S$
+	contains the vertex of $G$ which occurs in the tuple $\bar w_i$
+	on all positions which belong to the part $P$. Note that by definition, $\bar w_i^S$ is a non-repeating tuple consisting of those vertices in $\bar w_i$ which do not belong to the set $S$. In particular, the elements of the tuple $\bar w_i^S$ form a $2r$-independent subset of $G-S$.
+		
 	
-	Let $\bar y$ be the sequence of variables occurring in $\bar \alpha$.
 	Consider the formulas $\phi^{\bar \alpha}(\bar y)$ and $\phi'(\bar y)$ as described in Lemma~\ref{lem:remove-s}.
 	In particular, the following equivalences hold:
 	\begin{align}\label{eq:iff}
@@ -278,9 +291,6 @@ If $\bar w$ is a tuple of vertices of $G$, then its \emph{color tuple} is the tu
 Since the  elements of the tuple $\bar w_i^S$ are $2r$-independent in $G-S$, the $r$-neighborhood of $\bar w_i^S$ in $G^S$  
 is (isomorphic to) a disjoint union of the $r$-neighborhoods in $G^S$
 of $v$, for $v$ ranging over the elements of the tuple $\bar w_i^S$.
-
-
-
 By assumption that the tuple colors of $\bar w_1$ and of $\bar w_2$ are equal it follows that for $j=1..|\bar x|$,
 if $w^j_1$ is the $j$th coordinate of the tuple $\bar w_1$
 and $w^j_2$ is the $j$th coordinate of the tuple $\bar w_2$,
@@ -288,13 +298,23 @@ then the quantifier rank $q$ types of $N^r_{G^S}[w^j_1]$ and
 of $N^r_{G^S}[w^j_2]$ are equal, assuming $w^j_1$ and $w^j_2$
 are not in $S$. Lemma~\ref{lem:type-union} then implies 
 that the quantifier rank $q$ types of  $N^r_{G^S}[\bar w_1^S]$ and of $N^r_{G^S}[\bar w_2^S]$ are equal. 
-In particular, whether $\phi'(\bar w_i^S)$ holds in $G^S$ is independent of $i=1,2$
+In particular, whether $\phi'(\bar w_i^S)$ holds in $G^S$ is independent of $i=1,2$.
 It follows from~\eqref{eq:iff} that whether $\phi(\bar w_i)$ holds
 in $G$ is independent of $i=1,2$, proving Lemma~\ref{lem:coloring}.
 \end{proof}
 
 
-\begin{proof}[ of Theorem~\ref{thm:uqw-stable}]
+
+The following theorem is the main result of Section~\ref{sec:uqw-stable}.
+
+
+\begin{theorem}\label{thm:uqw-stable}
+	Let $\cal C$ be a uniformly quasi-wide class of graphs.
+	Then $\cal C$ is stable. More precisely, if $\phi(\bar u,\bar v)$ is a formula with $d$ free variables and quantifier rank $q$, and $N^d(r,m)$ and $s^d(r)$ are as in Proposition~\ref{prop:uqw-tuples}, then for all graphs $G\in\cal C$,  the ladder index of $\phi$ is at most $N^d(2r,(2T)^d)$,
+where $r= 7^q$,
+ $T$ is the number of all quantifier rank $q$ types with one free  variable over the signature of  graphs colored with $s^d(2r)$ colors.
+\end{theorem}
+\begin{proof}
 Let $r=  7^q$, 
 let $\phi$ be a formula of quantifier rank $q$ and $d$ free variables,
 and let $T'$ denote the number of all quantifier rank $q$ types of 
