@@ -171,6 +171,23 @@ from some vertex in $\bar a$.
 \end{lemma}
 \begin{proof}This is an immediate consequence of the Main Theorem~in~\cite{gaifman1982local}.
 \end{proof}
+We will use the following fact the compositionality of types of 
+under taking disjoint unions.
+		\begin{lemma}\label{lem:type-union}
+			For $i=1,2$, let $G_i,H_i$ be colored graphs,
+			and $a_i$ be a tuple of vertices of $G_i$
+			and $b_i$ be a tuple of vertices of $H_i$.
+			Suppose that $(G_1,\bar a_1)$ and $(G_2,\bar a_2)$ 
+			have the same quantifier rank $q$ type,
+			and $(H_1,\bar b_1)$ and $(H_2,\bar b_2)$ 
+			have the same quantifier rank $q$ type.			
+			Then the quantifier rank $q$ type of the disjoint union 
+			$(G_1\oplus H_1,\bar a_1\bar b_1)$ is equal to the one of $(G_2\oplus H_2,\bar a_2\bar b_2)$. \end{lemma}
+\begin{proof}[Sketch]
+	The proof proceeds by applying the well-known characterization 
+	of quantifier rank $q$  types using Ehrenfeucht-Fraisse games (see e.g.~\cite{libkin}). By assumption, duplicator has a winning strategy $\gamma$ in the $q$-round game on $(G_1,\bar a_1)$ and $(G_2,\bar a_2)$, and a winning strategy $\eta$ in the $q$-round game on $(H_1,\bar b_1)$ and $(H_2,\bar b_2)$. The strategies $\gamma$ and $\eta$ can be combined into a winning strategy on $(G_1\oplus H_1,\bar a_1\bar b_1)$ and $(G_2\oplus H_2,\bar a_2\bar b_2)$.
+\end{proof}
+
 
 \medskip
 The rest of Section~\ref{sec:uqw-stable} is devoted to a proof of Theorem~\ref{thm:uqw-stable}.
@@ -230,10 +247,10 @@ In each case, it follows from the inductive assumption that $\phi'$
 satisfies the required condition.
 \end{proof}
 
-Fix a graph $G$ and a set of vertices $S\subset V(G)$.
+Again, let $G$ be a graph and  $S\subset V(G)$ a set of vertices.
 To each  vertex $v$ of $G$ 
 assign a color which is equal to $v$ if $v\in S$,
-and otherwise, the color of $v$ is the quantifier rank $q$ type of  $N^r_{G^S}[v]$. Note that this coloring uses $T'+s^d(2r)$ colors.
+and otherwise, the color of $v$ is the quantifier rank $q$ type of  $N^r_{G^S}[v]$. %Note that this coloring uses $T'+s^d(2r)$ colors.
 If $\bar w$ is a tuple of vertices of $G$, then its \emph{color tuple} is the tuple of colors assigned to the components of $\bar w$.
 
 
@@ -263,20 +280,6 @@ is (isomorphic to) a disjoint union of the $r$-neighborhoods in $G^S$
 of $v$, for $v$ ranging over the elements of the tuple $\bar w_i^S$.
 
 
-		\begin{lemma}\label{lem:type-union}
-			For $i=1,2$, let $G_i,H_i$ be colored graphs,
-			and $a_i$ be a tuple of vertices of $G_i$
-			and $b_i$ be a tuple of vertices of $H_i$.
-			Suppose that $(G_1,\bar a_1)$ and $(G_2,\bar a_2)$ 
-			have the same quantifier rank $q$ type,
-			and $(H_1,\bar b_1)$ and $(H_2,\bar b_2)$ 
-			have the same quantifier rank $q$ type.			
-			Then the quantifier rank $q$ type of the disjoint union 
-			$(G_1\oplus H_1,\bar a_1\bar b_1)$ is equal to the one of $(G_2\oplus H_2,\bar a_2\bar b_2)$. \end{lemma}
-\begin{proof}[Sketch]
-	The proof proceeds by applying the well-known characterization 
-	of quantifier rank $q$  types using Ehrenfeucht-Fraisse games (see e.g.~\cite{libkin}). By assumption, duplicator has a winning strategy $\gamma$ in the $q$-round game on $(G_1,\bar a_1)$ and $(G_2,\bar a_2)$, and a winning strategy $\eta$ in the $q$-round game on $(H_1,\bar b_1)$ and $(H_2,\bar b_2)$. The strategies $\gamma$ and $\eta$ can be combined into a winning strategy on $(G_1\oplus H_1,\bar a_1\bar b_1)$ and $(G_2\oplus H_2,\bar a_2\bar b_2)$.
-\end{proof}
 
 By assumption that the tuple colors of $\bar w_1$ and of $\bar w_2$ are equal it follows that for $j=1..|\bar x|$,
 if $w^j_1$ is the $j$th coordinate of the tuple $\bar w_1$
@@ -287,7 +290,7 @@ are not in $S$. Lemma~\ref{lem:type-union} then implies
 that the quantifier rank $q$ types of  $N^r_{G^S}[\bar w_1^S]$ and of $N^r_{G^S}[\bar w_2^S]$ are equal. 
 In particular, whether $\phi'(\bar w_i^S)$ holds in $G^S$ is independent of $i=1,2$
 It follows from~\eqref{eq:iff} that whether $\phi(\bar w_i)$ holds
-in $G$ is independent of $i=1,2$, proving Lemma~\ref{lem:coloring}
+in $G$ is independent of $i=1,2$, proving Lemma~\ref{lem:coloring}.
 \end{proof}
 
 
@@ -307,14 +310,9 @@ which form a $\phi$-ladder in $G$.
 Applying Proposition~\ref{prop:uqw-tuples} to the set $A$, the radius $2r$, and target size $m$
 		 yields a set $S\subset V(G)$ such that $|S|\le s^d(2r)$
 	and a set $B\subset A$ of size $m$ which is totally $2r$-independent in $G-S$.
-
 % Replacing $A$ by $B$, we may assume that $\bar u_1,\ldots,\bar u_m\in V(G)^{\bar u}$ and $\bar v_1,\ldots,\bar v_k\in V(G)^{\bar v}$
 % form a $\phi$-ladder of length $m$ in $G$, and
 % that $A$ is totally $2r$-independent in $G-S$.
-
-
-
-
 %
 %
 % An \emph{$r$-local formula} $\phi(\bar x)$ is a
@@ -335,13 +333,12 @@ Applying Proposition~\ref{prop:uqw-tuples} to the set $A$, the radius $2r$, and 
 % % %  and $d^{>2r}(v,w)$ expresses the property that $\set{v,w}$ is $2r$-independent.
 % % 	\end{itemize}
 % \end{theorem}
-
-Since the set $B$ has $m=(T+s^d(r))^d+1$ elements,
+Since the set $B$ has $m=(T'+s^d(2r))^d+1$ elements,
 and each tuple $\bar u_i\bar v_i\in B$ has an associated color tuple 
-belonging to a set of cardinality $(T+s^d(r))^d$, 
+belonging to a set of cardinality $(T'+s^d(2r))^d$, 
 by the pigeonhole principle, there are $i$ and $j$ 
-such that $i<j$ and  $\bar u_i\bar v_i$ and $\bar u_j\bar v_j$ 
-are two tuples in $B$ which have the same color tuples. Then also $\bar w_1=\bar u_i\bar v_j$
+such that $i<j$ and such that $\bar u_i\bar v_i$ and $\bar u_j\bar v_j$ 
+ have the same color tuples. Then also  $\bar w_1=\bar u_i\bar v_j$
 and $\bar w_2=\bar u_j\bar v_i$ have the same color tuples.
 By Lemma~\ref{lem:coloring} above,  $\phi(\bar u_i,\bar v_j)$ holds in $G$
  if and only if $\phi(\bar u_j,\bar v_i)$ holds in $G$, which is a contradiction with the assumption that $\bar u_1,\ldots,\bar u_m$ and $\bar v_1,\ldots,\bar v_m$ form a $\phi$-ladder.
