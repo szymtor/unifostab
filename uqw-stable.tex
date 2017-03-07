@@ -248,7 +248,7 @@ assign a \emph{color} which is equal to $v$ if $v\in S$,
 and otherwise, the color of $v$ is the quantifier rank $q$ type of  $N^r_{G^S}[v]$.
 The \emph{equality type} of a tuple $w_1,\ldots,w_d$
 is a partition $\cal P$ of the set $\set{1,\ldots,d}$
-defined so that $i$ and $j$ are in the same part if and only if $w_i=w_j$.
+defined so that $i$ and $j$ are in the same part of the partition $\cal P$ if and only if $w_i=w_j$.
 The \emph{local type} of $w_1,\ldots,w_d$
 is the pair $((c_1,\ldots,c_d),\sim)$,
 where $\sim$ is the equality type of the tuple $w_1,\ldots,w_d$
@@ -269,17 +269,19 @@ and $c_i$ is the color of the vertex $w_i$.
  %
  %	
  Let $((c_1,\ldots,c_d),\cal P)$ be the local type of the tuples $\bar w_1$ and $\bar w_2$.
-  Let $\cal P^S$ be the set of those parts of the partition $\cal P$  which do not contain an element $i$ such that $c_i$ is a vertex belonging to $S$.  
+  Let ${\cal P}^S$ be the set of those parts of the partition $\cal P$  which do not contain an element $i$ such that $c_i$ is a vertex belonging to $S$.  
   
-  Let $\bar y$ be a tuple of variables of length $|\cal P^S|$,
-  and fix a bijection between the elements of $\bar y$ and the set $U^S$.
- 	Define a tuple $\bar \alpha$ as follows. For $j=1..|x|$, if 
-	$c_j\in S$, then let $\alpha_j=s$;
-	otherwise, the $j$th element of $\bar \alpha$ is the 
-	variable in the tuple $\bar y$ which corresponds to the part in the set $\cal P^S$ which contains the element $j$.
-	For $i=1,2$, let $\bar w_i^S$ denote the tuple of length $|\bar y|$, which on position corresponding to the part $P\in \cal P^S$
-	contains the vertex of $G$ which occurs in the tuple $\bar w_i$
-	on all positions which belong to the part $P$. Note that by definition, $\bar w_i^S$ is a non-repeating tuple consisting of those vertices in $\bar w_i$ which do not belong to the set $S$. In particular, the elements of the tuple $\bar w_i^S$ form a $2r$-independent subset of $G-S$.
+  Let $\bar y=(y_P)_{P\in{\cal P}^S}$ be a ${\cal P}^S$-indexed tuple of distinct variables.
+ 	Define a $d$-tuple $\bar \alpha$ as follows. For $j=1..d$, if 
+	$c_j\in S$ then let $\alpha_j=s$;
+	otherwise, if $j\in P$ for some $P\in {\cal P}^S$, 
+	then let $\alpha_j$
+be $y_P$.
+	For $i=1,2$, let $\bar w_i^S$ denote the ${\cal P}^S$-indexed tuple, which on position  $P\in {\cal P}^S$
+	contains the unique vertex $v$ of $G$ such that $v$ is the $j$th element of the tuple $\bar w_i$
+	for all  $j\in P$. Note that by definition, $\bar w_i^S$ is a non-repeating tuple consisting of those vertices in $\bar w_i$ which do not belong to the set $S$. Furthermore, 
+	any two distinct positions of the tuple $\bar w_i$
+	contain elements which are at distance larger than $2r$ in the graph $G-S$.
 		
 	
 	Consider the formulas $\phi^{\bar \alpha}(\bar y)$ and $\phi'(\bar y)$ as described in Lemma~\ref{lem:remove-s}.
@@ -314,6 +316,7 @@ The following theorem is the main result of Section~\ref{sec:uqw-stable}.
 where $r= 7^q$,
  $T$ is the number of all quantifier rank $q$ types with one free  variable over the signature of  graphs colored with $s^d(2r)$ colors.
 \end{theorem}
+[FIX PROOF TO CONSIDER LOCAL TYPES INSTEAD OF COLOR TUPLES]
 \begin{proof}
 Let $r=  7^q$, 
 let $\phi$ be a formula of quantifier rank $q$ and $d$ free variables,
