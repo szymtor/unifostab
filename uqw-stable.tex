@@ -230,46 +230,24 @@ In each case, it follows from the inductive assumption that $\phi'$
 satisfies the required condition.
 \end{proof}
 
-
-
-\begin{proof}[ of Theorem~\ref{thm:uqw-stable}]
-Let $r=  7^q$, 
-let $\phi$ be a formula of quantifier rank $q$ and $d$ free variables,
-and let $T'$ denote the number of all quantifier rank $q$ types of 
-formulas with one free variable over the signature of  graphs colored by $s^d(r)$ colors.
-Finally, let $m=(T'+s^d(2r))^d+1$. 
-
-We show that 
-every $\phi$-ladder in a graph $G\in\cal C$ has length smaller than $N^d(2r,m)$, which is at most $N^d(2r,(2T)^d)$ as $m\le (T'+s^d(2r)+1)^d\le (2T)^d$.
-To reach a contradiction, assume that there is a graph $G\in\cal C$, a number $k\ge N^d(2r,m)$
-and tuples $\bar u_1,\ldots,\bar u_k\in V(G)^{\bar u}$ and $\bar v_1,\ldots,\bar v_k\in V(G)^{\bar v}$
-which form a $\phi$-ladder in $G$.
-	Let $A=\set{\bar u_i\bar v_i: i=1,\ldots,k}\subset V(G)^d$; note that $|A|=k$.
-Applying Proposition~\ref{prop:uqw-tuples} to the set $A$, the radius $2r$, and target size $m$
-		 yields a set $S\subset V(G)$ such that $|S|\le s^d(2r)$
-	and a set $B\subset A$ of size $m$ which is totally $2r$-independent in $G-S$.
-
-Replacing $A$ by $B$, we may assume that $\bar u_1,\ldots,\bar u_m\in V(G)^{\bar u}$ and $\bar v_1,\ldots,\bar v_k\in V(G)^{\bar v}$
-form a $\phi$-ladder of length $m$ in $G$, and 
-that $A$ is totally $2r$-independent in $G-S$.
-
+Fix a graph $G$ and a set of vertices $S\subset V(G)$.
 To each  vertex $v$ of $G$ 
 assign a color which is equal to $v$ if $v\in S$,
 and otherwise, the color of $v$ is the quantifier rank $q$ type of  $N^r_{G^S}[v]$. Note that this coloring uses $T'+s^d(2r)$ colors.
-If $\bar v$ is a tuple of vertices of $G$, then its \emph{color tuple} is the tuple of colors assigned to the components of $\bar v$.
+If $\bar w$ is a tuple of vertices of $G$, then its \emph{color tuple} is the tuple of colors assigned to the components of $\bar w$.
 
 
 
-\begin{claim}
-	For each $1\le i,j\le m$, whether $\phi(\bar u_i,\bar v_j)$
-	holds in $G$ depends only on the color tuple  of~$\bar u_i\bar v_j$.
-\end{claim}
-\begin{proof}
+\begin{lemma}\label{lem:coloring}
 	Suppose that $\bar w_1$ and $\bar w_2$ are two  $\bar x$-tuples of 
-	vertices of $V(G)$ such that $\set{\bar w_1}$ and $\set{\bar w_2}$ are both totally $2r$-independent in $G-S$, and  $\bar w_1$ and $\bar w_2$ have the same color tuples. We show that $$G,\bar w_1\models \phi(\bar x)\iff G,\bar w_2\models \phi(\bar x).$$ The claim will then follow by taking $\bar w_1$ and $\bar w_2$ to be of the form $\bar u_i\bar v_j$.
-	
-	
-	
+	vertices of $V(G)$ such that $\set{\bar w_1}$ and $\set{\bar w_2}$ are both totally $2r$-independent in $G-S$, and  $\bar w_1$ and $\bar w_2$ have the same color tuples. Then $$G,\bar w_1\models \phi(\bar x)\iff G,\bar w_2\models \phi(\bar x).$$
+	% For each $1\le i,j\le m$, whether $\phi(\bar u_i,\bar v_j)$
+	% holds in $G$ depends only on the color tuple  of~$\bar u_i\bar v_j$.
+\end{lemma}
+\begin{proof}
+ % The claim will then follow by taking $\bar w_1$ and $\bar w_2$ to be of the form $\bar u_i\bar v_j$.
+ %
+ %	
 	Define a tuple $\bar \alpha$ as follows. For $j=1..|x|$, if the $j$th element in the tuple $\bar w_1$ is an element $s$ belonging to $S$, then the $j$th element of $\bar \alpha$ is $s$;
 	otherwise, the $j$th element of $\bar \alpha$ is the $j$th variable in the tuple $\bar x$. Note that using $\bar w_2$ in place of $\bar w_1$ in the above definition would yield the same tuple $\bar \alpha$. 	For $i=1,2$, let $\bar w_i^S$ denote the tuple obtained from $\bar w_i$ by removing those elements which belong to $S$.
 	
@@ -309,8 +287,32 @@ are not in $S$. Lemma~\ref{lem:type-union} then implies
 that the quantifier rank $q$ types of  $N^r_{G^S}[\bar w_1^S]$ and of $N^r_{G^S}[\bar w_2^S]$ are equal. 
 In particular, whether $\phi'(\bar w_i^S)$ holds in $G^S$ is independent of $i=1,2$
 It follows from~\eqref{eq:iff} that whether $\phi(\bar w_i)$ holds
-in $G$ is independent of $i=1,2$, proving the claim.
+in $G$ is independent of $i=1,2$, proving Lemma~\ref{lem:coloring}
 \end{proof}
+
+
+\begin{proof}[ of Theorem~\ref{thm:uqw-stable}]
+Let $r=  7^q$, 
+let $\phi$ be a formula of quantifier rank $q$ and $d$ free variables,
+and let $T'$ denote the number of all quantifier rank $q$ types of 
+formulas with one free variable over the signature of  graphs colored by $s^d(r)$ colors.
+Finally, let $m=(T'+s^d(2r))^d+1$. 
+
+We show that 
+every $\phi$-ladder in a graph $G\in\cal C$ has length smaller than $N^d(2r,m)$, which is at most $N^d(2r,(2T)^d)$ as $m\le (T'+s^d(2r)+1)^d\le (2T)^d$.
+To reach a contradiction, assume that there is a graph $G\in\cal C$, a number $k\ge N^d(2r,m)$
+and tuples $\bar u_1,\ldots,\bar u_k\in V(G)^{\bar u}$ and $\bar v_1,\ldots,\bar v_k\in V(G)^{\bar v}$
+which form a $\phi$-ladder in $G$.
+	Let $A=\set{\bar u_i\bar v_i: i=1,\ldots,k}\subset V(G)^d$; note that $|A|=k$.
+Applying Proposition~\ref{prop:uqw-tuples} to the set $A$, the radius $2r$, and target size $m$
+		 yields a set $S\subset V(G)$ such that $|S|\le s^d(2r)$
+	and a set $B\subset A$ of size $m$ which is totally $2r$-independent in $G-S$.
+
+% Replacing $A$ by $B$, we may assume that $\bar u_1,\ldots,\bar u_m\in V(G)^{\bar u}$ and $\bar v_1,\ldots,\bar v_k\in V(G)^{\bar v}$
+% form a $\phi$-ladder of length $m$ in $G$, and
+% that $A$ is totally $2r$-independent in $G-S$.
+
+
 
 
 %
@@ -334,12 +336,14 @@ in $G$ is independent of $i=1,2$, proving the claim.
 % % 	\end{itemize}
 % \end{theorem}
 
-Since the set $A$ has $m=(T+s^d(r))^d+1$ elements,
-and each tuple $\bar u_i\bar v_i\in A$ has an associated color tuple 
+Since the set $B$ has $m=(T+s^d(r))^d+1$ elements,
+and each tuple $\bar u_i\bar v_i\in B$ has an associated color tuple 
 belonging to a set of cardinality $(T+s^d(r))^d$, 
 by the pigeonhole principle, there are $i$ and $j$ 
-such that $1\le i<j\le m$ and  $\bar u_i\bar v_i$ and $\bar u_j\bar v_j$ have the same color tuples.
-By the claim above,  $\phi(\bar u_i,\bar v_j)$ holds in $G$
+such that $i<j$ and  $\bar u_i\bar v_i$ and $\bar u_j\bar v_j$ 
+are two tuples in $B$ which have the same color tuples. Then also $\bar w_1=\bar u_i\bar v_j$
+and $\bar w_2=\bar u_j\bar v_i$ have the same color tuples.
+By Lemma~\ref{lem:coloring} above,  $\phi(\bar u_i,\bar v_j)$ holds in $G$
  if and only if $\phi(\bar u_j,\bar v_i)$ holds in $G$, which is a contradiction with the assumption that $\bar u_1,\ldots,\bar u_m$ and $\bar v_1,\ldots,\bar v_m$ form a $\phi$-ladder.
  This finishes the proof of Theorem~\ref{thm:uqw-stable}.
 \end{proof}
