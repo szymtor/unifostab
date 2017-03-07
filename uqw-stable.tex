@@ -10,9 +10,10 @@ holds for tuples of vertices. Using this and  Gaifman's Locality Theorem, we pro
 \subsection{Uniform quasi-widness for tuples}\label{sec:uqw-tuples}
 Fix a graph $G$, a number $d\in\N$ (the dimension) and a number $r\in \N$ (the radius).
 If $S\subset V(G)$ is a set of vertices and $A\subset V(G)^d$ is a set of $d$-tuples of vertices,
-then we say that $A$ is \emph{totally $r$-independent} in $G-S$ 
-if the set of all vertices $v\in G-S$ which appear on some coordinate of some tuple $\bar a\in A$
-is $r$-independent in $G-S$. 
+then we say that $A$ is \emph{mutually $r$-independent} in $G-S$ 
+if for every two distinct $(u_1,\ldots,u_d),(v_1,\ldots,v_d)\in S$
+and for all $1\le i,j\le d$, the distance between the vertices $u_i$ and $v_j$ in the graph $G-S$
+is larger than $r$.
 
 
 \begin{proposition}\label{prop:uqw-tuples}
@@ -20,9 +21,9 @@ is $r$-independent in $G-S$.
 	There is a  function $N^d:\N\times\N\to\N$ and a function $s^d:\N\to\N$
 	such that for all $r,m\in\N$ and all subsets $A\subset V(G)^d$
 	with $|A|\ge N^d(r,m)$ there  is a set $S\subset V(G)$
-	of size $|S|\le s^d(r)$ and a subset $B\subset A$ of size $|B|\ge m$ which is totally $r$-independent in $G-S$.
+	of size $|S|\le s^d(r)$ and a subset $B\subset A$ of size $|B|\ge m$ which is mutually $r$-independent in $G-S$.
 \end{proposition}
-\begin{proof}We fix a uniformly quasi-wide class $\cal C$ and functions $N:\N\times\N\to \N$
+\begin{proof}Fix a uniformly quasi-wide class $\cal C$ and functions $N:\N\times\N\to \N$
 	and $s:\N\to\N$ as in the definition of uniform quasi-wideness.
 	Let $d\in \N$ be a fixed dimension.
 		For a fixed graph $G\in \cal C$  and
@@ -72,17 +73,17 @@ is $r$-independent in $G-S$, for every coordinate $i\in\set{1,\ldots,d}$. Lettin
 
 \begin{lemma}\label{lem:step2}
 	Let $B\subset V(G)^d$ and $S\subset V(G)$ be such that for  $i=1..d$,
-	$\pi_i(B)$ is $2r$-independent in $G-S$.
+	$\pi_i(B)$ is $2r$-independent in $G-S$, and for each tuple $\bar a\in B$, the set of its elements is $r$-independent in $G-S$.  
 	Then there is a set $C$ with $C\subset B$ 
-	such that $C$ is totally $r$-independent in $G-S$
+	such that $C$ is mutually $r$-independent in $G-S$
 	and $|C|> \frac{|B|}{d^2}$.
 \end{lemma}
 \begin{proof}
-We construct a sequence of sets $C_0\subset C_1\subset \ldots$ of subsets of $B$ which are totally $2r$-independent in $G-S$, as follows.
+We construct a sequence of sets $C_0\subset C_1\subset \ldots$ of subsets of $B$ which are mutually $r$-independent in $G-S$, as follows.
 
 We start with $C_0=\emptyset$. Suppose that $C_s\subset B$ is 
  already constructed for some $s\ge 0$
- and is totally $2r$-independent in $G-S$; we construct $C_{s+1}$.  To each element $a\in B-C_s$,
+ and is mutually $r$-independent in $G-S$; we construct $C_{s+1}$.  To each element $a\in B-C_s$,
 we associate any function $f_a:\set{1,\ldots,d}^2\to C_s\cup \set{\bot}$,
 with the following properties:
 \begin{itemize}
@@ -98,13 +99,11 @@ cannot be equal to the same element $b\in C_s$:
 otherwise, we would have that the $i$th coordinate of $a_1$
 and the $i$th coordinate of $a_2$ are at distance at most $2r$
 in $G-S$, which is impossible by the assumption on $B$.
-
 In particular, if $|B-C_s|> |C_s|\cdot d^2$
 then there must be some element  $a\in B-C_s$  
 such that $f_a(i,j)=\bot$  for all $i,j\in\set{1,\ldots,d}$.
 Let $C_{s+1}=C_s\cup \set s$.
-By construction, $C_{s+1}$ is totally $2r$-independent in $G-S$.
-[CORRECT THIS ARGUMENT! 2r should be r (?); the set $\set s$ should be totally $r$-independent itself]
+By construction, $C_{s+1}$ is mutually $r$-independent in $G-S$.
 
 We may repeat the construction as long as $|B|>|C_s|\cdot (d^2-1)=s\cdot (d^2-1)$, and we stop when this inequality no longer holds. Define the set $C$ as the last constructed set $C_s$.
 By construction, $|C_s|=s\ge 
@@ -113,12 +112,13 @@ By construction, $|C_s|=s\ge
 
 To finish the proof of Proposition~\ref{prop:uqw-tuples},
 given a set $A\subset V(G)^d$ and numbers $r,m\in\N$,
-first apply Lemma~\ref{lem:step1} 
+first apply 
+Lemma~\ref{lem:step1} 
   with $r'=2r$ and
  $m'= m\cdot d^2$.
  Assuming that $|A|\ge K(r',m')$, 
 we obtain a set $B\subset A$ with $|B|\ge m\cdot d^2$ and a set $S\subset V(G)$ with $|S|\le s(2r)$.
-To $B$ and $S$, apply Lemma~\ref{lem:step2}, yielding a set $C\subset B$ which is totally $r$-independent in $G-S$ and has size at least $m$. This yields the proposition, for $N^d(r,m)=K(r',m')=K(2r,m\cdot d^2)$
+To $B$ and $S$, apply Lemma~\ref{lem:step2}, yielding a set $C\subset B$ which is mutually $r$-independent in $G-S$ and has size at least $m$. This yields the proposition, for $N^d(r,m)=K(r',m')=K(2r,m\cdot d^2)$
 and $s^d(r)=d\cdot s(2r)$.
 \end{proof}
 
@@ -130,7 +130,7 @@ Before stating and proving Theorem~\ref{thm:uqw-stable}, we recall some notions 
 
 
 By a \emph{colored graph} we mean a graph  in which 
-every vertex is assigned zero or more colors from a fixed set of colors. We view a colored graph as a relational structure as usual, by viewing each color as a unary predicate. 
+every vertex is assigned zero or more colors from a fixed set of colors. We view a colored graph as a relational structure as usual, by treating each color as a unary predicate. 
 
 The \emph{quantifier rank} of a formula $\phi$ is the maximal number of nested quantifiers in $\phi$. Fix a set of colors $C$.
 Let $(G_1,\bar v_1)$ and $(G_2,\bar v_2)$ be two
