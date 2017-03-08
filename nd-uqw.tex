@@ -1,49 +1,77 @@
 \section{From nowhere denseness to uniform quasi-wideness}\label{sec:uqw}
 
 This section is devoted to the proof of~\cref{thm:new-uqw}. 
-Observe that we can use Ramsey's Theorem to find large independent
-sets in $G$. 
+We distinguish to cases. In the first case, we have found a 
+$2s$-independent set and we want to find a large $2s+1$-independent
+set. This case can easily be handled by the classical Ramsey 
+Theorem on nowhere dense classes of graphs. The more
+intricate case is to find a few elements to delete such that
+we find a large $2s+2$-independent set in a $2s+1$-independent set. 
+We alternatingly carry out the constructions for $s=1,\ldots, \left\lceil r/2\right\rceil$ to 
+get the desired statement. 
+
 
 \begin{lemma}\label{lem:ramsey1}
-Let $G$ be a graph such that $K_t\not\subseteq G$. If $A\subseteq V(G)$
-has size at least $\binom{m+t-2}{t-1}$, then there exists
-a subset $B\subseteq A$ of size at least $m$ which is an
-independent set. 
+Let $G$ be a graph and let $s\in \N$. If $K_t\not\minor_{s} G$ and 
+if $A\subseteq V(G)$ is a $2s$-independent set in $G$ of
+size at least $\binom{m+t-2}{t-1}$, then there exists
+a subset $B\subseteq A$ of size at least $m$ which $2s+1$-independent in $G$. 
 \end{lemma}
+\begin{proof}
+By Ramsey's Theorem, every set of size $\binom{m+t-2}{t-1}$ contains an
+independent set of size $m$ or a clique of size $t$. 
 
-The difficulty, as in the 
-original proof of Ne\v{s}et\v{r}il and Ossona de Mendez, 
-is to find a few elements to delete such that a large
-subset $A'\subseteq A$ is $2$-independent. Once we have 
-found such a set, we can 
-contract the disjoint neighborhoods of these elements and
-continue with the depth-$1$ minor $G'$, where we 
-identify $A'$ in $G$ with a set of vertices in $G'$. A $2$-independent
-subset of $A'$ in $G'$ will be a $4$-independent set in $G$, 
-and so on, until we finally arrive at an $r$-independent set. 
+As $A$ is $2s$-independent, we can contract the $s$-neighborhood
+of each $v\in A$. The corresponding elements $N_s[v]$ in the resulting 
+depth-$s$ minor $H$ form a set $Z$ that is in \mbox{$1$-to-$1$} correspondence 
+with~$A$. By assumption, 
+$H[Z]$ excludes $K_t$ as a subgraph, and hence by Ramsey's Theorem,
+it contains an independent set $B'\subseteq Z$ of size $m$ in $H$. 
+This set $B'$ corresponds to a $(2s+1)$-independent set $B\subseteq A$ of $G$. 
+\end{proof}
 
-We will employ one more lemma, which is based on the fact that
+For the second, more complicated case, 
+we will employ one more lemma, which is based on the fact that
 nowhere dense classes of graphs do not have dense 
 shallow minors~\cite{dvorak2007asymptotical,jiang2011compact}. 
 
-\begin{lemma}[adaptation of Lemma 4.11 in \cite{gajarsky2017kernelization}]\label{lem:diversity}\label{lem:gajarsky}
+\begin{lemma}[adaptation of Lemma 4.11 in \cite{gajarsky2017kernelization}]\label{lem:diversity}
 Let $\CCC$ be a nowhere dense class of graphs. Let $G\in \CCC$ and let $A\subseteq V(G)$. 
 Then for every $\epsilon>0$ there exists $n_0$ such that if $|A|\geq n_0$, then 
 \[\abs{\{N(v)\cap A : v\in V(G)\}}\leq\abs{A}^{1+\epsilon}.\]
 \end{lemma}
 
+Furthermore, observe that nowhere dense classes are closed under
+taking bounded depth minors, as stated in the following lemma. 
+The lemma is an immediate consequence of Proposition~4.1 
+of~\cite{sparsity}. 
+
+\begin{lemma}
+Let $\CCC$ be a nowhere dense class of graphs and let $s\in \N$. 
+Then the class $\{H \minor_s G : G\in \CCC\}$ is nowhere dense. 
+\end{lemma}
+
+\begin{corollary}\label{lem:gajarsky}
+Let $\CCC$ be a nowhere dense class of graphs and let $s\in \N$. 
+Let $G\in \CCC$ and let $A\subseteq V(G)$ be a $2s+1$-independent
+set. 
+Then for every $\epsilon>0$ there exists $n_0$ such that if $|A|\geq n_0$, then 
+\[\abs{\{N_{s+1}(v)\cap A : v\in V(G)\}}\leq\abs{A}^{1+\epsilon}.\]
+\end{corollary}
+
 We can now state the main building block of our proof as a lemma. 
 
 \begin{lemma}\label{lem:apex}
-Let $\CCC$ be a nowhere dense class of graphs and assume $K_t\not\minor_2 G$. 
+Let $\CCC$ be a nowhere dense class of graphs and let $s\in \N$. 
+Assume that $K_t\not\minor_{3s+1} G$. 
 Let $n_0$ be the constant of \cref{lem:gajarsky} for $\epsilon=1/3$ 
 and let $m\geq n_0$ be an integer. 
-If $A$ is an independent set in $G$ of size at least $(4(m+1)^3+2)^{2t+1}$ 
+If $A$ is an $2s+1$-independent set in $G$ of size at least $(4(m+1)^3+2)^{2t+1}$ 
 then either 
 \begin{itemize}
-\item $A$ contains a $2$-independent set of size $m$, or
+\item $A$ contains a $2s+2$-independent set $A'$ of size $m$, or
 \item there is a subset $A'\subseteq A$ of size at least~$m$ and
-a vertex $v\in V(G)$ which is adjacent to all vertices of $A'$. 
+a vertex $v\in V(G)$ which is at distance exactly $s+1$ to all vertices of $A'$. 
 \end{itemize}
 \end{lemma}
 
@@ -93,22 +121,27 @@ a vertex $v\in V(G)$ which is adjacent to all vertices of $A'$.
 %ladder index and branching index. In this section we will be working with 
 %formula $\phi(x,y)$ with exactly two free variables only. 
 
+To prove the lemma, we will arrange the elements of $A$ in a binary tree
+and prove that the tree contains a long path. From this path, we will 
+extract the set $A'$. 
+
 Let $T$ be a (rooted) binary tree, where each vertex (except the root) is 
 marked as a left or right successor of its predecessor. We call $w$ 
 a \emph{left (right) descendant} of $v$ if the first successor on the unique
 $v$-$w$ path in $T$ is a left (right) successor.
 
-Fix an enumeration $a_1,\ldots, a_{\ell}$ of $A$. The \emph{distance-$2$ tree}
+Fix an enumeration $a_1,\ldots, a_{\ell}$ of $A$ and let $s\in \N$. 
+The \emph{distance-$s$ tree}
 of $(a_1,\ldots,a_{\ell})$ is a binary tree which is constructed recursively as 
 follows. We make $a_1$ the root of the tree. Assume that $a_1,\ldots, a_i$
 have been inserted to the tree. We follow a root-leaf path to find the
-position for the next element $a_{i+1}$. If $\dist(a_j,a_{i+1})\leq 2$, we
+position for the next element $a_{i+1}$. If $\dist(a_j,a_{i+1})\leq s$, we
 follow the right branch at a point $v_j$, otherwise we follow the left branch. If 
 there is no right successor (or left successor, respectively), we insert $a_{i+1}$ 
 as a right (or left child, respectively) of $a_j$. 
 
-A root-leaf path in $T$ is called
-$k$-alternating if it contains $k+1$ nodes $a_1,\ldots, a_{k+1}$ (which appear
+A root-leaf path in $T$ has \emph{$k$ alternations} 
+if it contains $k+1$ nodes $a_1,\ldots, a_{k+1}$ (which appear
 in that order on the path, possibly not consecutively) such that $a_{i+1}$ is a left descendant of $a_i$
 if and only if $a_{i+2}$ is a right descendant of $a_{i+1}$, $1\leq i\leq k-2$. 
 The \emph{alternation rank} of $T$ is the largest number $t$ such that 
@@ -137,40 +170,45 @@ We now give an explicit bound on the alternation rank of the distance-$2$
 tree of $(a_1,\ldots, a_\ell)$. 
 
 \begin{lemma}\label{thm:alternation-rank-type-tree}
-Let $G$ be a graph such that $K_t\not\minor_2G$ and let
-$(v_1,\ldots, v_\ell)$ be an enumeration of an independent set 
-in $G$. Then the alternation rank of the distance-$2$ tree of 
+Let $G$ be a graph and let $s\in \N$ such that $K_t\not\minor_{3s+1} G$ and let
+$(v_1,\ldots, v_\ell)$ be an enumeration of a $2s+1$-independent set 
+in $G$. Then the alternation rank of the distance-$(2s+2)$ tree of 
 $(v_1,\ldots, v_\ell)$ is at most~$2t$. 
 \end{lemma}
 \begin{proof}
 Assume that we find a path which is $2k$ alternating, 
 containing the nodes $v_{i_1},\ldots, v_{i_{2k+1}}$, $1=i_1<i_2<\ldots <i_{2k+1}$, such that $v_{j+1}$ is a left descendant of $v_j$
 if and only if $v_{j+2}$ is a right descendant of $v_{j+1}$, $1\leq j\leq 2k-1$ in
-the distance-$2$ tree.. 
+the distance-$(2s+2)$ tree.
 For readability, we rename the elements as $a_1,b_1,\ldots, a_k,b_k$ in the 
-obvious way. We assume that $b_1$ is right of $a_1$ in the distance-$2$ 
+obvious way. We assume that $b_1$ is right of $a_1$ in the distance-$(2s+2)$ 
 tree, otherwise, we consider
-the path $b_1,a_2,b_2,\ldots,a_k, b_k$. Because $(v_1,\ldots, v_n)$ is 
-independent in~$G$, 
-none of these vertices are adjacent and all of the vertices on the
-paths of length $2$ which cause the creation of edges in the distance-$2$
-tree are distinct from $a_1,\ldots, b_k$. 
+the path $b_1,a_2,b_2,\ldots,a_k, b_k$. 
 
 \begin{claim}
-Every vertex $a_i$ is connected to every $b_j$, $j\geq i$,
-via a vertex $z_{ij}$ which is not connected to any~$b_\ell$, $\ell\neq j$. 
+For every pair $a_i,b_j$, $1\leq i\leq k, i\leq j\leq k$, there
+is a vertex $z_{ij}$ which is at distance exactly $s+1$ to 
+$a_i$ and $b_j$ and which is at distance greater than $s+1$ 
+to all $b_\ell$, $\ell\neq j$. 
 \end{claim}
 
-\noindent\textit{Proof.} Because $b_j$, $j\geq i$, is right of $a_i$, there is 
-an element $z_{ij}$ connected to $a_i$ and $b_j$. If $z_{ij}$ was 
-connected to $b_\ell$, $\ell\neq j$, then $b_\ell$ would be adjacent 
-to $b_j$ in the type tree, which it is not. \hfill$\lrcorner$
+\noindent\textit{Proof.} 
+Because $b_j$, $j\geq i$, is right of $a_i$ in the distance-$(2s+2)$ tree, 
+there is a path of length at most $2s+2$ between $a_i$ and $b_j$. 
+Because $(v_1,\ldots, v_n)$ is $2s+1$-independent in~$G$, this path
+must have length exactly $2s+2$, and hence there is an element $z_{ij}$ 
+at distance exactly $s+1$ both to $a_i$ and $b_j$. 
+If $z_{ij}$ was connected to $b_\ell$, $\ell\neq j$, then $b_\ell$ would be adjacent 
+to $b_j$ in the distance-$(2s+2)$ tree, which it is not. \hfill$\lrcorner$
 
 \bigskip
-Now let $X_j\coloneqq \{b_j\}\cup\{a_j\}\cup\{z_{ij} : 1\leq i\leq j\}$
-for all $1\leq j\leq k$. $X_j$ is connected and has radius $2$. As $a_i$
-is connected to $z_{ij}$ and $a_i\in X_i$ and $z_{ij}\in X_j$ for $i\neq j$, 
-we have constructed a complete graph $K_k$ as depth-$2$ minor. Hence 
+Now let $X_j\coloneqq N_s[b_j]\cup N_s[a_j]\cup\{z_{ij} : 1\leq i\leq j\}$
+for all $1\leq j\leq k$. $X_j$ is connected and has radius at most $3s+1$. 
+As $z_{ij}$ has distance at least $s+1$ to all $a_\ell, b_\ell$, these sets 
+are disjoint. 
+As $a_i$ is at distance $s+1$ to $z_{ij}$ and 
+$a_i\in X_i$ and $z_{ij}\in X_j$ for $i\neq j$, 
+we have constructed a complete graph $K_k$ as depth-$(3s+1)$ minor. Hence 
 $k\leq t-1$, which proves the claim. 
 \end{proof}
 
@@ -187,7 +225,7 @@ We can now prove \cref{lem:apex}.
 
 \begin{proof}[of \cref{lem:apex}]
 Fix any enumeration $v_1,\ldots$ of $A$ and
-build the distance-$2$ tree $T$ for
+build the distance-$(2s+2)$ tree $T$ for
 $v_1,\ldots$. According to~\cref{thm:alternation-rank-type-tree}, 
 the alternation rank of $T$ is at most~$2t$. 
 
@@ -198,113 +236,119 @@ of vertices on that path without alternations, which has hence length
 at least $(m+1)^3$. 
 
 Either, $X$ is a set with all its successors in $T$ on the left, 
-then $X$ is a $2$-independent set and we let $A'=X$ and finish the proof.
+then $X$ is a $(2s+2)$-independent set and we let $A'=X$ and finish the proof.
 
-Otherwise, the vertices of $X$ are pairwise at distance $2$. Let $\ell+1=|X|$. 
-We claim that we find an element which is connected to at least $\ell^{1/3}$
-of the vertices of $X$. There are $\binom{\ell+1}{2}\geq \ell^2/2$ pairs in $X$ which 
-must be connected via an intermediate vertex. A vertex of degree
-$d$ can create $\binom{d}{2}\leq d^2/2$ of such connections. 
-Hence, if there is no vertex which is connected to at least $\ell^{1/3}$
-vertices of $A$, we need $\ell^{4/3}$ vertices with distinct neighborhoods
+Otherwise, the vertices of $X$ are pairwise at distance $(2s+2)$. Let $\ell+1=|X|$. 
+We claim that we find an element which is at distance exactly $s+1$ 
+to at least $\ell^{1/3}$
+of the vertices of~$X$. There are $\binom{\ell+1}{2}\geq \ell^2/2$ pairs in $X$ which 
+must be connected via an intermediate vertex. A vertex which is at distance
+exactly $s+1$ to $d$ vertices of $A$ can create $\binom{d}{2}\leq d^2/2$ of such connections. 
+Hence, if there is no vertex with $|N_{s+1}[v]\cap A|\geq \ell^{1/3}$, 
+we need $\ell^{4/3}$ vertices with distinct $(s+1)$-neighborhoods
 to create all connections. As $\ell\geq n_0(1/3)$, 
 this contradicts \cref{lem:gajarsky}. Hence there exists a vertex $v$ which is 
-adjacent to at least $m$ vertices of $A$, we let $A'=N(v)\cap A$ and finish 
-the proof. 
+at distance exactly $s+1$ to at least $m$ vertices of $A$, 
+we let $A'=N_r[v]\cap A$ and finish the proof. 
 \end{proof}
 
 We iteratively apply \cref{lem:apex}, always adding the apex vertex 
 returned by the lemma to the set $S$, until we find a large 
-$2$-independent subset of $A$ in $G-S$. For the induction, we
+$(2s+2)$-independent subset of $A$ in $G-S$. For the induction, we
 define a function $R$ such that $R(m,1)=(4(m+1)^3+2)^{2t+1}$
 and $R(m, i+1)=(4(R(m,i)+1)^3+2)^{2t+1}$.
 
 \begin{lemma}\label{lem:iterate-apex}
 Let $\CCC$ be a nowhere dense class of graphs. 
-Let $n_0$ be the constant of for $\epsilon=1/3$. 
-Assume $K_t\not\minor_2 G$. 
+Let $n_0$ be the constant of \cref{lem:gajarsky} for $\epsilon=1/3$. 
+Let $s\in \N$ and assume $K_t\not\minor_{3s+1} G$. 
 Let $m\geq n_0$ be an integer. 
-Let $A$ be an independent set in $G$ of size at least $R(m,t)$. 
+Let $A$ be a $(2s+1)$-independent set in $G$ of size at least $R(m,t)$. 
 Then there is a subset $A'\subseteq A$ of size at least~$m$ and a 
 a set $S\subseteq V(G)\setminus A$ of size at most $t-1$ such that
 \begin{enumerate}
 \item every vertex of $S$ is connected to every vertex of $A'$, and
-\item $A'$ is $2$-independent in $G-S$. 
+\item $A'$ is $(2s+2)$-independent in $G-S$. 
 \end{enumerate} 
 \end{lemma}
 \begin{proof}
 Apply \cref{lem:apex} inductively. In step $i$ of the induction,
-either the lemma returns a $2$-independent $A'$ or a vertex $v$
-which is adjacent to $A'=N(v)$ of size $R(m,t-i)$. In the second
-case, add the vertex $v$ to $S$. After $t-1$
-iterations we must be in the first case, as otherwise we have found a 
-complete bipartite graph $K_{t,t}$ as a subgraph of $G$. 
-This graph contains $K_t$ as a depth-$1$ minor, contradicting
+either the lemma returns a $(2s+2)$-independent $A'$ or a vertex $v$
+with $N_{s+1}[v]\cap A=A'$ of size $R(m,t-i)$. In the second
+case, add the vertex $v$ to $S$. We claim that after $t-1$
+iterations we must be in the first case. Otherwise, enumerate the set $S$ 
+as $(s_1,\ldots, s_t)$ and consider the sets
+$X_i=N_s^{G-S}[a_i]\cup \{s_i\}$, $1\leq i\leq t$. Each~$X_i$ has radius
+$s+1$, the $X_i$ are disjoint, and $X_i$ has a vertex connected to $s_j\in X_j$, $i\neq j$, 
+hence we have found $K_t$ as a depth-$s+1$ minor, contradicting
 our assumption. 
 \end{proof}
 
 We now proceed by induction on $r$. 
 
-\begin{lemma}\label{lem:ramsey2}
-Let $G$ be a graph such that $K_t\not\minor_r G$. 
-If $A$ is $2r$-independent and
-has size at least $\binom{m+t-2}{t-1}$, then there exists
-a subset $B\subseteq A$ of size at least $m$ which is a
-$(2r+1)$-independent set. 
-\end{lemma}
-\begin{proof}
-As $A$ is $2r$-independent, we can contract the $r$-neighborhood
-of each $v\in A$. The corresponding elements $N_r[v]$ in the resulting 
-depth-$r$ minor $H$ form a set $Z$ that is in \mbox{$1$-to-$1$} correspondence 
-with $A$. By assumption, 
-$H[Z]$ excludes $K_t$ as a subgraph, and hence by \cref{lem:ramsey1},
-it contains an independent set $B'\subseteq Z$ of size $m$ in $H$. 
-This set $B'$ corresponds to a $(2r+1)$-independent set $B\subseteq A$ of $G$. 
-\end{proof}
+%\begin{lemma}\label{lem:ramsey2}
+%Let $G$ be a graph such that $K_t\not\minor_r G$. 
+%If $A$ is $2r$-independent and
+%has size at least $\binom{m+t-2}{t-1}$, then there exists
+%a subset $B\subseteq A$ of size at least $m$ which is a
+%$(2r+1)$-independent set. 
+%\end{lemma}
+%\begin{proof}
+%As $A$ is $2r$-independent, we can contract the $r$-neighborhood
+%of each $v\in A$. The corresponding elements $N_r[v]$ in the resulting 
+%depth-$r$ minor $H$ form a set $Z$ that is in \mbox{$1$-to-$1$} correspondence 
+%with $A$. By assumption, 
+%$H[Z]$ excludes $K_t$ as a subgraph, and hence by \cref{lem:ramsey1},
+%it contains an independent set $B'\subseteq Z$ of size $m$ in $H$. 
+%This set $B'$ corresponds to a $(2r+1)$-independent set $B\subseteq A$ of $G$. 
+%\end{proof}
+%
+%\begin{lemma}\label{lem:distance-apex}
+%Let $\CCC$ be a nowhere dense class of graphs. 
+%Let $n_0$ be the constant of for $\epsilon=1/3$. 
+%Assume $K_t\not\minor_{r+2} G$. 
+%Let $m\geq n_0$ be an integer. 
+%Let $A$ be a $(2r+1)$-independent set in $G$ of size at least $R(m,t)$. 
+%Then there is a subset $A'\subseteq A$ of size at least~$m$ and a 
+%a set $S\subseteq V(G)\setminus A$ of size at most $t-1$ such that
+%\begin{enumerate}
+%\item every vertex of $S$ is connected to a vertex at distance $r$ of $w$ for 
+%every $w\in A'$, and
+%\item $A'$ is $(2r+2)$-independent in $G-S$. 
+%\end{enumerate} 
+%\end{lemma}
+%\begin{proof}
+%As $A$ is $(2r+1)$-independent, we can contract the $r$-neighborhood
+%of each $v\in A$. The corresponding elements $N_r[v]$ in the resulting 
+%depth-$r$ minor $H$ form a set $Z$ that is in $1$-to-$1$ correspondence 
+%with $A$. As $A$
+%is $(2r+1)$-independent, $Z$ is independent in $H$. We now apply 
+%\cref{lem:iterate-apex} to $Z$ in $H$. Note that the depth-$2$ minor
+%we construct in \cref{thm:alternation-rank-type-tree} (now applied to $H$) 
+%uses as connecting vertices $z_{ij}$ original vertices of the graph and
+%not contracted vertices. Hence, when we apply the lemma, we may 
+%use the assumption that $K_t\not\minor_{r+2} G$ (in general, 
+%a depth-$2$ minor of a depth-$r$ minor may be a depth-$5r$ minor
+%of the original graph~see Proposition~4.1 of~\cite{sparsity}). 
+%Also, the vertices $v$ returned by 
+%\cref{lem:iterate-apex} correspond to vertices of the graph $G$ and not
+%to contracted neighborhoods. In particular, as $A$ is $(2r+1)$-independent, 
+%the vertices $v$ returned by the lemma have distance exactly $r$ to 
+%the vertices $w\in A$. The set $Z'$ returned by \cref{lem:iterate-apex}
+%for $H$ is $2$-independent in $H$, and hence the corresponding 
+%subset $B\subseteq A$ of $G$ is $(2r+2)$-independent. 
+%in $G$. 
+%\end{proof}
 
-\begin{lemma}\label{lem:distance-apex}
-Let $\CCC$ be a nowhere dense class of graphs. 
-Let $n_0$ be the constant of for $\epsilon=1/3$. 
-Assume $K_t\not\minor_{r+2} G$. 
-Let $m\geq n_0$ be an integer. 
-Let $A$ be a $(2r+1)$-independent set in $G$ of size at least $R(m,t)$. 
-Then there is a subset $A'\subseteq A$ of size at least~$m$ and a 
-a set $S\subseteq V(G)\setminus A$ of size at most $t-1$ such that
-\begin{enumerate}
-\item every vertex of $S$ is connected to a vertex at distance $r$ of $w$ for 
-every $w\in A'$, and
-\item $A'$ is $(2r+2)$-independent in $G-S$. 
-\end{enumerate} 
-\end{lemma}
-\begin{proof}
-As $A$ is $(2r+1)$-independent, we can contract the $r$-neighborhood
-of each $v\in A$. The corresponding elements $N_r[v]$ in the resulting 
-depth-$r$ minor $H$ form a set $Z$ that is in $1$-to-$1$ correspondence 
-with $A$. As $A$
-is $(2r+1)$-independent, $Z$ is independent in $H$. We now apply 
-\cref{lem:iterate-apex} to $Z$ in $H$. Note that the depth-$2$ minor
-we construct in \cref{thm:alternation-rank-type-tree} (now applied to $H$) 
-uses as connecting vertices $z_{ij}$ original vertices of the graph and
-not contracted vertices. Hence, when we apply the lemma, we may 
-use the assumption that $K_t\not\minor_{r+2} G$ (in general, 
-a depth-$2$ minor of a depth-$r$ minor may be a depth-$5r$ minor
-of the original graph~see Proposition~4.1 of~\cite{sparsity}). 
-Also, the vertices $v$ returned by 
-\cref{lem:iterate-apex} correspond to vertices of the graph $G$ and not
-to contracted neighborhoods. In particular, as $A$ is $(2r+1)$-independent, 
-the vertices $v$ returned by the lemma have distance exactly $r$ to 
-the vertices $w\in A$. The set $Z'$ returned by \cref{lem:iterate-apex}
-for $H$ is $2$-independent in $H$, and hence the corresponding 
-subset $B\subseteq A$ of $G$ is $(2r+2)$-independent. 
-in $G$. 
-\end{proof}
-
-After iterating \cref{lem:ramsey2} and \cref{lem:distance-apex} 
-alternatingly
-for $r$ times, we have found the desired $r$-independent set. Note
-that throughout the process we delete a set $S$ of size at most
-$t-1$, if $K_t\not\minor_{r+1} G$. For a convenient presentation
-assume that $\binom{m+t-2}{t-1}\leq (4(m+1)^3+2)^{2t+1}$. 
+\begin{proof}[of \cref{thm:new-uqw}]
+Alternatingly apply \cref{lem:ramsey1} and \cref{lem:iterate-apex} 
+for $r$ times. Note that throughout the process we delete a set $S$ of 
+size at most $t-1$, if $K_t\not\minor_{r+1} G$, as we can argue 
+for the union of the sets $S$ found in each iteration, as in the proof
+of \cref{lem:iterate-apex}. Furthermore, 
+$\binom{m+t-2}{t-1}\leq (4(m+1)^3+2)^{2t+1}$. 
 Then, if we start with a set $A$ of order at least 
 $R(m,r+t)\in\Oof(m^{(6t+3)^{t+3}})$ for fixed $t$, the 
 subset $B\subseteq A$ will have size $m$. This proves \cref{thm:new-uqw}. 
+\end{proof}
+
