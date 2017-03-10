@@ -9,6 +9,7 @@ The following theorem is the main result of Section~\ref{sec:uqw-stable}.
 % where $r= 7^q$,
 %  $T$ is the number of all quantifier rank $q$ types with one free  variable over the signature of  graphs colored with $s^d(2r)$ colors.
 \end{theorem}
+The proof will be effective. We will also show that in fact our  proof in fact yields Theorem~\ref{thm:new-stable}.
 
 
 In Section~\ref{sec:uqw-tuples} we formulate a consequence of the uniform quasi-wideness which
@@ -381,4 +382,33 @@ with $i<j$, such that $\bar u_i\bar v_i$ and $\bar u_j\bar v_j$
 \end{proof}
 
 
-[TODO: we haven't proved Theorem~\ref{thm:new-stable}!!!]
+We now prove Theorem~\ref{thm:new-stable}.
+\begin{proof}
+	The proof is by tracking the precise dependencies on the parameters in the proof of Theorem~\ref{thm:new-stable}. 
+	Let $\phi(\bar x)$ be a formula with $d$ free variables and quantifier rank $q$.
+ Define the functions
+	$s(r)=t$ and $N(r,m)=c\cdot {m^{(6t+3)}}^{t+r}$ as defined in Theorem~\ref{thm:new-uqw},
+	where $c$ is some constant. 
+	Following the proof of Proposition~\ref{prop:uqw-tuples}, we see that for the functions $N^d(r,m)$ and $s^d(r)$ we can take the following functions:%
+		\newcommand{\pow}{\ \uparrow\ }%
+	\begin{align*}
+	 N^d(r,m)&= c\cdot (m d)\pow{2(t+4)\pow{d(t+2r)}},\\
+	  s^d(r)&= d\cdot t,
+	\end{align*}
+where $x\pow y$ denotes $x^y$ and associates to the left, i.e., $x\pow y\pow z=(x^y)^z$.
+	
+As in the proof of Theorem~\ref{thm:uqw-stable}, let $r=7^q$,  
+$s=s^d(2r)=d\cdot t$,  $T=(s+d)^d\cdot |\mathrm{Tp}_d^{q,s}|$ and $m=T+1$.
+
+Let $\cal C$ be the class of all graphs $G$
+such that $K_t\not\minor_{3r+1} G$, i.e., $K_t\not\minor_{3\cdot 7^q+1} G$. We repeat the argument presented in the second paragraph of the proof of Theorem~\ref{thm:uqw-stable}, and assume that there is a $\phi$-ladder in $G\in \cal C$ of length larger than $N^d(2r,m)$.
+ Instead of applying Proposition~\ref{prop:uqw-tuples},
+we observe that from its proof we obtain sets  $S$ and $B$ with the required properties. As before, this yields a contradiction. 
+
+
+In particular, every $\phi$-ladder in a graph $G\in \cal C$ has length at most $N^d(2r,m)$, 
+which is at most $$c'\cdot (d^{d+1}\cdot (t+1)^d\cdot |\mathrm{Tp}_d^{q,d\cdot t}|)\pow(2t+8)\pow(d\cdot t+2d\cdot 7^q),$$
+where $c'$ is some constant.
+As the number $|\mathrm{Tp}_d^{q,s}|$ is computable given $d,q,s$, this 
+ yields Theorem~\ref{thm:new-stable}.
+\end{proof}
