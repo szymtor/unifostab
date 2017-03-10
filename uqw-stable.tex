@@ -32,6 +32,7 @@ is larger than $r$.
 	with $|A|\ge N^d(r,m)$ there  is a set $S\subset V(G)$
 	of size $|S|\le s^d(r)$ and a subset $B\subset A$ of size $|B|\ge m$ which is mutually $r$-independent in $G-S$.
 \end{proposition}
+
 \begin{proof}Fix a uniformly quasi-wide class $\cal C$ and functions $N:\N\times\N\to \N$
 	and $s:\N\to\N$ as in the definition of uniform quasi-wideness.
 	Let $d\in \N$ be a fixed dimension.
@@ -389,21 +390,30 @@ We now prove Theorem~\ref{thm:new-stable}.
  Define the functions
 	$s(r)=t$ and $N(r,m)=c\cdot {m^{(6t+3)}}^{t+r}$ as defined in Theorem~\ref{thm:new-uqw},
 	where $c$ is some constant. 
-	Following the proof of Proposition~\ref{prop:uqw-tuples}, we see that for the functions $N^d(r,m)$ and $s^d(r)$ we can take the following functions:%
+	Following the proof of Proposition~\ref{prop:uqw-tuples}, we see that for the functions $N^d(r,m)$ and $s^d(r)$, we can take the following functions:%
 		\newcommand{\pow}{\ \uparrow\ }%
 	\begin{align*}
-	 N^d(r,m)&= c\cdot (m d)\pow{2(t+4)\pow{d(t+2r)}},\\
+	 N^d(r,m)&= c\cdot (m d)\pow(2(t+4))\pow(d(t+2r)),\\
 	  s^d(r)&= d\cdot t,
 	\end{align*}
 where $x\pow y$ denotes $x^y$ and associates to the left, i.e., $x\pow y\pow z=(x^y)^z$.
+In particular, the proof of Proposition~\ref{prop:uqw-tuples} shows the following property
+($\ast$)
+for every graph $G$ such that $K_t\not\minor_{3r+1} G$ 
+and for every set of $d$-tuples $A\subset V(G)^d$ of size at least $N^d(r,m)$
+there is a subset $B\subset A$ of size $m$ and $S\subset V(G)$ of size at most $s^d(r)$
+such that $B$ is mutually $r$-independent in $G-S$.
+
 	
 As in the proof of Theorem~\ref{thm:uqw-stable}, let $r=7^q$,  
 $s=s^d(2r)=d\cdot t$,  $T=(s+d)^d\cdot |\mathrm{Tp}_d^{q,s}|$ and $m=T+1$.
 
+
+
 Let $\cal C$ be the class of all graphs $G$
 such that $K_t\not\minor_{3r+1} G$, i.e., $K_t\not\minor_{3\cdot 7^q+1} G$. We repeat the argument presented in the second paragraph of the proof of Theorem~\ref{thm:uqw-stable}, and assume that there is a $\phi$-ladder in $G\in \cal C$ of length larger than $N^d(2r,m)$.
- Instead of applying Proposition~\ref{prop:uqw-tuples},
-we observe that from its proof we obtain sets  $S$ and $B$ with the required properties. As before, this yields a contradiction. 
+ Instead of applying Proposition~\ref{prop:uqw-tuples} we apply  ($\ast$) above
+and obtain sets  $S$ and $B$ with the required properties. As before, this yields a contradiction. 
 
 
 In particular, every $\phi$-ladder in a graph $G\in \cal C$ has length at most $N^d(2r,m)$, 
