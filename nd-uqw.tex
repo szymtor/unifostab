@@ -1,14 +1,45 @@
 \section{From nowhere denseness to uniform quasi-wideness}\label{sec:uqw}
 
-This section is devoted to the proof of~\cref{thm:new-uqw}. 
-We distinguish to cases. In the first case, we have found a 
-$2s$-independent set and we want to find a large $2s+1$-independent
-set. This case can easily be handled by the classical Ramsey 
+This section is devoted to the proof of \cref{thm:new-uqw} and \cref{thm:new-vc}. 
+We first recall the required preliminaries from graph theory. 
+
+All graphs in this paper are finite, undirected and simple, that is, 
+they do not have loops or parallel edges. Our notation is standard,
+we refer to~\cite{diestel2012graph} for more background on 
+graph theory. 
+We write $V(G)$ for the vertex set of a graph $G$ and
+$E(G)$ for its edge set. 
+The {\em{distance}} between vertices $u$ and $v$ in $G$, denoted $\dist_G(u,v)$, is the length of a shortest path between $u$ and $v$ in~$G$.
+
+A {\em{minor model}} of a graph $H$ in $G$ is a family $(I_u)_{u\in V(H)}$ of pairwise vertex-disjoint connected subgraphs of $G$
+such that whenever $uv$ is an edge in~$H$, there are $u'\in I_u$ and $v'\in I_v$ for which $u'v'$ 
+is an edge in $G$.
+The graph $H$ is a {\em{depth-$r$ minor}} of $G$, denoted $H\minor_rG$, if there is a minor model
+$(I_u)_{u\in V(H)}$ of~$H$ in $G$ such that each subgraph $I_u$ has radius at most $r$.
+
+A class $\CCC$ of graphs is \emph{nowhere dense} if there is a function 
+$f:\N\rightarrow \N$ such that for all $r\in \N$ it holds that $K_{f(r)}\not\minor_r G$
+for all $G\in \CCC$. 
+
+A set $B\subseteq V(G)$ is called {\em{$r$-independent}} in $G$ if for all
+distinct $u,v\in B$ we have $\dist_G(u,v)>r$.
+A class $\CCC$ of graphs is \emph{uniformly quasi-wide} if there are
+functions $N\colon \N\times\N\rightarrow \N$ and $s:\N\rightarrow \N$ such
+that for all $r,m\in \N$ and all subsets $A\subseteq V(G)$ for
+$G\in \CCC$ of size $\abs{A}\geq N(r,m)$ there is a set
+$S\subseteq V(G)$ of size $\abs{S}\leq s(r)$ and a set
+$B\subseteq A\setminus S$ of size $\abs{B}\geq m$ which is $r$-independent in
+$G-S$. 
+
+To prove \cref{thm:new-uqw} we proceed as follows. 
+If for some $s\leq \left\lceil r/2\right\rceil$
+we have found a $2s$-independent set, we want to find a large 
+$2s+1$-independent subset. This case can easily be handled by the classical Ramsey 
 Theorem on nowhere dense classes of graphs. The more
 intricate case is to find a few elements to delete such that
 we find a large $2s+2$-independent set in a $2s+1$-independent set. 
 We alternatingly carry out the constructions for $s=1,\ldots, \left\lceil r/2\right\rceil$ to 
-get the desired statement. 
+obtain the statement of the theorem. 
 
 
 \begin{lemma}\label{lem:ramsey1}
@@ -22,11 +53,10 @@ By Ramsey's Theorem, every set of size $\binom{m+t-2}{t-1}$ contains an
 independent set of size $m$ or a clique of size $t$. 
 
 As $A$ is $2s$-independent, we can contract the $s$-neighborhood
-of each $v\in A$. The corresponding elements $N_s[v]$ in the resulting 
-depth-$s$ minor $H$ form a set $Z$ that is in \mbox{$1$-to-$1$} correspondence 
+of each $v\in A$ to obtain a depth-$s$ minor $H$ of $G$. The corresponding elements $N_s[v]$ that we identify with vertices of $H$ form a set $Z$ that is in \mbox{$1$-to-$1$} correspondence 
 with~$A$. By assumption, 
-$H[Z]$ excludes $K_t$ as a subgraph, and hence by Ramsey's Theorem,
-it contains an independent set $B'\subseteq Z$ of size $m$ in $H$. 
+$H$ excludes $K_t$ as a subgraph, and hence by Ramsey's Theorem,
+we can find an independent set $B'\subseteq Z$ of size $m$ in $H$. 
 This set $B'$ corresponds to a $(2s+1)$-independent set $B\subseteq A$ of $G$. 
 \end{proof}
 
@@ -48,7 +78,7 @@ of~\cite{sparsity}.
 
 \begin{lemma}
 Let $\CCC$ be a nowhere dense class of graphs and let $s\in \N$. 
-Then the class $\{H \minor_s G : G\in \CCC\}$ is nowhere dense. 
+Then also the class $\{H \minor_s G : G\in \CCC\}$ is nowhere dense. 
 \end{lemma}
 
 \begin{corollary}\label{lem:gajarsky}
@@ -123,7 +153,7 @@ a vertex $v\in V(G)$ which is at distance exactly $s+1$ to all vertices of $A'$.
 
 To prove the lemma, we will arrange the elements of $A$ in a binary tree
 and prove that the tree contains a long path. From this path, we will 
-extract the set $A'$. 
+extract the set $A'$. In stability theory, such trees are called \emph{type trees} and they are used to extract long indiscernible sequences, see e.g.~\cite{malliaris2014regularity}. 
 
 Let $T$ be a (rooted) binary tree, where each vertex (except the root) is 
 marked as a left or right successor of its predecessor. We call $w$ 
@@ -135,8 +165,8 @@ The \emph{distance-$s$ tree}
 of $(a_1,\ldots,a_{\ell})$ is a binary tree which is constructed recursively as 
 follows. We make $a_1$ the root of the tree. Assume that $a_1,\ldots, a_i$
 have been inserted to the tree. We follow a root-leaf path to find the
-position for the next element $a_{i+1}$. If $\dist(a_j,a_{i+1})\leq s$, we
-follow the right branch at a point $v_j$, otherwise we follow the left branch. If 
+position for the next element $a_{i+1}$. At a point $a_j$ in the root-leaf path, 
+if $\dist(a_j,a_{i+1})\leq s$, we continue along the right branch at $a_j$, otherwise we follow the left branch. If 
 there is no right successor (or left successor, respectively), we insert $a_{i+1}$ 
 as a right (or left child, respectively) of $a_j$. 
 
@@ -159,15 +189,17 @@ and $n_\ell^1\leq 2\ell-1$ for all $\ell$, and
 \begin{align*}
 n_\ell^s\leq 2(n_{\ell-2}^{s-1}+n_{\ell-3}^{s-1}+\ldots + n_{0}^{s-1})+2\ell-1
 \end{align*}
-for all $s\geq 2,\ell\geq 1$. In the last inequality, we count the two paths of length
-$\ell$ staring in the root which have no alternations. All nodes branching from 
-these paths have one less alternation available. 
-Now it is easy to check that the function $(2\ell+2)^s$ satisfies these requirements. 
+for all $s\geq 2,\ell\geq 1$. In the last inequality, we count the vertices on 
+the two paths of length at most 
+$\ell$ staring in the root which have no alternations (at most $2\ell-1$). 
+All nodes branching from 
+these paths have one less alternation available, hence there are at most
+$ 2(n_{\ell-2}^{s-1}+n_{\ell-3}^{s-1}+\ldots + n_{0}^{s-1})$ of them. 
+Now it is easy to check that the function $(2\ell+2)^s$ satisfies these requirements (use $n_0^{s-1}\leq 1$ here). 
 \end{proof}
 
-
-We now give an explicit bound on the alternation rank of the distance-$2$ 
-tree of $(a_1,\ldots, a_\ell)$. 
+We now prove that in nowhere dense classes the alternation ranks of 
+distance trees are small. 
 
 \begin{lemma}\label{thm:alternation-rank-type-tree}
 Let $G$ be a graph and let $s\in \N$ such that $K_t\not\minor_{3s+1} G$ and let
@@ -198,7 +230,7 @@ there is a path of length at most $2s+2$ between $a_i$ and $b_j$.
 Because $(v_1,\ldots, v_n)$ is $2s+1$-independent in~$G$, this path
 must have length exactly $2s+2$, and hence there is an element $z_{ij}$ 
 at distance exactly $s+1$ both to $a_i$ and $b_j$. 
-If $z_{ij}$ was connected to $b_\ell$, $\ell\neq j$, then $b_\ell$ would be adjacent 
+If $z_{ij}$ was at distance $s+1$ to $b_\ell$, $\ell\neq j$, then $b_\ell$ would be adjacent 
 to $b_j$ in the distance-$(2s+2)$ tree, which it is not. \hfill$\lrcorner$
 
 \bigskip
@@ -224,9 +256,9 @@ $k\leq t-1$, which proves the claim.
 We can now prove \cref{lem:apex}. 
 
 \begin{proof}[of \cref{lem:apex}]
-Fix any enumeration $v_1,\ldots$ of $A$ and
-build the distance-$(2s+2)$ tree $T$ for
-$v_1,\ldots$. According to~\cref{thm:alternation-rank-type-tree}, 
+Fix any enumeration $v_1,\ldots, v_\ell$ of $A$ and
+build the distance-$(2s+2)$ tree~$T$ for
+$v_1,\ldots,v_\ell$. According to~\cref{thm:alternation-rank-type-tree}, 
 the alternation rank of $T$ is at most~$2t$. 
 
 According 
@@ -244,12 +276,12 @@ to at least $\ell^{1/3}$
 of the vertices of~$X$. There are $\binom{\ell+1}{2}\geq \ell^2/2$ pairs in $X$ which 
 must be connected via an intermediate vertex. A vertex which is at distance
 exactly $s+1$ to $d$ vertices of $A$ can create $\binom{d}{2}\leq d^2/2$ of such connections. 
-Hence, if there is no vertex with $|N_{s+1}[v]\cap A|\geq \ell^{1/3}$, 
+Hence, if there is no vertex with $|N_{s+1}(v)\cap A|\geq \ell^{1/3}$, 
 we need $\ell^{4/3}$ vertices with distinct $(s+1)$-neighborhoods
 to create all connections. As $\ell\geq n_0(1/3)$, 
 this contradicts \cref{lem:gajarsky}. Hence there exists a vertex $v$ which is 
 at distance exactly $s+1$ to at least $m$ vertices of $A$, 
-we let $A'=N_r[v]\cap A$ and finish the proof. 
+we let $A'=N_r(v)\cap A$ and finish the proof. 
 \end{proof}
 
 We iteratively apply \cref{lem:apex}, always adding the apex vertex 
@@ -267,14 +299,15 @@ Let $A$ be a $(2s+1)$-independent set in $G$ of size at least $R(m,t)$.
 Then there is a subset $A'\subseteq A$ of size at least~$m$ and a 
 a set $S\subseteq V(G)\setminus A$ of size at most $t-1$ such that
 \begin{enumerate}
-\item every vertex of $S$ is connected to every vertex of $A'$, and
+\item every vertex of $S$ is at distance exactly $s+1$ to 
+every vertex of $A'$, and
 \item $A'$ is $(2s+2)$-independent in $G-S$. 
 \end{enumerate} 
 \end{lemma}
 \begin{proof}
 Apply \cref{lem:apex} inductively. In step $i$ of the induction,
 either the lemma returns a $(2s+2)$-independent $A'$ or a vertex $v$
-with $N_{s+1}[v]\cap A=A'$ of size $R(m,t-i)$. In the second
+with $N_{s+1}(v)\cap A=A'$ of size $R(m,t-i)$. In the second
 case, add the vertex $v$ to $S$. We claim that after $t-1$
 iterations we must be in the first case. Otherwise, enumerate the set $S$ 
 as $(s_1,\ldots, s_t)$ and consider the sets
@@ -347,8 +380,71 @@ size at most $t-1$, if $K_t\not\minor_{r+1} G$, as we can argue
 for the union of the sets $S$ found in each iteration, as in the proof
 of \cref{lem:iterate-apex}. Furthermore, 
 $\binom{m+t-2}{t-1}\leq (4(m+1)^3+2)^{2t+1}$. 
-Then, if we start with a set $A$ of order at least 
-$R(m,r+t)\in\Oof(m^{(6t+3)^{t+3}})$ for fixed $t$, the 
+Then, if we start with a set $A$ of size at least 
+$R(m,r+t)\in\Oof_{r,t}(m^{(6t+3)^{t+r}})$, the 
 subset $B\subseteq A$ will have size $m$. This proves \cref{thm:new-uqw}. 
 \end{proof}
 
+TODO: Algorithmic version
+
+We now come to the proof of \cref{thm:new-vc}. A set $X$ of vertices 
+in a graph is \emph{shattered} (resp. \emph{$2$-shattered}) if for every
+subset $Y\subseteq X$ (resp. every subset $Y\subseteq X$ of size $2$) there exists 
+a vertex $v$ such that $N[v]\cap X=Y$. The \emph{Vapnik-Chervonenkis dimension}, short \emph{VC-dimension}~\cite{chervonenkis1971theory} (resp.
+$2$VC-dimension) of a graph is the maximum size of a shattered set (resp. $2$-shattered set). The measure VC-dimension found has many applications, e.g.\ in learnability theory~\cite{haussler1987}, computational geometry~\cite{chazelle1989quasi} and graph theory~\cite{alon2006dominating,BousquetT15,chepoi2007covering,eickmeyer2016neighborhood}.
+
+
+The \emph{$r$th power of a graph $G$} is the graph $G^r$
+with vertex set $V(G)$, where there is an edge between two 
+vertices $u$ and $v$ if and only if their distance in $G$ is at most $r$. 
+
+We observe that an argument of Bousquet and 
+Thomasse\'e~\cite{BousquetT15} can be slightly modified to prove that 
+the $2$VC-dimension of the $r$-power graph $G^r$ of a graph $G$
+with $K_t\not\minor_r G$ is small. Obviously, the $2$VC-dimension of $G$
+bounds its VC-dimension. We hence prove a stronger result
+than stated as \cref{thm:new-vc} in the introduction. 
+
+\begin{theorem}
+Let $r\in \N$ and let $G$ be a graph. 
+If $K_t\not\minor_r G$, then the $2$VC-dimension of $G^r$
+is at most $t-1$. 
+\end{theorem}
+\begin{proof}
+Assume there is a set $A=\{a_1,\ldots, a_t\}$ of size $t$ such that
+for all subsets $\{a_i,a_j\}\subseteq A$ of size $2$ 
+there is an element $v_{ij}\in V(G)\setminus A$ with 
+$N_r[v_{ij}]\cap A=\{a_i,a_j\}$. Fix $v_{ij}$ with the property
+that $\max\{\dist_G(v_{ij},a_i), \dist_G(v_{ij},a_j)\}$ is 
+minimised. 
+
+A \emph{central walk} $W_{ij}$ is the concatenation of a minimum length
+path $P_{ij}^i$ from $a_i$ to $v_{ij}$ and a minimum length path $P_{ij}^j$ from $v_{ij}$ to $a_j$. 
+Note that a central walk is possibly not a path. For each pair $a_i,a_j$ fix
+a central walk $W_{ij}$ and the corresponding paths $P_{ij}^i$ and $P_{ij}^j$. 
+
+Now assume that a vertex $x$ belongs to two distinct central 
+walks $W_{ij}$, $W_{i'j'}$. Assume that $x$ lies on $P_{ij}^i$ and $P_{ij}^{i'}$,
+otherwise, rename the elements. First, observe that if $\dist(x,a_i)=\dist(x,a_{i'})$, 
+then $a_i=a_{i'}$. Otherwise, $\dist(v_{ij},a_{i})=\dist(v_{ij},a_{i'})$ and hence 
+$a_j=a_i$, and analogously, $a_{j'}=a_j$, contradicting the assumption 
+that $W_{ij}$ and $W_{i'j'}$ are distinct. By the same argument we have 
+$\dist(x,a_i)<\dist(x,a_j)$ and $\dist(x,a_{i'})<\dist(x,a_{j'})$. 
+Now assume that $\dist(x,a_i)<\dist(x,a_{i'})$. By the same argument as 
+above we have $a_{j'}=a_i$, hence $W_{i'j'}=W_{ij'}$. Here, we have
+$\dist(x,a_i)<\dist(x,a_j)$ and $\dist(x,a_{i})<\dist(x,a_{i'})$, 
+otherwise the walks are not distinct. 
+
+Let us now construct connected subsets $X_i$ for all $1\leq i\leq t$. 
+For every walk $W_{ij}$ the vertices of $W_{ij}$ closer to $a_i$ than to $a_j$ 
+are added to $X_i$, the vertices of $W_{ij}$ closer to $a_j$ than to $a_i$ 
+are added to $X_j$, ties are broken arbitrary.
+Then the sets $X_i$ are pairwise disjoint by what we proved above. If a vertex $x$
+appears in two distinct central walks, these are $W_{ij}$ and $W_{i\ell}$ for some
+$i,j,\ell$ with $\dist(x,a_i)<\dist(x,a_j)$ and $\dist(x,a_i)<\dist(x,a_\ell)$. 
+In both cases $x$ belongs to $X_i$. By construction, the sets $X_i$ are connected, 
+have radius at most~$r$, and 
+there is always an edge between a vertex of $X_i$ and a vertex of $X_j$ since $X_i\cup X_j$ 
+contains the walk $W_{ij}$. Therefore, if the $2$VC-dimension is at least $t$, the 
+graph contains $K_t$ as a depth-$r$ minor. 
+\end{proof}

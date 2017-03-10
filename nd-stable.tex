@@ -58,7 +58,7 @@ twoside=False]{geometry}
 \theoremsymbol{}
 \theorembodyfont{\itshape}
 \theoremheaderfont{\normalfont\bfseries}
-\theoremseparator{}
+\theoremseparator{.}
 
 \newtheorem{theorem}{Theorem}
 \crefformat{theorem}{#2Theorem~#1#3}
@@ -90,10 +90,10 @@ twoside=False]{geometry}
 \theoremheaderfont{\scshape}
 \theorembodyfont{\normalfont}
 \theoremsymbol{\ensuremath{\square}}
-\newtheorem{proof}{Proof.}
+\newtheorem{proof}{Proof}
 
 \theoremsymbol{\ensuremath{\lrcorner}}
-\newtheorem{clproof}{Proof.}
+\newtheorem{clproof}{Proof}
 
 % END ntheorem configuration
 
@@ -197,11 +197,11 @@ Institute of Informatics, University of Warsaw, Poland\\[0.1cm]
 \maketitle
 \input{abstract}
 
-\input{intro}
-%\input{preliminaries}
+%\input{intro}
+\input{intro-short}
 \input{nd-uqw}
 \input{uqw-stable}
-\input{vc-power}
+%\input{vc-power}
 
 
 \bibliographystyle{abbrv}
