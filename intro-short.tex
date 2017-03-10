@@ -1,0 +1,374 @@
+\section{Introduction}
+
+Nowhere dense classes of graphs were introduced 
+by Ne\v set\v ril and Ossona de 
+Mendez~\cite{nevsetvril2010first,nevsetvril2011nowhere} as a very 
+general model
+for uniform sparseness of graphs. These classes generalize many 
+familiar classes of sparse graphs, such as planar graphs, graphs 
+of bounded treewidth,  graphs of bounded degree, and, in fact, 
+all classes that exclude a fixed 
+topological minor.
+The concept of nowhere denseness
+turns out to be very robust as witnessed by the fact that it is equivalent 
+to multiple other concepts studied in different areas of mathematics. 
+One can equivalently characterize nowhere dense graph classes 
+by bounds on the density of shallow (topological)
+minors~\cite{nevsetvril2010first,nevsetvril2011nowhere},
+quasi-wideness~\cite{nevsetvril2011nowhere} (a notion introduced by
+Dawar~\cite{dawar2010homomorphism} in his study of homomorphism
+preservation properties), low tree-depth
+colorings~\cite{nevsetvril2008grad}, generalized coloring
+numbers~\cite{zhu2009coloring}, sparse neighborhood
+covers~\cite{GroheKRSS15,grohe2014deciding}, by a game called the
+splitter game~\cite{grohe2014deciding} and by the model-theoretic
+concepts of stability and independence~\cite{adler2014interpreting}.
+For a broader discussion on the graph theoretic sparsity we refer to the book
+of Ne\v{s}et\v{r}il and Ossona de Mendez~\cite{sparsity}.
+
+These alternative characterizations have been very useful in 
+the design of efficient algorithms. For instance, 
+the {\sc{Subgraph Isomorphism}} and {\sc{Homomorphism}} problems 
+are fixed-parameter tractable on any nowhere dense
+class, parameterized by the size of the pattern graph~\cite{nevsetvril2010first}
+and so is the {\sc Distance-$r$ Dominating Set} problem, parameterized
+by the size of the solution~\cite{DawarK09}. In fact, 
+the {\sc Distance-$r$ Dominating Set} problem admits
+polynomial kernels~\cite{siebertz2016polynomial} and even 
+almost linear kernels on nowhere dense classes of 
+graphs~\cite{eickmeyer2016neighborhood}
+(see also~\cite{drange2016kernelization} for the case $r=1$). 
+It was shown in~\cite{grohe2014deciding}
+that every first-order definable problem can be decided in
+almost linear time on any nowhere dense graph class.
+
+It is a natural question to ask for the most general classes of graphs
+which admit efficient solutions for certain problems, or to 
+classify them into tractable and intractable classes. It was shown 
+that for the first-order model-checking problem~\cite{dvovrak2013testing} and for
+the {\sc Distance-$r$ Dominating Set} problem~\cite{drange2016kernelization} 
+the dividing line for algorithmic tractability 
+on subgraph closed classes of graphs is exactly between the
+nowhere dense and somewhere dense graph classes. 
+
+\smallskip
+
+In (infinite) model theory, we are a different classification program is followed. An important 
+problem is to count the number and classify the models of a complete theory. According
+to the upward L\"ownheim-Skolem theorem, every theory $T$ with an infinite model has
+models of arbitrary infinite cardinalities (larger then the size of the language). One of the central problems
+ is to determine, for any fixed infinite cardinal~$\kappa$, how many models of cardinality 
+$\kappa$ the theory $T$ can have (up to isomorphism). Note that the number of
+models of cardinality $\kappa$ must lie between $1$ and $2^\kappa$ for all infinite cardinals $\kappa$ 
+bigger than the cardinality of the language. By a result of 
+Morley~\cite{morley1965categoricity}, if $T$ is a countable
+theory which has only one model of cardinality $\kappa$ for some uncountable $\kappa$, 
+then $T$ has only one model for all uncountable cardinals; a result which 
+is often considered the starting point of modern model theory. In his famous classification
+project~\cite{shelah1990classification}, Shelah essentially provided a complete
+classification for all countable theories (the classification was completed 
+in~\cite{hart2000uncountable}). Shelah identified several dividing lines and showed that
+all theories on the non-structure side of the dividing line have $2^\kappa$ models
+of cardinality $\kappa$. On
+the structure side he showed that there are only few models whose isomorphism 
+types can be described by small invariants. One of the most important dividing 
+lines is \emph{stability}. Very roughly, if a theory is not stable then its models 
+are too many and too complicated to classify, while this may be possible if the theory is stable, 
+especially if the theory is \emph{superstable} or \emph{totally transcendental}.
+
+Finite model theory is the study of the expressive power 
+of logics on the class of finite structures. Many theorems and 
+methods of classical model theory fail when only finite structures 
+are considered. These include the compactness theorem, the completeness 
+theorem and various interpolation and preservation theorems.
+On the other hand, quite different questions, which often arise in
+computer science, in particular questions from complexity theory and database
+theory, are interesting in finite model theory. Hence, instead of focusing 
+on negative results, much work has been invested in finding 
+subclasses of the class of all finite structures that may be better behaved.
+Surprisingly, it turns out that particularly classes which are 
+algorithmically well-behaved turn out to have good model-theoretic 
+properties. The two prime examples in our context are the result of 
+Dawar~\cite{dawar2010homomorphism}, who introduced the notion of
+quasi-wideness and proved any quasi-wide class that is closed under taking substructures
+and disjoint unions has the homomorphism preservation property. It was 
+later proved by Ne\v{s}et\v{r}il and Ossona de Mendez that 
+the notions of uniform quasi-wideness and nowhere denseness coincide for 
+graphs~\cite{nevsetvril2011nowhere}. The second result is by 
+Adler and Adler~\cite{adler2014interpreting}, who observed that 
+nowhere denseness essentially corresponds to the stability theoretic notion 
+of \emph{superflatness} introduced by Podewski and 
+Ziegler in~\cite{podewski1978stable}. In fact, Adler and Adler observed 
+that on subgraph closed classes of graphs, the notions of nowhere denseness, 
+stability and the non-independence property (NIP) are equivalent. 
+Before we can give an 
+overview of some of the techniques that can be brought down from 
+the infinite to the finite and state our contributions, we need some
+definitions. 
+
+\paragraph{Stability.}
+We start from recalling some notions from stability theory. 
+
+
+
+\begin{definition}
+Let $\cal C$ be a class of structures in a first-order language $L$. Let 
+$\phi(\tup{x},\tup{y})$ be an $L$-formula with the free variables
+divided into two groups $\tup{x}, \tup{y}$. A \emph{$\phi$-ladder}
+of length $n$ is a sequence $(\tup{a}_1,\ldots, \tup{a}_{n},
+\tup{b}_1,\ldots, \tup{b}_{n})$ of tuples in some model $\strA\in \cal C$, such that for all $1\leq i,j\le n$,
+\[\strA\models\phi(\tup{a}_i,\tup{b}_j)\Longleftrightarrow i\leq j. \]
+The least  $n$ for which 
+there is no $\phi$-ladder of length $n$ is 
+the \emph{ladder index} 
+of $\phi(\tup{x},\tup{y})$ in $\cal C$ (which may depend on the way we split the
+variables).
+A formula $\phi$ is \emph{stable} (for $\cal C$) if its ladder index is finite, and \emph{unstable} otherwise. The class of structures $\cal C$ is \emph{stable} if  every formula is stable.
+\end{definition}
+
+By abuse of notation, we will apply the above definition to a single structure $\strA$ in place of a class $\cal C$; formally, this amounts to considering the class $\cal C=\set\strA$.
+
+
+Usually, in model theory one fixes a complete theory $T$
+and takes as the class $\cal C$ above the class of all models of the theory $T$. The theory $T$ is then called stable if the class $\cal C$ is stable.
+We remark that a formula with ladder index $n$ is said to have the
+$n$-order property in~\cite{adler2014interpreting} and~\cite{ensley1996finite}.
+We follow the notation of the textbook~\cite{hodges1993model} and remark
+that it is easy to see that a class $\CCC$ is stable if and only if there is no 
+formula $\psi(\tup{x},\tup{y})$ such that for every $n\in \N$
+there exist a structure $\strA\in \CCC$ and tuples $\tup{a}_1,\ldots, \tup{a}_{n}$
+of elements of $\strA$ such that $\strA\models\psi(\tup{a}_i,\tup{a}_j)\Leftrightarrow i<j$,
+that is, $\psi$ orders the tuples linearly. 
+
+The first application of stability theory concerns the existence of long
+indiscernible sequences. If $\tup{a}=(a_0,\ldots)$ is a non-repeating sequence of elements of $\strA$, we write \[[\tup{a}]^k\coloneqq \{\tup{b}=(a_{i_1},\ldots, a_{i_k}) \sth 0\leq i_1<\ldots <i_k\}\] for the set of of all subsequences
+of $\tup{a}$ of length $k$. When we speak of a subsequence $\tup{a}'$
+of a sequence $\tup{a}$, we always mean an increasing subsequence. 
+
+\begin{definition}
+Let $\tup{a}=(a_0,\ldots)$ be a non-repeating sequence of elements of $\strA$.
+Let $f$ be a map with domain $[\tup{a}]^k$. A subsequence $\tup{a}'$ 
+of $\tup{a}$ is \emph{$f$-indiscernible} if for any two 
+subsequences $\tup{v},\tup{w}\in [\tup{a}']^k$ 
+it holds that $f(\tup{w})=f(\tup{w})$.
+
+If $\Phi$ is a set of formulas of the form $\phi(x_0,\ldots, x_{k-1})$, 
+we say that $\tup{a}'$ 
+is \emph{$\Phi$-indiscernible} (in a structure $\strA$)
+if for every $\phi\in \Phi$ and any two 
+subsequences $\tup{v},\tup{w}\in [\tup{a}]^k$ it
+holds that $\strA\models\phi(\tup{a})\Leftrightarrow\strA\models\phi(\tup{b})$. 
+\end{definition}
+
+%We often identify ordered sets with sequences of elements. 
+%A sequence $(a_1,\ldots, a_\ell)$ of elements of~$\strA$ is
+%\emph{$\Phi$-indiscernible} if for every formula
+%$\phi(x_1,\ldots, x_k)\in \Phi$ with $k$ free variables and any two
+%increasing sequences
+%$1\leq i_1<\ldots <i_k\leq \ell, 1\leq j_1< \ldots< j_k\leq \ell$ of
+%integers, it holds that
+%\[\strA\models\phi(a_{i_1},\ldots, a_{i_k})\Leftrightarrow \strA\models\phi(a_{j_1},
+%\ldots, a_{j_k}).\]
+
+Results about the existence of indiscernible sequences are known as 
+\emph{partition theorems}, because the map $f$ induces a partition
+on the set $[\tup{a}]^k$ (which can be identified with the ordered 
+set $A=\{a_0,\ldots\}$). Partitioning theorems play an important role in 
+combinatorics and graph theory, and also in stability theory. The 
+crucial distinction in stability theory is between \emph{Ramsey type 
+theorems}, which hold
+for reason of cardinality alone, and \emph{stability type theorems},
+which take into account the underlying structure (theory). The following
+theorem shows that we need the sequence $A$ to be only polynomially larger
+than the indiscernible sequence $B$ we are aiming at if we are in a stable theory. 
+It is easy to make the theorem algorithmic, see 
+e.g.~\cite{siebertz2016polynomial}. 
+
+\begin{theorem}[Malliaris and Shelah~\cite{malliaris2014regularity}, Theorem 3.5, Item (2)]\label{thm:malshelah}
+  Let  $\Delta$ be a finite
+  set of stable first-order formulas.  There is a polynomial $p(x)$ such that
+  for all $\strA\in \CCC$, every positive integer $m$ and every non-repeating sequence
+  $\tup{a}=(a_0,\ldots, a_{\ell-1})$ of elements of $\strA$ of length $\ell=p(m)$, there
+  exists a sub-sequence $\tup{a}'$ of
+  $\tup{a}$ of length $m$ which is
+  $\Delta$-indiscernible.
+\end{theorem}
+
+Another perspective on stability theory is to see it as a way of 
+classifying definable sets in a structure and describing the interaction 
+between definable sets. For this, we need the notion of types. 
+
+\begin{definition}
+Let $\Delta$ be a set of $L$-formulas, let $\strA$ be an $L$-structure and let
+$A$ be a set of elements of $\strA$. Let $a$ be an element of $\strA$. The 
+\emph{$\Delta$-type of~$a$ in $\strA$ over the parameters $A$} is the set
+\begin{align*}
+  \mathrm{tp}_\Delta(\strA, A, a) & \coloneqq  \{ \phi(x_1,a_1,\ldots, a_k)  : &\\
+  &  \hspace{3.1cm}
+                                \phi(x_1,y_1,\ldots, y_k)\in \Delta,
+                                a_1,\ldots, a_k\in A,
+                                \strA\models\phi(a,a_1,\ldots, a_k)\}.
+\end{align*}
+The set of \emph{$\Delta$-types realised} in $\strA$ over $A$ is the set
+$S_\Delta(\strA,A) \coloneqq \{ \mathrm{tp}_\Delta(\strA, A, a) \sth a$ element of $\strA\}$.
+\end{definition}
+
+We usually assume that $\Delta$ is closed under negations. 
+The number of realised types over a parameter set of cardinality
+$\kappa$ can be anything between $0$ and $\abs{\Delta}\cdot 2^\kappa$. 
+Shelah proved that
+in a \emph{dependent} theory the number of realised types will always be
+at most polynomial, and also this theorem carries over to the finite. 
+
+\begin{definition}
+Let $\cal C$ be a class of structures in a first-order language $L$. Let 
+$\phi(\tup{x},\tup{y})$ be an $L$-formula with the free variables
+divided into two groups $\tup{x}, \tup{y}$. The formula $\phi$ has
+the \emph{$n$-independence property} if for some structure $\strA$ in $\cal C$, there are tuples $\tup{a}_1,\ldots, \tup{a}_{n}$ and
+$\tup{b}_J$ for $J\subseteq \{1,\ldots, n\}$ such that
+\[\strA\models\phi(\tup{a}_i,\tup{b}_J)\Longleftrightarrow i\in J. \]
+A formula $\phi$ is \emph{dependent} (for $\cal C$) if there is 
+some $n\in \N$ such that $\phi$ does not have the $n$-independence property.
+A class $\CCC$ of structures is \emph{dependent} or has the \emph{non-independence property}, 
+short \emph{NIP}, if every formula~$\phi$ is dependent for $\cal C$. 
+\end{definition}
+
+\begin{theorem}[\cite{shelah1990classification}, Theorem II.4.10(4) and II.4.11(4)]
+Let $\Delta$ be a finite set of first-order formulas which are 
+dependent on $\strA$. Then there exists a positive integer $k$ such that 
+for any set~$A$ of elements of $\strA$ with $\abs{A}\geq 2$ it holds that
+$\abs{S_\Delta(\strA,A)}\leq \abs{A}^k$. 
+\end{theorem}
+
+The independence property of a formula can be understood as its 
+\emph{VC-dimension}~\cite{vapnik2015uniform,laskowski1992vapnik}, 
+a concept with many applications in computational
+learning theory, see e.g.~\cite{}. 
+
+\paragraph{Nowhere denseness.}
+We now come to the definition of nowhere dense graph classes, which is based
+on excluded bounded-depth minors. 
+
+\begin{definition}
+A {\em{minor model}} of a graph $H$ in $G$ is a family $(I_u)_{u\in V(H)}$ of pairwise vertex-disjoint connected subgraphs of $G$
+such that whenever $uv$ is an edge in~$H$, there are $u'\in I_u$ and $v'\in I_v$ for which $u'v'$ 
+is an edge in $G$.
+The graph $H$ is a {\em{depth-$r$ minor}} of $G$, denoted $H\minor_rG$, if there is a minor model
+$(I_u)_{u\in V(H)}$ of~$H$ in $G$ such that each subgraph $I_u$ has radius at most $r$.
+
+A graph $H$ is a \emph{topological minor} of a graph $G$ if there is a
+function~$\delta$ mapping vertices $v\in V(H)$ to vertices of $V(G)$ and 
+edges $e\in E(H)$ to directed paths in $G$ such that 
+$\delta(v)\neq \delta(u)$ for all distinct $u,v\in V(H)$, and 
+if $e=(u,v)\in E(H)$, then $\delta(e)$ is a path from 
+$\delta(u)$ to $\delta(v)$ in~$G$ which is internally vertex disjoint from all 
+$\delta(e')$ with $e'\in E(H)$, $e'\neq e$. 
+For $r\geq 0$, $H$ is a \emph{topological depth-$r$ minor} of $G$, 
+written $H\minor_r^tG$, if it is a topological minor and all paths~$\delta(e)$
+have length at most $2r$. If all paths~$\delta(e)$ have length exactly
+$r$, we say that $G$ contains an \emph{$r$-subdivision} of $H$ (as a 
+subgraph). 
+\end{definition}
+
+\begin{definition}
+A class $\CCC$ of graphs is \emph{nowhere dense} if there is a function 
+$f:\N\rightarrow \N$ such that for all $r\in \N$ it holds that $K_{f(r)}\not\minor_r G$
+for all $G\in \CCC$. 
+\end{definition}
+
+Equivalently, a 
+class $\CCC$ of graphs is nowhere dense if there is a function 
+$g:\N\rightarrow \N$ such that for all $r\in \N$ it holds that 
+$K_{g(r)}\not\minor_r^t G$ for all $G\in \CCC$, or that the
+$r$-subdivision of $K_{g(r)}$ is not a subgraph of all $G\in \CCC$. 
+The latter is in fact the definition of \emph{superflat classes of graphs}
+(for classes of finite and infinite graphs), 
+given by Podewski and Zieger~\cite{podewski1978stable}, who also
+proved that superflat classes of graphs are stable. 
+The notion of uniform
+quasi-wideness introduced by Dawar~\cite{dawar2010homomorphism}
+can be seen as a finite analogue of the property 
+$(\ast)$ introduced by Podewski and Ziegler. 
+
+\begin{definition}
+A set $B\subseteq V(G)$ is called {\em{$r$-independent}} in $G$ if for all
+distinct $u,v\in B$ we have $\dist_G(u,v)>r$.
+A class $\CCC$ of graphs is \emph{uniformly quasi-wide} if there are
+functions $N\colon \N\times\N\rightarrow \N$ and $s:\N\rightarrow \N$ such
+that for all $r,m\in \N$ and all subsets $A\subseteq V(G)$ for
+$G\in \CCC$ of size $\abs{A}\geq N(r,m)$ there is a set
+$S\subseteq V(G)$ of size $\abs{S}\leq s(r)$ and a set
+$B\subseteq A\setminus S$ of size $\abs{B}\geq m$ which is $r$-independent in
+$G-S$. 
+\end{definition}
+
+As shown by Ne\v{s}et\v{r}il and Ossona de Mendez~\cite{nevsetvril2010first},
+a class $\CCC$ of graphs is nowhere dense if and only if it
+is uniformly quasi-wide.
+
+\paragraph{Our contributions.} In this work we revisit the 
+connections between nowhere denseness, quasi-wideness and
+stability. 
+
+Our first result is  a new proof of a result of
+Ne\v{s}et\v{r}il and Ossona de Mendez~\cite{nevsetvril2010first},
+which states that a class $\CCC$ of graphs is nowhere dense if and only if it
+is uniformly quasi-wide. The proof of Ne\v{s}et\v{r}il 
+and Ossona de Mendez goes back to a construction
+of Kreidler and Seese~\cite{kreidler1998monadic} (see also Atserias et al.~\cite{atserias2006preservation}), 
+and uses iterated Ramsey arguments. Hence the original bounds on 
+the function $N$ are huge. Recently, 
+it was proved that we may always choose $N$ to be a polynomial 
+function~\cite{siebertz2016polynomial}. The degree of the polynomial 
+in~\cite{siebertz2016polynomial} was  not specified, its existence 
+depends on Adler and Adler's result that nowhere dense classes of graphs
+are stable and hence every fixed formula has bounded ladder index 
+on every nowhere dense class of graphs. We give a new construction 
+which is considerably simpler than that of~\cite{siebertz2016polynomial}
+and which gives explicit bounds on the degree of the polynomial. 
+We prove the following theorem. 
+
+\begin{theorem}\label{thm:new-uqw}
+Let $G$ be a graph such that $K_t\not\minor_{3r+1} G$. 
+If $A\subseteq V(G)$ of size $\Omega(m^{(6t+3)^{t+r}})$, then we can find a set
+$S\subseteq V(G)$ of size $|S|\leq t$ and a set $B\subseteq A\setminus S$ 
+of size $|B|\geq m$ which is $r$-independent in $G-S$.  
+\end{theorem}
+
+We prove \cref{thm:new-uqw} in \cref{sec:uqw}. We want to highlight
+that even though our methods are the methods from stability theory, 
+we use only very simple graph theoretic notions. In particular, the
+proof can easily be turned into an efficient algorithm which does not
+call a model-checking algorithm as a subroutine. 
+
+\bigskip
+Podewski and Ziegler's proof that flat graphs are stable uses an 
+infinite Ramsey argument. Based on Gaifman's Locality Theorem for
+first-order logic~\cite{gaifman1982local}, we give a combinatorial 
+proof that every first-order formula has finite ladder index on every
+nowhere dense class of graphs. Our proof gives explicit bounds for the
+ladder indices of formulas. 
+
+\begin{theorem}\label{thm:new-stable}
+  There are computable functions $f:\N^3\to\N$ and $g:\N\to\N$ with the following property.
+If $\phi(\bar x)$ is a formula of quantifier rank $q$ and with $d$ free variables
+and  $G$ is a graph such that $K_t\not\minor_{g(q)} G$, then the ladder index of $\phi$ on $G$ is at most $f(q,d,t)$. 
+\end{theorem}
+
+We prove \cref{thm:new-stable} in \cref{sec:stable}. 
+
+\bigskip
+
+Finally, we again consider the formula stating that the distance
+between two elements is at most $r$. 
+We observe that an argument of Bousquet and 
+Thomasse\'e~\cite{BousquetT15} can be slightly modified to prove that 
+the VC-dimension of the $r$-power graph $G^r$ of a graph $G$
+with $K_t\not\minor_r G$ is bounded by $t-1$.
+
+\begin{theorem}\label{thm:new-vc}
+Let $G$ be a graph such that $K_t\not\minor_r G$. Then the
+VC-dimension of the $r$-power graph~$G^r$ is bounded by $t-1$. 
+\end{theorem}
+
+We prove \cref{thm:new-vc} in \cref{sec:vc}. 
