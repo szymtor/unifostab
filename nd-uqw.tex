@@ -10,15 +10,16 @@ graph theory.
 We write $V(G)$ for the vertex set of a graph $G$ and
 $E(G)$ for its edge set. 
 The {\em{distance}} between vertices $u$ and $v$ in $G$, denoted $\dist_G(u,v)$, is the length of a shortest path between $u$ and $v$ in~$G$.
+If there is no path between $u$ and $v$ in $G$, we put $\dist_G(u,v)=\infty$.
 
-A {\em{minor model}} of a graph $H$ in $G$ is a family $(I_u)_{u\in V(H)}$ of pairwise vertex-disjoint connected subgraphs of $G$
+A {\em{minor model}} of a graph $H$ in $G$ is a family $(I_u)_{u\in V(H)}$ of pairwise vertex-disjoint connected subgraphs of $G$, called {\em{branch sets}},
 such that whenever $uv$ is an edge in~$H$, there are $u'\in I_u$ and $v'\in I_v$ for which $u'v'$ 
 is an edge in $G$.
 The graph $H$ is a {\em{depth-$r$ minor}} of $G$, denoted $H\minor_rG$, if there is a minor model
-$(I_u)_{u\in V(H)}$ of~$H$ in $G$ such that each subgraph $I_u$ has radius at most $r$.
+$(I_u)_{u\in V(H)}$ of~$H$ in $G$ such that each $I_u$ has radius at most $r$.
 
 A class $\CCC$ of graphs is \emph{nowhere dense} if there is a function 
-$f:\N\rightarrow \N$ such that for all $r\in \N$ it holds that $K_{f(r)}\not\minor_r G$
+$t\colon \N\rightarrow \N$ such that for all $r\in \N$ it holds that $K_{t(r)}\not\minor_r G$
 for all $G\in \CCC$. 
 
 A set $B\subseteq V(G)$ is called {\em{$r$-independent}} in $G$ if for all
