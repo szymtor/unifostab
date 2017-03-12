@@ -11,6 +11,7 @@ We write $V(G)$ for the vertex set of a graph $G$ and
 $E(G)$ for its edge set. 
 The {\em{distance}} between vertices $u$ and $v$ in $G$, denoted $\dist_G(u,v)$, is the length of a shortest path between $u$ and $v$ in~$G$.
 If there is no path between $u$ and $v$ in $G$, we put $\dist_G(u,v)=\infty$.
+For a vertex $u$ and nonnegative integer $s$, by $N_s[u]$ we denote the {\em{$s$-neighborhood of $u$}} which comprises vertices at distance at most $s$ from $u$.
 
 A {\em{minor model}} of a graph $H$ in $G$ is a family $(I_u)_{u\in V(H)}$ of pairwise vertex-disjoint connected subgraphs of $G$, called {\em{branch sets}},
 such that whenever $uv$ is an edge in~$H$, there are $u'\in I_u$ and $v'\in I_v$ for which $u'v'$ 
@@ -22,85 +23,106 @@ A class $\CCC$ of graphs is \emph{nowhere dense} if there is a function
 $t\colon \N\rightarrow \N$ such that for all $r\in \N$ it holds that $K_{t(r)}\not\minor_r G$
 for all $G\in \CCC$. 
 
-A set $B\subseteq V(G)$ is called {\em{$r$-independent}} in $G$ if for all
+A set $B\subseteq V(G)$ is called {\em{$r$-independent}} in a graph $G$ if for all
 distinct $u,v\in B$ we have $\dist_G(u,v)>r$.
 A class $\CCC$ of graphs is \emph{uniformly quasi-wide} if there are
 functions $N\colon \N\times\N\rightarrow \N$ and $s:\N\rightarrow \N$ such
-that for all $r,m\in \N$ and all subsets $A\subseteq V(G)$ for
-$G\in \CCC$ of size $\abs{A}\geq N(r,m)$ there is a set
+that for all $r,m\in \N$, all graphs $G\in \CCC$, and all subsets $A\subseteq V(G)$ of size $\abs{A}\geq N(r,m)$, there is a set
 $S\subseteq V(G)$ of size $\abs{S}\leq s(r)$ and a set
 $B\subseteq A\setminus S$ of size $\abs{B}\geq m$ which is $r$-independent in
 $G-S$. 
 
-To prove \cref{thm:new-uqw} we proceed as follows. 
+On high level, to prove \cref{thm:new-uqw} we proceed by finding large independent sets within $A$ for larger and larger radii, just as in~\cite{nevsetvril2010first}.
 If for some $s\leq \left\lceil r/2\right\rceil$
-we have found a $2s$-independent set, we want to find a large 
-$2s+1$-independent subset. This case can easily be handled by the classical Ramsey 
+we have found a large $2s$-independent set, we want to find a large 
+$(2s+1)$-independent subset. This case can easily be handled by the classical Ramsey 
 Theorem on nowhere dense classes of graphs. The more
 intricate case is to find a few elements to delete such that
-we find a large $2s+2$-independent set in a $2s+1$-independent set. 
-We alternatingly carry out the constructions for $s=1,\ldots, \left\lceil r/2\right\rceil$ to 
+we find a large $(2s+2)$-independent set in a large $(2s+1)$-independent set. 
+We alternately carry out the constructions for $s=1,\ldots, \left\lceil r/2\right\rceil$ to 
 obtain the statement of the theorem. 
 
+The following lemma encapsulates the step from a large $2s$-independent set to a large $(2s+1)$-independent set.
 
 \begin{lemma}\label{lem:ramsey1}
 Let $G$ be a graph and let $s\in \N$. If $K_t\not\minor_{s} G$ and 
 if $A\subseteq V(G)$ is a $2s$-independent set in $G$ of
 size at least $\binom{m+t-2}{t-1}$, then there exists
-a subset $B\subseteq A$ of size at least $m$ which $2s+1$-independent in $G$. 
+a subset $B\subseteq A$ of size at least $m$ which $(2s+1)$-independent in $G$. 
 \end{lemma}
 \begin{proof}
-By Ramsey's Theorem, every set of size $\binom{m+t-2}{t-1}$ contains an
+By Ramsey's Theorem\todo{citation?}, in any graph every set of size $\binom{m+t-2}{t-1}$ contains an
 independent set of size $m$ or a clique of size $t$. 
 
-As $A$ is $2s$-independent, we can contract the $s$-neighborhood
-of each $v\in A$ to obtain a depth-$s$ minor $H$ of $G$. The corresponding elements $N_s[v]$ that we identify with vertices of $H$ form a set $Z$ that is in \mbox{$1$-to-$1$} correspondence 
-with~$A$. By assumption, 
+As $A$ is $2s$-independent, the $s$-neighborhoods of vertices from $A$ are pairwise disjoint.
+Let $H$ be a graph with $A$ as the vertex set, where we put an edge between vertices $u$ and $v$ if and only if there is an edge in $G$ between $N_s[u]$ and $N_s[v]$.
+Clearly, $H$ is a depth-$s$ minor of $G$, as we can map each $u\in A$ to $I_u=G[N_s[u]]$ to obtain an appropriate minor model.
+By assumption, 
 $H$ excludes $K_t$ as a subgraph, and hence by Ramsey's Theorem,
-we can find an independent set $B'\subseteq Z$ of size $m$ in $H$. 
-This set $B'$ corresponds to a $(2s+1)$-independent set $B\subseteq A$ of $G$. 
+we can find an independent set $B$ of size $m$ in $H$. 
+By the construction of $H$, we have that $B\subseteq A$ and $B$ is also a $(2s+1)$-independent set in $G$. 
 \end{proof}
 
 For the second, more complicated case, 
-we will employ one more lemma, which is based on the fact that
-nowhere dense classes of graphs do not have dense 
-shallow minors~\cite{dvorak2007asymptotical,jiang2011compact}. 
+we will employ one more lemma, namely the bound on the number of distinct neighborhoods in a graph from a nowhere dense class.
 
 \begin{lemma}[adaptation of Lemma 4.11 in \cite{gajarsky2017kernelization}]\label{lem:diversity}
 Let $\CCC$ be a nowhere dense class of graphs. Let $G\in \CCC$ and let $A\subseteq V(G)$. 
 Then for every $\epsilon>0$ there exists $n_0$ such that if $|A|\geq n_0$, then 
-\[\abs{\{N(v)\cap A : v\in V(G)\}}\leq\abs{A}^{1+\epsilon}.\]
+\[\abs{\{N(v)\cap A \colon v\in V(G)\}}\leq\abs{A}^{1+\epsilon}.\]
 \end{lemma}
 
-Furthermore, observe that nowhere dense classes are closed under
-taking bounded depth minors, as stated in the following lemma. 
-The lemma is an immediate consequence of Proposition~4.1 
-of~\cite{sparsity}. 
-
-\begin{lemma}
-Let $\CCC$ be a nowhere dense class of graphs and let $s\in \N$. 
-Then also the class $\{H \minor_s G : G\in \CCC\}$ is nowhere dense. 
-\end{lemma}
+We remark that the proof of \cref{lem:diversity} uses only the fact that
+nowhere dense classes of graphs do not have dense 
+shallow minors~\cite{dvorak2007asymptotical,jiang2011compact}, and does not rely on any non-constructive arguments from the stability theory.
+From \cref{lem:diversity} we can derive the following.
 
 \begin{corollary}\label{lem:gajarsky}
-Let $\CCC$ be a nowhere dense class of graphs and let $s\in \N$. 
-Let $G\in \CCC$ and let $A\subseteq V(G)$ be a $2s+1$-independent
-set. 
+Let $\CCC$ be a nowhere dense graph class and let $s\in \N$. 
+Let $G\in \CCC$ and let $A\subseteq V(G)$ be a $(2s+1)$-independent
+set.
 Then for every $\epsilon>0$ there exists $n_0$ such that if $|A|\geq n_0$, then 
-\[\abs{\{N_{s+1}(v)\cap A : v\in V(G)\}}\leq\abs{A}^{1+\epsilon}.\]
+\[\abs{\{N_{s+1}[v]\cap A \colon v\in V(G)\}}\leq\abs{A}^{1+\epsilon}.\]
 \end{corollary}
+\begin{proof}
+As $A$ is $(2s+1)$-independent, we have that the $s$-neighborhoods of vertices from $A$ are pairwise disjoint.
+Obtain an $s$-shallow minor $H$ of $G$ by contracting $N_s[u]$ for each $u\in A$. 
+We implicitly identify each vertex $u\in A$ with the vertex of $H$ obtained from contracting $N_s[u]$, thus $A\subseteq V(H)$.
+Observe that $H$ belongs to the class $\CCC\triangledown s$ of all $s$-shallow minors of graphs from $\CCC$. This class is also nowhere dense;
+see, e.g., Proposition~4.1 in~\cite{sparsity}.
+
+Let us fix $\epsilon>0$
+Take any $v\in V(G)$. If $v\in N_s[u]$ for some $u\in A$, then since $A$ is $(2s+1)$-independent, we have that $v$ is at distance larger than $2s+1$ from any other vertex of $A$.
+Hence in this case we have $N_{s+1}[v]\cap A=\{u\}$ and there can be at most $|A|$ neighborhoods of this type.
+Next, suppose $v\notin N_s[u]$ for any $u\in A$. Then by the construction of $H$ we have that $N_{s+1}[v]\cap A=N^H[v]\cap A$, where $N^H[v]$ is the neighborhood of $v$ in $H$.
+Since $H\in \CCC\triangledown s$ and $\CCC\triangledown s$ is nowhere dense, by \cref{lem:diversity} we have that the number of such neighborhoods is at most $|A|^{1+\epsilon/2}$,
+provided $|A|\geq n_0$ for some $n_0$.
+Thus, we conclude that $\abs{\{N_{s+1}[v]\cap A \colon v\in V(G)\}}\leq |A|+|A|^{1+\epsilon/2}$, which is bounded by $|A|^{1+\epsilon}$ if we choose $n_0$ large enough.
+\end{proof}
+
+%Observe that nowhere dense classes are closed under
+%taking bounded depth minors, as stated in the following lemma. 
+%It is an immediate consequence of Proposition~4.1 
+%of~\cite{sparsity}. 
+
+%\begin{lemma}
+%Let $\CCC$ be a nowhere dense class of graphs and let $s\in \N$. 
+%Then also the class $\{H \minor_s G \colon G\in \CCC\}$ is nowhere dense. 
+%\end{lemma}
+
+
 
 We can now state the main building block of our proof as a lemma. 
 
 \begin{lemma}\label{lem:apex}
 Let $\CCC$ be a nowhere dense class of graphs and let $s\in \N$. 
 Assume that $K_t\not\minor_{3s+1} G$. 
-Let $n_0$ be the constant of \cref{lem:gajarsky} for $\epsilon=1/3$ 
+Let $n_0$ be the constant given by \cref{lem:gajarsky} for $\epsilon=1/3$ 
 and let $m\geq n_0$ be an integer. 
-If $A$ is an $2s+1$-independent set in $G$ of size at least $(4(m+1)^3+2)^{2t+1}$ 
+If $A$ is an $(2s+1)$-independent set in $G$ of size at least $(4(m+1)^3+2)^{2t+1}$ 
 then either 
 \begin{itemize}
-\item $A$ contains a $2s+2$-independent set $A'$ of size $m$, or
+\item $A$ contains a $(2s+2)$-independent set $A'$ of size $m$, or
 \item there is a subset $A'\subseteq A$ of size at least~$m$ and
 a vertex $v\in V(G)$ which is at distance exactly $s+1$ to all vertices of $A'$. 
 \end{itemize}
@@ -165,84 +187,106 @@ Fix an enumeration $a_1,\ldots, a_{\ell}$ of $A$ and let $s\in \N$.
 The \emph{distance-$s$ tree}
 of $(a_1,\ldots,a_{\ell})$ is a binary tree which is constructed recursively as 
 follows. We make $a_1$ the root of the tree. Assume that $a_1,\ldots, a_i$
-have been inserted to the tree. We follow a root-leaf path to find the
-position for the next element $a_{i+1}$. At a point $a_j$ in the root-leaf path, 
-if $\dist(a_j,a_{i+1})\leq s$, we continue along the right branch at $a_j$, otherwise we follow the left branch. If 
+have already been inserted into the tree. In order to insert the next element $a_{i+1}$, we follow a root-leaf path to find a position for it. 
+Starting from the root $a_1$, at each point we are at some node $a_j$ and we are to decide whether we continue along the left or to the right branch at $a_j$.
+If $\dist(a_j,a_{i+1})\leq s$, we continue along the right branch at $a_j$, otherwise we follow the left branch. If 
 there is no right successor (or left successor, respectively), we insert $a_{i+1}$ 
 as a right (or left child, respectively) of $a_j$. 
 
 A root-leaf path in $T$ has \emph{$k$ alternations} 
-if it contains $k+1$ nodes $a_1,\ldots, a_{k+1}$ (which appear
-in that order on the path, possibly not consecutively) such that $a_{i+1}$ is a left descendant of $a_i$
-if and only if $a_{i+2}$ is a right descendant of $a_{i+1}$, $1\leq i\leq k-2$. 
+if it contains $k+1$ nodes $a_{i_1},\ldots, a_{i_{k+1}}$ (which appear
+in that order on the path, possibly not consecutively) such that $a_{i_{j+1}}$ is a left descendant of $a_{i_j}$
+if and only if $a_{i_{j+2}}$ is a right descendant of $a_{i_{j+1}}$, for all $1\leq i\leq k-1$. 
 The \emph{alternation rank} of $T$ is the largest number $t$ such that 
-$T$ contains a $t$-alternating path of length $t$.
+$T$ contains a path with $t$ alternations.
 
 \begin{lemma}\label{lem:number-of-nodes}
-Let $T$ be a tree of alternation rank $t$. If
-$T$ has height at most~$h$, then $T$ has at most $(2h+2)^{t+1}$
+Let $T$ be a rooted binary tree of alternation rank at most $t$. If
+$T$ has height at most~$h$, then $T$ has at most $1+2h^{t+1}$
 vertices. 
 \end{lemma}
 \begin{proof}
-Denote by $n_\ell^s$ the number of vertices a binary tree without a 
-an $s$-alternating path can have. Then we have $n_0^s\leq 1$ for all $s\geq 1$
-and $n_\ell^1\leq 2\ell-1$ for all $\ell$, and 
+For each vertex $u$ of $T$, say at level $g\leq h$, let the {\em{characteristic vector}} of $u$ be the vector $(p_0,\ldots,p_{g-1})$ such that each $p_i\in \{\mathsf{L},\mathsf{R}\}$ denotes
+whether $u$ is the left of right successor of its unique ancestor at level $i$. Clearly, every vertex of $T$ has a different characteristic vector.
+
+For a characteristic vector $(p_0,\ldots,p_{g-1})$ of a vertex $u$, let $X\subseteq \{0,1,\ldots,g-2\}$ be the subset of those indices $i$ for which $p_i\neq p_{i+1}$. 
+Note that the path from the root to $u$ has $|X|$ alternations, so since $T$ has alternation rank at most $t$, we have that $|X|\leq t$.
+Observe also that the characteristic vector $(p_0,\ldots,p_{g-1})$ can be uniquely described by specifying $p_0\in \{\mathsf{L},\mathsf{R}\}$ and the set $X$, which is a subset of size at most $t$ of
+a set of size $g-1$.
+It follows that the number of different characteristic vectors of vertices at level $g\geq 1$ is at most $2\sum_{s=0}^{t}\binom{g-1}{s}$.
+
+We conclude that the number of vertices in $T$ is upper bounded by the number of different characteristic vectors of length at most $h$, which is at most
 \begin{align*}
-n_\ell^s\leq 2(n_{\ell-2}^{s-1}+n_{\ell-3}^{s-1}+\ldots + n_{0}^{s-1})+2\ell-1
+1+2\sum_{g=1}^h\, \sum_{s=0}^t\, \binom{g-1}{s}=1+2\sum_{s=0}^t\, \sum_{g=1}^h\, \binom{g-1}{s}= 1+2\sum_{s=1}^{t+1} \binom{h}{s}\leq 1+2h^{t+1}.
 \end{align*}
-for all $s\geq 2,\ell\geq 1$. In the last inequality, we count the vertices on 
-the two paths of length at most 
-$\ell$ staring in the root which have no alternations (at most $2\ell-1$). 
-All nodes branching from 
-these paths have one less alternation available, hence there are at most
-$ 2(n_{\ell-2}^{s-1}+n_{\ell-3}^{s-1}+\ldots + n_{0}^{s-1})$ of them. 
-Now it is easy to check that the function $(2\ell+2)^s$ satisfies these requirements (use $n_0^{s-1}\leq 1$ here). 
+This concludes the proof.
 \end{proof}
+
+
+%Denote by $k_\ell^s$ the maximum possible number of vertices in a binary tree of height at most $\ell$ and alternation rank at most $s$. We have $k_0^s\leq 1$ for all $s\geq 1$
+%and $k_\ell^1\leq 2\ell-1$ for all $\ell$. 
+%Take now any binary tree $T$ of height at most $\ell$ and alternation rank at most $s$, and let $L$ and $R$ be the root-leaf paths in $T$ that take only left, respectively only right successors.
+%As the height of $T$ is at most $\ell$, we have that the removal of $L$ and $R$ from $T$ results in a forest consisting of at most $2(\ell-1)$ subtrees of $T$. 
+%Observe that each of these subtrees has alternation rank at most $s-1$
+%and height at most $\ell-2$,
+%hence we have
+%\begin{align*}
+%k_\ell^s\leq 2(\ell-1)\cdot k_{\ell-2}^{s-1}+2\ell+1
+%\end{align*}
+%for all $s\geq 2,\ell\geq 2$. In the last inequality, we count the vertices on 
+%the two paths of length at most 
+%$\ell$ staring in the root which have no alternations (at most $2\ell-1$). 
+%All nodes branching from 
+%these paths have one less alternation available, hence there are at most
+%$ 2(k_{\ell-2}^{s-1}+k_{\ell-3}^{s-1}+\ldots + k_{0}^{s-1})$ of them. 
+%Now it is easy to check that the function $(2\ell+2)^s$ satisfies these requirements (use $k_0^{s-1}\leq 1$ here). 
+
 
 We now prove that in nowhere dense classes the alternation ranks of 
 distance trees are small. 
 
 \begin{lemma}\label{thm:alternation-rank-type-tree}
-Let $G$ be a graph and let $s\in \N$ such that $K_t\not\minor_{3s+1} G$ and let
-$(v_1,\ldots, v_\ell)$ be an enumeration of a $2s+1$-independent set 
+Let $G$ be a graph, let $s,t\in \N$ be such that $K_t\not\minor_{2s+2} G$, and let
+$(v_1,\ldots, v_\ell)$ be an enumeration of a $(2s+1)$-independent set 
 in $G$. Then the alternation rank of the distance-$(2s+2)$ tree of 
-$(v_1,\ldots, v_\ell)$ is at most~$2t$. 
+$(v_1,\ldots,v_\ell)$ is at most~$2t$. 
 \end{lemma}
 \begin{proof}
-Assume that we find a path which is $2k$ alternating, 
-containing the nodes $v_{i_1},\ldots, v_{i_{2k+1}}$, $1=i_1<i_2<\ldots <i_{2k+1}$, such that $v_{j+1}$ is a left descendant of $v_j$
-if and only if $v_{j+2}$ is a right descendant of $v_{j+1}$, $1\leq j\leq 2k-1$ in
-the distance-$(2s+2)$ tree.
-For readability, we rename the elements as $a_1,b_1,\ldots, a_k,b_k$ in the 
-obvious way. We assume that $b_1$ is right of $a_1$ in the distance-$(2s+2)$ 
-tree, otherwise, we consider
-the path $b_1,a_2,b_2,\ldots,a_k, b_k$. 
+Let $T$ be the distance-$(2s+2)$ tree of $(v_1,\ldots,v_\ell)$.
+Assume that we find a root-leaf path in $T$ which has alternation $2k$.
+That is, this path contains nodes $v_{i_1},\ldots, v_{i_{2k+1}}$ such that $v_{i_{j+1}}$ is a left descendant of $v_{i_j}$
+if and only if $v_{i_{j+2}}$ is a right descendant of $v_{i_{j+1}}$, for all $1\leq j\leq 2k-1$.
+Let $a_1,b_1,\ldots, a_k,b_k$ be the subsequence of $v_{i_1},\ldots, v_{i_{2k+1}}$ from $v_{i_1}$ to $v_{i_{2k}}$ if $v_{i_2}$ is a right descendant of $v_{i_1}$,
+and from $v_{i_2}$ to $v_{i_{2k+1}}$ otherwise. Thus, $b_1$ is a right descendant of $a_1$ in $T$.
 
-\begin{claim}
-For every pair $a_i,b_j$, $1\leq i\leq k, i\leq j\leq k$, there
-is a vertex $z_{ij}$ which is at distance exactly $s+1$ to 
-$a_i$ and $b_j$ and which is at distance greater than $s+1$ 
-to all $b_\ell$, $\ell\neq j$. 
+\begin{claim}\label{cl:zij}
+For every pair $a_i,b_j$ with $1\leq i\leq j\leq k$, there
+is a vertex $z_{ij}$ which is at distance exactly $s+1$ from 
+$a_i$ and from $b_j$, and which is at distance greater than $s+1$ 
+from all $b_\ell$ with~$\ell\neq j$. 
 \end{claim}
+\begin{clproof}
+Since for $j\geq i$, $b_j$ is a right descendant of $a_i$ in $T$, 
+there is a path of length at most $2s+2$ between $a_i$ and $b_j$ in $G$. 
+Since $\{v_1,\ldots, v_n\}$ is $(2s+1)$-independent in~$G$, this path
+must have length exactly $2s+2$, and hence there is a vertex $z_{ij}$ 
+at distance exactly $s+1$ both from $a_i$ and from $b_j$. 
 
-\noindent\textit{Proof.} 
-Because $b_j$, $j\geq i$, is right of $a_i$ in the distance-$(2s+2)$ tree, 
-there is a path of length at most $2s+2$ between $a_i$ and $b_j$. 
-Because $(v_1,\ldots, v_n)$ is $2s+1$-independent in~$G$, this path
-must have length exactly $2s+2$, and hence there is an element $z_{ij}$ 
-at distance exactly $s+1$ both to $a_i$ and $b_j$. 
-If $z_{ij}$ was at distance $s+1$ to $b_\ell$, $\ell\neq j$, then $b_\ell$ would be adjacent 
-to $b_j$ in the distance-$(2s+2)$ tree, which it is not. \hfill$\lrcorner$
+Suppose now that $z_{ij}$ was at distance at most $s+1$ from some $b_\ell$ with $\ell\neq j$.
+Then $b_\ell$ and $b_j$ would be at distance at most $2s+2$ in $G$.
+However, if $\ell<j$ then $b_j$ is a left descendant of $b_\ell$ in $T$, and if $\ell>j$ then $b_\ell$ is a left descendant of $b_j$ in $T$.
+In any case $b_j$ and $b_\ell$ have to be at distance more than $2s+2$ in $G$ by the construction of $T$, which is a contradiction.
+\end{clproof}
 
-\bigskip
-Now let $X_j\coloneqq N_s[b_j]\cup N_s[a_j]\cup\{z_{ij} : 1\leq i\leq j\}$
-for all $1\leq j\leq k$. $X_j$ is connected and has radius at most $3s+1$. 
-As $z_{ij}$ has distance at least $s+1$ to all $a_\ell, b_\ell$, these sets 
-are disjoint. 
-As $a_i$ is at distance $s+1$ to $z_{ij}$ and 
-$a_i\in X_i$ and $z_{ij}\in X_j$ for $i\neq j$, 
-we have constructed a complete graph $K_k$ as depth-$(3s+1)$ minor. Hence 
-$k\leq t-1$, which proves the claim. 
+Now for each $1\leq j\leq k$, let $H_j$ be the subgraph induced by $N_s[b_j]\cup N_s[a_j]\cup\{z_{ij} \colon 1\leq i\leq j\}$ in $G$.
+By \cref{cl:zij}, $H_j$ is connected and has radius at most $2s+2$; the center is $z_{jj}$.
+Since each vertex $z_{ij}$ is at distance $s+1$ from $a_i$ and $b_j$, it cannot be at distance at most $s$ from any other vertex $a_\ell$ for $\ell\neq i$, or $b_\ell$ for $\ell\neq j$;
+this would contradict the assumption that $a_1,b_1,\ldots,a_k,b_k$ are $(2s+1)$-independent.
+Moreover, we have that $z_{ij}\neq z_{i'j'}$ whenever $j\neq j'$, since $z_{ij}$ is at distance greater than $s+1$ from $b_{j'}$.
+It follows that subgraphs $H_j$ for $1\leq j\leq k$ are pairwise disjoint.
+However, for each $1\leq i<j\leq k$, the vertex $z_{ij}$ certifies that there is an edge in $G$ between $H_i$ and $H_j$.
+Hence, subgraphs $H_j$ for $1\leq j\leq k$ yield a depth-$(2s+2)$ minor of $K_k$ in $G$.
+Since $K_t\not\minor_{2s+2} G$, we infer that $k<t$, which proves the claim.
 \end{proof}
 
 %
