@@ -67,8 +67,8 @@ For the second, more complicated case,
 we will employ one more lemma, namely the bound on the number of distinct neighborhoods in a graph from a nowhere dense class.
 
 \begin{lemma}[adaptation of Lemma 4.11 in \cite{gajarsky2017kernelization}]\label{lem:diversity}
-Let $\CCC$ be a nowhere dense class of graphs. Let $G\in \CCC$ and let $A\subseteq V(G)$. 
-Then for every $\epsilon>0$ there exists $n_0$ such that if $|A|\geq n_0$, then 
+Let $G$ be a graph such that $K_t\not\minor_{1} G$ for some constant $t\in \N$. 
+Then for every $\epsilon>0$ there exists $n_0$, depending only on $t$ and $\epsilon$, such that for all $A\subseteq V(G)$ with $|A|\geq n_0$ it holds that
 \[\abs{\{N(v)\cap A \colon v\in V(G)\}}\leq\abs{A}^{1+\epsilon}.\]
 \end{lemma}
 
