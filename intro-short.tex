@@ -121,11 +121,12 @@ and which gives explicit bounds on the degree of the polynomial.
 Precisely, we prove the following theorem; here, the notation $\Omega_{r,t}(\cdot)$ hides factors depending on $r$ and $t$.
 
 \begin{theorem}\label{thm:new-uqw}
-For all $r,t\in \N$ there exists a function $N\colon \N\to \N$ with $N(m)\in \Omega_{r,t}(m^{(6t+3)^{t+r}})$ such that the following holds.
-Let $G$ be a graph such that $K_t\not\minor_{3r+1} G$, and
+For all $r,t\in \N$ there exists a function $N\colon \N\to \N$ with $N(m)\in \Omega_{r,t}(m^{(6t+3)^{r}})$ such that the following holds.
+Let $G$ be a graph such that $K_t\not\minor_{\lfloor 3r/2\rfloor} G$, and
 let $A\subseteq V(G)$ be a vertex subset of size at least $N(m)$, for a given $m$.
 Then we can find a set $S\subseteq V(G)$ of size $|S|\leq t$ and a set $B\subseteq A\setminus S$ 
-of size $|B|\geq m$ which is $r$-independent in $G-S$.\todo{Algorithm?}  
+of size $|B|\geq m$ which is $r$-independent in $G-S$.
+Moreover, given $G$ and $A$, such sets $S$ and $B$ can be computed in time $\Oof_{r,t}(|A|^c\cdot |E(G)|)$, where $c$ is a universal constant.
 \end{theorem}
 
 Let us remark
@@ -162,7 +163,7 @@ VC-dimension of $G^r$, the $r$th power of the graph~$G$, is bounded by $t-1$.
 \end{theorem}
 
 \paragraph{Organization.} We give background from graph theory in \cref{sec:uqw}, where we also
-prove \cref{thm:new-uqw} and \cref{thm:new-vc}. We provide background 
+prove \cref{thm:new-uqw}. The proof of \cref{thm:new-vc} is in \cref{sec:vc}. We provide background 
 on logic and prove \cref{thm:new-stable} in \cref{sec:stable}. 
 
 
