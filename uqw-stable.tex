@@ -1,7 +1,7 @@
 
 \section{From uniform quasi-wideness to stability}\label{sec:stable}
-The following theorem is the main result of Section~\ref{sec:uqw-stable}.
 
+In this section we focus on proving the following result, observed earlier by Adler and Adler~\cite{adler2014interpreting}.
 
 \begin{theorem}\label{thm:uqw-stable}
 	Let $\cal C$ be a uniformly quasi-wide class of graphs.
@@ -9,31 +9,36 @@ The following theorem is the main result of Section~\ref{sec:uqw-stable}.
 % where $r= 7^q$,
 %  $T$ is the number of all quantifier rank $q$ types with one free  variable over the signature of  graphs colored with $s^d(2r)$ colors.
 \end{theorem}
-The proof will be effective. We will also show that in fact our  proof in fact yields Theorem~\ref{thm:new-stable}.
 
+Note that \cref{thm:uqw-stable} is implied by \cref{thm:new-stable}, and is weaker in the following sense: \cref{thm:new-stable} asserts in addition that there is a computable bounds on the ladder index
+of any formula that depends only on the size of an excluded clique minor on a levels bounded in terms of formula's quantifier rank and number of free variables. At the end of the proof we argue that
+the obtained bounds in fact also imply the stronger statement of \cref{thm:new-stable}, but for the clarity of presentation we find it more instructive to work with the cleaner formulation of \cref{thm:uqw-stable}.
 
-In Section~\ref{sec:uqw-tuples} we formulate a consequence of the uniform quasi-wideness which
-holds for tuples of vertices. Using this and  Gaifman's Locality Theorem, we prove Theorem~\ref{thm:uqw-stable} in Section~\ref{sec:uqw-stable}.
+The plan is as follows. In \cref{sec:uqw-tuples} we formulate a variant of uniform quasi-wideness tailored to tuples of vertices. Using this and Gaifman's Locality Theorem, we prove \cref{thm:uqw-stable} in \cref{sec:uqw-stable}.
 
 
 \subsection{Uniform quasi-widness for tuples}\label{sec:uqw-tuples}
-Fix a graph $G$, a number $d\in\N$ (the dimension) and a number $r\in \N$ (the radius).
+Fix a graph $G$, the dimension $d\in\N$, and the radius $r\in \N$.
 If $S\subset V(G)$ is a set of vertices and $A\subset V(G)^d$ is a set of $d$-tuples of vertices,
 then we say that $A$ is \emph{mutually $r$-independent} in $G-S$ 
-if for every two distinct $(u_1,\ldots,u_d),(v_1,\ldots,v_d)\in S$
+if for every two distinct $(u_1,\ldots,u_d),(v_1,\ldots,v_d)\in A$
 and for all $1\le i,j\le d$, the distance between the vertices $u_i$ and $v_j$ in the graph $G-S$
-is larger than $r$.
+is larger than $r$. Throughout this section we use the convention that if $x\in S$, then the distance in $G-S$ between $x$ and any vertex, including $x$ itself, is infinity. 
+For instance, in the definition above, the tuples from $A$ may contain vertices of~$S$, and such a vertex is considered infinitely far from every vertex.
 
+We not prove the following proposition, which can be viewed as an extension of uniforma quasi-wideness to tuples.
+The proof is based on translating the approach of Podewski and Ziegler~\cite{podewski1978stable} to the finite.
 
 \begin{proposition}\label{prop:uqw-tuples}
-	Let $\cal C$ be a uniformly quasi-wide class of graphs and $d\in\N$ a number.
-	There is a  function $N^d:\N\times\N\to\N$ and a function $s^d:\N\to\N$
+	Let $\cal C$ be a uniformly quasi-wide class of graphs and $d\in\N$ be an integer.
+	Then there are functions $N^d\colon \N\times\N\to\N$ and $s^d\colon \N\to\N$
 	such that for all $r,m\in\N$ and all subsets $A\subset V(G)^d$
 	with $|A|\ge N^d(r,m)$ there  is a set $S\subset V(G)$
 	of size $|S|\le s^d(r)$ and a subset $B\subset A$ of size $|B|\ge m$ which is mutually $r$-independent in $G-S$.
 \end{proposition}
 
-\begin{proof}Fix a uniformly quasi-wide class $\cal C$ and functions $N:\N\times\N\to \N$
+The rest of this section is devoted to the proof of \cref{prop:uqw-tuples}.
+Fix a uniformly quasi-wide class $\cal C$ and functions $N:\N\times\N\to \N$
 	and $s:\N\to\N$ as in the definition of uniform quasi-wideness.
 	Let $d\in \N$ be a fixed dimension.
 		For a fixed graph $G\in \cal C$  and
@@ -42,64 +47,71 @@ is larger than $r$.
 	
 
 
-\begin{lemma}\label{lem:step1} For any $r,m\in \N$ there is a number $K(r,m)$ such that
+\begin{lemma}\label{lem:step1} For any $r,m\in \N$ there is an integer $K(r,m)$ such that
 	for any given $A\subset V(G)^d$ with $|A|\ge K(r,m)$,
 	there is a set $B\subset A$ with $|B|\ge m$ and a set $S\subset V(G)$ with $|S|\le d\cdot s(r)$, 
-	such that for each coordinate $i=1..d$, 
- $\pi_i(B)$ is $r$-independent in $G-S$. 
+	such that for each coordinate $i\in\set{1,\ldots,d}$ and all distinct $\bar x,\bar y\in B$,
+ $\pi_i(\bar x)$ and $\pi_i(\bar y)$ are at distance greater than $r$ in $G-S$. 
 \end{lemma}
 \begin{proof}
+We will iteratively apply the following claim.
 
-Let $f$ be the function defined so that $f(m)=N(r,m)\cdot m$ for $m\in\N$.
+%Let $f\colon \N\to \N$ be defined as $f(m)=N(r,m)\cdot m$ for $m\in\N$.
 
 \begin{claim}\label{claim:ith-coord}
-Fix a coordinate $i\in\set{1,\ldots,d}$, a number $m'\in\N$ and a  set $A\subset V(G)^d$ with  $|A|\ge f_r(m')$.
-There is a set $B\subset A$ such that $|B|\ge m'$
-and $S\subset V(G)$ such that $|S|\le  s(r)$,
-so that  $\pi_i(B)$ is $r$-independent in $G-S$.	
+Fix a coordinate $i\in\set{1,\ldots,d}$, an integer $m'\in\N$, and a  set $A'\subset V(G)^d$ with  $|A'|\ge N(r,m')\cdot m'$.
+Then there is a set $B'\subset D$ with $|B'|\ge m'$
+and a set $S'\subset V(G)$ with $|S'|\le  s(r)$, such that for all distinct $\bar x,\bar y\in B$,
+ $\pi_i(\bar x)$ and $\pi_i(\bar y)$ are at distance greater than $r$ in $G-S$. 
 \end{claim}
-To prove the claim, 
-we consider two cases.
-If $\pi_i(A)\subset V(G)$ has at least $N(r,m')$ elements, then we apply the definition of uniform quasi-wideness to $\pi_i(A)\subset V(G)$. Let $S\subset V(G)$ and $B'\subset \pi_i(A)$
-be as in the definition, i.e., $B'$ is $r$-independent in $G-S$,
-$|B'|\ge m'$ and $|S|\le s(r)$. Let $B\subset A$ be the set of all tuples 
-whose $i$th coordinate belongs to the set $B'$, i.e., $B=\pi_i^{-1}(B')\cap A$.
-Clearly, $|B|\ge |B'|\ge m'$, and $|S|\le s(r)$.
+\begin{clproof}
+We consider two cases.
 
-If $\pi_i(A)$ has less than $N(r,m')$ elements, then choose the element $a\in\pi_i(A)$ whose inverse image $\pi_i^{-1}(\set a)\cap A$ has the largest cardinality. Let $S=\set{a}$ 
-and let $B=\pi_i^{-1}(\set a)$. Then $|B|\ge \frac{|A|}{|\pi_i(A)|}\ge \frac{|A|}{N(r,m')}\ge \frac {f(m')}{N(r,m')}=m'$,
-and $|S|=1$. This proves Claim~\ref{claim:ith-coord}.
+If $\pi_i(A')\subset V(G)$ has at least $N(r,m')$ elements, then we apply the definition of uniform quasi-wideness to $\pi_i(A')\subset V(G)$. This yields sets $S'\subset V(G)$ and $B''\subset \pi_i(A')$
+such that $|B''|\ge m'$, $|S'|\le s(r)$, and $B''$ is $r$-independent in $G-S'$. 
+Let $B'\subseteq A'$ be a subset of tuples constructed as follows: for each $u\in B''$, include in $B'$ one arbitrarily chosen tuple $\bar x\in A'$ such that $\pi_i(\bar x)=u$.
+Clearly $|B'|=|B''|\ge m'$ and for all distinct $\bar x,\bar y\in B'$, we have that $\pi_i(\bar x)$ and $\pi_i(\bar y)$ are distinct and at distance greater than $r$ in $G-S$; this is because $B''$ is $r$-independent
+in $G-S$. Hence $B'$ and $S'$ satisfy all the required properties.
 
+If $\pi_i(A')$ has less than $N(r,m')$ elements, then choose the element $a\in\pi_i(A')$ whose inverse image $\pi_i^{-1}(\set a)\cap A'$ has the largest cardinality. Let $S'=\set{a}$ 
+and let $B'=\pi_i^{-1}(\set a)$. Then $$|B'|\ge \frac{|A'|}{|\pi_i(A')|}\ge \frac{|A'|}{N(r,m')}\ge \frac {N(r,m')\cdot m'}{N(r,m')}=m',$$
+and $|S'|=1$. Observe that $\pi_i(\bar x)=a$ for all $\bar x\in A'$. As $a\in S$, by the adopted convention we have that $\pi_i(\bar x)$ and $\pi_i(\bar y)$ are at infinite distance for all distinct $\bar x,\bar y\in B$.
+\end{clproof}
 
-We now prove Lemma~\ref{lem:step1}.
+We proceed with the proof of \cref{lem:step1}.
+Let $f(m')=N(r,m')\cdot m'$ for $m'\in\N$; by $f^k$ we denote the $k$-fold composition of $f$ with itself.
 Let $A\subset V(G)^d$ be such that $|A|\ge f^d(m)$. 
-Define $B_0=A$, $S_0=\emptyset$, and for $i=1..d$,
-let $B_{i}$ and $S_i$ be the $B$ and $S$ obtained from  Claim~\ref{claim:ith-coord} applied to the se of tuples $B_{i-1}\subset V(G)^d$, the coordinate $i$, and $m'=f^{d-i}(m)$.  The invariant is that $|B_i|\ge f^{d-i}(m)$.
+Define $B_0=A$, $S_0=\emptyset$, and for $i=1,\ldots,d$,
+let $B_{i}$ and $S_i$ be the $B'$ and $S'$ obtained from \cref{claim:ith-coord} applied to the set of tuples $B_{i-1}\subset V(G)^d$, the coordinate $i$, and $m'=f^{d-i}(m)$. 
+The invariant is that $|B_i|\ge f^{d-i}(m)$.
 In particular, 
 taking $B=B_d$ and $S=S_1\cup\ldots \cup S_d$, we obtain that $|B|\ge m$ and $|S|\le d\cdot s(r)$, and, by construction, $\pi_i(B)$
-is $r$-independent in $G-S$, for every coordinate $i\in\set{1,\ldots,d}$. Letting $K(r,m)=f^d(m)$ yields the lemma.
+is $r$-independent in $G-S$ for every coordinate $i\in\set{1,\ldots,d}$. Letting $K(r,m)=f^d(m)$ yields the lemma.
 \end{proof}
 
 
 \begin{lemma}\label{lem:step2}
-	Let $B\subset V(G)^d$ and $S\subset V(G)$ be such that for  $i=1..d$,
-	$\pi_i(B)$ is $2r$-independent in $G-S$, and for each tuple $\bar a\in B$, the set of its elements is $r$-independent in $G-S$.  
+	Let $B\subset V(G)^d$ and $S\subset V(G)$ be such that \begin{itemize}
+	\item for all $i\in \set{1,\ldots,d}$,
+	$\pi_i(B)$ is $2r$-independent in $G-S$, and 
+	\item for each tuple $\bar a\in B$, the set of entries of $\bar a$ is $r$-independent in $G-S$.  
+	\end{itemize}
 	Then there is a set $C$ with $C\subset B$ 
 	such that $C$ is mutually $r$-independent in $G-S$
-	and $|C|> \frac{|B|}{d^2}$.
+	and $|C|\geq\frac{|B|}{d^2+1}$.
 \end{lemma}
 \begin{proof}
-We construct a sequence of sets $C_0\subset C_1\subset \ldots$ of subsets of $B$ which are mutually $r$-independent in $G-S$, as follows.
+We construct a sequence of $C_0\subset C_1\subset \ldots$ of subsets of $B$ which are mutually $r$-independent in $G-S$, as follows.
 
 We start with $C_0=\emptyset$. Suppose that $C_s\subset B$ is 
  already constructed for some $s\ge 0$
- and is mutually $r$-independent in $G-S$; we construct $C_{s+1}$.  To each element $a\in B-C_s$,
-we associate any function $f_a:\set{1,\ldots,d}^2\to C_s\cup \set{\bot}$,
+ and is mutually $r$-independent in $G-S$; we construct $C_{s+1}$. With each element $a\in B-C_s$,
+we associate an arbitrarily chosen function $f_a\colon \set{1,\ldots,d}^2\to C_s\cup \set{\bot}$
 with the following properties:
 \begin{itemize}
 	\item If $f_a(i,j)=b$ then the $i$th coordinate of $a$
 	and the $j$th coordinate of $b$ are at distance at most $r$
-	in $G-S$;
+	in $G-S$.
 	\item If $f_a(i,j)=\bot$ then there is no element $b\in C_s$ 
 	such that the $i$th coordinate of $a$ and the $j$th coordinate of $b$ are at distance at most $r$ in $G-S$.	
 \end{itemize}
@@ -115,28 +127,27 @@ such that $f_a(i,j)=\bot$  for all $i,j\in\set{1,\ldots,d}$.
 Let $C_{s+1}=C_s\cup \set s$.
 By construction, $C_{s+1}$ is mutually $r$-independent in $G-S$.
 
-We may repeat the construction as long as $|B|>|C_s|\cdot (d^2-1)=s\cdot (d^2-1)$, and we stop when this inequality no longer holds. Define the set $C$ as the last constructed set $C_s$.
+We may repeat the construction as long as $|B|>|C_s|\cdot (d^2+1)=s\cdot (d^2+1)$, and we stop when this inequality no longer holds. Define the set $C$ as the last constructed set $C_s$.
 By construction, $|C_s|=s\ge 
-\frac{|B|}{d^2-1}>\frac{|B|}{d^2}$.	
+\frac{|B|}{d^2+1}$.	
 \end{proof}
 
-To finish the proof of Proposition~\ref{prop:uqw-tuples},
-given a set $A\subset V(G)^d$ and numbers $r,m\in\N$,
+To finish the proof of \cref{prop:uqw-tuples},
+given a set $A\subset V(G)^d$ and integers $r,m\in\N$,
 first apply 
-Lemma~\ref{lem:step1} 
+\cref{lem:step1} 
   with $r'=2r$ and
- $m'= m\cdot d^2$.
+ $m'= m\cdot (d^2+1)$.
  Assuming that $|A|\ge K(r',m')$, 
-we obtain a set $B\subset A$ with $|B|\ge m\cdot d^2$ and a set $S\subset V(G)$ with $|S|\le s(2r)$.
-To $B$ and $S$, apply Lemma~\ref{lem:step2}, yielding a set $C\subset B$ which is mutually $r$-independent in $G-S$ and has size at least $m$. This yields the proposition, for $N^d(r,m)=K(r',m')=K(2r,m\cdot d^2)$
-and $s^d(r)=d\cdot s(2r)$.
-\end{proof}
+we obtain a set $B\subset A$ with $|B|\ge m\cdot (d^2+1)$ and a set $S\subset V(G)$ with $|S|\le s(2r)$.
+Apply \cref{lem:step2} to $B$ and $S$, yielding a set $C\subset B$ which is mutually $r$-independent in $G-S$ and has size at least $m$. This concludes the proof of \cref{prop:uqw-tuples},
+where the obtained bounds are $N^d(r,m)=K(r',m')=K(2r,m\cdot (d^2+1))$ and $s^d(r)=d\cdot s(2r)$.
 
 
 \subsection{Excluding long ladders}
 \label{sec:uqw-stable}
 
-Before  proving Theorem~\ref{thm:uqw-stable}, we recall some notions from logic, namely quantifier ranks, Gaifman's Locality Theorem, and some simple manipulations on formulas.
+Before  proving \cref{thm:uqw-stable}, we recall some notions from logic, namely quantifier ranks, Gaifman's Locality Theorem, and some simple manipulations on formulas.
 
 
 By a \emph{colored graph} we mean a graph  in which 
@@ -144,7 +155,7 @@ every vertex is assigned zero or more colors from a fixed set of colors. We view
 
 The \emph{quantifier rank} of a formula $\phi$ is the maximal number of nested quantifiers in $\phi$. Fix a set of $s$ colors.
 Let $(G_1,\bar v_1)$ and $(G_2,\bar v_2)$ be two
-colored graphs with distinguished tuples of vertices of the same length $d$. We say that $(G_1,v_1)$ and $(G_2,v_2)$
+colored graphs with distinguished tuples of vertices of the same length $d$. We say that $(G_1,\bar v_1)$ and $(G_2,\bar v_2)$
 have the same \emph{quantifier rank $q$ type}
 if for every formula $\phi(\bar x)$ with $d$ free variables and of quantifier rank $q$,
  $$G_1,\bar v_1\models \phi(\bar x)\qquad\iff \qquad G_2,\bar v_2\models \phi(\bar x).$$
@@ -159,11 +170,11 @@ The following lemma is standard~(see e.g. Lemma 3.13 in~\cite{libkin}).
 \end{lemma}
 
 
-Before giving a proof of Theorem~\ref{thm:uqw-stable},
-we state Lemma~\ref{lem:gaifman}, which is an
+Before giving a proof of \cref{thm:uqw-stable},
+we state the following \cref{lem:gaifman}, which is an
 immediate consequence of Gaifman's Locality Theorem
 (the Main Theorem~in~\cite{gaifman1982local}).
- If $G$ is a colored graph, $r\in\N$  a number and $\bar a$ a tuple of vertices $a_1,\ldots,a_d$  of vertices of $G$, then  $N^G_r[\bar a]$ denotes the pair $(H,\bar a)$, where $H$ is the colored subgraph of $G$
+ If $G$ is a colored graph, $r\in\N$ is an integer, and $\bar a=(a_1,\ldots,a_d)$ is a tuple of vertices of $G$, then  $N^G_r[\bar a]$ denotes the pair $(H,\bar a)$, where $H$ is the colored subgraph of $G$
 induced by the set of all vertices which are in distance at most $r$
 from some vertex in $\bar a$.
 % We say that a formula $\phi(\bar x)$ with $d=|\bar x|$ free variables is \emph{$q$-local} if for every colored graph $G$ and every $\bar a_1,\bar a_2\in V(G^d)$, if  $N^G_r(\bar a_1)$ and  $N^G_r(\bar a_2)$
@@ -178,12 +189,12 @@ from some vertex in $\bar a$.
  where $r=7^q$.
 \end{lemma}
 
-We will use the following fact about the compositionality of types 
-under taking disjoint unions.
+We also use the following well-known fact about the compositionality of types 
+under taking disjoint unions. The proof is a standard application of Ehrenfeucht-Fraisse games, so we only give a sketch. By $\oplus$ we denote the disjoint union operation on graphs.
 		\begin{lemma}\label{lem:type-union}
 			For $i=1,2$, let $G_i,H_i$ be colored graphs,
-			and $a_i$ be a tuple of vertices of $G_i$
-			and $b_i$ be a tuple of vertices of $H_i$.
+			and $\bar a_i$ be a tuple of vertices of $G_i$
+			and $\bar b_i$ be a tuple of vertices of $H_i$.
 			Suppose that $(G_1,\bar a_1)$ and $(G_2,\bar a_2)$ 
 			have the same quantifier rank $q$ type,
 			and $(H_1,\bar b_1)$ and $(H_2,\bar b_2)$ 
@@ -197,9 +208,10 @@ under taking disjoint unions.
 
 
 \medskip
-To prove Theorem~\ref{thm:uqw-stable}, we will use Proposition~\ref{prop:uqw-tuples} and work with graphs $G$
-with a set of vertices $S$ removed.
-We will use the following notation allowing to translate a first order formula $\phi$ talking about a graph $G$ into an equivalent formula talking about a suitably colored  graph $G$ with the set of vertices $S$ removed.
+To prove \cref{thm:uqw-stable}, we will use \cref{prop:uqw-tuples} and work over a graph $G$
+with a subset of vertices $S$ removed.
+We will use the following notation allowing to translate a first order formula $\phi$ talking about a graph $G$ into an equivalent formula talking 
+about a suitably colored  graph $G$ with the set of vertices $S$ removed.
 
 Let $G$ be a graph and $S\subset V(G)$
 be a set of its vertices.
@@ -208,8 +220,9 @@ as the colored graph $G-S$, where for each $s\in S$, all vertices $v$
 which are neighbors of $s$ in $G$ are colored with color $C_s$.
 
 Fix a formula $\phi(\bar x)$.
-Let $\bar y$ be a non-repeating tuple of variables and $\alpha$ a tuple whose elements belong to $\bar y$ or $S$, of the same length as $\bar x$.
-Denote by $\phi^{\bar \alpha}(\bar y)$ the formula with free variables $\bar y$ obtained from $\phi$ by substituting for the variable $x_i$ the element $\alpha_i$, which is either a variable in $\bar y$  or an element of $S$. 
+Let $\bar y$ be a non-repeating tuple of variables and $\bar \alpha$ a tuple whose elements belong to $\bar y$ or $S$, of the same length as $\bar x$.
+Denote by $\phi^{\bar \alpha}(\bar y)$ the formula with free variables $\bar y$ obtained from $\phi$ by substituting the variable $x_i$ with the element $\alpha_i$, 
+which is either a variable in $\bar y$  or an element of $S$, intepreted as a constant in the formula. 
 
 
 \begin{lemma}\label{lem:remove-s}Let $G,S$ be as above.	
@@ -219,7 +232,7 @@ of the same quantifier rank as $\phi$ over the signature of $G^S$
  such that for every tuple $\tup{a}$ of vertices of $G-S$
  of the same length as $\bar y$,
 the following equivalence holds:
-$$G\models\phi^{\bar\alpha}(\tup{a})\qquad\Leftrightarrow\qquad G^S\models\phi'(\tup{a}).$$
+$$G\models\phi^{\bar\alpha}(\tup{a})\qquad\iff\qquad G^S\models\phi'(\tup{a}).$$
 \end{lemma}
 \begin{proof}
 The proof proceeds by induction on the structure of the formula $\phi$. If $\phi$ is an atomic formula,
@@ -242,12 +255,13 @@ If $\phi$ is a boolean combination of formulas $\phi_1,\ldots,\phi_k$, then
 apply the inductive assumption to each formula $\phi_i$,
 yielding formulas $\phi_1',\ldots,\phi_k'$. Then let $\phi'$ be the analogous boolean combination of the formulas $\phi_1',\ldots,\phi_k'$.
 
-Finally, suppose that $\phi$ is of the form $\exists x.\psi(\bar y x)$, where $x$ is not free in $\phi$ (the case of $\forall$ is dual). If $v$ is either the variable $x$ 
+Finally, suppose that $\phi$ is of the form $\exists x.\psi(\bar y x)$, where $x$ is not free in $\phi$. For $v$ being either the variable $x$ 
 or an element $s\in S$, 
 let $\psi^v(\bar y)$ be the formula obtained from the inductive assumption applied to the formula $\psi(\bar y x)$ 
 and tuple $\bar \alpha$ with the element $v$ appended to it.
 Then let $\phi'(\bar y)$
 be the formula $\exists x.\psi^x(\bar yx)\lor \bigvee_{v\in S}\psi^v(\bar y)$.
+The case of $\forall$ is dual.
 
 In each case, it follows from the inductive assumption that $\phi'$ 
 satisfies the required condition.
