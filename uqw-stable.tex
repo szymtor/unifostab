@@ -8,10 +8,12 @@ In this section we focus on proving the following result, observed earlier by Ad
 	Then $\cal C$ is stable. % More precisely, if $\phi(\bar u,\bar v)$ is a formula with $d$ free variables and quantifier rank $q$, and $N^d(r,m)$ and $s^d(r)$ are as in Proposition~\ref{prop:uqw-tuples}, then for all graphs $G\in\cal C$,  the ladder index of $\phi$ is at most $N^d(2r,(2T)^d)$,
 % where $r= 7^q$,
 %  $T$ is the number of all quantifier rank $q$ types with one free  variable over the signature of  graphs colored with $s^d(2r)$ colors.
-\marginpar{shall we recall the definition of stability and ladders?}
+%\marginpar{shall we recall the definition of stability and ladders?}
 \end{theorem}
 
-Note that \cref{thm:uqw-stable} is implied by \cref{thm:new-stable}, and is weaker in the following sense: \cref{thm:new-stable} asserts in addition that there is a computable bounds on the ladder index
+Recall that a class $\cal C$ is stable if and only if for every first-order formula $\varphi(\bar x,\bar y)$, its ladder index over graphs from $\cal C$ is bounded by a constant depending only on $\cal C$ and $\varphi$;
+see \cref{sec:intro} to recall the background on stability.
+Thus \cref{thm:uqw-stable} is implied by \cref{thm:new-stable} (stated in \cref{sec:intro}), and is weaker in the following sense: \cref{thm:new-stable} asserts in addition that there is a computable bounds on the ladder index
 of any formula that depends only on the size of an excluded clique minor on a levels bounded in terms of formula's quantifier rank and number of free variables. At the end of the proof we argue that
 the obtained bounds in fact also imply the stronger statement of \cref{thm:new-stable}, but for the clarity of presentation we find it more instructive to work with the cleaner formulation of \cref{thm:uqw-stable}.
 
@@ -157,9 +159,9 @@ every vertex is assigned zero or more colors from a fixed set of colors. We view
 The \emph{quantifier rank} of a formula $\phi$ is the maximal number of nested quantifiers in $\phi$. Fix a set of $s$ colors.
 Let $(G_1,\bar v_1)$ and $(G_2,\bar v_2)$ be two
 colored graphs with distinguished tuples of vertices of the same length $d$. We say that $(G_1,\bar v_1)$ and $(G_2,\bar v_2)$
-have the same \emph{quantifier rank $q$ type} \marginpar{also called $q$-equivalent and denoted $(G_1,\bar v_1)\equiv_q (G_2, \bar v_2)$}
+have the same \emph{quantifier rank $q$ type} %\marginpar{also called $q$-equivalent and denoted $(G_1,\bar v_1)\equiv_q (G_2, \bar v_2)$}
 if for every formula $\phi(\bar x)$ with $d$ free variables and of quantifier rank $q$,
- $$G_1,\bar v_1\models \phi(\bar x)\qquad\iff \qquad G_2,\bar v_2\models \phi(\bar x).$$
+ $$G_1\models \phi(\bar v_1)\qquad\iff \qquad G_2\models \phi(\bar v_2).$$
  The equivalence class of $(G,\bar v)$ under the above equivalence relation is called the \emph{quantifier rank $q$ type} of $(G,\bar v)$, and  the set of \emph{quantifier rank $q$ types with $d$ free variables}
 is the set of all equivalence classes, denoted
 $\mathrm{Tp}^{q,s}_d$ (where $s$ is the number of colors).
@@ -184,10 +186,9 @@ from some vertex in $\bar a$.
 \begin{lemma}\label{lem:gaifman}
 	Let $\phi(\bar x)$ be a  formula 
 	of quantifier rank $q$
-	in the signature of colored graphs. 	Then, whether a tuple $\bar a$ of vertices of $V(G)$
-	satisfies the formula $\phi(\bar x)$
-	depends only on the quantifier rank $q$ type of  $N^G_r[\bar a]$,
- where $r=7^q$. \marginpar{this is wrong, correct is: for any $\tup a, \tup b$, if the two have the same local type, then they evaluate equally}
+	in the signature of colored graphs. 
+	Suppose $\bar a,\bar b$ are tuples of vertices of $G$ of the same length as $\bar x$ such that $N^G_r[\bar a]$ and $N^G_r[\bar b]$ have the same quantifier rank $q$ type, where $r=7^q$. Then
+ $$G\models \phi(\bar a)\qquad\iff \qquad G\models \phi(\bar b).$$
 \end{lemma}
 
 We also use the following well-known fact about the compositionality of types 
@@ -300,7 +301,7 @@ with $d$ free variables for graphs colored using $s$ colors.
 	Let $\phi(\bar x)$ be a formula with
 	 $d$ free variables and of quantifier rank $q$.
 	Suppose that $\bar u$ and $\bar v$ are two  $d$-tuples of 
-	vertices of $V(G)$ such that  $\bar u$ and $\bar v$ have the same $q$-local types. Then $$(G,\bar u)\models \phi(\bar x)\iff (G,\bar v)\models \phi(\bar x).$$
+	vertices of $V(G)$ such that  $\bar u$ and $\bar v$ have the same $q$-local types. Then $$(G,\bar u)\models \phi(\bar x)\qquad \iff\qquad (G,\bar v)\models \phi(\bar x).$$
 \end{lemma}
 \begin{proof}
 Let $(\bar \alpha,\tau)$ be the $q$-local type of the tuples $\bar u$ and $\bar v$.
@@ -310,29 +311,35 @@ Let $(\bar \alpha,\tau)$ be the $q$-local type of the tuples $\bar u$ and $\bar 
 	G\models\phi(\bar u)\iff G\models\phi^{\bar\alpha}(\bar u^S)\iff G^S\models\phi'(\bar u^S),\\
 	G\models\phi(\bar v)\iff G\models\phi^{\bar\alpha}(\bar v^S)\iff G^S\models\phi'(\bar v^S).
 	\end{align*}
-		Note that $\phi'$ has the same quantifier rank as $\phi^{\bar \alpha}$, which, in turn, is the same as the quantifier rank of $\phi$, i.e., $q$. Hence, by \cref{lem:gaifman}, by any tuple $\bar w$ of elements of $G-S$, whether $\phi'(\bar w)$ holds in $G^S$ depends only on the quantifier rank $q$ type of $N^r_{G^S}[\bar w]$. Since $N^r_{G^S}[\bar u^S]$ and $N^r_{G^S}[\bar v^S]$ have the same quantifier rank $q$ types, the  lemma follows.
+		Note that $\phi'$ has the same quantifier rank as $\phi^{\bar \alpha}$, which, in turn, has the same quantifier rank as $\phi$, that is, $q$. 
+		Since $\bar u$ and $\bar v$ have the same $q$-local types, $N^r_{G^S}[\bar u^S]$ and $N^r_{G^S}[\bar v^S]$ have the same quantifier rank $q$ type.
+		By \cref{lem:gaifman} applied in $G^S$ to $\phi'$, $\bar u^S$, and $\bar v^s$, we infer that $G^S\models\phi'(\bar u^S)$ iff $G^S\models\phi'(\bar v^S)$.
+		The lemma follows by combining this with the above equivalences.
 \end{proof}
 
 \begin{lemma}\label{lem:crossing}	Let $\phi(\bar x)$ be a formula with
 	 $d$ free variables.
-  Let $\bar u,\bar v,\bar u',\bar v'$ tuples of vertices of $G$,
-  such that $|\bar u|=|\bar u'|$ and $|\bar v|=|\bar v'|$ and that $\bar u\bar v$ and $\bar u'\bar v'$ 
-  are tuples of the same length $d$ and the same $q$-local type, and the set $\set{\bar u\bar v,\bar u'\bar v'}$
-  is mutually $2r$-independent. Then 
+  Let $\bar u,\bar v,\bar u',\bar v'$ tuples of vertices of $G$
+  such that $|\bar u|=|\bar u'|$, $|\bar v|=|\bar v'|$, and $|\bar u\bar v|=|\bar u'\bar v'|=d$.
+  Suppose $\bar u\bar v$ and $\bar u'\bar v'$ have the same $q$-local type and $\set{\bar u\bar v,\bar u'\bar v'}$
+  is mutually $2r$-independent in $G-S$. Then 
   the tuples $\bar u\bar v'$ and $\bar u'\bar v$
   have the same $q$-local types. In particular, 
 $$G,\bar u\bar v'\models \phi(\bar x)\iff G,\bar u'\bar v\models \phi(\bar x).$$
 \end{lemma}
 \begin{proof}
-Since $\set{\bar u\bar v,\bar u'\bar v'}$ is mutually $2r$-independent, in particular, no vertex in $\bar u\bar v$ occurs in $\bar u'\bar v'$.
-It easy to check that this implies $\alpha(\bar u\bar v')=\alpha(\bar u'\bar v)$.
-Moreover, the tuple $(\bar u\bar v')^S$ as defined above 
+Since $\bar u\bar v$ and $\bar u'\bar v'$ have the same $q$-local type, in particular $\alpha(\bar u\bar v)=\alpha(\bar u'\bar v')$.
+This means that in tuples $\bar u\bar v$ and $\bar u'\bar v'$, the set of coordinates occupied by vertices of $S$ is the same, on moreover on each of these coordinates $\bar u\bar v$ and $\bar u'\bar v'$
+feature the same vertex from $S$. It follows that $\alpha(\bar u\bar v')=\alpha(\bar u'\bar v)$, so we are left with verifying that the quantifier rank $q$ types of $N^r_{G^S}[(\bar u\bar  v')^S]$ and
+$N^r_{G^S}[(\bar u'\bar  v)^S]$ are equal.
+
+Observe that the tuple $(\bar u\bar v')^S$
 is equal to the concatenation of the tuples $\bar u^S$
 and $(\bar v')^S$.
 Note that the set  $\set{\bar u^S,(\bar v')^S}$ is mutually $2r$-independent. In particular, the  $r$-neighborhood in the graph $G^S$
 of the tuple $(\bar u\bar v')^S$
 is the disjoint union of the $r$-neighborhoods
-of the tuples $\bar u^S$ and $(\bar v')^S$.
+of the tuples $\bar u^S$ and $(\bar v')^S$.\todo{Why??? The tuples do not need to be $r$-independent by themselves.}
 Also, note that it follows from the assumptions that $\bar u$ and $\bar u'$ have the same $q$-local types,
 and similarly, $\bar v$ and $\bar v'$ have the same $q$-local types.
 It follows then from Lemma~\ref{lem:type-union} that
