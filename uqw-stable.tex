@@ -8,6 +8,7 @@ In this section we focus on proving the following result, observed earlier by Ad
 	Then $\cal C$ is stable. % More precisely, if $\phi(\bar u,\bar v)$ is a formula with $d$ free variables and quantifier rank $q$, and $N^d(r,m)$ and $s^d(r)$ are as in Proposition~\ref{prop:uqw-tuples}, then for all graphs $G\in\cal C$,  the ladder index of $\phi$ is at most $N^d(2r,(2T)^d)$,
 % where $r= 7^q$,
 %  $T$ is the number of all quantifier rank $q$ types with one free  variable over the signature of  graphs colored with $s^d(2r)$ colors.
+\marginpar{shall we recall the definition of stability and ladders?}
 \end{theorem}
 
 Note that \cref{thm:uqw-stable} is implied by \cref{thm:new-stable}, and is weaker in the following sense: \cref{thm:new-stable} asserts in addition that there is a computable bounds on the ladder index
@@ -23,7 +24,7 @@ If $S\subset V(G)$ is a set of vertices and $A\subset V(G)^d$ is a set of $d$-tu
 then we say that $A$ is \emph{mutually $r$-independent} in $G-S$ 
 if for every two distinct $(u_1,\ldots,u_d),(v_1,\ldots,v_d)\in A$
 and for all $1\le i,j\le d$, the distance between the vertices $u_i$ and $v_j$ in the graph $G-S$
-is larger than $r$. Throughout this section we use the convention that if $x\in S$, then the distance in $G-S$ between $x$ and any vertex, including $x$ itself, is infinity. 
+is larger than $r$. Throughout this section we use the convention that if $x\in S$, then the distance in $G-S$ between $x$ and any vertex, including~$x$ itself, is infinity. 
 For instance, in the definition above, the tuples from $A$ may contain vertices of~$S$, and such a vertex is considered infinitely far from every vertex.
 
 We now prove the following proposition, which can be viewed as an extension of uniform quasi-wideness to tuples.
@@ -156,7 +157,7 @@ every vertex is assigned zero or more colors from a fixed set of colors. We view
 The \emph{quantifier rank} of a formula $\phi$ is the maximal number of nested quantifiers in $\phi$. Fix a set of $s$ colors.
 Let $(G_1,\bar v_1)$ and $(G_2,\bar v_2)$ be two
 colored graphs with distinguished tuples of vertices of the same length $d$. We say that $(G_1,\bar v_1)$ and $(G_2,\bar v_2)$
-have the same \emph{quantifier rank $q$ type}
+have the same \emph{quantifier rank $q$ type} \marginpar{also called $q$-equivalent and denoted $(G_1,\bar v_1)\equiv_q (G_2, \bar v_2)$}
 if for every formula $\phi(\bar x)$ with $d$ free variables and of quantifier rank $q$,
  $$G_1,\bar v_1\models \phi(\bar x)\qquad\iff \qquad G_2,\bar v_2\models \phi(\bar x).$$
  The equivalence class of $(G,\bar v)$ under the above equivalence relation is called the \emph{quantifier rank $q$ type} of $(G,\bar v)$, and  the set of \emph{quantifier rank $q$ types with $d$ free variables}
@@ -186,7 +187,7 @@ from some vertex in $\bar a$.
 	in the signature of colored graphs. 	Then, whether a tuple $\bar a$ of vertices of $V(G)$
 	satisfies the formula $\phi(\bar x)$
 	depends only on the quantifier rank $q$ type of  $N^G_r[\bar a]$,
- where $r=7^q$.
+ where $r=7^q$. \marginpar{this is wrong, correct is: for any $\tup a, \tup b$, if the two have the same local type, then they evaluate equally}
 \end{lemma}
 
 We also use the following well-known fact about the compositionality of types 
@@ -210,7 +211,7 @@ under taking disjoint unions. The proof is a standard application of Ehrenfeucht
 \medskip
 To prove \cref{thm:uqw-stable}, we will use \cref{prop:uqw-tuples} and work over a graph $G$
 with a subset of vertices $S$ removed.
-We will use the following notation allowing to translate a first order formula $\phi$ talking about a graph $G$ into an equivalent formula talking 
+We will use the following notation allowing to translate a first order formula~$\phi$ talking about a graph $G$ into an equivalent formula talking 
 about a suitably colored  graph $G$ with the set of vertices $S$ removed.
 
 Let $G$ be a graph and $S\subset V(G)$
@@ -222,7 +223,7 @@ which are neighbors of $s$ in $G$ are colored with color $C_s$.
 Fix a formula $\phi(\bar x)$.
 Let $\bar y$ be a non-repeating tuple of variables and $\bar \alpha$ a tuple whose elements belong to $\bar y$ or $S$, of the same length as $\bar x$.
 Denote by $\phi^{\bar \alpha}(\bar y)$ the formula with free variables $\bar y$ obtained from $\phi$ by substituting the variable $x_i$ with the element $\alpha_i$, 
-which is either a variable in $\bar y$  or an element of $S$, intepreted as a constant in the formula. 
+which is either a variable in~$\bar y$  or an element of $S$, intepreted as a constant in the formula. 
 
 
 \begin{lemma}\label{lem:remove-s}Let $G,S$ be as above.	
@@ -276,7 +277,7 @@ Let $y_1,\ldots,y_d$ be distinct variables.
 For a tuple $\bar w=(w_1,\ldots,w_d)\in V(G)^d$, let 
 $\alpha(\bar w)$ denote the sequence 
  $(\alpha_1,\ldots,\alpha_d)$,
- where $\alpha_i$ is the variable $y_j$
+ where $\alpha_i$ is the variable~$y_j$
  if $w_i\not\in S$ and $j\ge 1$  
  is the smallest number such that $w_j=w_i$,
  and $\alpha_i$ is $w_i$ if $w_i\in S$.
@@ -299,17 +300,17 @@ with $d$ free variables for graphs colored using $s$ colors.
 	Let $\phi(\bar x)$ be a formula with
 	 $d$ free variables and of quantifier rank $q$.
 	Suppose that $\bar u$ and $\bar v$ are two  $d$-tuples of 
-	vertices of $V(G)$ such that  $\bar u$ and $\bar v$ have the same $q$-local types. Then $$G,\bar u\models \phi(\bar x)\iff G,\bar v\models \phi(\bar x).$$
+	vertices of $V(G)$ such that  $\bar u$ and $\bar v$ have the same $q$-local types. Then $$(G,\bar u)\models \phi(\bar x)\iff (G,\bar v)\models \phi(\bar x).$$
 \end{lemma}
 \begin{proof}
 Let $(\bar \alpha,\tau)$ be the $q$-local type of the tuples $\bar u$ and $\bar v$.
-	Consider the formulas $\phi^{\bar \alpha}(\bar y)$ and $\phi'(\bar y)$ as described in Lemma~\ref{lem:remove-s}.
+	Consider the formulas $\phi^{\bar \alpha}(\bar y)$ and $\phi'(\bar y)$ as described in \cref{lem:remove-s}.
 	In particular, the following equivalences hold:
 	\begin{align*}
 	G\models\phi(\bar u)\iff G\models\phi^{\bar\alpha}(\bar u^S)\iff G^S\models\phi'(\bar u^S),\\
 	G\models\phi(\bar v)\iff G\models\phi^{\bar\alpha}(\bar v^S)\iff G^S\models\phi'(\bar v^S).
 	\end{align*}
-		Note that $\phi'$ has the same quantifier rank as $\phi^{\bar \alpha}$, which, in turn, is the same as the quantifier rank of $\phi$, i.e., $q$. Hence, by Lemma~\ref{lem:gaifman}, by any tuple $\bar w$ of elements of $G-S$, whether $\phi'(\bar w)$ holds in $G^S$ depends only on the quantifier rank $q$ type of $N^r_{G^S}[\bar w]$. Since $N^r_{G^S}[\bar u^S]$ and $N^r_{G^S}[\bar v^S]$ have the same quantifier rank $q$ types, the  lemma follows.
+		Note that $\phi'$ has the same quantifier rank as $\phi^{\bar \alpha}$, which, in turn, is the same as the quantifier rank of $\phi$, i.e., $q$. Hence, by \cref{lem:gaifman}, by any tuple $\bar w$ of elements of $G-S$, whether $\phi'(\bar w)$ holds in $G^S$ depends only on the quantifier rank $q$ type of $N^r_{G^S}[\bar w]$. Since $N^r_{G^S}[\bar u^S]$ and $N^r_{G^S}[\bar v^S]$ have the same quantifier rank $q$ types, the  lemma follows.
 \end{proof}
 
 \begin{lemma}\label{lem:crossing}	Let $\phi(\bar x)$ be a formula with

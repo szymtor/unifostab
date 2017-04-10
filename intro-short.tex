@@ -118,10 +118,10 @@ depends on the non-constructive arguments used by Adler and Adler's in showing t
 are stable~\cite{adler2014interpreting}. We give a new construction 
 which is considerably simpler than that of~\cite{siebertz2016polynomial}
 and which gives explicit bounds on the degree of the polynomial. 
-Precisely, we prove the following theorem; here, the notation $\Oof_{r,t}(\cdot)$ and $\Omega_{r,t}(\cdot)$ hides computable factors depending on $r$ and $t$.
+Precisely, we prove the following theorem; here, the notation $\Oof_{r,t}(\cdot)$ hides computable factors depending on $r$ and $t$.
 
 \begin{theorem}\label{thm:new-uqw}
-For all $r,t\in \N$ there exists a function $N\colon \N\to \N$ with $N(m)\in \Omega_{r,t}(m^{(6t+3)^{r}})$ such that the following holds.
+For all $r,t\in \N$ there exists a function $N\colon \N\to \N$ with $N(m)\in \Oof_{r,t}(m^{(6t+3)^{r}})$ such that the following holds.
 Let $G$ be a graph such that $K_t\not\minor_{\lfloor 3r/2\rfloor} G$, and
 let $A\subseteq V(G)$ be a vertex subset of size at least $N(m)$, for a given $m$.
 Then we can find a set $S\subseteq V(G)$ of size $|S|\leq t$ and a set $B\subseteq A\setminus S$ 
@@ -147,14 +147,14 @@ first-order logic~\cite{gaifman1982local}. Precisely, we prove the following the
 \begin{theorem}\label{thm:new-stable}
   There are computable functions $f\colon \N^3\to\N$ and $g\colon\N\to\N$ with the following property.
 If $\phi(\bar x)$ is a formula of quantifier rank $q$ and with $d$ free variables,
-and  $G$ is a graph such that $K_t\not\minor_{g(q)} G$, then the ladder index of $\phi$ on $G$ is at most $f(q,d,t)$. 
+and  $G$ is a graph such that $K_t\not\minor_{g(q)} G$, then the ladder index of $\phi$ on $G$ is at most $f(q,d,t)$. \marginpar{with any division of the variables}
 \end{theorem}
 
 Finally, we observe that an argument of Bousquet and 
 Thomasse\'e~\cite{BousquetT15} can be slightly modified to prove that 
 the VC-dimension of the $r$th power $G^r$ of a graph $G$
 with $K_t\not\minor_r G$ is bounded by $t-1$.
-Boundedness of VC-dimension is a weaker condition than the stability of a class, however it is sufficient in many context.
+Boundedness of VC-dimension is a weaker condition than the stability of a class, however it is sufficient in many contexts.
 Therefore, we consider investigating explicit bounds on the VC-dimension potentially useful for future research.
 
 \begin{theorem}\label{thm:new-vc}

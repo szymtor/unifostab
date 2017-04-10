@@ -58,7 +58,7 @@ By Ramsey's Theorem, in any graph every set of size $\binom{m+t-2}{t-1}$ contain
 independent set of size $m$ or a clique of size $t$. 
 
 As $A$ is $2s$-independent, the $s$-neighborhoods of vertices from $A$ are pairwise disjoint.
-Let $H$ be a graph with $A$ as the vertex set, where we put an edge between vertices $u$ and $v$ if and only if there is an edge in $G$ between $N_s[u]$ and $N_s[v]$.
+Let~$H$ be a graph with $A$ as the vertex set, where we put an edge between vertices $u$ and $v$ if and only if there is an edge in $G$ between $N_s[u]$ and $N_s[v]$.
 Clearly, $H$ is a depth-$s$ minor of $G$, as we can map each $u\in A$ to $I_u=G[N_s[u]]$ to obtain an appropriate minor model.
 By assumption, 
 $H$ excludes $K_t$ as a subgraph, and hence by Ramsey's Theorem,
@@ -90,7 +90,7 @@ Then for every $\epsilon>0$ there exists $n_0$, depending only on $\epsilon,t,s$
 As $A$ is $(2s+1)$-independent, we have that the $s$-neighborhoods of vertices from $A$ are pairwise disjoint.
 Obtain an $s$-shallow minor $H$ of $G$ by contracting $N_s[u]$ for each $u\in A$. 
 We implicitly identify each vertex $u\in A$ with the vertex of $H$ obtained from contracting $N_s[u]$, thus $A\subseteq V(H)$.
-It is known that every $1$-shallow minor of $H$ is also an $(3s+1)$-shallow minor of $G$ (cf.~\cite[Proposition~4.1]{sparsity}), hence $K_t\not\minor_{1} H$.
+It is known that every $1$-shallow minor of $H$ is also a $(3s+1)$-shallow minor of $G$ (cf.~\cite[Proposition~4.1]{sparsity}), hence $K_t\not\minor_{1} H$.
 
 Let us fix $\epsilon>0$.
 Take any $v\in V(G)$. If $v\in N_s[u]$ for some $u\in A$, then since $A$ is $(2s+1)$-independent, we have that $v$ is at distance larger than $2s+1$ from any other vertex of $A$.
@@ -120,7 +120,7 @@ Let $G$ be a graph and let $s\in \N$.
 Assume that $K_t\not\minor_{3s+2} G$ for some $t\in \N$. 
 Let $n_0$ be the constant given by \cref{lem:gajarsky} for $\epsilon=1/3$ and $t,s$ as above, 
 and let $m\geq n_0$ be an integer. 
-If $A$ is an $(2s+1)$-independent set in $G$ of size at least $2+2(2m^3)^{2t+1}$,
+If~$A$ is an $(2s+1)$-independent set in $G$ of size at least $2+2(2m^3)^{2t+1}$,
 then either 
 \begin{itemize}
 \item $A$ contains a $(2s+2)$-independent set $A'$ of size $m$, or
@@ -274,8 +274,8 @@ must have length exactly $2s+2$, and hence there is a vertex $z_{ij}$
 at distance exactly $s+1$ both from $a_i$ and from $b_j$. 
 
 Suppose now that $z_{ij}$ was at distance at most $s+1$ from some $b_\ell$ with $\ell\neq j$.
-Then $b_\ell$ and $b_j$ would be at distance at most $2s+2$ in $G$.
-However, if $\ell<j$ then $b_j$ is a left descendant of $b_\ell$ in $T$, and if $\ell>j$ then $b_\ell$ is a left descendant of $b_j$ in $T$.
+Then $b_\ell$ and~$b_j$ would be at distance at most $2s+2$ in $G$.
+However, if $\ell<j$, then~$b_j$ is a left descendant of $b_\ell$ in $T$, and if $\ell>j$ then $b_\ell$ is a left descendant of $b_j$ in $T$.
 In any case $b_j$ and $b_\ell$ have to be at distance more than $2s+2$ in $G$ by the construction of $T$, which is a contradiction.
 \end{clproof}
 
@@ -368,13 +368,15 @@ This application either yields a subset $A''\subseteq A'$ that is $(2s+2)$-indep
 or a subset $A''\subseteq A'$ of size at least $R(m,t-i-1)$ together with a vertex $v\in V(G)\setminus S$ that is at distance exactly $s+1$ from each vertex of $A''$ in $G-S$
 In the former case we are done, as $A''$ and $S$ form a valid outcome of the lemma.
 In the latter case, 
-observe that $v$ is at distance exactly $s+1$ from each vertex of $A''$ also in $G$, as each vertex of $S$ is at distance exactly $s+1$ from each vertex of $A''$ in $G$,
+observe that $v$ is at distance exactly $s+1$ from each vertex of $A''$ also 
+in~$G$, as each vertex of $S$ is at distance exactly $s+1$ from each vertex 
+of $A''$ in~$G$,
 so the removal of $S$ from the graph does change the balls around vertices $A''$ of radius $s$; that is, $N^{G-S}_s[a]=N^{G}_s[a]$ for each $a\in A''$.
 Hence we may proceed with the construction having set $A':=A''$ and $S:=S\cup \{v\}$.
 
 It remains to prove that if the construction was carried out for $t$ steps, 
-yielding a set $S$ of size $t$ and a subset $A'$ of size at least $R(m,0)=m$, then $K_t$ is a depth-$(s+1)$ minor of $G$, which is a contradiction.
-Let $(v_1,\ldots,v_t)$ be the enumeration of $S$ in the order of selection: vertex $v_i$ was selected in the $i$-th round.
+yielding a set $S$ of size~$t$ and a subset $A'$ of size at least $R(m,0)=m$, then $K_t$ is a depth-$(s+1)$ minor of $G$, which is a contradiction.
+Let $(v_1,\ldots,v_t)$ be the enumeration of $S$ in the order of selection: vertex~$v_i$ was selected in the $i$-th round.
 By the construction, each vertex $v_i$ is at distance exactly $s+1$ from each vertex of $A'$ in $G$.
 Select any distinct vertices $a_1,\ldots,a_t\in A'$; they exist since $|A'|\geq m\geq t$.
 Next, for $i=1,\ldots,t$ define
@@ -461,7 +463,7 @@ Hence we may apply \cref{lem:iterate-apex} to $A_i$ in $G-S_i$, yielding subsets
 such that $|R_{s}|\leq t$, $|A_{i+1}|\geq Q(m,r-i-1)$, each vertex of $A_{i+1}$ is at distance exactly $i+1$ from each vertex of $R_s$, and $A_{i+1}$ is $(i+1)$-independent in $(G-S_{i})-R_s$.
 We may set $S_{i+1}=R_s\cup S_i$ and proceed with the construction.
 
-Thus, after $r$ rounds we obtain subsets $S=S_r$ and $B=A_r$ such that $|B|\geq Q(m,0)=m$ and $A'$ is $r$-independent in $G-S$. Observe that we have $S=R_1\cup R_2\cup \ldots\cup R_{\lfloor r/2\rfloor}$,
+Thus, after $r$ rounds we obtain subsets $S=S_r$ and $B=A_r$ such that $|B|\geq Q(m,0)=m$ and~$A'$ is $r$-independent in $G-S$. Observe that we have $S=R_1\cup R_2\cup \ldots\cup R_{\lfloor r/2\rfloor}$,
 so the trivial upper bound on the size of $S$ is $rt/2$. We claim that in fact we have $|S|<t$; the argument is similar as in the proof of \cref{lem:iterate-apex}.
 
 Suppose $|S|\geq t$ and let $v_1,\ldots,v_t$ be any $t$ distinct vertices of $S$.
@@ -476,13 +478,13 @@ Hence, the sets $X_i=Y_i\cup \{v_i\}$ for $i=1,\ldots,t$ form a depth-$(\lfloor 
 given $G$ and $A$, outputs sets $S$ and $B$ in time $\Oof_{r,t}(|A|^c\cdot |E(G)|)$ for some universal constant~$c$.
 This boils down to implementing each step of the iterative construction from the proof.
 
-The even steps---from $(S_{2s},A_{2s})$ to $(S_{2s+1},A_{2s+1})$---are easy, as they boil down to applying Ramsey's theorem in a graph with $A$ as the vertex set, where two vertices are adjacent if and only
+The even steps---from $(S_{2s},A_{2s})$ to $(S_{2s+1},A_{2s+1})$---are easy, as we only have to apply Ramsey's theorem in a graph with $A$ as the vertex set, where two vertices are adjacent if and only
 if they are at distance $2s$ in $G$. The distances between vertices of $A$ can be computed in time $\Oof(|A|\cdot |E(G)|)$ by running a breadth-first search from each vertex of $A$, and afterwards it remains
 to emulate the proof of Ramsey's theorem algorithmically on a graph with $|A|$ vertices, which can be done in time polynomial in $|A|$.
 
 For the odd steps---from $(S_{2s+1},A_{2s+1})$ to $(S_{2s+2},A_{2s+2})$---we need to implement algorithmically the proof of \cref{lem:iterate-apex}. 
 This boils down to implementing algorithmically the proof of \cref{lem:apex}, since
-the proof of \cref{lem:iterate-apex} boils down to applying \cref{lem:apex} at most $t$ times. For \cref{lem:apex}, we can construct the distance-$(2s+2)$ tree $T$ of $A$ in time
+the proof of \cref{lem:iterate-apex} essentially consists of applying \cref{lem:apex} at most $t$ times. For \cref{lem:apex}, we can construct the distance-$(2s+2)$ tree $T$ of $A$ in time
 $\Oof(|A|\cdot |E(G)|)$, as this again only requires precomputing distances between vertices of $A$ using breadth-first search from each vertex of $A$.
 Afterwards we examine the longest root-to-leaf path in $T$, which has to have length at least $2m^3$, and we classify its vertices into red and blue, as in the proof. If more than half of the vertices are red,
 then they form a $(2s+2)$-independent set that can be output by the algorithm. Otherwise, the proof argues that there is vertex $v$ in the graph that is at distance exactly $s+1$ from at least $m$ blue vertices.
@@ -527,7 +529,7 @@ For each subset $\{i,j\}\subseteq \{1,\ldots,t\}$ of size $2$, choose a vertex $
 \end{enumerate}
 Observe that $u_{ij}$ is well-defined since setting $u_{ij}=v_{ij}$ satisfies the first two conditions.
 
-Let $P^i_{ij}$ and $P^j_{ij}$ be arbitrarily chosen shortest paths between $u_{ij}$ and $a_i$, and between $u_{ij}$ and $a_j$, respectively.
+Let $P^i_{ij}$ and $P^j_{ij}$ be arbitrarily chosen shortest paths between $u_{ij}$ and~$a_i$, and between $u_{ij}$ and~$a_j$, respectively.
 We now establish some basic properties of paths $P^i_{ij}$ and $P^j_{ij}$ following from the choice of $u_{ij}$.
 
 \begin{claim}\label{cl:ineq}
@@ -578,7 +580,7 @@ Then $i=i'$.
 Let $x$ be a vertex lying both on $Q^i_{ij}$ and $Q^{i'}_{i'j'}$. We first consider the corner case when $x=u_{ij}$.
 Suppose first that $\dist(v_{ij},x)\geq \dist(v_{i'j'},x)$. Then by \cref{cl:ineq} we have
 $$\dist(v_{i'j'},a_i)\leq \dist(v_{i'j'},x)+\dist(x,a_i)\leq \dist(v_{ij},x)+\dist(x,a_i)\leq r,$$
-and analogously $\dist(v_{i'j'},a_{j})\leq r$. However, we assumed that $a_{i'}$ and $a_{j'}$ are the only vertices of $A$ that are at distance at most $r$ from $v_{i'j'}$, hence $\{i,j\}=\{i',j'\}$,
+and analogously $\dist(v_{i'j'},a_{j})\leq r$. However, we assumed that $a_{i'}$ and $a_{j'}$ are the only vertices of~$A$ that are at distance at most $r$ from $v_{i'j'}$, hence $\{i,j\}=\{i',j'\}$,
 a contradiction. Suppose then that $\dist(v_{ij},x)<\dist(v_{i'j'},x)$. 
 Then we have
 $$\dist(v_{ij},a_{i'})\leq \dist(v_{ij},x)+\dist(x,a_{i'})<\dist(v_{i'j'},x)+\dist(x,a_{i'})\leq r,$$
