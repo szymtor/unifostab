@@ -343,35 +343,32 @@ Similarly, the $r$-neighborhood in $G^S$
 of the tuple $(\bar u')^S\bar v^S$
 is the disjoint union of the $r$-neighborhoods
 of the tuples $(\bar u')^S$ and $\bar v^S$.
-By assumption we have that $\bar u$ and $\bar u'$ have the same $q$ local types,
-and similarly $\bar v$ and $\bar v'$ have the same $q$ local types.
+By assumption we have that $\bar u$ and $\bar u'$ have the same $q$-local types,
+and similarly $\bar v$ and $\bar v'$ have the same $q$-local types.
 It follows then from \cref{lem:type-union} that
 the quantifier rank $q$ type of $N^r_{G^S}[\bar u^S(\bar  v')^S]$ is equal to the quantifier rank $q$ type of 
 $N^r_{G^S}[(\bar u')^S\bar  v^S]$, hence we are done.
 \end{proof}
 
+Finally, we piece together the proof of \cref{thm:uqw-stable}. 
 
-
-
-Finally, we prove \cref{thm:uqw-stable}. 
-\begin{proof}  
-
-Fix a formula  $\phi$ quantifier rank $q$ and $d$ free variables.
-Let $N^d(r,m)$ and $s^d(r)$ be as in \cref{prop:uqw-tuples}.
-Denote $r=  7^q$, 
-and let $T$ denote the number of all $q$-local types of 
-formulas with $d$ free variables over the signature of  graphs colored by $s^d(2r)$ colors. Note that $T\le (s+d)^d\cdot |\mathrm{Tp}_d^{q,s}|$, where $s=s^d(2r)$.
-Let $m=T+1$. 
+\begin{proof}[of \cref{thm:uqw-stable}]
+Fix a formula  $\phi(\bar x,\bar y)$ quantifier rank $q$ and with $d$ free variables, where $|\bar x|=d_1$ and $|\bar y|=d_2$ with $d_1+d_2=d$.
+Let $N^d(\cdot,\cdot)$ and $s^d(\cdot)$ be functions yielded by \cref{prop:uqw-tuples}.
+Denote $r=7^q$.
+For $i=1,2$, let $T_i$ denote the number of all $q$-local types of 
+formulas with $d_i$ free variables over the signature of graphs colored by $s^d(2r)$ colors. Note that $T_i\le (s+d_i)^{d_i}\cdot |\mathrm{Tp}_{d_i}^{q,s}|$, where $s=s^d(2r)$.
+Let $m=T_1T_2+1$. 
 
 We show that 
 every $\phi$-ladder in a graph $G\in\cal C$ has length smaller than $N^d(2r,m)$. 
-To reach a contradiction, assume that there is a graph $G\in\cal C$, a number $k\ge N^d(2r,m)$
-and tuples $\bar u_1,\ldots,\bar u_k\in V(G)^{\bar u}$ and $\bar v_1,\ldots,\bar v_k\in V(G)^{\bar v}$
+For the sake of contradiction, assume that there is a graph $G\in\cal C$, a number $k\ge N^d(2r,m)$,
+and tuples $\bar u_1,\ldots,\bar u_k\in V(G)^{d_1}$ and $\bar v_1,\ldots,\bar v_k\in V(G)^{d_2}$
 which form a $\phi$-ladder in $G$.
-	Let $A=\set{\bar u_i\bar v_i: i=1..k}\subset V(G)^d$; note that $|A|=k$.
-Applying \cref{prop:uqw-tuples} to the set $A$, the radius $2r$, and target size $m$
-		 yields a set $S\subset V(G)$ such that $|S|\le s^d(2r)$
-	and a set $B\subset A$ of size $m$ which is mutually $2r$-independent in $G-S$.
+	Let $A=\set{\bar u_i\bar v_i\colon i=1,\ldots,k}\subset V(G)^d$; note that $|A|=k$.
+Applying \cref{prop:uqw-tuples} to the set $A$, radius $2r$, and target size $m$
+		 yields a set $S\subset V(G)$ with $|S|\le s^d(2r)$
+	and a set $B\subset A$ with $|B|\geq m$ which is mutually $2r$-independent in $G-S$.
 % Replacing $A$ by $B$, we may assume that $\bar u_1,\ldots,\bar u_m\in V(G)^{\bar u}$ and $\bar v_1,\ldots,\bar v_k\in V(G)^{\bar v}$
 % form a $\phi$-ladder of length $m$ in $G$, and
 % that $A$ is totally $2r$-independent in $G-S$.
@@ -395,20 +392,19 @@ Applying \cref{prop:uqw-tuples} to the set $A$, the radius $2r$, and target size
 % % %  and $d^{>2r}(v,w)$ expresses the property that $\set{v,w}$ is $2r$-independent.
 % % 	\end{itemize}
 % \end{theorem}
-Since the set $B$ has $m=T+1$ elements,
-and each tuple $\bar u_i\bar v_i\in B$ has an associated $q$-local type 
-belonging to a set of cardinality $T$, 
-by the pigeonhole principle, there are $i$ and $j$ 
-with $i<j$, such that $\bar u_i\bar v_i$ and $\bar u_j\bar v_j$ 
- have the same $q$-local types. By \cref{lem:crossing},   $\phi(\bar u_i,\bar v_j)$ holds in $G$
+With each tuple $\bar u_i\bar v_i\in B$ we associate a pair consisting of the $q$-local type of $\bar u_i$ and the $q$-local type of $\bar v_i$.
+The number of such different pairs is $T_1T_2$, so since $B$ has at least $m=T_1T_2$ elements, it follows that 
+by the pigeonhole principle that there are $i$ and $j$ 
+with $i<j$, such that $\bar u_i$ and $\bar u_j$ have the same $q$-local type, as well as $\bar v_i$ and $\bar v_j$ 
+ have the same $q$-local type. By \cref{lem:crossing}, $\phi(\bar u_i,\bar v_j)$ holds in $G$
  if and only if $\phi(\bar u_j,\bar v_i)$ holds in $G$, which contradicts the assumption that $\bar u_1,\ldots,\bar u_m$ and $\bar v_1,\ldots,\bar v_m$ form a $\phi$-ladder.
  This finishes the proof of \cref{thm:uqw-stable}.
 \end{proof}
 
 
-We now prove Theorem~\ref{thm:new-stable}.
-\begin{proof}
-	The proof is by tracking the precise dependencies on the parameters in the proof of Theorem~\ref{thm:new-stable}. 
+We conclude by proving \cref{thm:new-stable}, promised in \cref{sec:intro}, which follows by tracking the precise dependencies on the parameters in the proof of \cref{thm:uqw-stable}.
+
+\begin{proof}[of \cref{thm:new-stable}]
 	Let $\phi(\bar x)$ be a formula with $d$ free variables and quantifier rank $q$.
  Define the functions
 	$s(r)=t$ and $N(r,m)=c\cdot {m^{(6t+3)}}^{t+r}$ as defined in Theorem~\ref{thm:new-uqw},
