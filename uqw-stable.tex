@@ -150,25 +150,146 @@ where the obtained bounds are $N^d(r,m)=K(r',m')=K(2r,m\cdot (d^2+1))$ and $s^d(
 \subsection{Excluding long ladders}
 \label{sec:uqw-stable}
 
-Before  proving \cref{thm:uqw-stable}, we recall some notions from logic, namely quantifier ranks, Gaifman's Locality Theorem, and some simple manipulations on formulas.
-
-
-By a \emph{colored graph} we mean a graph  in which 
-every vertex is assigned zero or more colors from a fixed set of colors. We view a colored graph as a relational structure as usual, by treating each color as a unary predicate. 
 
 \newcommand{\rg}{\mathrm{rg}}
 \newcommand{\fv}{\mathrm{fv}}
 \newcommand{\from}{\colon}
-For a formula $\phi$, let $\fv(\phi)$ denote its set 
-of free variables. We consider only finite sets of variables. 
-A \emph{valuation}
-of a set of variables $X$ in a (possibly colored) graph $G$ is a function $v\colon X\to V(G)$ from $X$.
-For a formula $\phi$ with free variables $X$ and a valuation $v$ as above, we write $G,v\models \phi$ to denote that $\phi$ is satisfied 
-in the graph $G$ with valuation $v$.
+We consider only finite sets of variables, and any mathematical object can be considered a variable (formally, whenever we want to treat an object $a$ as a variable, we  introduce a variable $x_a$, where $x$ is a fixed special symbol).
+If $\phi$ is a formula then it has a specified set of free variables.
+By abuse of language, if $X$ is a set of variables and $\phi$
+is a formula, when we say that $\phi$ \emph{has free variables} $X$
+we allow the set of free variables of $\phi$ to be a subset of $X$.
+
+If $\phi$ is a formula with free variables $X$, $G$
+is a  graph, then an $X$ tuple $v\in V(G)^X$ is sometimes called a \emph{valuation} of $X$ in $G$.
+For a formula $\phi$ with free variables $X$ and $v\in V(G)^X$, we write $G,v\models \phi$ to denote that $\phi$ is satisfied 
+in the graph $G$ with valuation $v$, which is defined as usual in logic, by induction on the structure of $\phi$.
+
+For two tuples
+$v\in V^Y$ and $w\in  W^Z$, where $Y$ and $Z$ are disjoint, by
+$v\oplus w$ we denote the set-theoretic union of the functions $v,w$,
+which is a tuple $v\oplus w\in (V\cup W)^{Y\cup Z}$.
+
+	 	Fix a formula $\phi$ with free variables $X$, together with a distinguished partition $X=Y\cup Z$ into disjoint sets $Y,Z$.
+		Let $G$ be a graph.
+		Let $u,v\in V(G)^X$ 
+		and let $u_Y$ and $u_Z$ be the restrictions of $u$ to $Y$ and $Z$, respectively,
+and $v_Y$ and $v_Z$ be the restrictions of $v$ to $Y$ and $Z$, respectively.
+		We say that $u,v$ are \emph{confusing} for $\phi$
+		if $$G,u_Y\oplus v_Z\models \phi\iff G,v_Y\oplus v_Z\models \phi,$$
+		
 
 
-The \emph{quantifier rank} of a formula $\phi$ is the maximal number of nested quantifiers in $\phi$. Fix a set of $s$ colors.
-Let $X$ be a set of variables, and for $i=1,2$, let $G_i$
+
+\medskip
+The key technical lemma of~\cref{sec:uqw-stable} is the following.
+
+\begin{proposition}\label{pro:crossing}	
+	Let $\phi$ be a formula with free variables $X$ partitioned as $X=Y\cup Z$.
+	 For every graph $G$ and set of its vertices $S\subset V(G)$ 
+	 there is a set of colors $C$ and a coloring $c\from V(G)^X\to C$
+ with the following properties:
+	 \begin{itemize}		 
+	 	\item The set of all colors $C$ can be computed from $|S|$ and from the quantifier rank of $\phi$, and does not depend on~$G$.
+		
+		\item The color $c(v)$ assigned to $v$ only depends on the radius $r$-neighborhood of $v$ in $G$, for some $r$ which depends only on $\phi$ and $|S|$.
+		
+		
+	 	\item 
+  If $u,v\in V(G)^X$ have the same colors and are mutually $2r$-independent in $G-S$, then they are confusing for $\phi$.
+	 \end{itemize}
+\end{proposition}
+
+Before proving~\cref{pro:crossing}, we show how it yields  \cref{thm:uqw-stable}. 
+
+\begin{proof}[of \cref{thm:uqw-stable}]
+Fix a formula $\phi$ with free variables $X$, partitioned into disjoint sets $Y,Z$.
+Let $N^d(\cdot,\cdot)$ and $s^d(\cdot)$ be functions yielded by \cref{prop:uqw-tuples}.
+Let $C$ be the be the set of colors as described in Proposition~\ref{pro:crossing}, for sets $S$ of size $s^d(2r)$,
+and let $m=|C|+1$.
+
+We show that 
+every $\phi$-ladder in a graph $G\in\cal C$ has length smaller than $N^d(2r,m)$. 
+For the sake of contradiction, assume that there is a graph $G\in\cal C$, a number $k\ge N^d(2r,m)$,
+and valuations $u_1,\ldots,u_k\in V(G)^Y$ and $ v_1,\ldots, v_k\in V(G)^Z$
+which form a $\phi$-ladder in $G$.
+Denote $w_i=u_i\oplus v_i$, for $i=1,\ldots,k$.
+	Let $A=\set{ w_i\colon i=1,\ldots,k}\subset V(G)^X$; note that $|A|=k$.
+Applying \cref{prop:uqw-tuples} to the set $A$, radius $2r$, and target size $m$
+		 yields a set $S\subset V(G)$ with $|S|\le s^d(2r)$
+	and a set $B\subset A$ with $|B|\geq m$ which is mutually $2r$-independent in $G-S$.
+% Replacing $A$ by $B$, we may assume that $\bar u_1,\ldots,\bar u_m\in V(G)^{\bar u}$ and $\bar v_1,\ldots,\bar v_k\in V(G)^{\bar v}$
+% form a $\phi$-ladder of length $m$ in $G$, and
+% that $A$ is totally $2r$-independent in $G-S$.
+%
+%
+% An \emph{$q$-local formula} $\phi(\bar x)$ is a
+% formula such that for every colored graph $G$ and tuple of vertices $\bar a\in V(G)^{\bar x}$, the following equivalence holds:
+% $$G,\bar a\models \phi\qquad\textit {if and only if }\qquad G[N^{r}(\bar a)],\bar a\models \phi.$$
+%
+% \begin{theorem}\label{thm:gaifman}
+% 	Let $\phi(\bar x)$ be a formula over the signature of colored graphs of quantifier rank $q$.
+% 	There is a  number $r\le 7^{q}$
+% 	% , and $s\le q+|\bar x|$,
+% 	such that $\phi$ is equivalent to a Boolean combination of sentences and $q$-local formulas $\psi^{(r)}(\bar x)$.% the following:
+% % 	\begin{itemize}
+% % 		\item $q$-local formulas ;
+% % 		\item sentences.%  of the form $$\exists y_1,\ldots,y_s
+% % % \bigwedge_{1\le i\le s} \alpha^{(r)}(y_i)\land
+% % % \bigwedge_{1\le i<j\le s} d^{>2r}(y_i,y_j),$$
+% % % where $\alpha^{(r)}(y)$ is $q$-local and in one variable,
+% % %  and $d^{>2r}(v,w)$ expresses the property that $\set{v,w}$ is $2r$-independent.
+% % 	\end{itemize}
+% \end{theorem}
+With each tuple $w_i\in B$ we associate the color as described in~\cref{pro:crossing}.
+The number of such different pairs is $|C|$, and since $B$ has at least $m>|C|$ elements, by
+ the pigeonhole principle, there are $i$ and $j$ 
+with $i<j$, such that $ w_i$ and $w_j$ have the same colors. Since $w_i$ and $w_j$ are $2r$-independent in $G-S$, they are confusing for $\phi$, i.e., 
+ $G,u_i\oplus v_j\models \phi$ 
+ if and only if $G,u_j\oplus v_i\models \phi$, which contradicts the assumption that $u_1,\ldots, u_m$ and $ v_1,\ldots, v_m$ form a $\phi$-ladder.
+ This finishes the proof of \cref{thm:uqw-stable}.
+\end{proof}
+It remains to prove~\cref{pro:crossing}. 
+First we recall some notions from logic, namely quantifier ranks, Gaifman's Locality Theorem, and some simple manipulations on formulas.
+
+
+By a \emph{colored graph} we mean a graph  in which 
+every vertex is assigned zero or more colors from a fixed set of colors. We view a colored graph as a relational structure as usual, by treating each color as a unary predicate. 
+The \emph{quantifier rank} of a formula $\phi$ is the maximal number of nested quantifiers in $\phi$.
+
+\begin{proposition}\label{pro:gaifman}
+	Let $q$ be a positive integer, let $C$ be a finite set of colors and let $X$ be a set of variables. There is a set of \emph{types} $\mathrm{Tp}^{q,C}_X$
+	and an assignment which maps every pair $(G,v)$ consisting of a $C$-colored graph $G$ and tuple $v\in V(G)^X$, to its \emph{quantifier rank $q$ type} in $\mathrm{Tp}^{q,C}_X$,
+ with the following properties:
+ \begin{itemize}
+ 	\item \emph{(Computability of types)} The set of types $\mathrm{Tp}^{q,C}_X$ is finite and computable from $q, s$, and $X$,
+	\item \emph{(Locality)} The quantifier rank $q$ type of a pair $(G,v)$ depends only on 
+	the pair $(H,v)$, where $H$ is the colored subgraph induced by the set of all vertices in $G$ which are in distance at most $r$ from some vertex in the range of $v$,
+	\item \emph{(Determinacy)} For every formula $\phi$ in the signature of $C$-colored graphs
+	of quantifier rank $q$ with free variables $X$,	for any $C$-colored graph $G$, and for any two $v_1,v_2\in V(G)^X$, if $(G,v_1)$ and $(G,v_2)$ have the same quantifier rank $q$ types,
+	then
+	 $$G_1,v_1\models \phi\qquad\iff \qquad G_2,v_2\models \phi.$$
+	 \item \emph{(Compositionality)} Suppose that $X$ is partitioned into $Y\cup Z$, 
+	 and
+	 for $i=1,2$,  $G_i,H_i$ are $C$-colored graphs,
+			and $v_i:X\to V(G_i)$ and $w_i:Y\to V(H_i)$ are valuations.
+			If $(G_1,v_1)$ and $(G_2,v_2)$ 
+			have the same  quantifier rank $q$ types,
+			and $(H_1,w_1)$ and $(H_2,w_2)$ 
+			have the same  quantifier rank $q$ types,
+			then the quantifier rank $q$ type of the disjoint union 
+			$(G_1\oplus H_1,v_1\oplus w_1)$ is equal to the one of $(G_2\oplus H_2,v_2\oplus w_2)$.
+	 
+	 \item \emph{(Monotonicity)} If $Y\subset X$ and $v,w\in V(G)^X$ have the same quantifier rank $q$ types, then the restrictions $v|_Y, w|_Y\in V(G)^Y$ have the same quantifier rank $q$ types.1
+ \end{itemize}
+\end{proposition}
+
+\cref{pro:gaifman} follows easily from  Gaifman's Locality Theorem
+(the Main Theorem~in~\cite{gaifman1982local}), but we give more details below for completeness.
+
+\begin{proof}[of~\cref{pro:gaifman}]
+ Fix a set of  colors $C$ and a set of variables $X$.
+For $i=1,2$, let $G_i$
 be a colored graph and $v_i:X\to V(G_i)$ be a valuation.
 We say that $(G_1, v_1)$ and $(G_2,v_2)$
 have the same \emph{quantifier rank $q$ type} %\marginpar{also called $q$-equivalent and denoted $(G_1,\bar v_1)\equiv_q (G_2, \bar v_2)$}
@@ -178,17 +299,18 @@ If $G$ is a graph colored with $s$ colors and
  $v:X\to V(G)$ is a valuation, 
 then the equivalence class of $(G, v)$ under the above equivalence relation is called the \emph{quantifier rank $q$ type} of $(G,v)$, and  the set of \emph{quantifier rank $q$ types with  free variables $X$}
 is the set of all equivalence classes, denoted
-$\mathrm{Tp}^{q,s}_X$.
+$\mathrm{Tp}^{q,C}_X$.
 
-The following lemma is standard~(see e.g. Lemma 3.13 in~\cite{libkin}).
+The following lemma is standard~(see e.g. Lemma 3.13 in~\cite{libkin}),
+and  yields the first condition in~\cref{pro:gaifman}.
 \begin{lemma}\label{lem:q-types}
-	Fix a set of $s$ colors, a rank $q$ and a set of variables $X$.
-	Then the set $\mathrm{Tp}^{q,s}_X$ of quantifier rank $q$ types with free variables $X$ is finite.
+	Fix a set of colors $C$, a rank $q$ and a set of variables $X$.
+	Then the set $\mathrm{Tp}^{q,C}_X$ of quantifier rank $q$ types with free variables $X$ is finite and computable.
 \end{lemma}
 
 
-Before giving a proof of \cref{thm:uqw-stable},
-we state the following \cref{lem:gaifman}, which is an
+
+We state the following \cref{lem:gaifman}, which is an
 immediate consequence of Gaifman's Locality Theorem
 (the Main Theorem~in~\cite{gaifman1982local}).
  If $G$ is a colored graph, $r\in\N$ is an integer, and $v$ is a valuation of a set of variables in $G$, then  $N^G_r[v]$ denotes the pair $(H,v)$, where $H$ is the colored subgraph of $G$
@@ -201,15 +323,17 @@ from some vertex in the range of $v$.
 	Let $\phi$ be a  formula 
 	of quantifier rank $q$
 	in the signature of colored graphs, with free variables $X$.
+	There is a coloring $c$ which assigns 
+	There is a number $r$ computable from $q$ such that 
+	$G$
+	
+	
 	Suppose $v_1,v_2$ are valuations of $X$ in $G$ such that $N^G_r[v_1]$ and $N^G_r[v_2]$ have the same quantifier rank $q$ type, where $r=7^q$. Then
  $$G,v_1\models \phi\qquad\iff \qquad G,v_2\models \phi.$$
 \end{lemma}
 
 We also use the following well-known fact about the compositionality of types 
-under taking disjoint unions. The proof is a standard application of Ehrenfeucht-Fraisse games, so we only give a sketch. By $G\oplus H$ we denote the disjoint union of colored graphs $G,H$. 			Let $X,Y$ be disjoint sets of variables. For two valuations 
-$v\colon X\to V(G)$ and $w\colon Y\to V(H)$ by $v\oplus w$
-we denote the set-theoretic union of the functions $v,w$,
-which is valuation $v\oplus w\colon X\cup Y\to V(G\oplus H)$.
+under taking disjoint unions. The proof is a standard application of Ehrenfeucht-Fraisse games, so we only give a sketch. By $G\oplus H$ we denote the disjoint union of colored graphs $G,H$. 			Let $X,Y$ be disjoint sets of variables. 
 
 
 		\begin{lemma}\label{lem:type-union}
@@ -226,11 +350,11 @@ which is valuation $v\oplus w\colon X\cup Y\to V(G\oplus H)$.
 	of quantifier rank $q$  types using Ehrenfeucht-Fraisse games (see e.g. Theorem 3.9 in~\cite{libkin}). By assumption, duplicator has a winning strategy $\gamma$ in the $q$-round game on $(G_1,v_1)$ and $(G_2,v_2)$, and a winning strategy $\eta$ in the $q$-round game on $(H_1,w_1)$ and $(H_2,w_2)$. The strategies $\gamma$ and $\eta$ can be combined into a winning strategy on $(G_1\oplus H_1,v_1\oplus w_1)$  and $(G_2\oplus H_2,v_2\oplus w_2)$.
 \end{proof}
 
+This finishes the proof of~\cref{pro:gaifman}.
+\end{proof}
 
 \medskip
-To prove \cref{thm:uqw-stable}, we will use \cref{prop:uqw-tuples} and work over a graph $G$
-with a subset of vertices $S$ removed.
-We will use the following notation allowing to translate a first order formula~$\phi$ talking about a graph $G$ into an equivalent formula talking 
+To prove \cref{pro:crossing}, we will introduce the following notation allowing to translate a first order formula~$\phi$ talking about a graph $G$ into an equivalent formula talking 
 about a suitably colored  graph $G$ with the set of vertices $S$ removed.
 
 Let $G$ be a graph and $S\subset V(G)$
@@ -242,15 +366,15 @@ is colored with color $C_s$ if and only if $v$ is a neighbor of $s$
 in $G$.
 
 Fix a formula $\phi$ with free variables $X$.
-If $G$ is a (colored) graph, $S\subset V(G)$ a set of vertices and $Y$ is a set of variables, then 
-a \emph{partial valuation} in $Y,S$ is a 
+If $G$ is a (colored) graph, $S\subset V(G)$ a set of vertices and $Y$ is a set of variables disjoint from $V(G)$, then 
+a \emph{partial valuation} in $Y\cup S$ is a 
 function $\alpha\colon X\to Y\cup S$.
 If $v\from Y\to V(G)$ is a valuation and $\alpha$ is as above,
 then by $\alpha\cdot v$ we denote the valuation of $X$ in $V(G)$
 which maps $x\in X$ to $\alpha(x) $ if $\alpha(x)\in S$
 and to $v(\alpha(x))$ if $\alpha(x)\in Y$.
 By $\phi^{\alpha}$ we denote the \emph{partially valuated} formula -- formally, the pair $(\phi,\alpha)$ -- whose semantics is defined so that for a valuation $v:Y\to V(G)$, 
-$$G,v\models \phi^{\alpha}\quad\Leftrightarrow \quad G,v^\alpha\models \phi.$$
+$$G,v\models \phi^{\alpha}\quad\Leftrightarrow \quad G,\alpha\cdot v\models \phi.$$
 Intuitively $\phi^\alpha$ is the formula $\phi$ with variable $x$ substituted by $\alpha(x)$,
 which can be either a variable in $Y$ or a vertex in $S$, treated as a constant.
 
@@ -266,10 +390,9 @@ $$G,v\models\phi^{\alpha}\qquad\iff\qquad G^S,v\models\phi'.$$
 \begin{proof}
 The proof proceeds by induction on the structure of the formula $\phi$. 
 
-If $\phi$ is an atomic formula $E(x,x')$ or $x=x'$ then the formula $\phi'$ is constructed by case analysis, depending on to which of the sets  $Y\times Y,S\times S,S\times Y,Y\times S$ 
- the pair $(\alpha(x),\alpha(x'))$ belongs to. Altogether there are eight cases to consider, here are two random ones given for the sake of example, the remaining ones are similar.
- Suppose that $\alpha(x)=y\in Y$ and $\alpha(x')=s\in S$. If $\phi$ is $E(x,x')$ then $\phi'$ is the formula $C_{s}(y)$.
- If $\phi$ is $x=x'$ then $\phi'$ is the formula $\bot$.
+If $\phi$ is an atomic formula $E(x,x')$ or $x=x'$ then the formula $\phi'$ is constructed by case analysis. If $\alpha(x),\alpha(x')\in Y$ then $\phi'$
+is obtained from $\phi$ by substituting the variables $x,x'$ according to~$\alpha$. If  $\alpha(x),\alpha(x')\in S$ then $\phi'$ is the truth value $\bot$ or $\top$ of 
+the formula $\phi$ in the graph $G$ under the valuation which maps $x$ to $\alpha(x)$ and $x'$ to $\alpha(x')$. Finally, suppose that $\alpha(x)=y\in Y$ and $\alpha(x')=s\in S$. If $\phi$ is $E(x,x')$ then $\phi'$ is the formula $C_{s}(y)$, and if $\phi$ is $x=x'$ then $\phi'$ is the formula $\bot$.
  
  
 
@@ -313,31 +436,41 @@ In each case, it follows from the inductive assumption that $\phi'$
 satisfies the required condition.
 \end{proof}
 
+
 Fix a graph $G$  and a set of vertices  $S\subset V(G)$.
-% To each  vertex $v$ of $G$
-% assign a \emph{color} which is equal to $v$ if $v\in S$,
-% and otherwise, the color of $v$ is the quantifier rank $q$ type of  $N^r_{G^S}[v]$.
-%
 Let $X$ be a set of variables.
 For a valuation  $v$ of $X$ in $G$, we define 
-a {decomposition} of $v$ (with respect to $S$), as follows.
-Choose any set of variables $Y$ whose cardinality 
-is the cardinality of $\rg(v)-S$, where $\rg(v)$ is the range of $v$, and  choose any partial valuation  $\alpha\from X\to Y\cup S$ and bijective valuation $w\from Y\to V(G)-S$ such that $v=\alpha\cdot w$. It is easy to see that such a decomposition is unique, up to renaming the elements of $Y$. For the sake of precision, we choose one fixed such decomposition as follows.
-Assume that the variables in $X$ are totally ordered. 
-Let $X'=v^{-1}(V(G)-S)$, and let $\sim$  be the kernel of $v$ restricted to $X'$, i.e., 
-$\sim$ is the equivalence relation on $X'$ such that $x\sim x'$ if and only if $v(x)=v(x')$. Let $Y\subset X'$ be the set of smallest elements of the equivalence classes of $\sim$ with respect to the total order on $X$. We define $\alpha$ as the mapping which maps $x\in X'$ to the smallest element which is $\sim$-equivalent to $x$, and maps $x\not\in X'$ to $v(x)$, which is an element of $S$.
-We define $w$ as the restriction of $v$ to $Y$. It is easy to see that $v=\alpha\cdot w$. We call the pair $(\alpha,w)$ the \emph{$S$-decomposition of $v$}.
+the {$S$-decomposition} of $v$,  
+as the (essentially unique) pair $(\alpha,v^S)$
+such that $\alpha\from X\to Y\cup S$ is a partial valuation
+for some set of variables $Y$,
+and $v^S\from Y\to \rg(v)-S$ is a bijective valuation such that 
+$\alpha\cdot v^S=v$ (where $\rg(v)$ is the range of $v$). The formal definition is as follows.
+
+% Let $\sim$ be the partial equivalence on $X$ defined so that
+% $x\sim x'$ if and only if both $x$ and $x'$ are mapped to the same element of $Y$.
+% In other words, $\sim$ is the restriction of the kernel of $v$ to $v^{-1}(Y)$.
+Let $Y=\set{v^{-1}(\set u): u\in \rg(v)-S}$. We treat $Y$ as a set of variables. Note that $Y$ is in bijection with $\rg(v)-S$, but we prefer 
+to define $Y$ in a way which is independent of the elements of $G-S$ for technical reasons.
+Define the partial valuation $\alpha\from X\to Y\cup S$
+by letting $\alpha(x)$ be $v(x)$ if $v(x)\in S$,
+and $v^{-1}(\set u)$ if $v(x)=u$ for some $u\in \rg(v)-S$.
+Finally, let $v^S$ be the valuation of $Y$ in $G$ which
+maps  $v^{-1}(\set u)$ to $u$, for $u\in \rg(v)-S$.
+It is easy to see that $v=\alpha\cdot v^S$ and $v^S$ is a bijection from $Y$ 
+to $\rg(v)-S$. We call the pair $(\alpha,v^S)$ the \emph{$S$-decomposition of $v$}.
+
 
 
 For a number $q$, the \emph{$(q,S)$-local type} of a valuation $v$ of $X$ in $G$
-is the pair $(\alpha,\mathrm{tp}(w))$,
-where $\mathrm{tp}(w)$ is the quantifier rank $q$
-type of  $N^r_{G^S}[w]$ for $r=7^q$,
-and $(\alpha,w)$ is the $S$-decomposition of~$v$.
-
-Note that the number of $(q,S)$-local types is bounded by 
-$(s+d)^d\cdot |\mathrm{Tp}^{q,s}_{d}|$,
-where $\mathrm{Tp}^{q,s}_{d}$
+is the pair $(\alpha,\tau)$,
+where $(\alpha,v^S)$ is the $S$-decomposition of~$v$
+and $\tau$ is the quantifier rank $q$
+type of  $N^r_{G^S}[v^S]$ for $r=7^q$.
+Note that the number of $(q,S)$-local types of valuations from $X$
+in arbitrary graphs is bounded by §
+$(s+d)^d\cdot |\mathrm{Tp}^{q,s}_{X}|$,
+where $d=|X|$, $s=|S|$ and $\mathrm{Tp}^{q,s}_{X}$
 is the set of quantifier rank $q$ types of 
 with free variables $X$ for graphs colored using $s$ colors.
 
@@ -354,29 +487,46 @@ free variables $X$, of quantifier rank $q$.
 Let $(\alpha,\tau)$ be the $(q,S)$-local type of the valuations $u$ and $v$, where $\alpha:X\to Y\cup S$ for some set of variables $Y$. Let $(\alpha,u^S)$ be the $S$-decomposition of $u$
 and let $(\alpha,v^S)$ be the $S$-decomposition of $v$.
 	Consider the formulas $\phi^{\alpha}$ and $\phi'$ as described in \cref{lem:remove-s}, both with free variables $Y$.
-	The following equivalences hold:
+	In particular, the following equivalences hold:
 	\begin{align*}
 	G,u\models\phi\iff G,u^S\models\phi^{\alpha}\iff G^S,u^S\models\phi',\\
 	G,v\models\phi\iff G,v^S\models\phi^{\alpha}\iff G^S,v^S\models\phi'.
 	\end{align*}
 		Note that $\phi'$ has the same quantifier rank as  $\phi$, that is, $q$.
 		Since $u$ and $ v$ have the same $(q,S)$-local type $\tau$, it follows that $N^r_{G^S}[u^S]$ and $N^r_{G^S}[v^S]$ have the same quantifier rank $q$ type.
-		By \cref{lem:gaifman} applied to $G^S$, $\phi'$, $ u^S$, and $ v^s$, we infer that $G^S,u^S\models\phi'$ if and only if $G^S,v^S\models\phi'$.
+		By \cref{lem:gaifman} applied to $G^S$, $\phi'$, $ u^S$, and $v^S$, we infer that $G^S,u^S\models\phi'$ if and only if $G^S,v^S\models\phi'$.
 		The lemma follows by combining this with the above equivalences.
 \end{proof}
 
-\begin{lemma}\label{lem:crossing}	Let $\phi(\bar x)$ be a formula with
-	 $d$ free variables.
-  Let $\bar u,\bar v,\bar u',\bar v'$ tuples of vertices of $G$
-  such that $|\bar u|=|\bar u'|$, $|\bar v|=|\bar v'|$, and $|\bar u\bar v|=|\bar u'\bar v'|=d$.
-  Suppose $\bar u$ and $\bar u'$ have the same $q$-local type, $\bar v$ and $\bar v'$ have the same $q$-local type, and $\set{\bar u\bar v,\bar u'\bar v'}$
-  is mutually $2r$-independent in $G^S$. Then 
-  the tuples $\bar u\bar v'$ and $\bar u'\bar v$
-  have the same $q$-local types. In particular, 
-$$G\models \phi(\bar u\bar v')\iff G\models \phi(\bar u'\bar v).$$
-\end{lemma}
-\begin{proof}
-Since $\set{\bar u\bar v,\bar u'\bar v'}$ is mutually $2r$-independent in $G^S$, it follows that in $G^S$, every vertex appearing in $\bar u^S$ is at distance larger than $2r$ from every vertex appearing in $(\bar v')^S$,
+% For a graph $G$, a set of vertices $S\subset V(G)$, a set of variables $X$, and  valuations $u,v$ of $X$ in $G$, we say that $u,v$ are mutually $2r$-independent in $G-S$
+% if, when treating $u$ and $v$ as  tuples of length $|X|$,
+% the set  $\set{u,v}$ is mutually $2r$-independent in $G-S$.
+
+
+% \begin{lemma}\label{lem:crossing}	Let $\phi$ be a formula with
+% 	 whose set of free variables $X$ is partitioned into  disjoint sets $Y,Z$.
+% Let $u$ and $v$ be valuations of $X$ in $G-S$ which, treated as tuples,
+% are mutually $2r$-independent in $G-S$, i.e.,  $u(x)$ and $v(x')$ are at distance larger than $2r$ in the subgraph of $G$ induced by $V(G)-S$,
+% for $x,x'\in X$.
+% Let $u_Y$ and $u_Z$ be the restrictions of $u$ to $Y$ and $Z$ respectively,
+% and let $v_Y$ and $v_Z$ be the restrictions of $v$ to $Y$ and $Z$ respectively.
+%   Suppose that $u_Y$ and $v_Y$ have the same $q$-local type, and that $u_Z$ and $v_Z$ have the same $q$-local type. Then
+%   the valuations $u_Y\oplus v_Z$ and $v_Y\oplus v_Z$
+%   of $X$ in $G-S$
+%   have the same $q$-local types. In particular,
+% $$G,u_Y\oplus v_Z\models \phi\iff G,v_Y\oplus v_Z\models \phi.$$
+% \end{lemma}
+We are now ready to prove~\cref{pro:crossing}.
+\begin{proof}[of~\cref{pro:crossing}]
+	Fix a graph $G$, a  set of its vertices $S$ and a formula $\phi$
+	with free variables $X$ and quantifier rank $q$. Let $r=7^q$.
+	For a tuple $v\in V(G)^Y$, define the \emph{color} of $v$
+	as the $(q,S)$-local type of $v$. It is clear that the first two conditions of~\cref{pro:crossing} are satisfied. We verify the last condition. 
+	
+Let $u,v\in V(G)^X$ be mutually $2r$-independent in $G-S$,
+and of the same $(q,S)$-local type.
+
+Since $\set{u,v}$ is mutually $2r$-independent in $G-S$, it follows that in $G^S$, every vertex appearing in $\rg \bar u^S$ is at distance larger than $2r$ from every vertex appearing in $(\bar v')^S$,
 in particular vertices appearing in $\bar u^S$ are pairwise distinct from vertices appearing in $(\bar v')^S$.
 Similarly for $(\bar u')^S$ and $\bar v^S$. Since pairs $\bar u,\bar u'$ and $\bar v,\bar v'$ have the same $q$-local types, we have $\alpha(\bar u)=\alpha(\bar u')$ and $\alpha(\bar v)=\alpha(\bar v')$.
 From the above facts it follows that $(\bar u\bar v')^S=\bar u^S(\bar v')^S$, $(\bar u'\bar v)^S=(\bar u')^S\bar v^S$, and $\alpha(\bar u\bar v')=\alpha(\bar u'\bar v)$.
@@ -398,56 +548,6 @@ the quantifier rank $q$ type of $N^r_{G^S}[\bar u^S(\bar  v')^S]$ is equal to th
 $N^r_{G^S}[(\bar u')^S\bar  v^S]$, hence we are done.
 \end{proof}
 
-Finally, we piece together the proof of \cref{thm:uqw-stable}. 
-
-\begin{proof}[of \cref{thm:uqw-stable}]
-Fix a formula  $\phi(\bar x,\bar y)$ quantifier rank $q$ and with $d$ free variables, where $|\bar x|=d_1$ and $|\bar y|=d_2$ with $d_1+d_2=d$.
-Let $N^d(\cdot,\cdot)$ and $s^d(\cdot)$ be functions yielded by \cref{prop:uqw-tuples}.
-Denote $r=7^q$.
-For $i=1,2$, let $T_i$ denote the number of all $q$-local types of 
-formulas with $d_i$ free variables over the signature of graphs colored by $s^d(2r)$ colors. Note that $T_i\le (s+d_i)^{d_i}\cdot |\mathrm{Tp}_{d_i}^{q,s}|$, where $s=s^d(2r)$.
-Let $m=T_1T_2+1$. 
-
-We show that 
-every $\phi$-ladder in a graph $G\in\cal C$ has length smaller than $N^d(2r,m)$. 
-For the sake of contradiction, assume that there is a graph $G\in\cal C$, a number $k\ge N^d(2r,m)$,
-and tuples $\bar u_1,\ldots,\bar u_k\in V(G)^{d_1}$ and $\bar v_1,\ldots,\bar v_k\in V(G)^{d_2}$
-which form a $\phi$-ladder in $G$.
-	Let $A=\set{\bar u_i\bar v_i\colon i=1,\ldots,k}\subset V(G)^d$; note that $|A|=k$.
-Applying \cref{prop:uqw-tuples} to the set $A$, radius $2r$, and target size $m$
-		 yields a set $S\subset V(G)$ with $|S|\le s^d(2r)$
-	and a set $B\subset A$ with $|B|\geq m$ which is mutually $2r$-independent in $G-S$.
-% Replacing $A$ by $B$, we may assume that $\bar u_1,\ldots,\bar u_m\in V(G)^{\bar u}$ and $\bar v_1,\ldots,\bar v_k\in V(G)^{\bar v}$
-% form a $\phi$-ladder of length $m$ in $G$, and
-% that $A$ is totally $2r$-independent in $G-S$.
-%
-%
-% An \emph{$q$-local formula} $\phi(\bar x)$ is a
-% formula such that for every colored graph $G$ and tuple of vertices $\bar a\in V(G)^{\bar x}$, the following equivalence holds:
-% $$G,\bar a\models \phi\qquad\textit {if and only if }\qquad G[N^{r}(\bar a)],\bar a\models \phi.$$
-%
-% \begin{theorem}\label{thm:gaifman}
-% 	Let $\phi(\bar x)$ be a formula over the signature of colored graphs of quantifier rank $q$.
-% 	There is a  number $r\le 7^{q}$
-% 	% , and $s\le q+|\bar x|$,
-% 	such that $\phi$ is equivalent to a Boolean combination of sentences and $q$-local formulas $\psi^{(r)}(\bar x)$.% the following:
-% % 	\begin{itemize}
-% % 		\item $q$-local formulas ;
-% % 		\item sentences.%  of the form $$\exists y_1,\ldots,y_s
-% % % \bigwedge_{1\le i\le s} \alpha^{(r)}(y_i)\land
-% % % \bigwedge_{1\le i<j\le s} d^{>2r}(y_i,y_j),$$
-% % % where $\alpha^{(r)}(y)$ is $q$-local and in one variable,
-% % %  and $d^{>2r}(v,w)$ expresses the property that $\set{v,w}$ is $2r$-independent.
-% % 	\end{itemize}
-% \end{theorem}
-With each tuple $\bar u_i\bar v_i\in B$ we associate a pair consisting of the $q$-local type of $\bar u_i$ and the $q$-local type of $\bar v_i$.
-The number of such different pairs is $T_1T_2$, so since $B$ has at least $m=T_1T_2$ elements, it follows that 
-by the pigeonhole principle that there are $i$ and $j$ 
-with $i<j$, such that $\bar u_i$ and $\bar u_j$ have the same $q$-local type, as well as $\bar v_i$ and $\bar v_j$ 
- have the same $q$-local type. By \cref{lem:crossing}, $\phi(\bar u_i,\bar v_j)$ holds in $G$
- if and only if $\phi(\bar u_j,\bar v_i)$ holds in $G$, which contradicts the assumption that $\bar u_1,\ldots,\bar u_m$ and $\bar v_1,\ldots,\bar v_m$ form a $\phi$-ladder.
- This finishes the proof of \cref{thm:uqw-stable}.
-\end{proof}
 
 
 We conclude by proving \cref{thm:new-stable}, promised in \cref{sec:intro}, which follows by tracking the precise dependencies on the parameters in the proof of \cref{thm:uqw-stable}.
