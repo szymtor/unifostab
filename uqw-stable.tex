@@ -202,12 +202,13 @@ hold:
 	 	\item The  set of all $\phi$-types  of tuples $v\in V(G)^X$  is finite and has size bounded by 
     $T(|S|,q)$, where $T(\cdot,\cdot)$ is some computable function which is monotonously increasing in the first argument.
 		
-		\item The $\phi$-type of $v\in V(G)^X$ only depends on the pair $(H,v)$, where $H$ is the subgraph induced by the vertices in $G$ 
-    which are within distance at most  $r(q)$  from some vertex in the range of $v$, for some computable function $r(\cdot)$.
+    % \item The $\phi$-type of $v\in V(G)^X$ only depends on the pair $(H,v)$, where $H$ is the subgraph induced by the vertices in $G$
+    %     which are within distance at most  $r(q)$  from some vertex in the range of $v$, for some computable function $r(\cdot)$.
 
 		
 	 	\item 
-  If $u,v\in V(G)^X$ have the same $\phi$-types and are mutually $2r(q)$-independent in $G-S$, then they are confusing for $\phi$.
+  If $u,v\in V(G)^X$ have the same $\phi$-types and are mutually $2r(q)$-independent in $G-S$, then they are confusing for $\phi$, where
+  $r(\cdot)$ is some computable function.
 	 \end{enumerate}
 \end{proposition}
 
@@ -217,11 +218,12 @@ Before proving~\cref{pro:crossing}, we show how it yields  \cref{thm:uqw-stable}
 Fix a formula $\phi$ of quantifier rank $q$ and with free variables $X$, partitioned into disjoint sets $Y,Z$.
 For $d=|X|$,
 let $N^d(\cdot,\cdot)$ and $s^d(\cdot)$ be functions yielded by \cref{prop:uqw-tuples}.
-Let $m=T(s^d(2r(q)),q)+1$, where $T(\cdot,\cdot)$ and $r(\cdot)$ are the functions mentioned in \cref{pro:crossing}.
+Let $T(\cdot,\cdot)$ and $r(\cdot)$ be the functions mentioned in \cref{pro:crossing},
+and denote $r=r(q), m=T(s^d(2r),q)+1, \ell=N^d(2r,m)$.
 
 We show that 
-every $\phi$-ladder in a graph $G\in\cal C$ has length smaller than $N^d(2r,m)$. 
-For the sake of contradiction, assume that there is a graph $G\in\cal C$, a number $k\ge N^d(2r,m)$,
+every $\phi$-ladder in a graph $G\in\cal C$ has length smaller than $\ell$. 
+For the sake of contradiction, assume that there is a graph $G\in\cal C$, a number $k\ge \ell$,
 and valuations $u_1,\ldots,u_k\in V(G)^Y$ and $ v_1,\ldots, v_k\in V(G)^Z$
 which form a $\phi$-ladder in $G$.
 Denote $w_i=u_i\oplus v_i$, for $i=1,\ldots,k$.
