@@ -94,11 +94,13 @@ is $r$-independent in $G-S$ for every coordinate $i\in\set{1,\ldots,d}$. Letting
 
 
 \begin{lemma}\label{lem:step2}
-	Let $B\subset V(G)^d$ and $S\subset V(G)$ be such that \begin{itemize}
-	\item for all $i\in \set{1,\ldots,d}$,
-	$\pi_i(B)$ is $2r$-independent in $G-S$, and 
-	\item for each tuple $\bar a\in B$, the set of entries of $\bar a$ is $r$-independent in $G-S$.  
-	\end{itemize}
+	Let $B\subset V(G)^d$ and $S\subset V(G)$ be such that 
+  %\begin{itemize}
+	%\item
+   for all $i\in \set{1,\ldots,d}$,
+	$\pi_i(B)$ is $2r$-independent in $G-S$.
+  % \item for each tuple $\bar a\in B$, the set of entries of $\bar a$ is $r$-independent in $G-S$.
+%	\end{itemize}
 	Then there is a set $C$ with $C\subset B$ 
 	such that $C$ is mutually $r$-independent in $G-S$
 	and $|C|\geq\frac{|B|}{d^2+1}$.
@@ -127,7 +129,7 @@ in $G-S$, which is impossible by the assumption on $B$.
 In particular, if $|B-C_s|> |C_s|\cdot d^2$
 then there must be some element  $a\in B-C_s$  
 such that $f_a(i,j)=\bot$  for all $i,j\in\set{1,\ldots,d}$.
-Let $C_{s+1}=C_s\cup \set s$.
+Let $C_{s+1}=C_s\cup \set a$.
 By construction, $C_{s+1}$ is mutually $r$-independent in $G-S$.
 
 We may repeat the construction as long as $|B|>|C_s|\cdot (d^2+1)=s\cdot (d^2+1)$, and we stop when this inequality no longer holds. Define the set $C$ as the last constructed set $C_s$.
@@ -160,19 +162,19 @@ By abuse of language, if $X$ is a set of variables and $\phi$
 is a formula, when we say that $\phi$ \emph{has free variables} $X$
 we allow the set of free variables of $\phi$ to be a subset of $X$.
 
-If $\phi$ is a formula with free variables $X$, $G$
-is a  graph, then a tuple $v\in V(G)^X$ is also called a \emph{valuation} of $X$ in $G$.
-For a formula $\phi$ with free variables $X$ and $v\in V(G)^X$, we write $G,v\models \phi$ to denote that $\phi$ is satisfied 
-in the graph $G$ with valuation $v$, which is defined as usual in logic, by induction on the structure of $\phi$.
-
+If $X$ is a finite set and $V$ is a set, then $V^X$ denotes the set of functions from $X$ to $V$, and an element $v\in V^X$ will be sometimes called a \emph{tuple} or, in the case $X$ is a set of variables, a \emph{valuation} in $V$.
 For two tuples
 $v\in V^Y$ and $w\in  W^Z$, where $Y$ and $Z$ are disjoint, by
 $v\oplus w$ we denote the set-theoretic union of the functions $v,w$,
 which is a tuple $v\oplus w\in (V\cup W)^{Y\cup Z}$.
 
-	 	Fix a formula $\phi$ with free variables $X$, together with a distinguished partition $X=Y\cup Z$ into disjoint sets $Y,Z$.
-		Let $G$ be a graph.
-    Recall that a $\phi$-ladder of length $n$ in $G$ consists of two sequences of valuations $u_1,\ldots,u_n\in V(G)^Y$
+
+Fix a formula $\phi$ with free variables $X$.
+Given a valuation $v\in V(G)^X$, we write $G,v\models \phi$ to denote that $\phi$ is satisfied 
+in the graph $G$ with valuation $v$, which is defined as usual in logic, by induction on the structure of $\phi$.
+
+
+Assuming that  $X$ is partitioned into disjoint sets $Y,Z$, recall that a $\phi$-ladder of length $n$ in a graph $G$ consists of two sequences of valuations $u_1,\ldots,u_n\in V(G)^Y$
     and $v_1,\ldots,v_n\in V(G)^Z$
      such that $G,u_i\oplus v_j\models \phi$ if and only if $i\le j$.
     
@@ -199,8 +201,8 @@ One can associate to each tuple $v\in V(G)^X$
 its \emph{$\phi$-type}, so that the following conditions 
 hold:
 	 \begin{enumerate}		 
-	 	\item The  set of all $\phi$-types  of tuples $v\in V(G)^X$  is finite and has size bounded by 
-    $T(|S|,q)$, where $T(\cdot,\cdot)$ is some computable function which is monotonously increasing in the first argument.
+	 	\item The  set of  $\phi$-types  of all tuples $v\in V(G)^X$  is finite and has size bounded by 
+    $T(|S|,q)$, where $T\from \N\times \N\to \N$ is some computable function.
 		
     % \item The $\phi$-type of $v\in V(G)^X$ only depends on the pair $(H,v)$, where $H$ is the subgraph induced by the vertices in $G$
     %     which are within distance at most  $r(q)$  from some vertex in the range of $v$, for some computable function $r(\cdot)$.
@@ -208,7 +210,7 @@ hold:
 		
 	 	\item 
   If $u,v\in V(G)^X$ have the same $\phi$-types and are mutually $2r(q)$-independent in $G-S$, then they are confusing for $\phi$, where
-  $r(\cdot)$ is some computable function.
+  $r\from \N \to \N$ is some computable function.
 	 \end{enumerate}
 \end{proposition}
 
@@ -218,8 +220,9 @@ Before proving~\cref{pro:crossing}, we show how it yields  \cref{thm:uqw-stable}
 Fix a formula $\phi$ of quantifier rank $q$ and with free variables $X$, partitioned into disjoint sets $Y,Z$.
 For $d=|X|$,
 let $N^d(\cdot,\cdot)$ and $s^d(\cdot)$ be functions yielded by \cref{prop:uqw-tuples}.
-Let $T(\cdot,\cdot)$ and $r(\cdot)$ be the functions mentioned in \cref{pro:crossing},
-and denote $r=r(q), m=T(s^d(2r),q)+1, \ell=N^d(2r,m)$.
+Let $T(\cdot,\cdot)$ and $r(\cdot)$ be the functions mentioned in \cref{pro:crossing}.
+We assume without loss of generality that the function $T(\cdot,\cdot)$ is weakly increasing in the first argument, by redefining $T(s,q)$ as $\max_{s'\le s} T(s,q)$ in case it wasn't.
+Denote $r=r(q), m=T(s^d(2r),q)+1, \ell=N^d(2r,m)$.
 
 We show that 
 every $\phi$-ladder in a graph $G\in\cal C$ has length smaller than $\ell$. 
@@ -382,20 +385,22 @@ in~$G$.
 
 Fix a formula $\phi$ with free variables $X$.
 If $G$ is a (colored) graph, $S\subset V(G)$ a set of vertices and $Y$ is a set of variables disjoint from $V(G)$, then 
-a \emph{partial valuation} in $Y\cup S$ is a 
+a \emph{pre-valuation} in $Y\cup S$ is a 
 function $\alpha\colon X\to Y\cup S$.
 If $v\from Y\to V(G)$ is a valuation and $\alpha$ is as above,
 then by $\alpha\cdot v$ we denote the valuation of $X$ in $V(G)$
 which maps $x\in X$ to $\alpha(x) $ if $\alpha(x)\in S$
 and to $v(\alpha(x))$ if $\alpha(x)\in Y$.
-By $\phi^{\alpha}$ we denote the \emph{partially valuated} formula -- formally, the pair $(\phi,\alpha)$ -- whose semantics is defined so that for a valuation $v\from Y\to V(G)$, 
+ The  pair $(\phi,\alpha)$  can be treated as a
+syntactic object denoted  $\phi^{\alpha}$,
+ whose semantics is defined so that for a valuation $v\from Y\to V(G)$, 
 $$G,v\models \phi^{\alpha}\quad\Leftrightarrow \quad G,\alpha\cdot v\models \phi.$$
 Intuitively $\phi^\alpha$ is the formula $\phi$ with variable $x$ substituted by $\alpha(x)$,
 which can be either a variable in $Y$ or a vertex in $S$, treated as a constant.
 
 
 \begin{lemma}\label{lem:remove-s}Let $G,S$ be as above.	
-For every formula $\phi$ with free variables $X$ and partial valuation $\alpha\from X\to Y\cup S$
+For every formula $\phi$ with free variables $X$ and pre-valuation $\alpha\from X\to Y\cup S$
 there is a formula $\phi'$ with free variables $Y$
 of the same quantifier rank as $\phi$ and over the signature of $G^S$
  such that for every valuation $v$ of $Y$ in $G-S$
@@ -442,7 +447,7 @@ Finally, suppose that $\phi$ is of the form $\exists x.\psi$, where   $Y$ are th
  For $w$ being either the variable $x$ 
 or an element $s\in S$, 
 let $\psi^w$ be the formula obtained from the inductive assumption applied to the formula $\psi$ 
-and partial valuation $\alpha$ extended to a valuation which maps  $x$ to $w$. 
+and pre-valuation $\alpha$ extended to a valuation which maps  $x$ to $w$. 
 Then let $\phi'$
 be the formula $\exists x.\psi^x \lor \bigvee_{v\in S}\psi^v$.
 The case of $\forall$ is dual.
@@ -456,7 +461,7 @@ satisfies the required condition.
 Let $X$ be a set of variables.
 For a valuation  $v$ of $X$ in $G$, we introduce the notion of an \emph{$S$-decomposition} of $v$,  
 which is the (essentially unique) pair $(\alpha,v^S)$
-such that $\alpha\from X\to Y\cup S$ is a partial valuation
+such that $\alpha\from X\to Y\cup S$ is a pre-valuation
 for some set of variables $Y$,
 and $v^S\from Y\to \rg(v)-S$ is a bijective valuation such that 
 $\alpha\cdot v^S=v$ (where $\rg(v)$ is the range of $v$). The formal definition is as follows.
@@ -466,7 +471,7 @@ $\alpha\cdot v^S=v$ (where $\rg(v)$ is the range of $v$). The formal definition 
 Let $Y=\set{v^{-1}(\set u): u\in \rg(v)-S}$. We treat $Y$ as a set of variables. 
 % Note that $Y$ is in bijection with $\rg(v)-S$, but we prefer
 % to define $Y$ in a way which is independent of the elements of $G-S$ for technical reasons.
-Define the partial valuation $\alpha\from X\to Y\cup S$
+Define the pre-valuation $\alpha\from X\to Y\cup S$
 by letting $\alpha(x)$ be $v(x)$ if $v(x)\in S$,
 and $v^{-1}(\set u)$ if $v(x)=u$ for some $u\in \rg(v)-S$.
 Finally, let $v^S$ be the valuation of $Y$ in $G$ which
@@ -546,13 +551,13 @@ are confusing for $\phi$.
 Let $u_Y,u_Z$ and $v_Y,v_Z$ denote the restrictions of $u$ and $v$ to $Y$ and $Z$, respectively. 
 
 \begin{claim}
- $u_Y\oplus v_Z$ and $u_Z\oplus v_Y$ have the same 
+ $u_Y\oplus v_Z$ and $v_y\oplus u_Z$ have the same 
 $(q,S)$-local types.  
 \end{claim}
-The claim yields the conclusion, by \cref{lem:coloring}.
-
+The claim yields the conclusion, by \cref{lem:coloring}. It remains to prove the claim.
 \medskip
-Let $(\alpha_Y,v_Y^S),(\alpha_Z,v_Z^S),(\beta_Y,w_Y^S),(\beta_Z,w_Z^S)$ denote the $S$-decompositions of the restrictions $u_Y,u_Z,v_Y,v_Z$. 
+
+Let $(\alpha_Y,u_Y^S),(\alpha_Z,u_Z^S),(\beta_Y,v_Y^S),(\beta_Z,v_Z^S)$ denote the $S$-decompositions of  $u_Y,u_Z,v_Y,v_Z$, respectively. 
 From the assumption that $u,v$ are mutually $2r$-independent in $G-S$ it follows in particular that
  $\rg(u_Y)\cap\rg(v_Z)\subset S$
 and  $\rg(v_Y)\cap \rg(v_Z)\subset S$.
