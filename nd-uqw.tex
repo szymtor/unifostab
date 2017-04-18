@@ -489,7 +489,8 @@ $\Oof(|A|\cdot |E(G)|)$, as this again only requires precomputing distances betw
 Afterwards we examine the longest root-to-leaf path in $T$, which has to have length at least $2m^3$, and we classify its vertices into red and blue, as in the proof. If more than half of the vertices are red,
 then they form a $(2s+2)$-independent set that can be output by the algorithm. Otherwise, the proof argues that there is vertex $v$ in the graph that is at distance exactly $s+1$ from at least $m$ blue vertices.
 Such a vertex can be found by computing in time $\Oof(|A|\cdot |E(G)|)$ the distances between each blue vertex and each vertex $v\in V(G)$, again using breadth-first search from each blue vertex, and selecting
-a vertex $v$ for which the number of blue vertices at distance exactly $s+1$ from $v$ is at least $m$.
+a vertex $v$ for which the number of blue vertices at distance exactly $s+1$ from $v$ is at least $m$. 
+
 
 \section{VC dimension}\label{sec:vc}
 
