@@ -61,7 +61,7 @@ When processing the vertex $a$, do the following. Start with $w$ being the empty
   If the distance from $a$ to $b$ in the graph 
   $G-R$ is at most $r$, replace $w$ by $w0$ and add to $B$ a path of length at most $r-1$ joining $a$ with some neighbour of $b$ in $G-R$. Otherwise, replace $w$ by $w1$.
   Repeat the step, unless $\tau(w)$ is undefined. 
-  Once $\tau(w)$ is undefined, extend $\tau$ to $w$    so that that $v_{\tau}(w)=a$ and $B_{\tau}(w)=B$.
+  Once $\tau(w)$ is undefined, extend $\tau$ to $w$    so that  $v_{\tau}(w)=a$ and $B_{\tau}(w)=B$.
   Note that $B_\tau(w)$ has radius at most $r$ centered at $a$,  is disjoint from $B_\tau(v)$ for every prefix $v$ of $w$, and contains at most $r\cdot k$ vertices, where $k$ is the number of $0$'s in $w$.  
   
   We have processed the element $a$, and now
@@ -78,8 +78,8 @@ When processing the vertex $a$, do the following. Start with $w$ being the empty
 The domain of $\tau$ consists of words with at most $t$ occurrences of the letter $0$. 
 \end{claim}
 \begin{clproof}
-  Observe that if $\tau(w)$ is defined and $w$ has $l$ occurrences of the letter $0$, then $G$ contains a clique on $l$ vertices as  a minor at depth $r$. 
-  The vertices of the clique are the words $u$ 
+  Observe that if $\tau(w)$ is defined and $w$ has $l$ occurrences of the letter $0$, then $G$ contains a clique on $l$ vertices as  a minor at depth $r$:
+  the vertices of the clique are the words $u$ 
 such that $u0$ is a prefix of $w$,
   and the branch set associated to $u$ 
   is $B_\tau(u)$.
@@ -99,9 +99,9 @@ Suppose that
   the height of $\tau$ is larger than $t\cdot (m+1)$, i.e.,
   there is a word $w$ of length larger than $t\cdot (m+1)$ in the domain of $\tau$. Since $w$ has at most $t$ occurrences of the letter~$0$, it  must contain a block of $m$ consecutive $1$'s, i.e., there is a word $u$ such that $u1^k$ is a prefix of $w$, for $k=1,\ldots,m$.
 Let $B$ be the set of corresponding vertices, i.e., $B=\set{v_\tau(u1^k):k=1,\ldots,m}$,
-and let $S$ be the set of vertices occurring in some $B_\tau(v)$, for some prefix $v$ of $w$.
+and let $S$ be the set of vertices occurring in some $B_\tau(v)$, for some prefix $v$ of $u$.
 It follows by construction that $B$ is a subset of $A$ which is $r$-independent in $G-S$.  Moreover, $|B|=m$ and 
-$S$ contains at most $r\cdot t^2$ edges.
+$S$ contains at most $r\cdot t^2$ vertices.
   \end{proof}
   
   
