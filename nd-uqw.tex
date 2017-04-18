@@ -39,53 +39,67 @@ $G-S$.
 \begin{proof}[of \cref{thm:new-uqw}]
   If $U$ is a set, then
   a \emph{binary tree}  with labels in $U$
-  is a partial function  $\tau\from \set{0,1}^*\to U$ whose domain is a finite set of binary words which is closed under taking prefixes.
-The empty tree is the tree with empty domain.
+  is a partial function  $\tau\from \set{0,1}^*\to U$ whose domain is a finite set of binary words which is closed under taking prefixes. The \emph{size} of a tree is the cardinality of its domain. The \emph{empty} tree is the tree of size $0$. The \emph{height} of a nonempty tree is the length of the longest word in its domain.
   
-  Let $G$ be a graph. To each non-repeating sequence $\bar a$ of vertices of $G$ we associate a binary tree $\tau$ denoted $\tau(\bar a)$, which is 
+  Let $G$ be a graph, $A\subset V(G)$ a set of its vertices
+  and $\bar a$ an enumeration of $A$.
+
+We define  a binary tree $\tau$ which is 
   labeled by pairs consisting 
-  of a vertex which is an element of $\bar a$ and a set of vertices in~$G$. For such a tree $\tau$, 
+  of a vertex $a$ which is an element of $\bar a$ and a connected subgraph of~$G$.
+ For any such tree $\tau$, 
   whenever $\tau(w)$ is defined,
    let $v_\tau(w)$ 
-  and $S_\tau(w)$ 
+  and $B_\tau(w)$ 
   denote the first and the second component of $\tau(w)$, respectively. 
   
-  The structure $\tau(\bar a)$ is defined by induction on the length of $\bar a$.  The base case is when $\bar a$ is the empty sequence, in which case,  $\tau(\bar a)$ is the empty tree. In the inductive step, suppose that $\tau(\bar a)$ is a tree $\tau$ and that $a$ is a vertex of $G$ which is not an element of $\bar a$. We  define the tree $\tau(\bar a a)$, as a result of the following procedure.
+  The structure $\tau$ is defined by processing all elements of the sequence $\bar a$ in sequentially. We start with $\tau$ being the empty tree, and for each element $a$ of the sequence $\bar a$, execute the following procedure, which extends the domain of $\tau$ by one element.
   
-Start with $w$ being the empty word and $S$ the empty set of vertices. While $\tau(w)$ is defined, repeat the following step.
-  Let $b=v_\tau(w)$ and let $R=S\cup \bigcup_{v\le w}S_\tau(w)$,
+When processing the vertex $a$, do the following. Start with $w$ being the empty word and $B$ the graph with only the vertex $a$. While $\tau(w)$ is defined, repeat the following step.
+  Let $b=v_\tau(w)$ and let $R=B\cup \bigcup_{v\le w}B_\tau(w)$,
   where $v\le w$ denotes that $v$ is a prefix of $w$.
   If the distance from $a$ to $b$ in the graph 
-  $G-R$ is at most $r$, replace $w$ by $w0$ and add to $S$ the vertices of a path of length at most $r$ between $a$ and $b$ in $G-S$. Otherwise, replace $w$ by $w1$.
+  $G-R$ is at most $r$, replace $w$ by $w0$ and add to $B$ a path of length at most $r-1$ joining $a$ with some neighbour of $b$ in $G-R$. Otherwise, replace $w$ by $w1$.
   Repeat the step, unless $\tau(w)$ is undefined. 
-  Once $\tau(w)$ is undefined, define $\tau(\bar aa)$ as the extension $\tau'$ of $\tau$ to $w$    such that that $v_{\tau'}=a$ and $S_{\tau'}=S$.
+  Once $\tau(w)$ is undefined, extend $\tau$ to $w$    so that that $v_{\tau}(w)=a$ and $B_{\tau}(w)=B$.
+  Note that $B_\tau(w)$ has radius at most $r$ centered at $a$,  is disjoint from $B_\tau(v)$ for every prefix $v$ of $w$, and contains at most $r\cdot k$ vertices, where $k$ is the number of $0$'s in $w$.  
+  
+  We have processed the element $a$, and now
+    proceed to the next element $a$ of $\bar a$, until all elements are processed. This ends the construction of $\tau$.
   
   
+  \medskip
   
-  Assume that $K_{t+1}\not\minor_r G$.   
-  Let $A\subset V(G)$ and let $\bar a$ be 
-  an enumeration of $A$.
-  Consider the tree $\tau=\tau(\bar a)$  as defined above.
+  From now on, assume that $K_{t+1}\not\minor_r G$.   
+  % Let $A\subset V(G)$ and let $\bar a$ be
+  % an enumeration of $A$.
+  % Consider the tree $\tau$  as defined above.
 \begin{claim}
 The domain of $\tau$ consists of words with at most $t$ occurrences of the letter $0$. 
 \end{claim}
 \begin{clproof}
-  Observe that if $\tau(w)$ is defined and $w$ has $l$ occurrences of the letter $0$, then $G$ contains $K_{l}$ as   minor at depth $r$, whose principal vertices are the vertices of the form $v_\tau(u)$, for $u$ such that $u0$ is a prefix of $w$.
+  Observe that if $\tau(w)$ is defined and $w$ has $l$ occurrences of the letter $0$, then $G$ contains a clique on $l$ vertices as  a minor at depth $r$. 
+  The vertices of the clique are the words $u$ 
+such that $u0$ is a prefix of $w$,
+  and the branch set associated to $u$ 
+  is $B_\tau(u)$.
 \end{clproof}
 
 
 \begin{claim}\label{cl:right-words}
-  If the domain of $\tau$ consists of words of length at most $h$, then it has at most $h^{t+1}$  elements.  
+  The  tree $\tau$  has size at most $h^{t+1}$, where $h$ is its height.
 \end{claim}
 \begin{clproof}
 The number of words of length at most $h$ and with at most $t$ occurrences of the letter $0$ is at most $h^{t+1}$.
 \end{clproof}
 
   
-  Let $h=t\cdot (m+1)$ and suppose that
-  $|A|>h^{t+1}$. By~\cref{cl:right-words},  there is a word $w$ of length larger than $h=t\cdot (m+1)$ in the domain of $\tau$. Since $w$ has at most $t$ occurrences of the letter~$0$, it  must contain a block of $m$ consecutive $1$'s, i.e., there is a word $u$ such that $u1^k$ is a prefix of $w$, for $k=1,\ldots,m$.
+Suppose that
+  $|A|>(t\cdot (m+1))^{t+1}$. By~\cref{cl:right-words},  
+  the height of $\tau$ is larger than $t\cdot (m+1)$, i.e.,
+  there is a word $w$ of length larger than $t\cdot (m+1)$ in the domain of $\tau$. Since $w$ has at most $t$ occurrences of the letter~$0$, it  must contain a block of $m$ consecutive $1$'s, i.e., there is a word $u$ such that $u1^k$ is a prefix of $w$, for $k=1,\ldots,m$.
 Let $B$ be the set of corresponding vertices, i.e., $B=\set{v_\tau(u1^k):k=1,\ldots,m}$,
-and let $S=\bigcup_{v\le u}S_\tau(v)$.
+and let $S$ be the set of vertices occurring in some $B_\tau(v)$, for some prefix $v$ of $w$.
 It follows by construction that $B$ is a subset of $A$ which is $r$-independent in $G-S$.  Moreover, $|B|=m$ and 
 $S$ contains at most $r\cdot t^2$ edges.
   \end{proof}
