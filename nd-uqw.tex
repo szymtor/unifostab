@@ -34,40 +34,47 @@ $S\subseteq V(G)$ of size $\abs{S}\leq s(r)$ and a set
 $B\subseteq A\setminus S$ of size $\abs{B}\geq m$ which is $r$-independent in
 $G-S$. 
 
-\paragraph{Strategy and the even case.}
-On high level, to prove \cref{thm:new-uqw} we proceed by finding large independent sets within $A$ for larger and larger radii, just as in~\cite{nevsetvril2010first}.
-If for some $s\leq \left\lceil r/2\right\rceil$
-we have found a large $2s$-independent set, we want to find a large 
-$(2s+1)$-independent subset. This case can easily be handled by the classical Ramsey 
-Theorem on nowhere dense classes of graphs. The more
-intricate case is to find a few elements to delete such that
-we find a large $(2s+2)$-independent set in a large $(2s+1)$-independent set. 
-We alternately carry out the constructions for $s=1,\ldots, \left\lceil r/2\right\rceil$ to 
-obtain the statement of the theorem.
+\paragraph{General strategy.}
+Our proof follows exactly the same lines as the original proof of Ne\v set\v ril and Ossona de Mendez, with the difference that in one technical lemma (\cref{lem:apex} below), we improve the bounds significantly by replacing a Ramsey argument by a more subtle argument about the neighborhood
+complexity in nowhere dense graph classes, due to~\cite{gajarsky2017kernelization}.
+For sake of completeness, we present the entire proof.
 
-The following lemma encapsulates the step from a large $2s$-independent set to a large $(2s+1)$-independent set.
 
-\begin{lemma}\label{lem:ramsey1}
-Let $G$ be a graph and let $s\in \N$. If $K_t\not\minor_{s} G$ and 
-if $A\subseteq V(G)$ is a $2s$-independent set in $G$ of
-size at least $\binom{m+t-2}{t-1}$, then there exists
-a subset $B\subseteq A$ of size at least $m$ which $(2s+1)$-independent in $G$. 
+The general idea behind the proof of 
+\cref{thm:new-uqw} is to prove the following 
+weaker variant, for each radius $r$:
+
+\begin{lemma}\label{lem:engine}
+For all $r,t\in \N$ there exists a function $L\colon \N\to \N$
+and a number $d$ such that the following holds.
+Given any graph $G$ such that $K_t\not\minor_d G$ and
+$(r-1)$-independent set of vertices $A\subset V(G)$ of size at least $L(m)$, there is a set $S\subseteq V(G)$ of size at most $t$ such that $A-S$ contains a subset of size $m$ which is $r$-independent in $G-S$.
 \end{lemma}
-\begin{proof}
-By Ramsey's Theorem, in any graph every set of size $\binom{m+t-2}{t-1}$ contains an
-independent set of size $m$ or a clique of size $t$. 
 
-As $A$ is $2s$-independent, the $s$-neighborhoods of vertices from $A$ are pairwise disjoint.
-Let~$H$ be a graph with $A$ as the vertex set, where we put an edge between vertices $u$ and $v$ if and only if there is an edge in $G$ between $N_s[u]$ and $N_s[v]$.
-Clearly, $H$ is a depth-$s$ minor of $G$, as we can map each $u\in A$ to $I_u=G[N_s[u]]$ to obtain an appropriate minor model.
-By assumption, 
-$H$ excludes $K_t$ as a subgraph, and hence by Ramsey's Theorem,
-we can find an independent set $B$ of size $m$ in $H$. 
-By the construction of $H$, we have that $B\subseteq A$ and $B$ is also a $(2s+1)$-independent set in $G$. 
-\end{proof}
+Note that the main difference between the statement of this lemma and~\cref{thm:new-uqw} is that here we assume that 
+$A$ is already $(r-1)$-independent, whereas in~\cref{thm:new-uqw} we make no assumptions on $A$. However, the theorem then follows by an easy induction: to find an $r$-independent set in a set $A$, we start with 
+the very large ($0$-independent) set $A_0=A$, in which (after removing 
+$L(1)$ vertices from $G$)
+we find a very large $1$-independent subset $A_1$, in which (after further removing $L(2)$ vertices from $G$) we find a large $2$-independent subset $A_2$, etc., until arriving at an $r$-independent subset $A_r$ of size $m$.
 
-\paragraph{The odd case.}
-For the second, more complicated case, 
+To prove~\cref{lem:engine}, we distinguish two special cases: the case of $r=0$ and the case $r=1$. The case of general $r$ then reduces to one of these two cases, depending on the parity of $r$, since a $(2s+1)$-independent set $A$ in $G$
+induces a $1$-independent set in $G$ with the balls of radius $s$ around the vertices of $A$ contracted, and,
+similarly, a $(2s+2)$-independent set $A$ in $G$
+induces a $2$-independent set in $G$ with the balls of radius $s$ around the vertices of $A$ contracted.
+
+We start by proving~\cref{lem:engine} in the case $r=0$,
+then we prove it in the case $r=1$. Next we show how the general case reduces to one of those two, and, finally, we deduce~\cref{thm:new-uqw} from~\cref{lem:engine}.
+
+\paragraph{Case $r=0$.}
+We prove~\cref{lem:engine} in the case $r=0$.
+Let $d=0$, so $K_t\not\minor_d G$ amounts to saying that $G$
+does not contain a clique of size $t$. By Ramsey's Theorem, in any graph every set of size $\binom{m+t-2}{t-1}$ contains an
+independent set of size $m$ or a clique of size $t$. Therefore, 
+taking $L(m)$ as the above binomial coefficient yields~\cref{lem:engine} in case $r=0$, by taking $S=\emptyset$.
+
+\paragraph{Case $r=1$.}
+We prove~\cref{lem:engine} in the case $r=1$.
+For the second, more intricate case, 
 we employ one more result: the bound on the number of distinct neighborhoods in a graph from a nowhere dense class.
 
 \begin{lemma}[adaptation of Lemma 4.11 in \cite{gajarsky2017kernelization}]\label{lem:diversity}
@@ -79,262 +86,168 @@ Then for every $\epsilon>0$ there exists $n_0$, depending only on $t$ and $\epsi
 We remark that the proof of \cref{lem:diversity} uses only the fact that
 nowhere dense classes of graphs do not have dense 
 shallow minors~\cite{dvorak2007asymptotical,jiang2011compact}, and does not rely on any non-constructive arguments from the stability theory.
-From \cref{lem:diversity} we can derive the following.
+From \cref{lem:diversity} we derive the following.
 
-\begin{corollary}\label{lem:gajarsky}
-Let $G$ be a graph, let $s\in \N$, and suppose there is a constant $t\in \N$ such that $K_t\not\minor_{3s+1} G$.
-Then for every $\epsilon>0$ there exists $n_0$, depending only on $\epsilon,t,s$, such that for each vertex subset $A\subseteq V(G)$ that is $(2s+1)$-independent in $G$ and satisfies $|A|\geq n_0$, it holds that 
-\[\abs{\{N_{s+1}[v]\cap A \colon v\in V(G)\}}\leq\abs{A}^{1+\epsilon}.\]
-\end{corollary}
-\begin{proof}
-As $A$ is $(2s+1)$-independent, we have that the $s$-neighborhoods of vertices from $A$ are pairwise disjoint.
-Obtain an $s$-shallow minor $H$ of $G$ by contracting $N_s[u]$ for each $u\in A$. 
-We implicitly identify each vertex $u\in A$ with the vertex of $H$ obtained from contracting $N_s[u]$, thus $A\subseteq V(H)$.
-It is known that every $1$-shallow minor of $H$ is also a $(3s+1)$-shallow minor of $G$ (cf.~\cite[Proposition~4.1]{sparsity}), hence $K_t\not\minor_{1} H$.
+% \begin{corollary}\label{lem:gajarsky}
+% Let $G$ be a graph, let $s\in \N$, and suppose there is a constant $t\in \N$ such that $K_t\not\minor_{3s+1} G$.
+% Then for every $\epsilon>0$ there exists $n_0$, depending only on $\epsilon,t,s$, such that for each vertex subset $A\subseteq V(G)$ that is $(2s+1)$-independent in $G$ and satisfies $|A|\geq n_0$, it holds that
+% \[\abs{\{N_{s+1}[v]\cap A \colon v\in V(G)\}}\leq\abs{A}^{1+\epsilon}.\]
+% \end{corollary}
+% \begin{proof}
+% As $A$ is $(2s+1)$-independent, we have that the $s$-neighborhoods of vertices from $A$ are pairwise disjoint.
+% Obtain an $s$-shallow minor $H$ of $G$ by contracting $N_s[u]$ for each $u\in A$.
+% We implicitly identify each vertex $u\in A$ with the vertex of $H$ obtained from contracting $N_s[u]$, thus $A\subseteq V(H)$.
+% It is known that every $1$-shallow minor of $H$ is also a $(3s+1)$-shallow minor of $G$ (cf.~\cite[Proposition~4.1]{sparsity}), hence $K_t\not\minor_{1} H$.
+%
+% Let us fix $\epsilon>0$.
+% Take any $v\in V(G)$. If $v\in N_s[u]$ for some $u\in A$, then since $A$ is $(2s+1)$-independent, we have that $v$ is at distance larger than $2s+1$ from any other vertex of $A$.
+% Hence in this case we have $N_{s+1}[v]\cap A=\{u\}$ and there can be at most $|A|$ neighborhoods of this type.
+% Next, suppose $v\notin N_s[u]$ for any $u\in A$. Then by the construction of $H$ we have that $N_{s+1}[v]\cap A=N^H[v]\cap A$, where $N^H[v]$ is the neighborhood of $v$ in $H$.
+% Since $K_t\not\minor_{1} H$, by \cref{lem:diversity} we have that the number of such neighborhoods is at most $|A|^{1+\epsilon/2}$,
+% provided $|A|\geq n_0$ for some $n_0$ depending only on $t$ and $\varepsilon$.
+% Thus, we conclude that $\abs{\{N_{s+1}[v]\cap A \colon v\in V(G)\}}\leq |A|+|A|^{1+\epsilon/2}$, which is bounded by $|A|^{1+\epsilon}$ if we choose $n_0$ large enough.
+% \end{proof}
+%
+% %Observe that nowhere dense classes are closed under
+% %taking bounded depth minors, as stated in the following lemma.
+% %It is an immediate consequence of Proposition~4.1
+% %of~\cite{sparsity}.
+%
+% %\begin{lemma}
+% %Let $\CCC$ be a nowhere dense class of graphs and let $s\in \N$.
+% %Then also the class $\{H \minor_s G \colon G\in \CCC\}$ is nowhere dense.
+% %\end{lemma}
 
-Let us fix $\epsilon>0$.
-Take any $v\in V(G)$. If $v\in N_s[u]$ for some $u\in A$, then since $A$ is $(2s+1)$-independent, we have that $v$ is at distance larger than $2s+1$ from any other vertex of $A$.
-Hence in this case we have $N_{s+1}[v]\cap A=\{u\}$ and there can be at most $|A|$ neighborhoods of this type.
-Next, suppose $v\notin N_s[u]$ for any $u\in A$. Then by the construction of $H$ we have that $N_{s+1}[v]\cap A=N^H[v]\cap A$, where $N^H[v]$ is the neighborhood of $v$ in $H$.
-Since $K_t\not\minor_{1} H$, by \cref{lem:diversity} we have that the number of such neighborhoods is at most $|A|^{1+\epsilon/2}$,
-provided $|A|\geq n_0$ for some $n_0$ depending only on $t$ and $\varepsilon$.
-Thus, we conclude that $\abs{\{N_{s+1}[v]\cap A \colon v\in V(G)\}}\leq |A|+|A|^{1+\epsilon/2}$, which is bounded by $|A|^{1+\epsilon}$ if we choose $n_0$ large enough.
-\end{proof}
-
-%Observe that nowhere dense classes are closed under
-%taking bounded depth minors, as stated in the following lemma. 
-%It is an immediate consequence of Proposition~4.1 
-%of~\cite{sparsity}. 
-
-%\begin{lemma}
-%Let $\CCC$ be a nowhere dense class of graphs and let $s\in \N$. 
-%Then also the class $\{H \minor_s G \colon G\in \CCC\}$ is nowhere dense. 
-%\end{lemma}
 
 
-
-We can now state the main building block of our proof as a lemma. 
+We  now state the main building block of our proof as a lemma. 
 
 \begin{lemma}\label{lem:apex}
 Let $G$ be a graph and let $s\in \N$. 
 Assume that $K_t\not\minor_{3s+2} G$ for some $t\in \N$. 
-Let $n_0$ be the constant given by \cref{lem:gajarsky} for $\epsilon=1/3$ and $t,s$ as above, 
+Let $n_0$ be the constant given by \cref{lem:diversity} for $\epsilon=1/3$ and $t,s$ as above, 
 and let $m\geq n_0$ be an integer. 
-If~$A$ is an $(2s+1)$-independent set in $G$ of size at least $2+2(2m^3)^{2t+1}$,
+If~$A$ is an $1$-independent set in $G$ of size at least $2+2(2m^3)^{2t+1}$,
 then either 
 \begin{itemize}
-\item $A$ contains a $(2s+2)$-independent set $A'$ of size $m$, or
-\item there is a subset $A'\subseteq A$ of size at least~$m$ and
-a vertex $v\in V(G)$ which is at distance exactly $s+1$ to all vertices of $A'$. 
+\item $A$ contains a $2$-independent set of size $m$, or
+\item some vertex $v$ of $G$
+has at least $m$ neighbors in $A$.
 \end{itemize}
 \end{lemma}
 
 
-%Even though we prove a purely graph theoretic statement, 
-%it is useful to see our methods in a more general model-theoretic context. 
-
-
-%\begin{definition}
-%If $\tau$ is a word over an alphabet $\Sigma$ and
-%$a\in \Sigma$, then $\tau\cdot a$ denotes the concatenation of~$\tau$
-%and $a$.  The \emph{branching index} of a formula $\psi(\tup{x},\tup{y}$
-%over a graph $G$ is the largest number
-%$\ell$ such that there are tuples of elements
-%$\tup{u}_{\sigma_1},\ldots, \tup{u}_{\sigma_{2^\ell}}\in V(G)$, indexed by the
-%words over the alphabet $\{0,1\}$ of length exactly $\ell$, and
-%tuples of elements $\tup{v}_{\tau_1},\ldots, \tup{v}_{\tau_{2^\ell-1}}$, indexed by the
-%words over $\{0,1\}$ of length strictly smaller than $\ell$, such that
-%if $\tau_j\cdot a$ is a (not necessarily proper) prefix of~$\sigma_i$, then
-%$G\models \psi(\tup{u}_{\sigma_i},\tup{v}_{\tau_j})$ if, and only if, $a=1$. The tuples
-%$\tup{u}_{\sigma_1},\ldots, \tup{u}_{\sigma_{2^\ell}}\in V(G)$ are called the 
-%\emph{leaves} of the tree, the tuples $\tup{v}_{\tau_1},\ldots, \tup{v}_{\tau_{2^\ell-1}}$
-%are its \emph{inner nodes}. Intuitively, a leaf $\tup{u}$ is connected to its 
-%predecessors~$\tup{v}$ such
-%that $\tup{u}$ is a \emph{right successor} of $\tup{v}$ and not to its predecessors such that 
-%it is a \emph{left
-%successor}. 
-%\end{definition}
-     
-
-%\begin{lemma}[\cite{hodges1993model}, Lemma 6.7.9, p.\
-%  313]\label{lem:branching}
-%  Let $\psi(\tup{x},\tup{y})$ be a formula and let $G$ be a graph. 
-%  If $\psi$ has branching index~$k$ over $G$, 
-%  then~$\psi$ has ladder index smaller than $2^{k+1}$ over $G$. 
-%  If $\psi$ has  has
-%  ladder index $k$ over $G$, then $\psi$ has branching index smaller than
-%  $2^{k+2}-2$ over $G$.
-% \end{lemma}
-
-%In the proof of~\cref{thm:malshelah} one constructs a tree, in which
-%elements are iteratively classified according to their types. The depth of 
-%the type tree is directly related to the ladder index of the formula, 
-%more precisely to the \emph{branching index} of the formula. We refrain
-%from defining the branching index here and refer to~\cite{malliaris2014regularity}
-%and to Lemma 6.7.9 of the textbook \cite{hodges1993model}, which relates
-%ladder index and branching index. In this section we will be working with 
-%formula $\phi(x,y)$ with exactly two free variables only. 
-
 To prove the lemma, we will arrange the elements of $A$ in a binary tree
 and prove that the tree contains a long path. From this path, we will 
-extract the set $A'$. In stability theory, such trees are called \emph{type trees} and they are used to extract long indiscernible sequences, see e.g.~\cite{malliaris2014regularity}. 
+extract the set $A'$. In stability theory, similar trees are called \emph{type trees} and they are used to extract long indiscernible sequences, see e.g.~\cite{malliaris2014regularity}. 
 
-Let $T$ be a (rooted) binary tree, where each vertex (except the root) is 
-marked as a left or right successor of its predecessor. We call $w$ 
-a \emph{left (right) descendant} of $v$ if the first successor on the unique
-$v$-$w$ path in $T$ is a left (right) successor.
-
-Fix an enumeration $a_1,\ldots, a_{\ell}$ of $A$ and let $s\in \N$. 
-The \emph{distance-$s$ tree}
-of $(a_1,\ldots,a_{\ell})$ is a binary tree which is constructed recursively as 
-follows. We make $a_1$ the root of the tree. Assume that $a_1,\ldots, a_i$
-have already been inserted into the tree. In order to insert the next element $a_{i+1}$, we follow a root-leaf path to find a position for it. 
-Starting from the root $a_1$, at each point we are at some node $a_j$ and we are to decide whether we continue along the left or to the right branch at $a_j$.
-If $\dist(a_j,a_{i+1})\leq s$, we continue along the right branch at $a_j$, otherwise we follow the left branch. If 
-there is no right successor (or left successor, respectively), we insert $a_{i+1}$ 
-as a right (or left child, respectively) of $a_j$. 
-
-A root-leaf path in $T$ has \emph{$k$ alternations} 
-if it contains $k+1$ nodes $a_{i_1},\ldots, a_{i_{k+1}}$ (which appear
-in that order on the path, possibly not consecutively) such that $a_{i_{j+1}}$ is a left descendant of $a_{i_j}$
-if and only if $a_{i_{j+2}}$ is a right descendant of $a_{i_{j+1}}$, for all $1\leq j\leq k$. 
-The \emph{alternation rank} of $T$ is the largest number $t$ such that 
-$T$ contains a path with $t$ alternations.
-
-\begin{lemma}\label{lem:number-of-nodes}
-Let $T$ be a rooted binary tree of alternation rank at most $t$. If
-$T$ has height at most~$h$, then $T$ has at most $1+2h^{t+1}$
-vertices. 
-\end{lemma}
 \begin{proof}
-For each vertex $u$ of $T$, say at level $g\leq h$, let the {\em{characteristic vector}} of $u$ be the vector $(p_0,\ldots,p_{g-1})$ such that each $p_i\in \{\mathsf{L},\mathsf{R}\}$ denotes
-whether $u$ is the left of right successor of its unique ancestor at level $i$. Clearly, every vertex of $T$ has a different characteristic vector.
+	We prove~\cref{lem:engine} in the case $r=1$.
+	Let $d=1$, so we assume that $G$ is a graph which does not contain a clique $K_t$ as a minor at depth $1$.
+	\newcommand{\dau}{D}
+	\newcommand{\son}{S}
+	
+	We call elements of the set $\set{\dau,\son}^*$ \emph{nodes},
+	and the nodes $w\dau$ and $w\son$ are, respectively, the \emph{daughter} and the \emph{son} of $w$,
+	and $w$ is the \emph{ancestor} of every word of the form $wv$, where $v\in\set{\dau,\son}^*$. The empty word  is called the \emph{root}.
+	 A (finite, rooted, binary) \emph{tree} is a partial labeling $\tau\from \set{\dau,\son}^*\to U$ whose domain is a finite set of nodes which is closed under taking ancestors. The \emph{size} of a tree is the cardinality of its domain. The \emph{empty} tree is the tree of size $0$. The \emph{height} of a nonempty tree is the length of the longest word in its domain. 
+  
+  Let $G$ be a graph, $A\subset V(G)$ a $1$-independent set of its vertices
+  and $\bar a$ an enumeration of $A$.
 
-For a characteristic vector $(p_0,\ldots,p_{g-1})$ of a vertex $u$, let $X\subseteq \{0,1,\ldots,g-2\}$ be the subset of those indices $i$ for which $p_i\neq p_{i+1}$. 
-Note that the path from the root to $u$ has $|X|$ alternations, so since $T$ has alternation rank at most $t$, we have that $|X|\leq t$.
-Observe also that the characteristic vector $(p_0,\ldots,p_{g-1})$ can be uniquely described by specifying $p_0\in \{\mathsf{L},\mathsf{R}\}$ and the set $X$, which is a subset of size at most $t$ of
-a set of size $g-1$.
-It follows that the number of different characteristic vectors of vertices at level $g\geq 1$ is at most $2\sum_{s=0}^{t}\binom{g-1}{s}$.
+We define  a binary tree $\tau$ which is 
+  labeled vertices of $G$. The tree is defined by processing all elements of the sequence $\bar a$ sequentially. We start with $\tau$ being the empty tree, and for each element $a$ of the sequence $\bar a$, execute the following procedure, which extends the domain of $\tau$ by one element.
+  
+When processing the vertex $a$, do the following. Start with $w$ being the root. While $w$ is in the domain of $\tau$, repeat the following step: 
+  if the distance from $a$ to $\tau(w)$ in the graph 
+  $G$ is two, replace $w$ by its son, otherwise, replace $w$ by its daughter.
+  % Repeat the step, unless $\tau(w)$ is undefined.
+  Once $w$ is not in the domain of $\tau$, extend $\tau$ to $w$    so that  $\tau(w)=a$. In this way, we have processed the element $a$, and now
+    proceed to the next element $a$ of $\bar a$, until all elements are processed. This ends the construction of $\tau$.
+	
+	Note that $\tau$ is a bijection from its domain to $A$.
+  
+  
+  \medskip
 
-We conclude that the number of vertices in $T$ is upper bounded by the number of different characteristic vectors of length at most $h$, which is at most
-\begin{align*}
-1+2\sum_{g=1}^h\, \sum_{s=0}^t\, \binom{g-1}{s}=1+2\sum_{s=0}^t\, \sum_{g=1}^h\, \binom{g-1}{s}= 1+2\sum_{s=1}^{t+1} \binom{h}{s}\leq 1+2h^{t+1}.
-\end{align*}
-This concludes the proof.
-\end{proof}
+We consider two cases:
+\begin{itemize}
+	\item  there is some $w\in\set{\son,\dau}^*$ in the domain of $\tau$ which contains at least $m^3$ $\son$'s,
+	\item every $w\in \set{\son,\dau}^*$ in the domain of $\tau$ contains at most $m$ $\son$'s.
+\end{itemize}
+
+	Consider the first case.
+	Let $B\subset A$ be the set of the labels of the 
+	fathers of the sons on the path corresponding to $w$, i.e.,
+	$$B=\set{\tau(u)\colon 
+	u\son \text{ is a prefix of }w}.$$
+	Note that $B$ has at least $m$ elements,
+	and by construction, any two elements of $B$ are at mutual distance two. 
+	
+	Let 
+	$$\cal F=\set {N[v]\cap B\colon v\in V(G)}.$$ 
+	We say that a pair  $a,b \in B$
+	is \emph{covered} if
+	$\set{a,b}$ is contained in some $F\in \cal F$.
 
 
-%Denote by $k_\ell^s$ the maximum possible number of vertices in a binary tree of height at most $\ell$ and alternation rank at most $s$. We have $k_0^s\leq 1$ for all $s\geq 1$
-%and $k_\ell^1\leq 2\ell-1$ for all $\ell$. 
-%Take now any binary tree $T$ of height at most $\ell$ and alternation rank at most $s$, and let $L$ and $R$ be the root-leaf paths in $T$ that take only left, respectively only right successors.
-%As the height of $T$ is at most $\ell$, we have that the removal of $L$ and $R$ from $T$ results in a forest consisting of at most $2(\ell-1)$ subtrees of $T$. 
-%Observe that each of these subtrees has alternation rank at most $s-1$
-%and height at most $\ell-2$,
-%hence we have
-%\begin{align*}
-%k_\ell^s\leq 2(\ell-1)\cdot k_{\ell-2}^{s-1}+2\ell+1
-%\end{align*}
-%for all $s\geq 2,\ell\geq 2$. In the last inequality, we count the vertices on 
-%the two paths of length at most 
-%$\ell$ staring in the root which have no alternations (at most $2\ell-1$). 
-%All nodes branching from 
-%these paths have one less alternation available, hence there are at most
-%$ 2(k_{\ell-2}^{s-1}+k_{\ell-3}^{s-1}+\ldots + k_{0}^{s-1})$ of them. 
-%Now it is easy to check that the function $(2\ell+2)^s$ satisfies these requirements (use $k_0^{s-1}\leq 1$ here). 
+Let $k$ be the maximal size of a set in $\cal F$.
+By~\cref{lem:diversity}, the family $\cal F$ contains 
+ at most  $m$ elements,
+ and each of them covers at most $k\choose 2$ 
+pairs of elements of $B$. Hence, by the union bound,
+at most $(k\choose 2)\cdot m$ pairs are covered, 
+yet,
+by the remarks above, every pair ${a,b}\subset B$.
+It follows that $k\ge m^{1/4}$.
 
 
-We now prove that in nowhere dense classes the alternation ranks of 
-distance trees are small. 
 
-\begin{lemma}\label{thm:alternation-rank-type-tree}
-Let $G$ be a graph, let $s,t\in \N$ be such that $K_t\not\minor_{2s+2} G$, and let
-$(v_1,\ldots, v_\ell)$ be an enumeration of a $(2s+1)$-independent set 
-in $G$. Then the alternation rank of the distance-$(2s+2)$ tree of 
-$(v_1,\ldots,v_\ell)$ is at most~$2t$. 
-\end{lemma}
-\begin{proof}
-Let $T$ be the distance-$(2s+2)$ tree of $(v_1,\ldots,v_\ell)$.
-Assume that we find a root-leaf path in $T$ which has alternation $2k$.
-That is, this path contains nodes $v_{i_1},\ldots, v_{i_{2k+1}}$ such that $v_{i_{j+1}}$ is a left descendant of $v_{i_j}$
-if and only if $v_{i_{j+2}}$ is a right descendant of $v_{i_{j+1}}$, for all $1\leq j\leq 2k-1$.
-Let $a_1,b_1,\ldots, a_k,b_k$ be the subsequence of $v_{i_1},\ldots, v_{i_{2k+1}}$ from $v_{i_1}$ to $v_{i_{2k}}$ if $v_{i_2}$ is a right descendant of $v_{i_1}$,
-and from $v_{i_2}$ to $v_{i_{2k+1}}$ otherwise. Thus, $b_1$ is a right descendant of $a_1$ in $T$.
+By the union bound, this means that the size of the family 
+		$$\set{N[v]\cap A\colon v\in V(G)}$$
+is at least 	
+	
+	
+	
 
-\begin{claim}\label{cl:zij}
-For every pair $a_i,b_j$ with $1\leq i\leq j\leq k$, there
-is a vertex $z_{ij}$ which is at distance exactly $s+1$ from 
-$a_i$ and from $b_j$, and which is at distance greater than $s+1$ 
-from all $b_\ell$ with~$\ell\neq j$. 
+
+  \begin{itemize}
+  	\item Every 
+	
+	\item There is a $w$ in the domain of $\tau$ which contains at 
+	
+  \end{itemize}
+  
+  
+
+\begin{claim}
+The domain of $\tau$ consists of words with at most $t$ occurrences of the letter $0$. 
 \end{claim}
 \begin{clproof}
-Since for $j\geq i$, $b_j$ is a right descendant of $a_i$ in $T$, 
-there is a path of length at most $2s+2$ between $a_i$ and $b_j$ in $G$. 
-Since $\{v_1,\ldots, v_n\}$ is $(2s+1)$-independent in~$G$, this path
-must have length exactly $2s+2$, and hence there is a vertex $z_{ij}$ 
-at distance exactly $s+1$ both from $a_i$ and from $b_j$. 
-
-Suppose now that $z_{ij}$ was at distance at most $s+1$ from some $b_\ell$ with $\ell\neq j$.
-Then $b_\ell$ and~$b_j$ would be at distance at most $2s+2$ in $G$.
-However, if $\ell<j$, then~$b_j$ is a left descendant of $b_\ell$ in $T$, and if $\ell>j$ then $b_\ell$ is a left descendant of $b_j$ in $T$.
-In any case $b_j$ and $b_\ell$ have to be at distance more than $2s+2$ in $G$ by the construction of $T$, which is a contradiction.
+  Observe that if $\tau(w)$ is defined and $w$ has $l$ occurrences of the letter $0$, then $G$ contains a clique on $l$ vertices as  a minor at depth $r$:
+  the vertices of the clique are the words $u$ 
+such that $u0$ is a prefix of $w$,
+  and the branch set associated to $u$ 
+  is $B_\tau(u)$.
 \end{clproof}
 
-Now for each $1\leq j\leq k$, let $H_j$ be the subgraph induced by $N_s[b_j]\cup N_s[a_j]\cup\{z_{ij} \colon 1\leq i\leq j\}$ in $G$.
-By \cref{cl:zij}, $H_j$ is connected and has radius at most $2s+2$; the center is $z_{jj}$.
-Since each vertex $z_{ij}$ is at distance $s+1$ from $a_i$ and $b_j$, it cannot be at distance at most $s$ from any other vertex $a_\ell$ for $\ell\neq i$, or $b_\ell$ for $\ell\neq j$;
-this would contradict the assumption that $a_1,b_1,\ldots,a_k,b_k$ are $(2s+1)$-independent.
-Moreover, we have that $z_{ij}\neq z_{i'j'}$ whenever $j\neq j'$, since $z_{ij}$ is at distance greater than $s+1$ from $b_{j'}$.
-It follows that subgraphs $H_j$ for $1\leq j\leq k$ are pairwise disjoint.
-However, for each $1\leq i<j\leq k$, the vertex $z_{ij}$ certifies that there is an edge in $G$ between $H_i$ and $H_j$.
-Hence, subgraphs $H_j$ for $1\leq j\leq k$ yield a depth-$(2s+2)$ minor of $K_k$ in $G$.
-Since $K_t\not\minor_{2s+2} G$, we infer that $k<t$, which proves the claim.
-\end{proof}
 
-%
-%Note that the above proof does not give a proof that the ladder
-%index of the distance-$2$ formula is at most $2(t-1)$. In the type
-%tree we have the stronger statement that the vertices $b_i$
-%are not connected by a path of length $2$. 
-%We make no statement about the connections
-%of these elements in the ladder. 
+\begin{claim}\label{cl:right-words}
+  The  tree $\tau$  has size at most $h^{t+1}$, where $h$ is its height.
+\end{claim}
+\begin{clproof}
+The number of words of length at most $h$ and with at most $t$ occurrences of the letter $0$ is at most $h^{t+1}$.
+\end{clproof}
 
-
-We can now prove \cref{lem:apex}. 
-
-\begin{proof}[of \cref{lem:apex}]
-Fix any enumeration $v_1,\ldots, v_\ell$ of $A$ and
-build the distance-$(2s+2)$ tree~$T$ for
-$v_1,\ldots,v_\ell$. By~\cref{thm:alternation-rank-type-tree}, 
-the alternation rank of $T$ is at most~$2t$. 
-
-By~\cref{lem:number-of-nodes}, $T$ has height at least $2m^3$, hence, 
-it contains a path of length at least $2m^3$. 
-Let $(a_1,\ldots,a_p)$ be the vertices of this path in the order of their appearance, where $a_1$ is the root.
-Color each $a_i$ {\em{red}} if all vertices $a_j$ for $j>i$ are left descendants of $a_i$, and {\em{blue}} otherwise; then all vertices $a_j$ for $j>i$ are right descendants of $a_i$.
-Since the length of the path is at least $2m^3$, we have either at least $m^3$ red or at least $m^3$ blue vertices.
-
-Suppose first that we have at least $m^3$ red vertices on the path; let $X$ be their set.
-Then by the construction of $T$ we have that $X$ is $(2s+2)$-independent in $G$, so setting $A'=X$ finishes the proof.
-
-Suppose now that we have at least $m^3$ blue vertices on the path; let $Y$ be their set.
-Then by the construction of $T$ we have that the vertices of $Y$ are pairwise at distance exactly $2s+2$. 
-Let $\ell=|Y|$. 
-Let $V'$ be the set of vertices of $G$ at distance at least $s+1$ from $A$.
-For each $v\in V'$, let $A_v\subseteq Y$ be the set of vertices of $Y$ at distance exactly $s+1$ from $v$.
-Observe that if there exists some $v\in V'$ for which $|A_v|\geq \ell^{1/3}$, then we we are done, as we may set $A'=A_v$ due to $\ell^{1/3}\geq m$.
-Hence assume otherwise: $|A_v|<\ell^{1/3}$ for all vertices $v\in V'$; we claim that this case leads to a contradiction.
-
-For each pair $\{x,y\}$ of distinct vertices from $Y$, select any (shortest) path of length $2s+2$ connecting $x$ and $y$, and let $u_{x,y}$ be its middle vertex.
-Since $Y$ is $(2s+2)$-independent, we have that $u_{x,y}\in V'$ and $u_{x,y}$ is at distance $s+1$ to both $x$ and $y$. So in particular $\{x,y\}\subseteq A_{u_{x,y}}$.
-As $\{x,y\}$ was chosen arbitrarily, we have
-\begin{equation}\label{eq:pairs-count}
-\binom{Y}{2}=\bigcup_{v\in V'} \binom{A_v}{2}.
-\end{equation}
-Observe that the left hand side of~\eqref{eq:pairs-count} contains $\binom{\ell}{2}$ pairs.
-By applying \cref{lem:gajarsky} for $\epsilon=1/3$, the number of different subsets $B\subseteq Y$ 
-for which there exists $v\in V(G)$ such that $B=A_v$ is at most $\ell^{4/3}$; here we use the assumption that $|Y|=\ell\geq m\geq n_0$ for $n_0$ given by \cref{lem:gajarsky} for $\epsilon=1/3$, $s$, and $t$.
-Each of these subsets is of size smaller than $\ell^{1/3}$, hence the right hand side of~\eqref{eq:pairs-count} contains fewer than $\ell^{4/3}\cdot \binom{\ell^{1/3}}{2}$ pairs.
-Since $\binom{\ell}{2}\geq \ell^{4/3}\cdot \binom{\ell^{1/3}}{2}$, we have a contradiction.
+  
+Suppose that
+  $|A|>(t\cdot (m+1))^{t+1}$. By~\cref{cl:right-words},  
+  the height of $\tau$ is larger than $t\cdot (m+1)$, i.e.,
+  there is a word $w$ of length larger than $t\cdot (m+1)$ in the domain of $\tau$. Since $w$ has at most $t$ occurrences of the letter~$0$, it  must contain a block of $m$ consecutive $1$'s, i.e., there is a word $u$ such that $u1^k$ is a prefix of $w$, for $k=1,\ldots,m$.
+Let $B$ be the set of corresponding vertices, i.e., $B=\set{v_\tau(u1^k):k=1,\ldots,m}$,
+and let $S$ be the set of vertices occurring in some $B_\tau(v)$, for some prefix $v$ of $u$.
+It follows by construction that $B$ is a subset of $A$ which is $r$-independent in $G-S$.  Moreover, $|B|=m$ and 
+$S$ contains at most $r\cdot t^2$ vertices.
 \end{proof}
 
 To solve the odd case (finding a large $(2s+2)$-independent subset of a large $(2s+1)$-indepenent set),
