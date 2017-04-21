@@ -41,8 +41,8 @@ The proof is based on translating the approach of Podewski and Ziegler~\cite{pod
 \end{proposition}
 
 The rest of this section is devoted to the proof of \cref{prop:uqw-tuples}.
-Fix a uniformly quasi-wide class $\cal C$ and functions $N:\N\times\N\to \N$
-	and $s:\N\to\N$ as in the definition of uniform quasi-wideness.
+Fix a uniformly quasi-wide class $\cal C$ and functions $N\colon \N\times\N\to \N$
+	and $s\colon \N\to\N$ as in the definition of uniform quasi-wideness.
 	Let $d\in \N$ be a fixed dimension.
 		For a fixed graph $G\in \cal C$  and
 	  coordinate $i\in\set{1,\ldots,d}$, let $\pi_i$ denote the projection from $V(G)^d$ onto the $i$th coordinate.
@@ -161,12 +161,14 @@ is a formula, when we say that $\phi$ \emph{has free variables} $X$
 we allow the set of free variables of $\phi$ to be a subset of $X$.
 
 If $X$ is a finite set and $V$ is a set, then $V^X$ denotes the set of functions from $X$ to $V$, and an element $v\in V^X$ will be sometimes called a \emph{tuple} 
-or, in the case $X$ is a set of variables, a \emph{valuation} in $X$.
+or, in the case $X$ is a set of variables, a \emph{valuation} of $X$.
 For two tuples
 $v\in V^Y$ and $w\in  W^Z$, where $Y$ and $Z$ are disjoint, by
 $v\oplus w$ we denote the set-theoretic union of the functions $v,w$,
 which is a tuple $v\oplus w\in (V\cup W)^{Y\cup Z}$.
 The image of a valuation $v$ is denoted by $\im(v)$.
+If $V=V(G)$ for some graph $G$, then we can treat valuations of $X$ as tuples of length $|X|$ consisting of vertices of $G$, ordered in the same way according to any fixed enumeration of $X$.
+Then we may say that a set of valuations is mutually $r$-independent in $G$, or in $G-S$ for some $S\subseteq V(G)$, meaning the notion discussed in the previous section.
 
 
 Fix a formula $\phi$ with free variables $X$.
@@ -199,15 +201,15 @@ The key technical lemma of this section is the following.
 Then one can associate to each tuple $v\in V(G)^X$
 its \emph{$\phi$-type}, so that the following conditions 
 hold:
-	 \begin{enumerate}		 
-	 	\item The  set of  $\phi$-types  of all tuples $v\in V(G)^X$  is finite and has size bounded by 
+	 \begin{enumerate}[(1)]
+	 	\item\label{c:number} The  set of  $\phi$-types  of all tuples $v\in V(G)^X$  is finite and has size bounded by 
     $T(|S|,q)$, where $T\from \N\times \N\to \N$ is some computable function.
 		
     % \item The $\phi$-type of $v\in V(G)^X$ only depends on the pair $(H,v)$, where $H$ is the subgraph induced by the vertices in $G$
     %     which are within distance at most  $r(q)$  from some vertex in the range of $v$, for some computable function $r(\cdot)$.
 
 		
-	 	\item 
+	 	\item\label{c:confusing}
   If $u,v\in V(G)^X$ are different, have the same $\phi$-types, and $\{u,v\}$ is mutually $2r(q)$-independent in $G-S$, then $u$ and $v$ are confusing for $\phi$, where
   $r\from \N \to \N$ is some computable function.
 	 \end{enumerate}
@@ -292,9 +294,9 @@ the quantifier rank $q$ type of $N^G_r[v]$. The $q$-\emph{local type} of $(G,v)$
 
 
 \begin{proposition}\label{pro:gaifman}
-	Fix a positive integer $q$, a finite set of colors $C$, and a set of variables $X$. Then the following conditions hold:
- \begin{enumerate}
- 	\item \emph{(Computability of types)} The set of types $\mathrm{Tp}^{q,C}_X$ is finite and computable from $C, X$, and $q$.
+	Fix a positive integer $q$, a finite set of colors $C$, and a set of variables $X$. Let $G$ be any $C$-colored graph. Then the following conditions hold:
+ \begin{enumerate}[(1)]
+ 	\item \emph{(Computability of types)} The set of types $\mathrm{Tp}^{q,C}_X$ is finite and computable from $C$, $X$, and $q$.
 
 	\item \emph{(Locality of first order logic)} There is an integer $r$ computable from $q$ such that for every formula $\phi$ in the signature of $C$-colored graphs  
 	of quantifier rank $q$ and with free variables $X$,	
@@ -308,13 +310,13 @@ the quantifier rank $q$ type of $N^G_r[v]$. The $q$-\emph{local type} of $(G,v)$
 % determines   the $(q,r)$-local type $(G,v|_Y)$ of the restriction of $v$ to $Y$.
 
 
-	 \item \emph{(Independence)} Suppose that $X$ is partitioned into $Y\cup Z$, 
+	 \item \emph{(Independence)} Suppose $X$ is partitioned into $Y\cup Z$, 
 	 and that $u_1,u_2\from Y\to V(G)$ and $v_1,v_2\from Z\to V(G)$ are valuations
-   such that the sets $\{\im(u_1),\im(v_1)\}$ and $\{\im(u_2),\im(v_2)\}$
-   are mutually $2r$-independent in $G$, for some $r$.
-   Moreover, suppose that the $(q,r)$-local types of $(G,\im(u_1))$ and $(G,\im(u_2))$ are equal,
-   and that the $(q,r)$-local types of $(G,\im(v_1))$ and $(G,\im(v_2))$ are equal.
-   Then the $(q,r)$-local types of $(G,u_1\oplus v_1)$ and $(G,u_2\oplus v_2)$ are equal.
+   such that each of the sets $\{u_1,v_1\}$ and $\{u_2,v_2\}$
+   is mutually $2r$-independent in $G$, for some $r$.
+   Moreover, suppose that the $(r,q)$-local types of $(G,\im(u_1))$ and $(G,\im(u_2))$ are equal,
+   and that the $(r,q)$-local types of $(G,\im(v_1))$ and $(G,\im(v_2))$ are equal.
+   Then the $(r,q)$-local types of $(G,u_1\oplus v_1)$ and $(G,u_2\oplus v_2)$ are equal.
  \end{enumerate}
 \end{proposition}
 
@@ -365,8 +367,8 @@ We use the following claim, whose proof is a standard application of Ehrenfeucht
 	The proof proceeds by applying the well-known characterization 
 	of quantifier rank $q$  types using Ehrenfeucht-Fraisse games (see e.g. Theorem 3.9 in~\cite{libkin}). By assumption, duplicator has a winning strategy $\gamma$ in the $q$-round game on $(G_1,v_1)$ and $(G_2,v_2)$, and a winning strategy $\eta$ in the $q$-round game on $(H_1,w_1)$ and $(H_2,w_2)$. The strategies $\gamma$ and $\eta$ can be combined into a winning strategy on $(G_1\oplus H_1,v_1\oplus w_1)$  and $(G_2\oplus H_2,v_2\oplus w_2)$.
 \end{clproof}
-Now the \emph{Independence} property follows immediately as follows. Since $\{\im(u_1),\im(v_1)\}$ is mutually $2r$-independent in $G$, the subgraph of $G$ induced by the $r$-neighborhood of $\im(u_1\oplus v_1)$ is isomorphic to the disjoint union of the subgraphs of $G$ induced by the $r$-neigbhorhoods of $\im(u_1)$ and $\im(v_1)$. The same holds also for the $r$-neighborhoods of $\im(u_2\oplus v_2)$, 
-$\im(u_2)$, and $\im(v_2)$. It now suffices to apply \cref{lem:type-union} and use the assumed equality of $(q,r)$-local types.
+The \emph{Independence} property is now almost immediate. Since $\{u_1,v_1\}$ is mutually $2r$-independent in $G$, the subgraph of $G$ induced by the $r$-neighborhood of $\im(u_1\oplus v_1)$ is isomorphic to the disjoint union of the subgraphs of $G$ induced by the $r$-neigbhorhoods of $\im(u_1)$ and $\im(v_1)$. The same holds also for the $r$-neighborhoods of $\im(u_2\oplus v_2)$, 
+$\im(u_2)$, and $\im(v_2)$. It now suffices to apply \cref{lem:type-union} and use the assumed equality of $(r,q)$-local types.
 \end{proof}
 
 We now prove \cref{pro:crossing}. Until the end of the proof, fix a graph $G$ and a set of vertices $S\subset V(G)$.
@@ -395,18 +397,17 @@ which can be either a variable in $Y$ or a vertex in $S$, treated as a constant.
 
 
 \begin{lemma}\label{lem:remove-s}Let $G,S$ be as above.	
-For every formula $\phi$ with free variables $X$ and pre-valuation $\alpha\from X\to Y\cup S$
+For every formula $\phi$ with free variables $X$ and every pre-valuation $\alpha\from X\to Y\cup S$
 there is a formula $\phi'$ with free variables $Y$
 of the same quantifier rank as $\phi$ and over the signature of $G^S$
- such that for every valuation $v$ of $Y$ in $G-S$
-the following equivalence holds:
+ such that for every valuation $v$ of $Y$ in $G-S$, we have
 $$G,v\models\phi^{\alpha}\qquad\iff\qquad G^S,v\models\phi'.$$
 \end{lemma}
 \begin{proof}
 The proof proceeds by induction on the structure of the formula $\phi$. 
 
-If $\phi$ is an atomic formula $E(x,x')$ or $x=x'$ then the formula $\phi'$ is constructed by case analysis. If $\alpha(x),\alpha(x')\in Y$ then $\phi'$
-is obtained from $\phi$ by substituting the variables $x,x'$ according to~$\alpha$. If  $\alpha(x),\alpha(x')\in S$ then $\phi'$ is the truth value $\bot$ or $\top$ of 
+If $\phi$ is an atomic formula $E(x,x')$ or $x=x'$, then the formula $\phi'$ is constructed by case analysis. If $\alpha(x),\alpha(x')\in Y$ then $\phi'$
+is obtained from $\phi$ by substituting the variables $x,x'$ with variables from $Y$ according to~$\alpha$. If  $\alpha(x),\alpha(x')\in S$ then $\phi'$ is the truth value $\bot$ or $\top$ of 
 the formula $\phi$ in the graph $G$ under the valuation which maps $x$ to $\alpha(x)$ and $x'$ to $\alpha(x')$. Finally, suppose that $\alpha(x)=y\in Y$ and $\alpha(x')=s\in S$. If $\phi$ is $E(x,x')$ then $\phi'$ is the formula $C_{s}(y)$, and if $\phi$ is $x=x'$ then $\phi'$ is the formula $\bot$.
  
  
@@ -458,21 +459,21 @@ For a valuation  $v$ of $X$ in $G$, we introduce the notion of an \emph{$S$-deco
 which is the (essentially unique) pair $(\alpha,v^S)$
 such that $\alpha\from X\to Y\cup S$ is a pre-valuation
 for some set of variables $Y$,
-and $v^S\from Y\to \rg(v)-S$ is a bijective valuation such that 
-$\alpha\cdot v^S=v$ (where $\rg(v)$ is the range of $v$). The formal definition is as follows.
+and $v^S\from Y\to (\im(v)-S)$ is a bijective valuation such that 
+$\alpha\cdot v^S=v$. The formal definition is as follows.
 % Let $\sim$ be the partial equivalence on $X$ defined so that
 % $x\sim x'$ if and only if both $x$ and $x'$ are mapped to the same element of $Y$.
 % In other words, $\sim$ is the restriction of the kernel of $v$ to $v^{-1}(Y)$.
-Let $Y=\set{v^{-1}(\set u): u\in \rg(v)-S}$. We treat $Y$ as a set of variables. 
+Let $Y=\set{v^{-1}(\set u)\colon u\in \im(v)-S}$. We treat $Y$ as a set of variables. 
 % Note that $Y$ is in bijection with $\rg(v)-S$, but we prefer
 % to define $Y$ in a way which is independent of the elements of $G-S$ for technical reasons.
 Define the pre-valuation $\alpha\from X\to Y\cup S$
 by letting $\alpha(x)$ be $v(x)$ if $v(x)\in S$,
-and $v^{-1}(\set u)$ if $v(x)=u$ for some $u\in \rg(v)-S$.
+and $v^{-1}(\set u)$ if $v(x)=u$ for some $u\in \im(v)-S$.
 Finally, let $v^S$ be the valuation of $Y$ in $G$ which
-maps  $v^{-1}(\set u)$ to $u$, for $u\in \rg(v)-S$.
+maps  $v^{-1}(\set u)$ to $u$, for $u\in \im(v)-S$.
 It is easy to see that $v=\alpha\cdot v^S$ and $v^S$ is a bijection from $Y$ 
-to $\rg(v)-S$. We call the pair $(\alpha,v^S)$ the \emph{$S$-decomposition of $v$}.
+to $\im(v)-S$. We call the pair $(\alpha,v^S)$ the \emph{$S$-decomposition of $v$}.
 
 
 
@@ -480,7 +481,7 @@ For a number $q$ and valuation $v\from X \to V(G)$, the \emph{$(q,S)$-local type
 is the pair $(\alpha,\tau)$,
 where $(\alpha,v^S)$ is the $S$-decomposition of~$v$
 and $\tau$ is the $q$-local type of   $(G^S,v^S)$.
-Note that there are at most  $(s+d)^d$ possible functions $\alpha$, where $s=|S|$ and $d=|X|$. In particular, by computability of types (cf.~\cref{pro:gaifman}), 
+Note that there are at most  $(s+d)^d$ possible functions $\alpha$, where $s=|S|$ and $d=|X|$. In particular, by the computability of types (cf.~\cref{pro:gaifman}), 
 the number of $(q,S)$-local types of valuations from $X$
 in arbitrary graphs is bounded by 
 a number computable from $s,d$, and $q$.
@@ -490,8 +491,8 @@ a number computable from $s,d$, and $q$.
 
 \begin{lemma}\label{lem:coloring}
 	Let $\phi$ be a formula with
-free variables $X$, of quantifier rank $q$.
-	Suppose that $u$~and~$v$ are two valuations of $X$  in $G$ of the same $(q,S)$-local types.
+free variables $X$ and of quantifier rank $q$.
+	Suppose that $u$~and~$v$ are two valuations of $X$  in $G$ with the same $(q,S)$-local types.
 	Then $$G,u\models \phi\qquad \iff\qquad G,v\models \phi.$$
 \end{lemma}
 \begin{proof}
@@ -505,7 +506,7 @@ and let $(\alpha,v^S)$ be the $S$-decomposition of $v$.
 	\end{align*}
 		Note that $\phi'$ has the same quantifier rank as  $\phi$, that is, $q$.
 		Since $u$ and $ v$ have the same $(q,S)$-local type $\tau$, it follows that $(G^S,u^S)$ and $(G^S,v^S)$ have the same   $q$-local type.
-		By locality of first order logic (cf.~\cref{pro:gaifman}) applied to $G^S$, $\phi'$, $ u^S$, and $v^S$, we infer that $G^S,u^S\models\phi'$ if and only if $G^S,v^S\models\phi'$.
+		By the locality of first order logic (cf.~\cref{pro:gaifman}) applied to $G^S$, $\phi'$, $ u^S$, and $v^S$, we infer that $G^S,u^S\models\phi'$ if and only if $G^S,v^S\models\phi'$.
 		The lemma follows by combining this with the above equivalences.
 \end{proof}
 
@@ -531,50 +532,51 @@ We are now ready to prove~\cref{pro:crossing}.
 \begin{proof}[of~\cref{pro:crossing}]
 Let $\phi$ be a formula
 	of  quantifier rank $q$
-  and whose free variables $X$ are partitioned into $Y$ and $Z$.
+   whose free variables $X$ are partitioned into $Y$ and $Z$.
   Let $C$ be the set of colors $\set{C_s:s\in S}$.
-  Let $r$ be the number given by locality of first order logic (cf.~\cref{pro:gaifman}).
+  Let $r$ be the number given by the locality of first order logic (cf.~\cref{pro:gaifman}).
   
 
-	For a tuple $v\in V(G)^X$, define the \emph{$\phi$-type} of $v$
+	For a valuation $v\in V(G)^X$, define the \emph{$\phi$-type} of $v$
   as the ordered pair consisting of two $(q,S)$-local types: of $v|_Y$  and of $v|_Z$. 
- It is clear that the first two conditions of~\cref{pro:crossing} are satisfied. We verify the last condition.
+ It is clear that condition~\eqref{c:number} of~\cref{pro:crossing} is satisfied. We are left with verifying condition~\eqref{c:confusing}.
 	
-Let $u,v\in V(G)^X$ be mutually $2r$-independent in $G-S$,
-and of the same $\phi$-type. We show that $u,v$
+Let $u,v\in V(G)^X$ be such that $\{u,v\}$ is mutually $2r$-independent in $G-S$,
+and moreover $u$ and $v$ have the same $\phi$-type. We show that $u,v$
 are confusing for $\phi$. 
 Let $u_Y,u_Z$ and $v_Y,v_Z$ denote the restrictions of $u$ and $v$ to $Y$ and $Z$, respectively. 
 
-\begin{claim}
- $u_Y\oplus v_Z$ and $v_y\oplus u_Z$ have the same 
+\begin{claim}\label{cl:sametype}
+Valuations $u_Y\oplus v_Z$ and $v_Y\oplus u_Z$ have the same 
 $(q,S)$-local types.  
 \end{claim}
-The claim yields the conclusion, by \cref{lem:coloring}. It remains to prove the claim.
-\medskip
-
+\begin{clproof}
 Let $(\alpha_Y,u_Y^S),(\alpha_Z,u_Z^S),(\beta_Y,v_Y^S),(\beta_Z,v_Z^S)$ denote the $S$-decompositions of  $u_Y,u_Z,v_Y,v_Z$, respectively. 
 From the assumption that $u,v$ are mutually $2r$-independent in $G-S$ it follows in particular that
- $\rg(u_Y)\cap\rg(v_Z)\subset S$
-and  $\rg(v_Y)\cap \rg(v_Z)\subset S$.
+ $\im(u_Y)\cap\im(v_Z)\subset S$
+and  $\im(v_Y)\cap \im(v_Z)\subset S$.
 This implies that the $S$-decompositions of $u_Y\oplus v_Z$
 and of  $v_Y\oplus u_Z$ can be computed in a componentwise fashion, and are as follows:
 \begin{align}
-u_Y\oplus v_Z &:\quad (\alpha_Y\oplus \beta_Z,  u_Y^S\oplus v_Z^S)\label{eq:dec1},\\  
-v_Y\oplus u_Z &:\quad (\beta_Y\oplus \alpha_Z, v_Y^S\oplus u_Z^S)\label{eq:dec2}.
+u_Y\oplus v_Z &\colon \quad (\alpha_Y\oplus \beta_Z,  u_Y^S\oplus v_Z^S)\label{eq:dec1},\\  
+v_Y\oplus u_Z &\colon \quad (\beta_Y\oplus \alpha_Z, v_Y^S\oplus u_Z^S)\label{eq:dec2}.
 \end{align}
 The assumption that $u,v$ have the same $\phi$-type implies the following:
 \begin{itemize}
   \item  $\alpha_Y=\beta_Y$ and $\alpha_Z=\beta_Z$.
   In particular, the $S$-decompositions
-  \eqref{eq:dec1} and \eqref{eq:dec2}  have equal first components.
+  \eqref{eq:dec1} and \eqref{eq:dec2}  have the first components equal.
   
-    \item  $u_Y^S$ and  $v_Y^S$ have 
+    \item Valuations $u_Y^S$ and  $v_Y^S$ have 
   the same $q$-local types, and similarly,
   $v_Z^S$ and  $u_Z^S$ have the same $q$-local types.
-  In particular, by the independence property of~\cref{pro:gaifman}, the second components of the $S$-decompositions~\eqref{eq:dec1} and~\eqref{eq:dec2}
+  Since $\{u,v\}$ is mutually $2r$-independent in $G-S$, it follows that both $\{u_Y^S,v_Z^S\}$ and $\{v_Y^S,u_Z^S\}$ are mutually $2r$-independent in $G^S$.
+  By the independence property of~\cref{pro:gaifman}, the second components of the $S$-decompositions~\eqref{eq:dec1} and~\eqref{eq:dec2}
   have the same $q$-local type. 
 \end{itemize}
-The two observations above yield the conclusion of the claim, finishing the proof of~\cref{pro:crossing}.
+The two observations above yield the conclusion of the claim.
+\end{clproof}
+By \cref{cl:sametype} and \cref{lem:coloring} we infer that $u$ and $v$ are confusing for $\varphi$. This finishes the proof.
 \end{proof}
 
 
@@ -582,15 +584,15 @@ The two observations above yield the conclusion of the claim, finishing the proo
 We conclude by proving \cref{thm:new-stable}, promised in \cref{sec:intro}, which follows by tracking the precise dependencies on the parameters in the proof of \cref{thm:uqw-stable}.
 
 \begin{proof}[of \cref{thm:new-stable}]
-  Let $r(\cdot)$ be the function described in~\cref{pro:crossing} and we 
-  define the function $g(\cdot)$  from the statement of the theorem by $g(q)=6r(q)$.
+  Let $r(\cdot)$ be the function described in~\cref{pro:crossing}. We 
+  define the function $g(\cdot)$ from the statement of the theorem by $g(q)=6\cdot r(q)$.
 	Let $\phi$ be the given formula of quantifier rank $q$ and with  free variables $X$, partitioned into $Y$ and $Z$.
   Denote $r=r(q)$. From now on we consider only graphs $G$ such that $K_t\not\minor_{6r} G$.
 
 We first examine \cref{prop:uqw-tuples}, and in particular the dependence of the yielded functions 
 $N^d(\cdot,\cdot)$ and $s^d(\cdot)$ on the assumed quasi-wideness properties of the class $\CCC$.
-More precisely, having assumed that the underlying class $\CCC$ is quasi-wide with functions $N(\cdot,\cdot)$ and $s(\cdot)$,
-we obtained:
+Precisely, having assumed that the underlying class $\CCC$ is quasi-wide with functions $N(\cdot,\cdot)$ and $s(\cdot)$,
+we have~obtained:
 $$
 N^d(2r,m)=K(4r,m(d^2+1))\qquad\textrm{and}\qquad s^d(2r)=d\cdot s(4r),
 $$
