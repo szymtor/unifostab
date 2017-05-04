@@ -35,9 +35,9 @@ $B\subseteq A\setminus S$ of size $\abs{B}\geq m$ which is $r$-independent in
 $G-S$. 
 
 \paragraph{General strategy.}
-Our proof follows exactly the same lines as the original proof of Ne\v set\v ril and Ossona de Mendez, with the difference that in one technical lemma (\cref{lem:apex} below), we improve the bounds significantly by replacing a Ramsey argument by a more subtle argument about the neighborhood
+Our proof follows exactly the same lines as the original proof of Ne\v set\v ril and Ossona de Mendez, with the difference that in one technical lemma (\cref{lem:apex} below), we improve the bounds significantly by replacing a Ramsey argument by bounds on neighborhood
 complexity in nowhere dense graph classes, due to~\cite{gajarsky2017kernelization}.
-For sake of completeness, we present the entire proof.
+For sake of completeness, we present the entire proof of~\cref{thm:new-uqw}.
 
 
 The general idea behind the proof of 
@@ -47,8 +47,8 @@ weaker variant, for each radius $r$:
 \begin{lemma}\label{lem:engine}
 For all $r,t\in \N$ there exists a function $L\colon \N\to \N$
 and a number $d$ such that the following holds.
-Given any graph $G$ such that $K_t\not\minor_d G$ and
-$(r-1)$-independent set of vertices $A\subset V(G)$ of size at least $L(m)$, there is a set $S\subseteq V(G)$ of size at most $t$ such that $A-S$ contains a subset of size $m$ which is $r$-independent in $G-S$.
+Given a number $m\in \N$ and graph $G$ such that $K_t\not\minor_d G$ and
+$(r-1)$-independent set of vertices $A\subset V(G)$ of size at least $L(m)$ there is a set $S\subseteq V(G)$ of size at most $t$ such that $A-S$ contains a subset of size $m$ which is $r$-independent in $G-S$.
 \end{lemma}
 
 Note that the main difference between the statement of this lemma and~\cref{thm:new-uqw} is that here we assume that 
@@ -57,7 +57,7 @@ the very large ($0$-independent) set $A_0=A$, in which (after removing
 $L(1)$ vertices from $G$)
 we find a very large $1$-independent subset $A_1$, in which (after further removing $L(2)$ vertices from $G$) we find a large $2$-independent subset $A_2$, etc., until arriving at an $r$-independent subset $A_r$ of size $m$.
 
-To prove~\cref{lem:engine}, we distinguish two special cases: the case of $r=0$ and the case $r=1$. The case of general $r$ then reduces to one of these two cases, depending on the parity of $r$, since a $(2s+1)$-independent set $A$ in $G$
+To prove~\cref{lem:engine}, we distinguish two special cases: the case of $r=0$ and the case $r=1$. The case of general $r$ then reduces to one of these two cases, depending on the parity of $r$, by observing that a $(2s+1)$-independent set $A$ in $G$
 induces a $1$-independent set in $G$ with the balls of radius $s$ around the vertices of $A$ contracted, and,
 similarly, a $(2s+2)$-independent set $A$ in $G$
 induces a $2$-independent set in $G$ with the balls of radius $s$ around the vertices of $A$ contracted.
@@ -65,15 +65,15 @@ induces a $2$-independent set in $G$ with the balls of radius $s$ around the ver
 We start by proving~\cref{lem:engine} in the case $r=0$,
 then we prove it in the case $r=1$. Next we show how the general case reduces to one of those two, and, finally, we deduce~\cref{thm:new-uqw} from~\cref{lem:engine}.
 
-\paragraph{Case $r=0$.}
-We prove~\cref{lem:engine} in the case $r=0$.
+\paragraph{Case $r=1$.}
+We prove~\cref{lem:engine} in the case $r=1$.
 Let $d=0$, so $K_t\not\minor_d G$ amounts to saying that $G$
 does not contain a clique of size $t$. By Ramsey's Theorem, in any graph every set of size $\binom{m+t-2}{t-1}$ contains an
 independent set of size $m$ or a clique of size $t$. Therefore, 
 taking $L(m)$ as the above binomial coefficient yields~\cref{lem:engine} in case $r=0$, by taking $S=\emptyset$.
 
-\paragraph{Case $r=1$.}
-We prove~\cref{lem:engine} in the case $r=1$.
+\paragraph{Case $r=2$.}
+We prove~\cref{lem:engine} in the case $r=2$.
 For the second, more intricate case, 
 we employ one more result: the bound on the number of distinct neighborhoods in a graph from a nowhere dense class.
 
@@ -83,10 +83,45 @@ Then for every $\epsilon>0$ there exists $n_0$, depending only on $t$ and $\epsi
 \[\abs{\{N(v)\cap A \colon v\in V(G)\}}\leq\abs{A}^{1+\epsilon}.\]
 \end{lemma}
 
+
+
 We remark that the proof of \cref{lem:diversity} uses only the fact that
 nowhere dense classes of graphs do not have dense 
 shallow minors~\cite{dvorak2007asymptotical,jiang2011compact}, and does not rely on any non-constructive arguments from the stability theory.
 From \cref{lem:diversity} we derive the following.
+
+\begin{corollary}\label{cor:diversity}
+  Let $G,t,\epsilon,n_0$ be as above.
+  If $|A|=n\ge n_0$ and every pair of elements of $A$ has a common neighbor in $G$,
+  then there is a vertex $v$ in $G$ which has at least $n^{(1-\epsilon)/2}$ neighbors in $A$.
+\end{corollary}
+\begin{proof}Let ${\cal F}=\set{N(v)\cap A\colon v\in V(G)}$. 
+  Suppose that every set in ${\cal F}$ has at most $k$ elements. 
+  Say that a pair $(a,b)$ of elements of $A$ is \emph{covered} by $F\in {\cal F}$
+  if  $a,b\in F$.
+  By assumption, all $n^2$ pairs in $A^2$ are covered by some element $F\in {\cal F}$, and,
+  clearly, every $F\in {\cal F}$ can cover at most $k^2$ pairs. 
+  Hence, $n^2/k^2\le |{\cal F}|\le  n^{1+\epsilon}$, proving $k\ge n^{(1-\epsilon)/2}$.
+\end{proof}
+
+\begin{corollary}\label{cor:biversity}
+    For every real $\alpha>2$ and integer $t\in\N$ there exists $\ell_0$ with the following property.
+  Let $G$ be a graph which does not contain 
+  the complete bipartite graph $K_{t,t}$ and let
+  $A$ be a $1$-independent subset of $G$ with $|A|\ge \ell_0$ such that every pair of vertices in $A$ has a common neighbor in $G$.
+   Then there is a vertex $v\in G$
+  with at least $|A|^{1/\alpha}$ neighbors in $A$.
+\end{corollary}
+\begin{proof}\label{pf:}
+    Note that if $K_{2t}$ has a depth $1$ minor model in 
+    a bipartite graph $H$, then there is a depth $1$ minor model of $K_{t}$ in $H$ with all centers of branch sets contained in one part of $H$. This, in turns, implies that $K_{t,t}$ is a subgraph of $H$.
+  Choose $H$ to be the bipartite graph induced 
+  by $G$, with parts $A$ and $V(G)-A$, i.e.,  $v\in A$ and $w\in V(G)-A$ are adjacent in $H$ iff they are in $G$. Since $G$ does not contain the complete bipartite graph $K_{t,t}$, neither does $H$. By the preceding remark, this implies  that $K_{2t}\not\minor_1 H$.
+  Let $\ell_0$
+    be the value $n_0$ from~\cref{lem:diversity} applied to $2t$ in place of $t$ and $\epsilon$ such that $2/(1-\epsilon)=\alpha$. Applying~\cref{cor:diversity} to $H,2t,\epsilon,\ell_0$, we conclude that if every pair of elements of $A$ has a common neighbor in $G$
+    (hence also in $H$), then there is a vertex $v$
+    in $G$ with at least $|A|^{1/\alpha}$ neighbors in $A$.
+\end{proof}
 
 % \begin{corollary}\label{lem:gajarsky}
 % Let $G$ be a graph, let $s\in \N$, and suppose there is a constant $t\in \N$ such that $K_t\not\minor_{3s+1} G$.
@@ -123,17 +158,18 @@ From \cref{lem:diversity} we derive the following.
 We  now state the main building block of our proof as a lemma. 
 
 \begin{lemma}\label{lem:apex}
-Let $G$ be a graph and let $s\in \N$. 
-Assume that $K_t\not\minor_{3s+2} G$ for some $t\in \N$. 
-Let $n_0$ be the constant given by \cref{lem:diversity} for $\epsilon=1/3$ and $t,s$ as above, 
-and let $m\geq n_0$ be an integer. 
-If~$A$ is an $1$-independent set in $G$ of size at least $2+2(2m^3)^{2t+1}$,
-then either 
-\begin{itemize}
-\item $A$ contains a $2$-independent set of size $m$, or
-\item some vertex $v$ of $G$
-has at least $m$ neighbors in $A$.
-\end{itemize}
+For every integer $t\in \N$ and real $\alpha>2$ 
+there is an integer $\ell_0\in\N$ with the following property.
+Let $m,l$ be integers with $\ell\ge \ell_0$. 
+If~$G$ is a graph and $A$ is its $1$-independent subset
+with at least ${{m+\ell}\choose m}$ elements,
+then at least one of the following conditions hold:
+\begin{enumerate}
+  \item $A$ contains the principal vertices of a $1$-subdivision of a clique $K_t$ contained in $G$, 
+\item  $A$ contains a $2$-independent set of size $m$, 
+\item  some vertex $v$ of $G$
+has at least $\ell^{1/\alpha}$ neighbors in $A$.
+\end{enumerate}
 \end{lemma}
 
 
@@ -142,163 +178,157 @@ and prove that the tree contains a long path. From this path, we will
 extract the set $A'$. In stability theory, similar trees are called \emph{type trees} and they are used to extract long indiscernible sequences, see e.g.~\cite{malliaris2014regularity}. 
 
 \begin{proof}
-	We prove~\cref{lem:engine} in the case $r=1$.
-	Let $d=1$, so we assume that $G$ is a graph which does not contain a clique $K_t$ as a minor at depth $1$.
 	\newcommand{\dau}{D}
 	\newcommand{\son}{S}
 	
-	We call elements of the set $\set{\dau,\son}^*$ \emph{nodes},
-	and the nodes $w\dau$ and $w\son$ are, respectively, the \emph{daughter} and the \emph{son} of $w$,
-	and $w$ is the \emph{ancestor} of every word of the form $wv$, where $v\in\set{\dau,\son}^*$. The empty word  is called the \emph{root}.
-	 A (finite, rooted, binary) \emph{tree} is a partial labeling $\tau\from \set{\dau,\son}^*\to U$ whose domain is a finite set of nodes which is closed under taking ancestors. The \emph{size} of a tree is the cardinality of its domain. The \emph{empty} tree is the tree of size $0$. The \emph{height} of a nonempty tree is the length of the longest word in its domain. 
+	We identify words  $\set{\dau,\son}^*$ with \emph{nodes}
+	of the infinite rooted binary tree. For $w\in \set{\dau,\son}^*$,
+	 the nodes $w\dau$ and $w\son$ are called, respectively, the \emph{daughter} and the \emph{son} of $w$,
+	and $w$ is the \emph{father} of both $w\son$ and $w\dau$.
+	We consider
+	 finite, labeled, rooted, binary trees, which are called simply trees below, and are defined as follows.
+	 A \emph{tree} is a partial labeling $\tau\from \set{\dau,\son}^*\to U$ whose domain is a finite set of nodes which is closed under taking fathers.
   
   Let $G$ be a graph, $A\subset V(G)$ a $1$-independent set of its vertices
   and $\bar a$ an enumeration of $A$.
-
 We define  a binary tree $\tau$ which is 
-  labeled vertices of $G$. The tree is defined by processing all elements of the sequence $\bar a$ sequentially. We start with $\tau$ being the empty tree, and for each element $a$ of the sequence $\bar a$, execute the following procedure, which extends the domain of $\tau$ by one element.
+  labeled by vertices of $G$. The tree is defined by processing all elements of the sequence $\bar a$ sequentially. We start with $\tau$ being the  tree with empty domain, and for each element $a$ of the sequence $\bar a$, execute the following procedure, which extends the domain of $\tau$ by one element.
   
-When processing the vertex $a$, do the following. Start with $w$ being the root. While $w$ is in the domain of $\tau$, repeat the following step: 
+When processing the vertex $a$, do the following. Start with $w$ being the empty word. While $w$ is in the domain of $\tau$, repeat the following step: 
   if the distance from $a$ to $\tau(w)$ in the graph 
   $G$ is two, replace $w$ by its son, otherwise, replace $w$ by its daughter.
   % Repeat the step, unless $\tau(w)$ is undefined.
   Once $w$ is not in the domain of $\tau$, extend $\tau$ to $w$    so that  $\tau(w)=a$. In this way, we have processed the element $a$, and now
     proceed to the next element $a$ of $\bar a$, until all elements are processed. This ends the construction of $\tau$.
 	
-	Note that $\tau$ is a bijection from its domain to $A$.
+  
   
   
   \medskip
-
-We consider two cases:
-\begin{itemize}
-	\item  there is some $w\in\set{\son,\dau}^*$ in the domain of $\tau$ which contains at least $m^3$ $\son$'s,
-	\item every $w\in \set{\son,\dau}^*$ in the domain of $\tau$ contains at most $m$ $\son$'s.
-\end{itemize}
-
-	Consider the first case.
-	Let $B\subset A$ be the set of the labels of the 
-	fathers of the sons on the path corresponding to $w$, i.e.,
-	$$B=\set{\tau(u)\colon 
-	u\son \text{ is a prefix of }w}.$$
-	Note that $B$ has at least $m$ elements,
-	and by construction, any two elements of $B$ are at mutual distance two. 
-	
-	Let 
-	$$\cal F=\set {N[v]\cap B\colon v\in V(G)}.$$ 
-	We say that a pair  $a,b \in B$
-	is \emph{covered} if
-	$\set{a,b}$ is contained in some $F\in \cal F$.
+For a tree $\tau$, define its
+\emph{height} as one plus 
+the length of the longest word in the domain of $\tau$,
+and 
+its
+ \emph{alternation rank}
+as the maximal number $k$ such that 
+the domain of $\tau$ contains a word with $k$ occurrences of 
+a $\dau$ followed immediately by a $\son$.
 
 
-Let $k$ be the maximal size of a set in $\cal F$.
-By~\cref{lem:diversity}, the family $\cal F$ contains 
- at most  $m$ elements,
- and each of them covers at most $k\choose 2$ 
-pairs of elements of $B$. Hence, by the union bound,
-at most $(k\choose 2)\cdot m$ pairs are covered, 
-yet,
-by the remarks above, every pair ${a,b}\subset B$.
-It follows that $k\ge m^{1/4}$.
-
-
-
-By the union bound, this means that the size of the family 
-		$$\set{N[v]\cap A\colon v\in V(G)}$$
-is at least 	
-	
-	
-	
-
-
-  \begin{itemize}
-  	\item Every 
-	
-	\item There is a $w$ in the domain of $\tau$ which contains at 
-	
-  \end{itemize}
-  
-  
-
-\begin{claim}
-The domain of $\tau$ consists of words with at most $t$ occurrences of the letter $0$. 
-\end{claim}
-\begin{clproof}
-  Observe that if $\tau(w)$ is defined and $w$ has $l$ occurrences of the letter $0$, then $G$ contains a clique on $l$ vertices as  a minor at depth $r$:
-  the vertices of the clique are the words $u$ 
-such that $u0$ is a prefix of $w$,
-  and the branch set associated to $u$ 
-  is $B_\tau(u)$.
-\end{clproof}
-
-
-\begin{claim}\label{cl:right-words}
-  The  tree $\tau$  has size at most $h^{t+1}$, where $h$ is its height.
-\end{claim}
-\begin{clproof}
-The number of words of length at most $h$ and with at most $t$ occurrences of the letter $0$ is at most $h^{t+1}$.
-\end{clproof}
-
-  
-Suppose that
-  $|A|>(t\cdot (m+1))^{t+1}$. By~\cref{cl:right-words},  
-  the height of $\tau$ is larger than $t\cdot (m+1)$, i.e.,
-  there is a word $w$ of length larger than $t\cdot (m+1)$ in the domain of $\tau$. Since $w$ has at most $t$ occurrences of the letter~$0$, it  must contain a block of $m$ consecutive $1$'s, i.e., there is a word $u$ such that $u1^k$ is a prefix of $w$, for $k=1,\ldots,m$.
-Let $B$ be the set of corresponding vertices, i.e., $B=\set{v_\tau(u1^k):k=1,\ldots,m}$,
-and let $S$ be the set of vertices occurring in some $B_\tau(v)$, for some prefix $v$ of $u$.
-It follows by construction that $B$ is a subset of $A$ which is $r$-independent in $G-S$.  Moreover, $|B|=m$ and 
-$S$ contains at most $r\cdot t^2$ vertices.
+\begin{lemma}\label{lem:number-of-nodes}
+	Let $\tau$ be a tree of alternation rank at most $t$.
+	If $\tau$ has height at most $h$, then $\tau$ has at most $h^{t+1}$
+	vertices.
+\end{lemma}
+\begin{proof}	
+	To each node $w$ of $\tau$ assign 
+	the set $X$ 
+	consisting of those numbers $i\in \set{1,\ldots,h}$
+	such that $w_i\neq w_{i-1}$, 
+	where $w_0$ is assumed to be equal $\dau$
+	and $w_i$ is assumed to be equal $\bot$ if $|w|<i\le h$, where $\bot$
+	is a symbol different from $\dau$ and $\son$.
+	The mapping $w\mapsto X$ is injective, and maps the domain of $\tau$
+to the family of nonempty subsets of  $\set{1,\ldots,h}$ of size at most $t+1$.
+This family has at most $h^{t+1}$ elements.	
 \end{proof}
 
-To solve the odd case (finding a large $(2s+2)$-independent subset of a large $(2s+1)$-indepenent set),
-we iteratively apply \cref{lem:apex}, always adding the apex vertex $v$
-returned by the lemma to the set $S$, until we find a large 
-$(2s+2)$-independent subset of $A$ in $G-S$. For the induction, we
-define a function $R$ such that $R(m,0)=m$
-and $R(m,i)=2+2(2(R(m,i-1))^3)^{2t+1}$ for $i\geq 1$.
-Then it can be easily seen that $R(m,t)\in \Theta_{t}(m^{6t+3})$.
-
-\begin{lemma}\label{lem:iterate-apex}
-Let $G$ be a graph and let $s\in \N$. 
-Assume that $K_t\not\minor_{3s+2} G$ for some $t\in \N$. 
-Let $n_0$ be the constant given by \cref{lem:gajarsky} for $\epsilon=1/3$ and $t,s$ as above, 
-and let $m\geq \max(t,n_0)$ be an integer. 
-Suppose $A$ is a $(2s+1)$-independent set in $G$ of size at least $R(m,t)$.
-Then there is a subset $A'\subseteq A$ of size at least~$m$ and a 
-a set $S\subseteq V(G)\setminus A$ of size at most $t-1$ such that
-\begin{enumerate}
-\item every vertex of $S$ is at distance exactly $s+1$ from 
-every vertex of $A'$, and
-\item $A'$ is $(2s+2)$-independent in $G-S$. 
-\end{enumerate} 
+\begin{lemma}\label{thm:alternation-rank-type-tree}
+Suppose that  $G$ is such that $K_t\not\minor_{2} G$.
+Then $\tau$ has alternation rank at most $2t$.
 \end{lemma}
 \begin{proof}
-We apply \cref{lem:apex} iteratively, for less than $t$ steps.
-At step $i$ we maintain a subset $S\subseteq V(G)$ with $|S|=i$ and a subset $A'\subseteq A$ of size at least $R(m,t-i)$ such that each vertex of $S$ is at distance exactly $s+1$ from each vertex of $A'$ in $G$.
-In the beginning we have $i=0$, $S=\emptyset$, and $A'=A$, so the invariant is satisfied.
-In step $i$ of the construction, where $i<t$, we apply \cref{lem:apex} to $A'$ in $G-S$.
-This application either yields a subset $A''\subseteq A'$ that is $(2s+2)$-independent in $G-S$ and satisfies $|A''|\geq R(m,t-i-1)\geq m$,
-or a subset $A''\subseteq A'$ of size at least $R(m,t-i-1)$ together with a vertex $v\in V(G)\setminus S$ that is at distance exactly $s+1$ from each vertex of $A''$ in $G-S$
-In the former case we are done, as $A''$ and $S$ form a valid outcome of the lemma.
-In the latter case, 
-observe that $v$ is at distance exactly $s+1$ from each vertex of $A''$ also 
-in~$G$, as each vertex of $S$ is at distance exactly $s+1$ from each vertex 
-of $A''$ in~$G$,
-so the removal of $S$ from the graph does change the balls around vertices $A''$ of radius $s$; that is, $N^{G-S}_s[a]=N^{G}_s[a]$ for each $a\in A''$.
-Hence we may proceed with the construction having set $A':=A''$ and $S:=S\cup \{v\}$.
-
-It remains to prove that if the construction was carried out for $t$ steps, 
-yielding a set $S$ of size~$t$ and a subset $A'$ of size at least $R(m,0)=m$, then $K_t$ is a depth-$(s+1)$ minor of $G$, which is a contradiction.
-Let $(v_1,\ldots,v_t)$ be the enumeration of $S$ in the order of selection: vertex~$v_i$ was selected in the $i$-th round.
-By the construction, each vertex $v_i$ is at distance exactly $s+1$ from each vertex of $A'$ in $G$.
-Select any distinct vertices $a_1,\ldots,a_t\in A'$; they exist since $|A'|\geq m\geq t$.
-Next, for $i=1,\ldots,t$ define
-$$X_i=N^{G}_s[a_i]\cup \{v_i\}.$$
-Since $A'$ is $(2s+1)$-independent in $G$ and each vertex $v_i$ is at distance exactly $s+1$ from each vertex of $A'$ in $G$, we infer that sets $X_i$ are pairwise disjoint.
-Moreover, since $v_i$ is at distance $s+1$ from $a_i$, we also have that each $X_i$ induces a connected graph of radius at most $s+1$.
-Finally, observe that for each $i\neq j$, $v_i$ has a neighbor among $N^G_s[a_j]$, since $v_i$ is at distance $s+1$ from $a_j$ in $G$.
-This implies that $(X_i)_{i=1,\ldots,t}$ is a depth-$(s+1)$ minor model of $K_t$ in $G$.
+	
 \end{proof}
+
+Suppose that $A$ does not contain the principal vertices of the $1$-subdivision of the clique $K_t$.
+We consider two cases, and then argue that one of these cases must occur.
+
+In the first case, suppose that there is some node $w$
+  in the domain of $\tau$
+  which contains at least $m$ occurrences of $\dau$.
+	Let $B\subset A$ be the set of the labels of the 
+	fathers of all the daughters on the path corresponding to $w$, i.e.,
+  	$B=\set{\tau(u)\colon 
+  	u\dau \text{ is a prefix of }w}.$
+    Then $B$ has at least $m$ elements,
+    and, by construction, $B$ is a $2$-independent subset of $G$.  
+
+In the second case, suppose that there  is some node $w$ in the domain of $\tau$ which contains at least $\ell$ occurrences of $\son$.
+	Let $B\subset A$ be the set of the labels of the 
+	fathers of the sons on the path corresponding to $w$, i.e.,
+	$B=\set{\tau(u)\colon 
+	u\son \text{ is a prefix of }w}.$
+	Note that $B$ has at least $\ell$ elements,
+	and by construction, any two elements of $B$ are at mutual distance two. Applying Corollary~\ref{cor:biversity} to $B$ we conclude that there is a vertex $v$ in $G$ which has at least $\ell^{1/\alpha}$ neighbors in $B$.
+  
+   At least one of the two cases above must hold, as otherwise every node $w$ in the domain of $\tau$
+  would contain at most  $m-1$ occurrences of $\dau$
+  and at most $\ell-1$ occurrences of $\son$, and there
+are  ${{m+\ell}\choose m}-1$
+  such words, contradicting the assumption about 
+  the size of $A$.
+\end{proof}
+
+
+
+We now prove~\cref{lem:engine} in the case $r=2$,
+for graphs $G$ and their subsets $A$ 
+which do not contain the principal vertices of a $1$-subdivision of the clique $K_t$. In particular, this is implied 
+if $K_t\not\minor_1 G$, so in case $r=2$
+we can take $d=1$ in the formulation of the lemma.
+Our goal is to exhibit a large $2$-independent subset 
+of a large $1$-independent subset of  $G-S$, where $S$ is a small set. 
+To this end, we iteratively apply \cref{lem:apex} as long as  it results in the third case, yielding a vertex $v$ with many neighbhors in $A$. In this case, we add $v$ vertex to the set $S$, and apply the lemma again,
+restricting $A$ to $A\cap N(v)$. 
+The precise calculations follow.
+
+Let $G,t$ be as above, and fix some number $\alpha>2$. Let $\ell_0$ be the number granted by~\cref{lem:apex}, and denote $\beta= 2m\alpha$.
+We will apply the lemma in the following form of the following implication~($\ast$):
+for $G$ and $A$  as above, if $A$ does not contain a $2$-independent set of size $m$ and $|A|\ge (2\ell_0)^m$, then there is a vertex $v$ of $G$ which has
+at least $|A|^{1/\beta}$ neighbors in $A$.
+
+
+Suppose that $|A|\ge t^{\beta^t}$ and $|A|\ge (2\ell_0)^{m\cdot \beta^t}$.
+We construct a sequence  $A=A_0\supseteq A_1\supseteq\ldots$ 
+of $1$-independent subsets of $G$
+of length at most $m$,
+such that $|A_i|\ge |A_0|^{1/\beta^i}$,
+ as follows. Start with $S=\emptyset$, $A_0=A$, and 
+for $i=1,2,\ldots$,
+ apply~$(\ast)$ to the graph $G-S$ playing the role of $G$, 
+ $A_{i-1}$ playing the role of $A$.
+The assumptions are satisfied, since $$|A_{i-1}|\ge 
+|A_0|^{1/\beta^i}\ge |A_0|^{1/\beta^t}\ge (2\ell_0)^m.$$
+If $A_{i-1}$ contains a $2$-independent set of size $m$ in $G-S$, terminate.
+ Otherwise, there is a vertex $v_i$ of $G-S$
+ whose neighborhood in $G-S$ contains at least
+ $|A_{i-1}|^{1/\beta}$ elements of $A_{i-1}$.
+ Let $A_{i}$ consist of those elements, and add $v_i$
+ to the set $S$, and proceed by replacing $i$ by $i+1$.
+ 
+ Note that by construction, the vertex $v_i$ is connected in $G$
+ to all vertices of $A_{i}$. In particular, all the vertices $v_1,\ldots,v_i$ are connected to all the vertices of $A_{i}$
+ and $|A_i|\ge |A_0|^{1/\beta^i}\ge |A_0|^{1/\beta^t}\ge t$. In particular, as $G$
+ does not contain the $1$-subdivision of $K_t$,
+ the process must terminate with $i<t$.
+ Hence, at some point we must have obtained a $2$-independent subset of $G-S$ of size $m$.
+ Moreover, $|S|\le t$.
+
+
+\paragraph{General case}
+We now prove~\cref{lem:engine} in the general case.
+Suppose that $r=2s+i$, where $i$ is $1$ or $2$, and $s\in\N$. Let $A$ be an $(r-1)$-independent subset of a graph $G$. Consider the graph $G'$ obtained from $G$
+by contracting the $s$-neighborhood around each vertex $v\in A$. Identifying each vertex $v\in A$ with the resulting contracted ball in $G'$,  $A$ induces an $(i-1)$-independent subset in $G'$. 
+Taking $d=r-1$, the assumption $K_t\not\minor_d G$
+implies that $A$ does not contain the principle vertices of a $1$-subdivision of $K_t$, and so we may apply the already proved case to $G'$, yielding a subset $B$ of $A$ and a subset $S$ of $G'-A$
+so that $B$ is $i$-independent in $G'-S$. 
+This corresponds to a subset $B$ of $A$ and a subset $S$ of $G$
+so that $B$ is $r$-independent in $G-S$.
+This finishes  the proof of the general case of~\cref{lem:engine}.
+
+
 
 \paragraph*{Finishing the proof of \cref{thm:new-uqw}.}
 We now wrap up the proof of \cref{thm:new-uqw} by applying induction on the radius. 
