@@ -207,31 +207,25 @@ When processing the vertex $a$, do the following. Start with $w$ being the empty
   \medskip
 For a tree $\tau$, define its
 \emph{height} as one plus 
-the length of the longest word in the domain of $\tau$,
-and 
-its
- \emph{alternation rank}
-as the maximal number $k$ such that 
-the domain of $\tau$ contains a word with $k$ occurrences of 
-a $\dau$ followed immediately by a $\son$.
+the length of the longest word in the domain of $\tau$.
+For a word $w$, define an \emph{alternation} to be 
+a position $i$ such that $w_i\neq w_{i-1}$, where $w_0$ is assumed to be $\dau$.
+ The \emph{alternation rank} of the tree $\tau$ is the maximal number of alternations, over of all words in the domain of $\tau$.
 
 
 \begin{lemma}\label{lem:number-of-nodes}
-	Let $\tau$ be a tree of alternation rank at most $t$.
-	If $\tau$ has height at most $h$, then $\tau$ has at most $h^{t+1}$
-	vertices.
+	If $\tau$ has alternation rank at most $t$ and height at most $h$, then it has at most $h^{t+1}$
+	nodes.
 \end{lemma}
-\begin{proof}	
+\begin{proof}		
 	To each node $w$ of $\tau$ assign 
-	the set $X$ 
-	consisting of those numbers $i\in \set{1,\ldots,h}$
-	such that $w_i\neq w_{i-1}$, 
-	where $w_0$ is assumed to be equal $\dau$
-	and $w_i$ is assumed to be equal $\bot$ if $|w|<i\le h$, where $\bot$
-	is a symbol different from $\dau$ and $\son$.
-	The mapping $w\mapsto X$ is injective, and maps the domain of $\tau$
-to the family of nonempty subsets of  $\set{1,\ldots,h}$ of size at most $t+1$.
-This family has at most $h^{t+1}$ elements.	
+	the function $f_w:\set{1,\ldots,t+1}\to\set{1,\ldots,h}$ which
+	maps a number $i$ to the $i$th smallest index $j\ge 1$
+	such that $w_j\neq w_{j-1}$, if it exists, 
+	where $w_0$ is assumed to be equal $\dau$,
+	and if such an index $j$ does not exist, then $f_w(i)=|w|+1$.
+		The mapping $w\mapsto f_w$ is injective, hence the domain of $\tau$ 
+		has at most $h^{t+1}$ elements.	
 \end{proof}
 
 \begin{lemma}\label{thm:alternation-rank-type-tree}
@@ -239,6 +233,25 @@ Suppose that  $G$ is such that $K_t\not\minor_{2} G$.
 Then $\tau$ has alternation rank at most $2t$.
 \end{lemma}
 \begin{proof}
+	Let $w$ be a node of $\tau$ with alternation rank at least $2k$.  
+	In particular, there are nodes $a_1,b_1,\ldots,a_k,b_k$ in $A$
+	such that for each $i=1,\ldots,k$, 
+	the nodes in $\tau$ corresponding to $b_i,a_{i+1},b_{i+1},\ldots,a_k,b_k$ are  descendants of the son of the node which corresponds to $a_i$,
+	and the nodes corresponding to $a_{i+1},b_{i+1},\ldots,a_k,b_k$
+	are descendants of the daughter of the node which corresponds to $b_i$.
+	
+	\begin{claim}
+		For every pair $a_i,b_j$ with $1\le i\le j\le k$, there is a vertex $z_{ij}$
+		which is a common neighbor of $a_i$ and $b_j$,
+		and is not a neighbor of $b_s$, for $s\neq j$.
+	\end{claim}
+	\begin{proof}
+		If $i\le j$, then $d(a_i,b_j)\le 2$, but $d(a_i,b_j)>1$ since $A$
+		is independent. In particular, there is a vertex $z_{ij}$ which is a common neighbor of $a_i$ and $b_j$. 
+		Suppose that $z_{ij}$ is a neighbor of $b_s$, for some $s\neq j$. This implies that $d(b_j,b_s)\le 2$, which is impossible, 
+since
+		 the nodes corresponding to $b_s$ and $b_j$ in $\tau$ are such that one is a descendant of the daughter of the other, implying that $d(b_s,b_j)>2$.
+	\end{proof}
 	
 \end{proof}
 
