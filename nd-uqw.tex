@@ -160,12 +160,13 @@ We  now state the main building block of our proof as a lemma.
 \begin{lemma}\label{lem:apex}
 For every integer $t\in \N$ and real $\alpha>2$ 
 there is an integer $\ell_0\in\N$ with the following property.
-Let $m,l$ be integers with $\ell\ge \ell_0$. 
+Let $m,\ell$ be integers with $\ell\ge \ell_0$. 
 If~$G$ is a graph and $A$ is its $1$-independent subset
-with at least ${{m+\ell}\choose m}$ elements,
+with at least $(m+\ell)^{t}$ elements,
 then at least one of the following conditions hold:
 \begin{enumerate}
-  \item $A$ contains the principal vertices of a $1$-subdivision of a clique $K_t$ contained in $G$, 
+  % \item $A$ contains the principal vertices of a $1$-subdivision of a clique $K_t$ contained in $G$,
+  \item $K_t\minor_{2} G$,
 \item  $A$ contains a $2$-independent set of size $m$, 
 \item  some vertex $v$ of $G$
 has at least $\ell^{1/\alpha}$ neighbors in $A$.
@@ -187,7 +188,7 @@ extract the set $A'$. In stability theory, similar trees are called \emph{type t
 	and $w$ is the \emph{father} of both $w\son$ and $w\dau$.
 	We consider
 	 finite, labeled, rooted, binary trees, which are called simply trees below, and are defined as follows.
-	 A \emph{tree} is a partial labeling $\tau\from \set{\dau,\son}^*\to U$ whose domain is a finite set of nodes which is closed under taking fathers.
+	 A \emph{tree} is a partial labeling $\tau\from \set{\dau,\son}^*\to U$ whose domain is a finite set of nodes, called the \emph{nodes of $\tau$}, which is closed under taking fathers.
   
   Let $G$ be a graph, $A\subset V(G)$ a $1$-independent set of its vertices
   and $\bar a$ an enumeration of $A$.
@@ -206,31 +207,32 @@ When processing the vertex $a$, do the following. Start with $w$ being the empty
   
   \medskip
 For a tree $\tau$, define its
-\emph{height} as one plus 
+\emph{height} as 
 the length of the longest word in the domain of $\tau$.
 For a word $w$, define an \emph{alternation} to be 
 a position $i$ such that $w_i\neq w_{i-1}$, where $w_0$ is assumed to be $\dau$.
- The \emph{alternation rank} of the tree $\tau$ is the maximal number of alternations, over of all words in the domain of $\tau$.
+ The \emph{alternation rank} of the tree $\tau$ is the maximum of the number of alternations of $w$, over all nodes $w$ of $\tau$.
 
 
 \begin{lemma}\label{lem:number-of-nodes}
-	If $\tau$ has alternation rank at most $t$ and height at most $h$, then it has at most $h^{t+1}$
+Let $h,t\ge 2$.	If $\tau$ has alternation rank at most $t-1$ and height at most $h-1$, then $\tau$ has fewer than $h^{t}$
 	nodes.
 \end{lemma}
 \begin{proof}		
 	To each node $w$ of $\tau$ assign 
-	the function $f_w:\set{1,\ldots,t+1}\to\set{1,\ldots,h}$ which
+	the function $f_w:\set{1,\ldots,t}\to\set{1,\ldots,h}$ which
 	maps a number $i$ to the $i$th smallest index $j\ge 1$
 	such that $w_j\neq w_{j-1}$, if it exists, 
 	where $w_0$ is assumed to be equal $\dau$,
 	and if such an index $j$ does not exist, then $f_w(i)=|w|+1$.
-		The mapping $w\mapsto f_w$ is injective, hence the domain of $\tau$ 
-		has at most $h^{t+1}$ elements.	
+		The mapping $w\mapsto f_w$ is injective
+and its image is contained in monotone functions, hence the domain of $\tau$ 
+		has fewer than $h^{t}$ elements.
 \end{proof}
 
 \begin{lemma}\label{thm:alternation-rank-type-tree}
-Suppose that  $G$ is such that $K_t\not\minor_{2} G$.
-Then $\tau$ has alternation rank at most $2t$.
+Suppose that  $K_t\not\minor_{2} G$.
+Then $\tau$ has alternation rank at most $2t-1$.
 \end{lemma}
 \begin{proof}
 	Let $w$ be a node of $\tau$ with alternation rank at least $2k$.  
@@ -246,51 +248,48 @@ Then $\tau$ has alternation rank at most $2t$.
 		and is not a neighbor of $b_s$, for $s\neq j$.
 	\end{claim}
 	\begin{proof}
-		If $i\le j$, then $d(a_i,b_j)\le 2$, but $d(a_i,b_j)>1$ since $A$
+		Note that if $i\le j$, then $d(a_i,b_j)\le 2$, however, $d(a_i,b_j)>1$ since $A$
 		is independent. In particular, there is a vertex $z_{ij}$ which is a common neighbor of $a_i$ and $b_j$. 
 		Suppose that $z_{ij}$ is a neighbor of $b_s$, for some $s\neq j$. This implies that $d(b_j,b_s)\le 2$, which is impossible, 
 since
 		 the nodes corresponding to $b_s$ and $b_j$ in $\tau$ are such that one is a descendant of the daughter of the other, implying that $d(b_s,b_j)>2$.
 	\end{proof}
-	
-\end{proof}
-
-Suppose that $A$ does not contain the principal vertices of the $1$-subdivision of the clique $K_t$.
-We consider two cases, and then argue that one of these cases must occur.
-
-In the first case, suppose that there is some node $w$
-  in the domain of $\tau$
-  which contains at least $m$ occurrences of $\dau$.
-	Let $B\subset A$ be the set of the labels of the 
-	fathers of all the daughters on the path corresponding to $w$, i.e.,
-  	$B=\set{\tau(u)\colon 
-  	u\dau \text{ is a prefix of }w}.$
-    Then $B$ has at least $m$ elements,
-    and, by construction, $B$ is a $2$-independent subset of $G$.  
-
-In the second case, suppose that there  is some node $w$ in the domain of $\tau$ which contains at least $\ell$ occurrences of $\son$.
-	Let $B\subset A$ be the set of the labels of the 
-	fathers of the sons on the path corresponding to $w$, i.e.,
-	$B=\set{\tau(u)\colon 
-	u\son \text{ is a prefix of }w}.$
-	Note that $B$ has at least $\ell$ elements,
-	and by construction, any two elements of $B$ are at mutual distance two. Applying Corollary~\ref{cor:biversity} to $B$ we conclude that there is a vertex $v$ in $G$ which has at least $\ell^{1/\alpha}$ neighbors in $B$.
   
-   At least one of the two cases above must hold, as otherwise every node $w$ in the domain of $\tau$
-  would contain at most  $m-1$ occurrences of $\dau$
-  and at most $\ell-1$ occurrences of $\son$, and there
-are  ${{m+\ell}\choose m}-1$
-  such words, contradicting the assumption about 
-  the size of $A$.
+
+
+For each $j=1,\ldots,k$, define the graph $B_j$
+as the subgraph of $G$ induced by the set
+$\set{a_j,b_j}\cup\set{z_{ij}\mid 1\le i\le  j}$.
+By the claim above we have that the graphs $B_j$
+are pairwise disjoint, for $j=1,\ldots,k$.
+Moreover, for $1\le i\le j\le k$, there is an edge between $B_i$
+and $B_j$, namely, the edge between $z_{ij}\in B_j$
+and $a_i\in B_i$.
+Hence, the graphs $B_j$, for $1\le j\le l$, define a depth-$(2s+2)$ minor model of $K_k$ in $G$. Since $K_t\not\minor_{2}G$, this implies that $k<t$, proving~\cref{thm:alternation-rank-type-tree}.
+\end{proof}
+
+To prove~\cref{lem:apex}, let $\ell_0$
+be the number obtained from~\cref{cor:biversity}.
+Fix integers $\ell\ge \ell_0$ and $m$, and define $h=m+\ell$.
+Let $A$ be an independent subset of $G$
+of size at least $h^{t}$.
+
+Suppose that the first case of~\cref{lem:apex} does not hold. In particular $K_t\not\minor_2 G$, so by~\cref{thm:alternation-rank-type-tree}, $\tau$ has alternation rank at most $2t-1$. From~\cref{lem:number-of-nodes} 
+we conclude that $\tau$  has height at least~$h$.
+As $h=m+\ell$, it follows that either $\tau$  has a node $w$ which contains at least $m$ letters $\dau$, or $\tau$ has a node which contains  at least $\ell$ letters $\son$.
+
+Consider the first case, i.e., there is a node $w$ of $\tau$
+which contains at least $m$ letters $\dau$, and let $X$
+be the set of all nodes $\tau(v)$ such that $v\dau$ is a prefix of $w$. Then, by construction, $X$ is a $2$-independent subset of $G$ of size at least $m$, so the second case of the lemma holds.
+
+Finally, consider the second case, i.e., there is anode $w$ in $\tau$ which contains at least $\ell$ letters $\son$, and let 
+$Y$ be the set of all nodes $\tau(v)$ such that $v\son$ is a prefix of $w$. Then, by construction, $Y\subset A$ is a set of vertices which are mutually at distance exactly $2$ in $G$. By~\cref{cor:biversity}, there is a vertex $v\in G$
+with at least $\ell^{1/\alpha}$ neighbors in $Y$.
 \end{proof}
 
 
 
-We now prove~\cref{lem:engine} in the case $r=2$,
-for graphs $G$ and their subsets $A$ 
-which do not contain the principal vertices of a $1$-subdivision of the clique $K_t$. In particular, this is implied 
-if $K_t\not\minor_1 G$, so in case $r=2$
-we can take $d=1$ in the formulation of the lemma.
+We now prove~\cref{lem:engine} in the case $r=2$, and for $d=2$, i.e., we assume that $A$ is a sufficiently large subset of a graph $G$ such that $K_t\not\minor_2 G$.
 Our goal is to exhibit a large $2$-independent subset 
 of a large $1$-independent subset of  $G-S$, where $S$ is a small set. 
 To this end, we iteratively apply \cref{lem:apex} as long as  it results in the third case, yielding a vertex $v$ with many neighbhors in $A$. In this case, we add $v$ vertex to the set $S$, and apply the lemma again,
@@ -298,7 +297,7 @@ restricting $A$ to $A\cap N(v)$.
 The precise calculations follow.
 
 Let $G,t$ be as above, and fix some number $\alpha>2$. Let $\ell_0$ be the number granted by~\cref{lem:apex}, and denote $\beta= 2m\alpha$.
-We will apply the lemma in the following form of the following implication~($\ast$):
+We will apply the lemma in the form of the following implication~($\ast$):
 for $G$ and $A$  as above, if $A$ does not contain a $2$-independent set of size $m$ and $|A|\ge (2\ell_0)^m$, then there is a vertex $v$ of $G$ which has
 at least $|A|^{1/\beta}$ neighbors in $A$.
 
