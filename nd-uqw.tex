@@ -287,7 +287,17 @@ $Y$ be the set of all nodes $\tau(v)$ such that $v\son$ is a prefix of $w$. Then
 with at least $\ell^{1/\alpha}$ neighbors in $Y$.
 \end{proof}
 
+\begin{corollary}\label{cor:apex}
+	Let $t$ be an integer ant $\beta>2\cdot t$ a real. 
+	There is an integer $m_0$ such that for all $m\ge m_0,k\ge 1$, the following holds.
+	If $G$ is a graph such that $K_t\not\minor_2 G$,
+	$A\subset V(G)$ is an independent set which does not contain a $2$-independent set of size $m$, and $|A|\ge (k\cdot m)^{\beta ^k}$
+	then there is a vertex $v$ of $G$ such that $|N_G(v)\cap A| \ge ((k-1)\cdot m)^{\beta^{k-1}}$.
+\end{corollary}
 
+\begin{proof}
+	
+\end{proof}
 
 We now prove~\cref{lem:engine} in the case $r=2$, and for $d=2$, i.e., we assume that $A$ is a sufficiently large subset of a graph $G$ such that $K_t\not\minor_2 G$.
 Our goal is to exhibit a large $2$-independent subset 
@@ -296,35 +306,32 @@ To this end, we iteratively apply \cref{lem:apex} as long as  it results in the 
 restricting $A$ to $A\cap N(v)$. 
 The precise calculations follow.
 
-Let $G,t$ be as above, and fix some number $\alpha>2$. Let $\ell_0$ be the number granted by~\cref{lem:apex}, and denote $\beta= 2m\alpha$.
-We will apply the lemma in the form of the following implication~($\ast$):
-for $G$ and $A$  as above, if $A$ does not contain a $2$-independent set of size $m$ and $|A|\ge (2\ell_0)^m$, then there is a vertex $v$ of $G$ which has
-at least $|A|^{1/\beta}$ neighbors in $A$.
+Let $G,t$ be such that $K_t\not\minor_2 G$, and fix some number $\beta>2\cdot t$. Let $m_0$ be the number granted by~\cref{cor:apex}. If $m<m_0$, replace $m$ by $m_0$. We will find 
+a subset of $A$ of size $m$ which is $2$-independent in $G-S$, where $|S|\le t$.
 
 
-Suppose that $|A|\ge t^{\beta^t}$ and $|A|\ge (2\ell_0)^{m\cdot \beta^t}$.
-We construct a sequence  $A=A_0\supseteq A_1\supseteq\ldots$ 
+Assume that $|A|\ge ((t+1)\cdot \beta)^{\beta^{t+1}}$. By induction, we
+ construct a sequence  $A=A_0\supseteq A_1\supseteq\ldots$ 
 of $1$-independent subsets of $G$
-of length at most $m$,
-such that $|A_i|\ge |A_0|^{1/\beta^i}$,
- as follows. Start with $S=\emptyset$, $A_0=A$, and 
-for $i=1,2,\ldots$,
- apply~$(\ast)$ to the graph $G-S$ playing the role of $G$, 
- $A_{i-1}$ playing the role of $A$.
-The assumptions are satisfied, since $$|A_{i-1}|\ge 
-|A_0|^{1/\beta^i}\ge |A_0|^{1/\beta^t}\ge (2\ell_0)^m.$$
+of length at most $t$,
+such that $|A_i|\ge ((t+1-i)\cdot\beta)^{\beta^{t+1-i}}$,
+ as follows. Start with $A_0=A$. We maintain a set $S$ of vertices of $G$ which is initially empty.
+For $i=1,2,\ldots$,
+ apply~\cref{cor:apex} to the graph $G-S$ playing the role of $G$, 
+$t-i$ playing the role of $k$ and $A_{i-1}$ playing the role of $A$.
 If $A_{i-1}$ contains a $2$-independent set of size $m$ in $G-S$, terminate.
  Otherwise, there is a vertex $v_i$ of $G-S$
  whose neighborhood in $G-S$ contains at least
- $|A_{i-1}|^{1/\beta}$ elements of $A_{i-1}$.
- Let $A_{i}$ consist of those elements, and add $v_i$
- to the set $S$, and proceed by replacing $i$ by $i+1$.
+ $((t+1-i)\cdot\beta)^{\beta^{t+1-i}}$ vertices of $A_{i-1}$.
+ Let $A_{i}$ consist of those vertices, and add $v_i$
+ to the set $S$. Proceed by replacing $i$ by $i+1$.
  
  Note that by construction, the vertex $v_i$ is connected in $G$
  to all vertices of $A_{i}$. In particular, all the vertices $v_1,\ldots,v_i$ are connected to all the vertices of $A_{i}$
- and $|A_i|\ge |A_0|^{1/\beta^i}\ge |A_0|^{1/\beta^t}\ge t$. In particular, as $G$
- does not contain the $1$-subdivision of $K_t$,
- the process must terminate with $i<t$.
+ and $|A_i|\ge \beta^\beta\ge t^2$ for $i\le t$. Hence,
+if $v_1,\ldots,v_i$ and $A_i$ are constructed, 
+then $G$ contains the complete bipartite graph with $i$ vertices in one part and $t^2$ vertices in the other part, and, in particular, $K_i\minor_2 G$.
+ Since $K_t\not\minor_2 G$, the process must terminate with $i<t$.
  Hence, at some point we must have obtained a $2$-independent subset of $G-S$ of size $m$.
  Moreover, $|S|\le t$.
 
