@@ -40,9 +40,8 @@ complexity in nowhere dense graph classes, due to~\cite{gajarsky2017kernelizatio
 For sake of completeness, we present the entire proof of~\cref{thm:new-uqw}.
 
 
-The general idea behind the proof of 
-\cref{thm:new-uqw} is to prove the following 
-weaker variant, for each radius $r$:
+To prove
+\cref{thm:new-uqw}, we first prove its variant~\cref{lem:engine} below, in which we assume that $A$ is already $(r-1)$-independent, and then chain the lemma for $r$ ranging from $1$ to the target value of $r$ to obtain the general statement.
 
 \begin{lemma}\label{lem:engine}
 For all $r,t\in \N$ there exists a function $L\colon \N\to \N$
@@ -51,11 +50,6 @@ Given a number $m\in \N$ and graph $G$ such that $K_t\not\minor_d G$ and
 $(r-1)$-independent set of vertices $A\subset V(G)$ of size at least $L(m)$ there is a set $S\subseteq V(G)$ of size at most $t$ such that $A-S$ contains a subset of size $m$ which is $r$-independent in $G-S$.
 \end{lemma}
 
-Note that the main difference between the statement of this lemma and~\cref{thm:new-uqw} is that here we assume that 
-$A$ is already $(r-1)$-independent, whereas in~\cref{thm:new-uqw} we make no assumptions on $A$. However, the theorem then follows by an easy induction: to find an $r$-independent set in a set $A$, we start with 
-the very large ($0$-independent) set $A_0=A$, in which (after removing 
-$L(1)$ vertices from $G$)
-we find a very large $1$-independent subset $A_1$, in which (after further removing $L(2)$ vertices from $G$) we find a large $2$-independent subset $A_2$, etc., until arriving at an $r$-independent subset $A_r$ of size $m$.
 
 To prove~\cref{lem:engine}, we distinguish two special cases: the case of $r=1$ and the case $r=2$. The case of general $r$ then reduces to one of these two cases, depending on the parity of $r$, by observing that a $(2s+1)$-independent set $A$ in $G$
 induces a $1$-independent set in $G$ with the balls of radius $s$ around the vertices of $A$ contracted, and,
@@ -273,7 +267,7 @@ are pairwise disjoint, for $j=1,\ldots,k$.
 Moreover, for $1\le i\le j\le k$, there is an edge between $B_i$
 and $B_j$, namely, the edge between $z_{ij}\in B_j$
 and $a_i\in B_i$.
-Hence, the graphs $B_j$, for $1\le j\le l$, define a depth-$(2s+2)$ minor model of $K_k$ in $G$. Since $K_t\not\minor_{2}G$, this implies that $k<t$, proving~\cref{thm:alternation-rank-type-tree}.
+Hence, the graphs $B_j$, for $1\le j\le l$, define a depth-$2$ minor model of $K_k$ in $G$. Since $K_t\not\minor_{2}G$, this implies that $k<t$, proving~\cref{thm:alternation-rank-type-tree}.
 \end{proof}
 
 To prove~\cref{lem:apex}, let $\ell_0$
@@ -293,8 +287,10 @@ be the set of all nodes $\tau(v)$ such that $v\dau$ is a prefix of $w$. Then, by
 Finally, consider the second case, i.e., there is anode $w$ in $\tau$ which contains at least $\ell$ letters $\son$, and let 
 $Y$ be the set of all nodes $\tau(v)$ such that $v\son$ is a prefix of $w$. Then, by construction, $Y\subset A$ is a set of vertices which are mutually at distance exactly $2$ in $G$. By~\cref{cor:biversity}, there is a vertex $v\in G$
 with at least $\ell^{\alpha}$ neighbors in $Y$.
+This finishes the proof of~\cref{lem:apex}.
 \end{proof}
 
+We will apply~\cref{lem:apex} in the following form.
 \begin{corollary}\label{cor:apex}
 	Let $t$ be an integer ant $\beta>2\cdot t$ a real. 
 	There is an integer $m_0$ such that for all $m\ge m_0,k\ge 1$, the following holds.
@@ -314,10 +310,9 @@ we may  apply Lemma~\ref{lem:apex},
 yielding a vertex $v$ with $\ell^\alpha=(k\cdot m)^{\beta^{k-1}}$ neighbors in~$A$.
 \end{proof}
 
-\begin{proof}	
-We now prove~\cref{lem:engine} in the case $r=2$, and for $d=2$, i.e., we assume that $A$ is a sufficiently large subset of a graph $G$ such that $K_t\not\minor_2 G$.
-Our goal is to exhibit a large $2$-independent subset 
-of a large $1$-independent subset of  $G-S$, where $S$ is a small set. 
+% \begin{proof}  [of~\cref{lem:engine}]
+We now prove~\cref{lem:engine} in the case $r=2$, and for $d=2$, i.e., we show  that if $A$ is a sufficiently large $1$-independent subset of a graph $G$ such that $K_t\not\minor_2 G$, then $A$ contains a subset of size $m$
+which is  $2$-independent in  $G-S$, where $S$ has at most $t$ elements. 
 To this end, we iteratively apply \cref{lem:apex} as long as  it results in the third case, yielding a vertex $v$ with many neighbhors in $A$. In this case, we add $v$ vertex to the set $S$, and apply the lemma again,
 restricting $A$ to $A\cap N(v)$. 
 The precise calculations follow.
@@ -334,7 +329,8 @@ such that $|A_i|\ge ((t+1-i)\cdot m)^{\beta^{t-i}}$,
  as follows. Start with $A_0=A$. We maintain a set $S$ of vertices of $G$ which is initially empty.
 For $i=1,2,\ldots$,
  apply~\cref{cor:apex} to the graph $G-S$ playing the role of $G$, 
-$t-i$ playing the role of $k$ and $A_{i-1}$ playing the role of $A$.
+$t-i$ playing the role of $k$ and $A_{i-1}$
+ playing the role of $A$.
 If $A_{i-1}$ contains a $2$-independent set of size $m$ in $G-S$, terminate.
  Otherwise, there is a vertex $v_i$ of $G-S$
  whose neighborhood in $G-S$ contains at least
@@ -347,22 +343,43 @@ Suppose that the construction proceeds for $k\le t$ steps.
 By construction, each vertex $v_i$, for $i\le k$, is connected in $G$
  to all vertices of $A_{j}$, for $i\le j\le k$. In particular, all the vertices $v_1,\ldots,v_k$ are neighbors of all the vertices of $A_{k}$
  and $|A_k|\ge t+1-k$.
- In particular, we may choose pairwise distinct vertices $w_1,\ldots,w_k$,
- such that $w_i\in A_i$ and $w_i$ is a neighbor of $v_i$.
- Hence, the connected subgraphs $\set{w_i,v_i}$ of $G$ yield a depth-$2$ minor model of $K_k$ in $G$.
+We may choose pairwise distinct vertices $w_1,\ldots,w_k$,
+ so that $w_i\in A_i$ and $w_i$ is a neighbor of $v_i$.
+ Hence, the connected subgraphs $\set{w_i,v_i}$ of $G$ yield a depth-$1$ minor model of $K_k$ in $G$.
  Since $K_t\not\minor_2 G$, we must have $k<t$, so the process terminates before $t$ steps.
  Therefore, at some point we must have obtained a $2$-independent subset of $G-S$ of size $m$.
  Moreover, $|S|\le t$.
  
  This proves~\cref{lem:engine} in the case $r=2$, for $d=2$, and for the function $L$ defined by $L(m)=((t+1)\cdot m)^{\beta^t}$
  for $m\ge m_0$ and $L(m)=L(m_0)$ for $m<m_0$ (where $\beta>2\cdot t$ is any fixed constant and $m_0$ is obtained from~\cref{cor:apex}).
-\end{proof}
+% \end{proof}
 
 
-\paragraph{General case}
-We now prove~\cref{lem:engine} in the general case.
-Suppose that $r=2s+i$, where $i$ is $1$ or $2$, and $s\in\N$. Let $A$ be an $(r-1)$-independent subset of a graph $G$. Consider the graph $G'$ obtained from $G$
-by contracting the $s$-neighborhood around each vertex $v\in A$. Identifying each vertex $v\in A$ with the resulting contracted ball in $G'$,  $A$ induces an $(i-1)$-independent subset in $G'$. 
+\paragraph{Odd case.}
+We prove~\cref{lem:engine} in the case $r=2s+1$, for some $s\in \N$. Suppose that $K_t\not\minor_s G$.
+ Let $A$ be an $2s$-independent subset of a graph $G$. Consider the graph $G'$ obtained from $G$
+by contracting the (pairwise disjoint) balls of radius $s$ around each vertex $v\in A$.
+ Let $A'$ denote the set of vertices of $G'$ corresponding to the contracted balls. There is an obvious bijection between $A$ and $A'$.
+From $K_t\not\minor_s G$ it follows that $G'$ does not contain $K_t$. Applying the already proved case $r=1$ to $G'$ and $A'$, we conclude that 
+if $|A|=|A'|\ge {m+t-2\choose t-1}$ then
+ $A'$ contains an independent subset of size $m$,
+ which corresponds to a $2s+1$-independent subset of $G$.
+ 
+ 
+ \paragraph{Even case.}
+ Finally,
+ we prove~\cref{lem:engine} in the case $r=2s+2$, for some $s\in \N$. Suppose that $K_t\not\minor_{2s+2} G$.
+ Let $A$ be an $2s+1$-independent subset of a graph $G$. Consider the graph $G'$ obtained from $G$
+by contracting the (pairwise disjoint) balls of radius $s$ around each vertex $v\in A$.
+ Let $A'$ denote the set of vertices of $G'$ corresponding to the contracted balls. Again, there is a bijection between $A$ and $A'$. Note that
+this time, $A'$ is a $1$-independent subset of $G'$.
+From $K_t\not\minor_{2s+2} G$ it follows that $K_t\not\minor_2 G'$. Applying the already proved case $r=2$ to $G'$ and $A'$, we conclude that 
+if $|A|=|A'|\ge {m+t-2\choose t-1}$ then
+ $A'$ contains a $2$-independent subset of size $m$,
+ which corresponds to a $2s+2$-independent subset of $G$.
+ 
+ 
+ 
 Taking $d=r-1$, the assumption $K_t\not\minor_d G$
 implies that $A$ does not contain the principle vertices of a $1$-subdivision of $K_t$, and so we may apply the already proved case to $G'$, yielding a subset $B$ of $A$ and a subset $S$ of $G'-A$
 so that $B$ is $i$-independent in $G'-S$. 
