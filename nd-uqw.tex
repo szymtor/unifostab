@@ -41,7 +41,7 @@ For sake of completeness, we present the entire proof of~\cref{thm:new-uqw}.
 
 
 To prove
-\cref{thm:new-uqw}, we first prove its variant~\cref{lem:engine} below, in which we assume that $A$ is already $(r-1)$-independent, and then chain the lemma for $r$ ranging from $1$ to the target value of $r$ to obtain the general statement.
+\cref{thm:new-uqw}, we first prove its variant,~\cref{lem:engine} below, in which we assume that $A$ is already $(r-1)$-independent, and then chain the lemma for $r$ ranging from $1$ to the target value of $r$ to obtain the general statement.
 
 \begin{lemma}\label{lem:engine}
 For all $t\in \N$ there exists a function $L\colon \N\to \N$
@@ -55,26 +55,15 @@ then every vertex of $S$ is at distance exactly $ r/2$ from every vertex of $A'$
 Finally, given $G$ and $A$, the sets $A'$ and $S$ can be computed in time $\Oof_{r,t}(|A|^c\cdot |E(G)|)$, where $c$ is some universal constant.
 \end{lemma}
 
-\subsection{Proof of~\cref{lem:engine}}
+We prove~\cref{lem:engine} in Section~\ref{sec:engine}, but  a very rough sketch is as follows.
+The  case of general~$r$ reduces to the case $r=1$ or $r=2$, depending on the parity of $r$,
+by contracting the balls of radius $\lceil \frac {r-1} 2\rceil $ around the vertices in $A$ to single points.
+The case of $r=1$ follows immediately from Ramsey's theorem. 
+It turns out that the case $r=2$ is substantially more difficult.
+We start by formulating and proving the main technical result needed for proving the case $r=2$.
 
-To prove~\cref{lem:engine}, we distinguish two special cases: the case of $r=1$ and the case $r=2$. The case of general $r$ then reduces to one of these two cases, depending on the parity of $r$, by observing that a $(2s+1)$-independent set $A$ in $G$
-induces a $1$-independent set in $G$ with the balls of radius $s$ around the vertices of $A$ contracted, and,
-similarly, a $(2s+2)$-independent set $A$ in $G$
-induces a $2$-independent set in $G$ with the balls of radius $s$ around the vertices of $A$ contracted.
-
-We start by proving~\cref{lem:engine} in the case $r=1$,
-then we prove it in the case $r=2$. Next we show how the general case reduces to one of those two, and, finally, we deduce~\cref{thm:new-uqw} from~\cref{lem:engine}.
-
-\paragraph{Case $r=1$.}
-We prove~\cref{lem:engine} in the case $r=1$.
-Let $d=0$, so $K_t\not\minor_d G$ amounts to saying that $G$
-does not contain a clique of size $t$. By Ramsey's Theorem, in any graph every set of size $\binom{m+t-2}{t-1}$ contains an
-independent set $A'$ of size $m$ or a clique of size $t$. Therefore, 
-taking $L(m)$ as the above binomial coefficient yields~\cref{lem:engine} in case $r=0$, for $S=\emptyset$. Moreover, the set $A'$ can be computed from $G$ and $A$
-in time~$\Oof(|A|\cdot |E(G)|)$, by simulating the proof of Ramsey's theorem.
-
-\paragraph{Case $r=2$.}
-We prove~\cref{lem:engine} in the case $r=2$. The main tool is the following Ramsey-like result.
+\subsection{The main technical lemma}
+The main tool is the following Ramsey-like result.
 
 \begin{lemma}\label{lem:apex}
 For every integer $t\in \N$ and positive real $\alpha<\frac 1 2$ 
@@ -309,9 +298,30 @@ which belongs to the largest number of those neighborhoods. The overall running 
 $\Oof_{r,t}(|A|^c\cdot |E(G)|)$, for some constant $c$, as required.
 \end{proof}
 
+\subsection{Proof of~\cref{lem:engine}}
+\label{sec:engine}
+% To prove~\cref{lem:engine}, we distinguish two special cases: the case of $r=1$ and the case $r=2$. The case of general $r$ then reduces to one of these two cases, depending on the parity of $r$, by observing that a $(2s+1)$-independent set $A$ in $G$
+% induces a $1$-independent set in $G$ with the balls of radius $s$ around the vertices of $A$ contracted, and,
+% similarly, a $(2s+2)$-independent set $A$ in $G$
+% induces a $2$-independent set in $G$ with the balls of radius $s$ around the vertices of $A$ contracted.
+
+We start by proving~\cref{lem:engine} in the case $r=1$,
+then we prove it in the case $r=2$. Next we show how the general case reduces to one of those two.
+% , and, finally, we deduce~\cref{thm:new-uqw} from~\cref{lem:engine}.
+
+\paragraph{Case $r=1$.}
+We prove~\cref{lem:engine} in the case $r=1$.
+Let $d=0$, so $K_t\not\minor_d G$ amounts to saying that $G$
+does not contain a clique of size $t$. By Ramsey's Theorem, in any graph every set of size $\binom{m+t-2}{t-1}$ contains an
+independent set $A'$ of size $m$ or a clique of size $t$. Therefore, 
+taking $L(m)$ as the above binomial coefficient yields~\cref{lem:engine} in case $r=0$, for $S=\emptyset$. Moreover, the set $A'$ can be computed from $G$ and $A$
+in time~$\Oof(|A|\cdot |E(G)|)$, by simulating the proof of Ramsey's theorem.
+
+\paragraph{Case $r=2$.}
+We prove~\cref{lem:engine} in the case $r=2$. 
 We will apply~\cref{lem:apex} in the following form.
 \begin{corollary}\label{cor:apex}
-	Let $t$ be an integer ant $\beta>2\cdot t$ a real. 
+	Let $t$ be an integer and $\beta>2\cdot t$ a real. 
 	There is an integer $m_0$ such that for all $m\ge m_0,k\ge 1$, the following holds.
 	If $G$ is a graph such that $K_t\not\minor_2 G$,
 	$A\subset V(G)$ is an independent set which does not contain a $2$-independent set of size $m$, and $|A|\ge ((k+1)\cdot m)^{\beta ^k}$
@@ -359,7 +369,7 @@ If $A_{i-1}$ contains a $2$-independent set of size $m$ in $G-S$, terminate.
   Proceed by replacing $i$ by $i+1$.
 
 \begin{claim}\label{claim:at-most-t}
-	The construction halts after fewer than $t$ steps. 
+	The construction halts after less than $t$ steps.
 \end{claim}
 \begin{proof}
 Suppose that the construction proceeds for $k\le t$ steps.
@@ -439,7 +449,7 @@ should be then replaced by the negation of the above condition.
 
 
 
-\subsection*{Proof of \cref{thm:new-uqw}.}
+\subsection*{Proof of \cref{thm:new-uqw}}
 We now wrap up the proof of \cref{thm:new-uqw} by iteratively applying~\cref{lem:engine}.
 
 %\begin{lemma}\label{lem:ramsey2}
