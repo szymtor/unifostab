@@ -52,6 +52,7 @@ $(r-1)$-independent set of vertices $A\subset V(G)$ of size at least $L(m)$ ther
 
 Moreover, if $r$ is odd then $S$ is empty, and if $r$ is even,
 then every vertex of $S$ is at distance exactly $ r/2$ from every vertex of $A'$.
+Finally, given $G$ and $A$, the sets $A'$ and $S$ can be computed in time $\Oof_{r,t}(|A|^c\cdot |E(G)|)$, where $c$ is some universal constant.
 \end{lemma}
 
 \subsection{Proof of~\cref{lem:engine}}
@@ -68,13 +69,35 @@ then we prove it in the case $r=2$. Next we show how the general case reduces to
 We prove~\cref{lem:engine} in the case $r=1$.
 Let $d=0$, so $K_t\not\minor_d G$ amounts to saying that $G$
 does not contain a clique of size $t$. By Ramsey's Theorem, in any graph every set of size $\binom{m+t-2}{t-1}$ contains an
-independent set of size $m$ or a clique of size $t$. Therefore, 
-taking $L(m)$ as the above binomial coefficient yields~\cref{lem:engine} in case $r=0$, for $S=\emptyset$.
+independent set $A'$ of size $m$ or a clique of size $t$. Therefore, 
+taking $L(m)$ as the above binomial coefficient yields~\cref{lem:engine} in case $r=0$, for $S=\emptyset$. Moreover, the set $A'$ can be computed from $G$ and $A$
+in time~$\Oof(|A|\cdot |E(G)|)$, by simulating the proof of Ramsey's theorem.
 
 \paragraph{Case $r=2$.}
-We prove~\cref{lem:engine} in the case $r=2$.
-For the second, more intricate case, 
-we employ one more result: the bound on the number of distinct neighborhoods in a graph from a nowhere dense class.
+We prove~\cref{lem:engine} in the case $r=2$. The main tool is the following Ramsey-like result.
+
+\begin{lemma}\label{lem:apex}
+For every integer $t\in \N$ and positive real $\alpha<\frac 1 2$ 
+there is an integer $\ell_0\in\N$ with the following property.
+Let $m,\ell$ be integers with $\ell\ge \ell_0$. 
+If~$G$ is a graph and $A$ is its $1$-independent subset
+with at least $(m+\ell)^{t}$ elements,
+then at least one of the following conditions hold:
+\begin{enumerate}
+  % \item $A$ contains the principal vertices of a $1$-subdivision of a clique $K_t$ contained in $G$,
+  \item $K_t\minor_{2} G$,
+\item  $A$ contains a $2$-independent set of size $m$, 
+\item  some vertex $v$ of $G$
+has at least $\ell^{\alpha}$ neighbors in $A$.
+\end{enumerate}
+Moreover, in each case, the corresponding structure (a depth-$2$ minor model, an $2$-independent set of size $m$ or the vertex $v$) can be computed in $\Oof(|A|^c\cdot |E(G)|)$, where $c$  is some universal constant.
+\end{lemma}
+
+Note that a similar statement as that of~\cref{lem:apex}
+can be obtained without much effort by employing Ramsey's theorem, as has been done in~\cite{}; however, the bound $(m+\ell)^t$ above is then replaced by a bound which is not polynomial in $m$, and is therefore insufficient for our needs.
+
+\medskip
+To prove~\cref{lem:apex}, we employ the following result: the bound on the number of distinct neighborhoods in a graph from a nowhere dense class.
 
 \begin{lemma}[adaptation of Lemma 4.11 in \cite{gajarsky2017kernelization}]\label{lem:diversity}
 Let $G$ be a graph such that $K_t\not\minor_{1} G$ for some constant $t\in \N$. 
@@ -162,26 +185,9 @@ From \cref{lem:diversity} we derive the following.
 
 
 
-We  now state the main building block of our proof as a lemma. 
-
-\begin{lemma}\label{lem:apex}
-For every integer $t\in \N$ and positive real $\alpha<\frac 1 2$ 
-there is an integer $\ell_0\in\N$ with the following property.
-Let $m,\ell$ be integers with $\ell\ge \ell_0$. 
-If~$G$ is a graph and $A$ is its $1$-independent subset
-with at least $(m+\ell)^{t}$ elements,
-then at least one of the following conditions hold:
-\begin{enumerate}
-  % \item $A$ contains the principal vertices of a $1$-subdivision of a clique $K_t$ contained in $G$,
-  \item $K_t\minor_{2} G$,
-\item  $A$ contains a $2$-independent set of size $m$, 
-\item  some vertex $v$ of $G$
-has at least $\ell^{\alpha}$ neighbors in $A$.
-\end{enumerate}
-\end{lemma}
 
 
-To prove the lemma, we will arrange the elements of $A$ in a binary tree
+To prove~\cref{lem:apex}, we will arrange the elements of $A$ in a binary tree
 and prove that the tree contains a long path. From this path, we will 
 extract the set $A'$. In stability theory, similar trees are called \emph{type trees} and they are used to extract long indiscernible sequences, see e.g.~\cite{malliaris2014regularity}. 
 
@@ -291,7 +297,16 @@ be the set of all nodes $\tau(v)$ such that $v\dau$ is a prefix of $w$. Then, by
 Finally, consider the second case, i.e., there is anode $w$ in $\tau$ which contains at least $\ell$ letters $\son$, and let 
 $Y$ be the set of all nodes $\tau(v)$ such that $v\son$ is a prefix of $w$. Then, by construction, $Y\subset A$ is a set of vertices which are mutually at distance exactly $2$ in $G$. By~\cref{cor:biversity}, there is a vertex $v\in G$
 with at least $\ell^{\alpha}$ neighbors in $Y$.
-This finishes the proof of~\cref{lem:apex}.
+This finishes the proof of the first part of~\cref{lem:apex}.
+
+\medskip
+The proof above yields an algorithm which first constructs the tree $\tau$, by 
+processing each vertex $w$ of $A$, and testing whether the distance between $w$ and each vertex processed already is equal to $2$. Whenever a node with $2t$ alternations 
+is inserted, we can exhibit in $G$ a depth-$2$ minor model of $K_t$.
+Whenever a node with least $m$ letters $\dau$ is added to $\tau$,
+we have constructed an $m$-independent set. Whenever a node with at least $\ell$ letters $\son$ is added to $\tau$, as argued, there must be some vertex $v\in V(G)-A$ with at least $\ell^\alpha$ neighbors in $A$. To find such a vertex, scan through all neighborhoods of vertices $v\in A$ in the graph $G$, and then select a vertex $w\in V(G)$
+which belongs to the largest number of those neighborhoods. The overall running time is 
+$\Oof_{r,t}(|A|^c\cdot |E(G)|)$, for some constant $c$, as required.
 \end{proof}
 
 We will apply~\cref{lem:apex} in the following form.
@@ -357,12 +372,15 @@ We may choose pairwise distinct vertices $w_1,\ldots,w_k$,
  Since $K_t\not\minor_2 G$, we must have $k<t$, so the process terminates before $t$ steps.
  \end{proof}
  
- Therefore, at some step $k<t$ of the construction we must have obtained a $2$-independent subset of $G-S$ of size $m$. Moreover, $|S|\le k<t$.
+ Therefore, at some step $k<t$ of the construction we must have obtained a $2$-independent subset $A'$ of $G-S$ of size $m$. Moreover, $|S|\le k<t$.
  
  
  
- This proves~\cref{lem:engine} in the case $r=2$, for $d=2$, and for the function $L=L_t$, defined by $L_t(m)=(m+t\cdot m)^{\beta^t}$
- for $m\ge m_0$ and $L(m)=L(m_0)$ for $m<m_0$ (where $\beta>2\cdot t$ is any fixed constant and $m_0$ is obtained from~\cref{cor:apex}).
+ This proves~\cref{lem:engine} in the case $r=2$, for $d=2$, and for the function $L=L_t$, defined by $L_t(m)=((t+1)\cdot m)^{\beta^t}$
+ for $m\ge m_0$ and $L(m)=L(m_0)$ for $m<m_0$, where $\beta>2\cdot t$ is any fixed constant and $m_0$ is obtained from~\cref{cor:apex}.
+ The proof yields an algorithm constructing the sets $A'$ and $S$,
+ which amounts to applying at most $t$ times the algorithm obtained in~\cref{lem:apex}.
+ Hence, its running time  is $\Oof_{r,t}(|A|^c\cdot |E(G)|)$ as required.
 % \end{proof}
 
 
@@ -374,7 +392,7 @@ by contracting the (pairwise disjoint) balls of radius $s$ around each vertex $v
  Let $A'$ denote the set of vertices of $G'$ corresponding to the contracted balls. There is an obvious bijection between $A$ and $A'$.
 From $K_t\not\minor_s G$ it follows that $G'$ does not contain $K_t$. Applying the already proved case $r=1$ to $G'$ and $A'$, we conclude that 
 if $|A|=|A'|\ge {m+t-2\choose t-1}$ then
- $A'$ contains an independent subset of size $m$,
+ $A'$ contains an independent subset $B$ of size $m$,
  which corresponds to a $2s+1$-independent subset of $G$.
  
  
@@ -396,8 +414,13 @@ and the set  $B'$ corresponds to some subset $B$ of $A$
 which is $(2s+2)$-independent in $G-S$. Moreover, as each vertex of $S'$
 is a neighbor of each vertex of $B'$, we have that each vertex of $S$
 has distance exactly $s+1=r/2$ from each vertex of $B$.
- 
+
+\medskip
+An algorithm computing the sets $B$ and $S$ (in either the odd or even case)
+simply runs a breadth-first search from each vertex of $A$ to compute the graph $G'$ with the balls of radius  $\lfloor \frac{r-1}2 \rfloor$  around the vertices in $A$ contracted to single vertices, and then runs the algorithm for the case $r=1$ or $r=2$.
+This yields a running time of  $\Oof_{r,t}(|A|^c\cdot |E(G)|)$, where $c$ is some constant.
  \medskip
+  
 This finishes  the proof of~\cref{lem:engine}.
 
 \begin{remark}
@@ -417,7 +440,7 @@ should be then replaced by the negation of the above condition.
 
 
 \subsection*{Proof of \cref{thm:new-uqw}.}
-We now wrap up the proof of \cref{thm:new-uqw} by applying~\cref{lem:engine} by induction on $r$.
+We now wrap up the proof of \cref{thm:new-uqw} by iteratively applying~\cref{lem:engine}.
 
 %\begin{lemma}\label{lem:ramsey2}
 %Let $G$ be a graph such that $K_t\not\minor_r G$. 
@@ -477,7 +500,7 @@ We now wrap up the proof of \cref{thm:new-uqw} by applying~\cref{lem:engine} by 
 Fix integers $r,t$,  and a graph $G$ such that $K_t\not\minor_{d} G$,
 for $d=\lceil 5r/2 \rceil$. Let $\beta>2\cdot t$ be a fixed real, and let $m_0$ be the number from~\cref{cor:apex}. Without loss of generality suppose $m\geq t$ and $m\ge m_0$.
  Denote $\gamma=\beta^t$, and
-define the function $L_t(m)=((t+1)\cdot m)^\gamma$.
+define a function $L_t$ by $L_t(m)=((t+1)\cdot m)^\gamma$.
 
 Define the sequence $m_0,m_1,\ldots,m_r$ recursively so that $m_i=
 (t+1)^{\gamma^{r+1-i}}\cdot m^{\gamma^{r-i}}$. Note that $m_r\ge m$
@@ -495,7 +518,7 @@ at least $m_{i+1}$
 which is $(i+1)$-independent in $G-S_{i+1}$, where $S_{i+1}=S\cup S_i$. This completes the inductive construction.
 
 In particular, we have that $|A_r|\ge m$ and that $A_r$ is a subset of $A$ which is $r$-independent in $G-S_r$.
-Observe that by construction, $|S_r|\le r\cdot t/2$, as in the odd steps, the constructed set $S$ is empty, and in the even steps, it has at most $t$ elements.  We claim that in fact we have $|S_r|<t$. The argument is similar as in the proof of \cref{claim:at-most-t}.
+Observe that by construction, $|S_r|\le r\cdot t/2$, as in the odd steps, the constructed set $S$ is empty, and in the even steps, it has at most $t$ elements.  We claim that in fact we have $|S_r|<t$. The argument below is similar as in the proof of \cref{claim:at-most-t}.
 
 
 By the last part of the statement of~\cref{lem:engine},  at the $i$th step of the construction, each vertex of the set $S$
@@ -514,26 +537,17 @@ form a minor model of $K_t$ in $G$ at depth-$(\lfloor r/2\rfloor+1)$.
 This contradicts the assumption that $K_t\not\minor_d G$ for $d=\lceil 5r/2 \rceil$.
 Hence, $|S|<t$.
 
-This proves~\cref{thm:new-uqw}, where as the function $N$ we may take the following function
-$$N(m)=(m(t+1))^{{(2(t+1))}^{r(t+1)}}.$$
+This proves the first part of~\cref{thm:new-uqw}, where as the function $N$ we may take the following function
+$$N(m)=(m(t+1))^{{(2t+1)}^{r(t+1)}},$$
+and the sets $B$ and $S$ are, respectively, the sets $A_r$ and $S_r$ constructed above.
+
+\medskip
+The proof presented above can be turned into an algorithm that, 
+given $G$ and $A$, outputs the sets $S$ and $B$, and amounts to
+applying the algorithm given by~\cref{lem:engine} at most $r$ times.
+Hence, the total running time is $\Oof_{r,t}(|A|^c\cdot |E(G)|)$ for some universal constant~$c$.
+This finishes the proof~\cref{thm:new-uqw}.
 \end{proof}
-
-\paragraph{Algorithm.} We now argue that the proof presented above can be turned into an algorithm that, 
-given $G$ and $A$, outputs sets $S$ and $B$ in time $\Oof_{r,t}(|A|^c\cdot |E(G)|)$ for some universal constant~$c$.
-This boils down to implementing each step of the iterative construction from the proof.
-
-The even steps---from $(S_{2s},A_{2s})$ to $(S_{2s+1},A_{2s+1})$---are easy, as we only have to apply Ramsey's theorem in a graph with $A$ as the vertex set, where two vertices are adjacent if and only
-if they are at distance $2s$ in $G$. The distances between vertices of $A$ can be computed in time $\Oof(|A|\cdot |E(G)|)$ by running a breadth-first search from each vertex of $A$, and afterwards it remains
-to emulate the proof of Ramsey's theorem algorithmically on a graph with $|A|$ vertices, which can be done in time polynomial in $|A|$.
-
-For the odd steps---from $(S_{2s+1},A_{2s+1})$ to $(S_{2s+2},A_{2s+2})$---we need to implement algorithmically the proof of \cref{lem:iterate-apex}. 
-This boils down to implementing algorithmically the proof of \cref{lem:apex}, since
-the proof of \cref{lem:iterate-apex} essentially consists of applying \cref{lem:apex} at most $t$ times. For \cref{lem:apex}, we can construct the distance-$(2s+2)$ tree $T$ of $A$ in time
-$\Oof(|A|\cdot |E(G)|)$, as this again only requires precomputing distances between vertices of $A$ using breadth-first search from each vertex of $A$.
-Afterwards we examine the longest root-to-leaf path in $T$, which has to have length at least $2m^3$, and we classify its vertices into red and blue, as in the proof. If more than half of the vertices are red,
-then they form a $(2s+2)$-independent set that can be output by the algorithm. Otherwise, the proof argues that there is vertex $v$ in the graph that is at distance exactly $s+1$ from at least $m$ blue vertices.
-Such a vertex can be found by computing in time $\Oof(|A|\cdot |E(G)|)$ the distances between each blue vertex and each vertex $v\in V(G)$, again using breadth-first search from each blue vertex, and selecting
-a vertex $v$ for which the number of blue vertices at distance exactly $s+1$ from $v$ is at least $m$. 
 
 
 \section{VC dimension}\label{sec:vc}
