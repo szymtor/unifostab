@@ -126,9 +126,8 @@ and which gives explicit bounds on the degree of the polynomial.
 More precisely, we prove the following theorem; here, the notation $\Oof_{r,t}(\cdot)$ hides computable factors depending on $r$ and $t$.
 
 \begin{theorem}\label{thm:new-uqw}
-For all $r,t\in \N$ there is a polynomial  $N\colon \N\to \N$,
-of the form
-$$N(m)=(m(t+1))^{{(2t+1)}^{r(t+1)}}+d,$$ for some constant $d$ depending on $t$, such that the following holds.
+For all $r,t\in \N$ there is a polynomial  $N\colon \N\to \N$ with $N(m)=
+\Oof_{r,t}{((m(t+1))^{{(2t+1)}^{r(t+1)}})}$, such that the following holds.
 Let $G$ be a graph such that $K_t\not\minor_{\lfloor 5r/2\rfloor} G$, and
 let $A\subseteq V(G)$ be a vertex subset of size at least $N(m)$, for a given $m$.
 Then there exists a set $S\subseteq V(G)$ of size $|S|\leq t$ and a set $B\subseteq A\setminus S$ 
