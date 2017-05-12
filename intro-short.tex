@@ -9,15 +9,15 @@ familiar classes of sparse graphs, such as planar graphs, graphs
 of bounded treewidth,  graphs of bounded degree, and, in fact, 
 all classes that exclude a fixed 
 topological minor.
-Formally, a class $\CCC$ of graphs is {\em{nowhere dense}} if there is a function $t\colon \N\to \N$ such that for every $r\in \N$, every graph $G$ from $\CCC$ does not admit $K_{t(r)}$ as an {\em{$r$-shallow minor}}
-(denoted $K_{t(r)}\not\minor_r G$),
-that is, there is no minor model of $K_{t(r)}$ in $G$ where every branch set has radius at most $r$.
+Formally, a class $\CCC$ of graphs is {\em{nowhere dense}} if there is a function $t\colon \N\to \N$ such that for every $r\in \N$, no graph $G$ in~$\CCC$ admits the clique $K_{t(r)}$ on $t(r)$ vertices  as an {\em{$r$-shallow minor}},
+i.e., as a subgraph of a graph obtained from $G$ by contracting mutually disjoint  subgraphs of radius $r$   to single vertices.
+
 
 The concept of nowhere denseness
 turns out to be very robust, as witnessed by the fact that it is equivalent 
 to multiple other concepts studied in different areas of mathematics. 
 One can equivalently characterize nowhere dense graph classes 
-by bounds on the density of shallow 
+by bounds on the density of (topological) shallow 
 minors~\cite{nevsetvril2010first,nevsetvril2011nowhere},
 quasi-wideness~\cite{nevsetvril2011nowhere} (a notion introduced by
 Dawar~\cite{dawar2010homomorphism} in his study of homomorphism
@@ -71,11 +71,12 @@ that for all $r,m\in \N$ and all subsets $A\subseteq V(G)$ for
 $G\in \CCC$ of size $\abs{A}\geq N(r,m)$ there is a set
 $S\subseteq V(G)$ of size $\abs{S}\leq s(r)$ and a set
 $B\subseteq A\setminus S$ of size $\abs{B}\geq m$ which is $r$-independent in
-$G-S$. Recall that a set $B\subseteq V(G)$ is called {\em{$r$-independent}} in $G$ if for all
-distinct $u,v\in B$ we have $\dist_G(u,v)>r$.
+$G-S$. Recall that a set $B\subseteq V(G)$ is called {\em{$r$-independent}} in $G$ if all
+distinct $u,v\in B$ are at distance 
+larger than $r$ in $G$.
  Ne\v{s}et\v{r}il and Ossona de Mendez proved that
 the notions of uniform quasi-wideness and nowhere denseness coincide for 
-graphs~\cite{nevsetvril2011nowhere}. We give another proof of this result, with better bounds.
+classes of graphs~\cite{nevsetvril2011nowhere}. We revisit their proof, obtaining improved bounds.
 
 
 The second topic of study is the
@@ -85,8 +86,8 @@ Fix a
  a relational vocabulary $\Sigma$. Let 
 $\phi(\tup{x},\tup{y})$ be a $\Sigma$-formula with the free variables
 partitioned into two groups $\tup{x}, \tup{y}$. A \emph{$\phi$-ladder}
-of length $n$ in a $\Sigma$-structure $\str A$ is a sequence $(\tup{a}_1,\ldots, \tup{a}_{n},
-\tup{b}_1,\ldots, \tup{b}_{n})$ of tuples of elements of $\str A$ 
+of length $n$ in a $\Sigma$-structure $\str A$ is a sequence $\tup{a}_1,\ldots, \tup{a}_{n},
+\tup{b}_1,\ldots, \tup{b}_{n}$ of tuples of elements of $\str A$ 
 such that for all $1\leq i,j\le n$,
 \[\strA\models\phi(\tup{a}_i,\tup{b}_j)\Longleftrightarrow i\leq j. \]
 The least  $n$ for which 
@@ -151,7 +152,7 @@ first-order logic~\cite{gaifman1982local}, in order to prove the following theor
 
 \begin{theorem}\label{thm:new-stable}
   There are computable functions $f\colon \N^3\to\N$ and $g\colon\N\to\N$ with the following property.
-Suppose $\phi(\bar x,\bar y)$ is a formula of quantifier rank $q$ and with $d$ free variables, divided into two groups $\bar x$ and $\bar y$,
+Suppose $\phi(\bar x,\bar y)$ is a formula of quantifier rank $q$ and with $d$ free variables,
 and $G$ is a graph such that $K_t\not\minor_{g(q)} G$. Then the ladder index of $\phi(\bar x,\bar y)$ in $G$ is at most $f(q,d,t)$.
 \end{theorem}
 

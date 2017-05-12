@@ -25,10 +25,10 @@ $(I_u)_{u\in V(H)}$ of~$H$ in $G$ such that each $I_u$ has radius at most $r$.
 
 A class $\CCC$ of graphs is \emph{nowhere dense} if there is a function 
 $t\colon \N\rightarrow \N$ such that for all $r\in \N$ it holds that $K_{t(r)}\not\minor_r G$
-for all $G\in \CCC$, where $K_t$ denotes the clique on $t$ vertices.
+for all $G\in \CCC$, where $K_{t(r)}$ denotes the clique on $t(r)$ vertices.
 
-A set $B\subseteq V(G)$ is called {\em{$r$-independent}} in a graph $G$ if for all
-distinct $u,v\in B$ we have $\dist_G(u,v)>r$.
+A set $B\subseteq V(G)$ is called {\em{$r$-independent}} in a graph $G$ if  $\dist_G(u,v)>r$ for all
+distinct $u,v\in B$.
 A class $\CCC$ of graphs is \emph{uniformly quasi-wide} if there are
 functions $N\colon \N\times\N\rightarrow \N$ and $s:\N\rightarrow \N$ such
 that for all $r,m\in \N$, all graphs $G\in \CCC$, and all subsets $A\subseteq V(G)$ of size $\abs{A}\geq N(r,m)$, there is a set
@@ -47,10 +47,9 @@ We first prove a restricted its variant,~\cref{lem:engine} below, in which we as
  chain the lemma for $r$ ranging from $1$ to the target value of $r$.
 
 \begin{lemma}\label{lem:engine}
-For all $t\in \N$ there exists a function $L\colon \N\to \N$
-bounded by a polynomial
+For all $t,r\in \N$ there exists a function $L\colon \N\to \N$ bounded by a polynomial,
 and a number $d$ such that the following holds.
-Given numbers $r,m\in \N$ and graph $G$ such that $K_t\not\minor_d G$ and
+Given numbers $m\in \N$ and graph $G$ such that $K_t\not\minor_d G$ and
 $(r-1)$-independent set of vertices $A\subset V(G)$ of size at least $L(m)$ there is a set $S\subseteq V(G)-A$ of size at most $t$ such that $A$ contains a subset $A'$ of size $m$ which is $r$-independent in $G-S$.
 
 Moreover, if $r$ is odd then $S$ is empty, and if $r$ is even,
@@ -60,7 +59,7 @@ Finally, given $G$ and $A$, the sets $A'$ and $S$ can be computed in time $\Oof_
 
 We prove~\cref{lem:engine} in Section~\ref{sec:engine}, but  a very rough sketch is as follows.
 The  case of general~$r$ reduces to the case $r=1$ or $r=2$, depending on the parity of $r$,
-by contracting the balls of radius $\lceil \frac {r-1} 2\rceil $ around the vertices in $A$ to single points.
+by contracting the balls of radius $\lceil \frac {r-1} 2\rceil $ around the vertices in $A$ to single vertices.
 The case of $r=1$ follows immediately from Ramsey's theorem. 
 It turns out that the case $r=2$ is substantially more difficult.
 We start by formulating and proving the main technical result needed for proving the case $r=2$.
@@ -82,14 +81,15 @@ then at least one of the following conditions hold:
 \item  some vertex $v$ of $G$
 has at least $\ell^{\alpha}$ neighbors in $A$.
 \end{enumerate}
-Moreover, in each case, the corresponding structure (a depth-$2$ minor model, an $2$-independent set of size $m$ or the vertex $v$) can be computed in $\Oof(|A|^c\cdot |E(G)|)$, where $c$  is some universal constant.
+Moreover, in each case, the corresponding structure (a depth-$2$ minor model, a $2$-independent set of size $m$ or a vertex $v$ as above) can be computed in time $\Oof(|A|^c\cdot |E(G)|)$, where $c$  is some universal constant.
 \end{lemma}
 
 Note that a similar statement as that of~\cref{lem:apex}
-can be obtained without much effort by employing Ramsey's theorem, as has been done in~\cite{nevsetvril2011nowhere}; however, the bound $(m+\ell)^t$ above is then replaced by a bound which is not polynomial in $m$, and is therefore insufficient for our needs.
+can be obtained without much effort by employing Ramsey's theorem, as has been done in~\cite{nevsetvril2011nowhere}; however, the bound $(m+\ell)^t$ above is then replaced by a bound which is not polynomial in $m$, and  thus cannot be used to prove~\cref{thm:new-uqw}.
 
 \medskip
-To prove~\cref{lem:apex}, we employ the following result: the bound on the number of distinct neighborhoods in a graph from a nowhere dense class.
+To prove~\cref{lem:apex}, we employ the following result,
+providing a bound on the number of distinct neighborhoods in a graph from a nowhere dense class.
 
 \begin{lemma}[adaptation of Lemma 4.11 in \cite{gajarsky2017kernelization}]\label{lem:diversity}
 Let $G$ be a graph such that $K_t\not\minor_{1} G$ for some constant $t\in \N$. 
@@ -188,23 +188,25 @@ extract the set $A'$. In stability theory, similar trees are called \emph{type t
 	\newcommand{\son}{\mathrm{S}}
 	
 	We identify words in $\set{\dau,\son}^*$ with \emph{nodes}
-	of the infinite rooted binary tree. For $w\in \set{\dau,\son}^*$,
+	of the infinite rooted binary tree. 
+  The \emph{depth} of a node $w$ is the length of $w$.
+  For $w\in \set{\dau,\son}^*$,
 	 the nodes $w\dau$ and $w\son$ are called, respectively, the \emph{daughter} and the \emph{son} of $w$,
 	and $w$ is the \emph{father} of both $w\son$ and $w\dau$.
 	We consider
 	 finite, labeled, rooted, binary trees, which are called simply trees below, and are defined as follows.
-	 A \emph{tree} is a partial labeling $\tau\from \set{\dau,\son}^*\to U$ whose domain is a finite set of nodes, called the \emph{nodes of $\tau$}, which is closed under taking fathers.
+	 A \emph{tree} is a partial function $\tau\from \set{\dau,\son}^*\to U$ whose domain is a finite set of nodes, called the \emph{nodes of $\tau$}, which is closed under taking fathers. If $v$ is a node of $\tau$, then $\tau(v)$ is called its \emph{label}.
   
   Let $G$ be a graph, $A\subset V(G)$ a $1$-independent set of its vertices
   and $\bar a$ an enumeration of $A$.
 We define  a binary tree $\tau$ which is 
-  labeled by vertices of $G$. The tree is defined by processing all elements of the sequence $\bar a$ sequentially. We start with $\tau$ being the  tree with empty domain, and for each element $a$ of the sequence $\bar a$, execute the following procedure, which extends the domain of $\tau$ by one element.
+  labeled by vertices of $G$. The tree is defined by processing all elements of $\bar a$ sequentially. We start with $\tau$ being the  tree with empty domain, and for each element $a$ of the sequence $\bar a$, execute the following procedure, which results in adding a node with label $a$ to $\tau$.
   
-When processing the vertex $a$, do the following. Start with $w$ being the empty word. While $w$ is in the domain of $\tau$, repeat the following step: 
+When processing the vertex $a$, do the following. Start with $w$ being the empty word. While $w$ is a node of $\tau$, repeat the following step: 
   if the distance from $a$ to $\tau(w)$ in the graph 
   $G$ is two, replace $w$ by its son, otherwise, replace $w$ by its daughter.
   % Repeat the step, unless $\tau(w)$ is undefined.
-  Once $w$ is not in the domain of $\tau$, extend $\tau$ to $w$    so that  $\tau(w)=a$. In this way, we have processed the element $a$, and now
+  Once $w$ is not a node of $\tau$, extend $\tau$ to $w$    so that  $\tau(w)=a$. In this way, we have processed the element $a$, and now
     proceed to the next element $a$ of $\bar a$, until all elements are processed. This ends the construction of $\tau$.
 	
   
@@ -212,15 +214,15 @@ When processing the vertex $a$, do the following. Start with $w$ being the empty
   
   \medskip
 For a tree $\tau$, define its
-\emph{height} as 
-the length of the longest word in the domain of $\tau$.
+\emph{depth} as 
+the maximal depth of a node of $\tau$.
 For a word $w$, define an \emph{alternation} to be 
 a position $i$ such that $w_i\neq w_{i-1}$, where $w_0$ is assumed to be $\dau$.
  The \emph{alternation rank} of the tree $\tau$ is the maximum of the number of alternations of $w$, over all nodes $w$ of $\tau$.
 
 
 \begin{lemma}\label{lem:number-of-nodes}
-Let $h,t\ge 2$.	If $\tau$ has alternation rank at most $t-1$ and height at most $h-1$, then $\tau$ has fewer than $h^{t}$
+Let $h,t\ge 2$.	If $\tau$ has alternation rank at most $t-1$ and depth at most $h-1$, then $\tau$ has fewer than $h^{t}$
 	nodes.
 \end{lemma}
 \begin{proof}		
@@ -264,7 +266,7 @@ since
 For each $j=1,\ldots,k$, define the graph $B_j$
 as the subgraph of $G$ induced by the set
 $\set{a_j,b_j}\cup\set{z_{ij}\mid 1\le i\le  j}$.
-By the claim above we have that the graphs $B_j$
+By the claim above, the graphs $B_j$
 are pairwise disjoint, for $j=1,\ldots,k$.
 Moreover, for $1\le i\le j\le k$, there is an edge between $B_i$
 and $B_j$, namely, the edge between $z_{ij}\in B_j$
@@ -279,7 +281,7 @@ Let $A$ be an independent subset of $G$
 of size at least $h^{t}$.
 
 Suppose that the first case of~\cref{lem:apex} does not hold. In particular $K_t\not\minor_2 G$, so by~\cref{thm:alternation-rank-type-tree}, $\tau$ has alternation rank at most $2t-1$. From~\cref{lem:number-of-nodes} 
-we conclude that $\tau$  has height at least~$h$.
+we conclude that $\tau$  has depth at least~$h$.
 As $h=m+\ell$, it follows that either $\tau$  has a node $w$ which contains at least $m$ letters $\dau$, or $\tau$ has a node which contains  at least $\ell$ letters $\son$.
 
 Consider the first case, i.e., there is a node $w$ of $\tau$
@@ -428,7 +430,7 @@ The set $S'$ corresponds to some set of vertices $S\subset V(G)$
 which are at distance at least $s+1$ from each vertex in $A$,
 and the set  $B'$ corresponds to some subset $B$ of $A$
 which is $(2s+2)$-independent in $G-S$. Moreover, as each vertex of $S'$
-is a neighbor of each vertex of $B'$, we have that each vertex of $S$
+is a neighbor of each vertex of $B'$,  each vertex of $S$
 has distance exactly $s+1=r/2$ from each vertex of $B$.
 
 \medskip
@@ -533,7 +535,7 @@ $i$-independent subset $A_i$ of size at least $L_t(m_{i+1})$. This yields a set 
 at least $m_{i+1}$
 which is $(i+1)$-independent in $G-S_{i+1}$, where $S_{i+1}=S\cup S_i$. This completes the inductive construction.
 
-In particular, we have that $|A_r|\ge m$ and that $A_r$ is a subset of $A$ which is $r$-independent in $G-S_r$.
+In particular,  $|A_r|\ge m$ and $A_r$ is a subset of $A$ which is $r$-independent in $G-S_r$.
 Observe that by construction, $|S_r|\le r\cdot t/2$, as in the odd steps, the constructed set $S$ is empty, and in the even steps, it has at most $t$ elements.  We claim that in fact we have $|S_r|<t$. The argument below is similar as in the proof of \cref{claim:at-most-t}.
 
 
