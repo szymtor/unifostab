@@ -121,8 +121,8 @@ and which gives explicit bounds on the degree of the polynomial.
 Precisely, we prove the following theorem; here, the notation $\Oof_{r,t}(\cdot)$ hides computable factors depending on $r$ and $t$.
 
 \begin{theorem}\label{thm:new-uqw}
-For all $r,t\in \N$ there exists a function $N\colon \N\to \N$ with $N(m)\in \Oof_{r,t}(m^{(6t+3)^{r}})$ such that the following holds.
-Let $G$ be a graph such that $K_t\not\minor_{\lfloor 3r/2\rfloor} G$, and
+For all $r,t\in \N$ there exists a polynomial  $N\colon \N\to \N$ such that the following holds.
+Let $G$ be a graph such that $K_t\not\minor_{\lfloor 5r/2\rfloor} G$, and
 let $A\subseteq V(G)$ be a vertex subset of size at least $N(m)$, for a given $m$.
 Then we can find a set $S\subseteq V(G)$ of size $|S|\leq t$ and a set $B\subseteq A\setminus S$ 
 of size $|B|\geq m$ which is $r$-independent in $G-S$.
@@ -131,9 +131,8 @@ Moreover, given $G$ and $A$, such sets $S$ and $B$ can be computed in time $\Oof
 
 Let us remark
 that even though the techniques employed to prove \cref{thm:new-uqw} are inspired by the methods from stability theory, 
-we use only very simple graph theoretic notions. In particular, the
-proof can easily be turned into an efficient algorithm which does not
-call the model-checking algorithm as a subroutine. 
+we use only very simple graph theoretic notions. In particular, we shall see that the
+proof can easily be turned into an efficient algorithm.
 
 The proof of Podewski and Ziegler~\cite{podewski1978stable} that flat graphs are stable uses an 
 infinite Ramsey argument and compactness, and the observation of Adler and Adler~\cite{adler2014interpreting} was that

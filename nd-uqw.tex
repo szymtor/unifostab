@@ -44,12 +44,17 @@ To prove
 \cref{thm:new-uqw}, we first prove its variant~\cref{lem:engine} below, in which we assume that $A$ is already $(r-1)$-independent, and then chain the lemma for $r$ ranging from $1$ to the target value of $r$ to obtain the general statement.
 
 \begin{lemma}\label{lem:engine}
-For all $r,t\in \N$ there exists a function $L\colon \N\to \N$
+For all $t\in \N$ there exists a function $L\colon \N\to \N$
+bounded by a polynomial
 and a number $d$ such that the following holds.
-Given a number $m\in \N$ and graph $G$ such that $K_t\not\minor_d G$ and
-$(r-1)$-independent set of vertices $A\subset V(G)$ of size at least $L(m)$ there is a set $S\subseteq V(G)$ of size at most $t$ such that $A-S$ contains a subset of size $m$ which is $r$-independent in $G-S$.
+Given numbers $r,m\in \N$ and graph $G$ such that $K_t\not\minor_d G$ and
+$(r-1)$-independent set of vertices $A\subset V(G)$ of size at least $L(m)$ there is a set $S\subseteq V(G)-A$ of size at most $t$ such that $A$ contains a subset $A'$ of size $m$ which is $r$-independent in $G-S$.
+
+Moreover, if $r$ is odd then $S$ is empty, and if $r$ is even,
+then every vertex of $S$ is at distance exactly $ r/2$ from every vertex of $A'$.
 \end{lemma}
 
+\subsection{Proof of~\cref{lem:engine}}
 
 To prove~\cref{lem:engine}, we distinguish two special cases: the case of $r=1$ and the case $r=2$. The case of general $r$ then reduces to one of these two cases, depending on the parity of $r$, by observing that a $(2s+1)$-independent set $A$ in $G$
 induces a $1$-independent set in $G$ with the balls of radius $s$ around the vertices of $A$ contracted, and,
@@ -64,7 +69,7 @@ We prove~\cref{lem:engine} in the case $r=1$.
 Let $d=0$, so $K_t\not\minor_d G$ amounts to saying that $G$
 does not contain a clique of size $t$. By Ramsey's Theorem, in any graph every set of size $\binom{m+t-2}{t-1}$ contains an
 independent set of size $m$ or a clique of size $t$. Therefore, 
-taking $L(m)$ as the above binomial coefficient yields~\cref{lem:engine} in case $r=0$, by taking $S=\emptyset$.
+taking $L(m)$ as the above binomial coefficient yields~\cref{lem:engine} in case $r=0$, for $S=\emptyset$.
 
 \paragraph{Case $r=2$.}
 We prove~\cref{lem:engine} in the case $r=2$.
@@ -181,8 +186,8 @@ and prove that the tree contains a long path. From this path, we will
 extract the set $A'$. In stability theory, similar trees are called \emph{type trees} and they are used to extract long indiscernible sequences, see e.g.~\cite{malliaris2014regularity}. 
 
 \begin{proof}
-	\newcommand{\dau}{D}
-	\newcommand{\son}{S}
+	\newcommand{\dau}{\mathrm{D}}
+	\newcommand{\son}{\mathrm{S}}
 	
 	We identify words in $\set{\dau,\son}^*$ with \emph{nodes}
 	of the infinite rooted binary tree. For $w\in \set{\dau,\son}^*$,
@@ -238,15 +243,14 @@ Then $\tau$ has alternation rank at most $2t-1$.
 \end{lemma}
 \begin{proof}
 	Let $w$ be a node of $\tau$ with alternation rank at least $2k$.  
-	In particular, there are nodes $a_1,b_1,\ldots,a_k,b_k$ in $A$
+	In particular, there are vertices $a_1,b_1,\ldots,a_k,b_k$ in $A$
 	such that for each $i=1,\ldots,k$, 
 	the nodes in $\tau$ corresponding to $b_i,a_{i+1},b_{i+1},\ldots,a_k,b_k$ are  descendants of the son of the node which corresponds to $a_i$,
 	and the nodes corresponding to $a_{i+1},b_{i+1},\ldots,a_k,b_k$
 	are descendants of the daughter of the node which corresponds to $b_i$.
 	
-	\begin{claim}
-		For every pair $a_i,b_j$ with $1\le i\le j\le k$, there is a vertex $z_{ij}$
-		which is a common neighbor of $a_i$ and $b_j$,
+	\begin{claim}\label{claim:minor}
+		For every pair $a_i,b_j$ with $1\le i\le j\le k$, there is a vertex $z_{ij}\not\in A$		which is a common neighbor of $a_i$ and $b_j$,
 		and is not a neighbor of $b_s$, for $s\neq j$.
 	\end{claim}
 	\begin{proof}
@@ -338,7 +342,11 @@ If $A_{i-1}$ contains a $2$-independent set of size $m$ in $G-S$, terminate.
  Let $A_{i}$ consist of those vertices, and add $v_i$
  to the set~$S$.  
   Proceed by replacing $i$ by $i+1$.
- 
+
+\begin{claim}\label{claim:at-most-t}
+	The construction halts after fewer than $t$ steps. 
+\end{claim}
+\begin{proof}
 Suppose that the construction proceeds for $k\le t$ steps.
 By construction, each vertex $v_i$, for $i\le k$, is connected in $G$
  to all vertices of $A_{j}$, for $i\le j\le k$. In particular, all the vertices $v_1,\ldots,v_k$ are neighbors of all the vertices of $A_{k}$
@@ -347,17 +355,21 @@ We may choose pairwise distinct vertices $w_1,\ldots,w_k$,
  so that $w_i\in A_i$ and $w_i$ is a neighbor of $v_i$.
  Hence, the connected subgraphs $\set{w_i,v_i}$ of $G$ yield a depth-$1$ minor model of $K_k$ in $G$.
  Since $K_t\not\minor_2 G$, we must have $k<t$, so the process terminates before $t$ steps.
- Therefore, at some point we must have obtained a $2$-independent subset of $G-S$ of size $m$.
- Moreover, $|S|\le t$.
+ \end{proof}
  
- This proves~\cref{lem:engine} in the case $r=2$, for $d=2$, and for the function $L$ defined by $L(m)=((t+1)\cdot m)^{\beta^t}$
+ Therefore, at some step $k<t$ of the construction we must have obtained a $2$-independent subset of $G-S$ of size $m$. Moreover, $|S|\le k<t$.
+ 
+ 
+ 
+ This proves~\cref{lem:engine} in the case $r=2$, for $d=2$, and for the function $L=L_t$, defined by $L_t(m)=(m+t\cdot m)^{\beta^t}$
  for $m\ge m_0$ and $L(m)=L(m_0)$ for $m<m_0$ (where $\beta>2\cdot t$ is any fixed constant and $m_0$ is obtained from~\cref{cor:apex}).
 % \end{proof}
 
 
 \paragraph{Odd case.}
-We prove~\cref{lem:engine} in the case $r=2s+1$, for some $s\in \N$. Suppose that $K_t\not\minor_s G$.
- Let $A$ be an $2s$-independent subset of a graph $G$. Consider the graph $G'$ obtained from $G$
+We prove~\cref{lem:engine} in the case $r=2s+1$, for some $s\in \N$. Take $d=s$.
+Let $G$ be a graph such that $K_t\not\minor_s G$, and 
+ let $A$ be an $2s$-independent subset of $G$. Consider the graph $G'$ obtained from $G$
 by contracting the (pairwise disjoint) balls of radius $s$ around each vertex $v\in A$.
  Let $A'$ denote the set of vertices of $G'$ corresponding to the contracted balls. There is an obvious bijection between $A$ and $A'$.
 From $K_t\not\minor_s G$ it follows that $G'$ does not contain $K_t$. Applying the already proved case $r=1$ to $G'$ and $A'$, we conclude that 
@@ -368,29 +380,44 @@ if $|A|=|A'|\ge {m+t-2\choose t-1}$ then
  
  \paragraph{Even case.}
  Finally,
- we prove~\cref{lem:engine} in the case $r=2s+2$, for some $s\in \N$. Suppose that $K_t\not\minor_{2s+2} G$.
- Let $A$ be an $2s+1$-independent subset of a graph $G$. Consider the graph $G'$ obtained from $G$
+ we prove~\cref{lem:engine} in the case $r=2s+2$, for some $s\in \N$.  Take  $d=5s+2$.
+Let $G$  be such that 
+ $K_t\not\minor_{d} G$, and
+let $A$ be an $(2s+1)$-independent subset of $G$. Consider the graph $G'$ obtained from $G$
 by contracting the (pairwise disjoint) balls of radius $s$ around each vertex $v\in A$.
  Let $A'$ denote the set of vertices of $G'$ corresponding to the contracted balls. Again, there is a bijection between $A$ and $A'$. Note that
 this time, $A'$ is a $1$-independent subset of $G'$.
-From $K_t\not\minor_{2s+2} G$ it follows that $K_t\not\minor_2 G'$. Applying the already proved case $r=2$ to $G'$ and $A'$, we conclude that 
-if $|A|=|A'|\ge {m+t-2\choose t-1}$ then
- $A'$ contains a $2$-independent subset of size $m$,
- which corresponds to a $2s+2$-independent subset of $G$.
+From $K_t\not\minor_{5s+2} G$ it follows that $K_t\not\minor_2 G'$. Apply the already proved case $r=2$ to $G'$ and $A'$. Then, if $|A|=|A'|\ge L_t(m)$, where $L_t$ is the function as defined in the case $r=2$, then
+ $A'$ contains a subset $B'$ of size $m$
+which is  $2$-independent in $G'-S'$, for some $S'\subset V(G')-A'$.
+The set $S'$ corresponds to some set of vertices $S\subset V(G)$
+which are at distance at least $s+1$ from each vertex in $A$,
+and the set  $B'$ corresponds to some subset $B$ of $A$
+which is $(2s+2)$-independent in $G-S$. Moreover, as each vertex of $S'$
+is a neighbor of each vertex of $B'$, we have that each vertex of $S$
+has distance exactly $s+1=r/2$ from each vertex of $B$.
  
- 
- 
-Taking $d=r-1$, the assumption $K_t\not\minor_d G$
-implies that $A$ does not contain the principle vertices of a $1$-subdivision of $K_t$, and so we may apply the already proved case to $G'$, yielding a subset $B$ of $A$ and a subset $S$ of $G'-A$
-so that $B$ is $i$-independent in $G'-S$. 
-This corresponds to a subset $B$ of $A$ and a subset $S$ of $G$
-so that $B$ is $r$-independent in $G-S$.
-This finishes  the proof of the general case of~\cref{lem:engine}.
+ \medskip
+This finishes  the proof of~\cref{lem:engine}.
+
+\begin{remark}
+	It is not difficult to decrease the bound from $d=5s$ to $d= 3s+2$
+	in the  case when $r=2s+2$. To do so, one would need to formulate~\cref{lem:apex}
+	a bit more carefully, and replace the first possibility $K_t\minor_2 G$
+	by the following condition, corresponding to the statement of~\cref{claim:minor}:
+\begin{quote}
+	There are vertices $a_1,b_1,\ldots,a_t,b_t\in A$ 
+	such that for each $1\le i\le j\le t$, there is a vertex $z_{ij}\in V(G)-A$
+	which is a neighbor of $a_i$ and $b_j$, but not of $b_s$, for $s\neq j$.	
+\end{quote}
+Similarly, the assumption of~\cref{thm:alternation-rank-type-tree}
+should be then replaced by the negation of the above condition.
+\end{remark}
 
 
 
-\paragraph*{Finishing the proof of \cref{thm:new-uqw}.}
-We now wrap up the proof of \cref{thm:new-uqw} by applying induction on the radius. 
+\subsection*{Proof of \cref{thm:new-uqw}.}
+We now wrap up the proof of \cref{thm:new-uqw} by applying~\cref{lem:engine} by induction on $r$.
 
 %\begin{lemma}\label{lem:ramsey2}
 %Let $G$ be a graph such that $K_t\not\minor_r G$. 
@@ -447,33 +474,48 @@ We now wrap up the proof of \cref{thm:new-uqw} by applying induction on the radi
 %\end{proof}
 
 \begin{proof}[of \cref{thm:new-uqw}]
-Without loss of generality suppose $m\geq t$.
-Define $Q(m,i)$ as follows: $$Q(m,0)=m\quad\textrm{and}\quad Q(m,i)=\max \left (R(Q(i-1),t),\binom{Q(i-1)+t-2}{t-1}\right)\textrm{ for }i>0.$$
-Since $R(n,t)\in \Theta_{t}(n^{6t+3})$ and $\binom{n+t-2}{t-1}\in \Theta_t(n^{t-1})$, it can be easily seen that $Q(m,r)\in \Theta_{r,t}(m^{(6t+3)^r})$.
-We set $N(m)=Q(m,r)$, so suppose we are given a vertex subset $A$ of size at least $Q(m,r)$.
+Fix integers $r,t$,  and a graph $G$ such that $K_t\not\minor_{d} G$,
+for $d=\lceil 5r/2 \rceil$. Let $\beta>2\cdot t$ be a fixed real, and let $m_0$ be the number from~\cref{cor:apex}. Without loss of generality suppose $m\geq t$ and $m\ge m_0$.
+ Denote $\gamma=\beta^t$, and
+define the function $L_t(m)=((t+1)\cdot m)^\gamma$.
 
-We now proceed in $r$ rounds, applying \cref{lem:ramsey1} and \cref{lem:iterate-apex} alternately.
-Precisely, we construct sets $S_0\subseteq S_1\subseteq \ldots\subseteq S_r$ and $A_0\supseteq A_1\supseteq \ldots\supseteq A_r$, where $S_0=\emptyset$ and $A_0=A$.
-We maintain the invariant that $|S_i|\leq \lfloor i/2\rfloor$, $|A_i|\geq Q(m,r-i)$, and $A_i$ is $i$-independent in $G-S_i$. This is clearly satisfied for $i=0$, so we need to describe the construction
-of $(A_i,S_i)$ based on $(A_{i-1},S_{i-1})$ for $i>0$.
+Define the sequence $m_0,m_1,\ldots,m_r$ recursively so that $m_i=
+(t+1)^{\gamma^{r+1-i}}\cdot m^{\gamma^{r-i}}$. Note that $m_r\ge m$
+and $m_i\ge L_t(m_{i+1})$, for $i=0,\ldots,r-1$.
 
-Suppose first $i=2s$ for some integer $s$. Then apply \cref{lem:ramsey1} to $A_i$ in $G-S_i$, yielding its subset $A_{i+1}$ of size at least $Q(m,r-i-1)$ that is $(i+1)$-independent in $G-S_i$. We may set $S_{i+1}=S_i$
-and proceed with the construction.
+Suppose that $A$ is a set of vertices of $G$ such that $|A|\ge m_0=(t+1)^{\gamma^{r+1}}\cdot m^{\gamma^{r}}$. We inductively construct sequences of sets $A= A_0\supseteq A_1\supseteq \ldots \supseteq A_r$ and $\emptyset=S_0\subseteq S_1\subseteq S_2\ldots$
+satisfying the following conditions:
+\begin{itemize}
+	\item $|A_i|\ge m_i \ge L_t(m_{i+1})$,
+	\item $A_i$ is $i$-independent in $G-S_i$.
+\end{itemize}
+To construct $A_{i+1}$ out of $A_i$, apply~\cref{lem:engine} to the graph $G-S_i$ and 
+$i$-independent subset $A_i$ of size at least $L_t(m_{i+1})$. This yields a set $S\subset V(G)$ which is disjoint from $S_i\cup A_i$, and a subset $A_{i+1}$ of $A_i$ of size 
+at least $m_{i+1}$
+which is $(i+1)$-independent in $G-S_{i+1}$, where $S_{i+1}=S\cup S_i$. This completes the inductive construction.
 
-Suppose now $i=2s+1$ for some integer $s$; then $i<r$ implies that $s\leq r/2-1$, so $K_{t}\not\minor_{3s+2} G$. 
-Hence we may apply \cref{lem:iterate-apex} to $A_i$ in $G-S_i$, yielding subsets $R_{s}\subseteq V(G)-S_i$ and $A_{i+1}\subseteq A_i$ 
-such that $|R_{s}|\leq t$, $|A_{i+1}|\geq Q(m,r-i-1)$, each vertex of $A_{i+1}$ is at distance exactly $i+1$ from each vertex of $R_s$, and $A_{i+1}$ is $(i+1)$-independent in $(G-S_{i})-R_s$.
-We may set $S_{i+1}=R_s\cup S_i$ and proceed with the construction.
+In particular, we have that $|A_r|\ge m$ and that $A_r$ is a subset of $A$ which is $r$-independent in $G-S_r$.
+Observe that by construction, $|S_r|\le r\cdot t/2$, as in the odd steps, the constructed set $S$ is empty, and in the even steps, it has at most $t$ elements.  We claim that in fact we have $|S_r|<t$. The argument is similar as in the proof of \cref{claim:at-most-t}.
 
-Thus, after $r$ rounds we obtain subsets $S=S_r$ and $B=A_r$ such that $|B|\geq Q(m,0)=m$ and~$A'$ is $r$-independent in $G-S$. Observe that we have $S=R_1\cup R_2\cup \ldots\cup R_{\lfloor r/2\rfloor}$,
-so the trivial upper bound on the size of $S$ is $rt/2$. We claim that in fact we have $|S|<t$; the argument is similar as in the proof of \cref{lem:iterate-apex}.
 
-Suppose $|S|\geq t$ and let $v_1,\ldots,v_t$ be any $t$ distinct vertices of $S$.
-Since $m\geq t$, we may arbitrarily choose $a_1,\ldots,a_t$ to be $t$ distinct vertices of $A'$.
-Let $Y_i=N^{G-S}_{\lfloor r/2\rfloor}[a_i]$ for $i=1,2,\ldots,t$.
-From \cref{lem:iterate-apex} it can be seen by a trivial induction on $s$ that each vertex of $R_s$ has a neighbor in each set $Y_j$, for $i,j\in \{1,2,\ldots,t\}$; 
-this is because at step $i=2s+1$ of the construction we remove from the graph only vertices at distance exactly $s+1$ from each $a_j$.
-Hence, the sets $X_i=Y_i\cup \{v_i\}$ for $i=1,\ldots,t$ form a depth-$(\lfloor r/2\rfloor+1)$ minor model of $K_t$ in $G$, a contradiction. 
+By the last part of the statement of~\cref{lem:engine},  at the $i$th step of the construction, each vertex of the set $S$
+has distance exactly $i/2$ from all vertices in $A_{i+1}$ in the graph 
+$G-S_i$. In particular, 
+each vertex of the final set $S_r$ has distance at most $r/2$ from all vertices in $A_r$
+in $G-S_r$. 
+
+For $a\in A_r$, let $N(a)$ denotes the $r$-neighborhood of $a$ in $G-S_r$.
+The above remark amounts to saying that for $s\in S_r$ and $a\in A_r$, $s$ has a neighbor in $N(a)$ in $G-S_r$.
+
+By assumption that $m\ge t$, we may choose vertices $a_1,\ldots,a_t\in A_r$.
+To reach a contradiction, suppose that $S_r$ contains $t$ distinct vertices $s_1,\ldots,s_t$. 
+By the above, the sets $N(a_i)\cup\set{s_i}$ 
+form a minor model of $K_t$ in $G$ at depth-$(\lfloor r/2\rfloor+1)$.
+This contradicts the assumption that $K_t\not\minor_d G$ for $d=\lceil 5r/2 \rceil$.
+Hence, $|S|<t$.
+
+This proves~\cref{thm:new-uqw}, where as the function $N$ we may take the following function
+$$N(m)=(m(t+1))^{{(2(t+1))}^{r(t+1)}}.$$
 \end{proof}
 
 \paragraph{Algorithm.} We now argue that the proof presented above can be turned into an algorithm that, 
