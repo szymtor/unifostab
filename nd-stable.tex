@@ -63,7 +63,7 @@ twoside=False]{geometry}
 \newtheorem{theorem}{Theorem}
 \crefformat{theorem}{#2Theorem~#1#3}
 \Crefformat{theorem}{#2Theorem~#1#3}
-
+\renewcommand{\setminus}{-}
 \newcommand{\newtheoremwithcrefformat}[2]{%
   \newtheorem{#1}[lemma]{#2}%
   \crefformat{#1}{##2\MakeUppercase#1~##1##3}%
