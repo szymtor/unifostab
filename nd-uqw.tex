@@ -330,7 +330,7 @@ We prove~\cref{lem:engine} in the case $r=2$.
 We will apply~\cref{lem:apex} in the following form.
 \begin{corollary}\label{cor:apex}
 	Let $t$ be an integer and $\beta>2\cdot t$ a real. 
-	There is an integer $m_0$ such that for all $m\ge m_0,k\ge 1$, the following holds.
+	There is an integer $m_\bullet$ such that for all $m\ge m_\bullet,k\ge 1$, the following holds.
 	If $G$ is a graph such that $K_t\not\minor_2 G$,
 	$A\subset V(G)$ is an independent set which does not contain a $2$-independent set of size $m$, and $|A|\ge ((k+1)\cdot m)^{\beta ^k}$
 	then there is a vertex $v$ of $G$ such that $|N_G(v)\cap A| \ge (k\cdot m)^{\beta^{k-1}}$.
@@ -339,7 +339,7 @@ We will apply~\cref{lem:apex} in the following form.
 Let $\alpha=t/\beta$, so that $\alpha<1/2$, 
  and let 
 $\ell=(k\cdot m)^{\beta^{k-1}/\alpha}$.
-Take $m_0= \ell_0^{t/\beta}$; then $m\ge m_0$ implies that $\ell\ge\ell_0$.
+Take $m_\bullet= \ell_0^{t/\beta}$; then $m\ge m_\bullet$ implies that $\ell\ge\ell_0$.
 Since
 $$|A|\ge \left((k+1)\cdot m\right)^{\beta^k}=\left ((((m+ k\cdot m)^{\beta^{k-1}/\alpha)}) \right)^t
 \ge (m+(k\cdot m)^{\beta^{k-1}/\alpha})^t=(m+\ell)^t,$$
@@ -354,7 +354,7 @@ To this end, we iteratively apply \cref{lem:apex} as long as  it results in the 
 restricting $A$ to $A\cap N(v)$. 
 The precise calculations follow.
 
-Let $G,t$ be such that $K_t\not\minor_2 G$, and fix some number $\beta>2\cdot t$. Let $m_0$ be the number granted by~\cref{cor:apex}. If $m<m_0$, replace $m$ by $m_0$. We will find 
+Let $G,t$ be such that $K_t\not\minor_2 G$, and fix some number $\beta>2\cdot t$. Let $m_\bullet$ be the number granted by~\cref{cor:apex}. If $m<m_\bullet$, replace $m$ by $m_\bullet$. We will find 
 a subset of $A$ of size $m$ which is $2$-independent in $G-S$, where $|S|\le t$.
 
 
@@ -395,7 +395,7 @@ We may choose pairwise distinct vertices $w_1,\ldots,w_k$,
  
  
  This proves~\cref{lem:engine} in the case $r=2$, for $d=2$, and for the function $L=L_t$, defined by $L_t(m)=((t+1)\cdot m)^{\beta^t}$
- for $m\ge m_0$ and $L(m)=L(m_0)$ for $m<m_0$, where $\beta>2\cdot t$ is any fixed constant and $m_0$ is obtained from~\cref{cor:apex}.
+ for $m\ge m_\bullet$ and $L(m)=L(m_\bullet)$ for $m<m_\bullet$, where $\beta>2\cdot t$ is any fixed constant and $m_\bullet$ is obtained from~\cref{cor:apex}.
  The proof yields an algorithm constructing the sets $A'$ and $S$,
  which amounts to applying at most $t$ times the algorithm obtained in~\cref{lem:apex}.
  Hence, its running time  is $\Oof_{r,t}(|A|^c\cdot |E(G)|)$ as required.
@@ -516,9 +516,9 @@ We now wrap up the proof of \cref{thm:new-uqw} by iteratively applying~\cref{lem
 
 \begin{proof}[of \cref{thm:new-uqw}]
 Fix integers $r,t$,  and a graph $G$ such that $K_t\not\minor_{d} G$,
-for $d=\lceil 5r/2 \rceil$. Let $\beta>2\cdot t$ be a fixed real, and let $m_0$ be the number from~\cref{cor:apex}. Without loss of generality suppose $m\geq t$ and $m\ge m_0$.
+for $d=\lceil 5r/2 \rceil$. Let $\beta>2\cdot t$ be a fixed real, and let $m_\bullet$ be the number from~\cref{cor:apex}. Without loss of generality suppose $m\geq t$ and $m\ge m_\bullet$.
  Denote $\gamma=\beta^t$, and
-define a function $L_t$ by $L_t(m)=((t+1)\cdot m)^\gamma$.
+define the function $L_t$ by $L_t(m)=((t+1)\cdot m)^\gamma$.
 
 Define the sequence $m_0,m_1,\ldots,m_r$ recursively so that $m_i=
 (t+1)^{\gamma^{r+1-i}}\cdot m^{\gamma^{r-i}}$. Note that $m_r\ge m$
@@ -536,7 +536,7 @@ at least $m_{i+1}$
 which is $(i+1)$-independent in $G-S_{i+1}$, where $S_{i+1}=S\cup S_i$. This completes the inductive construction.
 
 In particular,  $|A_r|\ge m$ and $A_r$ is a subset of $A$ which is $r$-independent in $G-S_r$.
-Observe that by construction, $|S_r|\le r\cdot t/2$, as in the odd steps, the constructed set $S$ is empty, and in the even steps, it has at most $t$ elements.  We claim that in fact we have $|S_r|<t$. The argument below is similar as in the proof of \cref{claim:at-most-t}.
+Observe that by construction, $|S_r|\le r t/2$, as in the odd steps, the constructed set $S$ is empty, and in the even steps, it has at most $t$ elements.  We show that in fact we have $|S_r|<t$ using the following argument, similar to the one used in~\cref{claim:at-most-t}.
 
 
 By the last part of the statement of~\cref{lem:engine},  at the $i$th step of the construction, each vertex of the set $S$
@@ -555,15 +555,18 @@ form a minor model of $K_t$ in $G$ at depth-$(\lfloor r/2\rfloor+1)$.
 This contradicts the assumption that $K_t\not\minor_d G$ for $d=\lceil 5r/2 \rceil$.
 Hence, $|S|<t$.
 
-This proves the first part of~\cref{thm:new-uqw}, where as the function $N$ we may take the following function
-$$N(m)=(m(t+1))^{{(2t+1)}^{r(t+1)}},$$
-and the sets $B$ and $S$ are, respectively, the sets $A_r$ and $S_r$ constructed above.
 
-\medskip
-The proof presented above can be turned into an algorithm that, 
-given $G$ and $A$, outputs the sets $S$ and $B$, and amounts to
-applying the algorithm given by~\cref{lem:engine} at most $r$ times.
-Hence, the total running time is $\Oof_{r,t}(|A|^c\cdot |E(G)|)$ for some universal constant~$c$.
+Define the function  $K:\N\to\N$
+by $K(m)=(t+1)^{\beta^{t(r+1)}}\cdot m^{\beta^{tr}}$
+for $m\ge m_\bullet$  and $K(m)=m_\bullet$.
+The argument above shows that if $|A|\ge K(m)$ then 
+there is a set $S\subset V(G)$, equal to $S_r$ above,
+and a set $B\subset A$, equal to $A_r$ above,
+so that $B$ is $r$-independent in $G-S$. Note that if $\beta=2t+1$ and $d=N(m_\bullet)$, then $K(m)\le N(m)$,
+where $N$ is the function in the statement of~\cref{thm:new-uqw}.
+% This proves the
+% first part of~\cref{thm:new-uqw}.
+Given $G$ and $A$, the sets $S$ and $B$ can be computed by applying the algorithm given by~\cref{lem:engine} at most $r$ times, so in time $\Oof_{r,t}(|A|^c\cdot |E(G)|)$ for some universal constant~$c$.
 This finishes the proof of~\cref{thm:new-uqw}.
 \end{proof}
 
