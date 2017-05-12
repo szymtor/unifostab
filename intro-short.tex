@@ -17,7 +17,7 @@ The concept of nowhere denseness
 turns out to be very robust, as witnessed by the fact that it is equivalent 
 to multiple other concepts studied in different areas of mathematics. 
 One can equivalently characterize nowhere dense graph classes 
-by bounds on the density of shallow (topological)
+by bounds on the density of shallow 
 minors~\cite{nevsetvril2010first,nevsetvril2011nowhere},
 quasi-wideness~\cite{nevsetvril2011nowhere} (a notion introduced by
 Dawar~\cite{dawar2010homomorphism} in his study of homomorphism
@@ -60,14 +60,11 @@ nowhere dense and somewhere dense graph classes.
 %\bigskip
 
 In this work we revisit the connections between the notion of nowhere 
-denseness and notions from (finite) model theory.
+denseness and notions from  model theory and finite model theory.
 We first consider uniform quasi-wideness, a
-notion was introduced by Dawar~\cite{dawar2010homomorphism}, who 
+notion  introduced by Dawar~\cite{dawar2010homomorphism}, who 
 proved that every quasi-wide class that is closed under taking substructures
-and disjoint unions has the homomorphism preservation property. It was 
-later proved by Ne\v{s}et\v{r}il and Ossona de Mendez that 
-the notions of uniform quasi-wideness and nowhere denseness coincide for 
-graphs~\cite{nevsetvril2011nowhere}. 
+and disjoint unions has the homomorphism preservation property. 
 Formally, a class $\CCC$ of graphs is \emph{uniformly quasi-wide} if there are
 functions $N\colon \N\times\N\rightarrow \N$ and $s\colon \N\rightarrow \N$ such
 that for all $r,m\in \N$ and all subsets $A\subseteq V(G)$ for
@@ -76,21 +73,28 @@ $S\subseteq V(G)$ of size $\abs{S}\leq s(r)$ and a set
 $B\subseteq A\setminus S$ of size $\abs{B}\geq m$ which is $r$-independent in
 $G-S$. Recall that a set $B\subseteq V(G)$ is called {\em{$r$-independent}} in $G$ if for all
 distinct $u,v\in B$ we have $\dist_G(u,v)>r$.
+ Ne\v{s}et\v{r}il and Ossona de Mendez proved that
+the notions of uniform quasi-wideness and nowhere denseness coincide for 
+graphs~\cite{nevsetvril2011nowhere}. We give another proof of this result, with better bounds.
+
 
 The second topic of study is the
 connection between nowhere denseness and stability theory. 
-Let $\cal C$ be a class of structures over a relational vocabulary $\Sigma$. Let 
+Fix a 
+% Let $\cal C$ be a class of structures over
+ a relational vocabulary $\Sigma$. Let 
 $\phi(\tup{x},\tup{y})$ be a $\Sigma$-formula with the free variables
-divided into two groups $\tup{x}, \tup{y}$. A \emph{$\phi$-ladder}
-of length $n$ is a sequence $(\tup{a}_1,\ldots, \tup{a}_{n},
-\tup{b}_1,\ldots, \tup{b}_{n})$ of tuples in some model $\strA\in \cal C$, 
+partitioned into two groups $\tup{x}, \tup{y}$. A \emph{$\phi$-ladder}
+of length $n$ in a $\Sigma$-structure $\str A$ is a sequence $(\tup{a}_1,\ldots, \tup{a}_{n},
+\tup{b}_1,\ldots, \tup{b}_{n})$ of tuples of elements of $\str A$ 
 such that for all $1\leq i,j\le n$,
 \[\strA\models\phi(\tup{a}_i,\tup{b}_j)\Longleftrightarrow i\leq j. \]
 The least  $n$ for which 
 there is no $\phi$-ladder of length $n$ is 
 the \emph{ladder index} 
-of $\phi(\tup{x},\tup{y})$ in $\cal C$ (which may depend on the way we split the
-variables).
+of $\phi(\tup{x},\tup{y})$ in $\str A$ (which may depend on the way we split the
+variables). 
+
 Based on work of Podewski and Ziegler~\cite{podewski1978stable}, 
 Adler and Adler~\cite{adler2014interpreting}
 proved that every nowhere dense class $\CCC$ of graphs is stable, that is, 
@@ -110,21 +114,21 @@ is uniformly quasi-wide. The proof of Ne\v{s}et\v{r}il
 and Ossona de Mendez goes back to a construction
 of Kreidler and Seese~\cite{kreidler1998monadic} (see also Atserias et al.~\cite{atserias2006preservation}), 
 and uses iterated Ramsey arguments. Hence the original bounds on 
-the function $N$ are huge. Recently, 
-it was proved that we may always choose~$N$ to be a polynomial 
+the function $N$ are huge. Recently, Kreutzer, Rabinovitch and the second author
+ proved that we may always choose~$N$ to be a polynomial 
 function~\cite{siebertz2016polynomial}. However, the degree of the polynomial 
 in~\cite{siebertz2016polynomial} was  not specified, as its existence 
 depends on the non-constructive arguments used by Adler and Adler's in showing that nowhere dense classes of graphs
 are stable~\cite{adler2014interpreting}. We give a new construction 
 which is considerably simpler than that of~\cite{siebertz2016polynomial}
 and which gives explicit bounds on the degree of the polynomial. 
-Precisely, we prove the following theorem; here, the notation $\Oof_{r,t}(\cdot)$ hides computable factors depending on $r$ and $t$.
+More precisely, we prove the following theorem; here, the notation $\Oof_{r,t}(\cdot)$ hides computable factors depending on $r$ and $t$.
 
 \begin{theorem}\label{thm:new-uqw}
 For all $r,t\in \N$ there exists a polynomial  $N\colon \N\to \N$ such that the following holds.
 Let $G$ be a graph such that $K_t\not\minor_{\lfloor 5r/2\rfloor} G$, and
 let $A\subseteq V(G)$ be a vertex subset of size at least $N(m)$, for a given $m$.
-Then we can find a set $S\subseteq V(G)$ of size $|S|\leq t$ and a set $B\subseteq A\setminus S$ 
+Then there exists a set $S\subseteq V(G)$ of size $|S|\leq t$ and a set $B\subseteq A\setminus S$ 
 of size $|B|\geq m$ which is $r$-independent in $G-S$.
 Moreover, given $G$ and $A$, such sets $S$ and $B$ can be computed in time $\Oof_{r,t}(|A|^c\cdot |E(G)|)$, where $c$ is a universal constant.
 \end{theorem}
@@ -134,35 +138,38 @@ that even though the techniques employed to prove \cref{thm:new-uqw} are inspire
 we use only very simple graph theoretic notions. In particular, we shall see that the
 proof can easily be turned into an efficient algorithm.
 
-The proof of Podewski and Ziegler~\cite{podewski1978stable} that flat graphs are stable uses an 
-infinite Ramsey argument and compactness, and the observation of Adler and Adler~\cite{adler2014interpreting} was that
+ Podewski and Ziegler~\cite{podewski1978stable} 
+consider \emph{flat graphs}, a notion corresponding to uniform quasi-wideness in the 
+infinite. They show that  flat graphs are stable using an 
+infinite Ramsey argument and compactness. The observation of Adler and Adler~\cite{adler2014interpreting} was that
 this can be translated to classes $\CCC$ of finite graphs by considering an infinite graph that is the disjoint union of graphs from $\CCC$.
 Based on the approach of Podewski and Ziegler~\cite{podewski1978stable}, we give a combinatorial 
 proof that every first-order formula has finite ladder index on every
 nowhere dense class of graphs, which does not involve infinite combinatorics and model theory.
 In particular, instead of compactness we use Gaifman's Locality Theorem for
-first-order logic~\cite{gaifman1982local}. Precisely, we prove the following theorem.
+first-order logic~\cite{gaifman1982local}, in order to prove the following theorem.
 
 \begin{theorem}\label{thm:new-stable}
   There are computable functions $f\colon \N^3\to\N$ and $g\colon\N\to\N$ with the following property.
 Suppose $\phi(\bar x,\bar y)$ is a formula of quantifier rank $q$ and with $d$ free variables, divided into two groups $\bar x$ and $\bar y$,
-and $G$ is a graph such that $K_t\not\minor_{g(q)} G$. Then the ladder index of $\phi(\bar x,\bar y)$ on $G$ is at most $f(q,d,t)$.
+and $G$ is a graph such that $K_t\not\minor_{g(q)} G$. Then the ladder index of $\phi(\bar x,\bar y)$ in $G$ is at most $f(q,d,t)$.
 \end{theorem}
 
-Finally, we observe that an argument of Bousquet and 
-Thomasse\'e~\cite{BousquetT15} can be slightly modified to prove that 
-the VC-dimension of the $r$th power $G^r$ of a graph $G$
-with $K_t\not\minor_r G$ is bounded by $t-1$.
-Boundedness of VC-dimension is a weaker condition than the stability of a class, however it is sufficient in many contexts.
-Therefore, we consider investigating explicit bounds on the VC-dimension potentially useful for future research.
-
-\begin{theorem}\label{thm:new-vc}
-Let $G$ be a graph such that $K_t\not\minor_r G$. Then the
-VC-dimension of $G^r$, the $r$th power of the graph~$G$, is bounded by $t-1$. 
-\end{theorem}
+% Finally, we observe that an argument of Bousquet and
+% Thomasse\'e~\cite{BousquetT15} can be slightly modified to prove that
+% the VC-dimension of the $r$th power $G^r$ of a graph $G$
+% with $K_t\not\minor_r G$ is bounded by $t-1$.
+% Boundedness of VC-dimension is a weaker condition than the stability of a class, however it is sufficient in many contexts.
+% Therefore, we consider investigating explicit bounds on the VC-dimension potentially useful for future research.
+%
+% \begin{theorem}\label{thm:new-vc}
+% Let $G$ be a graph such that $K_t\not\minor_r G$. Then the
+% VC-dimension of $G^r$, the $r$th power of the graph~$G$, is bounded by $t-1$.
+% \end{theorem}
 
 \paragraph{Organization.} We give background from graph theory in \cref{sec:uqw}, where we also
-prove \cref{thm:new-uqw}. The proof of \cref{thm:new-vc} is in \cref{sec:vc}. We provide background 
+prove \cref{thm:new-uqw}. 
+We provide background 
 on logic and prove \cref{thm:new-stable} in \cref{sec:stable}. 
 
 

@@ -1,8 +1,8 @@
 \section{From nowhere denseness to uniform quasi-wideness}\label{sec:uqw}
 
 This section is devoted to the proof of \cref{thm:new-uqw}. 
-In the presentation we focus on proving the existential statement, and at the end we briefly argue how the proof can be turned into an algorithm with the promised running time guarantee.
-We first recall necessary preliminaries from graph theory. 
+% In the presentation we focus on proving the existential statement, and at the end we briefly argue how the proof can be turned into an algorithm with the promised running time.
+We first recall some basic notions from graph theory. 
 
 \paragraph*{Preliminaries.}
 All graphs in this paper are finite, undirected and simple, that is, 
@@ -14,6 +14,8 @@ $E(G)$ for its edge set.
 The {\em{distance}} between vertices $u$ and $v$ in $G$, denoted $\dist_G(u,v)$, is the length of a shortest path between $u$ and $v$ in~$G$.
 If there is no path between $u$ and $v$ in $G$, we put $\dist_G(u,v)=\infty$.
 For a vertex $u$ and nonnegative integer $s$, by $N_s[u]$ we denote the {\em{$s$-neighborhood of $u$}} which comprises vertices at distance at most $s$ from $u$.
+The \emph{radius} of a graph $G$ is the least integer $r$ such that there is some vertex $v$ of $G$ with $N_r[v]=V(G)$.
+
 
 A {\em{minor model}} of a graph $H$ in $G$ is a family $(I_u)_{u\in V(H)}$ of pairwise vertex-disjoint connected subgraphs of $G$, called {\em{branch sets}},
 such that whenever $uv$ is an edge in~$H$, there are $u'\in I_u$ and $v'\in I_v$ for which $u'v'$ 
@@ -23,7 +25,7 @@ $(I_u)_{u\in V(H)}$ of~$H$ in $G$ such that each $I_u$ has radius at most $r$.
 
 A class $\CCC$ of graphs is \emph{nowhere dense} if there is a function 
 $t\colon \N\rightarrow \N$ such that for all $r\in \N$ it holds that $K_{t(r)}\not\minor_r G$
-for all $G\in \CCC$. 
+for all $G\in \CCC$, where $K_t$ denotes the clique on $t$ vertices.
 
 A set $B\subseteq V(G)$ is called {\em{$r$-independent}} in a graph $G$ if for all
 distinct $u,v\in B$ we have $\dist_G(u,v)>r$.
@@ -40,8 +42,9 @@ complexity in nowhere dense graph classes, due to~\cite{gajarsky2017kernelizatio
 For sake of completeness, we present the entire proof of~\cref{thm:new-uqw}.
 
 
-To prove
-\cref{thm:new-uqw}, we first prove its variant,~\cref{lem:engine} below, in which we assume that $A$ is already $(r-1)$-independent, and then chain the lemma for $r$ ranging from $1$ to the target value of $r$ to obtain the general statement.
+We first prove a restricted its variant,~\cref{lem:engine} below, in which we assume that $A$ is already $(r-1)$-independent, and then to derive
+\cref{thm:new-uqw}, we 
+ chain the lemma for $r$ ranging from $1$ to the target value of $r$.
 
 \begin{lemma}\label{lem:engine}
 For all $t\in \N$ there exists a function $L\colon \N\to \N$
@@ -296,6 +299,9 @@ Whenever a node with least $m$ letters $\dau$ is added to $\tau$,
 we have constructed an $m$-independent set. Whenever a node with at least $\ell$ letters $\son$ is added to $\tau$, as argued, there must be some vertex $v\in V(G)-A$ with at least $\ell^\alpha$ neighbors in $A$. To find such a vertex, scan through all neighborhoods of vertices $v\in A$ in the graph $G$, and then select a vertex $w\in V(G)$
 which belongs to the largest number of those neighborhoods. The overall running time is 
 $\Oof_{r,t}(|A|^c\cdot |E(G)|)$, for some constant $c$, as required.
+
+\medskip
+This finishes the proof of~\cref{lem:apex}.
 \end{proof}
 
 \subsection{Proof of~\cref{lem:engine}}
@@ -306,7 +312,7 @@ $\Oof_{r,t}(|A|^c\cdot |E(G)|)$, for some constant $c$, as required.
 % induces a $2$-independent set in $G$ with the balls of radius $s$ around the vertices of $A$ contracted.
 
 We start by proving~\cref{lem:engine} in the case $r=1$,
-then we prove it in the case $r=2$. Next we show how the general case reduces to one of those two.
+then we prove it in the case $r=2$. Next we show how the general case reduces to one of those two cases.
 % , and, finally, we deduce~\cref{thm:new-uqw} from~\cref{lem:engine}.
 
 \paragraph{Case $r=1$.}
@@ -556,7 +562,7 @@ The proof presented above can be turned into an algorithm that,
 given $G$ and $A$, outputs the sets $S$ and $B$, and amounts to
 applying the algorithm given by~\cref{lem:engine} at most $r$ times.
 Hence, the total running time is $\Oof_{r,t}(|A|^c\cdot |E(G)|)$ for some universal constant~$c$.
-This finishes the of proof~\cref{thm:new-uqw}.
+This finishes the proof of~\cref{thm:new-uqw}.
 \end{proof}
 
 
