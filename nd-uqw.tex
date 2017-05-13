@@ -42,15 +42,15 @@ complexity in nowhere dense graph classes, due to~\cite{gajarsky2017kernelizatio
 For sake of completeness, we present the entire proof of~\cref{thm:new-uqw}.
 
 
-We first prove a restricted its variant,~\cref{lem:engine} below, in which we assume that $A$ is already $(r-1)$-independent, and then to derive
+We first prove its restricted variant,~\cref{lem:engine} below, in which we assume that $A$ is already $(r-1)$-independent, and then to derive
 \cref{thm:new-uqw}, we 
- chain the lemma for $r$ ranging from $1$ to the target value of $r$.
+ chain the lemma for $r$ ranging from $1$ to the target value.
 
 \begin{lemma}\label{lem:engine}
 For all $t,r\in \N$ there exists a function $L\colon \N\to \N$ bounded by a polynomial,
 and a number $d$ such that the following holds.
 Given numbers $m\in \N$ and graph $G$ such that $K_t\not\minor_d G$ and
-$(r-1)$-independent set of vertices $A\subset V(G)$ of size at least $L(m)$ there is a set $S\subseteq V(G)-A$ of size at most $t$ such that $A$ contains a subset $A'$ of size $m$ which is $r$-independent in $G-S$.
+an $(r-1)$-independent set of vertices $A\subset V(G)$ of size at least $L(m)$ there is a set $S\subseteq V(G)-A$ of size at most $t$ such that $A$ contains a subset $A'$ of size $m$ which is $r$-independent in $G-S$.
 
 Moreover, if $r$ is odd then $S$ is empty, and if $r$ is even,
 then every vertex of $S$ is at distance exactly $ r/2$ from every vertex of $A'$.
@@ -85,7 +85,11 @@ Moreover, in each case, the corresponding structure (a depth-$2$ minor model, a 
 \end{lemma}
 
 Note that a similar statement as that of~\cref{lem:apex}
-can be obtained without much effort by employing Ramsey's theorem, as has been done in~\cite{nevsetvril2011nowhere}; however, the bound $(m+\ell)^t$ above is then replaced by a bound which is not polynomial in $m$, and  thus cannot be used to prove~\cref{thm:new-uqw}.
+can be obtained by employing Ramsey's theorem, as has been done in~\cite{nevsetvril2011nowhere}, yielding 
+in place of the bound $(m_\ell)^t$ a bound of the form $R(m,\underbrace{q,q,\ldots,q}_{k\text{ times}})$,
+where $k\sim\ell^{2\alpha}$ and $R(m_1,\ldots,m_c)$
+is the Ramsey number for $c$ colors.
+In particular, this does not give a bound which is polynomial $m$, and  thus cannot be used to prove~\cref{thm:new-uqw}.
 
 \medskip
 To prove~\cref{lem:apex}, we employ the following result,
@@ -255,7 +259,7 @@ Then $\tau$ has alternation rank at most $2t-1$.
 	\end{claim}
 	\begin{proof}
 		Note that if $i\le j$, then $d(a_i,b_j)\le 2$, however, $d(a_i,b_j)>1$ since $A$
-		is independent. In particular, there is a vertex $z_{ij}$ which is a common neighbor of $a_i$ and $b_j$. 
+		is $1$-independent. In particular, there is a vertex $z_{ij}$ which is a common neighbor of $a_i$ and $b_j$. 
 		Suppose that $z_{ij}$ is a neighbor of $b_s$, for some $s\neq j$. This implies that $d(b_j,b_s)\le 2$, which is impossible, 
 since
 		 the nodes corresponding to $b_s$ and $b_j$ in $\tau$ are such that one is a descendant of the daughter of the other, implying that $d(b_s,b_j)>2$.
@@ -277,7 +281,7 @@ Hence, the graphs $B_j$, for $1\le j\le l$, define a depth-$2$ minor model of $K
 To prove~\cref{lem:apex}, let $\ell_0$
 be the number obtained from~\cref{cor:biversity}.
 Fix integers $\ell\ge \ell_0$ and $m$, and define $h=m+\ell$.
-Let $A$ be an independent subset of $G$
+Let $A$ be an $1$-independent subset of $G$
 of size at least $h^{t}$.
 
 Suppose that the first case of~\cref{lem:apex} does not hold. In particular $K_t\not\minor_2 G$, so by~\cref{thm:alternation-rank-type-tree}, $\tau$ has alternation rank at most $2t-1$. From~\cref{lem:number-of-nodes} 
@@ -326,14 +330,21 @@ taking $L(m)$ as the above binomial coefficient yields~\cref{lem:engine} in case
 in time~$\Oof(|A|\cdot |E(G)|)$, by simulating the proof of Ramsey's theorem.
 
 \paragraph{Case $r=2$.}
-We prove~\cref{lem:engine} in the case $r=2$. 
+We now prove~\cref{lem:engine} in the case $r=2$, and for $d=2$, i.e., we show  that if $A$ is a sufficiently large $1$-independent subset of a graph $G$ such that $K_t\not\minor_2 G$, then $A$ contains a subset of size $m$
+which is  $2$-independent in  $G-S$, where $S$ has at most $t$ elements. 
+To this end, we iteratively apply \cref{lem:apex} as long as  it results in the third case, yielding a vertex $v$ with many neighbhors in $A$. In this case, we add $v$ vertex to the set $S$, and apply the lemma again,
+restricting $A$ to $A\cap N(v)$. 
+The precise calculations follow.
+
+Fix an integer $t$ and a number $\beta>2\cdot t$. For $k\ge 0$,
+define $m_k=((k+1)\cdot m)^{\beta^k}$.
 We will apply~\cref{lem:apex} in the following form.
 \begin{corollary}\label{cor:apex}
-	Let $t$ be an integer and $\beta>2\cdot t$ a real. 
+  % Let $t$ be an integer and $\beta>2\cdot t$ a real.
 	There is an integer $m_\bullet$ such that for all $m\ge m_\bullet,k\ge 1$, the following holds.
 	If $G$ is a graph such that $K_t\not\minor_2 G$,
-	$A\subset V(G)$ is an independent set which does not contain a $2$-independent set of size $m$, and $|A|\ge ((k+1)\cdot m)^{\beta ^k}$
-	then there is a vertex $v$ of $G$ such that $|N_G(v)\cap A| \ge (k\cdot m)^{\beta^{k-1}}$.
+	$A\subset V(G)$ is an $1$-independent set which does not contain a $2$-independent set of size $m$ and $|A|\ge m_k$ %$((k+1)\cdot m)^{\beta ^k}$
+	then there is a vertex $v$ of $G$ such that $|N_G(v)\cap A| \ge m_{k-1}$.%$(k\cdot m)^{\beta^{k-1}}$.
 \end{corollary}
 \begin{proof}
 Let $\alpha=t/\beta$, so that $\alpha<1/2$, 
@@ -344,37 +355,32 @@ Since
 $$|A|\ge \left((k+1)\cdot m\right)^{\beta^k}=\left ((((m+ k\cdot m)^{\beta^{k-1}/\alpha)}) \right)^t
 \ge (m+(k\cdot m)^{\beta^{k-1}/\alpha})^t=(m+\ell)^t,$$
 we may  apply Lemma~\ref{lem:apex},
-yielding a vertex $v$ with $\ell^\alpha=(k\cdot m)^{\beta^{k-1}}$ neighbors in~$A$.
+yielding a vertex $v$ with at least $\ell^\alpha=(k\cdot m)^{\beta^{k-1}}$ neighbors in~$A$.
 \end{proof}
 
 % \begin{proof}  [of~\cref{lem:engine}]
-We now prove~\cref{lem:engine} in the case $r=2$, and for $d=2$, i.e., we show  that if $A$ is a sufficiently large $1$-independent subset of a graph $G$ such that $K_t\not\minor_2 G$, then $A$ contains a subset of size $m$
-which is  $2$-independent in  $G-S$, where $S$ has at most $t$ elements. 
-To this end, we iteratively apply \cref{lem:apex} as long as  it results in the third case, yielding a vertex $v$ with many neighbhors in $A$. In this case, we add $v$ vertex to the set $S$, and apply the lemma again,
-restricting $A$ to $A\cap N(v)$. 
-The precise calculations follow.
 
 Let $G,t$ be such that $K_t\not\minor_2 G$, and fix some number $\beta>2\cdot t$. Let $m_\bullet$ be the number granted by~\cref{cor:apex}. If $m<m_\bullet$, replace $m$ by $m_\bullet$. We will find 
 a subset of $A$ of size $m$ which is $2$-independent in $G-S$, where $|S|\le t$.
 
 
-Assume that $|A|\ge ((t+1)\cdot m)^{\beta^{t}}$. By induction, we
+Assume that $|A|\ge m_t$. By induction, we
  construct a sequence  $A=A_0\supseteq A_1\supseteq\ldots$ 
 of $1$-independent subsets of $G$
 of length at most $t$,
-such that $|A_i|\ge ((t+1-i)\cdot m)^{\beta^{t-i}}$,
+such that $|A_i|\ge m_{t-i}$,
  as follows. Start with $A_0=A$. We maintain a set $S$ of vertices of $G$ which is initially empty.
-For $i=1,2,\ldots$,
- apply~\cref{cor:apex} to the graph $G-S$ playing the role of $G$, 
-$t-i$ playing the role of $k$ and $A_{i-1}$
- playing the role of $A$.
-If $A_{i-1}$ contains a $2$-independent set of size $m$ in $G-S$, terminate.
- Otherwise, there is a vertex $v_i$ of $G-S$
+
+For $i=0,1,2,\ldots$, do as follows.
+If $A_{i}$ contains a $2$-independent set of size $m$ in $G-S$, terminate.
+ Otherwise, 
+ apply~\cref{cor:apex} to the graph $G-S$ with $1$-independent subset
+ $A_{i}$ of size $|A_i|\ge m_{t-i}$. This yields a vertex $v_{i+1}$ of $G-S$
  whose neighborhood in $G-S$ contains at least
- $((t+1-i)\cdot m)^{\beta^{t-i}}$ vertices of $A_{i-1}$.
- Let $A_{i}$ consist of those vertices, and add $v_i$
+ $m_{t-i-1}$ vertices of $A_{i}$.
+ Let $A_{i+1}$ consist of those vertices, and add $v_{i+1}$
  to the set~$S$.  
-  Proceed by replacing $i$ by $i+1$.
+  If $i\le t$, proceed by replacing $i$ by $i+1$.
 
 \begin{claim}\label{claim:at-most-t}
 	The construction halts after less than $t$ steps.
@@ -387,17 +393,17 @@ By construction, each vertex $v_i$, for $i\le k$, is connected in $G$
 We may choose pairwise distinct vertices $w_1,\ldots,w_k$,
  so that $w_i\in A_i$ and $w_i$ is a neighbor of $v_i$.
  Hence, the connected subgraphs $\set{w_i,v_i}$ of $G$ yield a depth-$1$ minor model of $K_k$ in $G$.
- Since $K_t\not\minor_2 G$, we must have $k<t$, so the process terminates before $t$ steps.
+ Since $K_t\not\minor_2 G$, we must have $k<t$.
  \end{proof}
  
  Therefore, at some step $k<t$ of the construction we must have obtained a $2$-independent subset $A'$ of $G-S$ of size $m$. Moreover, $|S|\le k<t$.
  
  
  
- This proves~\cref{lem:engine} in the case $r=2$, for $d=2$, and for the function $L=L_t$, defined by $L_t(m)=((t+1)\cdot m)^{\beta^t}$
+ This proves~\cref{lem:engine} in the case $r=2$, for $d=2$, and for the function $L=L_t$, defined by $L_t(m)=m_t=((t+1)\cdot m)^{\beta^t}$
  for $m\ge m_\bullet$ and $L(m)=L(m_\bullet)$ for $m<m_\bullet$, where $\beta>2\cdot t$ is any fixed constant and $m_\bullet$ is obtained from~\cref{cor:apex}.
  The proof yields an algorithm constructing the sets $A'$ and $S$,
- which amounts to applying at most $t$ times the algorithm obtained in~\cref{lem:apex}.
+ which amounts to applying at most $t$ times the procedure obtained in~\cref{lem:apex}.
  Hence, its running time  is $\Oof_{r,t}(|A|^c\cdot |E(G)|)$ as required.
 % \end{proof}
 
@@ -410,7 +416,7 @@ by contracting the (pairwise disjoint) balls of radius $s$ around each vertex $v
  Let $A'$ denote the set of vertices of $G'$ corresponding to the contracted balls. There is an obvious bijection between $A$ and $A'$.
 From $K_t\not\minor_s G$ it follows that $G'$ does not contain $K_t$. Applying the already proved case $r=1$ to $G'$ and $A'$, we conclude that 
 if $|A|=|A'|\ge {m+t-2\choose t-1}$ then
- $A'$ contains an independent subset $B$ of size $m$,
+ $A'$ contains a $1$-independent subset $B$ of size $m$,
  which corresponds to a $2s+1$-independent subset of $G$.
  
  
@@ -451,8 +457,6 @@ This finishes  the proof of~\cref{lem:engine}.
 	such that for each $1\le i\le j\le t$, there is a vertex $z_{ij}\in V(G)-A$
 	which is a neighbor of $a_i$ and $b_j$, but not of $b_s$, for $s\neq j$.	
 \end{quote}
-Similarly, the assumption of~\cref{thm:alternation-rank-type-tree}
-should be then replaced by the negation of the above condition.
 \end{remark}
 
 
