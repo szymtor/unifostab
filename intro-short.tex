@@ -117,17 +117,17 @@ of Kreidler and Seese~\cite{kreidler1998monadic} (see also Atserias et al.~\cite
 and uses iterated Ramsey arguments. Hence the original bounds on 
 the function $N$ are huge. Recently, Kreutzer, Rabinovitch and the second author
  proved that we may always choose~$N$ to be a polynomial 
-function~\cite{siebertz2016polynomial}. However, the degree of the polynomial 
-in~\cite{siebertz2016polynomial} was  not specified, as its existence 
-depends on the non-constructive arguments used by Adler and Adler's in showing that nowhere dense classes of graphs
-are stable~\cite{adler2014interpreting}. We give a new construction 
+function of $m$, with the degree of the polynomial depending on $r$~\cite{siebertz2016polynomial}. However, the exact dependence of degree of the polynomial on $r$ and on the class $\CCC$ itself
+ was  not specified in~\cite{siebertz2016polynomial}, as the existence of a polynomial bound is derived
+from non-constructive arguments used by Adler and Adler's in showing that every nowhere dense class of graphs
+is stable~\cite{adler2014interpreting}. We give a new construction 
 which is considerably simpler than that of~\cite{siebertz2016polynomial}
 and which gives explicit bounds on the degree of the polynomial. 
 More precisely, we prove the following theorem; here, the notation $\Oof_{r,t}(\cdot)$ hides computable factors depending on $r$ and $t$.
 
 \begin{theorem}\label{thm:new-uqw}
 For all $r,t\in \N$ there is a polynomial  $N\colon \N\to \N$ with $N(m)=
-\Oof_{r,t}{((m(t+1))^{{(2t+1)}^{r(t+1)}})}$, such that the following holds.
+\Oof_{r,t}{(m^{{(2t+1)}^{r(t+1)}})}$, such that the following holds.
 Let $G$ be a graph such that $K_t\not\minor_{\lfloor 5r/2\rfloor} G$, and
 let $A\subseteq V(G)$ be a vertex subset of size at least $N(m)$, for a given $m$.
 Then there exists a set $S\subseteq V(G)$ of size $|S|\leq t$ and a set $B\subseteq A\setminus S$ 
@@ -136,26 +136,30 @@ Moreover, given $G$ and $A$, such sets $S$ and $B$ can be computed in time $\Oof
 \end{theorem}
 
 Let us remark
-that even though the techniques employed to prove \cref{thm:new-uqw} are inspired by the methods from stability theory, 
-we use only very simple graph theoretic notions. In particular, we shall see that the
+that even though the techniques employed to prove \cref{thm:new-uqw} are inspired by methods from stability theory, 
+at the end we use only very simple graph theoretic notions. In particular, as asserted in the last sentence of the theorem, the
 proof can easily be turned into an efficient algorithm.
 
  Podewski and Ziegler~\cite{podewski1978stable} 
 consider \emph{flat graphs}, a notion corresponding to uniform quasi-wideness in the 
 infinite. They show that  flat graphs are stable using an 
 infinite Ramsey argument and compactness. The observation of Adler and Adler~\cite{adler2014interpreting} was that
-this can be translated to classes $\CCC$ of finite graphs by considering an infinite graph that is the disjoint union of graphs from $\CCC$.
+this can be translated to classes $\CCC$ of finite graphs by considering an infinite graph that is the disjoint union of graphs from~$\CCC$.
+However, this inherently non-constructive approach cannot give explicit upper bounds on parameters governing the stability of $\CCC$, for instance, the ladder indices.
+
 Based on the approach of Podewski and Ziegler~\cite{podewski1978stable}, we give a combinatorial 
 proof that every first-order formula has finite ladder index on every
-nowhere dense class of graphs, which does not involve infinite combinatorics and model theory.
+nowhere dense class, which does not involve infinite combinatorics and model theory.
 In particular, instead of compactness we use Gaifman's Locality Theorem for
-first-order logic~\cite{gaifman1982local}, in order to prove the following theorem.
+first-order logic~\cite{gaifman1982local}. The following theorem summarizes our~result.
 
 \begin{theorem}\label{thm:new-stable}
   There are computable functions $f\colon \N^3\to\N$ and $g\colon\N\to\N$ with the following property.
 Suppose $\phi(\bar x,\bar y)$ is a formula of quantifier rank $q$ and with $d$ free variables,
 and $G$ is a graph such that $K_t\not\minor_{g(q)} G$. Then the ladder index of $\phi(\bar x,\bar y)$ in $G$ is at most $f(q,d,t)$.
 \end{theorem}
+
+\noindent Note that in particular, \cref{thm:new-stable} implies that every nowhere dense graph is stable, which was the main conclusion of Adler and Adler~\cite{adler2014interpreting}.
 
 % Finally, we observe that an argument of Bousquet and
 % Thomasse\'e~\cite{BousquetT15} can be slightly modified to prove that
@@ -169,10 +173,10 @@ and $G$ is a graph such that $K_t\not\minor_{g(q)} G$. Then the ladder index of 
 % VC-dimension of $G^r$, the $r$th power of the graph~$G$, is bounded by $t-1$.
 % \end{theorem}
 
-\paragraph{Organization.} We give background from graph theory in \cref{sec:uqw}, where we also
-prove \cref{thm:new-uqw}. 
-We provide background 
-on logic and prove \cref{thm:new-stable} in \cref{sec:stable}. 
+%\paragraph{Organization.} We give background from graph theory in \cref{sec:uqw}, where we also
+%prove \cref{thm:new-uqw}. 
+%We provide background 
+%on logic and prove \cref{thm:new-stable} in \cref{sec:stable}. 
 
 
 
