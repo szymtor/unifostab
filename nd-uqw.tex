@@ -1,6 +1,6 @@
 \section{From nowhere denseness to uniform quasi-wideness}\label{sec:uqw}
 
-This section is devoted to the proof of \cref{thm:new-uqw}. 
+In this section we prove \cref{thm:new-uqw}. 
 % In the presentation we focus on proving the existential statement, and at the end we briefly argue how the proof can be turned into an algorithm with the promised running time.
 We first recall some basic notions from graph theory. 
 
@@ -13,8 +13,8 @@ We write $V(G)$ for the vertex set of a graph $G$ and
 $E(G)$ for its edge set. 
 The {\em{distance}} between vertices $u$ and $v$ in $G$, denoted $\dist_G(u,v)$, is the length of a shortest path between $u$ and $v$ in~$G$.
 If there is no path between $u$ and $v$ in $G$, we put $\dist_G(u,v)=\infty$.
-For a vertex $u$ and nonnegative integer $s$, by $N_s[u]$ we denote the {\em{$s$-neighborhood of $u$}} which comprises vertices at distance at most $s$ from $u$.
-The \emph{radius} of a graph $G$ is the least integer $r$ such that there is some vertex $v$ of $G$ with $N_r[v]=V(G)$.
+The {\em{(open) neighborhood}} of a vertex $u$, denoted $N(u)$, is the set of neighbors of $u$, excluding $u$ itself.
+For a nonnegative integer $s$, by $N_s[u]$ we denote the {\em{(closed) $s$-neighborhood}} of $u$ which comprises vertices at distance at most $s$ from $u$; note that $u$ is always contained in its closed $s$-neighborhood. The \emph{radius} of a graph $G$ is the least integer $r$ such that there is some vertex $v$ of $G$ with $N_r[v]=V(G)$.
 
 
 A {\em{minor model}} of a graph $H$ in $G$ is a family $(I_u)_{u\in V(H)}$ of pairwise vertex-disjoint connected subgraphs of $G$, called {\em{branch sets}},
@@ -37,29 +37,27 @@ $B\subseteq A\setminus S$ of size $\abs{B}\geq m$ which is $r$-independent in
 $G-S$. 
 
 \paragraph{General strategy.}
-Our proof follows exactly the same lines as the original proof of Ne\v set\v ril and Ossona de Mendez, with the difference that in one technical lemma (\cref{lem:apex} below), we improve the bounds significantly by replacing a Ramsey argument by bounds on neighborhood
-complexity in nowhere dense graph classes, due to~\cite{gajarsky2017kernelization}.
+Our proof follows exactly the same lines as the original proof of Ne\v set\v ril and Ossona de Mendez, with the difference that in the key technical lemma (\cref{lem:apex} below), 
+we improve the bounds significantly by replacing a Ramsey argument with a new combinatorial reasoning.
+The new argument essentially originates in the concept of {\em{branching index}} from the stability theory, 
+and also uses the almost linear bound on neighborhood complexity in nowhere dense graph classes, due to Gajarsk\'y et al.~\cite{gajarsky2017kernelization}.
 For sake of completeness, we present the entire proof of~\cref{thm:new-uqw}.
 
-
-We first prove its restricted variant,~\cref{lem:engine} below, in which we assume that $A$ is already $(r-1)$-independent, and then to derive
-\cref{thm:new-uqw}, we 
- chain the lemma for $r$ ranging from $1$ to the target value.
+We first prove a restricted variant,~\cref{lem:engine} below, in which we assume that $A$ is already $(r-1)$-independent. Then, in order to derive
+\cref{thm:new-uqw}, we apply the lemma iteratively for $r$ ranging from $1$ to the target value.
 
 \begin{lemma}\label{lem:engine}
-For all $t,r\in \N$ there exists a function $L\colon \N\to \N$ bounded by a polynomial,
-and a number $d$ such that the following holds.
-Given numbers $m\in \N$ and graph $G$ such that $K_t\not\minor_d G$ and
-an $(r-1)$-independent set of vertices $A\subset V(G)$ of size at least $L(m)$ there is a set $S\subseteq V(G)-A$ of size at most $t$ such that $A$ contains a subset $A'$ of size $m$ which is $r$-independent in $G-S$.
-
+For all $t,r\in \N$ there exists a function $L\colon \N\to \N$ with $L(m)=\Oof_{r,t}{(m^{{(2t+1)}^{r(t+1)}})}$ such that the following holds.
+For each $m\in \N$, graph $G$ with $K_t\not\minor_{\lfloor 5r/2\rfloor} G$, and
+$(r-1)$-independent set $A\subseteq V(G)$ of size at least $L(m)$, there is a set $S\subseteq V(G)-A$ of size at most $t$ such that $A$ contains a subset $A'$ of size $m$ which is $r$-independent in $G-S$.
 Moreover, if $r$ is odd then $S$ is empty, and if $r$ is even,
-then every vertex of $S$ is at distance exactly $ r/2$ from every vertex of $A'$.
+then every vertex of $S$ is at distance exactly $r/2$ from every vertex of $A'$.
 Finally, given $G$ and $A$, the sets $A'$ and $S$ can be computed in time $\Oof_{r,t}(|A|^c\cdot |E(G)|)$, where $c$ is some universal constant.
 \end{lemma}
 
 We prove~\cref{lem:engine} in Section~\ref{sec:engine}, but  a very rough sketch is as follows.
 The  case of general~$r$ reduces to the case $r=1$ or $r=2$, depending on the parity of $r$,
-by contracting the balls of radius $\lceil \frac {r-1} 2\rceil $ around the vertices in $A$ to single vertices.
+by contracting the balls of radius $\lfloor \frac {r-1} 2\rfloor $ around the vertices in $A$ to single vertices.
 The case of $r=1$ follows immediately from Ramsey's theorem. 
 It turns out that the case $r=2$ is substantially more difficult.
 We start by formulating and proving the main technical result needed for proving the case $r=2$.
@@ -70,30 +68,29 @@ The main tool is the following Ramsey-like result.
 \begin{lemma}\label{lem:apex}
 For every integer $t\in \N$ and positive real $\alpha<\frac 1 2$ 
 there is an integer $\ell_0\in\N$ with the following property.
-Let $m,\ell$ be integers with $\ell\ge \ell_0$. 
-If~$G$ is a graph and $A$ is its $1$-independent subset
+Let $m,\ell\in \N$ be such that $\ell\ge \ell_0$. 
+If~$G$ is a graph and $A$ is a $1$-independent set in $G$
 with at least $(m+\ell)^{t}$ elements,
 then at least one of the following conditions hold:
-\begin{enumerate}
+\begin{itemize}
   % \item $A$ contains the principal vertices of a $1$-subdivision of a clique $K_t$ contained in $G$,
   \item $K_t\minor_{2} G$,
 \item  $A$ contains a $2$-independent set of size $m$, 
 \item  some vertex $v$ of $G$
 has at least $\ell^{\alpha}$ neighbors in $A$.
-\end{enumerate}
-Moreover, in each case, the corresponding structure (a depth-$2$ minor model, a $2$-independent set of size $m$ or a vertex $v$ as above) can be computed in time $\Oof(|A|^c\cdot |E(G)|)$, where $c$  is some universal constant.
+\end{itemize}
+Moreover, in each case, the corresponding structure (a depth-$2$ minor model, a $2$-independent set of size $m$, or a vertex $v$ as above) can be computed in time $\Oof(|A|^c\cdot |E(G)|)$, where $c$  is some universal constant.
 \end{lemma}
 
-Note that a similar statement as that of~\cref{lem:apex}
-can be obtained by employing Ramsey's theorem, as has been done in~\cite{nevsetvril2011nowhere}, yielding 
-in place of the bound $(m_\ell)^t$ a bound of the form $R(m,\underbrace{q,q,\ldots,q}_{k\text{ times}})$,
+We remark that a statement similar to that of \cref{lem:apex}
+can be obtained by employing Ramsey's theorem, as has been done in~\cite{nevsetvril2011nowhere}. This, however, yields
+in place of the bound $(m+\ell)^t$ a bound of the form $R(m,\underbrace{q,q,\ldots,q}_{k\text{ times}})$,
 where $k\sim\ell^{2\alpha}$ and $R(m_1,\ldots,m_c)$
 is the Ramsey number for $c$ colors.
-In particular, this does not give a bound which is polynomial $m$, and  thus cannot be used to prove~\cref{thm:new-uqw}.
+In particular, this does not give a bound which is polynomial in $m$, and thus cannot be used to prove~\cref{thm:new-uqw}.
 
-\medskip
-To prove~\cref{lem:apex}, we employ the following result,
-providing a bound on the number of distinct neighborhoods in a graph from a nowhere dense class.
+\paragraph*{Neighborhood complexity.} Let us first recall the following result of Gajarsk\'y et al.~\cite{gajarsky2017kernelization}
+which provides an upper bound on the number of distinct neighborhoods in a graph from a nowhere dense class.
 
 \begin{lemma}[adaptation of Lemma 4.11 in \cite{gajarsky2017kernelization}]\label{lem:diversity}
 Let $G$ be a graph such that $K_t\not\minor_{1} G$ for some constant $t\in \N$. 
@@ -106,48 +103,45 @@ Then for every $\epsilon>0$ there exists $n_0$, depending only on $t$ and $\epsi
 We remark that the proof of \cref{lem:diversity} uses only the fact that
 nowhere dense classes of graphs do not have dense 
 shallow minors~\cite{dvorak2007asymptotical,jiang2011compact}, and does not rely on any non-constructive arguments from the stability theory.
+In particular, $n_0$ depends in a computable manner on $t$ and $\epsilon$.
 From \cref{lem:diversity} we derive the following.
 
 \begin{corollary}\label{cor:diversity}
-  Let $G,t,\epsilon,n_0$ be as above.
-  If $|A|=n\ge n_0$ and every pair of elements of $A$ has a common neighbor in $G$,
-  then there is a vertex $v$ in $G$ which has at least $n^{(1-\epsilon)/2}$ neighbors in $A$.
+  Let $G,A,t,\epsilon,n_0$ be as in \cref{lem:diversity}.
+  Suppose $|A|\ge n_0$ and every pair of elements of $A$ has a common neighbor in $G$.
+  Then there exists a vertex $v$ in $G$ which has at least $|A|^{(1-\epsilon)/2}$ neighbors in $A$.
 \end{corollary}
 \begin{proof}Let ${\cal F}=\set{N(v)\cap A\colon v\in V(G)}$. 
   Let $k$ be the maximal cardinality of a set $F$ in ${\cal F}$.
-  Say that a pair $(a,b)$ of elements of $A$ is \emph{covered} by $F\in {\cal F}$
+  Say that an unordered pair $\{a,b\}$ of distinct elements of $A$ is \emph{covered} by $F\in {\cal F}$
   if  $a,b\in F$.
-  By assumption, each of the $n^2$ pairs in $A^2$ is covered by some element $F\in {\cal F}$, and,
-  clearly, every $F\in {\cal F}$ can cover at most $k^2$ pairs. 
-  Hence, $n^2/k^2\le |{\cal F}|\le  n^{1+\epsilon}$, proving $k\ge n^{(1-\epsilon)/2}$.
+  By assumption, each of the $\binom{|A|}{2}$ unordered pairs of distinct elements of $A$ is covered by some element $F\in {\cal F}$, and,
+  clearly, every $F\in {\cal F}$ can cover at most $\binom{k}{2}$ pairs. 
+  Hence $\frac{\binom{|A|}{2}}{\binom{k}{2}}\leq |{\cal F}|\le  |A|^{1+\epsilon}$, implying $k\ge |A|^{(1-\epsilon)/2}$.
 \end{proof}
 
+\begin{comment}
 \begin{corollary}\label{cor:biversity}
-    For every positive real $\alpha<\frac 1 2$ and integer $t\in\N$ there exists $\ell_0$ with the following property.
+    For every positive real $\alpha<\frac 1 2$ and integer $t\in\N$ there exists an integer $\ell_0$ with the following property.
   Let $G$ be a graph such that $K_t\not\minor_2 G$
-  % which does not contain
-  % the complete bipartite graph $K_{t,t}$ 
   and let
   $A$ be a $1$-independent subset of $G$ with $|A|\ge \ell_0$ such that every pair of vertices in $A$ has a common neighbor in $G$.
    Then there is a vertex $v\in G$
   with at least $|A|^{\alpha}$ neighbors in $A$.
 \end{corollary}
 \begin{proof}\label{pf:}
-    % Note that if $K_{2t}$ has a depth $1$ minor model in
-    % a bipartite graph $H$, then there is a depth $1$ minor model of $K_{t}$ in $H$ with all centers of branch sets contained in one part of $H$. This, in turns, implies that $K_{t,t}$ is a subgraph of $H$.
   Define $H$ to be the bipartite graph induced 
-  by $G$, with parts $A$ and $V(G)-A$, i.e.,  $v\in A$ and $w\in V(G)-A$ are adjacent in $H$ iff they are in $G$. 
+  by $G$, with partite sets $A$ and $V(G)-A$; that is,  $v\in A$ and $w\in V(G)-A$ are adjacent in $H$ iff they are in $G$. 
   We claim that $K_{2t^2}\not\minor_1 H$. Indeed, it is easy to see that 
   since $H$ is bipartite, $K_{2t^2}\minor_1 H$ would imply that $H$ contains the 
   complete bipartite graph $K_{t^2,t^2}$,  which, in turn, implying that $K_{t}\minor_2 G$, contrary to our assumption.  
-  % Since $G$ does not contain the complete bipartite graph $K_{t,t}$, neither does $H$.  
-  % By the preceding remark, this implies  that $K_{2t}\not\minor_1 H$.
-
+  
   Let $\ell_0$
     be the value $n_0$ from~\cref{lem:diversity} applied to $2t^2$ in place of $t$ and $\epsilon$ such that $(1-\epsilon)/2=\alpha$. Applying~\cref{cor:diversity} to $H,2t,\epsilon,\ell_0$, we conclude that if every pair of elements of $A$ has a common neighbor in $G$
     (hence also in $H$), then there is a vertex $v$
     of $H$ with at least $|A|^{\alpha}$ neighbors in~$A$.
 \end{proof}
+\end{comment}
 
 % \begin{corollary}\label{lem:gajarsky}
 % Let $G$ be a graph, let $s\in \N$, and suppose there is a constant $t\in \N$ such that $K_t\not\minor_{3s+1} G$.
@@ -183,40 +177,38 @@ From \cref{lem:diversity} we derive the following.
 
 
 
-To prove~\cref{lem:apex}, we will arrange the elements of $A$ in a binary tree
+\paragraph*{Proof of \cref{lem:apex}.} We proceed with the proof of \cref{lem:apex}, which spans the whole remainder of this section.
+We will arrange the elements of $A$ in a binary tree
 and prove that the tree contains a long path. From this path, we will 
 extract the set $A'$. In stability theory, similar trees are called \emph{type trees} and they are used to extract long indiscernible sequences, see e.g.~\cite{malliaris2014regularity}. 
 
-\begin{proof}
-	\newcommand{\dau}{\mathrm{D}}
-	\newcommand{\son}{\mathrm{S}}
+
+\newcommand{\dau}{\mathrm{D}}
+\newcommand{\son}{\mathrm{S}}
 	
 	We identify words in $\set{\dau,\son}^*$ with \emph{nodes}
 	of the infinite rooted binary tree. 
   The \emph{depth} of a node $w$ is the length of $w$.
   For $w\in \set{\dau,\son}^*$,
 	 the nodes $w\dau$ and $w\son$ are called, respectively, the \emph{daughter} and the \emph{son} of $w$,
-	and $w$ is the \emph{father} of both $w\son$ and $w\dau$.
+	and $w$ is the \emph{parent} of both $w\son$ and $w\dau$.
 	We consider
 	 finite, labeled, rooted, binary trees, which are called simply trees below, and are defined as follows.
-	 A \emph{tree} is a partial function $\tau\from \set{\dau,\son}^*\to U$ whose domain is a finite set of nodes, called the \emph{nodes of $\tau$}, which is closed under taking fathers. If $v$ is a node of $\tau$, then $\tau(v)$ is called its \emph{label}.
+	 A \emph{tree} is a partial function $\tau\from \set{\dau,\son}^*\to U$ whose domain is a finite set of nodes, called the \emph{nodes of $\tau$}, which is closed under taking parents. If $v$ is a node of $\tau$, then $\tau(v)$ is called its \emph{label}.
   
-  Let $G$ be a graph, $A\subset V(G)$ a $1$-independent set of its vertices
-  and $\bar a$ an enumeration of $A$.
+  Let $G$ be a graph, $A\subset V(G)$ be a $1$-independent set in $G$,
+  and $\bar a$ be an enumeration of $A$.
 We define  a binary tree $\tau$ which is 
-  labeled by vertices of $G$. The tree is defined by processing all elements of $\bar a$ sequentially. We start with $\tau$ being the  tree with empty domain, and for each element $a$ of the sequence $\bar a$, execute the following procedure, which results in adding a node with label $a$ to $\tau$.
+  labeled by vertices of $G$. The tree is defined by processing all elements of $\bar a$ sequentially. We start with $\tau$ being the  tree with empty domain, and for each element $a$ of the sequence $\bar a$, processed in the order given by $\bar a$, execute the following procedure which results in adding a node with label $a$ to $\tau$.
   
 When processing the vertex $a$, do the following. Start with $w$ being the empty word. While $w$ is a node of $\tau$, repeat the following step: 
   if the distance from $a$ to $\tau(w)$ in the graph 
-  $G$ is two, replace $w$ by its son, otherwise, replace $w$ by its daughter.
+  $G$ is equal to $2$, replace $w$ by its son, otherwise, replace $w$ by its daughter.
   % Repeat the step, unless $\tau(w)$ is undefined.
-  Once $w$ is not a node of $\tau$, extend $\tau$ to $w$    so that  $\tau(w)=a$. In this way, we have processed the element $a$, and now
+  Once $w$ is not a node of $\tau$, extend $\tau$ by setting  $\tau(w)=a$. In this way, we have processed the element $a$, and now
     proceed to the next element $a$ of $\bar a$, until all elements are processed. This ends the construction of $\tau$.
 	
-  
-  
-  
-  \medskip
+
 For a tree $\tau$, define its
 \emph{depth} as 
 the maximal depth of a node of $\tau$.
@@ -231,12 +223,9 @@ Let $h,t\ge 2$.	If $\tau$ has alternation rank at most $t-1$ and depth at most $
 \end{lemma}
 \begin{proof}		
 	To each node $w$ of $\tau$ assign 
-	the function $f_w:\set{1,\ldots,t}\to\set{1,\ldots,h}$ which
-	maps a number $i$ to the $i$th smallest index $j\ge 1$
-	such that $w_j\neq w_{j-1}$, if it exists, 
-	where $w_0$ is assumed to be equal $\dau$,
-	and if such an index $j$ does not exist, then $f_w(i)=|w|+1$.
-		The mapping $w\mapsto f_w$ is injective
+	the function $f_w\colon \set{1,\ldots,t}\to\set{1,\ldots,h}$ defined as follows:
+	$f_w$ maps each $i\in \set{1,\ldots,t}$ to the $i$th alternation of $w$, provided $i$ is at most the number of alternations of $w$, and otherwise we put $f_w(i)=|w|+1$.
+	It is clear that the mapping $w\mapsto f_w$ is injective
 and its image is contained in monotone functions, hence the domain of $\tau$ 
 		has fewer than $h^{t}$ elements.
 \end{proof}
@@ -257,13 +246,13 @@ Then $\tau$ has alternation rank at most $2t-1$.
 		For every pair $a_i,b_j$ with $1\le i\le j\le k$, there is a vertex $z_{ij}\not\in A$		which is a common neighbor of $a_i$ and $b_j$,
 		and is not a neighbor of $b_s$, for $s\neq j$.
 	\end{claim}
-	\begin{proof}
+	\begin{clproof}
 		Note that if $i\le j$, then $d(a_i,b_j)\le 2$, however, $d(a_i,b_j)>1$ since $A$
 		is $1$-independent. In particular, there is a vertex $z_{ij}$ which is a common neighbor of $a_i$ and $b_j$. 
 		Suppose that $z_{ij}$ is a neighbor of $b_s$, for some $s\neq j$. This implies that $d(b_j,b_s)\le 2$, which is impossible, 
 since
 		 the nodes corresponding to $b_s$ and $b_j$ in $\tau$ are such that one is a descendant of the daughter of the other, implying that $d(b_s,b_j)>2$.
-	\end{proof}
+	\end{clproof}
   
 
 
@@ -278,9 +267,9 @@ and $a_i\in B_i$.
 Hence, the graphs $B_j$, for $1\le j\le l$, define a depth-$2$ minor model of $K_k$ in $G$. Since $K_t\not\minor_{2}G$, this implies that $k<t$, proving~\cref{thm:alternation-rank-type-tree}.
 \end{proof}
 
-To prove~\cref{lem:apex}, let $\ell_0$
-be the number obtained from~\cref{cor:biversity}.
-Fix integers $\ell\ge \ell_0$ and $m$, and define $h=m+\ell$.
+To prove~\cref{lem:apex}, let $n_0$
+be the number obtained from~\cref{lem:diversity}.
+Fix integers $\ell\ge n_0$ and $m$, and define $h=m+\ell$.
 Let $A$ be an $1$-independent subset of $G$
 of size at least $h^{t}$.
 
@@ -293,11 +282,10 @@ which contains at least $m$ letters $\dau$, and let $X$
 be the set of all nodes $\tau(v)$ such that $v\dau$ is a prefix of $w$. Then, by construction, $X$ is a $2$-independent subset of $G$ of size at least $m$, so the second case of the lemma holds.
 
 Finally, consider the second case, i.e., there is anode $w$ in $\tau$ which contains at least $\ell$ letters $\son$, and let 
-$Y$ be the set of all nodes $\tau(v)$ such that $v\son$ is a prefix of $w$. Then, by construction, $Y\subset A$ is a set of vertices which are mutually at distance exactly $2$ in $G$. By~\cref{cor:biversity}, there is a vertex $v\in G$
+$Y$ be the set of all nodes $\tau(v)$ such that $v\son$ is a prefix of $w$. Then, by construction, $Y\subset A$ is a set of vertices which are mutually at distance exactly $2$ in $G$. By~\cref{cor:diversity}, there is a vertex $v\in G$
 with at least $\ell^{\alpha}$ neighbors in $Y$.
 This finishes the proof of the first part of~\cref{lem:apex}.
 
-\medskip
 The proof above yields an algorithm which first constructs the tree $\tau$, by 
 processing each vertex $w$ of $A$, and testing whether the distance between $w$ and each vertex processed already is equal to $2$. Whenever a node with $2t$ alternations 
 is inserted, we can exhibit in $G$ a depth-$2$ minor model of $K_t$.
@@ -306,9 +294,7 @@ we have constructed an $m$-independent set. Whenever a node with at least $\ell$
 which belongs to the largest number of those neighborhoods. The overall running time is 
 $\Oof_{r,t}(|A|^c\cdot |E(G)|)$, for some constant $c$, as required.
 
-\medskip
 This finishes the proof of~\cref{lem:apex}.
-\end{proof}
 
 \subsection{Proof of~\cref{lem:engine}}
 \label{sec:engine}
