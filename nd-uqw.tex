@@ -70,7 +70,7 @@ For every integer $t\in \N$ and positive real $\alpha<\frac 1 2$
 there is an integer $\ell_0\in\N$ with the following property.
 Let $m,\ell\in \N$ be such that $\ell\ge \ell_0$. 
 If~$G$ is a graph and $A$ is a $1$-independent set in $G$
-with at least $(m+\ell)^{t}$ elements,
+with at least $(m+\ell)^{2t}$ elements,
 then at least one of the following conditions hold:
 \begin{itemize}
   % \item $A$ contains the principal vertices of a $1$-subdivision of a clique $K_t$ contained in $G$,
@@ -191,7 +191,7 @@ extract the set $A'$. In stability theory, similar trees are called \emph{type t
   The \emph{depth} of a node $w$ is the length of $w$.
   For $w\in \set{\dau,\son}^*$,
 	 the nodes $w\dau$ and $w\son$ are called, respectively, the \emph{daughter} and the \emph{son} of $w$,
-	and $w$ is the \emph{parent} of both $w\son$ and $w\dau$.
+	and $w$ is the \emph{parent} of both $w\son$ and $w\dau$. A node $w'$ is a {\em{descendant}} of a node $w$ if $w'$ is a prefix of $w$ (possibly $w'=w$).
 	We consider
 	 finite, labeled, rooted, binary trees, which are called simply trees below, and are defined as follows.
 	 A \emph{tree} is a partial function $\tau\from \set{\dau,\son}^*\to U$ whose domain is a finite set of nodes, called the \emph{nodes of $\tau$}, which is closed under taking parents. If $v$ is a node of $\tau$, then $\tau(v)$ is called its \emph{label}.
@@ -203,14 +203,14 @@ We define  a binary tree $\tau$ which is
   
 When processing the vertex $a$, do the following. Start with $w$ being the empty word. While $w$ is a node of $\tau$, repeat the following step: 
   if the distance from $a$ to $\tau(w)$ in the graph 
-  $G$ is equal to $2$, replace $w$ by its son, otherwise, replace $w$ by its daughter.
+  $G$ is at most $2$, replace $w$ by its son, otherwise, replace $w$ by its daughter.
   % Repeat the step, unless $\tau(w)$ is undefined.
   Once $w$ is not a node of $\tau$, extend $\tau$ by setting  $\tau(w)=a$. In this way, we have processed the element $a$, and now
     proceed to the next element $a$ of $\bar a$, until all elements are processed. This ends the construction of $\tau$.
 	
 
-For a tree $\tau$, define its
-\emph{depth} as 
+Define the
+\emph{depth} of $\tau$ as 
 the maximal depth of a node of $\tau$.
 For a word $w$, define an \emph{alternation} to be 
 a position $i$ such that $w_i\neq w_{i-1}$, where $w_0$ is assumed to be $\dau$.
@@ -218,16 +218,15 @@ a position $i$ such that $w_i\neq w_{i-1}$, where $w_0$ is assumed to be $\dau$.
 
 
 \begin{lemma}\label{lem:number-of-nodes}
-Let $h,t\ge 2$.	If $\tau$ has alternation rank at most $t-1$ and depth at most $h-1$, then $\tau$ has fewer than $h^{t}$
-	nodes.
+Let $h,t\ge 2$.	If $\tau$ has alternation rank at most $2t-1$ and depth at most $h-1$, then $\tau$ has fewer than $h^{2t}$ nodes.
 \end{lemma}
 \begin{proof}		
 	To each node $w$ of $\tau$ assign 
-	the function $f_w\colon \set{1,\ldots,t}\to\set{1,\ldots,h}$ defined as follows:
-	$f_w$ maps each $i\in \set{1,\ldots,t}$ to the $i$th alternation of $w$, provided $i$ is at most the number of alternations of $w$, and otherwise we put $f_w(i)=|w|+1$.
-	It is clear that the mapping $w\mapsto f_w$ is injective
+	the function $f_w\colon \set{1,\ldots,2t}\to\set{1,\ldots,h}$ defined as follows:
+	$f_w$ maps each $i\in \set{1,\ldots,2t}$ to the $i$th alternation of $w$, provided $i$ is at most the number of alternations of $w$, and otherwise we put $f_w(i)=|w|+1$.
+	It is clear that the mapping $w\mapsto f_w$ for nodes $w$ of $\tau$ is injective
 and its image is contained in monotone functions, hence the domain of $\tau$ 
-		has fewer than $h^{t}$ elements.
+		has fewer than $h^{2t}$ elements.
 \end{proof}
 
 \begin{lemma}\label{thm:alternation-rank-type-tree}
@@ -235,64 +234,72 @@ Suppose that  $K_t\not\minor_{2} G$.
 Then $\tau$ has alternation rank at most $2t-1$.
 \end{lemma}
 \begin{proof}
-	Let $w$ be a node of $\tau$ with alternation rank at least $2k$.  
+	Let $w$ be a node of $\tau$ with at least $2k$ alternations, for some $k\in \N$.
 	In particular, there are vertices $a_1,b_1,\ldots,a_k,b_k$ in $A$
-	such that for each $i=1,\ldots,k$, 
+	such that for each $i\in \set{1,\ldots,k}$, 
 	the nodes in $\tau$ corresponding to $b_i,a_{i+1},b_{i+1},\ldots,a_k,b_k$ are  descendants of the son of the node which corresponds to $a_i$,
 	and the nodes corresponding to $a_{i+1},b_{i+1},\ldots,a_k,b_k$
 	are descendants of the daughter of the node which corresponds to $b_i$.
 	
 	\begin{claim}\label{claim:minor}
 		For every pair $a_i,b_j$ with $1\le i\le j\le k$, there is a vertex $z_{ij}\not\in A$		which is a common neighbor of $a_i$ and $b_j$,
-		and is not a neighbor of $b_s$, for $s\neq j$.
+		and is not a neighbor of any $b_s$ with $s\neq j$.
 	\end{claim}
 	\begin{clproof}
-		Note that if $i\le j$, then $d(a_i,b_j)\le 2$, however, $d(a_i,b_j)>1$ since $A$
-		is $1$-independent. In particular, there is a vertex $z_{ij}$ which is a common neighbor of $a_i$ and $b_j$. 
-		Suppose that $z_{ij}$ is a neighbor of $b_s$, for some $s\neq j$. This implies that $d(b_j,b_s)\le 2$, which is impossible, 
+		Note that since $i\le j$, the node of corresponding to $b_j$ is a descendant of the son of the node corresponding to $a_i$, hence we have $\dist_G(a_i,b_j)\le 2$ by the construction of $\tau$.
+		However, we also have $\dist_G(a_i,b_j)>1$ since $A$
+		is $1$-independent. Therefore $\dist_G(a_i,b_j)=2$, so there is a vertex $z_{ij}$ which is a common neighbor of $a_i$ and $b_j$. 
+		Suppose that $z_{ij}$ was a neighbor of $b_s$, for some $s\neq j$. This would imply that $\dist_G(b_j,b_s)\le 2$, which is impossible, 
 since
-		 the nodes corresponding to $b_s$ and $b_j$ in $\tau$ are such that one is a descendant of the daughter of the other, implying that $d(b_s,b_j)>2$.
+		 the nodes corresponding to $b_s$ and $b_j$ in $\tau$ are such that one is a descendant of the daughter of the other, implying that $\dist_G(b_s,b_j)>2$.
 	\end{clproof}
   
+Note that whenever $i\leq j$ and $i'\leq j'$ are such that $j\neq j'$, vertices $z_{ij}$ and $z_{i'j'}$ are different, because $z_{ij}$ is adjacent to $b_{j}$ but not to $b_{j'}$, and the converse holds fro $z_{i'j'}$.
+However, it may happen that $z_{ij}=z_{i'j}$ even if $i\neq i'$. This will not affect our further reasoning.
 
-
-For each $j=1,\ldots,k$, define the graph $B_j$
+For each $j\in\set{1,\ldots,k}$, define the graph $B_j$
 as the subgraph of $G$ induced by the set
-$\set{a_j,b_j}\cup\set{z_{ij}\mid 1\le i\le  j}$.
-By the claim above, the graphs $B_j$
-are pairwise disjoint, for $j=1,\ldots,k$.
-Moreover, for $1\le i\le j\le k$, there is an edge between $B_i$
+$\set{a_j,b_j}\cup\set{z_{ij}\colon 1\le i\le  j}$.
+By \cref{thm:alternation-rank-type-tree} and the discussion from the previous paragraph, the graphs $B_j$ for $j\in \set{1,\ldots,k}$
+are pairwise disjoint.
+Moreover, for all $1\le i\le j\le k$, there is an edge between $B_i$
 and $B_j$, namely, the edge between $z_{ij}\in B_j$
 and $a_i\in B_i$.
-Hence, the graphs $B_j$, for $1\le j\le l$, define a depth-$2$ minor model of $K_k$ in $G$. Since $K_t\not\minor_{2}G$, this implies that $k<t$, proving~\cref{thm:alternation-rank-type-tree}.
+Hence, the graphs $B_j$, for $j\in \set{1,\ldots,k}$, define a depth-$2$ minor model of $K_k$ in $G$. Since $K_t\not\minor_{2}G$, this implies that $k<t$, proving~\cref{thm:alternation-rank-type-tree}.
 \end{proof}
 
-To prove~\cref{lem:apex}, let $n_0$
-be the number obtained from~\cref{lem:diversity}.
-Fix integers $\ell\ge n_0$ and $m$, and define $h=m+\ell$.
-Let $A$ be an $1$-independent subset of $G$
-of size at least $h^{t}$.
+To prove~\cref{lem:apex}, 
+choose $\epsilon=1-2\alpha$ so that $\alpha=\frac{1-\epsilon}{2}$; note that $0<\epsilon<1$.
+Let $n_0$ be the integer given by~\cref{lem:diversity} for $t$ and $\epsilon$; w.l.o.g. $n_0\geq 2$.
+We put $\ell_0=n_0$.
+Fix integers $\ell\ge \ell_0$ and $m$, and define $h=m+\ell$.
+Let $A$ be a $1$-independent set in $G$
+of size at least $h^{2t}$.
 
 Suppose that the first case of~\cref{lem:apex} does not hold. In particular $K_t\not\minor_2 G$, so by~\cref{thm:alternation-rank-type-tree}, $\tau$ has alternation rank at most $2t-1$. From~\cref{lem:number-of-nodes} 
 we conclude that $\tau$  has depth at least~$h$.
-As $h=m+\ell$, it follows that either $\tau$  has a node $w$ which contains at least $m$ letters $\dau$, or $\tau$ has a node which contains  at least $\ell$ letters $\son$.
+As $h=m+\ell$, it follows that either $\tau$  has a node $w$ which contains at least $m$ letters $\dau$, or $\tau$ has a node $w$ which contains  at least $\ell$ letters $\son$.
 
 Consider the first case, i.e., there is a node $w$ of $\tau$
 which contains at least $m$ letters $\dau$, and let $X$
-be the set of all nodes $\tau(v)$ such that $v\dau$ is a prefix of $w$. Then, by construction, $X$ is a $2$-independent subset of $G$ of size at least $m$, so the second case of the lemma holds.
+be the set of all vertices $\tau(u)$ such that $u\dau$ is a prefix of $w$. Then, by construction, $X$ is a $2$-independent set in $G$ of size at least $m$, so the second case of the lemma holds.
 
-Finally, consider the second case, i.e., there is anode $w$ in $\tau$ which contains at least $\ell$ letters $\son$, and let 
-$Y$ be the set of all nodes $\tau(v)$ such that $v\son$ is a prefix of $w$. Then, by construction, $Y\subset A$ is a set of vertices which are mutually at distance exactly $2$ in $G$. By~\cref{cor:diversity}, there is a vertex $v\in G$
-with at least $\ell^{\alpha}$ neighbors in $Y$.
+Finally, consider the second case, i.e., there is a node $w$ in $\tau$ which contains at least $\ell$ letters~$\son$. Let 
+$Y$ be the set of all vertices $\tau(u)$ such that $u\son$ is a prefix of $w$. Then, by construction, $Y\subset A$ is a set of vertices which are mutually at distance exactly $2$ in $G$. 
+Since $K_t\not\minor_2 G$, by~\cref{cor:diversity} we infer that there is a vertex $v\in G$
+with at least $\ell^{\frac{1-\epsilon}{2}}=\ell^{\alpha}$ neighbors in $Y$.
 This finishes the proof of the first part of~\cref{lem:apex}.
 
 The proof above yields an algorithm which first constructs the tree $\tau$, by 
-processing each vertex $w$ of $A$, and testing whether the distance between $w$ and each vertex processed already is equal to $2$. Whenever a node with $2t$ alternations 
-is inserted, we can exhibit in $G$ a depth-$2$ minor model of $K_t$.
+iteratively processing each vertex $w$ of $A$ and testing whether the distance between $w$ and each vertex processed already is equal to $2$.
+This amounts to running a breadth-first search from every vertex of $A$, which can be done in time $\Oof(|A|\cdot |E(G)|)$.
+Whenever a node with $2t$ alternations 
+is inserted to $\tau$, we can exhibit in $G$ a depth-$2$ minor model of $K_t$.
 Whenever a node with least $m$ letters $\dau$ is added to $\tau$,
-we have constructed an $m$-independent set. Whenever a node with at least $\ell$ letters $\son$ is added to $\tau$, as argued, there must be some vertex $v\in V(G)-A$ with at least $\ell^\alpha$ neighbors in $A$. To find such a vertex, scan through all neighborhoods of vertices $v\in A$ in the graph $G$, and then select a vertex $w\in V(G)$
-which belongs to the largest number of those neighborhoods. The overall running time is 
-$\Oof_{r,t}(|A|^c\cdot |E(G)|)$, for some constant $c$, as required.
+we have constructed an $m$-independent set. Whenever a node with at least $\ell$ letters $\son$ is added to $\tau$, as argued, there must be some vertex $v\in V(G)-A$ with at least $\ell^\alpha$ neighbors in~$A$. 
+To find such a vertex, scan through all neighborhoods of vertices $v\in A$ in the graph $G$, and then select a vertex $w\in V(G)$
+which belongs to the largest number of those neighborhoods; this can be done in time $\Oof(|E(G)|)$.
+The overall running time is $\Oof(|A|\cdot |E(G)|)$, as required.
 
 This finishes the proof of~\cref{lem:apex}.
 
@@ -303,50 +310,56 @@ This finishes the proof of~\cref{lem:apex}.
 % similarly, a $(2s+2)$-independent set $A$ in $G$
 % induces a $2$-independent set in $G$ with the balls of radius $s$ around the vertices of $A$ contracted.
 
-We start by proving~\cref{lem:engine} in the case $r=1$,
-then we prove it in the case $r=2$. Next we show how the general case reduces to one of those two cases.
+With \cref{lem:apex} proved, we can proceed with~\cref{lem:engine}. 
+We start with the case $r=1$, then we move to the case $r=2$. 
+Next we show how the general case reduces to one of those two cases.
 % , and, finally, we deduce~\cref{thm:new-uqw} from~\cref{lem:engine}.
 
 \paragraph{Case $r=1$.}
-We prove~\cref{lem:engine} in the case $r=1$.
-Let $d=0$, so $K_t\not\minor_d G$ amounts to saying that $G$
-does not contain a clique of size $t$. By Ramsey's Theorem, in any graph every set of size $\binom{m+t-2}{t-1}$ contains an
-independent set $A'$ of size $m$ or a clique of size $t$. Therefore, 
-taking $L(m)$ as the above binomial coefficient yields~\cref{lem:engine} in case $r=0$, for $S=\emptyset$. Moreover, the set $A'$ can be computed from $G$ and $A$
-in time~$\Oof(|A|\cdot |E(G)|)$, by simulating the proof of Ramsey's theorem.
+Note that in the statement we assume that $K_t\not\minor_2 G$, but we will actually prove a stronger statement where we only assume that $K_t\not\minor_0 G$; 
+that is, $G$ does not contain a clique of size $t$. By Ramsey's Theorem, in any graph every set of size $\binom{m+t-2}{t-1}$ contains an
+independent set of size $m$ or a clique of size $t$. Therefore, 
+taking $L(m)$ as the above binomial coefficient yields~\cref{lem:engine} in case $r=0$, for $S=\emptyset$. Note here that $\binom{m+t-2}{t-1}=\Oof_{t}{(m^{{(2t+1)}^{t+1}})}$.
+Moreover, such independent set or clique can be computed from $G$ and $A$ in time~$\Oof(|A|\cdot |E(G)|)$ by simulating the proof of Ramsey's theorem.
 
 \paragraph{Case $r=2$.}
-We now prove~\cref{lem:engine} in the case $r=2$, and for $d=2$, i.e., we show  that if $A$ is a sufficiently large $1$-independent subset of a graph $G$ such that $K_t\not\minor_2 G$, then $A$ contains a subset of size $m$
-which is  $2$-independent in  $G-S$, where $S$ has at most $t$ elements. 
-To this end, we iteratively apply \cref{lem:apex} as long as  it results in the third case, yielding a vertex $v$ with many neighbhors in $A$. In this case, we add $v$ vertex to the set $S$, and apply the lemma again,
+Note that in the statement we assume that $K_t\not\minor_5 G$, but we will actually prove a stronger statement where we only assume that $K_t\not\minor_2 G$.
+Namely, we show that if $A$ is a sufficiently large $1$-independent set in a graph $G$ such that $K_t\not\minor_2 G$, 
+then there is a set of vertices $S$ of size at most $t$ such that $A\setminus S$ contains a subset of size $m$ which is $2$-independent in $G-S$. 
+Here, by ``sufficiently large'' we mean of size of size at least $L(m)$, for $L(m)$ emerging from the proof.
+To this end, we shall iteratively apply \cref{lem:apex} as long as  it results in the third case, 
+yielding a vertex $v$ with many neighbhors in $A$. In this case, we add $v$ vertex to the set $S$, and apply the lemma again,
 restricting $A$ to $A\cap N(v)$. 
 The precise calculations follow.
 
-Fix an integer $t$ and a number $\beta>2\cdot t$. For $k\ge 0$,
-define $m_k=((k+1)\cdot m)^{\beta^k}$.
+\newcommand{\mbull}{\widehat{m}}
+
+Fix a number $\beta>2t$. For $k\ge 0$,
+define $m_k=((k+1)\cdot m)^{(2\beta)^k}$.
 We will apply~\cref{lem:apex} in the following form.
 \begin{corollary}\label{cor:apex}
   % Let $t$ be an integer and $\beta>2\cdot t$ a real.
-	There is an integer $m_\bullet$ such that for all $m\ge m_\bullet,k\ge 1$, the following holds.
-	If $G$ is a graph such that $K_t\not\minor_2 G$,
-	$A\subset V(G)$ is an $1$-independent set which does not contain a $2$-independent set of size $m$ and $|A|\ge m_k$ %$((k+1)\cdot m)^{\beta ^k}$
-	then there is a vertex $v$ of $G$ such that $|N_G(v)\cap A| \ge m_{k-1}$.%$(k\cdot m)^{\beta^{k-1}}$.
+	There is an integer $\mbull$ such that for all $m\ge \mbull$ and $k\ge 1$, the following holds.
+	If $G$ is a graph such that $K_t\not\minor_2 G$, and
+	$A\subset V(G)$ is an $1$-independent set in $G$ which does not contain a $2$-independent set of size $m$ and satisfies $|A|\ge m_k$, %$((k+1)\cdot m)^{\beta ^k}$
+	then there exists a vertex $v$ of $G$ such that $|N_G(v)\cap A| \ge m_{k-1}$.%$(k\cdot m)^{\beta^{k-1}}$.
 \end{corollary}
 \begin{proof}
 Let $\alpha=t/\beta$, so that $\alpha<1/2$, 
  and let 
-$\ell=(k\cdot m)^{\beta^{k-1}/\alpha}$.
-Take $m_\bullet= \ell_0^{t/\beta}$; then $m\ge m_\bullet$ implies that $\ell\ge\ell_0$.
+$\ell=(k\cdot m)^{(2\beta)^{k-1}/\alpha}$.
+Take $\mbull= \ell_0^{t/\beta}$, where $\ell_0$ is the constant given by \cref{lem:apex} for $t$ and $\alpha$.
+Then $m\ge \mbull$ implies that $\ell\ge\ell_0$.
 Since
-$$|A|\ge \left((k+1)\cdot m\right)^{\beta^k}=\left ((((m+ k\cdot m)^{\beta^{k-1}/\alpha)}) \right)^t
-\ge (m+(k\cdot m)^{\beta^{k-1}/\alpha})^t=(m+\ell)^t,$$
-we may  apply Lemma~\ref{lem:apex},
-yielding a vertex $v$ with at least $\ell^\alpha=(k\cdot m)^{\beta^{k-1}}$ neighbors in~$A$.
+$$|A|\ge \left((k+1)\cdot m\right)^{(2\beta)^k}=\left ((m+ k\cdot m)^{(2\beta)^{k-1}/\alpha} \right)^{2t}
+\ge (m+(k\cdot m)^{(2\beta)^{k-1}/\alpha})^{2t}=(m+\ell)^{2t},$$
+we may  apply \cref{lem:apex},
+yielding a vertex $v$ with at least $\ell^\alpha=(k\cdot m)^{(2\beta)^{k-1}}$ neighbors in~$A$.
 \end{proof}
 
 % \begin{proof}  [of~\cref{lem:engine}]
 
-Let $G,t$ be such that $K_t\not\minor_2 G$, and fix some number $\beta>2\cdot t$. Let $m_\bullet$ be the number granted by~\cref{cor:apex}. If $m<m_\bullet$, replace $m$ by $m_\bullet$. We will find 
+Let $G,t$ be such that $K_t\not\minor_2 G$, and fix some number $\beta>2\cdot t$. Let $\mbull$ be the number granted by~\cref{cor:apex}. If $m<\mbull$, replace $m$ by $\mbull$. We will find 
 a subset of $A$ of size $m$ which is $2$-independent in $G-S$, where $|S|\le t$.
 
 
@@ -387,7 +400,7 @@ We may choose pairwise distinct vertices $w_1,\ldots,w_k$,
  
  
  This proves~\cref{lem:engine} in the case $r=2$, for $d=2$, and for the function $L=L_t$, defined by $L_t(m)=m_t=((t+1)\cdot m)^{\beta^t}$
- for $m\ge m_\bullet$ and $L(m)=L(m_\bullet)$ for $m<m_\bullet$, where $\beta>2\cdot t$ is any fixed constant and $m_\bullet$ is obtained from~\cref{cor:apex}.
+ for $m\ge \mbull$ and $L(m)=L(\mbull)$ for $m<\mbull$, where $\beta>2\cdot t$ is any fixed constant and $\mbull$ is obtained from~\cref{cor:apex}.
  The proof yields an algorithm constructing the sets $A'$ and $S$,
  which amounts to applying at most $t$ times the procedure obtained in~\cref{lem:apex}.
  Hence, its running time  is $\Oof_{r,t}(|A|^c\cdot |E(G)|)$ as required.
@@ -506,7 +519,7 @@ We now wrap up the proof of \cref{thm:new-uqw} by iteratively applying~\cref{lem
 
 \begin{proof}[of \cref{thm:new-uqw}]
 Fix integers $r,t$,  and a graph $G$ such that $K_t\not\minor_{d} G$,
-for $d=\lceil 5r/2 \rceil$. Let $\beta>2\cdot t$ be a fixed real, and let $m_\bullet$ be the number from~\cref{cor:apex}. Without loss of generality suppose $m\geq t$ and $m\ge m_\bullet$.
+for $d=\lceil 5r/2 \rceil$. Let $\beta>2\cdot t$ be a fixed real, and let $\mbull$ be the number from~\cref{cor:apex}. Without loss of generality suppose $m\geq t$ and $m\ge \mbull$.
  Denote $\gamma=\beta^t$, and
 define the function $L_t$ by $L_t(m)=((t+1)\cdot m)^\gamma$.
 
@@ -548,7 +561,7 @@ Hence, $|S|<t$.
 
 Define the function  $N:\N\to\N$
 by $N(m)=(t+1)^{\beta^{t(r+1)}}\cdot m^{\beta^{tr}}$
-for $m\ge m_\bullet$  and $N(m)=N(m_\bullet)$ for $m<m_\bullet$.
+for $m\ge \mbull$  and $N(m)=N(\mbull)$ for $m<\mbull$.
 The argument above shows that if $|A|\ge N(m)$ then 
 there is a set $S\subset V(G)$, equal to $S_r$ above,
 and a set $B\subset A$, equal to $A_r$ above,
