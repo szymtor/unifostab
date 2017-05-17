@@ -47,12 +47,12 @@ We first prove a restricted variant,~\cref{lem:engine} below, in which we assume
 \cref{thm:new-uqw}, we apply the lemma iteratively for $r$ ranging from $1$ to the target value.
 
 \begin{lemma}\label{lem:engine}
-For all $t,r\in \N$ there exists a function $L\colon \N\to \N$ with $L(m)=\Oof_{r,t}{(m^{{(2t+1)}^{r(t+1)}})}$ such that the following holds.
-For each $m\in \N$, graph $G$ with $K_t\not\minor_{\lfloor 5r/2\rfloor} G$, and
+For all $t,r\in \N$ there exists an integer $d<5r/2$ and a function $L\colon \N\to \N$ with $L(m)=\Oof_{r,t}{(m^{{(2t+1)}^{2rt}})}$ such that the following holds.
+For each $m\in \N$, graph $G$ with $K_t\not\minor_{d} G$, and
 $(r-1)$-independent set $A\subseteq V(G)$ of size at least $L(m)$, there is a set $S\subseteq V(G)-A$ of size at most $t$ such that $A$ contains a subset $A'$ of size $m$ which is $r$-independent in $G-S$.
 Moreover, if $r$ is odd then $S$ is empty, and if $r$ is even,
 then every vertex of $S$ is at distance exactly $r/2$ from every vertex of $A'$.
-Finally, given $G$ and $A$, the sets $A'$ and $S$ can be computed in time $\Oof_{r,t}(|A|^c\cdot |E(G)|)$, where $c$ is some universal constant.
+Finally, given $G$ and $A$, the sets $A'$ and $S$ can be computed in time $\Oof_{r,t}(|A|\cdot |E(G)|)$, where $c$ is some universal constant.
 \end{lemma}
 
 We prove~\cref{lem:engine} in Section~\ref{sec:engine}, but  a very rough sketch is as follows.
@@ -316,14 +316,13 @@ Next we show how the general case reduces to one of those two cases.
 % , and, finally, we deduce~\cref{thm:new-uqw} from~\cref{lem:engine}.
 
 \paragraph{Case $r=1$.}
-Note that in the statement we assume that $K_t\not\minor_2 G$, but we will actually prove a stronger statement where we only assume that $K_t\not\minor_0 G$; 
-that is, $G$ does not contain a clique of size $t$. By Ramsey's Theorem, in any graph every set of size $\binom{m+t-2}{t-1}$ contains an
+We put $d=0$, thus we assume that $K_t\not\minor_0 G$; that is, $G$ does not contain a clique of size $t$. By Ramsey's Theorem, in any graph every set of size $\binom{m+t-2}{t-1}$ contains an
 independent set of size $m$ or a clique of size $t$. Therefore, 
-taking $L(m)$ as the above binomial coefficient yields~\cref{lem:engine} in case $r=0$, for $S=\emptyset$. Note here that $\binom{m+t-2}{t-1}=\Oof_{t}{(m^{{(2t+1)}^{t+1}})}$.
+taking $L(m)$ as the above binomial coefficient yields~\cref{lem:engine} in case $r=0$, for $S=\emptyset$. Note here that $\binom{m+t-2}{t-1}=\Oof_{t}{(m^{{(2t+1)}^{2t}})}$.
 Moreover, such independent set or clique can be computed from $G$ and $A$ in time~$\Oof(|A|\cdot |E(G)|)$ by simulating the proof of Ramsey's theorem.
 
 \paragraph{Case $r=2$.}
-Note that in the statement we assume that $K_t\not\minor_5 G$, but we will actually prove a stronger statement where we only assume that $K_t\not\minor_2 G$.
+We put $d=2$, thus we assume that $K_t\not\minor_2 G$.
 Namely, we show that if $A$ is a sufficiently large $1$-independent set in a graph $G$ such that $K_t\not\minor_2 G$, 
 then there is a set of vertices $S$ of size at most $t$ such that $A\setminus S$ contains a subset of size $m$ which is $2$-independent in $G-S$. 
 Here, by ``sufficiently large'' we mean of size of size at least $L(m)$, for $L(m)$ emerging from the proof.
@@ -337,43 +336,43 @@ The precise calculations follow.
 Fix a number $\beta>2t$. For $k\ge 0$,
 define $m_k=((k+1)\cdot m)^{(2\beta)^k}$.
 We will apply~\cref{lem:apex} in the following form.
-\begin{corollary}\label{cor:apex}
+\begin{claim}\label{cor:apex}
   % Let $t$ be an integer and $\beta>2\cdot t$ a real.
-	There is an integer $\mbull$ such that for all $m\ge \mbull$ and $k\ge 1$, the following holds.
+	There is an integer $\mbull$, depending only on $t$ and $\beta$, such that for all $m\ge \mbull$ and $k\ge 1$, the following holds.
 	If $G$ is a graph such that $K_t\not\minor_2 G$, and
 	$A\subset V(G)$ is an $1$-independent set in $G$ which does not contain a $2$-independent set of size $m$ and satisfies $|A|\ge m_k$, %$((k+1)\cdot m)^{\beta ^k}$
 	then there exists a vertex $v$ of $G$ such that $|N_G(v)\cap A| \ge m_{k-1}$.%$(k\cdot m)^{\beta^{k-1}}$.
-\end{corollary}
-\begin{proof}
-Let $\alpha=t/\beta$, so that $\alpha<1/2$, 
- and let 
-$\ell=(k\cdot m)^{(2\beta)^{k-1}/\alpha}$.
-Take $\mbull= \ell_0^{t/\beta}$, where $\ell_0$ is the constant given by \cref{lem:apex} for $t$ and $\alpha$.
+\end{claim}
+\begin{clproof}
+Let $\alpha=t/\beta$, so that $\alpha<1/2$.
+Put $\mbull= \ell^{\alpha}=\ell_0^{t/\beta}$, where $\ell_0$ is the constant given by \cref{lem:apex} for $t$ and $\alpha$.
+Let $\ell=(k\cdot m)^{(2\beta)^{k-1}/\alpha}$.
 Then $m\ge \mbull$ implies that $\ell\ge\ell_0$.
-Since
+Observe that
 $$|A|\ge \left((k+1)\cdot m\right)^{(2\beta)^k}=\left ((m+ k\cdot m)^{(2\beta)^{k-1}/\alpha} \right)^{2t}
-\ge (m+(k\cdot m)^{(2\beta)^{k-1}/\alpha})^{2t}=(m+\ell)^{2t},$$
-we may  apply \cref{lem:apex},
-yielding a vertex $v$ with at least $\ell^\alpha=(k\cdot m)^{(2\beta)^{k-1}}$ neighbors in~$A$.
-\end{proof}
+\ge (m+(k\cdot m)^{(2\beta)^{k-1}/\alpha})^{2t}=(m+\ell)^{2t}.$$
+Therefore, we may  apply \cref{lem:apex}, yielding a vertex $v$ with at least $\ell^\alpha=(k\cdot m)^{(2\beta)^{k-1}}=m_{k-1}$ neighbors in~$A$.
+\end{clproof}
 
 % \begin{proof}  [of~\cref{lem:engine}]
 
-Let $G,t$ be such that $K_t\not\minor_2 G$, and fix some number $\beta>2\cdot t$. Let $\mbull$ be the number granted by~\cref{cor:apex}. If $m<\mbull$, replace $m$ by $\mbull$. We will find 
+Let $\mbull$ be the number given by~\cref{cor:apex}. 
+In the following we assume that $m\geq \max(t,\mbull)$, for we may always ask for finding a $2$-independent set of size $\max(t,\mbull,m)$ instead of $m$.
+We will find 
 a subset of $A$ of size $m$ which is $2$-independent in $G-S$, where $|S|\le t$.
 
 
 Assume that $|A|\ge m_t$. By induction, we
  construct a sequence  $A=A_0\supseteq A_1\supseteq\ldots$ 
 of $1$-independent subsets of $G$
-of length at most $t$,
+of length at most $t$
 such that $|A_i|\ge m_{t-i}$,
- as follows. Start with $A_0=A$. We maintain a set $S$ of vertices of $G$ which is initially empty.
+ as follows. Start with $A_0=A$. We maintain a set $S$ of vertices of $G$ which is initially empty, and we maintain the invariant that $A_i$ is disjoint with $S$ at each step of the induction.
 
 For $i=0,1,2,\ldots$, do as follows.
 If $A_{i}$ contains a $2$-independent set of size $m$ in $G-S$, terminate.
  Otherwise, 
- apply~\cref{cor:apex} to the graph $G-S$ with $1$-independent subset
+ apply~\cref{cor:apex} to the graph $G-S$ with $1$-independent set
  $A_{i}$ of size $|A_i|\ge m_{t-i}$. This yields a vertex $v_{i+1}$ of $G-S$
  whose neighborhood in $G-S$ contains at least
  $m_{t-i-1}$ vertices of $A_{i}$.
@@ -386,12 +385,10 @@ If $A_{i}$ contains a $2$-independent set of size $m$ in $G-S$, terminate.
 \end{claim}
 \begin{proof}
 Suppose that the construction proceeds for $k\le t$ steps.
-By construction, each vertex $v_i$, for $i\le k$, is connected in $G$
- to all vertices of $A_{j}$, for $i\le j\le k$. In particular, all the vertices $v_1,\ldots,v_k$ are neighbors of all the vertices of $A_{k}$
- and $|A_k|\ge t+1-k$.
-We may choose pairwise distinct vertices $w_1,\ldots,w_k$,
- so that $w_i\in A_i$ and $w_i$ is a neighbor of $v_i$.
- Hence, the connected subgraphs $\set{w_i,v_i}$ of $G$ yield a depth-$1$ minor model of $K_k$ in $G$.
+By construction, each vertex $v_i$, for $i\le k$, is adjacent in $G$
+ to all the vertices of $A_{j}$, for each $i\le j\le k$. In particular, all the vertices $v_1,\ldots,v_k$ are adjacent to all the vertices of $A_{k}$
+ and $|A_k|\ge m_{t-k}\ge m\ge t$.
+Choose any pairwise distinct vertices $w_1,\ldots,w_k\in A_k$ and observe that the connected subgraphs $\set{w_i,v_i}$ of $G$ yield a depth-$1$ minor model of $K_k$ in $G$.
  Since $K_t\not\minor_2 G$, we must have $k<t$.
  \end{proof}
  
@@ -399,36 +396,39 @@ We may choose pairwise distinct vertices $w_1,\ldots,w_k$,
  
  
  
- This proves~\cref{lem:engine} in the case $r=2$, for $d=2$, and for the function $L=L_t$, defined by $L_t(m)=m_t=((t+1)\cdot m)^{\beta^t}$
- for $m\ge \mbull$ and $L(m)=L(\mbull)$ for $m<\mbull$, where $\beta>2\cdot t$ is any fixed constant and $\mbull$ is obtained from~\cref{cor:apex}.
- The proof yields an algorithm constructing the sets $A'$ and $S$,
- which amounts to applying at most $t$ times the procedure obtained in~\cref{lem:apex}.
- Hence, its running time  is $\Oof_{r,t}(|A|^c\cdot |E(G)|)$ as required.
+ This proves~\cref{lem:engine} in the case $r=2$, for the function $L(m)=m_t=((t+1)\cdot m)^{\beta^{2t}}$
+ for $m\ge \max(t,\mbull)$ and $L(m)=m_{\max(t,\mbull)}$ for $m<\max(t,\mbull)$, where $\beta>2\cdot t$ is any fixed constant and $\mbull$ is obtained from~\cref{cor:apex}.
+ It is easy to see that then $L_t(m)=L(m)=\Oof_{t}{(m^{{(2t+1)}^{2t}})}$, provided we put $\beta=2t+1$.
+ Also, the proof easily yields an algorithm constructing the sets $A'$ and $S$,
+ which amounts to applying at most $t$ times the algorithm of~\cref{lem:apex}.
+ Hence, its running time  is $\Oof_{r,t}(|A|\cdot |E(G)|)$, as required.
 % \end{proof}
 
 
 \paragraph{Odd case.}
-We prove~\cref{lem:engine} in the case $r=2s+1$, for some $s\in \N$. Take $d=s$.
+We prove~\cref{lem:engine} in the case when $r=2s+1$, for some integer $s\geq 1$. We put $d=s=\frac{r-1}{2}$.
 Let $G$ be a graph such that $K_t\not\minor_s G$, and 
- let $A$ be an $2s$-independent subset of $G$. Consider the graph $G'$ obtained from $G$
+ let $A$ be a $2s$-independent set in $G$. Consider the graph $G'$ obtained from $G$
 by contracting the (pairwise disjoint) balls of radius $s$ around each vertex $v\in A$.
- Let $A'$ denote the set of vertices of $G'$ corresponding to the contracted balls. There is an obvious bijection between $A$ and $A'$.
-From $K_t\not\minor_s G$ it follows that $G'$ does not contain $K_t$. Applying the already proved case $r=1$ to $G'$ and $A'$, we conclude that 
-if $|A|=|A'|\ge {m+t-2\choose t-1}$ then
+ Let $A'$ denote the set of vertices of $G'$ corresponding to the contracted balls. There is a natural bijection between $A$ and $A'$.
+From $K_t\not\minor_s G$ it follows that $G'$ does not contain $K_t$ as a subgraph. Applying the already proved case $r=1$ to $G'$ and $A'$, we conclude that 
+if $|A|=|A'|\ge {m+t-2\choose t-1}$, then
  $A'$ contains a $1$-independent subset $B$ of size $m$,
- which corresponds to a $2s+1$-independent subset of $G$.
+ which corresponds to a $(2s+1)$-independent set in $G$ that is contained in $A$.
+ Hence, the obtained bound is $L(m)={m+t-2\choose t-1}$, and we have already argued that then $L(m)\in \Oof_{r,t}{(m^{{(2t+1)}^{2t}})}$.
  
  
  \paragraph{Even case.}
  Finally,
- we prove~\cref{lem:engine} in the case $r=2s+2$, for some $s\in \N$.  Take  $d=5s+2$.
+ we prove~\cref{lem:engine} in the case $r=2s+2$, for some integer $s\geq 1$. We put $d=5s+2=5r/2-3$.
 Let $G$  be such that 
  $K_t\not\minor_{d} G$, and
-let $A$ be an $(2s+1)$-independent subset of $G$. Consider the graph $G'$ obtained from $G$
+let $A$ be a $(2s+1)$-independent set in $G$. Consider the graph $G'$ obtained from $G$
 by contracting the (pairwise disjoint) balls of radius $s$ around each vertex $v\in A$.
  Let $A'$ denote the set of vertices of $G'$ corresponding to the contracted balls. Again, there is a bijection between $A$ and $A'$. Note that
-this time, $A'$ is a $1$-independent subset of $G'$.
-From $K_t\not\minor_{5s+2} G$ it follows that $K_t\not\minor_2 G'$. Apply the already proved case $r=2$ to $G'$ and $A'$. Then, if $|A|=|A'|\ge L_t(m)$, where $L_t$ is the function as defined in the case $r=2$, then
+this time, $A'$ is a $1$-independent set in $G'$.
+From $K_t\not\minor_{5s+2} G$ it follows that $K_t\not\minor_2 G'$. Apply the already proved case $r=2$ to $G'$ and $A'$. 
+Then, if $|A|=|A'|\ge L_t(m)$, where $L_t(m)$ is the function as defined in the case $r=2$, then
  $A'$ contains a subset $B'$ of size $m$
 which is  $2$-independent in $G'-S'$, for some $S'\subset V(G')-A'$.
 The set $S'$ corresponds to some set of vertices $S\subset V(G)$
@@ -439,15 +439,22 @@ is a neighbor of each vertex of $B'$,  each vertex of $S$
 has distance exactly $s+1=r/2$ from each vertex of $B$.
 
 \medskip
-An algorithm computing the sets $B$ and $S$ (in either the odd or even case)
-simply runs a breadth-first search from each vertex of $A$ to compute the graph $G'$ with the balls of radius  $\lfloor \frac{r-1}2 \rfloor$  around the vertices in $A$ contracted to single vertices, and then runs the algorithm for the case $r=1$ or $r=2$.
-This yields a running time of  $\Oof_{r,t}(|A|^c\cdot |E(G)|)$, where $c$ is some constant.
+An algorithm computing the sets $B$ and $S$ (in either the odd or even case) can be given as follows:
+simply run a breadth-first search from each vertex of $A$ to compute the graph $G'$ with the balls of radius  $\lfloor \frac{r-1}2 \rfloor$  around the vertices in $A$ contracted to single vertices, 
+and then run the algorithm for the case $r=1$ or $r=2$.
+This yields a running time of  $\Oof_{r,t}(|A|\cdot |E(G)|)$.
  \medskip
   
 This finishes  the proof of~\cref{lem:engine}.
 
 \begin{remark}
-	It is not difficult to decrease the bound from $d=5s$ to $d= 3s+2$
+A more careful analysis of the case $r=2s+2$, in particular of the construction of $G'$ and the properties of $G'$ actually used in the proof of \cref{claim:minor},
+shows that the bound of $d=5s+2$ may be decreased to $d=3s+2$. We refrain from giving the details for the sake of clarity of the argument.
+\end{remark}
+
+\begin{comment}
+\begin{remark}
+	It is not difficult to decrease the bound from $d=5s+2$ to $d= 3s+2$
 	in the  case when $r=2s+2$. To do so, one would need to formulate~\cref{lem:apex}
 	a bit more carefully, and replace the first possibility $K_t\minor_2 G$
 	by the following condition, corresponding to the statement of~\cref{claim:minor}:
@@ -457,10 +464,10 @@ This finishes  the proof of~\cref{lem:engine}.
 	which is a neighbor of $a_i$ and $b_j$, but not of $b_s$, for $s\neq j$.	
 \end{quote}
 \end{remark}
+\end{comment}
 
 
-
-\subsection*{Proof of \cref{thm:new-uqw}}
+\subsection{Proof of \cref{thm:new-uqw}}
 We now wrap up the proof of \cref{thm:new-uqw} by iteratively applying~\cref{lem:engine}.
 
 %\begin{lemma}\label{lem:ramsey2}
@@ -519,57 +526,57 @@ We now wrap up the proof of \cref{thm:new-uqw} by iteratively applying~\cref{lem
 
 \begin{proof}[of \cref{thm:new-uqw}]
 Fix integers $r,t$,  and a graph $G$ such that $K_t\not\minor_{d} G$,
-for $d=\lceil 5r/2 \rceil$. Let $\beta>2\cdot t$ be a fixed real, and let $\mbull$ be the number from~\cref{cor:apex}. Without loss of generality suppose $m\geq t$ and $m\ge \mbull$.
- Denote $\gamma=\beta^t$, and
-define the function $L_t$ by $L_t(m)=((t+1)\cdot m)^\gamma$.
+for $d=\lfloor 5r/2 \rfloor$. Let $\beta>2\cdot t$ be a fixed real, and let $\mbull$ be the number from~\cref{cor:apex}. As in the proof of \cref{lem:engine}, without loss of generality suppose $m\geq \max(t,\mbull)$.
+ Denote $\gamma=\beta^{2t}$, and
+define the function $L(m)$ as $L(m)=((t+1)\cdot m)^\gamma$.
 
-Define the sequence $m_0,m_1,\ldots,m_r$ recursively so that $m_i=
-(t+1)^{\gamma^{r+1-i}}\cdot m^{\gamma^{r-i}}$. Note that $m_r\ge m$
-and $m_i\ge L_t(m_{i+1})$, for $i=0,\ldots,r-1$.
+Define the sequence $m_0,m_1,\ldots,m_r$ as follows:
+$$m_i=(t+1)^{\gamma^{r-i}}\cdot m^{\gamma^{r-i}}.$$ 
+Note that $m_r\geq m$ and $m_i=L(m_{i+1})$, for all $i\in \set{0,\ldots,r-1}$.
 
-Suppose that $A$ is a set of vertices of $G$ such that $|A|\ge m_0=(t+1)^{\gamma^{r+1}}\cdot m^{\gamma^{r}}$. We inductively construct sequences of sets $A= A_0\supseteq A_1\supseteq \ldots \supseteq A_r$ and $\emptyset=S_0\subseteq S_1\subseteq S_2\ldots$
+Suppose that $A$ is a set of vertices of $G$ such that $|A|\ge m_0=(t+1)^{\gamma^{r}}\cdot m^{\gamma^{r}}$. 
+We inductively construct sequences of sets $A= A_0\supseteq A_1\supseteq \ldots \supseteq A_r$ and $\emptyset=S_0\subseteq S_1\subseteq S_2\ldots$
 satisfying the following conditions:
 \begin{itemize}
-	\item $|A_i|\ge m_i \ge L_t(m_{i+1})$,
-	\item $A_i$ is $i$-independent in $G-S_i$.
+	\item $|A_i|\ge m_i \ge L(m_{i+1})$,
+	\item $A_i\cap S_i=\emptyset$ and $A_i$ is $i$-independent in $G-S_i$.
 \end{itemize}
 To construct $A_{i+1}$ out of $A_i$, apply~\cref{lem:engine} to the graph $G-S_i$ and 
-$i$-independent subset $A_i$ of size at least $L_t(m_{i+1})$. This yields a set $S\subset V(G)$ which is disjoint from $S_i\cup A_i$, and a subset $A_{i+1}$ of $A_i$ of size 
+the $i$-independent set $A_i$ of size at least $L(m_{i+1})$. This yields a set $S\subseteq V(G)$ which is disjoint from $S_i\cup A_i$, and a subset $A_{i+1}$ of $A_i$ of size 
 at least $m_{i+1}$
 which is $(i+1)$-independent in $G-S_{i+1}$, where $S_{i+1}=S\cup S_i$. This completes the inductive construction.
 
 In particular,  $|A_r|\ge m$ and $A_r$ is a subset of $A$ which is $r$-independent in $G-S_r$.
-Observe that by construction, $|S_r|\le r t/2$, as in the odd steps, the constructed set $S$ is empty, and in the even steps, it has at most $t$ elements.  We show that in fact we have $|S_r|<t$ using the following argument, similar to the one used in~\cref{claim:at-most-t}.
+Observe that by construction, $|S_r|\le r t/2$, as in the odd steps, the constructed set $S$ is empty, and in the even steps, it has at most $t$ elements. 
+We show that in fact we have $|S_r|<t$ using the following argument, similar to the one used in~\cref{claim:at-most-t}.
 
 
 By the last part of the statement of~\cref{lem:engine},  at the $i$th step of the construction, each vertex of the set $S$
 has distance exactly $i/2$ from all vertices in $A_{i+1}$ in the graph 
-$G-S_i$. In particular, 
-each vertex of the final set $S_r$ has distance at most $r/2$ from all vertices in $A_r$
-in $G-S_r$. 
+$G-S_i$. 
+For $a\in A_r$, let $\overline{N}(a)$ denote the $\lfloor r/2\rfloor$-neighborhood of $a$ in $G-S_r$; note that sets $\overline{N}(a)$ are pairwise disjoint.
+The above remark implies that each vertex $v$ of the final set $S_r$ has a neighbor in the set $\overline{N}(a)$ for each $a\in A_r$.
+Indeed, suppose $v$ belonged to the set $S$ added to $S_r$ in the $i$th step of the construction; i.e. $v\in S_{i+1}\setminus S_i$.
+Then there exists a path in $G-S_i$ from $v$ to $a$ of length exactly $i/2$, which traverses only vertices at distance less than $i/2$ from $a$.
+Since in this and further steps of the construction we were removing only vertices at distance at least $i/2$ from $a$, this path stays intact in $G-S_r$ and hence is completely contained in $\overline{N}(a)$.
 
-For $a\in A_r$, let $N(a)$ denotes the $r$-neighborhood of $a$ in $G-S_r$.
-The above remark amounts to saying that for $s\in S_r$ and $a\in A_r$, $s$ has a neighbor in $N(a)$ in $G-S_r$.
-
-By assumption that $m\ge t$, we may choose vertices $a_1,\ldots,a_t\in A_r$.
+By assumption that $m\ge t$, we may choose pairwise different vertices $a_1,\ldots,a_t\in A_r$.
 To reach a contradiction, suppose that $S_r$ contains $t$ distinct vertices $s_1,\ldots,s_t$. 
-By the above, the sets $N(a_i)\cup\set{s_i}$ 
+By the above, the sets $\overline{N}(a_i)\cup\set{s_i}$ 
 form a minor model of $K_t$ in $G$ at depth-$(\lfloor r/2\rfloor+1)$.
-This contradicts the assumption that $K_t\not\minor_d G$ for $d=\lceil 5r/2 \rceil$.
+This contradicts the assumption that $K_t\not\minor_d G$ for $d=\lfloor 5r/2 \rfloor$.
 Hence, $|S|<t$.
 
 
 Define the function  $N:\N\to\N$
-by $N(m)=(t+1)^{\beta^{t(r+1)}}\cdot m^{\beta^{tr}}$
-for $m\ge \mbull$  and $N(m)=N(\mbull)$ for $m<\mbull$.
+as $N(m)=((t+1)m)^{\gamma^{r}}=((t+1)m)^{\beta^{2rt}}$
+for $m\ge \max(t,\mbull)$  and $N(m)=N(\mbull)$ for $m<\max(\mbull)$.
+Note that $N(m)\in \Oof_{r,t}{(m^{{(2t+1)}^{2rt}})}$, provided we put $\beta=2t+1$.
 The argument above shows that if $|A|\ge N(m)$ then 
 there is a set $S\subset V(G)$, equal to $S_r$ above,
 and a set $B\subset A$, equal to $A_r$ above,
-so that $B$ is $r$-independent in $G-S$. Taking $\beta=2t+1$,
-we get $N(m)=\Oof_{r,t}{((m(t+1))^{{(2t+1)}^{r(t+1)}})}.$
-% This proves the
-% first part of~\cref{thm:new-uqw}.
-Given $G$ and $A$, the sets $S$ and $B$ can be computed by applying the algorithm given by~\cref{lem:engine} at most $r$ times, so in time $\Oof_{r,t}(|A|^c\cdot |E(G)|)$ for some universal constant~$c$.
+so that $B$ is $r$-independent in $G-S$.
+Given $G$ and $A$, the sets $S$ and $B$ can be computed by applying the algorithm given by~\cref{lem:engine} at most $r$ times, so in time $\Oof_{r,t}(|A|\cdot |E(G)|)$.
 This finishes the proof of~\cref{thm:new-uqw}.
 \end{proof}
 
