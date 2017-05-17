@@ -52,7 +52,7 @@ For each $m\in \N$, graph $G$ with $K_t\not\minor_{d} G$, and
 $(r-1)$-independent set $A\subseteq V(G)$ of size at least $L(m)$, there is a set $S\subseteq V(G)-A$ of size at most $t$ such that $A$ contains a subset $A'$ of size $m$ which is $r$-independent in $G-S$.
 Moreover, if $r$ is odd then $S$ is empty, and if $r$ is even,
 then every vertex of $S$ is at distance exactly $r/2$ from every vertex of $A'$.
-Finally, given $G$ and $A$, the sets $A'$ and $S$ can be computed in time $\Oof_{r,t}(|A|\cdot |E(G)|)$, where $c$ is some universal constant.
+Finally, given $G$ and $A$, the sets $A'$ and $S$ can be computed in time $\Oof_{r,t}(|A|\cdot |E(G)|)$.
 \end{lemma}
 
 We prove~\cref{lem:engine} in Section~\ref{sec:engine}, but  a very rough sketch is as follows.
@@ -79,7 +79,7 @@ then at least one of the following conditions hold:
 \item  some vertex $v$ of $G$
 has at least $\ell^{\alpha}$ neighbors in $A$.
 \end{itemize}
-Moreover, in each case, the corresponding structure (a depth-$2$ minor model, a $2$-independent set of size $m$, or a vertex $v$ as above) can be computed in time $\Oof(|A|^c\cdot |E(G)|)$, where $c$  is some universal constant.
+Moreover, in each case, the corresponding structure (a depth-$2$ minor model, a $2$-independent set of size $m$, or a vertex $v$ as above) can be computed in time $\Oof_t(|A|\cdot |E(G)|)$.
 \end{lemma}
 
 We remark that a statement similar to that of \cref{lem:apex}
