@@ -14,7 +14,7 @@ $E(G)$ for its edge set.
 The {\em{distance}} between vertices $u$ and $v$ in $G$, denoted $\dist_G(u,v)$, is the length of a shortest path between $u$ and $v$ in~$G$.
 If there is no path between $u$ and $v$ in $G$, we put $\dist_G(u,v)=\infty$.
 The {\em{(open) neighborhood}} of a vertex $u$, denoted $N(u)$, is the set of neighbors of $u$, excluding $u$ itself.
-For a nonnegative integer $s$, by $N_s[u]$ we denote the {\em{(closed) $s$-neighborhood}} of $u$ which comprises vertices at distance at most $s$ from $u$; note that $u$ is always contained in its closed $s$-neighborhood. The \emph{radius} of a graph $G$ is the least integer $r$ such that there is some vertex $v$ of $G$ with $N_r[v]=V(G)$.
+For a nonnegative integer $r$, by $N_r[u]$ we denote the {\em{(closed) $r$-neighborhood}} of $u$ which comprises vertices at distance at most $r$ from $u$; note that $u$ is always contained in its closed $r$-neighborhood. The \emph{radius} of a graph $G$ is the least integer $r$ such that there is some vertex $v$ of $G$ with $N_r[v]=V(G)$.
 
 
 A {\em{minor model}} of a graph $H$ in $G$ is a family $(I_u)_{u\in V(H)}$ of pairwise vertex-disjoint connected subgraphs of $G$, called {\em{branch sets}},
@@ -37,11 +37,11 @@ $B\subseteq A\setminus S$ of size $\abs{B}\geq m$ which is $r$-independent in
 $G-S$. 
 
 \paragraph{General strategy.}
-Our proof follows exactly the same lines as the original proof of Ne\v set\v ril and Ossona de Mendez, with the difference that in the key technical lemma (\cref{lem:apex} below), 
+Our proof follows the same lines as the original proof of Ne\v set\v ril and Ossona de Mendez, with the difference that in the key technical lemma (\cref{lem:apex} below), 
 we improve the bounds significantly by replacing a Ramsey argument with a new combinatorial reasoning.
-The new argument essentially originates in the concept of {\em{branching index}} from the stability theory, 
+The new argument essentially originates in the concept of {\em{branching index}} from stability theory, 
 and also uses the almost linear bound on neighborhood complexity in nowhere dense graph classes, due to Gajarsk\'y et al.~\cite{gajarsky2017kernelization}.
-For sake of completeness, we present the entire proof of~\cref{thm:new-uqw}.
+%For sake of completeness, we present the entire proof of~\cref{thm:new-uqw}.
 
 We first prove a restricted variant,~\cref{lem:engine} below, in which we assume that $A$ is already $(r-1)$-independent. Then, in order to derive
 \cref{thm:new-uqw}, we apply the lemma iteratively for $r$ ranging from $1$ to the target value.
@@ -55,7 +55,7 @@ then every vertex of $S$ is at distance exactly $r/2$ from every vertex of $A'$.
 Finally, given $G$ and $A$, the sets $A'$ and $S$ can be computed in time $\Oof_{r,t}(|A|\cdot |E(G)|)$.
 \end{lemma}
 
-We prove~\cref{lem:engine} in Section~\ref{sec:engine}, but  a very rough sketch is as follows.
+We prove~\cref{lem:engine} in \Cref{sec:engine}, but  a very rough sketch is as follows.
 The  case of general~$r$ reduces to the case $r=1$ or $r=2$, depending on the parity of $r$,
 by contracting the balls of radius $\lfloor \frac {r-1} 2\rfloor $ around the vertices in $A$ to single vertices.
 The case of $r=1$ follows immediately from Ramsey's theorem. 
@@ -84,7 +84,7 @@ Moreover, in each case, the corresponding structure (a depth-$2$ minor model, a 
 
 We remark that a statement similar to that of \cref{lem:apex}
 can be obtained by employing Ramsey's theorem, as has been done in~\cite{nevsetvril2011nowhere}. This, however, yields
-in place of the bound $(m+\ell)^t$ a bound of the form $R(m,\underbrace{q,q,\ldots,q}_{k\text{ times}})$,
+in place of the bound $(m+\ell)^{2t}$ a bound of the form $R(m,\underbrace{q,q,\ldots,q}_{k\text{ times}})$,
 where $k\sim\ell^{2\alpha}$ and $R(m_1,\ldots,m_c)$
 is the Ramsey number for $c$ colors.
 In particular, this does not give a bound which is polynomial in $m$, and thus cannot be used to prove~\cref{thm:new-uqw}.
@@ -102,7 +102,7 @@ Then for every $\epsilon>0$ there exists $n_0$, depending only on $t$ and $\epsi
 
 We remark that the proof of \cref{lem:diversity} uses only the fact that
 nowhere dense classes of graphs do not have dense 
-shallow minors~\cite{dvorak2007asymptotical,jiang2011compact}, and does not rely on any non-constructive arguments from the stability theory.
+shallow minors~\cite{dvorak2007asymptotical,jiang2011compact}, and does not rely on any non-constructive arguments from stability theory.
 In particular, $n_0$ depends in a computable manner on $t$ and $\epsilon$.
 From \cref{lem:diversity} we derive the following.
 
@@ -201,9 +201,9 @@ extract the set $A'$. In stability theory, similar trees are called \emph{type t
 We define  a binary tree $\tau$ which is 
   labeled by vertices of $G$. The tree is defined by processing all elements of $\bar a$ sequentially. We start with $\tau$ being the  tree with empty domain, and for each element $a$ of the sequence $\bar a$, processed in the order given by $\bar a$, execute the following procedure which results in adding a node with label $a$ to $\tau$.
   
-When processing the vertex $a$, do the following. Start with $w$ being the empty word. While $w$ is a node of $\tau$, repeat the following step: 
+When processing the vertex $a$, do the following. Start with $w$ being the empty word. While~$w$ is a node of $\tau$, repeat the following step: 
   if the distance from $a$ to $\tau(w)$ in the graph 
-  $G$ is at most $2$, replace $w$ by its son, otherwise, replace $w$ by its daughter.
+  $G$ is at most~$2$, replace $w$ by its son, otherwise, replace $w$ by its daughter.
   % Repeat the step, unless $\tau(w)$ is undefined.
   Once $w$ is not a node of $\tau$, extend $\tau$ by setting  $\tau(w)=a$. In this way, we have processed the element $a$, and now
     proceed to the next element $a$ of $\bar a$, until all elements are processed. This ends the construction of $\tau$.
@@ -218,14 +218,14 @@ a position $i$ such that $w_i\neq w_{i-1}$, where $w_0$ is assumed to be $\dau$.
 
 
 \begin{lemma}\label{lem:number-of-nodes}
-Let $h,t\ge 2$.	If $\tau$ has alternation rank at most $2t-1$ and depth at most $h-1$, then $\tau$ has fewer than $h^{2t}$ nodes.
+Let $h,t\ge 2$.	If $\tau$ has alternation rank at most $2t-1$ and depth at most $h-1$, then~$\tau$ has fewer than $h^{2t}$ nodes.
 \end{lemma}
 \begin{proof}		
 	To each node $w$ of $\tau$ assign 
 	the function $f_w\colon \set{1,\ldots,2t}\to\set{1,\ldots,h}$ defined as follows:
 	$f_w$ maps each $i\in \set{1,\ldots,2t}$ to the $i$th alternation of $w$, provided $i$ is at most the number of alternations of $w$, and otherwise we put $f_w(i)=|w|+1$.
 	It is clear that the mapping $w\mapsto f_w$ for nodes $w$ of $\tau$ is injective
-and its image is contained in monotone functions, hence the domain of $\tau$ 
+and its image is contained in monotone functions, hence the domain of~$\tau$ 
 		has fewer than $h^{2t}$ elements.
 \end{proof}
 
@@ -272,13 +272,13 @@ To prove~\cref{lem:apex},
 choose $\epsilon=1-2\alpha$ so that $\alpha=\frac{1-\epsilon}{2}$; note that $0<\epsilon<1$.
 Let $n_0$ be the integer given by~\cref{lem:diversity} for $t$ and $\epsilon$; w.l.o.g. $n_0\geq 2$.
 We put $\ell_0=n_0$.
-Fix integers $\ell\ge \ell_0$ and $m$, and define $h=m+\ell$.
+Fix integers $\ell\ge \ell_0$ and~$m$, and define $h=m+\ell$.
 Let $A$ be a $1$-independent set in $G$
 of size at least $h^{2t}$.
 
-Suppose that the first case of~\cref{lem:apex} does not hold. In particular $K_t\not\minor_2 G$, so by~\cref{thm:alternation-rank-type-tree}, $\tau$ has alternation rank at most $2t-1$. From~\cref{lem:number-of-nodes} 
+Suppose that the first case of \cref{lem:apex} does not hold. In particular $K_t\not\minor_2 G$, so by \cref{thm:alternation-rank-type-tree},~$\tau$ has alternation rank at most $2t-1$. From \cref{lem:number-of-nodes} 
 we conclude that $\tau$  has depth at least~$h$.
-As $h=m+\ell$, it follows that either $\tau$  has a node $w$ which contains at least $m$ letters $\dau$, or $\tau$ has a node $w$ which contains  at least $\ell$ letters $\son$.
+As $h=m+\ell$, it follows that either $\tau$  has a node $w$ which contains at least $m$ letters~$\dau$, or $\tau$ has a node $w$ which contains  at least $\ell$ letters $\son$.
 
 Consider the first case, i.e., there is a node $w$ of $\tau$
 which contains at least $m$ letters $\dau$, and let $X$

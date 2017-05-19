@@ -9,7 +9,7 @@ familiar classes of sparse graphs, such as planar graphs, graphs
 of bounded treewidth,  graphs of bounded degree, and, in fact, 
 all classes that exclude a fixed 
 topological minor.
-Formally, a class $\CCC$ of graphs is {\em{nowhere dense}} if there is a function $t\colon \N\to \N$ such that for every $r\in \N$, no graph $G$ in~$\CCC$ admits the clique $K_{t(r)}$ on $t(r)$ vertices  as an {\em{$r$-shallow minor}},
+Formally, a class $\CCC$ of graphs is {\em{nowhere dense}} if there is a function $t\colon \N\to \N$ such that for every $r\in \N$, no graph $G$ in~$\CCC$ contains the clique $K_{t(r)}$ on $t(r)$ vertices  as an {\em{$r$-shallow minor}},
 i.e., as a subgraph of a graph obtained from $G$ by contracting mutually disjoint  subgraphs of radius $r$   to single vertices.
 
 
@@ -76,7 +76,8 @@ distinct $u,v\in B$ are at distance
 larger than $r$ in $G$.
  Ne\v{s}et\v{r}il and Ossona de Mendez proved that
 the notions of uniform quasi-wideness and nowhere denseness coincide for 
-classes of graphs~\cite{nevsetvril2011nowhere}. We revisit their proof, obtaining improved bounds.
+classes of graphs~\cite{nevsetvril2011nowhere}. 
+We revisit their proof, obtaining improved bounds.
 
 
 The second topic of study is the
@@ -125,6 +126,7 @@ which is considerably simpler than that of~\cite{siebertz2016polynomial}
 and which gives explicit bounds on the degree of the polynomial. 
 More precisely, we prove the following theorem; here, the notation $\Oof_{r,t}(\cdot)$ hides computable factors depending on $r$ and $t$.
 
+\pagebreak
 \begin{theorem}\label{thm:new-uqw}
 For all $r,t\in \N$ there is a polynomial  $N\colon \N\to \N$ with $N(m)=
 \Oof_{r,t}{(m^{{(2t+1)}^{2rt}})}$, such that the following holds.
@@ -132,7 +134,7 @@ Let $G$ be a graph such that $K_t\not\minor_{\lfloor 5r/2\rfloor} G$, and
 let $A\subseteq V(G)$ be a vertex subset of size at least $N(m)$, for a given $m$.
 Then there exists a set $S\subseteq V(G)$ of size $|S|\leq t$ and a set $B\subseteq A\setminus S$ 
 of size $|B|\geq m$ which is $r$-independent in $G-S$.
-Moreover, given $G$ and $A$, such sets $S$ and $B$ can be computed in time $\Oof_{r,t}(|A|\cdot |E(G)|)$. 
+Moreover, given~$G$ and $A$, such sets $S$ and $B$ can be computed in time $\Oof_{r,t}(|A|\cdot |E(G)|)$. 
 \end{theorem}
 
 Let us remark
