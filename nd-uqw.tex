@@ -14,7 +14,7 @@ $E(G)$ for its edge set.
 The {\em{distance}} between vertices $u$ and $v$ in $G$, denoted $\dist_G(u,v)$, is the length of a shortest path between $u$ and $v$ in~$G$.
 If there is no path between $u$ and $v$ in $G$, we put $\dist_G(u,v)=\infty$.
 The {\em{(open) neighborhood}} of a vertex $u$, denoted $N(u)$, is the set of neighbors of $u$, excluding $u$ itself.
-For a nonnegative integer $r$, by $N_r[u]$ we denote the {\em{(closed) $r$-neighborhood}} of $u$ which comprises vertices at distance at most $r$ from $u$; note that $u$ is always contained in its closed $r$-neighborhood. The \emph{radius} of a graph $G$ is the least integer $r$ such that there is some vertex $v$ of $G$ with $N_r[v]=V(G)$.
+For a non-negative integer $r$, by $N_r[u]$ we denote the {\em{(closed) $r$-neighborhood}} of $u$ which comprises vertices at distance at most $r$ from $u$; note that $u$ is always contained in its closed $r$-neighborhood. The \emph{radius} of a graph $G$ is the least integer $r$ such that there is some vertex $v$ of $G$ with $N_r[v]=V(G)$.
 
 
 A {\em{minor model}} of a graph $H$ in $G$ is a family $(I_u)_{u\in V(H)}$ of pairwise vertex-disjoint connected subgraphs of $G$, called {\em{branch sets}},
@@ -316,18 +316,18 @@ Next we show how the general case reduces to one of those two cases.
 % , and, finally, we deduce~\cref{thm:new-uqw} from~\cref{lem:engine}.
 
 \paragraph{Case $r=1$.}
-We put $d=0$, thus we assume that $K_t\not\minor_0 G$; that is, $G$ does not contain a clique of size $t$. By Ramsey's Theorem, in any graph every set of size $\binom{m+t-2}{t-1}$ contains an
+We put $d=0$, thus we assume that $K_t\not\minor_0 G$; that is, $G$ does not contain a clique of size $t$ as a subgraph. By Ramsey's Theorem, in every graph every set of size $\binom{m+t-2}{t-1}$ contains an
 independent set of size $m$ or a clique of size $t$. Therefore, 
-taking $L(m)$ as the above binomial coefficient yields~\cref{lem:engine} in case $r=0$, for $S=\emptyset$. Note here that $\binom{m+t-2}{t-1}=\Oof_{t}{(m^{{(2t+1)}^{2t}})}$.
+taking $L(m)$ as the above binomial coefficient yields~\cref{lem:engine} in case $r=0$, for $S=\emptyset$. Note here that $\binom{m+t-2}{t-1}\in\Oof_{t}{(m^{{(2t+1)}^{2t}})}$.
 Moreover, such independent set or clique can be computed from $G$ and $A$ in time~$\Oof(|A|\cdot |E(G)|)$ by simulating the proof of Ramsey's theorem.
 
 \paragraph{Case $r=2$.}
 We put $d=2$, thus we assume that $K_t\not\minor_2 G$.
 Namely, we show that if $A$ is a sufficiently large $1$-independent set in a graph $G$ such that $K_t\not\minor_2 G$, 
-then there is a set of vertices $S$ of size at most $t$ such that $A\setminus S$ contains a subset of size $m$ which is $2$-independent in $G-S$. 
+then there is a set of vertices~$S$ of size at most $t$ such that $A\setminus S$ contains a subset of size $m$ which is $2$-independent in $G-S$. 
 Here, by ``sufficiently large'' we mean of size of size at least $L(m)$, for $L(m)$ emerging from the proof.
 To this end, we shall iteratively apply \cref{lem:apex} as long as  it results in the third case, 
-yielding a vertex $v$ with many neighbhors in $A$. In this case, we add $v$ vertex to the set $S$, and apply the lemma again,
+yielding a vertex $v$ with many neighbors in $A$. In this case, we add $v$ vertex to the set $S$, and apply the lemma again,
 restricting $A$ to $A\cap N(v)$. 
 The precise calculations follow.
 
@@ -385,10 +385,10 @@ If $A_{i}$ contains a $2$-independent set of size $m$ in $G-S$, terminate.
 \end{claim}
 \begin{proof}
 Suppose that the construction proceeds for $k\le t$ steps.
-By construction, each vertex $v_i$, for $i\le k$, is adjacent in $G$
+By construction, each vertex~$v_i$, for $i\le k$, is adjacent in $G$
  to all the vertices of $A_{j}$, for each $i\le j\le k$. In particular, all the vertices $v_1,\ldots,v_k$ are adjacent to all the vertices of $A_{k}$
  and $|A_k|\ge m_{t-k}\ge m\ge t$.
-Choose any pairwise distinct vertices $w_1,\ldots,w_k\in A_k$ and observe that the connected subgraphs $\set{w_i,v_i}$ of $G$ yield a depth-$1$ minor model of $K_k$ in $G$.
+Choose any pairwise distinct vertices $w_1,\ldots,w_k\in A_k$ and observe that the connected subgraphs $\set{w_i,v_i}$ of~$G$ yield a depth-$1$ minor model of $K_k$ in $G$.
  Since $K_t\not\minor_2 G$, we must have $k<t$.
  \end{proof}
  
@@ -398,8 +398,8 @@ Choose any pairwise distinct vertices $w_1,\ldots,w_k\in A_k$ and observe that t
  
  This proves~\cref{lem:engine} in the case $r=2$, for the function $L(m)=m_t=((t+1)\cdot m)^{\beta^{2t}}$
  for $m\ge \max(t,\mbull)$ and $L(m)=m_{\max(t,\mbull)}$ for $m<\max(t,\mbull)$, where $\beta>2\cdot t$ is any fixed constant and $\mbull$ is obtained from~\cref{cor:apex}.
- It is easy to see that then $L_t(m)=L(m)=\Oof_{t}{(m^{{(2t+1)}^{2t}})}$, provided we put $\beta=2t+1$.
- Also, the proof easily yields an algorithm constructing the sets $A'$ and $S$,
+ It is easy to see that then $L_t(m)=L(m)\in \Oof_{t}{(m^{{(2t+1)}^{2t}})}$, provided we put $\beta=2t+1$.
+ Also, the proof easily yields an algorithm constructing the sets~$A'$ and $S$,
  which amounts to applying at most $t$ times the algorithm of~\cref{lem:apex}.
  Hence, its running time  is $\Oof_{r,t}(|A|\cdot |E(G)|)$, as required.
 % \end{proof}
@@ -411,7 +411,7 @@ Let $G$ be a graph such that $K_t\not\minor_s G$, and
  let $A$ be a $2s$-independent set in $G$. Consider the graph $G'$ obtained from $G$
 by contracting the (pairwise disjoint) balls of radius $s$ around each vertex $v\in A$.
  Let $A'$ denote the set of vertices of $G'$ corresponding to the contracted balls. There is a natural bijection between $A$ and $A'$.
-From $K_t\not\minor_s G$ it follows that $G'$ does not contain $K_t$ as a subgraph. Applying the already proved case $r=1$ to $G'$ and $A'$, we conclude that 
+From $K_t\not\minor_s G$ it follows that~$G'$ does not contain $K_t$ as a subgraph. Applying the already proved case $r=1$ to $G'$ and $A'$, we conclude that 
 if $|A|=|A'|\ge {m+t-2\choose t-1}$, then
  $A'$ contains a $1$-independent subset $B$ of size $m$,
  which corresponds to a $(2s+1)$-independent set in $G$ that is contained in $A$.
@@ -576,7 +576,7 @@ The argument above shows that if $|A|\ge N(m)$ then
 there is a set $S\subset V(G)$, equal to $S_r$ above,
 and a set $B\subset A$, equal to $A_r$ above,
 so that $B$ is $r$-independent in $G-S$.
-Given $G$ and $A$, the sets $S$ and $B$ can be computed by applying the algorithm given by~\cref{lem:engine} at most $r$ times, so in time $\Oof_{r,t}(|A|\cdot |E(G)|)$.
+Given $G$ and $A$, the sets $S$ and $B$ can be computed by applying the algorithm given by~\cref{lem:engine} at most~$r$ times, so in time $\Oof_{r,t}(|A|\cdot |E(G)|)$.
 This finishes the proof of~\cref{thm:new-uqw}.
 \end{proof}
 

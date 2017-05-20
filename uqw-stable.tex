@@ -124,7 +124,7 @@ Observe that whenever $a_1, a_2$ are two distinct elements of $B-C_s$,
 then for all $i,j\in \set{1,\ldots,d}^2$, the values $f_{a_1}(i,j)$ and $f_{a_2}(i,j)$
 cannot be equal to the same element $b\in C_s$:
 otherwise, we would have that the $i$th coordinate of $a_1$
-and the $i$th coordinate of $a_2$ are at distance at most $2r$
+and the $i$th coordinate of $a_2$ are at distance at most~$2r$
 in $G-S$, which is impossible by the assumption on $B$.
 In particular, if $|B-C_s|> |C_s|\cdot d^2$
 then there must be some element  $a\in B-C_s$  
@@ -167,8 +167,8 @@ $v\in V^Y$ and $w\in  W^Z$, where $Y$ and $Z$ are disjoint, by
 $v\oplus w$ we denote the set-theoretic union of the functions $v,w$,
 which is a tuple $v\oplus w\in (V\cup W)^{Y\cup Z}$.
 The image of a valuation $v$ is denoted by $\im(v)$.
-If $V=V(G)$ for some graph $G$, then we can treat valuations of $X$ as tuples of length $|X|$ consisting of vertices of $G$, ordered in the same way according to any fixed enumeration of $X$.
-Then we may say that a set of valuations is mutually $r$-independent in $G$, or in $G-S$ for some $S\subseteq V(G)$, meaning the notion discussed in the previous section.
+If $V=V(G)$ for some graph $G$, then we can treat valuations of~$X$ as tuples of length $|X|$ consisting of vertices of $G$, ordered in the same way according to any fixed enumeration of $X$.
+Then we may say that a set of valuations is mutually $r$-independent in~$G$, or in $G-S$ for some $S\subseteq V(G)$, meaning the notion discussed in the previous section.
 
 
 Fix a formula $\phi$ with free variables $X$.
@@ -294,12 +294,12 @@ the quantifier rank $q$ type of $N^G_r[v]$. The $q$-\emph{local type} of $(G,v)$
 
 
 \begin{proposition}\label{pro:gaifman}
-	Fix a positive integer $q$, a finite set of colors $C$, and a set of variables $X$. Let $G$ be any $C$-colored graph. Then the following conditions hold:
+	Fix a positive integer $q$, a finite set of colors $C$, and a set of variables $X$. Let~$G$ be any $C$-colored graph. Then the following conditions hold:
  \begin{enumerate}[(1)]
  	\item \emph{(Computability of types)} The set of types $\mathrm{Tp}^{q,C}_X$ is finite and computable from $C$, $X$, and $q$.
 
 	\item \emph{(Locality of first order logic)} There is an integer $r$ computable from $q$ such that for every formula $\phi$ in the signature of $C$-colored graphs  
-	of quantifier rank $q$ and with free variables $X$,	
+	of quantifier rank $q$ and with free variables~$X$,	
   if $(G,v_1)$ and $(G,v_2)$ have the same $(r,q)$-local types,
 	then
 	 $$G_1,v_1\models \phi\qquad\iff \qquad G_2,v_2\models \phi.$$
@@ -334,7 +334,7 @@ the quantifier rank $q$ type of $N^G_r[v]$. The $q$-\emph{local type} of $(G,v)$
 immediate consequence of Gaifman's Locality Theorem
 (the Main Theorem~in~\cite{gaifman1982local}),
 where it is shown that one can take $r=7^q$.
-It is also known (cf. Corollary 4.13 in \cite{libkin}) that it suffices to take $r=\frac{3^{q+1}-1}2$.
+It is also known (cf. Corollary~4.13 in \cite{libkin}) that it suffices to take $r=\frac{3^{q+1}-1}2$.
 
 
 % We say that a formula $\phi(\bar x)$ with $d=|\bar x|$ free variables is \emph{$q$-local} if for every colored graph $G$ and every $\bar a_1,\bar a_2\in V(G^d)$, if  $N^G_r(\bar a_1)$ and  $N^G_r(\bar a_2)$
@@ -367,7 +367,7 @@ We use the following claim, whose proof is a standard application of Ehrenfeucht
 	The proof proceeds by applying the well-known characterization 
 	of quantifier rank $q$  types using Ehrenfeucht-Fraisse games (see e.g. Theorem 3.9 in~\cite{libkin}). By assumption, duplicator has a winning strategy $\gamma$ in the $q$-round game on $(G_1,v_1)$ and $(G_2,v_2)$, and a winning strategy $\eta$ in the $q$-round game on $(H_1,w_1)$ and $(H_2,w_2)$. The strategies $\gamma$ and $\eta$ can be combined into a winning strategy on $(G_1\oplus H_1,v_1\oplus w_1)$  and $(G_2\oplus H_2,v_2\oplus w_2)$.
 \end{clproof}
-The \emph{Independence} property is now almost immediate. Since $\{u_1,v_1\}$ is mutually $2r$-independent in $G$, the subgraph of $G$ induced by the $r$-neighborhood of $\im(u_1\oplus v_1)$ is isomorphic to the disjoint union of the subgraphs of $G$ induced by the $r$-neigbhorhoods of $\im(u_1)$ and $\im(v_1)$. The same holds also for the $r$-neighborhoods of $\im(u_2\oplus v_2)$, 
+The \emph{Independence} property is now almost immediate. Since $\{u_1,v_1\}$ is mutually $2r$-independent in $G$, the subgraph of $G$ induced by the $r$-neighborhood of $\im(u_1\oplus v_1)$ is isomorphic to the disjoint union of the subgraphs of $G$ induced by the $r$-neighborhoods of $\im(u_1)$ and $\im(v_1)$. The same holds also for the $r$-neighborhoods of $\im(u_2\oplus v_2)$, 
 $\im(u_2)$, and $\im(v_2)$. It now suffices to apply \cref{lem:type-union} and use the assumed equality of $(r,q)$-local types.
 \end{proof}
 
@@ -482,7 +482,7 @@ is the pair $(\alpha,\tau)$,
 where $(\alpha,v^S)$ is the $S$-decomposition of~$v$
 and $\tau$ is the $q$-local type of   $(G^S,v^S)$.
 Note that there are at most  $(s+d)^d$ possible functions $\alpha$, where $s=|S|$ and $d=|X|$. In particular, by the computability of types (cf.~\cref{pro:gaifman}), 
-the number of $(q,S)$-local types of valuations from $X$
+the number of $(q,S)$-local types of valuations from~$X$
 in arbitrary graphs is bounded by 
 a number computable from $s,d$, and $q$.
 
@@ -492,7 +492,7 @@ a number computable from $s,d$, and $q$.
 \begin{lemma}\label{lem:coloring}
 	Let $\phi$ be a formula with
 free variables $X$ and of quantifier rank $q$.
-	Suppose that $u$~and~$v$ are two valuations of $X$  in $G$ with the same $(q,S)$-local types.
+	Suppose that~$u$ and~$v$ are two valuations of $X$  in $G$ with the same $(q,S)$-local types.
 	Then $$G,u\models \phi\qquad \iff\qquad G,v\models \phi.$$
 \end{lemma}
 \begin{proof}
@@ -556,7 +556,7 @@ From the assumption that $u,v$ are mutually $2r$-independent in $G-S$ it follows
  $\im(u_Y)\cap\im(v_Z)\subset S$
 and  $\im(v_Y)\cap \im(v_Z)\subset S$.
 This implies that the $S$-decompositions of $u_Y\oplus v_Z$
-and of  $v_Y\oplus u_Z$ can be computed in a componentwise fashion, and are as follows:
+and of  $v_Y\oplus u_Z$ can be computed in a component wise fashion, and are as follows:
 \begin{align}
 u_Y\oplus v_Z &\colon \quad (\alpha_Y\oplus \beta_Z,  u_Y^S\oplus v_Z^S)\label{eq:dec1},\\  
 v_Y\oplus u_Z &\colon \quad (\beta_Y\oplus \alpha_Z, v_Y^S\oplus u_Z^S)\label{eq:dec2}.
