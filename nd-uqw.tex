@@ -383,14 +383,14 @@ If $A_{i}$ contains a $2$-independent set of size $m$ in $G-S$, terminate.
 \begin{claim}\label{claim:at-most-t}
 	The construction halts after less than $t$ steps.
 \end{claim}
-\begin{proof}
+\begin{clproof}
 Suppose that the construction proceeds for $k\le t$ steps.
 By construction, each vertex~$v_i$, for $i\le k$, is adjacent in $G$
  to all the vertices of $A_{j}$, for each $i\le j\le k$. In particular, all the vertices $v_1,\ldots,v_k$ are adjacent to all the vertices of $A_{k}$
  and $|A_k|\ge m_{t-k}\ge m\ge t$.
 Choose any pairwise distinct vertices $w_1,\ldots,w_k\in A_k$ and observe that the connected subgraphs $\set{w_i,v_i}$ of~$G$ yield a depth-$1$ minor model of $K_k$ in $G$.
  Since $K_t\not\minor_2 G$, we must have $k<t$.
- \end{proof}
+ \end{clproof}
  
  Therefore, at some step $k<t$ of the construction we must have obtained a $2$-independent subset $A'$ of $G-S$ of size $m$. Moreover, $|S|\le k<t$.
  
