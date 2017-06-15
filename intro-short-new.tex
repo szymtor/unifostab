@@ -27,6 +27,9 @@ numbers~\cite{zhu2009coloring}, sparse neighborhood
 covers~\cite{GroheKRSS15,grohe2014deciding}, by a game called the
 splitter game~\cite{grohe2014deciding}, and by the model-theoretic
 concepts of stability and independence~\cite{adler2014interpreting}.
+\textcolor{red}{Classes of bounded expansion~\cite{nevsetvril2008grad} 
+are important subclasses 
+of nowhere dense graph classes.}
 For a broader discussion on the graph theoretic sparsity we refer to the book
 of Ne\v{s}et\v{r}il and Ossona de Mendez~\cite{sparsity}.
 
@@ -82,7 +85,7 @@ We revisit their proof, obtaining improved bounds.
 
 The second topic of study is the
 connection between nowhere denseness and stability theory. 
-Fix a 
+Fix
 % Let $\cal C$ be a class of structures over
  a relational vocabulary $\Sigma$. Let 
 $\phi(\tup{x},\tup{y})$ be a $\Sigma$-formula with the free variables
@@ -114,11 +117,12 @@ was to prove that nowhere dense classes of graphs have small
 was proved that for every nowhere dense class $\CCC$ of 
 graphs, every positive integer $r$ and every $\epsilon>0$ there
 exists a constant $c$ such that for every graph $G\in\CCC$ and
-every vertex subset $A\subseteq V(G)$ the set of distance-$r$ neighborhood intersections with $A$
-\[\{N_r[v]\cap A : v\in V(G)\}\]
+every vertex subset $A\subseteq V(G)$, the set of distance-$r$ neighborhood intersections with $A$,
+$\{N_r[v]\cap A : v\in V(G)\}$,
 has size bounded by $c\cdot |A|^{1+\epsilon}$. This result
-generalizes a result of Reidl et al.~\cite{reidl2016characterising}, who proved that classes of bounded expansion have linear distance neighborhood complexity. 
-Distance neighborhood complexity is a 
+generalizes a result of Reidl et al.~\cite{reidl2016characterising}, who proved that classes of bounded expansion have linear distance neighborhood complexity. }
+
+\textcolor{red}{Distance neighborhood complexity is a 
 special case of a much more general definition which is 
 commonly studied in (infinite) model theory. 
 Let $\psi(\tup x,y)$ be a first-order formula, where 
@@ -126,9 +130,9 @@ $\tup x$ is an $m$-tuple of variables and $y$ is a single variable.
 Let $\strA$ be a structure and let $A$ be a set of elements of
 $\strA$. Then the \emph{$\psi$-type} $S_\psi(A,\strA)$ of $A$ in 
 $\strA$ is the set
-\[\{\{\tup a\ \in A^m : \strA\models\psi(\tup a,b)\} : \tup b\in V(\strA)\}.\]
-The number of types that can be realized over a parameter
-set $A$ in a structure $\strA$ of a theory $T$ 
+\[\{\{\tup a\ \in A^m : \strA\models\psi(\tup a,b)\} : b\in V(\strA)\}.\]
+In stability theory, the number of types that can be realized over a parameter
+set $A$ in a structure~$\strA$ of a theory $T$ 
 is one of the key measures for the complexity of the theory $T$, 
 in fact, the original definition of a stable theory is made in 
 terms of bounds on the number of types that are realized in
@@ -186,53 +190,62 @@ Suppose $\phi(\bar x,\bar y)$ is a formula of quantifier rank $q$ and with $d$ f
 and $G$ is a graph such that $K_t\not\minor_{g(q)} G$. Then the ladder index of $\phi(\bar x,\bar y)$ in $G$ is at most $f(q,d,t)$.
 \end{theorem}
 
-\noindent Note that in particular, \cref{thm:new-stable} implies that every nowhere dense graph is stable, which was the main conclusion of Adler and Adler~\cite{adler2014interpreting}.
+Note that in particular, \cref{thm:new-stable} implies that every nowhere dense graph is stable, which was the main conclusion of Adler and Adler~\cite{adler2014interpreting}.
 
+\bigskip
 \textcolor{red}{Finally, we prove the following theorem concerning the number of
-types in nowhere dense graph classes. }
+types in sparse graph classes. }
 
 \textcolor{red}{\begin{theorem}\label{thm:vc-density}
-Let $\CCC$ be a nowhere dense class of graphs, 
-let $\epsilon>0$ and let $\psi(\tup x,y)$ be a first-order formula, where 
+Let $\CCC$ be a class of graphs and let $\psi(\tup x,y)$ be a first-order formula, where 
 $\tup x$ is an $m$-tuple of variables and $y$ is a single variable. 
-There exists a constant~$c$ such that for every $G\in \CCC$ 
-and every
+\begin{enumerate}
+\item If $\CCC$ is nowhere dense, then for every $\epsilon>0$ 
+there exists a constant~$c$ such that for every $G\in \CCC$ and every
 $A\subseteq V(G)$, we have 
 \[|S_\psi(A,G)|=|\{\{\tup a\ \in A^m : G\models\psi(\tup a,v)\} : v\in V(G)\}|\leq c\cdot |A|^{1+\epsilon}.\]
+\item If $\CCC$ has bounded expansion, then there exists a constant~$c$ such that for every $G\in \CCC$ and every $A\subseteq V(G)$, we have $|S_\psi(A,G)|\leq c\cdot |A|$.
+\end{enumerate}
 \end{theorem}}
 
-\textcolor{red}{The proof of the theorem can easily be modified to work for classes 
-of bounded expansion.}
-
-\textcolor{red}{\begin{theorem}\label{thm:vc-density-exp}
-Let $\CCC$ be a class of bounded expansion
-and let $\psi(\tup x,y)$ be a first-order formula, where 
-$\tup x$ is an $m$-tuple of variables and $y$ is a single variable. 
-There exists a constant~$c$ such that for every $G\in \CCC$ 
-and every
-$A\subseteq V(G)$, we have  $|S_\psi(A,G)|\leq c\cdot |A|$.
-\end{theorem}}
-
-\textcolor{red}{Also, it is not difficult to see that our result in fact yields a 
-characterization 
-of nowhere dense graph classes which are closed under taking 
+\textcolor{red}{It is not difficult to see that our result in fact yields new
+characterizations
+of nowhere dense graph classes and classes of bounded expansion 
+which are closed under taking 
 subgraphs. }
 
 \textcolor{red}{\begin{theorem}\label{thm:vc-density-lower-bound}
-Let $\CCC$ be a somewhere dense class of graphs which 
-is closed under taking subgraphs. Then there is a formula 
+Let $\CCC$ be a class of graphs which 
+is closed under taking subgraphs. 
+\begin{enumerate}
+\item If $\CCC$ is somewhere dense, then there is a formula 
 $\psi(x,y)$ such that there are $G\in\CCC$ and $A\subseteq V(G)$ 
 with $|S_\psi(A,G)|=2^{|A|}$. 
+\item If $\CCC$ has unbounded expansion, then there is a formula 
+$\psi(x,y)$ such that for every function $f:\N\rightarrow \N$ 
+there are $G\in\CCC$ and $A\subseteq V(G)$ 
+with $|S_\psi(A,G)|>f(|\psi|)\cdot |A|$. 
+\end{enumerate}
 \end{theorem}}
 
 \textcolor{red}{The proof of \Cref{thm:vc-density} is (again) based on Gaifman's locality
 theorem for first-order logic, which allows us to focus at local 
 neighborhoods around the elements $v\in V(G)$. 
-Using the closure lemma of~\cite{eickmeyer2016neighborhood}
-for nowhere dense graph classes and uniform quasi-wideness
+Using the closure lemma of~\cite{DrangeDFKLPPRVS16} for
+classes of bounded expansion and its generalization to
+nowhere dense classes~\cite{eickmeyer2016neighborhood}
+together with uniform quasi-wideness,
 we are then able to well control and classify 
-the interaction of tuples
-$v$ with the set $A$. }
+the interaction of elements $v$ with the set $A$. }
+
+\textcolor{red}{\Cref{thm:vc-density} shows a strong new connection 
+between first-order logic and the notions of bounded expansion
+and nowhere denseness. This connection is particularly interesting for
+the case of bounded expansion classes, as unlike for nowhere
+dense graphs, we are not aware of formerly known characterizations of
+these classes in terms of model theoretic notions.}
+
+\pagebreak
 
 
 % Finally, we observe that an argument of Bousquet and

@@ -1,6 +1,6 @@
 \section{On the number of types in nowhere dense graph classes}
 
-In this section we prove \Cref{thm:vc-density}, \Cref{thm:vc-density-exp} and \Cref{thm:vc-density-lower-bound}. Recall that for a
+In this section we prove \Cref{thm:vc-density} and \Cref{thm:vc-density-lower-bound}. Recall that for a
 formula $\psi(\tup x,y)$, where 
 $\tup x$ is an $m$-tuple of variables and $y$ is a single variable, 
 \[S_\psi(A,G)=\{\{a\ \in A : G\models\psi(a,\tup v)\} : \tup v\in V(G)^m\}.\]
@@ -28,22 +28,25 @@ is larger than $r$. We define
 \[\projnum_r(G,A)=|\{M_r^G(u,A)\colon u\in V(G)\setminus A\}|\quad\textrm{and}\quad \projprof_r(G,A)=|\{\rho_r^G[u,A]\colon u\in V(G)\setminus A\}|\]
 to be the number of different $r$-projections and $r$-projection profiles realized on $A$, respectively. Clearly, it holds that $\projnum_r(G,A)\leq \projprof_r(G,A)$.
 
+\pagebreak
 \begin{lemma}[[\cite{drange2016kernelization,eickmeyer2016neighborhood}]\label{lem:closure}
 Let $\CCC$ be a class of graphs. 
 \begin{enumerate}
-\item If $\CCC$ has bounded expansion, then there is a function $\fcl(r)$ and a polynomial-time algorithm that, given $G\in \CCC$, $X\subseteq V(G)$ and $r\in \N$ computes the {\em{$r$-closure}} of $X$, denoted $\cl_r(X)$
-with the following properties. 
+\item If $\CCC$ has bounded expansion, then for every $r\in \N$ there is a constant $c\in \N$ such that for
+every $G\in \CCC$ and $X\subseteq V(G)$ there exists a set $\cl_r(X)$, called an {\em{$r$-closure}} of $X$, with the following properties. 
 \begin{itemize}
   \item $X\subseteq \cl_r(X)\subseteq V(G)$;
-  \item $|\cl_r(X)|\leq \fcl(r)\cdot |X|$; and
-  \item $|M_r^G(u,\cl_r(X))|\leq \fcl(r)$ for each $u\in V(G)\setminus \cl_r(X)$.
+  \item $|\cl_r(X)|\leq c\cdot |X|$; and
+  \item $|M_r^G(u,\cl_r(X))|\leq c$ for each $u\in V(G)\setminus \cl_r(X)$.
 \end{itemize}
-\item If $\CCC$ is nowhere dense, then there is a function $\fcl(r,\epsilon)$ and a polynomial-time algorithm that, given $G\in \CCC$, $X\subseteq V(G)$, $r\in \N$, and $\epsilon>0$, computes the {\em{$r$-closure}} of $X$, denoted $\cl_r(X)$
+\item If $\CCC$ is nowhere dense, then for every $r\in\N$ and $\epsilon>0$ there is a 
+constant $c\in\N$ such that for every $G\in \CCC$ and $X\subseteq V(G)$ there exists a set 
+$\cl_r(X)$,  called an {\em{$r$-closure}} of $X$, 
 with the following properties. 
 \begin{itemize}
   \item $X\subseteq \cl_r(X)\subseteq V(G)$;
-  \item $|\cl_r(X)|\leq \fcl(r,\epsilon)\cdot |X|^{1+\epsilon}$; and
-  \item $|M_r^G(u,\cl_r(X))|\leq \fcl(r,\epsilon)\cdot |X|^{\epsilon}$ for each $u\in V(G)\setminus \cl_r(X)$.
+  \item $|\cl_r(X)|\leq c\cdot |X|^{1+\epsilon}$; and
+  \item $|M_r^G(u,\cl_r(X))|\leq c\cdot |X|^{\epsilon}$ for each $u\in V(G)\setminus \cl_r(X)$.
 \end{itemize}
 \end{enumerate}
 \end{lemma}
@@ -51,13 +54,12 @@ with the following properties.
 \begin{lemma}[\cite{drange2016kernelization,eickmeyer2016neighborhood}]\label{lem:projection-complexity}
 Let $\CCC$ be a class of graphs. 
 \begin{enumerate}
-\item If $\CCC$ has bounded expansion, then there is 
-  a function $\fproj(r)$ such that for every $r\in \N$, graph $G\in \CCC$, and vertex subset $A\subseteq V(G)$, 
-  it holds that $\projprof_r(G,A)\leq \fproj(r)\cdot |A|$.
-  \item If $\CCC$ is nowhere dense, then there is 
-  a function $\fproj(r,\epsilon)$ such that for every $r\in \N$, 
-  $\epsilon>0$, graph $G\in \CCC$, and vertex subset $A\subseteq V(G)$, 
-  it holds that $\projprof_r(G,A)\leq \fproj(r,\epsilon)\cdot |A|^{1+\epsilon}$.
+\item If $\CCC$ has bounded expansion, then for every $r\in \N$ there is 
+  a constant $c\in\N$ such that for every graph $G\in \CCC$, and vertex subset $A\subseteq V(G)$, 
+  it holds that $\projprof_r(G,A)\leq c\cdot |A|$.
+  \item If $\CCC$ is nowhere dense, then for every $r\in \N$ and $\epsilon>0$ there is 
+  a constant $c\in \N$ such that for every graph $G\in \CCC$, and vertex subset $A\subseteq V(G)$, 
+  it holds that $\projprof_r(G,A)\leq c\cdot |A|^{1+\epsilon}$.
 \end{enumerate}
 \end{lemma}
 
@@ -65,25 +67,15 @@ We now are ready to count the number of types realized by elements
 of the same projection class. 
 
 \begin{lemma}\label{lem:num-types-same-class}
-Let $\phi(\tup x,y)$ be a first-order formula of locality radius $r$. 
-Let $\CCC$ be a class of graphs. 
-\begin{enumerate}
-\item Assume that $\CCC$ has bounded expansion. Let 
-$G\in \CCC$ and $B\subseteq V(G)$. Assume that 
+Let $\phi(\tup x,y)$ be a first-order formula of locality radius $r$ (as defined in \Cref{pro:gaifman}). 
+Let $G$ be a graph such that $K_t\not\minor_{\left\lfloor 5r/2\right\rfloor} G$. 
+Let $X=\tup x\oplus y$ and denote by $\mathrm{Tp}^{q,S}_X$ the set of types over a 
+set $S$ of colors of size $t$. Let 
+$B\subseteq V(G)$ and assume that 
 $|M_r^G(u,B)|\leq c$ for some positive integer
-$\fcl(r)$. Let $v_1,\ldots, v_t$ be a maximal set
+$c$. Let $v_1,\ldots, v_k$ be a maximal set
 of elements which have different $B$-types and which
-have the same $B$-projection. Then $t< (tp_{q,s}+c+1)^{p(r)}$. 
-
-\item Assume that $\CCC$ is nowhere dense. Let 
-$G\in \CCC$ and $B\subseteq V(G)$. Let $\epsilon>0$ 
-and assume that 
-$|M_r^G(u,B)|\leq \fcl(r,\epsilon)\cdot |B|^\epsilon$. 
-Let $v_1,\ldots, v_t$ be a maximal set
-of elements which have different $B$-types and which
-have the same $B$-projection. Then $t< (tp_{q,s}+|B|^\epsilon+1)^{p(r)}$. 
-\end{enumerate}
-\marginpar{here, nowhere dense suffices and all numbers with $c$}
+have the same $B$-projection. Then $k\in\Oof((|\mathrm{Tp}^{q,S}_X|+c+1)^{(2t+1)^{2rt}})$. 
 \end{lemma}
 \begin{proof}
 Assume $t\geq (tp_{q,s}+c+1)^{p(r)}$. Then by uniform
@@ -104,7 +96,7 @@ same type. This is a contradiction with our assumption.
 Now, it is easy to conclude the main theorem. 
 
 \marginpar{set counter}
-\begin{theorem}\label{thm:vc-density}
+\begin{theorem}
 Let $\CCC$ be a nowhere dense class of graphs, 
 let $\epsilon>0$ and let $\psi(\tup x,y)$ be a first-order formula, where 
 $\tup x$ is an $m$-tuple of variables and $y$ is a single variable. 
@@ -118,5 +110,5 @@ Compute the closure $B$ of $A$ according to \Cref{lem:closure}.
 According to \Cref{lem:types-over-B}, it suffices to bound the
 number $|S_\psi(B,G)|$. Now plug the numbers of 
 \Cref{lem:closure} and \Cref{lem:projection-complexity} 
-into \Cref{lem:num-types-same-class} and conclude. 
+into \Cref{lem:num-types-same-class} and conclude by rescaling $\epsilon$. . 
 \end{proof}
