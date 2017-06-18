@@ -14,19 +14,28 @@ $\psi(\tup x,y)$ be a first-order formula. Then
 $|S_\psi(A,G)|\leq |S_\psi(B,G)|$. 
 \end{lemma}
 
-We will first enlarge the set of interest such 
-that the connections from outside are well controlled. This approach
+We will first enlarge the set $A$ to a set $B$, called
+an \emph{$r$-closure of $A$}, such 
+that the connections of elements from $V(G)\setminus B$ 
+towards $B$ are well controlled. This approach
 was first used in Drange et al.~\cite{drange2016kernelization} for
 classes of bounded expansion and extended to nowhere dense
 classes in Eickmeyer et al.~\cite{eickmeyer2016neighborhood}. 
+Let us recall the necessary definitions.
 
-Let $G\in \CCC$ be a graph and let $A\subseteq V(G)$ be a subset of vertices. For vertices $v\in A$ and $u\in V(G)\setminus A$, a path $P$ connecting $u$ and $v$ is called {\em{$A$-avoiding}}
-if all its vertices apart from~$v$ do not belong to $A$. For a positive integer $r$, the {\em{$r$-projection}} of any $u\in V(G)\setminus A$ on $A$, denoted $M^G_r(u,A)$ is the set of all vertices $v\in A$ that
-can be connected to $u$ by an $A$-avoiding path of length at most $r$. The {\em{$r$-projection profile}} of a vertex $u\in V(G)\setminus A$ on $A$ is a function $\rho^G_r[u,A]$ mapping vertices of
-$A$ to $\{0,1,\ldots,r,\infty\}$, defined as follows: for every $v\in A$, the value $\rho^G_r[u,A](v)$ is the length of a shortest $A$-avoiding path connecting $u$ and~$v$, and~$\infty$ in case this length
-is larger than $r$. We define 
-\[\projnum_r(G,A)=|\{M_r^G(u,A)\colon u\in V(G)\setminus A\}|\quad\textrm{and}\quad \projprof_r(G,A)=|\{\rho_r^G[u,A]\colon u\in V(G)\setminus A\}|\]
-to be the number of different $r$-projections and $r$-projection profiles realized on $A$, respectively. Clearly, it holds that $\projnum_r(G,A)\leq \projprof_r(G,A)$.
+Let $G$ be a graph and let $B\subseteq V(G)$ be a subset of vertices. For vertices $v\in B$ and $u\in V(G)\setminus B$, a path $P$ connecting $u$ and $v$ is called {\em{$B$-avoiding}}
+if all its vertices apart from~$v$ do not belong to $B$. For a positive integer $r$, the {\em{$r$-projection}} of any $u\in V(G)\setminus B$ on $B$, denoted $M^G_r(u,B)$ is the set of all vertices $v\in B$ that
+can be connected to $u$ by a $B$-avoiding path of length at most $r$. 
+%
+%The {\em{$r$-projection profile}} of a vertex $u\in V(G)\setminus A$ on $A$ is a function $\rho^G_r[u,A]$ mapping vertices of
+%$A$ to $\{0,1,\ldots,r,\infty\}$, defined as follows: for every $v\in A$, the value $\rho^G_r[u,A](v)$ is the length of a shortest $A$-avoiding path connecting $u$ and~$v$, and~$\infty$ in case this length
+%is larger than $r$. 
+%
+We define 
+\[\projnum_r(G,B)=|\{M_r^G(u,B)\colon u\in V(G)\setminus B\}|\]
+%\quad\textrm{and}\quad \projprof_r(G,A)=|\{\rho_r^G[u,A]\colon %u\in V(G)\setminus A\}|\]
+to be the number of different $r$-projections.
+% and $r$-projection profiles realized on $B$, respectively. Clearly, it %holds that $\projnum_r(G,A)\leq \projprof_r(G,A)$.
 
 \pagebreak
 \begin{lemma}[[\cite{drange2016kernelization,eickmeyer2016neighborhood}]\label{lem:closure}
@@ -92,7 +101,7 @@ $K_t\not\minor_{\lfloor 10r/2\rfloor} G$. According to
 of size at least $N(m)$, for a given $m$, there exists a set $S\subseteq V(G)$ of size $|S|\leq t$ 
 and a set $X\subseteq D\setminus S$ of size $|X|\geq m$ which is $r$-independent in $G-S$.
 According to \Cref{pro:gaifman} (1), the set of types $\mathrm{Tp}^{q,S}_{\tup y,x}$ is 
-finite and computable from $t,m$ and $q$. Let $k\coloneqq |\mathrm{Tp}^{q,S}_{\tup y,x}|$. 
+finite and computable from $t,|\tup x|$ and $q$. Let $k\coloneqq |\mathrm{Tp}^{q,S}_{\tup y,x}|$. 
 
 Assume $\ell\geq N(k+c+1)$. Apply \Cref{thm:new-uqw} to find $S\subseteq V(G)$ of size $|S|\leq t$ 
 and a set $X\subseteq \{v_1,\ldots, v_\ell\}\setminus S$ of size $|X|\geq k+c+1$ which is 
@@ -127,7 +136,7 @@ contradicting the assumption of the lemma.
 Now, it is easy to conclude the main theorem. We repeat the statement of the theorem 
 for convenience.
 
-\setcounter{theorem}{3}
+\setcounter{theorem}{2}
 \begin{theorem}
 Let $\CCC$ be a class of graphs and let $\psi(\tup x,y)$ be a first-order formula, where 
 $\tup x$ is an $m$-tuple of variables and $y$ is a single variable. 
@@ -152,3 +161,81 @@ number $|S_\psi(B,G)|$.
 Now plug the numbers of \Cref{lem:closure} and \Cref{lem:projection-complexity} 
 into \Cref{lem:num-types-same-class} to conclude. 
 \end{proof}
+
+\Cref{thm:vc-density-lower-bound}, which we also repeat for
+convenience, is a simple consequence of the following two
+lemmas. 
+
+\begin{theorem}
+Let $\CCC$ be a class of graphs which 
+is closed under taking subgraphs. 
+\begin{enumerate}
+\item If $\CCC$ is somewhere dense, then there is a formula 
+$\psi(x,y)$ such that for every $n\in \N$ there are $G\in\CCC$ and $A\subseteq V(G)$ 
+with $|A|\geq n$ and $|S_\psi(A,G)|=2^{|A|}$. 
+\item If $\CCC$ has unbounded expansion, then there is a formula 
+$\psi(x,y)$ such that for every function $f:\N\rightarrow \N$ 
+there are $G\in\CCC$ and $A\subseteq V(G)$ 
+with $|S_\psi(A,G)|>f(|\psi|)\cdot |A|$. 
+\end{enumerate}
+\end{theorem}
+
+Let $\mathcal{G}_r$ be the class of $r$-subdivisions of all 
+simple graphs, that is, the class comprising
+all the graphs that can be obtained from any simple graph by replacing every edge by a path of
+length $r$.
+
+\begin{lemma}[\cite{nevsetvril2011nowhere}]\label{lem:lower-nd}
+For every somewhere dense graph class $\CCC$ that is closed 
+under taking subgraphs, there
+exists an integer $r_0$ such that $\mathcal{G}_{r_0}\subseteq \CCC$.
+\end{lemma}
+
+For $r\in \N$ and a graph $G$ denote by $\nu_r(G)$ the
+\emph{$r$-neighborhood complexity} of $G$ as defined
+by Reidl et al.~\cite{reidl2016characterising}, that is, the number 
+\[\max_{H\subseteq G,\emptyset\neq X\subseteq V(G)}\frac{|\{N_r[v]\cap X : v\in V(G)\}|}{|X|}.\] 
+
+A graph $H$ is a \emph{topological depth-$r$ minor} of $G$ if
+there is a mapping $\phi$ that maps vertices of~$H$ to 
+vertices of $G$ such that $\phi(u)\neq \phi(v)$ for 
+$u\neq v$, and edges of $H$ to paths in 
+$G$ such that if $uv\in E(H)$, then $\phi(uv)$
+is a path of length at most $2r$ between $u$ and $v$ in 
+$G$ and furthermore, if $uv, xy\in E(H)$, then 
+$\phi(uv)$ and $\phi(xy)$ are internally vertex
+disjoint. We write $H\minor_r^t G$. 
+Note that the above definition makes sense for 
+half-integers. 
+
+\begin{lemma}[Theorem 4 of \cite{reidl2016characterising}]\label{lem:lower-be}
+Let $G$ be a graph, let $r$ be a half-integer 
+and let $H\minor_r^tG$. 
+Then $|E(H)|/|V(H)|\leq (2r + 1)\cdot \max \left\{\nu_1(G)^4\cdot \log^2\nu_1(G),\nu_2(G),\ldots, \nu_{\left\lceil r+1/2\right\rceil}\right\}$.
+\end{lemma}
+
+\begin{proof}[of \Cref{thm:vc-density-lower-bound}]
+To prove the first statement of \Cref{thm:vc-density-lower-bound}, 
+for $n\in \N$, let $\PPP(n)$ denote the graph with $n+2^n$ 
+vertices $V(\PPP(n))\coloneqq \{v_1,\ldots, v_n\}\cup \{w_M : M\subseteq \{1,\ldots, n\}\}$ and edges $E(\PPP(n))\coloneqq \{v_iw_M :1\leq i\leq n, M\subseteq \{1,\ldots, n\}, i\in M\}$. 
+If $\CCC$ is somewhere dense and closed under taking subgraphs, 
+according to \Cref{lem:lower-nd}, there exists an integer $r_0$ 
+such that $\mathcal{G}_{r_0}\subseteq \CCC$, and in particular, 
+$\{\PPP(n)_{r_0} :n\in \N\}\subseteq \CCC$. Now consider 
+the formula $\psi(x,y)$ stating that $x$ and~$y$ have 
+distance $r_0$. Then for every $n\in \N$ we have 
+$S_\psi(\PPP(n),A)=2^{|A|}$, where $A\subseteq V(\PPP(n))$ denotes the set $\{v_1,\ldots, v_n\}$, which implies the statement
+of the theorem.
+
+For the second claim, we apply a result of Dvo\v{r}\'ak~\cite{s}, 
+which relates the edge density of topological depth-$r$ minors
+and depth-$r$ minors. In particular, the result of Dvo\v{r}\'ak
+implies that a 
+class $\CCC$ of graphs has unbounded expansion if and only 
+if there is $r\in \N$ such that $\limsup_{H\minor_r G}|E(H)|/|V(H)|=\infty$. By applying \Cref{lem:lower-be} and 
+a standard Ramsey argument we find $r_0\leq r$ such that 
+$\limsup_{G\in\CCC}\nu_{r_0}=\infty$. As above, consider 
+the formula $\psi(x,y)$ stating that $x$ and~$y$ have 
+distance $r_0$ to conclude. 
+\end{proof}
+

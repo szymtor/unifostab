@@ -25,7 +25,11 @@ $(I_u)_{u\in V(H)}$ of~$H$ in $G$ such that each $I_u$ has radius at most $r$.
 
 A class $\CCC$ of graphs is \emph{nowhere dense} if there is a function 
 $t\colon \N\rightarrow \N$ such that for all $r\in \N$ it holds that $K_{t(r)}\not\minor_r G$
-for all $G\in \CCC$, where $K_{t(r)}$ denotes the clique on $t(r)$ vertices.
+for all $G\in \CCC$, where $K_{t(r)}$ denotes the clique on $t(r)$ vertices. \textcolor{red}{The class $\CCC$ has \emph{bounded expansion}
+if there is a function $d\colon\N\rightarrow\N$ such that for all 
+$r\in \N$ and all $H\minor_rG$ with $G\in\CCC$, the edge density
+of $H$, $|E(H)|/|V(H)|$, is bounded by $d(r)$. Note that every 
+class of bounded expansion is nowhere dense.} 
 
 A set $B\subseteq V(G)$ is called {\em{$r$-independent}} in a graph $G$ if  $\dist_G(u,v)>r$ for all
 distinct $u,v\in B$.
@@ -93,10 +97,11 @@ In particular, this does not give a bound which is polynomial in $m+\ell$, and t
 which provides an upper bound on the number of distinct neighborhoods in a graph from a nowhere dense class.
 
 \begin{lemma}[adaptation of Lemma 4.11 in \cite{gajarsky2017kernelization}]\label{lem:diversity}
-Let $G$ be a graph such that $K_t\not\minor_{1} G$ for some constant $t\in \N$. 
+\marginpar{This lemma is wrong, we need that $G$ comes from a nowhere dense class if we want it to work for every $\epsilon$}Let $G$ be a graph such that $K_t\not\minor_{1} G$ for some constant $t\in \N$. 
 Then for every $\epsilon>0$ there exists $n_0$, depending only on $t$ and $\epsilon$, such that for all $A\subseteq V(G)$ with $|A|\geq n_0$ it holds that
 \[\abs{\{N(v)\cap A \colon v\in V(G)\}}\leq\abs{A}^{1+\epsilon}.\]
 \end{lemma}
+
 
 
 
@@ -118,6 +123,7 @@ From \cref{lem:diversity} we derive the following.
   By assumption, each of the $\binom{|A|}{2}$ unordered pairs of distinct elements of $A$ is covered by some element $F\in {\cal F}$, and,
   clearly, every $F\in {\cal F}$ can cover at most $\binom{k}{2}$ pairs. 
   Hence $\frac{\binom{|A|}{2}}{\binom{k}{2}}\leq |{\cal F}|\le  |A|^{1+\epsilon}$, implying $k\ge |A|^{(1-\epsilon)/2}$.
+  \marginpar{$k\ge \frac{1}{2}|A|^{(1-\epsilon)/2}$}
 \end{proof}
 
 \begin{comment}
@@ -576,7 +582,7 @@ The argument above shows that if $|A|\ge N(m)$ then
 there is a set $S\subset V(G)$, equal to $S_r$ above,
 and a set $B\subset A$, equal to $A_r$ above,
 so that $B$ is $r$-independent in $G-S$.
-Given $G$ and $A$, the sets $S$ and $B$ can be computed by applying the algorithm given by~\cref{lem:engine} at most~$r$ times, so in time $\Oof_{r,t}(|A|\cdot |E(G)|)$.
+Given~$G$ and $A$, the sets $S$ and $B$ can be computed by applying the algorithm given by~\cref{lem:engine} at most~$r$ times, so in time $\Oof_{r,t}(|A|\cdot |E(G)|)$.
 This finishes the proof of~\cref{thm:new-uqw}.
 \end{proof}
 
