@@ -2,6 +2,14 @@
 
 In this section we prove \Cref{thm:vc-density} and \Cref{thm:vc-density-lower-bound}.
 \begin{change}{sz}
+	These results provide bounds on the number of types in classes of graphs which are nowhere dense, 
+	and stronger bounds for classes which have bounded expansion. 
+A class of graphs $\CCC$ has \emph{bounded expansion}
+	if there is a function $d\colon\N\rightarrow\N$ such that for all 
+	$r\in \N$ and all $H\minor_rG$ with $G\in\CCC$, the edge density
+	of $H$, $|E(H)|/|V(H)|$, is bounded by $d(r)$. Note that every 
+	class of bounded expansion is nowhere dense.
+	
 Throughout this section, fix a formula  $\phi(\tup x,y)$, where
 $\tup x$ is an $m$-tuple of variables and $y$ is a single variable.
 
@@ -36,7 +44,7 @@ classes in Eickmeyer et al.~\cite{eickmeyer2016neighborhood}.
 Let us recall the necessary definitions.
 
 Let $G$ be a graph and let $B\subseteq V(G)$ be a subset of vertices. For vertices $v\in B$ and $u\in V(G)\setminus B$, a path $P$ connecting $u$ and $v$ is called {\em{$B$-avoiding}}
-if all its vertices apart from~$v$ do not belong to $B$. For a positive integer $r$, the {\em{$r$-projection}} of any $u\in V(G)\setminus B$ on $B$, denoted $M^G_r(u,B)$ is the set of all vertices $v\in B$ that
+if all its vertices apart from~$v$ do not belong to $B$. For a positive integer $r$ and $u\in V(G)\setminus B$, the {\em{$r$-projection}} of $u$ on $B$, denoted $M^G_r(u,B)$ is the set of all vertices $v\in B$ that
 can be connected to $u$ by a $B$-avoiding path of length at most $r$. 
 %
 %The {\em{$r$-projection profile}} of a vertex $u\in V(G)\setminus A$ on $A$ is a function $\rho^G_r[u,A]$ mapping vertices of

@@ -129,7 +129,7 @@ commonly studied in (infinite) model theory.
 Let $\psi(\tup x,y)$ be a first-order formula, where 
 $\tup x$ is an $m$-tuple of variables and $y$ is a single variable. 
 Let $\strA$ be a structure and let $A$ be a set of elements of
-$\strA$. Then the \emph{$\psi$-type} $S_\psi(A,\strA)$ of $A$ in 
+$\strA$. Then the set of \emph{$\psi$-types} over $A$ in 
 $\strA$ is the set
 \[\{\{\tup a\ \in A^m : \strA\models\psi(\tup a,b)\} : b\in V(\strA)\}.\]
 In stability theory, the number of types that can be realized over a parameter
@@ -214,13 +214,13 @@ $A\subseteq V(G)$, we have $|S_\psi(A,G)|\leq c\cdot |A|^{1+\epsilon}.$
 \end{theorem}
 \sebi{The proof of \Cref{thm:vc-density} is (again) based on Gaifman's locality
 theorem for first-order logic, which allows us to focus at local 
-neighborhoods around the elements $v\in V(G)$. 
+neighborhoods around the vertices $v\in V(G)$. 
 Using the closure lemma of~\cite{DrangeDFKLPPRVS16} for
 classes of bounded expansion and its generalization to
 nowhere dense classes~\cite{eickmeyer2016neighborhood}
 together with uniform quasi-wideness,
-we are then able to well control and classify 
-the interaction of elements $v$ with the set $A$. }
+\begin{change}{sz}we are able to bound 
+the number of interactions of vertices $v$ with the set $A$. \end{change}}
 
 
 
