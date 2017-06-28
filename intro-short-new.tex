@@ -1,6 +1,6 @@
 \section{Introduction}\label{sec:intro}
 
-\textcolor{red}{Classes of bounded expansion and} nowhere dense classes of graphs were introduced 
+\sebi{Classes of bounded expansion and} nowhere dense classes of graphs were introduced 
 by Ne\v set\v ril and Ossona de 
 Mendez~\cite{nevsetvril2008grad,nevsetvril2010first,nevsetvril2011nowhere} as a very 
 general model
@@ -11,13 +11,13 @@ all classes that exclude a fixed
 topological minor.
 Formally, a class $\CCC$ of graphs is {\em{nowhere dense}} if there is a function $t\colon \N\to \N$ such that for every $r\in \N$, no graph $G$ in~$\CCC$ contains the clique $K_{t(r)}$ on $t(r)$ vertices  as an {\em{$r$-shallow minor}},
 i.e., as a subgraph of a graph obtained from $G$ by contracting mutually disjoint  subgraphs of radius $r$   to single vertices.
-\textcolor{red}{Classes of bounded expansion~\cite{nevsetvril2008grad} 
+\sebi{Classes of bounded expansion~\cite{nevsetvril2008grad} 
 are important subclasses 
 of nowhere dense graph classes which are defined by bounds on 
 the edge density of $r$-shallow minors.}
 
 
-\textcolor{red}{Especially} the concept of nowhere denseness
+\sebi{Especially} the concept of nowhere denseness
 turns out to be very robust, as witnessed by the fact that it is equivalent 
 to multiple other concepts studied in different areas of mathematics. 
 One can equivalently characterize nowhere dense graph classes 
@@ -112,7 +112,7 @@ We remark that the above connections between nowhere denseness and notions from 
 Both uniform quasi-wideness and stability techniques are key tools used in the study of the complexity of the {\sc Distance-$r$ Dominating Set} problem on nowhere dense graph classes,
 and in particular in the design of polynomial kernelization procedures for this problem~\cite{DawarK09,drange2016kernelization,eickmeyer2016neighborhood,siebertz2016polynomial}.
 
-\textcolor{red}{One of the main contributions of \cite{eickmeyer2016neighborhood}
+\sebi{One of the main contributions of \cite{eickmeyer2016neighborhood}
 was to prove that nowhere dense classes of graphs have small
 \emph{distance neighborhood complexity}. More precisely, it
 was proved that for every nowhere dense class $\CCC$ of 
@@ -123,7 +123,7 @@ $\{N_r[v]\cap A : v\in V(G)\}$,
 has size bounded by $c\cdot |A|^{1+\epsilon}$. This result
 generalizes a result of Reidl et al.~\cite{reidl2016characterising}, who proved that classes of bounded expansion have linear distance neighborhood complexity. }
 
-\textcolor{red}{Distance neighborhood complexity is a 
+\sebi{Distance neighborhood complexity is a 
 special case of a much more general definition which is 
 commonly studied in (infinite) model theory. 
 Let $\psi(\tup x,y)$ be a first-order formula, where 
@@ -194,28 +194,46 @@ and $G$ is a graph such that $K_t\not\minor_{g(q)} G$. Then the ladder index of 
 Note that in particular, \cref{thm:new-stable} implies that every nowhere dense graph is stable, which was the main conclusion of Adler and Adler~\cite{adler2014interpreting}.
 
 \bigskip
-\textcolor{red}{Finally, we prove the following theorem concerning the number of
-types in sparse graph classes. }
+Finally, we prove the following theorem concerning the number of
+types in sparse graph classes. 
+\begin{change}{sz}For a graph $G$, a set of vertices $A\subset V(G)$, and a formula $\psi(\tup x, y)$, define the \emph{set of $\psi$-types} over $A$:
+\[S_\psi(A,G)=\setof{\setof{\tup a\ \in A^m}{G\models\psi(\tup a,v)}}{ v\in V(G)}\]
+\end{change}
 
-\textcolor{red}{\begin{theorem}\label{thm:vc-density}
+
+\begin{theorem}\label{thm:vc-density}
 Let $\CCC$ be a class of graphs and let $\psi(\tup x,y)$ be a first-order formula, where 
 $\tup x$ is an $m$-tuple of variables and $y$ is a single variable. 
 \begin{enumerate}
 \item If $\CCC$ is nowhere dense, then for every $\epsilon>0$ 
 there exists a constant~$c$ such that for every $G\in \CCC$ and every
-$A\subseteq V(G)$, we have 
-\[|S_\psi(A,G)|=|\{\{\tup a\ \in A^m : G\models\psi(\tup a,v)\} : v\in V(G)\}|\leq c\cdot |A|^{1+\epsilon}.\]
+$A\subseteq V(G)$, we have $|S_\psi(A,G)|\leq c\cdot |A|^{1+\epsilon}.$
+
 \item If $\CCC$ has bounded expansion, then there exists a constant~$c$ such that for every $G\in \CCC$ and every $A\subseteq V(G)$, we have $|S_\psi(A,G)|\leq c\cdot |A|$.
 \end{enumerate}
-\end{theorem}}
+\end{theorem}
+\sebi{The proof of \Cref{thm:vc-density} is (again) based on Gaifman's locality
+theorem for first-order logic, which allows us to focus at local 
+neighborhoods around the elements $v\in V(G)$. 
+Using the closure lemma of~\cite{DrangeDFKLPPRVS16} for
+classes of bounded expansion and its generalization to
+nowhere dense classes~\cite{eickmeyer2016neighborhood}
+together with uniform quasi-wideness,
+we are then able to well control and classify 
+the interaction of elements $v$ with the set $A$. }
 
-\textcolor{red}{It is not difficult to see that our result in fact yields new
-characterizations
-of nowhere dense graph classes and classes of bounded expansion 
-which are closed under taking 
-subgraphs. }
 
-\textcolor{red}{\begin{theorem}\label{thm:vc-density-lower-bound}
+
+
+\begin{change}{sz}
+\Cref{thm:vc-density} shows a strong new connection 
+	between first-order logic and the notions of bounded expansion
+	and nowhere denseness.
+	It is not difficult to see that it also yields new dichotomies 
+characterizing classes which are nowhere dense  or have bounded expansion, obtained by combining~\cref{thm:vc-density}
+with the complementary result stated below.
+
+\begin{theorem}\label{thm:vc-density-lower-bound}
 Let $\CCC$ be a class of graphs which 
 is closed under taking subgraphs. 
 \begin{enumerate}
@@ -227,21 +245,10 @@ $\psi(x,y)$ such that for every function $f:\N\rightarrow \N$
 there are $G\in\CCC$ and $A\subseteq V(G)$ 
 with $|S_\psi(A,G)|>f(|\psi|)\cdot |A|$. 
 \end{enumerate}
-\end{theorem}}
+\end{theorem}
+\end{change}
 
-\textcolor{red}{The proof of \Cref{thm:vc-density} is (again) based on Gaifman's locality
-theorem for first-order logic, which allows us to focus at local 
-neighborhoods around the elements $v\in V(G)$. 
-Using the closure lemma of~\cite{DrangeDFKLPPRVS16} for
-classes of bounded expansion and its generalization to
-nowhere dense classes~\cite{eickmeyer2016neighborhood}
-together with uniform quasi-wideness,
-we are then able to well control and classify 
-the interaction of elements $v$ with the set $A$. }
 
-\textcolor{red}{\Cref{thm:vc-density} shows a strong new connection 
-between first-order logic and the notions of bounded expansion
-and nowhere denseness. }
 
 \pagebreak
 

@@ -21,11 +21,15 @@ twoside=False]{geometry}
 
 \usepackage{marginnote}
 
-
+\definecolor{sz}{rgb}{0.1,0.2,0.6}
 \definecolor{blue}{rgb}{0.1,0.2,0.5}
 \definecolor{brown}{rgb}{0.6,0.6,0.2}
 \usepackage[ocgcolorlinks, linkcolor={blue}, citecolor={brown}]{hyperref}
+\newcommand{\sebi}[1]{\textcolor{red}{#1}}
 
+\newenvironment{change}[1]
+{\begingroup\color{#1}}
+{\endgroup}
 
 \usepackage[amsmath,thmmarks,hyperref]{ntheorem}
 \usepackage{cleveref}
@@ -99,6 +103,7 @@ twoside=False]{geometry}
 % END ntheorem configuration
 
 \newcommand{\set}[1]{\{#1\}}
+\newcommand{\setof}[2]{\left\{#1 \,\mid\, #2 \right\}}
 \renewcommand{\subset}{\subseteq}
 
 %\setlength{\parskip}{0.1cm}
@@ -212,6 +217,7 @@ Institute of Informatics, University of Warsaw, Poland\\[0.1cm]
 %\input{intro}
 \input{intro-short-new}
 \input{nd-uqw}
+\input{gaifman}
 \input{uqw-stable}
 %\input{vc-power}
 \input{vc-density}

@@ -1,17 +1,29 @@
 \section{On the number of types in nowhere dense graph classes}
 
-In this section we prove \Cref{thm:vc-density} and \Cref{thm:vc-density-lower-bound}. Recall that for a
-formula $\psi(\tup x,y)$, where 
-$\tup x$ is an $m$-tuple of variables and $y$ is a single variable, 
-\[S_\psi(A,G)=\{\{\tup a \in A^m : G\models\psi(\tup a,v)\} : v\in V(G)\}.\]
+In this section we prove \Cref{thm:vc-density} and \Cref{thm:vc-density-lower-bound}.
+\begin{change}{sz}
+Throughout this section, fix a formula  $\phi(\tup x,y)$, where
+$\tup x$ is an $m$-tuple of variables and $y$ is a single variable.
+
+For a graph $G$, a set of  vertices $A\subset V(G)$, and a vertex $v\in V(G)$,
+denote
+\[\phi(A,v)=\setof{\tup a \in A^m }{ G\models\phi(\tup a,v)},\]
+and for $W\subset V(G)$, denote
+\[S_\phi(A,W)=\setof{\phi(A,v)}{ v\in W}.\]
+Note that $S_\phi(A,W)$ is \emph{not} symmetric in $A$ and $W$.
+We write $S_\phi(A,G)$ as a shorthand for $S_\phi(A,V(G))$.
+
+Our goal is to prove that if $G\in \CCC$, where $\CCC$ is a nowhere dense class,
+then for every $\varepsilon>0$,   $S_\phi(A,G)\le \Oof(|A|^{1+\varepsilon})$, and 
+$S_\phi(A,G)\le \Oof(|A|)$ if $\CCC$ is a class of bounded expansion.
+\end{change}
 
 First, observe that if $A\subseteq B$, then the number of types
 over $A$ cannot be larger than the number of types over $B$. 
 
 \begin{lemma}\label{lem:types-over-B}
-Let $G$ be a graph and let $A\subseteq B\subseteq V(G)$. Let 
-$\psi(\tup x,y)$ be a first-order formula. Then 
-$|S_\psi(A,G)|\leq |S_\psi(B,G)|$. 
+Let $G$ be a graph and let $A\subseteq B\subseteq V(G)$. Then 
+$|S_\phi(A,G)|\leq |S_\phi(B,G)|$. 
 \end{lemma}
 
 We will first enlarge the set $A$ to a set $B$, called
@@ -37,8 +49,7 @@ We define
 to be the number of different $r$-projections.
 % and $r$-projection profiles realized on $B$, respectively. Clearly, it %holds that $\projnum_r(G,A)\leq \projprof_r(G,A)$.
 
-\pagebreak
-\begin{lemma}[[\cite{drange2016kernelization,eickmeyer2016neighborhood}]\label{lem:closure}
+\begin{lemma}[\cite{drange2016kernelization,eickmeyer2016neighborhood}]\label{lem:closure}
 Let $\CCC$ be a class of graphs. 
 \begin{enumerate}
 \item If $\CCC$ has bounded expansion, then for every $r\in \N$ there is a constant $c\in \N$ such that for
@@ -65,98 +76,105 @@ Let $\CCC$ be a class of graphs.
 \begin{enumerate}
 \item If $\CCC$ has bounded expansion, then for every $r\in \N$ there is 
   a constant $c\in\N$ such that for every graph $G\in \CCC$, and vertex subset $A\subseteq V(G)$, 
-  it holds that $\projprof_r(G,A)\leq c\cdot |A|$.
+  it holds that $\projnum_r(G,A)\leq c\cdot |A|$.
   \item If $\CCC$ is nowhere dense, then for every $r\in \N$ and $\epsilon>0$ there is 
   a constant $c\in \N$ such that for every graph $G\in \CCC$, and vertex subset $A\subseteq V(G)$, 
-  it holds that $\projprof_r(G,A)\leq c\cdot |A|^{1+\epsilon}$.
+  it holds that $\projnum_r(G,A)\leq c\cdot |A|^{1+\epsilon}$.
 \end{enumerate}
 \end{lemma}
 
-We now are ready to count the number of types realized by elements
-of the same projection class. 
 
+\begin{change}{sz}
+	Theorem~\cref{thm:vc-density} will follow easily from the above results and the following lemma.
 \begin{lemma}\label{lem:num-types-same-class}
-Let $\phi(\tup x,y)$ be a first-order formula of quantifier rank $q$, 
-where $\tup x$ is an $m$-tuple of 
-variables and $y$ is a single variable. Let $\CCC$ be a nowhere dense class of 
-graphs and let $G\in\CCC$. Let 
-$B\subseteq V(G)$ and assume that 
-$|M_r^G(u,B)|\leq c$ for some positive integer
-$c$. There are integers $k,p$ depending only on $q,m$ and $\CCC$, such that 
-the following holds. Let $\{v_1,\ldots,v_\ell\}\subseteq V(G)$ be maximal such that
-\begin{itemize}
-\item $M_r^G(v_i,B)=M_r^G(v_j,B)$ and such that 
-\item $\{\tup a \in B^m : G\models\psi(\tup a,v_i)\}\neq \{\tup a \in B^m : G\models\psi(\tup a,v_j)\}$
-for all $1\leq i<j\leq \ell$. 
-\end{itemize}
-Then $\ell\in\Oof((k+c+1)^p)$. 
+ Let $\CCC$ be a nowhere dense class,
+ % There is a polynomial $f$ depending only
+ % on $\CCC$ and $\phi$ such that the following holds.
+let $G\in\CCC$ and let $B,C$ be sets of vertices with
+$C\subset B\subseteq V(G)$.
+Then, for any set of vertices $W\subset V(G)$ such that 
+$M_r^G(v,B)=C$ for all $v\in W$, 
+ $|S_\phi(B,W)|\le f(c)$, where $c=|C|$ and $f$ is a polynomial depending only on $\CCC$ and $\phi$.
 \end{lemma}
+
 \begin{proof}
-Let $r$
-be the integer computable from $q$ as described in \Cref{pro:gaifman} (2). 
+As we are only interested in the cardinality of the set $\setof{\phi(B,u)}{u\in W}$,
+we may assume  that $\phi(B,u)\neq \phi(B,v)$ 
+for distinct $u, v\in W$.
+
+
+Let $q$ be the quantifier rank of the formula $\phi$,
+and let $r\in \N$ and~$T\from \N\times \N\to \N$  
+be as described in~\cref{pro:crossing}.
+
 As $\CCC$ is nowhere dense, there is an integer $t$ such that 
-$K_t\not\minor_{\lfloor 10r/2\rfloor} G$. According to 
-\Cref{thm:new-uqw}, there is a polynomial  $N\colon \N\to \N$ with $N(m)=
-\Oof_{r,t}{(m^{{(2t+1)}^{2rt}})}$ such that for every set $D\subseteq V(G)$
-of size at least $N(m)$, for a given $m$, there exists a set $S\subseteq V(G)$ of size $|S|\leq t$ 
-and a set $X\subseteq D\setminus S$ of size $|X|\geq m$ which is $r$-independent in $G-S$.
-According to \Cref{pro:gaifman} (1), the set of types $\mathrm{Tp}^{q,S}_{\tup y,x}$ is 
-finite and computable from $t,|\tup x|$ and $q$. Let $k\coloneqq |\mathrm{Tp}^{q,S}_{\tup y,x}|$. 
+$K_t\not\minor_{\lfloor 10r/2\rfloor} G$. 
+% According to
+% \Cref{thm:new-uqw}, there is a polynomial  $N\colon \N\to \N$ with $N(m)=
+% \Oof_{r,t}{(m^{{(2t+1)}^{2rt}})}$ such that for every set $D\subseteq V(G)$
+% of size at least $N(m)$, for a given $m$, there exists a set $S\subseteq V(G)$ of size $|S|\leq t$
+% and a set $X\subseteq D\setminus S$ of size $|X|\geq m$ which is $r$-independent in $G-S$.
+Let $k\coloneqq T(q,t,1)$, where $q$ is the quantifier rank of $\phi$. In the parlance of~\cref{pro:crossing},
+$k$ is a bound on the number of $(q,S)$-local types of vertices in a graph $G$,
+for any fixed $S\subset V(G)$ with $|S|\le t$.
 
-Assume $\ell\geq N(k+c+1)$. Apply \Cref{thm:new-uqw} to find $S\subseteq V(G)$ of size $|S|\leq t$ 
-and a set $X\subseteq \{v_1,\ldots, v_\ell\}\setminus S$ of size $|X|\geq k+c+1$ which is 
-$2r$-independent in $G-S$. Let $Y\subseteq X$ be the set of vertices $v\in X$ 
-with $M_r^{G-S}(v,B)\neq \emptyset$. Observe that $|Y|\leq c$, as otherwise, by the pigeon-hole 
-principle, we have distinct $u,v\in Y$ with $M_r^{G-S}(u,B)\cap M_r^{G-S}(v,B)\neq \emptyset$. 
-Then we have $\dist_{G-S}(u,v)\leq 2r$, contradicting the assumption that 
-$X$ is $2r$-independent in $G-S$. 
 
-As in the previous section, define $G^S$ as the graph $G-S$
-colored with colors $\{C_s : s\in S\}$ as follows. For each $s\in S$, a vertex $v\in V(G)\setminus S$
-is colored with color $C_s$ in $G^S$ if and only if $v$ is a neighbor of $s$ in $G$. 
-According to \Cref{lem:remove-s}, we can rewrite $\phi$ to a formula $\phi'$ such that
-for every valuation $\tup a,v$ of $\tup x,y$ in $G-S$ we have 
-\[(G,(\tup a,v))\models \phi\Leftrightarrow (G^S,(\tup a,v))\models \phi'.\]
 
-Let $Z\coloneqq X\setminus Y$. By assumption we have $|Z|\geq k+1$, and hence, by 
-the pigeon-hole principle, we find distinct $u,v\in Z$ such that 
-$(G^S,u)$ and $(G^S,v)$ have the same $(r,q)$-local types. Fix any $\tup a\in A^m$. 
-Then, by construction, the sets $\{\tup a, u\}$ and $\{\tup a,v\}$ are mutually $2r$-independent
-in $G-S$. 
-According to \Cref{pro:gaifman} (3), the $(r,q)$-local types of $(G^S,(\tup a,u))$ and 
-$(G^S,(\tup a,v))$ are equal. We apply \Cref{pro:gaifman} (2) to conclude that 
-\[(G^S, (\tup a,u))\models \phi'\Leftrightarrow(G^S, (\tup a,v))\models \phi'.\]
-From the construction of $\phi'$ it follows that 
-\[(G, (\tup a,u))\models \phi\Leftrightarrow(G, (\tup a,v))\models \phi.\]
-As the choice of $\tup a$ was arbitrary, we conclude that 
-\[\{\tup a \in B^m : G\models\psi(\tup a,u)\}= \{\tup a \in B^m : G\models\psi(\tup a,v)\},\]
-contradicting the assumption of the lemma. 
+Let  $N\colon \N\to \N$ be the polynomial obtained by applying~\cref{thm:new-uqw} to $t$ and $2r$.
+Suppose   $|W|\geq N(k+c+1)$. Then there is a  
+set $S\subseteq V(G)$ of size $|S|\leq t$ 
+and a set $X\subseteq W\setminus S$ of size $|X|\geq k+c+1$ which is 
+$2r$-independent in $G-S$. 
+
+Note that the function
+ $v\mapsto M_r^{G-S}(v,B)$ 
+ maps distinct $v,w\in X$ to pairwise disjoint subsets of $C$,
+as otherwise we would have $\dist_{G-S}(v,w)\leq 2r$,
+contradicting $2r$-independence.
+As  $|X|\ge k+|C|+1$, it follows that 
+there are at least $k+1$ vertices $v\in X$
+for which ${M_r^{G-S}(v,B)=\emptyset}$. Let $Z$ denote the set of all those vertices. Then $Z$ and $B$ are $r$-separated by~$S$.
+
+
+% As in the previous section, define $G^S$ as the graph $G-S$
+% colored with colors $\{C_s : s\in S\}$ as follows. For each $s\in S$, a vertex $v\in V(G)\setminus S$
+% is colored with color $C_s$ in $G^S$ if and only if $v$ is a neighbor of $s$ in $G$.
+% According to \Cref{lem:remove-s}, we can rewrite $\phi$ to a formula $\phi'$ such that
+% for every valuation $\tup a,v$ of $\tup x,y$ in $G-S$ we have
+% \[(G,(\tup a,v))\models \phi\Leftrightarrow (G^S,(\tup a,v))\models \phi'.\]
+
+Since $|Z|\geq k+1$, by the pigeon-hole principle, there are  distinct $u,v\in Z$ such that 
+$u$ and $v$ have the same $(q,S)$-local types,
+and from~\cref{pro:crossing}~\cref{c:confusing} it follows that $u$ and $v$
+have the same quantifier rank $q$ over $B$.
+In particular, $\phi(B,u)=\phi(B,v)$, contrary to the assumption made at the beginning of the proof.
 \end{proof}
+\end{change}
 
 Now, it is easy to conclude the main theorem. We repeat the statement of the theorem 
 for convenience.
 
 \setcounter{theorem}{2}
 \begin{theorem}
-Let $\CCC$ be a class of graphs and let $\psi(\tup x,y)$ be a first-order formula, where 
+Let $\CCC$ be a class of graphs and let $\phi(\tup x,y)$ be a first-order formula, where 
 $\tup x$ is an $m$-tuple of variables and $y$ is a single variable. 
 \begin{enumerate}
 \item If $\CCC$ is nowhere dense, then for every $\epsilon>0$ 
 there exists a constant~$c$ such that for every $G\in \CCC$ and every
-$A\subseteq V(G)$, we have 
-\[|S_\psi(A,G)|=|\{\{\tup a\ \in A^m : G\models\psi(\tup a,v)\} : v\in V(G)\}|\leq c\cdot |A|^{1+\epsilon}.\]
-\item If $\CCC$ has bounded expansion, then there exists a constant~$c$ such that for every $G\in \CCC$ and every $A\subseteq V(G)$, we have $|S_\psi(A,G)|\leq c\cdot |A|$.
+$A\subseteq V(G)$, we have $|S_\phi(A,G)|\leq c\cdot |A|^{1+\epsilon}.$
+\item If $\CCC$ has bounded expansion, then there exists a constant~$c$ such that for every $G\in \CCC$ and every $A\subseteq V(G)$, we have $|S_\phi(A,G)|\leq c\cdot |A|$.
 \end{enumerate}
 \end{theorem}
 \begin{proof}
-Let $p$ be the constant from \Cref{lem:num-types-same-class} computed
-from $\psi$ and $\CCC$. In case $\CCC$ is nowhere dense, choose
-$\epsilon'$ such that $(p+2)\epsilon'+(\epsilon')^2\leq \epsilon$. In this case 
-compute the closure $B$ of $A$ according to \Cref{lem:closure} with 
-parameters $r$ and $\epsilon'$, in case $\CCC$ has bounded expansion 
-compute it just with parameter $r$. 
+Let $f$ be the polynomial from \Cref{lem:num-types-same-class},
+depending on $\phi$ and $\CCC$,
+and let $p$ be its degree.
+ In case $\CCC$ is nowhere dense, choose
+$\epsilon'$ such that $(p+2)\epsilon'+(\epsilon')^2\leq \epsilon$. In this case,
+let $B$ be the closure of $A$ according to \Cref{lem:closure} with 
+parameters $r$ and $\epsilon'$. In case $\CCC$ has bounded expansion, let $B$ be the closure of $A$ with parameter $r$.
 According to \Cref{lem:types-over-B}, it suffices to bound the
-number $|S_\psi(B,G)|$. 
+number $|S_\phi(B,G)|$. 
 
 Now plug the numbers of \Cref{lem:closure} and \Cref{lem:projection-complexity} 
 into \Cref{lem:num-types-same-class} to conclude. 
@@ -171,12 +189,12 @@ Let $\CCC$ be a class of graphs which
 is closed under taking subgraphs. 
 \begin{enumerate}
 \item If $\CCC$ is somewhere dense, then there is a formula 
-$\psi(x,y)$ such that for every $n\in \N$ there are $G\in\CCC$ and $A\subseteq V(G)$ 
-with $|A|\geq n$ and $|S_\psi(A,G)|=2^{|A|}$. 
+$\phi(x,y)$ such that for every $n\in \N$ there are $G\in\CCC$ and $A\subseteq V(G)$ 
+with $|A|\geq n$ and $|S_\phi(A,G)|=2^{|A|}$. 
 \item If $\CCC$ has unbounded expansion, then there is a formula 
-$\psi(x,y)$ such that for every function $f:\N\rightarrow \N$ 
+$\phi(x,y)$ such that for every function $f:\N\rightarrow \N$ 
 there are $G\in\CCC$ and $A\subseteq V(G)$ 
-with $|S_\psi(A,G)|>f(|\psi|)\cdot |A|$. 
+with $|S_\phi(A,G)|>f(|\phi|)\cdot |A|$. 
 \end{enumerate}
 \end{theorem}
 
@@ -194,7 +212,7 @@ exists an integer $r_0$ such that $\mathcal{G}_{r_0}\subseteq \CCC$.
 For $r\in \N$ and a graph $G$ denote by $\nu_r(G)$ the
 \emph{$r$-neighborhood complexity} of $G$ as defined
 by Reidl et al.~\cite{reidl2016characterising}, that is, the number 
-\[\max_{H\subseteq G,\emptyset\neq X\subseteq V(G)}\frac{|\{N_r[v]\cap X : v\in V(G)\}|}{|X|}.\] 
+\[\max_{H\subseteq G,\emptyset\neq X\subseteq V(G)}\frac{|\{N_r^H[v]\cap X : v\in V(H)\}|}{|X|}.\] 
 
 A graph $H$ is a \emph{topological depth-$r$ minor} of $G$ if
 there is a mapping $\phi$ that maps vertices of~$H$ to 
@@ -222,9 +240,9 @@ If $\CCC$ is somewhere dense and closed under taking subgraphs,
 according to \Cref{lem:lower-nd}, there exists an integer $r_0$ 
 such that $\mathcal{G}_{r_0}\subseteq \CCC$, and in particular, 
 $\{\PPP(n)_{r_0} :n\in \N\}\subseteq \CCC$. Now consider 
-the formula $\psi(x,y)$ stating that $x$ and~$y$ have 
+the formula $\phi(x,y)$ stating that $x$ and~$y$ have 
 distance $r_0$. Then for every $n\in \N$ we have 
-$S_\psi(\PPP(n),A)=2^{|A|}$, where $A\subseteq V(\PPP(n))$ denotes the set $\{v_1,\ldots, v_n\}$, which implies the statement
+$S_\phi(\PPP(n),A)=2^{|A|}$, where $A\subseteq V(\PPP(n))$ denotes the set $\{v_1,\ldots, v_n\}$, which implies the statement
 of the theorem.
 
 For the second claim, we apply a result of Dvo\v{r}\'ak~\cite{s}, 
@@ -232,10 +250,13 @@ which relates the edge density of topological depth-$r$ minors
 and depth-$r$ minors. In particular, the result of Dvo\v{r}\'ak
 implies that a 
 class $\CCC$ of graphs has unbounded expansion if and only 
-if there is $r\in \N$ such that $\limsup_{H\minor_r G}|E(H)|/|V(H)|=\infty$. By applying \Cref{lem:lower-be} and 
-a standard Ramsey argument we find $r_0\leq r$ such that 
-$\limsup_{G\in\CCC}\nu_{r_0}=\infty$. As above, consider 
-the formula $\psi(x,y)$ stating that $x$ and~$y$ have 
+if there is $r\in \N$ such that the value $|E(H)|/|V(H)|$ is unbounded
+when $H$ ranges over all graphs such that $H\minor_r^tG $ for some $G\in \CCC$.
+ By applying \Cref{lem:lower-be} and 
+a standard Ramsey argument we find $r_0\leq r$ such that the value
+$\nu_{r_0(H)}$ is unbounded when $H$ ranges over all graphs such that $H\minor_r^t G$
+for some $G\in\CCC$. As above, consider 
+the formula $\phi(x,y)$ stating that $x$ and~$y$ have 
 distance $r_0$ to conclude. 
 \end{proof}
 
