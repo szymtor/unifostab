@@ -1,8 +1,8 @@
-\section{Introduction}\label{sec:intro}
+\section{Introduction and contributions}\label{sec:intro}
 
-\sebi{Classes of bounded expansion and} nowhere dense classes of graphs were introduced 
+Nowhere dense classes of graphs were introduced 
 by Ne\v set\v ril and Ossona de 
-Mendez~\cite{nevsetvril2008grad,nevsetvril2010first,nevsetvril2011nowhere} as a very 
+Mendez~\cite{nevsetvril2010first,nevsetvril2011nowhere} as a very 
 general model
 for uniform sparseness of graphs. These classes generalize many 
 familiar classes of sparse graphs, such as planar graphs, graphs 
@@ -11,13 +11,13 @@ all classes that exclude a fixed
 topological minor.
 Formally, a class $\CCC$ of graphs is {\em{nowhere dense}} if there is a function $t\colon \N\to \N$ such that for every $r\in \N$, no graph $G$ in~$\CCC$ contains the clique $K_{t(r)}$ on $t(r)$ vertices  as an {\em{$r$-shallow minor}},
 i.e., as a subgraph of a graph obtained from $G$ by contracting mutually disjoint  subgraphs of radius $r$   to single vertices.
-\sebi{Classes of bounded expansion~\cite{nevsetvril2008grad} 
+Classes of bounded expansion~\cite{nevsetvril2008grad} 
 are important subclasses 
 of nowhere dense graph classes which are defined by bounds on 
-the edge density of $r$-shallow minors.}
+the edge density of $r$-shallow minors.
 
 
-\sebi{Especially} the concept of nowhere denseness
+The concept of nowhere denseness
 turns out to be very robust, as witnessed by the fact that it is equivalent 
 to multiple other concepts studied in different areas of mathematics. 
 One can equivalently characterize nowhere dense graph classes 
@@ -61,7 +61,7 @@ on subgraph closed classes of graphs is exactly between the
 nowhere dense and somewhere dense graph classes. 
 \end{comment}
 
-%\bigskip
+\paragraph{Uniform quasi-wideness.}
 
 In this work we revisit the connections between the notion of nowhere 
 denseness and notions from  model theory and finite model theory.
@@ -69,6 +69,8 @@ We first consider uniform quasi-wideness, a
 notion  introduced by Dawar~\cite{dawar2010homomorphism}, who 
 proved that every quasi-wide class that is closed under taking substructures
 and disjoint unions has the homomorphism preservation property. 
+
+
 Formally, a class $\CCC$ of graphs is \emph{uniformly quasi-wide} if there are
 functions $N\colon \N\times\N\rightarrow \N$ and $s\colon \N\rightarrow \N$ such
 that for all $r,m\in \N$ and all subsets $A\subseteq V(G)$ for
@@ -78,72 +80,11 @@ $B\subseteq A\setminus S$ of size $\abs{B}\geq m$ which is $r$-independent in
 $G-S$. Recall that a set $B\subseteq V(G)$ is called {\em{$r$-independent}} in $G$ if all
 distinct $u,v\in B$ are at distance 
 larger than $r$ in $G$.
- Ne\v{s}et\v{r}il and Ossona de Mendez proved that
+
+Ne\v{s}et\v{r}il and Ossona de Mendez proved that
 the notions of uniform quasi-wideness and nowhere denseness coincide for 
 classes of graphs~\cite{nevsetvril2011nowhere}. 
-We revisit their proof, obtaining improved bounds.
-
-
-The second topic of study is the
-connection between nowhere denseness and stability theory. 
-Fix
-% Let $\cal C$ be a class of structures over
- a relational vocabulary $\Sigma$. Let 
-$\phi(\tup{x},\tup{y})$ be a $\Sigma$-formula with the free variables
-partitioned into two groups $\tup{x}, \tup{y}$. A \emph{$\phi$-ladder}
-of length $n$ in a $\Sigma$-structure $\str A$ is a sequence $\tup{a}_1,\ldots, \tup{a}_{n},
-\tup{b}_1,\ldots, \tup{b}_{n}$ of tuples of elements of $\str A$ 
-such that for all $1\leq i,j\le n$,
-\[\strA\models\phi(\tup{a}_i,\tup{b}_j)\Longleftrightarrow i\leq j. \]
-The least  $n$ for which 
-there is no $\phi$-ladder of length $n$ is 
-the \emph{ladder index} 
-of $\phi(\tup{x},\tup{y})$ in $\str A$ (which may depend on the way we split the
-variables). 
-
-Based on work of Podewski and Ziegler~\cite{podewski1978stable}, 
-Adler and Adler~\cite{adler2014interpreting}
-proved that every nowhere dense class $\CCC$ of graphs is stable, that is, 
-the ladder index of every first-order formula $\phi(\tup{x},\tup{y})$ over
-graphs from $\CCC$ is bounded by a constant depending only on $\phi$ 
-and~$\CCC$. In fact, for a subgraph-closed class $\CCC$, the notions of nowhere denseness and stability coincide.
-
-We remark that the above connections between nowhere denseness and notions from model theory have recently found algorithmic applications.
-Both uniform quasi-wideness and stability techniques are key tools used in the study of the complexity of the {\sc Distance-$r$ Dominating Set} problem on nowhere dense graph classes,
-and in particular in the design of polynomial kernelization procedures for this problem~\cite{DawarK09,drange2016kernelization,eickmeyer2016neighborhood,siebertz2016polynomial}.
-
-\sebi{One of the main contributions of \cite{eickmeyer2016neighborhood}
-was to prove that nowhere dense classes of graphs have small
-\emph{distance neighborhood complexity}. More precisely, it
-was proved that for every nowhere dense class $\CCC$ of 
-graphs, every positive integer $r$ and every $\epsilon>0$ there
-exists a constant $c$ such that for every graph $G\in\CCC$ and
-every vertex subset $A\subseteq V(G)$, the set of distance-$r$ neighborhood intersections with $A$,
-$\{N_r[v]\cap A : v\in V(G)\}$,
-has size bounded by $c\cdot |A|^{1+\epsilon}$. This result
-generalizes a result of Reidl et al.~\cite{reidl2016characterising}, who proved that classes of bounded expansion have linear distance neighborhood complexity. }
-
-\sebi{Distance neighborhood complexity is a 
-special case of a much more general definition which is 
-commonly studied in (infinite) model theory. 
-Let $\psi(\tup x,y)$ be a first-order formula, where 
-$\tup x$ is an $m$-tuple of variables and $y$ is a single variable. 
-Let $\strA$ be a structure and let $A$ be a set of elements of
-$\strA$. Then the set of \emph{$\psi$-types} over $A$ in 
-$\strA$ is the set
-\[\{\{\tup a\ \in A^m : \strA\models\psi(\tup a,b)\} : b\in V(\strA)\}.\]
-In stability theory, the number of types that can be realized over a parameter
-set $A$ in a structure~$\strA$ of a theory $T$ 
-is one of the key measures for the complexity of the theory $T$, 
-in fact, the original definition of a stable theory is made in 
-terms of bounds on the number of types that are realized in
-its models. }
-
-\paragraph{Our contribution.} 
-Our first result is  a new proof of a result of
-Ne\v{s}et\v{r}il and Ossona de Mendez~\cite{nevsetvril2010first},
-which states that a class $\CCC$ of graphs is nowhere dense if and only if it
-is uniformly quasi-wide. The proof of Ne\v{s}et\v{r}il 
+The proof of Ne\v{s}et\v{r}il 
 and Ossona de Mendez goes back to a construction
 of Kreidler and Seese~\cite{kreidler1998monadic} (see also Atserias et al.~\cite{atserias2006preservation}), 
 and uses iterated Ramsey arguments. Hence the original bounds on 
@@ -172,12 +113,39 @@ that even though the techniques employed to prove \cref{thm:new-uqw} are inspire
 at the end we use only very simple graph theoretic notions. In particular, as asserted in the last sentence of the theorem, the
 proof can easily be turned into an efficient algorithm.
 
- Podewski and Ziegler~\cite{podewski1978stable} 
+\paragraph{Stability.}
+
+
+The second topic of study is the
+connection between nowhere denseness and stability theory. 
+Fix
+% Let $\cal C$ be a class of structures over
+ a relational vocabulary $\Sigma$. Let 
+$\phi(\tup{x},\tup{y})$ be a $\Sigma$-formula with the free variables
+partitioned into two groups $\tup{x}, \tup{y}$. A \emph{$\phi$-ladder}
+of length $n$ in a $\Sigma$-structure $\str A$ is a sequence $\tup{a}_1,\ldots, \tup{a}_{n},
+\tup{b}_1,\ldots, \tup{b}_{n}$ of tuples of elements of $\str A$ 
+such that for all $1\leq i,j\le n$,
+\[\strA\models\phi(\tup{a}_i,\tup{b}_j)\Longleftrightarrow i\leq j. \]
+The least  $n$ for which 
+there is no $\phi$-ladder of length $n$ is 
+the \emph{ladder index} 
+of $\phi(\tup{x},\tup{y})$ in $\str A$ (which may depend on the way we split the
+variables). A class of graphs $\CCC$ is \emph{stable} if
+the ladder index of every first-order formula $\phi(\tup{x},\tup{y})$ over
+graphs from $\CCC$ is bounded by a constant depending only on $\phi$ 
+and~$\CCC$. 
+
+Podewski and Ziegler~\cite{podewski1978stable} 
 consider \emph{flat graphs}, a notion corresponding to uniform quasi-wideness in the 
-infinite. They show that  flat graphs are stable using an 
-infinite Ramsey argument and compactness. The observation of Adler and Adler~\cite{adler2014interpreting} was that
-this can be translated to classes $\CCC$ of finite graphs by considering an infinite graph that is the disjoint union of graphs from~$\CCC$.
-However, this inherently non-constructive approach cannot give explicit upper bounds on parameters governing the stability of $\CCC$, for instance, the ladder indices.
+infinite. They show that flat graphs are stable using an 
+infinite Ramsey argument and compactness. Based on the 
+results of Podewski and Ziegler, 
+Adler and Adler~\cite{adler2014interpreting}
+proved that every nowhere dense class is stable, in fact, they 
+proved that for a subgraph-closed class $\CCC$, the notions of 
+nowhere denseness and stability coincide.
+However, their inherently non-constructive approach cannot give explicit upper bounds on parameters governing the stability of $\CCC$, for instance, the ladder indices.
 
 Based on the approach of Podewski and Ziegler~\cite{podewski1978stable}, we give a combinatorial 
 proof that every first-order formula has finite ladder index on every
@@ -193,17 +161,63 @@ and $G$ is a graph such that $K_t\not\minor_{g(q)} G$. Then the ladder index of 
 
 Note that in particular, \cref{thm:new-stable} implies that every nowhere dense graph is stable, which was the main conclusion of Adler and Adler~\cite{adler2014interpreting}.
 
-\bigskip
-Finally, we prove the following theorem concerning the number of
-types in sparse graph classes. 
-\begin{change}{sz}For a graph $G$, a set of vertices $A\subset V(G)$, and a formula $\psi(\tup x, y)$, define the \emph{set of $\psi$-types} over $A$:
-\[S_\psi(A,G)=\setof{\setof{\tup a\ \in A^m}{G\models\psi(\tup a,v)}}{ v\in V(G)}\]
-\end{change}
+We remark that the above connections between nowhere denseness and notions from model theory have recently found algorithmic applications.
+Both uniform quasi-wideness and stability techniques are key tools used in the study of the complexity of the {\sc Distance-$r$ Dominating Set} problem on nowhere dense graph classes,
+and in particular in the design of polynomial kernelization procedures for this problem~\cite{DawarK09,drange2016kernelization,eickmeyer2016neighborhood,siebertz2016polynomial}.
 
+\paragraph{VC-dimension and VC-density.} The notion of VC-dimension was introduced by 
+Vapnik and Chervonenkis~\cite{chervonenkis1971theory} and 
+has found important applications in many areas of
+statistics, discrete and computational geometry, 
+and learning theory. The concept found its way to
+model theory when Laskowski~\cite{laskowski1992vapnik} 
+observed that a complete first-order theory does not have
+the independence property (as introduced by 
+Shelah~\cite{shelah1971stability}) if and only if, 
+in each model, each definable family of sets has finite 
+VC-dimension. In the following years several authors 
+aimed to obtain explicit bounds on the VC-dimension of 
+definable families of sets in restricted 
+structures, see e.g.~\cite{AschenbrennerDHMS13, aschenbrenner2016vapnik, bobkov2017computations, johnson2010compression, karpinski1997approximating, 
+karpinski1997polynomial}. We refer to~\cite{aschenbrenner2016vapnik} for an overview of 
+applications of VC-dimension and VC-density in model
+theory and to the surveys~\cite{furedi1991traces,matouvsek1998geometric} 
+on uses of VC-density in
+combinatorics. 
+
+Our attention was drawn to VC-dimension and 
+VC-density when we studied the parameterized 
+complexity of the {\sc Distance-$r$ Dominating Set} 
+problem on nowhere dense graph classes~\cite{eickmeyer2016neighborhood}. 
+One of the main contributions of \cite{eickmeyer2016neighborhood}
+was to prove that nowhere dense classes of graphs have small
+\emph{distance neighborhood complexity}. More precisely, it
+was proved that for every nowhere dense class~$\CCC$ of 
+graphs, every positive integer $r$ and every $\epsilon>0$ there
+exists a constant $c$ such that for every graph $G\in\CCC$ and
+every vertex subset $A\subseteq V(G)$, the set of distance-$r$ neighborhood intersections with $A$,
+$\{N_r[v]\cap A : v\in V(G)\}$,
+has size bounded by $c\cdot |A|^{1+\epsilon}$. This result
+generalizes a result of Reidl et al.~\cite{reidl2016characterising}, who proved that classes of bounded expansion have linear distance neighborhood complexity. 
+
+The property of having distance at most $r$ in a graph is 
+a first-order definable property. 
+VC-density in model theory studies the asymptotic growth 
+of arbitrary finite definable families. More precisely, 
+let $\psi(\tup x,\tup y)$ be a first-order formula, where 
+$\tup x$ is an $m$-tuple and $\tup y$ is an $n$-tuple of variables. 
+Let $\strA$ be a structure and let $A$ be a set of elements of
+$\strA$. Then the set of \emph{$\psi$-types} or 
+\emph{$\psi$-traces} over $A$ in 
+$\strA$ is the set
+\[S_\psi(\strA,A)=\{\{\tup a\ \in A^m : \strA\models\psi(\tup a,\tup b)\} : \tup b\in V(\strA)^n\}.\]
+
+We prove the following theorem concerning the number of
+types in sparse graph classes. 
 
 \begin{theorem}\label{thm:vc-density}
 Let $\CCC$ be a class of graphs and let $\psi(\tup x,y)$ be a first-order formula, where 
-$\tup x$ is an $m$-tuple of variables and $y$ is a single variable. 
+$\tup x$ is an $m$-tuple and $\tup y$ is an $n$-tuple of variables. 
 \begin{enumerate}
 \item If $\CCC$ is nowhere dense, then for every $\epsilon>0$ 
 there exists a constant~$c$ such that for every $G\in \CCC$ and every
@@ -212,24 +226,35 @@ $A\subseteq V(G)$, we have $|S_\psi(A,G)|\leq c\cdot |A|^{1+\epsilon}.$
 \item If $\CCC$ has bounded expansion, then there exists a constant~$c$ such that for every $G\in \CCC$ and every $A\subseteq V(G)$, we have $|S_\psi(A,G)|\leq c\cdot |A|$.
 \end{enumerate}
 \end{theorem}
-\sebi{The proof of \Cref{thm:vc-density} is (again) based on Gaifman's locality
-theorem for first-order logic, which allows us to focus at local 
-neighborhoods around the vertices $v\in V(G)$. 
-Using the closure lemma of~\cite{DrangeDFKLPPRVS16} for
-classes of bounded expansion and its generalization to
-nowhere dense classes~\cite{eickmeyer2016neighborhood}
-together with uniform quasi-wideness,
-\begin{change}{sz}we are able to bound 
-the number of interactions of vertices $v$ with the set $A$. \end{change}}
 
+Formulated in terms of VC-density, for every nowhere 
+dense class of graphs and every first-order formula $\psi(\tup x,\tup y)$
+we have 
+\[\limsup_{a\rightarrow \infty}\max_{\substack{G\in\CCC\\A\subseteq
+    V(G), |A|=a}}\frac{\log |S_\psi(A,G)|}{\log a}\leq n.\]
 
-
-
-\begin{change}{sz}
-\Cref{thm:vc-density} shows a strong new connection 
-	between first-order logic and the notions of bounded expansion
-	and nowhere denseness.
-	It is not difficult to see that it also yields new dichotomies 
+Our result generalizes the recent result of Bobkov~\cite{bobkov2017computations} that nowhere dense classes
+are dp-minimal (a notion introduced by Shelah~\cite{shelah2014strongly}).
+%
+%
+%\sebi{The proof of \Cref{thm:vc-density} is (again) based on Gaifman's locality
+%theorem for first-order logic, which allows us to focus at local 
+%neighborhoods around the vertices $v\in V(G)$. 
+%Using the closure lemma of~\cite{DrangeDFKLPPRVS16} for
+%classes of bounded expansion and its generalization to
+%nowhere dense classes~\cite{eickmeyer2016neighborhood}
+%together with uniform quasi-wideness,
+%\begin{change}{sz}we are able to bound 
+%the number of interactions of vertices $v$ with the set $A$. \end{change}}
+%
+%
+%
+%
+%\begin{change}{sz}
+%\Cref{thm:vc-density} shows a strong new connection 
+%	between first-order logic and the notions of bounded expansion
+%	and nowhere denseness.
+It is not difficult to see that this result also yields new dichotomies 
 characterizing classes which are nowhere dense  or have bounded expansion, obtained by combining~\cref{thm:vc-density}
 with the complementary result stated below.
 
@@ -246,9 +271,12 @@ there are $G\in\CCC$ and $A\subseteq V(G)$
 with $|S_\psi(A,G)|>f(|\psi|)\cdot |A|$. 
 \end{enumerate}
 \end{theorem}
-\end{change}
+%\end{change}
 
-
+\paragraph{Acknowledgment. } The second author would like to 
+thank Patrice Ossona de Mendez for pointing him to the 
+question of studying VC-density of nowhere dense graph 
+classes. 
 
 \pagebreak
 
