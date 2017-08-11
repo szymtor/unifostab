@@ -47,7 +47,7 @@ We first prove a restricted variant,~\cref{lem:engine} below, in which we assume
 \cref{thm:new-uqw}, we apply the lemma iteratively for $r$ ranging from $1$ to the target value.
 
 \begin{lemma}\label{lem:engine}
-For every pair of integers $t,r\in \N$ there exists an integer $d<5r/2$ and a function $L\colon \N\to \N$ with $L(m)=\Oof_{r,t}{(m^{{(2t+1)}^{2rt}})}$ such that the following holds.
+For \marginpar{check numbers}every pair of integers $t,r\in \N$ there exists an integer $d<5r/2$ and a function $L\colon \N\to \N$ with $L(m)=\Oof_{r,t}{(m^{{(2t+1)}^{2rt}})}$ such that the following holds.
 For each $m\in \N$, graph~$G$ with $K_t\not\minor_{d} G$, and
 $(r-1)$-independent set $A\subseteq V(G)$ of size at least $L(m)$, there is a set $S\subseteq V(G)-A$ of size at most $t$ such that $A$ contains a subset $A'$ of size $m$ which is $r$-independent in $G-S$.
 Moreover, if $r$ is odd then $S$ is empty, and if $r$ is even,
@@ -66,7 +66,7 @@ We start by formulating and proving the main technical result needed for proving
 The main tool is the following Ramsey-like result.
 
 \begin{lemma}\label{lem:apex}
-For every integer $t\in \N$ and positive real $\alpha<\frac 1 2$ 
+For \marginpar{check numbers}every integer $t\in \N$ and positive real $\alpha<\frac 1 2$ 
 there is an integer $\ell_0\in\N$ with the following property.
 Let $m,\ell\in \N$ be such that $\ell\ge \ell_0$. 
 If~$G$ is a graph and $A$ is a $1$-independent set in $G$
@@ -90,27 +90,70 @@ is the Ramsey number for $c$ colors.
 In particular, this does not give a bound which is polynomial in $m+\ell$, and thus cannot be used to prove~\cref{thm:new-uqw}.
 
 \paragraph*{Neighborhood complexity.} Let us first recall the following result of Gajarsk\'y et al.~\cite{gajarsky2017kernelization}
-which provides an upper bound on the number of distinct neighborhoods in a graph from a nowhere dense class.
+which provides an upper bound on the number of distinct neighborhoods in terms of density of shallow minors. 
 
-\begin{lemma}[adaptation of Lemma 4.11 in \cite{gajarsky2017kernelization}]\label{lem:diversity}
-\marginpar{This lemma is wrong, we need that $G$ comes from a nowhere dense class if we want it to work for every $\epsilon$}Let $G$ be a graph such that $K_t\not\minor_{1} G$ for some constant $t\in \N$. 
-Then for every $\epsilon>0$ there exists $n_0$, depending only on $t$ and $\epsilon$, such that for all $A\subseteq V(G)$ with $|A|\geq n_0$ it holds that
-\[\abs{\{N(v)\cap A \colon v\in V(G)\}}\leq\abs{A}^{1+\epsilon}.\]
+\begin{lemma}[adaptation of Lemma 4.11 in \cite{gajarsky2017kernelization}]\label{lem:pre-diversity}
+Let $G$ be a graph such that $K_t\not\minor_{1} G$ for some constant $t\in \N$ and let $a\in \N$. 
+Let \[p\coloneqq \max
+\left\{\frac{|E(H)|}{|V(H)|} : H\minor_1 G, |V(H)|= a\right\}.\] 
+Then for all $A\subseteq V(G)$ with $|A|= a$ we have 
+\[\abs{\{N(v)\cap A \colon v\in V(G)\}}\leq(2p)^t\cdot \abs{A}.\]
 \end{lemma}
 
+Nowhere dense classes have small edge density as
+first shown by Dvo\v{r}\'ak~\cite{dvorak2007asymptotical}. 
+We apply the best currently known bounds due to 
+Jiang~\cite{jiang2011compact}. 
 
+\begin{lemma}[adaptation of Theorem 1.6 in~\cite{jiang2011compact}]\label{lem:densityjiang}
+Let $s\in\N$, $\epsilon<1/2$ and $r=\left\lfloor 10/\epsilon\right\rfloor$. There exists 
+$n_0$ such that for all $n\geq n_0$, if $G$ is an 
+$n$-vertex graph with $K_s\not\minor_rG$, 
+then $G$ has less than $n^{1+\epsilon}$ many edges. 
+\end{lemma}
 
+Finally, we note the following lemma. 
+
+\begin{lemma}[adaptation of Proposition 4.11 in~\cite{sparsity}]\label{lem:combineminors}
+Let $a,b\in \N$ and let $c=\frac{(2a+1)(2b+1)-1}{2}$. 
+Let $G$ be a graph, let $H\minor_aG$ and let 
+$J\minor_bH$. Then $J\minor_cG$. 
+\end{lemma}
+
+\begin{corollary}\label{lem:diversity}
+Let $\CCC$ be a nowhere dense class of graphs. 
+Let $G\in \CCC$ be a graph such that $K_t\not\minor_1G$ 
+and $K_s\not\minor_{90t}G$ for
+some constants $s,t\in\N$. Then 
+there exists $n_0$ such that for all $A\subseteq V(G)$ 
+with $|A|\geq n_0$ we have 
+\[\abs{\{N(v)\cap A \colon v\in V(G)\}}\leq\abs{A}^{1+1/3}.\]
+\end{corollary}
+\begin{proof}
+Let $H$ be the densest depth-$1$ minor of $G$ with 
+$|A|$ vertices. Now apply \Cref{lem:densityjiang}
+to the graph $H$ with parameters $s$, $1/(6t)$ and $r=30t$.
+Observe that according to \Cref{lem:combineminors}, 
+a depth-$30t$ minor of $H$ is a depth-$90t$ minor 
+of $G$, hence the lemma can be applied to $H$ with 
+parameter $s$. According to the lemma, there is 
+$n_0$ depending only on $s$ and $t$ such that 
+if $|A|\geq n_0$, then $H$ has at most $|A|^{1+1/(6t)}$
+many edges, hence $p\coloneqq |E(H)|/|V(H)|\leq a^{1/(6t)}$. Without loss of generality assume 
+that $n_0\geq 2^{6t}$. 
+We now apply \Cref{lem:pre-diversity} to conclude that
+\[\abs{\{N(v)\cap A \colon v\in V(G)\}}\leq(2p)^t\cdot \abs{A}\leq (2|A|^{1/(6t)})^t\cdot \abs{A}\leq n_0^{1/6}\cdot \abs{A}^{1+1/6}\leq \abs{A}^{1+1/3}.\]
+\end{proof}
 
 We remark that the proof of \cref{lem:diversity} uses only the fact that
 nowhere dense classes of graphs do not have dense 
-shallow minors~\cite{dvorak2007asymptotical,jiang2011compact}, and does not rely on any non-constructive arguments from stability theory.
-In particular, $n_0$ depends in a computable manner on $t$ and $\epsilon$.
+shallow minors~\cite{dvorak2007asymptotical,jiang2011compact}, and does not rely on any non-constructive arguments from stability theory. In particular, $n_0$ depends in a computable manner on $s$ and $t$.
 From \cref{lem:diversity} we derive the following.
 
 \begin{corollary}\label{cor:diversity}
-  Let $G,A,t,\epsilon,n_0$ be as in \cref{lem:diversity}.
+  Let $G,A,s,t,n_0$ be as in \cref{lem:diversity}.
   Suppose $|A|\ge n_0$ and every pair of elements of $A$ has a common neighbor in $G$.
-  Then there exists a vertex $v$ in $G$ which has at least $|A|^{(1-\epsilon)/2}$ neighbors in $A$.
+  Then there exists a vertex $v$ in $G$ which has at least $|A|^{1/3}$ neighbors in $A$.
 \end{corollary}
 \begin{proof}Let ${\cal F}=\set{N(v)\cap A\colon v\in V(G)}$. 
   Let $k$ be the maximal cardinality of a set $F$ in ${\cal F}$.
@@ -118,7 +161,7 @@ From \cref{lem:diversity} we derive the following.
   if  $a,b\in F$.
   By assumption, each of the $\binom{|A|}{2}$ unordered pairs of distinct elements of $A$ is covered by some element $F\in {\cal F}$, and,
   clearly, every $F\in {\cal F}$ can cover at most $\binom{k}{2}$ pairs. 
-  Hence $\frac{\binom{|A|}{2}}{\binom{k}{2}}\leq |{\cal F}|\le  |A|^{1+\epsilon}$, implying $k\ge |A|^{(1-\epsilon)/2}$.
+  Hence $\frac{\binom{|A|}{2}}{\binom{k}{2}}\leq |{\cal F}|\le  |A|^{1+1/3}$, implying $k\ge |A|^{1/3}$.\marginpar{this is not entirely correct}
 \end{proof}
 
 \begin{comment}
@@ -319,7 +362,7 @@ Next we show how the general case reduces to one of those two cases.
 \paragraph{Case $r=1$.}
 We put $d=0$, thus we assume that $K_t\not\minor_0 G$; that is, $G$ does not contain a clique of size $t$ as a subgraph. By Ramsey's Theorem, in every graph every set of size $\binom{m+t-2}{t-1}$ contains an
 independent set of size $m$ or a clique of size $t$. Therefore, 
-taking $L(m)$ as the above binomial coefficient yields~\cref{lem:engine} in case $r=0$, for $S=\emptyset$. Note here that $\binom{m+t-2}{t-1}\in\Oof_{t}{(m^{{(2t+1)}^{2t}})}$.
+taking $L(m)$ as the above binomial coefficient yields~\cref{lem:engine} in case $r=0$, for $S=\emptyset$. Note here that $\binom{m+t-2}{t-1}\in\Oof_{t}{(m^{{(2t+1)}^{2t}})}$.\marginpar{check numbers}
 Moreover, such independent set or clique can be computed from $G$ and $A$ in time~$\Oof(|A|\cdot |E(G)|)$ by simulating the proof of Ramsey's theorem.
 
 \paragraph{Case $r=2$.}
@@ -334,7 +377,7 @@ The precise calculations follow.
 
 \newcommand{\mbull}{\widehat{m}}
 
-Fix a number $\beta>2t$. For $k\ge 0$,
+Fix a number $\beta>2t$. For $k\ge 0$,\marginpar{check numbers}
 define $m_k=((k+1)\cdot m)^{(2\beta)^k}$.
 We will apply~\cref{lem:apex} in the following form.
 \begin{claim}\label{cor:apex}
@@ -345,7 +388,7 @@ We will apply~\cref{lem:apex} in the following form.
 	then there exists a vertex $v$ of $G$ such that $|N_G(v)\cap A| \ge m_{k-1}$.%$(k\cdot m)^{\beta^{k-1}}$.
 \end{claim}
 \begin{clproof}
-Let $\alpha=t/\beta$, so that $\alpha<1/2$.
+Let $\alpha=t/\beta$, so that $\alpha<1/2$.\marginpar{check numbers}
 Put $\mbull= \ell^{\alpha}=\ell_0^{t/\beta}$, where $\ell_0$ is the constant given by \cref{lem:apex} for $t$ and $\alpha$.
 Let $\ell=(k\cdot m)^{(2\beta)^{k-1}/\alpha}$.
 Then $m\ge \mbull$ implies that $\ell\ge\ell_0$.
@@ -416,7 +459,7 @@ From $K_t\not\minor_s G$ it follows that~$G'$ does not contain $K_t$ as a subgra
 if $|A|=|A'|\ge {m+t-2\choose t-1}$, then
  $A'$ contains a $1$-independent subset $B$ of size $m$,
  which corresponds to a $(2s+1)$-independent set in $G$ that is contained in $A$.
- Hence, the obtained bound is $L(m)={m+t-2\choose t-1}$, and we have already argued that then $L(m)\in \Oof_{r,t}{(m^{{(2t+1)}^{2t}})}$.
+ Hence, the obtained bound is $L(m)={m+t-2\choose t-1}$, and we have already argued that then $L(m)\in \Oof_{r,t}{(m^{{(2t+1)}^{2t}})}$.\marginpar{check numbers}
  
  
  \paragraph{Even case.}
@@ -526,7 +569,7 @@ We now wrap up the proof of \cref{thm:new-uqw} by iteratively applying~\cref{lem
 %\end{proof}
 
 \begin{proof}[of \cref{thm:new-uqw}]
-Fix integers $r,t$,  and a graph $G$ such that $K_t\not\minor_{d} G$,
+Fix \marginpar{check numbers} integers $r,t$,  and a graph $G$ such that $K_t\not\minor_{d} G$,
 for $d=\lfloor 5r/2 \rfloor$. Let $\beta>2\cdot t$ be a fixed real, and let $\mbull$ be the number from~\cref{cor:apex}. As in the proof of \cref{lem:engine}, without loss of generality suppose $m\geq \max(t,\mbull)$.
  Denote $\gamma=\beta^{2t}$, and
 define the function $L(m)$ as $L(m)=((t+1)\cdot m)^\gamma$.
