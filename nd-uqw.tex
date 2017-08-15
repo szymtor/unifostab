@@ -40,7 +40,7 @@ $G-S$.
 Our proof follows the same lines as the original proof of Ne\v set\v ril and Ossona de Mendez, with the difference that in the key technical lemma (\cref{lem:apex} below), 
 we improve the bounds significantly by replacing a Ramsey argument with a new combinatorial reasoning.
 The new argument essentially originates in the concept of {\em{branching index}} from stability theory, 
-and also uses the almost linear bound on neighborhood complexity in nowhere dense graph classes, due to Gajarsk\'y et al.~\cite{gajarsky2017kernelization}.
+and also uses the almost linear bound on neighborhood complexity in nowhere dense graph classes, due to Gajarsk\'y et al.~\cite{gajarsky2017kernelization}. \marginpar{no longer}
 %For sake of completeness, we present the entire proof of~\cref{thm:new-uqw}.
 
 We first prove a restricted variant,~\cref{lem:engine} below, in which we assume that $A$ is already $(r-1)$-independent. Then, in order to derive
@@ -63,23 +63,61 @@ It turns out that the case $r=2$ is substantially more difficult.
 We start by formulating and proving the main technical result needed for proving the case $r=2$.
 
 \subsection{The main technical lemma}
-The main tool is the following Ramsey-like result.
+
+We need the following bounds on the edge density
+of graphs with excluded shallow minors obtained
+by Alon et al.~\cite{alon2003turan}. 
+
+\begin{lemma}[Theorem 2.2 in~\cite{alon2003turan}]\label{lem:densitynd}
+Let $H$ be a bipartite graph with maximum degree
+$d$ on one side. Then exists a constant $c_H$, depending 
+only on $H$, such that every $n$-vertex graph $G$
+excluding~$H$ as a subgraph has at most $c_H\cdot n^{2-1/d}$
+edges. 
+\end{lemma} 
+
+Observe that if $K_t\not\minor_1G$, then in particular
+the $1$-subdivision of $K_t$ is excluded as a subgraph
+of $G$ (the $1$-subdivision of a graph $H$ is obtained by 
+replacing every edge of $H$ by a path of length $2$). 
+Observe furthermore that the $1$-subdivision of 
+$K_t$ is a bipartite graph with maximum degree $2$ on one
+side. Furthermore, it is easy to check in the 
+proof of Theorem 2.2 in~\cite{alon2003turan} 
+that $c_H\leq |V(H)|$
+in case $d=2$. Since the $1$-subdivision of $K_t$ has 
+less than $t^2$ vertices we can choose $c_t=t^2$ and
+note the following corollary.   
+
+\begin{corollary}\label{crl:densitynd}
+Let $G$ be an $n$-vertex graph such that $K_t\not\minor_1 G$ for
+some constant $t\in \N$. Then $G$ has at most 
+$t^2\cdot n^{3/2}$ edges.
+\end{corollary}
+
+We note the following lemma. 
+
+\begin{lemma}[adaptation of Proposition 4.11 in~\cite{sparsity}]\label{lem:combineminors}
+Let $a,b\in \N$ and let $c=\frac{(2a+1)(2b+1)-1}{2}$. 
+Let $G$ be a graph, let $H\minor_aG$ and let 
+$J\minor_bH$. Then $J\minor_cG$. 
+\end{lemma}
+
+Our main tool is the following Ramsey-like result which we will
+prove below. 
 
 \begin{lemma}\label{lem:apex}
-For \marginpar{check numbers}every integer $t\in \N$ and positive real $\alpha<\frac 1 2$ 
-there is an integer $\ell_0\in\N$ with the following property.
-Let $m,\ell\in \N$ be such that $\ell\ge \ell_0$. 
-If~$G$ is a graph and $A$ is a $1$-independent set in $G$
-with at least $(m+\ell)^{2t}$ elements,
+Let $\ell,m,t\in \N$ and assume $\ell\geq t^{8}$. 
+If~$G$ is a graph and $A$ is a $1$-independent set in~$G$
+with at least $(m+\ell)^{2t}$ \marginpar{check numbers} elements,
 then at least one of the following conditions hold:
 \begin{itemize}
-  % \item $A$ contains the principal vertices of a $1$-subdivision of a clique $K_t$ contained in $G$,
-  \item $K_t\minor_{2} G$,
+  \item $K_t\minor_{4} G$,
 \item  $A$ contains a $2$-independent set of size $m$, 
 \item  some vertex $v$ of $G$
-has at least $\ell^{\alpha}$ neighbors in $A$.
+has at least $\ell^{1/8}$ neighbors in $A$.
 \end{itemize}
-Moreover, in each case, the corresponding structure (a depth-$2$ minor model, a $2$-independent set of size $m$, or a vertex $v$ as above) can be computed in time $\Oof_t(|A|\cdot |E(G)|)$.
+Moreover, in each case, the corresponding structure (a depth-$4$ minor model, a $2$-independent set of size $m$, or a vertex $v$ as above) can be computed in time $\Oof_t(|A|\cdot |E(G)|)$. \marginpar{the depth-$4$ minor possibly not}
 \end{lemma}
 
 We remark that a statement similar to that of \cref{lem:apex}
@@ -89,79 +127,115 @@ where $k\sim\ell^{2\alpha}$ and $R(m_1,\ldots,m_c)$
 is the Ramsey number for $c$ colors.
 In particular, this does not give a bound which is polynomial in $m+\ell$, and thus cannot be used to prove~\cref{thm:new-uqw}.
 
-\paragraph*{Neighborhood complexity.} Let us first recall the following result of Gajarsk\'y et al.~\cite{gajarsky2017kernelization}
-which provides an upper bound on the number of distinct neighborhoods in terms of density of shallow minors. 
+%\paragraph*{Neighborhood complexity.} Let us first recall the following result of Gajarsk\'y et al.~\cite{gajarsky2017kernelization}
+%which provides an upper bound on the number of distinct neighborhoods in terms of density of shallow minors. 
+%
+%\begin{lemma}[adaptation of Lemma 4.11 in \cite{gajarsky2017kernelization}]\label{lem:pre-diversity}
+%Let $G$ be a graph such that $K_t\not\minor_{1} G$ for some constant $t\in \N$ and let $a\in \N$. 
+%Let \[p\coloneqq \max
+%\left\{\frac{|E(H)|}{|V(H)|} : H\minor_1 G, |V(H)|= a\right\}.\] 
+%Then for all $A\subseteq V(G)$ with $|A|= a$ we have 
+%\[\abs{\{N(v)\cap A \colon v\in V(G)\}}\leq(2p)^t\cdot \abs{A}.\]
+%\end{lemma}
+%
+%Nowhere dense classes have small edge density as
+%first shown by Dvo\v{r}\'ak~\cite{dvorak2007asymptotical}. 
+%We apply the best currently known bounds due to 
+%Jiang~\cite{jiang2011compact}. 
+%
+%\begin{lemma}[adaptation of Theorem 1.6 in~\cite{jiang2011compact}]\label{lem:densityjiang}
+%Let $s\in\N$, $\epsilon<1/2$ and $r=\left\lfloor 10/\epsilon\right\rfloor$. There exists 
+%$n_0$ such that for all $n\geq n_0$, if $G$ is an 
+%$n$-vertex graph with $K_s\not\minor_rG$, 
+%then $G$ has less than $n^{1+\epsilon}$ many edges. 
+%\end{lemma}
+%
+%
+%\begin{corollary}\label{lem:diversity}
+%Let $G\in \CCC$ be a graph such that $K_t\not\minor_1G$ 
+%and $K_s\not\minor_{90t}G$ for
+%some constants $s,t\in\N$. Then 
+%there exists $n_0$ such that for all $A\subseteq V(G)$ 
+%with $|A|\geq n_0$ we have 
+%\[\abs{\{N(v)\cap A \colon v\in V(G)\}}\leq\abs{A}^{1+1/3}.\]
+%\end{corollary}
+%\begin{proof}
+%Let $H$ be the densest depth-$1$ minor of $G$ with 
+%$|A|$ vertices. Now apply \Cref{lem:densityjiang}
+%to the graph $H$ with parameters $s$, $1/(6t)$ and $r=30t$.
+%Observe that according to \Cref{lem:combineminors}, 
+%a depth-$30t$ minor of $H$ is a depth-$90t$ minor 
+%of $G$, hence the lemma can be applied to $H$ with 
+%parameter $s$. According to the lemma, there is 
+%$n_0$ depending only on $s$ and $t$ such that 
+%if $|A|\geq n_0$, then $H$ has at most $|A|^{1+1/(6t)}$
+%many edges, hence $p\coloneqq |E(H)|/|V(H)|\leq a^{1/(6t)}$. Without loss of generality assume 
+%that $n_0\geq 2^{6t}$. 
+%We now apply \Cref{lem:pre-diversity} to conclude that
+%\[\abs{\{N(v)\cap A \colon v\in V(G)\}}\leq(2p)^t\cdot \abs{A}\leq (2|A|^{1/(6t)})^t\cdot \abs{A}\leq n_0^{1/6}\cdot \abs{A}^{1+1/6}\leq \abs{A}^{1+1/3}.\]
+%\end{proof}
+%
+%We remark that the proof of \cref{lem:diversity} uses only the fact that
+%nowhere dense classes of graphs do not have dense 
+%shallow minors~\cite{dvorak2007asymptotical,jiang2011compact}, and does not rely on any non-constructive arguments from stability theory. In particular, $n_0$ depends in a computable manner on $s$ and $t$.
+%From \cref{lem:diversity} we derive the following.
 
-\begin{lemma}[adaptation of Lemma 4.11 in \cite{gajarsky2017kernelization}]\label{lem:pre-diversity}
-Let $G$ be a graph such that $K_t\not\minor_{1} G$ for some constant $t\in \N$ and let $a\in \N$. 
-Let \[p\coloneqq \max
-\left\{\frac{|E(H)|}{|V(H)|} : H\minor_1 G, |V(H)|= a\right\}.\] 
-Then for all $A\subseteq V(G)$ with $|A|= a$ we have 
-\[\abs{\{N(v)\cap A \colon v\in V(G)\}}\leq(2p)^t\cdot \abs{A}.\]
+To prove \Cref{lem:apex} we need one more lemma. 
+
+\begin{lemma}\label{lem:diversity}
+  Let $G$ be a graph such that $K_t\not\minor_4G$ for some
+  $t\in\N$ and let $A\subseteq V(G)$ with $|A|\geq t^{8}$. 
+  Assume furthermore that every pair of elements of $A$ has a common neighbor in $V(G)\setminus A$.
+  Then there exists a vertex $v$ in $G$ which has at least $|A|^{1/8}$ neighbors in $A$.
 \end{lemma}
-
-Nowhere dense classes have small edge density as
-first shown by Dvo\v{r}\'ak~\cite{dvorak2007asymptotical}. 
-We apply the best currently known bounds due to 
-Jiang~\cite{jiang2011compact}. 
-
-\begin{lemma}[adaptation of Theorem 1.6 in~\cite{jiang2011compact}]\label{lem:densityjiang}
-Let $s\in\N$, $\epsilon<1/2$ and $r=\left\lfloor 10/\epsilon\right\rfloor$. There exists 
-$n_0$ such that for all $n\geq n_0$, if $G$ is an 
-$n$-vertex graph with $K_s\not\minor_rG$, 
-then $G$ has less than $n^{1+\epsilon}$ many edges. 
-\end{lemma}
-
-Finally, we note the following lemma. 
-
-\begin{lemma}[adaptation of Proposition 4.11 in~\cite{sparsity}]\label{lem:combineminors}
-Let $a,b\in \N$ and let $c=\frac{(2a+1)(2b+1)-1}{2}$. 
-Let $G$ be a graph, let $H\minor_aG$ and let 
-$J\minor_bH$. Then $J\minor_cG$. 
-\end{lemma}
-
-\begin{corollary}\label{lem:diversity}
-Let $\CCC$ be a nowhere dense class of graphs. 
-Let $G\in \CCC$ be a graph such that $K_t\not\minor_1G$ 
-and $K_s\not\minor_{90t}G$ for
-some constants $s,t\in\N$. Then 
-there exists $n_0$ such that for all $A\subseteq V(G)$ 
-with $|A|\geq n_0$ we have 
-\[\abs{\{N(v)\cap A \colon v\in V(G)\}}\leq\abs{A}^{1+1/3}.\]
-\end{corollary}
 \begin{proof}
-Let $H$ be the densest depth-$1$ minor of $G$ with 
-$|A|$ vertices. Now apply \Cref{lem:densityjiang}
-to the graph $H$ with parameters $s$, $1/(6t)$ and $r=30t$.
-Observe that according to \Cref{lem:combineminors}, 
-a depth-$30t$ minor of $H$ is a depth-$90t$ minor 
-of $G$, hence the lemma can be applied to $H$ with 
-parameter $s$. According to the lemma, there is 
-$n_0$ depending only on $s$ and $t$ such that 
-if $|A|\geq n_0$, then $H$ has at most $|A|^{1+1/(6t)}$
-many edges, hence $p\coloneqq |E(H)|/|V(H)|\leq a^{1/(6t)}$. Without loss of generality assume 
-that $n_0\geq 2^{6t}$. 
-We now apply \Cref{lem:pre-diversity} to conclude that
-\[\abs{\{N(v)\cap A \colon v\in V(G)\}}\leq(2p)^t\cdot \abs{A}\leq (2|A|^{1/(6t)})^t\cdot \abs{A}\leq n_0^{1/6}\cdot \abs{A}^{1+1/6}\leq \abs{A}^{1+1/3}.\]
-\end{proof}
+%Our approach to prove the lemma is inspired by 
+%the proof of Lemma 4.3 in~\cite{gajarsky2017kernelization}. 
+We construct a depth-$1$ 
+minor~$H$ of $G$ with $|A|$ vertices as follows. Recall that a 
+minor model of a graph~$H$ in $G$ is a family $(I_u)_{u\in V(H)}$ of pairwise vertex-disjoint connected subgraphs of $G$
+such that whenever~$uv$ is an edge in~$H$, there 
+are $u'\in I_u$ and $v'\in I_v$ for which $u'v'$ 
+is an edge in $G$. 
 
-We remark that the proof of \cref{lem:diversity} uses only the fact that
-nowhere dense classes of graphs do not have dense 
-shallow minors~\cite{dvorak2007asymptotical,jiang2011compact}, and does not rely on any non-constructive arguments from stability theory. In particular, $n_0$ depends in a computable manner on $s$ and $t$.
-From \cref{lem:diversity} we derive the following.
+Let $G^0=G$, $V(H^0)=A$ and $I_u^0=G[\{u\}]$ for 
+all $u\in V(H)$. We iteratively define a sequence 
+$G^1,G^2,\ldots,G^\ell$ and $(I_u)^1_{u\in V(H)},
+\ldots (I_u)^\ell_{u\in V(H)}$ as follows. Observe
+that for $0\leq i\leq \ell$ the sequence $(I_u)^i_{u\in V(H)}$
+uniquely defines a depth-$1$ minor $H^i$. 
 
-\begin{corollary}\label{cor:diversity}
-  Let $G,A,s,t,n_0$ be as in \cref{lem:diversity}.
-  Suppose $|A|\ge n_0$ and every pair of elements of $A$ has a common neighbor in $G$.
-  Then there exists a vertex $v$ in $G$ which has at least $|A|^{1/3}$ neighbors in $A$.
-\end{corollary}
-\begin{proof}Let ${\cal F}=\set{N(v)\cap A\colon v\in V(G)}$. 
+If $G^i$ and $(I_u)^i_{u\in V(H)}$ (with corresponding
+depth-$1$ minor $H^i$) have been 
+constructed, $0\leq i<\ell$, we proceed as follows. 
+If there is a vertex $v\in V(G^i)\setminus A$ with 
+$a,b\in A \cap N(v)$ and $ab\not\in E(H^i)$, then 
+remove $v$ from $G^i$ to obtain $G^{i+1}$ 
+and add $v$ to $I_a^i$ to obtain $I_a^{i+1}$ (this 
+adds the edge $ab$ to $E(H^{i+1})$). 
+For $u\neq a$ set $I_u^{i+1}=I_u$. We terminate
+in iteration $\ell$ if no such pair $a,b$ can be found 
+and let $H=H^\ell$. 
+
+By assumption, $K_t\not\minor_4 G$, which by 
+\Cref{lem:combineminors} implies $K_t\not\minor_1 H$. 
+This by \Cref{crl:densitynd} implies that $H$ has at most
+$t^2\cdot|A|^{3/2}$ edges. Our assumption $|A|\geq t^8$
+implies $t^2\cdot |A|^{3/2}\leq |A|^{7/4}$. 
+
+Now, let ${\cal F}=\set{N(v)\cap A\colon v\in V(G)}$. 
   Let $k$ be the maximal cardinality of a set $F$ in ${\cal F}$.
   Say that an unordered pair $\{a,b\}$ of distinct elements of $A$ is \emph{covered} by $F\in {\cal F}$
-  if  $a,b\in F$.
-  By assumption, each of the $\binom{|A|}{2}$ unordered pairs of distinct elements of $A$ is covered by some element $F\in {\cal F}$, and,
-  clearly, every $F\in {\cal F}$ can cover at most $\binom{k}{2}$ pairs. 
-  Hence $\frac{\binom{|A|}{2}}{\binom{k}{2}}\leq |{\cal F}|\le  |A|^{1+1/3}$, implying $k\ge |A|^{1/3}$.\marginpar{this is not entirely correct}
+  if  $a,b\in F$. Clearly, every $F\in {\cal F}$ can cover at most $\binom{k}{2}$ pairs. When we removed some $v\in V(G^i)$ to
+  introduce a new edge to $H^{i+1}$, we therefore potentially
+  created $\binom{k}{2}$ uncovered pairs. On the other hand, 
+  by assumption, each of the $\binom{|A|}{2}$ unordered pairs of
+   distinct elements of $A$ is covered in $G^0$ by some element 
+   $F\in {\cal F}$. Hence we have at least 
+   $\binom{|A|}{2}/\binom{k}{2}$ edges in $H$. 
+   This implies $k\geq |A|^{1/8}$, as otherwise
+   $\binom{|A|}{2}/\binom{k}{2}> |A|^2/k^2\geq |A|^{7/4}$,
+   a contradiction.
 \end{proof}
 
 \begin{comment}
@@ -312,11 +386,8 @@ and $a_i\in B_i$.
 Hence, the graphs $B_j$, for $j\in \set{1,\ldots,k}$, define a depth-$2$ minor model of $K_k$ in $G$. Since $K_t\not\minor_{2}G$, this implies that $k<t$, proving~\cref{thm:alternation-rank-type-tree}.
 \end{proof}
 
-To prove~\cref{lem:apex}, 
-choose $\epsilon=1-2\alpha$ so that $\alpha=\frac{1-\epsilon}{2}$; note that $0<\epsilon<1$.
-Let $n_0$ be the integer given by~\cref{lem:diversity} for $t$ and $\epsilon$; w.l.o.g. $n_0\geq 2$.
-We put $\ell_0=n_0$.
-Fix integers $\ell\ge \ell_0$ and~$m$, and define $h=m+\ell$.
+We proceed to prove~\cref{lem:apex}. 
+Fix integers $\ell\ge t^8$ and~$m$, and define $h=m+\ell$.
 Let $A$ be a $1$-independent set in $G$
 of size at least $h^{2t}$.
 
@@ -330,8 +401,8 @@ be the set of all vertices $\tau(u)$ such that $u\dau$ is a prefix of $w$. Then,
 
 Finally, consider the second case, i.e., there is a node $w$ in $\tau$ which contains at least $\ell$ letters~$\son$. Let 
 $Y$ be the set of all vertices $\tau(u)$ such that $u\son$ is a prefix of $w$. Then, by construction, $Y\subset A$ is a set of vertices which are mutually at distance exactly $2$ in $G$. 
-Since $K_t\not\minor_2 G$, by~\cref{cor:diversity} we infer that there is a vertex $v\in G$
-with at least $\ell^{\frac{1-\epsilon}{2}}=\ell^{\alpha}$ neighbors in $Y$.
+Since $K_t\not\minor_4 G$, by~\cref{lem:diversity} we infer that there is a vertex $v\in G$
+with at least $\ell^{1/8}$ neighbors in $Y$.
 This finishes the proof of the first part of~\cref{lem:apex}.
 
 The proof above yields an algorithm which first constructs the tree $\tau$, by 
@@ -340,12 +411,12 @@ This amounts to running a breadth-first search from every vertex of $A$, which c
 Whenever a node with $2t$ alternations 
 is inserted to $\tau$, we can exhibit in $G$ a depth-$2$ minor model of $K_t$.
 Whenever a node with least $m$ letters $\dau$ is added to $\tau$,
-we have constructed an $m$-independent set. Whenever a node with at least $\ell$ letters $\son$ is added to $\tau$, as argued, there must be some vertex $v\in V(G)-A$ with at least $\ell^\alpha$ neighbors in~$A$. 
+we have constructed an $m$-independent set. Whenever a node with at least $\ell$ letters $\son$ is added to $\tau$, as argued, there must be some vertex $v\in V(G)-A$ with at least $\ell^{1/8}$ neighbors in~$A$. 
 To find such a vertex, scan through all neighborhoods of vertices $v\in A$ in the graph $G$, and then select a vertex $w\in V(G)$
 which belongs to the largest number of those neighborhoods; this can be done in time $\Oof(|E(G)|)$.
-The overall running time is $\Oof(|A|\cdot |E(G)|)$, as required.
+The overall running time is $\Oof(|A|\cdot |E(G)|)$, as required.\hfill$\square$
 
-This finishes the proof of~\cref{lem:apex}.
+%This finishes the proof of~\cref{lem:apex}.
 
 \subsection{Proof of~\cref{lem:engine}}
 \label{sec:engine}
@@ -366,8 +437,8 @@ taking $L(m)$ as the above binomial coefficient yields~\cref{lem:engine} in case
 Moreover, such independent set or clique can be computed from $G$ and $A$ in time~$\Oof(|A|\cdot |E(G)|)$ by simulating the proof of Ramsey's theorem.
 
 \paragraph{Case $r=2$.}
-We put $d=2$, thus we assume that $K_t\not\minor_2 G$.
-Namely, we show that if $A$ is a sufficiently large $1$-independent set in a graph $G$ such that $K_t\not\minor_2 G$, 
+We put $d=2$ and we assume that $K_t\not\minor_4 G$.
+We show that if $A$ is a sufficiently large $1$-independent set in a graph $G$ such that $K_t\not\minor_4 G$, 
 then there is a set of vertices~$S$ of size at most $t$ such that $A\setminus S$ contains a subset of size $m$ which is $2$-independent in $G-S$. 
 Here, by ``sufficiently large'' we mean of size of size at least $L(m)$, for $L(m)$ emerging from the proof.
 To this end, we shall iteratively apply \cref{lem:apex} as long as  it results in the third case, 
@@ -383,7 +454,7 @@ We will apply~\cref{lem:apex} in the following form.
 \begin{claim}\label{cor:apex}
   % Let $t$ be an integer and $\beta>2\cdot t$ a real.
 	There is an integer $\mbull$, depending only on $t$ and $\beta$, such that for all $m\ge \mbull$ and $k\ge 1$, the following holds.
-	If $G$ is a graph such that $K_t\not\minor_2 G$, and
+	If $G$ is a graph such that $K_t\not\minor_4 G$, and
 	$A\subset V(G)$ is an $1$-independent set in $G$ which does not contain a $2$-independent set of size $m$ and satisfies $|A|\ge m_k$, %$((k+1)\cdot m)^{\beta ^k}$
 	then there exists a vertex $v$ of $G$ such that $|N_G(v)\cap A| \ge m_{k-1}$.%$(k\cdot m)^{\beta^{k-1}}$.
 \end{claim}
