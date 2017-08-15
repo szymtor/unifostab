@@ -39,15 +39,16 @@ $G-S$.
 \paragraph{General strategy.}
 Our proof follows the same lines as the original proof of Ne\v set\v ril and Ossona de Mendez, with the difference that in the key technical lemma (\cref{lem:apex} below), 
 we improve the bounds significantly by replacing a Ramsey argument with a new combinatorial reasoning.
-The new argument essentially originates in the concept of {\em{branching index}} from stability theory, 
-and also uses the almost linear bound on neighborhood complexity in nowhere dense graph classes, due to Gajarsk\'y et al.~\cite{gajarsky2017kernelization}. \marginpar{no longer}
+The new argument essentially originates in the concept of {\em{branching index}} from stability theory. 
+%, 
+%and also uses the almost linear bound on neighborhood complexity in nowhere dense graph classes, due to Gajarsk\'y et al.~\cite{gajarsky2017kernelization}. \marginpar{no longer}
 %For sake of completeness, we present the entire proof of~\cref{thm:new-uqw}.
 
 We first prove a restricted variant,~\cref{lem:engine} below, in which we assume that $A$ is already $(r-1)$-independent. Then, in order to derive
 \cref{thm:new-uqw}, we apply the lemma iteratively for $r$ ranging from $1$ to the target value.
 
 \begin{lemma}\label{lem:engine}
-For \marginpar{check numbers}every pair of integers $t,r\in \N$ there exists an integer $d<5r/2$ and a function $L\colon \N\to \N$ with $L(m)=\Oof_{r,t}{(m^{{(2t+1)}^{2rt}})}$ such that the following holds.
+For \marginpar{check depth}every pair of integers $t,r\in \N$ there exists an integer $d<5r/2$ and a function $L\colon \N\to \N$ with $L(m)=\Oof_{r,t}{(m^{{(8t+1)}^{2rt}})}$ such that the following holds.
 For each $m\in \N$, graph~$G$ with $K_t\not\minor_{d} G$, and
 $(r-1)$-independent set $A\subseteq V(G)$ of size at least $L(m)$, there is a set $S\subseteq V(G)-A$ of size at most $t$ such that $A$ contains a subset $A'$ of size $m$ which is $r$-independent in $G-S$.
 Moreover, if $r$ is odd then $S$ is empty, and if $r$ is even,
@@ -186,7 +187,7 @@ To prove \Cref{lem:apex} we need one more lemma.
   Let $G$ be a graph such that $K_t\not\minor_4G$ for some
   $t\in\N$ and let $A\subseteq V(G)$ with $|A|\geq t^{8}$. 
   Assume furthermore that every pair of elements of $A$ has a common neighbor in $V(G)\setminus A$.
-  Then there exists a vertex $v$ in $G$ which has at least $|A|^{1/8}$ neighbors in $A$.
+  Then there exists a vertex $v$ in $V(G)\setminus A$ which has at least $|A|^{1/8}$ neighbors in $A$.
 \end{lemma}
 \begin{proof}
 %Our approach to prove the lemma is inspired by 
@@ -410,7 +411,7 @@ iteratively processing each vertex $w$ of $A$ and testing whether the distance b
 This amounts to running a breadth-first search from every vertex of $A$, which can be done in time $\Oof(|A|\cdot |E(G)|)$.
 Whenever a node with $2t$ alternations 
 is inserted to $\tau$, we can exhibit in $G$ a depth-$2$ minor model of $K_t$.
-Whenever a node with least $m$ letters $\dau$ is added to $\tau$,
+Whenever a node with least $m$ letters $\dau$ is added to~$\tau$,
 we have constructed an $m$-independent set. Whenever a node with at least $\ell$ letters $\son$ is added to $\tau$, as argued, there must be some vertex $v\in V(G)-A$ with at least $\ell^{1/8}$ neighbors in~$A$. 
 To find such a vertex, scan through all neighborhoods of vertices $v\in A$ in the graph $G$, and then select a vertex $w\in V(G)$
 which belongs to the largest number of those neighborhoods; this can be done in time $\Oof(|E(G)|)$.
@@ -433,7 +434,7 @@ Next we show how the general case reduces to one of those two cases.
 \paragraph{Case $r=1$.}
 We put $d=0$, thus we assume that $K_t\not\minor_0 G$; that is, $G$ does not contain a clique of size $t$ as a subgraph. By Ramsey's Theorem, in every graph every set of size $\binom{m+t-2}{t-1}$ contains an
 independent set of size $m$ or a clique of size $t$. Therefore, 
-taking $L(m)$ as the above binomial coefficient yields~\cref{lem:engine} in case $r=0$, for $S=\emptyset$. Note here that $\binom{m+t-2}{t-1}\in\Oof_{t}{(m^{{(2t+1)}^{2t}})}$.\marginpar{check numbers}
+taking $L(m)$ as the above binomial coefficient yields~\cref{lem:engine} in case $r=0$, for $S=\emptyset$. Note here that $\binom{m+t-2}{t-1}\in\Oof_{t}{(m^{{(8t+1)}^{2t}})}$.
 Moreover, such independent set or clique can be computed from $G$ and $A$ in time~$\Oof(|A|\cdot |E(G)|)$ by simulating the proof of Ramsey's theorem.
 
 \paragraph{Case $r=2$.}
@@ -448,31 +449,24 @@ The precise calculations follow.
 
 \newcommand{\mbull}{\widehat{m}}
 
-Fix a number $\beta>2t$. For $k\ge 0$,\marginpar{check numbers}
+Fix a number $\beta>8t$. For $k\ge 0$,
 define $m_k=((k+1)\cdot m)^{(2\beta)^k}$.
 We will apply~\cref{lem:apex} in the following form.
 \begin{claim}\label{cor:apex}
-  % Let $t$ be an integer and $\beta>2\cdot t$ a real.
-	There is an integer $\mbull$, depending only on $t$ and $\beta$, such that for all $m\ge \mbull$ and $k\ge 1$, the following holds.
 	If $G$ is a graph such that $K_t\not\minor_4 G$, and
-	$A\subset V(G)$ is an $1$-independent set in $G$ which does not contain a $2$-independent set of size $m$ and satisfies $|A|\ge m_k$, %$((k+1)\cdot m)^{\beta ^k}$
-	then there exists a vertex $v$ of $G$ such that $|N_G(v)\cap A| \ge m_{k-1}$.%$(k\cdot m)^{\beta^{k-1}}$.
+	$A\subset V(G)$ is an $1$-independent set in $G$ which does not contain a $2$-independent set of size $m\geq t^8$ and satisfies $|A|\ge m_k$,
+	then there exists a vertex $v$ of $G$ such that $|N_G(v)\cap A| \ge m_{k-1}$.
 \end{claim}
 \begin{clproof}
-Let $\alpha=t/\beta$, so that $\alpha<1/2$.\marginpar{check numbers}
-Put $\mbull= \ell^{\alpha}=\ell_0^{t/\beta}$, where $\ell_0$ is the constant given by \cref{lem:apex} for $t$ and $\alpha$.
-Let $\ell=(k\cdot m)^{(2\beta)^{k-1}/\alpha}$.
-Then $m\ge \mbull$ implies that $\ell\ge\ell_0$.
+Let $\ell=(k\cdot m)^{8\cdot(2\beta)^{k-1}}$.
+Then $m\ge t^8$ implies that $\ell\ge t^8$.
 Observe that
-$$|A|\ge \left((k+1)\cdot m\right)^{(2\beta)^k}=\left ((m+ k\cdot m)^{(2\beta)^{k-1}/\alpha} \right)^{2t}
-\ge (m+(k\cdot m)^{(2\beta)^{k-1}/\alpha})^{2t}=(m+\ell)^{2t}.$$
-Therefore, we may  apply \cref{lem:apex}, yielding a vertex $v$ with at least $\ell^\alpha=(k\cdot m)^{(2\beta)^{k-1}}=m_{k-1}$ neighbors in~$A$.
+\[|A|\ge \left((k+1)\cdot m\right)^{(2\beta)^k}\ge\left ((m+ k\cdot m)^{8\cdot(2\beta)^{k-1}} \right)^{2t}
+\ge \left(m+(k\cdot m)^{8\cdot (2\beta)^{k-1}}\right)^{2t}=(m+\ell)^{2t}.\]
+Therefore, we may  apply \cref{lem:apex}, yielding a vertex $v$ with at least $\ell^{1/8}=(k\cdot m)^{(2\beta)^{k-1}}=m_{k-1}$ neighbors in~$A$.
 \end{clproof}
 
-% \begin{proof}  [of~\cref{lem:engine}]
-
-Let $\mbull$ be the number given by~\cref{cor:apex}. 
-In the following we assume that $m\geq \max(t,\mbull)$, for we may always ask for finding a $2$-independent set of size $\max(t,\mbull,m)$ instead of $m$.
+In the following we assume that $m\geq t^8$, since we may always ask for finding a $2$-independent set of size $t^8$ instead of $m$.
 We will find 
 a subset of $A$ of size $m$ which is $2$-independent in $G-S$, where $|S|\le t$.
 
@@ -512,8 +506,8 @@ Choose any pairwise distinct vertices $w_1,\ldots,w_k\in A_k$ and observe that t
  
  
  This proves~\cref{lem:engine} in the case $r=2$, for the function $L(m)=m_t=((t+1)\cdot m)^{\beta^{2t}}$
- for $m\ge \max(t,\mbull)$ and $L(m)=m_{\max(t,\mbull)}$ for $m<\max(t,\mbull)$, where $\beta>2\cdot t$ is any fixed constant and $\mbull$ is obtained from~\cref{cor:apex}.
- It is easy to see that then $L_t(m)=L(m)\in \Oof_{t}{(m^{{(2t+1)}^{2t}})}$, provided we put $\beta=2t+1$.
+ for $m\ge t^8$ and $L(m)=L(t^8)$ for $m<\max(t,\mbull)$, where $\beta>8t$ is any fixed constant.
+ It is easy to see that then $L_t(m)=L(m)\in \Oof_{t}{(m^{{(8t+1)}^{2t}})}$, provided we put $\beta=8t+1$.
  Also, the proof easily yields an algorithm constructing the sets~$A'$ and $S$,
  which amounts to applying at most $t$ times the algorithm of~\cref{lem:apex}.
  Hence, its running time  is $\Oof_{r,t}(|A|\cdot |E(G)|)$, as required.
@@ -530,12 +524,12 @@ From $K_t\not\minor_s G$ it follows that~$G'$ does not contain $K_t$ as a subgra
 if $|A|=|A'|\ge {m+t-2\choose t-1}$, then
  $A'$ contains a $1$-independent subset $B$ of size $m$,
  which corresponds to a $(2s+1)$-independent set in $G$ that is contained in $A$.
- Hence, the obtained bound is $L(m)={m+t-2\choose t-1}$, and we have already argued that then $L(m)\in \Oof_{r,t}{(m^{{(2t+1)}^{2t}})}$.\marginpar{check numbers}
+ Hence, the obtained bound is $L(m)={m+t-2\choose t-1}$, and we have already argued that then $L(m)\in \Oof_{r,t}{(m^{{(8t+1)}^{2t}})}$.
  
  
  \paragraph{Even case.}
  Finally,
- we prove~\cref{lem:engine} in the case $r=2s+2$, for some integer $s\geq 1$. We put $d=5s+2=5r/2-3$.
+ we prove~\cref{lem:engine} in the case $r=2s+2$, for some integer $s\geq 1$. We put $d=5s+2=5r/2-3$. \marginpar{check depth}
 Let $G$  be such that 
  $K_t\not\minor_{d} G$, and
 let $A$ be a $(2s+1)$-independent set in $G$. Consider the graph $G'$ obtained from $G$
