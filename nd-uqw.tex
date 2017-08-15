@@ -48,7 +48,7 @@ We first prove a restricted variant,~\cref{lem:engine} below, in which we assume
 \cref{thm:new-uqw}, we apply the lemma iteratively for $r$ ranging from $1$ to the target value.
 
 \begin{lemma}\label{lem:engine}
-For \marginpar{check depth}every pair of integers $t,r\in \N$ there exists an integer $d<5r/2$ and a function $L\colon \N\to \N$ with $L(m)=\Oof_{r,t}{(m^{{(8t+1)}^{2rt}})}$ such that the following holds.
+For every pair of integers $t,r\in \N$ there exists an integer $d<9r/2$ and a function $L\colon \N\to \N$ with $L(m)=\Oof_{r,t}{(m^{{(8t+1)}^{2rt}})}$ such that the following holds.
 For each $m\in \N$, graph~$G$ with $K_t\not\minor_{d} G$, and
 $(r-1)$-independent set $A\subseteq V(G)$ of size at least $L(m)$, there is a set $S\subseteq V(G)-A$ of size at most $t$ such that $A$ contains a subset $A'$ of size $m$ which is $r$-independent in $G-S$.
 Moreover, if $r$ is odd then $S$ is empty, and if $r$ is even,
@@ -110,7 +110,7 @@ prove below.
 \begin{lemma}\label{lem:apex}
 Let $\ell,m,t\in \N$ and assume $\ell\geq t^{8}$. 
 If~$G$ is a graph and $A$ is a $1$-independent set in~$G$
-with at least $(m+\ell)^{2t}$ \marginpar{check numbers} elements,
+with at least $(m+\ell)^{2t}$ elements,
 then at least one of the following conditions hold:
 \begin{itemize}
   \item $K_t\minor_{4} G$,
@@ -118,7 +118,10 @@ then at least one of the following conditions hold:
 \item  some vertex $v$ of $G$
 has at least $\ell^{1/8}$ neighbors in $A$.
 \end{itemize}
-Moreover, in each case, the corresponding structure (a depth-$4$ minor model, a $2$-independent set of size $m$, or a vertex $v$ as above) can be computed in time $\Oof_t(|A|\cdot |E(G)|)$. \marginpar{the depth-$4$ minor possibly not}
+Moreover, if $K_t\not\minor_4G$, the
+structures described in the other two cases (a $2$-independent set 
+of size~$m$, or a vertex $v$ as above) can be 
+computed in time $\Oof_t(|A|\cdot |E(G)|)$. 
 \end{lemma}
 
 We remark that a statement similar to that of \cref{lem:apex}
@@ -438,7 +441,7 @@ taking $L(m)$ as the above binomial coefficient yields~\cref{lem:engine} in case
 Moreover, such independent set or clique can be computed from $G$ and $A$ in time~$\Oof(|A|\cdot |E(G)|)$ by simulating the proof of Ramsey's theorem.
 
 \paragraph{Case $r=2$.}
-We put $d=2$ and we assume that $K_t\not\minor_4 G$.
+We put $d=2$, thus we assume that $K_t\not\minor_4 G$.
 We show that if $A$ is a sufficiently large $1$-independent set in a graph $G$ such that $K_t\not\minor_4 G$, 
 then there is a set of vertices~$S$ of size at most $t$ such that $A\setminus S$ contains a subset of size $m$ which is $2$-independent in $G-S$. 
 Here, by ``sufficiently large'' we mean of size of size at least $L(m)$, for $L(m)$ emerging from the proof.
@@ -529,14 +532,14 @@ if $|A|=|A'|\ge {m+t-2\choose t-1}$, then
  
  \paragraph{Even case.}
  Finally,
- we prove~\cref{lem:engine} in the case $r=2s+2$, for some integer $s\geq 1$. We put $d=5s+2=5r/2-3$. \marginpar{check depth}
+ we prove~\cref{lem:engine} in the case $r=2s+2$, for some integer $s\geq 1$. We put $d=9s+4=9r/2-5$.
 Let $G$  be such that 
  $K_t\not\minor_{d} G$, and
 let $A$ be a $(2s+1)$-independent set in $G$. Consider the graph $G'$ obtained from $G$
 by contracting the (pairwise disjoint) balls of radius $s$ around each vertex $v\in A$.
  Let $A'$ denote the set of vertices of $G'$ corresponding to the contracted balls. Again, there is a bijection between $A$ and $A'$. Note that
 this time, $A'$ is a $1$-independent set in $G'$.
-From $K_t\not\minor_{5s+2} G$ it follows that $K_t\not\minor_2 G'$. Apply the already proved case $r=2$ to $G'$ and $A'$. 
+From $K_t\not\minor_{9s+4} G$ it follows by \Cref{lem:combineminors} that $K_t\not\minor_4 G'$. Apply the already proved case $r=2$ to $G'$ and $A'$. 
 Then, if $|A|=|A'|\ge L_t(m)$, where $L_t(m)$ is the function as defined in the case $r=2$, then
  $A'$ contains a subset $B'$ of size $m$
 which is  $2$-independent in $G'-S'$, for some $S'\subset V(G')-A'$.
@@ -556,24 +559,24 @@ This yields a running time of  $\Oof_{r,t}(|A|\cdot |E(G)|)$.
   
 This finishes  the proof of~\cref{lem:engine}.
 
-\begin{remark}
-A more careful analysis of the case $r=2s+2$, in particular of the construction of $G'$ and the properties of $G'$ actually used in the proof of \cref{claim:minor},
-shows that the bound of $d=5s+2$ may be decreased to $d=3s+2$. We refrain from giving the details for the sake of clarity of the argument.
-\end{remark}
+%\begin{remark}
+%A more careful analysis of the case $r=2s+2$, in particular of the construction of $G'$ and the properties of $G'$ actually used in the proof of \cref{claim:minor},
+%shows that the bound of $d=5s+2$ may be decreased to $d=3s+2$. We refrain from giving the details for the sake of clarity of the argument.
+%\end{remark}
 
-\begin{comment}
-\begin{remark}
-	It is not difficult to decrease the bound from $d=5s+2$ to $d= 3s+2$
-	in the  case when $r=2s+2$. To do so, one would need to formulate~\cref{lem:apex}
-	a bit more carefully, and replace the first possibility $K_t\minor_2 G$
-	by the following condition, corresponding to the statement of~\cref{claim:minor}:
-\begin{quote}
-	There are vertices $a_1,b_1,\ldots,a_t,b_t\in A$ 
-	such that for each $1\le i\le j\le t$, there is a vertex $z_{ij}\in V(G)-A$
-	which is a neighbor of $a_i$ and $b_j$, but not of $b_s$, for $s\neq j$.	
-\end{quote}
-\end{remark}
-\end{comment}
+%\begin{comment}
+%\begin{remark}
+%	It is not difficult to decrease the bound from $d=5s+2$ to $d= 3s+2$
+%	in the  case when $r=2s+2$. To do so, one would need to formulate~\cref{lem:apex}
+%	a bit more carefully, and replace the first possibility $K_t\minor_2 G$
+%	by the following condition, corresponding to the statement of~\cref{claim:minor}:
+%\begin{quote}
+%	There are vertices $a_1,b_1,\ldots,a_t,b_t\in A$ 
+%	such that for each $1\le i\le j\le t$, there is a vertex $z_{ij}\in V(G)-A$
+%	which is a neighbor of $a_i$ and $b_j$, but not of $b_s$, for $s\neq j$.	
+%\end{quote}
+%\end{remark}
+%\end{comment}
 
 
 \subsection{Proof of \cref{thm:new-uqw}}
@@ -634,8 +637,8 @@ We now wrap up the proof of \cref{thm:new-uqw} by iteratively applying~\cref{lem
 %\end{proof}
 
 \begin{proof}[of \cref{thm:new-uqw}]
-Fix \marginpar{check numbers} integers $r,t$,  and a graph $G$ such that $K_t\not\minor_{d} G$,
-for $d=\lfloor 5r/2 \rfloor$. Let $\beta>2\cdot t$ be a fixed real, and let $\mbull$ be the number from~\cref{cor:apex}. As in the proof of \cref{lem:engine}, without loss of generality suppose $m\geq \max(t,\mbull)$.
+Fix integers $r,t$,  and a graph $G$ such that $K_t\not\minor_{d} G$,
+for $d=\lfloor 9r/2 \rfloor$. Let $\beta>8t$ be a fixed real. As in the proof of \cref{lem:engine}, without loss of generality suppose $m\geq t^8$.
  Denote $\gamma=\beta^{2t}$, and
 define the function $L(m)$ as $L(m)=((t+1)\cdot m)^\gamma$.
 
@@ -673,14 +676,14 @@ By assumption that $m\ge t$, we may choose pairwise different vertices $a_1,\ldo
 To reach a contradiction, suppose that $S_r$ contains $t$ distinct vertices $s_1,\ldots,s_t$. 
 By the above, the sets $\overline{N}(a_i)\cup\set{s_i}$ 
 form a minor model of $K_t$ in $G$ at depth-$(\lfloor r/2\rfloor+1)$.
-This contradicts the assumption that $K_t\not\minor_d G$ for $d=\lfloor 5r/2 \rfloor$.
+This contradicts the assumption that $K_t\not\minor_d G$ for $d=\lfloor 9r/2 \rfloor$.
 Hence, $|S|<t$.
 
 
 Define the function  $N:\N\to\N$
 as $N(m)=((t+1)m)^{\gamma^{r}}=((t+1)m)^{\beta^{2rt}}$
-for $m\ge \max(t,\mbull)$  and $N(m)=N(\mbull)$ for $m<\max(t,\mbull)$.
-Note that $N(m)\in \Oof_{r,t}{(m^{{(2t+1)}^{2rt}})}$, provided we put $\beta=2t+1$.
+for $m\ge t^8$  and $N(m)=N(t^8)$ for $m<t^8$.
+Note that $N(m)\in \Oof_{r,t}{(m^{{(8t+1)}^{2rt}})}$, provided we put $\beta=8t+1$.
 The argument above shows that if $|A|\ge N(m)$ then 
 there is a set $S\subset V(G)$, equal to $S_r$ above,
 and a set $B\subset A$, equal to $A_r$ above,
