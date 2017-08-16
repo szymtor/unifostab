@@ -96,7 +96,8 @@ some constant $t\in \N$. Then $G$ has at most
 $t^2\cdot n^{3/2}$ edges.
 \end{corollary}
 
-We note the following lemma. 
+The following lemma ensures that we can take shallow
+minors of shallow minors and still control the situation. 
 
 \begin{lemma}[adaptation of Proposition 4.11 in~\cite{sparsity}]\label{lem:combineminors}
 Let $a,b\in \N$ and let $c=\frac{(2a+1)(2b+1)-1}{2}$. 
@@ -104,8 +105,68 @@ Let $G$ be a graph, let $H\minor_aG$ and let
 $J\minor_bH$. Then $J\minor_cG$. 
 \end{lemma}
 
-Our main tool is the following Ramsey-like result which we will
-prove below. 
+We need to prove one more technical lemma. 
+
+\begin{lemma}\label{lem:diversity}
+  Let $G$ be a graph such that $K_t\not\minor_4G$ for some
+  $t\in\N$ and let $A\subseteq V(G)$ with $|A|\geq t^{8}$. 
+  Assume furthermore that every pair of elements of $A$ has a common neighbor in $V(G)\setminus A$.
+  Then there exists a vertex $v$ in $V(G)\setminus A$ which has at least $|A|^{1/8}$ neighbors in $A$.
+\end{lemma}
+\begin{proof}
+%Our approach to prove the lemma is inspired by 
+%the proof of Lemma 4.3 in~\cite{gajarsky2017kernelization}. 
+We construct a depth-$1$ 
+minor~$H$ of $G$ with $|A|$ vertices as follows. Recall that a 
+minor model of a graph~$H$ in $G$ is a family $(I_u)_{u\in V(H)}$ of pairwise vertex-disjoint connected subgraphs of $G$
+such that whenever~$uv$ is an edge in~$H$, there 
+are $u'\in I_u$ and $v'\in I_v$ for which $u'v'$ 
+is an edge in $G$. 
+
+Let $G^0=G$, $V(H^0)=A$ and $I_u^0=G[\{u\}]$ for 
+all $u\in V(H)$. We iteratively define a sequence 
+$G^1,G^2,\ldots,G^\ell$ and $(I_u)^1_{u\in V(H)},
+\ldots, (I_u)^\ell_{u\in V(H)}$ of subgraphs of $G$ 
+of radius at most $1$ 
+as follows. Observe
+that for $0\leq i\leq \ell$, the sequence $(I_u)^i_{u\in V(H)}$
+uniquely defines a depth-$1$ minor $H^i\minor_1G$. 
+
+If $G^i$ and $(I_u)^i_{u\in V(H)}$ (with corresponding
+depth-$1$ minor $H^i$) have been 
+constructed, $0\leq i<\ell$, we proceed as follows. 
+If there is a vertex $v\in V(G^i)\setminus A$ with 
+$a,b\in A \cap N(v)$ and $ab\not\in E(H^i)$, then 
+remove $v$ from $G^i$ to obtain $G^{i+1}$ 
+and add $v$ to $I_a^i$ to obtain $I_a^{i+1}$ (this 
+adds the edge $ab$ to $E(H^{i+1})$). 
+For $u\neq a$ set $I_u^{i+1}=I_u$. We terminate
+in iteration $\ell$ if no such pair $a,b$ can be found 
+and let $H=H^\ell$. 
+
+By assumption, $K_t\not\minor_4 G$, which by 
+\Cref{lem:combineminors} implies $K_t\not\minor_1 H$. 
+This by \Cref{crl:densitynd} implies that $H$ has at most
+$t^2\cdot|A|^{3/2}$ edges. Our assumption $|A|\geq t^8$
+implies $t^2\cdot |A|^{3/2}\leq |A|^{7/4}$. 
+
+Now, let ${\cal F}=\set{N(v)\cap A\colon v\in V(G)}$. 
+  Let $k$ be the maximal cardinality of a set $F$ in ${\cal F}$.
+  Say that an unordered pair $\{a,b\}$ of distinct elements of $A$ is \emph{covered} by $F\in {\cal F}$
+  if  $a,b\in F$. Clearly, every $F\in {\cal F}$ can cover at most $\binom{k}{2}$ pairs. When we removed some $v\in V(G^i)$ to
+  introduce a new edge to $H^{i+1}$, we therefore potentially
+  created $\binom{k}{2}$ uncovered pairs. On the other hand, 
+  by assumption, each of the $\binom{|A|}{2}$ unordered pairs of
+   distinct elements of $A$ is covered in $G^0$ by some element 
+   $F\in {\cal F}$. We conclude that we have at least 
+   $\binom{|A|}{2}/\binom{k}{2}$ edges in $H$. 
+   This implies $k\geq |A|^{1/8}$, as otherwise
+   $\binom{|A|}{2}/\binom{k}{2}> |A|^2/k^2\geq |A|^{7/4}$,
+   a contradiction.
+\end{proof}
+
+Our main tool is the following Ramsey-like result which we prove
+next. 
 
 \begin{lemma}\label{lem:apex}
 Let $\ell,m,t\in \N$ and assume $\ell\geq t^{8}$. 
@@ -125,11 +186,14 @@ computed in time $\Oof_t(|A|\cdot |E(G)|)$.
 \end{lemma}
 
 We remark that a statement similar to that of \cref{lem:apex}
-can be obtained by employing Ramsey's theorem, as has been done in~\cite{nevsetvril2011nowhere}. This, however, yields
-in place of the bound $(m+\ell)^{2t}$ a bound of the form $R(m,\underbrace{q,q,\ldots,q}_{k\text{ times}})$,
-where $k\sim\ell^{2\alpha}$ and $R(m_1,\ldots,m_c)$
-is the Ramsey number for $c$ colors.
-In particular, this does not give a bound which is polynomial in $m+\ell$, and thus cannot be used to prove~\cref{thm:new-uqw}.
+can be obtained by employing Ramsey's theorem, as has been done in~\cite{nevsetvril2011nowhere}. This, however, 
+%yields
+%in place of the bound $(m+\ell)^{2t}$ 
+%a bound of the form $R(m,\underbrace{q,q,\ldots,q}_{k\text{ times}})$,
+%where $k\sim\ell^{1/8}$ and $R(m_1,\ldots,m_c)$
+%is the Ramsey number for $c$ colors.
+%In particular, this 
+does not give a bound which is polynomial in $m+\ell$, and thus cannot be used to prove~\cref{thm:new-uqw}.
 
 %\paragraph*{Neighborhood complexity.} Let us first recall the following result of Gajarsk\'y et al.~\cite{gajarsky2017kernelization}
 %which provides an upper bound on the number of distinct neighborhoods in terms of density of shallow minors. 
@@ -184,63 +248,7 @@ In particular, this does not give a bound which is polynomial in $m+\ell$, and t
 %shallow minors~\cite{dvorak2007asymptotical,jiang2011compact}, and does not rely on any non-constructive arguments from stability theory. In particular, $n_0$ depends in a computable manner on $s$ and $t$.
 %From \cref{lem:diversity} we derive the following.
 
-To prove \Cref{lem:apex} we need one more lemma. 
 
-\begin{lemma}\label{lem:diversity}
-  Let $G$ be a graph such that $K_t\not\minor_4G$ for some
-  $t\in\N$ and let $A\subseteq V(G)$ with $|A|\geq t^{8}$. 
-  Assume furthermore that every pair of elements of $A$ has a common neighbor in $V(G)\setminus A$.
-  Then there exists a vertex $v$ in $V(G)\setminus A$ which has at least $|A|^{1/8}$ neighbors in $A$.
-\end{lemma}
-\begin{proof}
-%Our approach to prove the lemma is inspired by 
-%the proof of Lemma 4.3 in~\cite{gajarsky2017kernelization}. 
-We construct a depth-$1$ 
-minor~$H$ of $G$ with $|A|$ vertices as follows. Recall that a 
-minor model of a graph~$H$ in $G$ is a family $(I_u)_{u\in V(H)}$ of pairwise vertex-disjoint connected subgraphs of $G$
-such that whenever~$uv$ is an edge in~$H$, there 
-are $u'\in I_u$ and $v'\in I_v$ for which $u'v'$ 
-is an edge in $G$. 
-
-Let $G^0=G$, $V(H^0)=A$ and $I_u^0=G[\{u\}]$ for 
-all $u\in V(H)$. We iteratively define a sequence 
-$G^1,G^2,\ldots,G^\ell$ and $(I_u)^1_{u\in V(H)},
-\ldots (I_u)^\ell_{u\in V(H)}$ as follows. Observe
-that for $0\leq i\leq \ell$ the sequence $(I_u)^i_{u\in V(H)}$
-uniquely defines a depth-$1$ minor $H^i$. 
-
-If $G^i$ and $(I_u)^i_{u\in V(H)}$ (with corresponding
-depth-$1$ minor $H^i$) have been 
-constructed, $0\leq i<\ell$, we proceed as follows. 
-If there is a vertex $v\in V(G^i)\setminus A$ with 
-$a,b\in A \cap N(v)$ and $ab\not\in E(H^i)$, then 
-remove $v$ from $G^i$ to obtain $G^{i+1}$ 
-and add $v$ to $I_a^i$ to obtain $I_a^{i+1}$ (this 
-adds the edge $ab$ to $E(H^{i+1})$). 
-For $u\neq a$ set $I_u^{i+1}=I_u$. We terminate
-in iteration $\ell$ if no such pair $a,b$ can be found 
-and let $H=H^\ell$. 
-
-By assumption, $K_t\not\minor_4 G$, which by 
-\Cref{lem:combineminors} implies $K_t\not\minor_1 H$. 
-This by \Cref{crl:densitynd} implies that $H$ has at most
-$t^2\cdot|A|^{3/2}$ edges. Our assumption $|A|\geq t^8$
-implies $t^2\cdot |A|^{3/2}\leq |A|^{7/4}$. 
-
-Now, let ${\cal F}=\set{N(v)\cap A\colon v\in V(G)}$. 
-  Let $k$ be the maximal cardinality of a set $F$ in ${\cal F}$.
-  Say that an unordered pair $\{a,b\}$ of distinct elements of $A$ is \emph{covered} by $F\in {\cal F}$
-  if  $a,b\in F$. Clearly, every $F\in {\cal F}$ can cover at most $\binom{k}{2}$ pairs. When we removed some $v\in V(G^i)$ to
-  introduce a new edge to $H^{i+1}$, we therefore potentially
-  created $\binom{k}{2}$ uncovered pairs. On the other hand, 
-  by assumption, each of the $\binom{|A|}{2}$ unordered pairs of
-   distinct elements of $A$ is covered in $G^0$ by some element 
-   $F\in {\cal F}$. Hence we have at least 
-   $\binom{|A|}{2}/\binom{k}{2}$ edges in $H$. 
-   This implies $k\geq |A|^{1/8}$, as otherwise
-   $\binom{|A|}{2}/\binom{k}{2}> |A|^2/k^2\geq |A|^{7/4}$,
-   a contradiction.
-\end{proof}
 
 \begin{comment}
 \begin{corollary}\label{cor:biversity}
@@ -454,10 +462,11 @@ The precise calculations follow.
 
 Fix a number $\beta>8t$. For $k\ge 0$,
 define $m_k=((k+1)\cdot m)^{(2\beta)^k}$.
+In the following we will always assume that $m\geq t^8$. 
 We will apply~\cref{lem:apex} in the following form.
 \begin{claim}\label{cor:apex}
 	If $G$ is a graph such that $K_t\not\minor_4 G$, and
-	$A\subset V(G)$ is an $1$-independent set in $G$ which does not contain a $2$-independent set of size $m\geq t^8$ and satisfies $|A|\ge m_k$,
+	$A\subset V(G)$ is an $1$-independent set in $G$ which does not contain a $2$-independent set of size $m$ and satisfies $|A|\ge m_k$,
 	then there exists a vertex $v$ of $G$ such that $|N_G(v)\cap A| \ge m_{k-1}$.
 \end{claim}
 \begin{clproof}
@@ -469,19 +478,17 @@ Observe that
 Therefore, we may  apply \cref{lem:apex}, yielding a vertex $v$ with at least $\ell^{1/8}=(k\cdot m)^{(2\beta)^{k-1}}=m_{k-1}$ neighbors in~$A$.
 \end{clproof}
 
-In the following we assume that $m\geq t^8$, since we may always ask for finding a $2$-independent set of size $t^8$ instead of $m$.
-We will find 
+%In the following we assume that $m\geq t^8$, since we may always ask for finding a $2$-independent set of size $t^8$ instead of $m$.
+We will now find 
 a subset of $A$ of size $m$ which is $2$-independent in $G-S$, where $|S|\le t$.
-
-
 Assume that $|A|\ge m_t$. By induction, we
  construct a sequence  $A=A_0\supseteq A_1\supseteq\ldots$ 
-of $1$-independent subsets of $G$
+of \mbox{$1$-independent} subsets of $G$
 of length at most $t$
 such that $|A_i|\ge m_{t-i}$,
  as follows. Start with $A_0=A$. We maintain a set $S$ of vertices of $G$ which is initially empty, and we maintain the invariant that $A_i$ is disjoint with $S$ at each step of the induction.
 
-For $i=0,1,2,\ldots$, do as follows.
+For $i=0,1,2,\ldots$ do as follows.
 If $A_{i}$ contains a $2$-independent set of size $m$ in $G-S$, terminate.
  Otherwise, 
  apply~\cref{cor:apex} to the graph $G-S$ with $1$-independent set
@@ -509,7 +516,7 @@ Choose any pairwise distinct vertices $w_1,\ldots,w_k\in A_k$ and observe that t
  
  
  This proves~\cref{lem:engine} in the case $r=2$, for the function $L(m)=m_t=((t+1)\cdot m)^{\beta^{2t}}$
- for $m\ge t^8$ and $L(m)=L(t^8)$ for $m<\max(t,\mbull)$, where $\beta>8t$ is any fixed constant.
+ for $m\ge t^8$ and $L(m)=L(t^8)$ for $m<t^8$, where $\beta>8t$ is any fixed constant.
  It is easy to see that then $L_t(m)=L(m)\in \Oof_{t}{(m^{{(8t+1)}^{2t}})}$, provided we put $\beta=8t+1$.
  Also, the proof easily yields an algorithm constructing the sets~$A'$ and $S$,
  which amounts to applying at most $t$ times the algorithm of~\cref{lem:apex}.
@@ -535,7 +542,7 @@ if $|A|=|A'|\ge {m+t-2\choose t-1}$, then
  we prove~\cref{lem:engine} in the case $r=2s+2$, for some integer $s\geq 1$. We put $d=9s+4=9r/2-5$.
 Let $G$  be such that 
  $K_t\not\minor_{d} G$, and
-let $A$ be a $(2s+1)$-independent set in $G$. Consider the graph $G'$ obtained from $G$
+let $A$ be a $(2s+1)$-independent set in~$G$. Consider the graph $G'$ obtained from $G$
 by contracting the (pairwise disjoint) balls of radius $s$ around each vertex $v\in A$.
  Let $A'$ denote the set of vertices of $G'$ corresponding to the contracted balls. Again, there is a bijection between $A$ and $A'$. Note that
 this time, $A'$ is a $1$-independent set in $G'$.
@@ -669,7 +676,7 @@ $G-S_i$.
 For $a\in A_r$, let $\overline{N}(a)$ denote the $\lfloor r/2\rfloor$-neighborhood of $a$ in $G-S_r$; note that sets $\overline{N}(a)$ are pairwise disjoint.
 The above remark implies that each vertex $v$ of the final set $S_r$ has a neighbor in the set $\overline{N}(a)$ for each $a\in A_r$.
 Indeed, suppose $v$ belonged to the set $S$ added to $S_r$ in the $i$th step of the construction; i.e. $v\in S_{i+1}\setminus S_i$.
-Then there exists a path in $G-S_i$ from $v$ to $a$ of length exactly $i/2$, which traverses only vertices at distance less than $i/2$ from $a$.
+Then there exists a path in $G-S_i$ from $v$ to $a$ of length exactly~$i/2$, which traverses only vertices at distance less than $i/2$ from $a$.
 Since in this and further steps of the construction we were removing only vertices at distance at least $i/2$ from $a$, this path stays intact in $G-S_r$ and hence is completely contained in $\overline{N}(a)$.
 
 By assumption that $m\ge t$, we may choose pairwise different vertices $a_1,\ldots,a_t\in A_r$.
@@ -688,7 +695,7 @@ The argument above shows that if $|A|\ge N(m)$ then
 there is a set $S\subset V(G)$, equal to $S_r$ above,
 and a set $B\subset A$, equal to $A_r$ above,
 so that $B$ is $r$-independent in $G-S$.
-Given~$G$ and $A$, the sets $S$ and $B$ can be computed by applying the algorithm given by~\cref{lem:engine} at most~$r$ times, so in time $\Oof_{r,t}(|A|\cdot |E(G)|)$.
+Given~$G$ and $A$, the sets~$S$ and $B$ can be computed by applying the algorithm given by~\cref{lem:engine} at most~$r$ times, so in time $\Oof_{r,t}(|A|\cdot |E(G)|)$.
 This finishes the proof of~\cref{thm:new-uqw}.
 \end{proof}
 
