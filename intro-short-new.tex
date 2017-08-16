@@ -10,7 +10,7 @@ of bounded treewidth,  graphs of bounded degree, and, in fact,
 all classes that exclude a fixed 
 topological minor.
 Formally, a class $\CCC$ of graphs is {\em{nowhere dense}} if there is a function $t\colon \N\to \N$ such that for every $r\in \N$, no graph $G$ in~$\CCC$ contains the clique $K_{t(r)}$ on $t(r)$ vertices  as an {\em{$r$-shallow minor}},
-i.e., as a subgraph of a graph obtained from $G$ by contracting mutually disjoint  subgraphs of radius $r$   to single vertices.
+i.e., as a subgraph of a graph obtained from $G$ by contracting mutually disjoint  subgraphs of radius at most $r$ to single vertices.
 Classes of bounded expansion~\cite{nevsetvril2008grad} 
 are important subclasses 
 of nowhere dense graph classes which are defined by bounds on 
@@ -65,10 +65,12 @@ nowhere dense and somewhere dense graph classes.
 
 In this work we revisit the connections between the notion of nowhere 
 denseness and notions from  model theory and finite model theory.
-We first consider uniform quasi-wideness, a
-notion  introduced by Dawar~\cite{dawar2010homomorphism}, who 
-proved that every quasi-wide class that is closed under taking substructures
-and disjoint unions has the homomorphism preservation property. 
+We first consider the connection to uniform quasi-wideness.
+
+%, a
+%notion  introduced by Dawar~\cite{dawar2010homomorphism}, who 
+%proved that every quasi-wide class that is closed under taking substructures
+%and disjoint unions has the homomorphism preservation property. 
 
 
 Formally, a class $\CCC$ of graphs is \emph{uniformly quasi-wide} if there are
@@ -83,7 +85,7 @@ larger than $r$ in $G$.
 
 Ne\v{s}et\v{r}il and Ossona de Mendez proved that
 the notions of uniform quasi-wideness and nowhere denseness coincide for 
-classes of graphs~\cite{nevsetvril2011nowhere}. 
+classes of finite graphs~\cite{nevsetvril2011nowhere}. 
 The proof of Ne\v{s}et\v{r}il 
 and Ossona de Mendez goes back to a construction
 of Kreidler and Seese~\cite{kreidler1998monadic} (see also Atserias et al.~\cite{atserias2006preservation}), 
@@ -92,8 +94,8 @@ the function $N$ are huge. Recently, Kreutzer, Rabinovich and the second author
  proved that we may always choose~$N$ to be a polynomial 
 function of $m$, with the degree of the polynomial depending on $r$~\cite{siebertz2016polynomial}. However, the exact dependence of degree of the polynomial on $r$ and on the class $\CCC$ itself
  was  not specified in~\cite{siebertz2016polynomial}, as the existence of a polynomial bound is derived
-from non-constructive arguments used by Adler and Adler's in showing that every nowhere dense class of graphs
-is stable~\cite{adler2014interpreting}. We give a new construction 
+from non-constructive arguments used by Adler and Adler in~\cite{adler2014interpreting} when showing that every nowhere dense class of graphs
+is stable. We give a new construction 
 which is considerably simpler than that of~\cite{siebertz2016polynomial}
 and which gives explicit bounds on the degree of the polynomial. 
 More precisely, we prove the following theorem; here, the notation $\Oof_{r,t}(\cdot)$ hides computable factors depending on $r$ and $t$.
@@ -101,7 +103,7 @@ More precisely, we prove the following theorem; here, the notation $\Oof_{r,t}(\
 \begin{theorem}\label{thm:new-uqw}
 For all $r,t\in \N$ there is a polynomial  $N\colon \N\to \N$ with $N(m)=
 \Oof_{r,t}{(m^{{(8t+1)}^{2rt}})}$, such that the following holds.
-Let $G$ be a graph such that $K_t\not\minor_{\lfloor 5r/2\rfloor} G$, and\marginpar{check depth}
+Let $G$ be a graph such that $K_t\not\minor_{\lfloor 9r/2\rfloor} G$, and
 let $A\subseteq V(G)$ be a vertex subset of size at least $N(m)$, for a given $m$.
 Then there exists a set $S\subseteq V(G)$ of size $|S|\leq t$ and a set $B\subseteq A\setminus S$ 
 of size $|B|\geq m$ which is $r$-independent in $G-S$.
@@ -175,15 +177,37 @@ observed that a complete first-order theory does not have
 the independence property (as introduced by 
 Shelah~\cite{shelah1971stability}) if and only if, 
 in each model, each definable family of sets has finite 
-VC-dimension. Also the related notion of VC-density 
-turned out to be a very important measure for 
-the combinatorial complexity of a family of sets. 
-In the following years several authors 
-aimed to obtain explicit bounds on the VC-dimension 
-and VC-density of 
-definable families of sets in restricted 
-structures, see e.g.~\cite{AschenbrennerDHMS13, aschenbrenner2016vapnik, bobkov2017computations, johnson2010compression, karpinski1997approximating, 
-karpinski1997polynomial}. We refer to~\cite{aschenbrenner2016vapnik} for an overview of 
+VC-dimension.
+
+Formally, VC-dimension is defined as follows. 
+Let $A$ be a set and let  $\FFF\subseteq \PPP ow(A)$ 
+be a family of subsets of $A$. For a set
+ $X\subseteq A$ let $X\cap \FFF\coloneqq\{X\cap F : F\in \FFF\}$.
+The set $X$ is \emph{shattered by $\FFF$} if
+$X\cap \FFF=\PPP ow(X)$. 
+The \emph{Vapnik-Chervonenkis-dimension}, short 
+\emph{VC-dimension},
+of $\FFF$ is the maximum size of a set $X$ that is shattered by
+$\FFF$. One of the main uses of VC-dimension is the
+Sauer-Shelah-Lemma~\cite{chervonenkis1971theory,sauer1972density, shelah1972combinatorial}, which states that the
+cardinality of a set family $\FFF$ on a ground set $A$ 
+with VC-dimension $d$ satisfies 
+$\abs{\FFF}\leq \sum_{i=0}^{d}\binom{|A|}{i}\in \Oof(|A|^d)$.
+This motivates the definition of \emph{VC-density}, which
+describes the asymptotic growth of finite set families
+(as the size of the ground set $A$ goes to infinity). 
+%
+%Also the related notion of VC-density 
+%turned out to be a very important measure for 
+%the combinatorial complexity of a family of sets. 
+%In the following years several authors 
+%aimed to obtain explicit bounds on the VC-dimension 
+%and VC-density of 
+%definable families of sets in restricted 
+%structures, see e.g.~\cite{AschenbrennerDHMS13, aschenbrenner2016vapnik, bobkov2017computations, johnson2010compression, karpinski1997approximating, 
+%karpinski1997polynomial}. 
+
+We refer to~\cite{aschenbrenner2016vapnik} for an overview of 
 applications of VC-dimension and VC-density in model
 theory and to the surveys~\cite{furedi1991traces,matouvsek1998geometric} 
 on uses of VC-density in
@@ -225,20 +249,26 @@ $\tup x$ is an $m$-tuple and $\tup y$ is an $n$-tuple of variables.
 \begin{enumerate}
 \item If $\CCC$ is nowhere dense, then for every $\epsilon>0$ 
 there exists a constant~$c$ such that for every $G\in \CCC$ and every
-$A\subseteq V(G)$, we have $|S_\psi(A,G)|\leq c\cdot |A|^{1+\epsilon}.$
+$A\subseteq V(G)$, we have $|S_\psi(A,G)|\leq c\cdot |A|^{n+\epsilon}.$
 
-\item If $\CCC$ has bounded expansion, then there exists a constant~$c$ such that for every $G\in \CCC$ and every $A\subseteq V(G)$, we have $|S_\psi(A,G)|\leq c\cdot |A|$.
+\item If $\CCC$ has bounded expansion, then there exists a constant~$c$ such that for every $G\in \CCC$ and every $A\subseteq V(G)$, we have $|S_\psi(A,G)|\leq c\cdot |A|^n$.
 \end{enumerate}
 \end{theorem}
 
-Formulated in terms of VC-density, for every nowhere 
-dense class of graphs and every first-order formula $\psi(\tup x,\tup y)$
-we have 
-\[\limsup_{a\rightarrow \infty}\max_{\substack{G\in\CCC\\A\subseteq
-    V(G), |A|=a}}\frac{\log |S_\psi(A,G)|}{\log a}\leq n.\]
+Another way to state the theorem is to say that the number
+of $\psi$-types over $A$ in a nowhere dense class 
+converges to $|A|^n$ as $|A|$ goes
+to infinity. 
+
+%Formulated in terms of VC-density, for every nowhere 
+%dense class of graphs and every first-order formula $\psi(\tup x,\tup y)$
+%we have 
+%\[\limsup_{a\rightarrow \infty}\max_{\substack{G\in\CCC\\A\subseteq
+%    V(G), |A|=a}}\frac{\log |S_\psi(A,G)|}{\log a}\leq n.\]
 
 Our result generalizes the recent result of Bobkov~\cite{bobkov2017computations} that nowhere dense classes
-are dp-minimal (a notion introduced by Shelah~\cite{shelah2014strongly}).
+are dp-minimal (a notion introduced by Shelah~\cite{shelah2014strongly}). 
+
 %
 %
 %\sebi{The proof of \Cref{thm:vc-density} is (again) based on Gaifman's locality
