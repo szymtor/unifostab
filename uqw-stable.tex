@@ -184,7 +184,6 @@ and valuations $u_1,\ldots,u_k\in V(G)^Y$ and $ v_1,\ldots, v_k\in V(G)^Z$
 which form a $\phi$-ladder in $G$.
 Denote $w_i=u_i\oplus v_i$, for $i=1,\ldots,k$.
 	Let $A=\set{ w_i\colon i=1,\ldots,k}\subset V(G)^X$; note that $|A|=k$.
-	\begin{change}{sz}
 Applying \cref{prop:uqw-tuples} to the set $A$, radius $2r$, and target size $m$
 		 yields a set $S\subset V(G)$ with $|S|\le s^d(2r)$
 	and a set $B\subset A$ with $|B|\geq m$ 
@@ -231,7 +230,6 @@ From~\cref{pro:crossing} it follows that $w_i$ and $w_j$ have the same quantifie
 In particular, $u_e\oplus w_i\models\phi$ if and only if 
 $u_e\oplus w_j\models\phi$,
 contradicting the assumption that $u_1,\ldots, u_k$ and $ v_1,\ldots, v_k$ form a $\phi$-ladder. This finishes the proof of \cref{thm:uqw-stable}.
- \end{change}
 \end{proof}
 
 
@@ -242,7 +240,7 @@ We conclude by proving \cref{thm:new-stable}, promised in \cref{sec:intro}, whic
 
 \begin{proof}[of \cref{thm:new-stable}]
   Let $r(\cdot)$ be the function described in~\cref{pro:crossing}. We 
-  define the function $g(\cdot)$ from the statement of the theorem by $g(q)=10\cdot r(q)$.
+  define the function~$g(\cdot)$ from the statement of the theorem by $g(q)=10\cdot r(q)$.
 	Let $\phi$ be the given formula of quantifier rank $q$ and with  free variables $X$, partitioned into $Y$ and $Z$.
   Denote $r=r(q)$. From now on we consider only graphs $G$ such that $K_t\not\minor_{10r} G$.
 

@@ -1,5 +1,4 @@
 \section{Gaifman locality}\label{sec:gaifman}
-\begin{change}{sz}
 In this section, we extract from Gaifman's Locality Theorem~\cite{gaifman1982local} a technical lemma
 (\cref{pro:crossing} below), which will be used later on two different occasions. 
 
@@ -8,7 +7,7 @@ In this section, we extract from Gaifman's Locality Theorem~\cite{gaifman1982loc
 If $X,Y,S\subset V(G)$ are sets of vertices of a graph $G$ 
 and $r\in \N$, then we say that $X$ and $Y$ are  \emph{$r$-separated}
 by $S$  (in $G$) if every path between a vertex in $X$ and a vertex in 
-$Y$ of length at most $r$ contains a vertex from $S$. If $G$ is a graph, $B\subset V(G)$ is a set of vertices,
+$Y$ of length at most~$r$ contains a vertex from $S$. If $G$ is a graph, $B\subset V(G)$ is a set of vertices,
 and $v,w\in V(G)^d$ are two tuples of vertices, then we say that 
 $v$ and $w$ have \emph{the same quantifier rank $q$ type} over $B$
 if $v$ and $w$ satisfy exactly the same formulas of quantifier rank $q$ with parameters from $B$.
@@ -91,7 +90,6 @@ Given a valuation $v\in V(G)^X$, we write $G,v\models \phi$ to denote that $\phi
 in the graph $G$ with valuation $v$, which is defined as usual in logic, by induction on the structure of $\phi$.
 
 
-\end{change}
 
 
 It remains to prove~\cref{pro:crossing}. 
@@ -131,7 +129,7 @@ the quantifier rank $q$ type of $N^G_r[v]$. The $q$-\emph{local type} of $(G,v)$
 	of quantifier rank $q$ and with free variables~$X$,	
   if $(G,v_1)$ and $(G,v_2)$ have the same $(r,q)$-local types,
 	then
-	 $$G_1,v_1\models \phi\qquad\iff \qquad G_2,v_2\models \phi.$$
+	 $$G,v_1\models \phi\qquad\iff \qquad G,v_2\models \phi.$$
    % We call $r$ the \emph{locality radius} for quantifier rank $q$, and fix this number in what follows.
 
 %    \item \emph{(Monotonicity)} If $Y\subset X$ and $v \from X\to V(G)$
