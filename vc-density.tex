@@ -1,7 +1,6 @@
 \section{On the number of types in nowhere dense graph classes}
 
 In this section we prove \Cref{thm:vc-density} and \Cref{thm:vc-density-lower-bound}.
-\begin{change}{sz}
 	These results provide bounds on the number of types in classes of graphs which are nowhere dense, 
 	and stronger bounds for classes which have bounded expansion. 
 A class of graphs $\CCC$ has \emph{bounded expansion}
@@ -10,21 +9,21 @@ A class of graphs $\CCC$ has \emph{bounded expansion}
 	of $H$, $|E(H)|/|V(H)|$, is bounded by $d(r)$. Note that every 
 	class of bounded expansion is nowhere dense.
 	
-Throughout this section, fix a formula  $\phi(\tup x,y)$, where
-$\tup x$ is an $m$-tuple of variables and $y$ is a single variable.
+Throughout this section, fix a formula  $\phi(\tup x,\tup y)$, where
+$\tup x$ is an $m$-tuple and $\tup y$ is an $n$-tuple of variables.
 
-For a graph $G$, a set of  vertices $A\subset V(G)$, and a vertex $v\in V(G)$,
+For a graph $G$, a set of  vertices $A\subset V(G)$, and a tuple $\tup v\in V(G)^n$,
 denote
-\[\phi(A,v)=\setof{\tup a \in A^m }{ G\models\phi(\tup a,v)},\]
+\[\phi(A,\tup v)=\setof{\tup a \in A^m }{ G\models\phi(\tup a,\tup v)},\]
 and for $W\subset V(G)$, denote
-\[S_\phi(A,W)=\setof{\phi(A,v)}{ v\in W}.\]
+\[S_\phi(A,W)=\setof{\phi(A,\tup v)}{ \tup v\in W^n}.\]
 Note that $S_\phi(A,W)$ is \emph{not} symmetric in $A$ and $W$.
 We write $S_\phi(A,G)$ as a shorthand for $S_\phi(A,V(G))$.
 
 Our goal is to prove that if $G\in \CCC$, where $\CCC$ is a nowhere dense class,
-then for every $\varepsilon>0$,   $S_\phi(A,G)\le \Oof(|A|^{1+\varepsilon})$, and 
-$S_\phi(A,G)\le \Oof(|A|)$ if $\CCC$ is a class of bounded expansion.
-\end{change}
+then for every $\varepsilon>0$,   $S_\phi(A,G)\le \Oof(|A|^{n+\varepsilon})$, and 
+$S_\phi(A,G)\le \Oof(|A|^n)$ if $\CCC$ is a class of bounded expansion.
+
 
 First, observe that if $A\subseteq B$, then the number of types
 over $A$ cannot be larger than the number of types over $B$. 
@@ -93,11 +92,9 @@ Let $\CCC$ be a class of graphs.
 
 
 \begin{change}{sz}
-	Theorem~\cref{thm:vc-density} will follow easily from the above results and the following lemma.
+	\Cref{thm:vc-density} will follow easily from the above results and the following lemma.
 \begin{lemma}\label{lem:num-types-same-class}
  Let $\CCC$ be a nowhere dense class,
- % There is a polynomial $f$ depending only
- % on $\CCC$ and $\phi$ such that the following holds.
 let $G\in\CCC$ and let $B,C$ be sets of vertices with
 $C\subset B\subseteq V(G)$.
 Then, for any set of vertices $W\subset V(G)$ such that 
