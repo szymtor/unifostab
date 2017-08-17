@@ -37,7 +37,7 @@ The proof is based on translating the approach of Podewski and Ziegler~\cite{pod
 	Then there are functions $N^d\colon \N\times\N\to\N$ and $s^d\colon \N\to\N$
 	such that for all $r,m\in\N$ and all subsets $A\subset V(G)^d$
 	with $|A|\ge N^d(r,m)$ there  is a set $S\subset V(G)$
-	of size $|S|\le s^d(r)$ and a subset $B\subset A$ of size $|B|\ge m$ which is mutually $r$-independent in $G-S$.
+	of size $|S|\le s^d(r)$ and a subset $B\subset A$ of size $|B|\ge m$ which is mutually $r$-independent in $G-S$. Moreover, $N^d$ is polynomial in the second argument and $s^d$ is polynomial. 
 \end{proposition}
 
 The rest of this section is devoted to the proof of \cref{prop:uqw-tuples}.
@@ -253,7 +253,7 @@ N^d(2r,m)=K(4r,m(d^2+1))\qquad\textrm{and}\qquad s^d(2r)=d\cdot s(4r),
 $$
 where $K(4r,m')$ is the $d$-fold composition of the function $f(m')=N(4r,m')\cdot m'$.
 Thus, when establishing the values of $N^d(2r,m)$ and $s^d(2r)$, we refer to the quasi-wideness of $\CCC$ only by using numbers $s(4r)$ and $N(4r,m')$ for $m'\in \N$.
-By \cref{thm:new-uqw}, it suffices to assume that $K_t\not\minor_{10r} G$ to have $s(4r)\leq t$ and $N(4r,m')\leq c(r,t)\cdot (m')^{(2t+1)^{8rt}}$ for some computable function $c(r,t)$.
+By \cref{thm:new-uqw}, it suffices to assume that $K_t\not\minor_{10r} G$ to have $s(4r)\leq t$ and $N(4r,m')\leq c(r,t)\cdot (m')^{(8t+1)^{2rt}}$ for some computable function $c(r,t)$.
 Hence, this supposition alone, instead of full quasi-wideness of $\CCC$, is sufficient to claim that the conclusion of \cref{thm:new-uqw} holds with
 $s^d(2r)$ bounded by a computable function of $t$, $d$, and $q$, and $N^d(2r,m)$ bounded by a computable function of $m$, $t$, $d$, and $q$.
 
