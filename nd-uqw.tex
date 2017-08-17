@@ -81,14 +81,14 @@ Observe that if $K_t\not\minor_1G$, then in particular
 the $1$-subdivision of $K_t$ is excluded as a subgraph
 of $G$ (the $1$-subdivision of a graph $H$ is obtained by 
 replacing every edge of $H$ by a path of length $2$). 
-Observe furthermore that the $1$-subdivision of 
+Moreover, the $1$-subdivision of 
 $K_t$ is a bipartite graph with maximum degree $2$ on one
 side. Furthermore, it is easy to check in the 
 proof of Theorem 2.2 in~\cite{alon2003turan} 
 that $c_H\leq |V(H)|$
 in case $d=2$. Since the $1$-subdivision of $K_t$ has 
 less than $t^2$ vertices we can choose $c_t=t^2$ and
-note the following corollary.   
+conclude the following.   
 
 \begin{corollary}\label{crl:densitynd}
 Let $G$ be an $n$-vertex graph such that $K_t\not\minor_1 G$ for
@@ -96,8 +96,8 @@ some constant $t\in \N$. Then $G$ has at most
 $t^2\cdot n^{3/2}$ edges.
 \end{corollary}
 
-The following lemma ensures that we can take shallow
-minors of shallow minors and still control the situation. 
+The following lemma will allow us to get a grip of 
+shallow minors at depth larger than $1$.
 
 \begin{lemma}[adaptation of Proposition 4.11 in~\cite{sparsity}]\label{lem:combineminors}
 Let $a,b\in \N$ and let $c=\frac{(2a+1)(2b+1)-1}{2}$. 

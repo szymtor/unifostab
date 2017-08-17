@@ -14,15 +14,19 @@ $\tup x$ is an $m$-tuple and $\tup y$ is an $n$-tuple of variables.
 
 For a graph $G$, a set of  vertices $A\subset V(G)$, and a tuple $\tup v\in V(G)^n$,
 denote
-\[\phi(A,\tup v)=\setof{\tup a \in A^m }{ G\models\phi(\tup a,\tup v)},\]
-and for $W\subset V(G)$, denote
+\[\phi(A,\tup v)=\setof{\tup a \in A^m }{ G\models\phi(\tup a,\tup v)}.\]
+We call $\phi(A,\tup v)$ the \emph{$\phi$-type} of $\tup v$ \emph{over} $A$, and
+$A$ is sometimes called the \emph{parameter set}.
+For $W\subset V(G)$, denote
 \[S_\phi(A,W)=\setof{\phi(A,\tup v)}{ \tup v\in W^n}.\]
 Note that $S_\phi(A,W)$ is \emph{not} symmetric in $A$ and $W$.
-We write $S_\phi(A,G)$ as a shorthand for $S_\phi(A,V(G))$.
+We write $S_\phi(A,G)$ as a shorthand for $S_\phi(A,V(G))$. 
+The set $S_\phi(A,G)$ is therefore the set of all $\phi$-types of $n$-tuples 
+of vertices of $G$ over the parameter set $A$.
 
 Our goal is to prove that if $G\in \CCC$, where $\CCC$ is a nowhere dense class,
-then for every $\varepsilon>0$,   $S_\phi(A,G)\le \Oof(|A|^{n+\varepsilon})$, and 
-$S_\phi(A,G)\le \Oof(|A|^n)$ if $\CCC$ is a class of bounded expansion.
+then for every $\varepsilon>0$,   $|S_\phi(A,G)|\le \Oof(|A|^{n+\varepsilon})$, and 
+$|S_\phi(A,G)|\le \Oof(|A|^n)$ if $\CCC$ is a class of bounded expansion.
 
 
 First, observe that if $A\subseteq B$, then the number of types
@@ -109,7 +113,7 @@ for distinct $u, v\in W$.
 
 
 Let $q$ be the quantifier rank of the formula $\phi$,
-and let $r\in \N$ and~$T\from \N\times \N\to \N$  
+and let $r\in \N$ and~$T\from \N\times \N\times \N\to \N$  
 be as described in~\cref{pro:crossing}.
 
 As $\CCC$ is nowhere dense, there is an integer $t$ such that 
@@ -119,7 +123,7 @@ $K_t\not\minor_{\lfloor 10r/2\rfloor} G$.
 % \Oof_{r,t}{(m^{{(2t+1)}^{2rt}})}$ such that for every set $D\subseteq V(G)$
 % of size at least $N(m)$, for a given $m$, there exists a set $S\subseteq V(G)$ of size $|S|\leq t$
 % and a set $X\subseteq D\setminus S$ of size $|X|\geq m$ which is $r$-independent in $G-S$.
-Let $k\coloneqq T(q,t,1)$, where $q$ is the quantifier rank of $\phi$. In the parlance of~\cref{pro:crossing},
+Let $k\coloneqq T(q,1,t)$, where $q$ is the quantifier rank of $\phi$. In the parlance of~\cref{pro:crossing},
 $k$ is a bound on the number of $(q,S)$-local types of vertices in a graph $G$,
 for any fixed $S\subset V(G)$ with $|S|\le t$.
 
