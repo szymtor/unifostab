@@ -110,7 +110,7 @@ Let $q$ be the quantifier rank of the formula $\phi$,
 and let $r\in \N$ and~$T\from \N\times \N\times \N\to \N$  
 be as described in~\cref{pro:crossing}.
 
-Let $N^d\colon \N\times\N\to\N$ and $s^d\colon \N\to\N$ be
+$N^d\colon \N\times\N\to\N$ and $s^d\colon \N\to\N$ be
 the functions for $\CCC$ described in \Cref{prop:uqw-tuples}. 
 Let $s=s^n(2r)$, that is, we apply the function $s^d$ with
 parameters $n$ and $2r$, and let $k\coloneqq T(q,n,s)$. In the parlance of~\cref{pro:crossing},
@@ -122,7 +122,7 @@ argument.
 Let $Y\subseteq W^n$ be a maximal set of $n$-tuples 
 such that $\phi(B,\tup u)\neq \phi(B,\tup v)$ 
 for distinct $\tup u, \tup v\in Y$.
-Suppose $|Y|\geq N^n(r,k+c+1)$. Then there is a  
+Suppose $|Y|\geq N(k+c+1)$. Then there is a  
 set $S\subseteq V(G)$ of size $|S|\leq s$ 
 and a set $X\subseteq Y$ of size $|X|\geq k+c+1$ which is 
 mutually $2r$-independent in $G-S$. 
@@ -130,26 +130,23 @@ mutually $2r$-independent in $G-S$.
 %on each coordinate that contains an element of $S$ we have 
 %equality for all tuples. We now need a lemma that this is fine.} 
 
-Consider the function $\pi\from V(G)\to P(C)$,
-defined by the correspondence
- $v\mapsto M_r^{G-S}(v,B)$.
- Then, for distinct $\tup v,\tup w\in X$
- and $1\leq i,j\leq n$, 
- the sets $\pi(v_i)$ and $\pi(w_j)$ are pairwise disjoint subsets of $C$,
+Note that the function
+ $v\mapsto M_r^{G-S}(v,B)$ 
+ maps $v_i$ and $w_j$, 
+ $1\leq i,j\leq n$, for $v_i\in \tup v, w_j\in \tup w$ for distinct $\tup v,\tup w\in X$ 
+ to pairwise disjoint subsets of $C$,
 as otherwise we would have \mbox{$\dist_{G-S}(v_i,w_j)\leq 2r$},
 contradicting mutual $2r$-independence.
 As  $|X|\ge k+|C|+1$, it follows that 
 there are at least $k+1$ tuples $\tup v\in X$
-such that  $\pi(v)=\emptyset$ for every vertex $v$ appearing in $\bar v$. Let $Z$ denote the set of these tuples. Then the set of all those vertices appearing in~$Z$ and the
+for which ${M_r^{G-S}(\tup v,B)=\emptyset}$. Let $Z$ denote the set of these tuples. Then the set of all those vertices appearing in~$Z$ and the
 set $B$ are $r$-separated by~$S$.
 
-Since $|Z|\geq k+1$ there are  distinct $\tup u,\tup v\in Z$ such that 
+Since $|Z|\geq k+1$, by the pigeon-hole principle, there are  distinct $\tup u,\tup v\in Z$ such that 
 $\tup u$ and $\tup v$ have the same $(q,S)$-local types,
 and from~\cref{pro:crossing}~\cref{c:confusing} it follows that $\tup u$ and $\tup v$
 have the same quantifier rank $q$ type over $B$.
-In particular, $\phi(B,\tup u)=\phi(B,\tup v)$. Since $\tup u,\tup v\in Y$, this contradicts the definition of $Y$. This proves $|Y|\le N^n(r,k+c+1)$,
-and hence $|S_\phi(B,W)|=|Y|\le f(c)$ for 
-$f(c)= N^n(r,k+c+1)$.
+In particular, $\phi(B,\tup u)=\phi(B,\tup v)$, contrary to the assumption made at the beginning of the proof.
 \end{proof}
 
 
