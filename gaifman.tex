@@ -15,7 +15,8 @@ if $v$ and $w$ satisfy exactly the same formulas of quantifier rank $q$ with par
 
 
 
-The key technical lemma of this section is the following.
+The aim of this section is to prove the following technical lemma, which
+may be considered folklore (cf. Fig~\ref{fig:gaifman} for a graphical illustration). 
 
 
 \begin{lemma}\label{pro:crossing}	
@@ -30,8 +31,8 @@ there is a  function mapping tuples  $v\in V(G)^d$
 so that the following conditions 
 hold.
 	 \begin{enumerate}[(1)]
-	 	\item\label{c:number} The  set of  $(q,S)$-local types  of all tuples $v\in V(G)^d$  is finite and has size bounded by 
-    $T(q,d,|S|)$, for some computable function $T\from \N\times \N\times\N\to \N$ which is weakly increasing in all of its arguments.
+	 	\item\label{c:number} The  set of  $(q,S)$-local types  of all tuples $v\in V(G)^d$  has at most
+    $T(q,d,|S|)$ elements, for some computable function $T\from \N\times \N\times\N\to \N$ which is weakly increasing in all of its arguments.
 
 	
 		
@@ -64,7 +65,25 @@ have
 % \[G,u\oplus w\models \phi\iff G,v\oplus w\models \phi.\]
 	 \end{enumerate}
 \end{lemma}
-We start by introducing some notation specific to this section.
+
+\begin{figure}[h!]
+	\centering
+		\includegraphics[scale=0.3,page=1]{pics}
+	\caption{The sets $A$ and $B$ are $r$-separated by $S$
+	(here $r=3$), and the tuples $u,v$ of elements of $A$ are assumed to have  
+	the same \emph{$(q,S)$-local type}, where $q\sim \log r$. This implies that 
+	for every first-order formula $\phi(\bar x,\bar y)$ of quantifier rank
+	$q$
+	(where $|\bar x|=|u|=|v|$)
+	and every tuple $w$ of $|\bar y|$ elements of $B$,	
+	  $\phi(u,w)$ holds in $G$ iff 
+	 $\phi(v,w)$ holds in $G$.
+	}
+	\label{fig:gaifman}
+\end{figure}
+
+The rest of Section~\ref{sec:gaifman} is devoted to the proof of~\cref{pro:crossing}.
+We start by introducing some notation which will be used in this proof only.
 
 We consider only finite sets of variables, and any mathematical object can be considered a variable 
 (formally, whenever we want to treat an object $a$ as a variable, we introduce a variable~$x_a$, where~$x$ is a fixed special symbol).
@@ -162,7 +181,7 @@ the quantifier rank $q$ type of $N^G_r[v]$. The $q$-\emph{local type} of $(G,v)$
 immediate consequence of Gaifman's Locality Theorem
 (the Main Theorem~in~\cite{gaifman1982local}),
 where it is shown that one can take $r=7^q$.
-It is also known (cf. Corollary~4.13 in \cite{libkin}) that it suffices to take $r=\frac{3^{q+1}-1}2$.
+It is also known (cf. Exercise~4.10 in \cite{libkin}) that it suffices to take $r=2^q$; this bound is tight.
 
 
 % We say that a formula $\phi(\bar x)$ with $d=|\bar x|$ free variables is \emph{$q$-local} if for every colored graph $G$ and every $\bar a_1,\bar a_2\in V(G^d)$, if  $N^G_r(\bar a_1)$ and  $N^G_r(\bar a_2)$
