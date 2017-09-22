@@ -168,7 +168,8 @@ Both uniform quasi-wideness and stability techniques are key tools used in the s
 and in particular in the design of polynomial kernelization procedures for this problem~\cite{DawarK09,drange2016kernelization,eickmeyer2016neighborhood,siebertz2016polynomial}.
 
 \paragraph{VC-dimension and VC-density.} The notion of VC-dimension was introduced by 
-Vapnik and Chervonenkis~\cite{chervonenkis1971theory} and 
+Vapnik and Chervonenkis~\cite{chervonenkis1971theory} as a measure of complexity of set systems, or equivalently of hypergraphs.
+Over the years it
 has found important applications in many areas of
 statistics, discrete and computational geometry, 
 and learning theory. The concept found its way to
@@ -180,11 +181,10 @@ in each model, each definable family of sets has finite
 VC-dimension.
 
 Formally, VC-dimension is defined as follows. 
-Let $A$ be a set and let  $\FFF\subseteq \PPP ow(A)$ 
-be a family of subsets of $A$. For a set
- $X\subseteq A$ let $X\cap \FFF\coloneqq\{X\cap F : F\in \FFF\}$.
-The set $X$ is \emph{shattered by $\FFF$} if
-$X\cap \FFF=\PPP ow(X)$. 
+Let $A$ be a set and let  $\FFF\subseteq 2^A$ 
+be a family of subsets of $A$.
+A subset $X\subseteq A$ is \emph{shattered by $\FFF$} if
+$\{X\cap F\colon F\in \FFF\}=2^X$; that is, every subset of $X$ can be obtained as the intersection of some set from $\FFF$ with $X$. 
 The \emph{Vapnik-Chervonenkis-dimension}, short 
 \emph{VC-dimension},
 of $\FFF$ is the maximum size of a set $X$ that is shattered by
@@ -218,20 +218,21 @@ VC-density when we studied the parameterized
 complexity of the {\sc Distance-$r$ Dominating Set} 
 problem on nowhere dense graph classes~\cite{eickmeyer2016neighborhood}. 
 One of the main contributions of \cite{eickmeyer2016neighborhood}
-was to prove that nowhere dense classes of graphs have small
+was to prove that nowhere dense classes of graphs have almost linear
 \emph{distance neighborhood complexity}. More precisely, it
 was proved that for every nowhere dense class~$\CCC$ of 
 graphs, every positive integer $r$ and every $\epsilon>0$ there
 exists a constant $c$ such that for every graph $G\in\CCC$ and
 every vertex subset $A\subseteq V(G)$, the set of distance-$r$ neighborhood intersections with $A$,
-$\{N_r[v]\cap A : v\in V(G)\}$,
+$\{N_r[v]\cap A \colon v\in V(G)\}$,
 has size bounded by $c\cdot |A|^{1+\epsilon}$. This result
 generalizes a result of Reidl et al.~\cite{reidl2016characterising}, who proved that classes of bounded expansion have linear distance neighborhood complexity. 
 
-The property of having distance at most $r$ in a graph is 
-a first-order definable property. 
+Our goal is to generalizes the above result to the larger context of VC-density of first-order definable set families.
+Note that the property of being at distance at most $r$ in a graph is 
+a first-order definable property, for every constant $r$.
 VC-density in model theory studies the asymptotic growth 
-of arbitrary finite definable families. More precisely, 
+of arbitrary definable families. More precisely, 
 let $\psi(\tup x,\tup y)$ be a first-order formula, where 
 $\tup x$ is an $m$-tuple and $\tup y$ is an $n$-tuple of variables. 
 Let $\strA$ be a structure and let $A$ be a set of elements of
@@ -239,26 +240,33 @@ $\strA$. Then the set of \emph{$\psi$-types} or
 \emph{$\psi$-traces} over $A$ in 
 $\strA$ is the set
 \[S_\psi(\strA,A)=\{\{\tup a\ \in A^m : \strA\models\psi(\tup a,\tup b)\} : \tup b\in V(\strA)^n\}.\]
+The set $S_\psi(\strA,A)$ is also known as the {\em{Stone space}} of $\psi$ over $A\subseteq \strA$.
+
+It is known that in (infinite) model theory,
+measuring cardinality of Stone spaces can be used to characterize when a formula $\psi$ is stable on a class of models (i.e., does not define arbitrarily long ladders).
+In a nutshell, this is the case if and only if for every model $\strA$ of interest and every infinite set of its elements $A$, say of cardinality at most $\kappa$ for a cardinal $\kappa$,
+the cardinality of $S_\psi(\strA,A)$ is at most $\kappa$. We refer to~\cite{}\todo{Citation needed} for more information.
 
 We prove the following theorem concerning the number of
-types in sparse graph classes. 
+types in sparse graph classes.
 
 \begin{theorem}\label{thm:vc-density}
-Let $\CCC$ be a class of graphs and let $\psi(\tup x,y)$ be a first-order formula, where 
+Let $\CCC$ be a class of graphs and let $\psi(\tup x,\tup y)$ be a first-order formula, where 
 $\tup x$ is an $m$-tuple and $\tup y$ is an $n$-tuple of variables. 
 \begin{enumerate}
 \item If $\CCC$ is nowhere dense, then for every $\epsilon>0$ 
-there exists a constant~$c$ such that for every $G\in \CCC$ and every
+there exists a constant~$c$ such that for every $G\in \CCC$ and every nonempty
 $A\subseteq V(G)$, we have $|S_\psi(A,G)|\leq c\cdot |A|^{n+\epsilon}.$
 
-\item If $\CCC$ has bounded expansion, then there exists a constant~$c$ such that for every $G\in \CCC$ and every $A\subseteq V(G)$, we have $|S_\psi(A,G)|\leq c\cdot |A|^n$.
+\item If $\CCC$ has bounded expansion, then there exists a constant~$c$ such that for every $G\in \CCC$ and every nonempty $A\subseteq V(G)$, we have $|S_\psi(A,G)|\leq c\cdot |A|^n$.
 \end{enumerate}
 \end{theorem}
 
-Another way to state the theorem is to say that the number
+Intuitively, \cref{thm:vc-density} states the number
 of $\psi$-types over $A$ in a nowhere dense class 
-converges to $|A|^n$ as $|A|$ goes
-to infinity. 
+is bounded almost linearly in $|A|^n$, the total number number of $n$-tuples of vertices from $A$. 
+\cref{thm:vc-density} also generalizes the recent result of Bobkov~\cite{bobkov2017computations} that nowhere dense classes
+are {\em{dp-minimal}}, a notion introduced by Shelah~\cite{shelah2014strongly} that we will not use here.
 
 %Formulated in terms of VC-density, for every nowhere 
 %dense class of graphs and every first-order formula $\psi(\tup x,\tup y)$
@@ -266,8 +274,6 @@ to infinity.
 %\[\limsup_{a\rightarrow \infty}\max_{\substack{G\in\CCC\\A\subseteq
 %    V(G), |A|=a}}\frac{\log |S_\psi(A,G)|}{\log a}\leq n.\]
 
-Our result generalizes the recent result of Bobkov~\cite{bobkov2017computations} that nowhere dense classes
-are dp-minimal (a notion introduced by Shelah~\cite{shelah2014strongly}). 
 
 %
 %
@@ -307,12 +313,7 @@ with $|S_\psi(A,G)|>f(|\psi|)\cdot |A|$.
 \end{theorem}
 %\end{change}
 
-\paragraph{Acknowledgment. } The second author would like to 
-thank Patrice Ossona de Mendez for pointing him to the 
-question of studying VC-density of nowhere dense graph 
-classes. 
-
-\pagebreak
+%\pagebreak
 
 
 % Finally, we observe that an argument of Bousquet and

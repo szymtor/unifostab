@@ -1,6 +1,6 @@
 
 TEX=pdflatex
-MAIN=nd-stable
+MAIN=nd-stable-new
 MAINFILE=$(MAIN).pdf
 BIBFILE=ref.bib
 TEXFILES :=  $(wildcard *.tex)
