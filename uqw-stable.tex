@@ -173,24 +173,26 @@ We now prove~\cref{thm:uqw-stable}, i.e.,
 that any uniformly quasi-wide  class of graphs $\CCC$ is stable.
 
 \begin{proof}%[of \cref{thm:uqw-stable}]
-Fix a formula $\phi$ of quantifier rank $q$ and with free variables $X$, partitioned into disjoint sets $Y,Z$.
-For $d=|X|$,
+Fix a formula $\phi(\bar y,\bar z)$ of quantifier rank $q$ and
+a partitioning of its 
+free variables $\bar x$ into tuples $\bar y$ and $\bar z$.
+For $d=|\bar x|$,
 let $N^d(\cdot,\cdot)$ and $s^d(\cdot)$ be functions yielded by \cref{prop:uqw-tuples}.
 Let $T(\cdot,\cdot,\cdot)$ and $r(\cdot)$ be the functions given by \cref{pro:crossing}.
 
 We show that 
 every $\phi$-ladder in a graph $G\in\cal C$ has length smaller than $\ell$. 
 For the sake of contradiction, assume that there is a graph $G\in\cal C$, a number $k\ge \ell$,
-and valuations $u_1,\ldots,u_k\in V(G)^Y$ and $ v_1,\ldots, v_k\in V(G)^Z$
+and tuples $u_1,\ldots,u_k\in V(G)^{|\bar y|}$ and $ v_1,\ldots, v_k\in V(G)^{|\bar z|}$
 which form a $\phi$-ladder in $G$.
-Denote $w_i=u_i\oplus v_i$, for $i=1,\ldots,k$.
+Denote $w_i=(u_i, v_i)$, for $i=1,\ldots,k$.
 	Let $A=\set{ w_i\colon i=1,\ldots,k}\subset V(G)^X$; note that $|A|=k$.
 Applying \cref{prop:uqw-tuples} to the set $A$, radius $2r$, and target size $m$
 		 yields a set $S\subset V(G)$ with $|S|\le s^d(2r)$
 	and a set $B\subset A$ with $|B|\geq m$ 
 such that for all $i,j$ such that $w_i,w_j\in B$
 	and $w_i\neq w_j$,
-	the valuations $u_i$ and $v_j$ are $2r$-independent in $G-S$.
+	the tuples $u_i$ and $v_j$ are $2r$-independent in $G-S$.
 		Let $M=\bigcup_{w\in B} w(Y)$
 		and let $N=\bigcup_{w\in B} w(Z)$.
 	 Then $M$ and $N$ are $r$-separated by $S$.
@@ -228,8 +230,8 @@ since $w_i$ and $w_j$ are
 mutually $r$-independent in $G-S$.
 
 From~\cref{pro:crossing} it follows that $w_i$ and $w_j$ have the same quantifier rank $q$ type over $M$.
-In particular, $u_e\oplus w_i\models\phi$ if and only if 
-$u_e\oplus w_j\models\phi$,
+In particular, $\phi(u_e, w_i)$ holds in $G$ if and only if 
+$\phi(u_e, w_j)$ holds in $G$,
 contradicting the assumption that $u_1,\ldots, u_k$ and $ v_1,\ldots, v_k$ form a $\phi$-ladder. This finishes the proof of \cref{thm:uqw-stable}.
 \end{proof}
 

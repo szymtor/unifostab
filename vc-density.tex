@@ -52,6 +52,17 @@ can be connected to $u$ by a $B$-avoiding path of length at most $r$. Note that 
 %$A$ to $\{0,1,\ldots,r,\infty\}$, defined as follows: for every $v\in A$, the value $\rho^G_r[u,A](v)$ is the length of a shortest $A$-avoiding path connecting $u$ and~$v$, and~$\infty$ in case this length
 %is larger than $r$. 
 %
+\begin{figure}[h!]
+	\centering
+		\includegraphics[scale=0.35,page=2]{pics}
+	\caption{The  $r$-projection of $u$ on $B$
+	(here $r=2$)
+	is the minimal (inclusion-wise) set of $S\subset B$
+	which $r$-separates $ u$ from $B$.
+	}
+	\label{fig:gaifman}
+\end{figure}
+
 We define 
 \[\projnum_r(G,B)=|\{M_r^G(u,B)\colon u\in V(G)\setminus B\}|\]
 %\quad\textrm{and}\quad \projprof_r(G,A)=|\{\rho_r^G[u,A]\colon %u\in V(G)\setminus A\}|\]
@@ -98,7 +109,60 @@ Let $\CCC$ be a nowhere dense class. Then for every $r\in \N$ and $\epsilon>0$ t
 We note that in~\cite{drange2016kernelization,eickmeyer2016neighborhood} projections on $B$ are defined only for vertices outside of $B$. 
 However, adding singleton projections for vertices of $B$ to the definition only adds $|B|$ possible projections of size $1$ each, so this does not influence the validity of the above results.
 
+\begin{comment}
+\begin{figure}[t]
+	\centering
+		\includegraphics[scale=0.35,page=3]{pics}
+	\caption{Summarization of closures and projections in the nowhere dense case, i.e., \Cref{lem:closure-nd} and \Cref{lem:projection-complexity-nd}. The $r$-closure $B$ of $A$ has the following three properties:
+(a) its size is  $\Oof(|A|^{1+\epsilon})$,
+(b) it has at most $\Oof(|B|^{1+\epsilon})$ distinct $r$-projections,
+(c) every $r$-projection has size $\Oof(|B|^\epsilon)$.
+}
+	\label{fig:closure}
+\end{figure}
+
+We informally sketch our proof of~\cref{thm:vc-density} in Figure~\ref{fig:sketch}.
+\begin{figure}[h!]
+	\centering
+		\includegraphics[scale=0.35,page=4]{pics}
+	\caption{Sketch of the proof of~\cref{thm:vc-density}. The precise values $\epsilon_1,\ldots,\epsilon_5$ need to be adapted suitably.
+	%We rescale $\epsilon$	freely in the arguments.
+	Fix $\phi$ of quantifier rank $q$ and let 
+$r$ be the number obtained from~\cref{pro:crossing}.
+Let $B$ be the $r$-closure of $A$. 
+	Suppose that there are $|B|^{1+\epsilon_1}$ nodes with
+	mutually distinct $\phi$-types over $B$.
+	In the first step, we extract a set of $|B|^{\epsilon_3}$
+	nodes which have the same $r$-projection $C$ to $B$;
+	thus, they are $r$-separated from $B$ by $C$.
+In the second step, using uniform quasi-wideness
+with polynomial bounds,
+	we further extract a subset of $|B|^{\epsilon_3/d}=|B|^{\epsilon_4}$ nodes
+	(where $d$ is some constant)
+	 which 
+	are pairwise $2r$-separated by $S$, for some set of vertices $S$
+	of constant size.
+Since $|C|\le|B|^{\epsilon_2}$ 
+it is easy to see that among these
+	$|B|^{\epsilon_4}$ nodes,
+there must be $|B|^{\epsilon_5}$
+nodes which are $r$-separated from $B$ by $S$.
+	Since $|S|$ is a constant,
+	there is only a constant number of $(q,S)$-local types,
+	so there must be two nodes $u,v$
+	with the same $(q,S)$-local types, 
+	which are $r$-separated from $B$ by $S$.
+	By~\cref{pro:crossing}, $u$ and $v$ have the same types over $B$. This is a contradiction with the assumption the initial nodes $|B|^{1+\epsilon_1}$ had distinct $\phi$-types over $B$.	
+	}
+	\label{fig:sketch}
+\end{figure}
+For a formal proof, we formulate the following lemma,
+which corresponds to the reasoning depicted in the figures caption,
+starting from the point where a set of vertices with the same $r$-projection has been already selected.
+\end{comment}
+
 \Cref{thm:vc-density} will follow easily from the above results and the following lemma.
+
 \begin{lemma}\label{lem:num-types-same-class}
 Let $\CCC$ be a nowhere dense class.
 Then there exists a polynomial $p(\cdot)$, depending only on $\CCC$ and the fixed formula $\phi$, such that for every graph $G\in\CCC$ and all sets of its vertices $B,C$ with
@@ -168,6 +232,7 @@ $A\subseteq V(G)$, we have $|S_\psi(A,G)|\leq c\cdot |A|^{n+\epsilon}.$
 \item If $\CCC$ has bounded expansion, then there exists a constant~$c$ such that for every $G\in \CCC$ and every nonempty $A\subseteq V(G)$, we have $|S_\psi(A,G)|\leq c\cdot |A|^n$.
 \end{enumerate}
 \end{theorem}
+
 \begin{proof}
 We prove the statement about nowhere dense classes of graphs,
 the bounded expansion case is proved analogously using \Cref{lem:closure-be} and \Cref{lem:projection-complexity-be} instead of \Cref{lem:closure-nd} and \Cref{lem:projection-complexity-nd}.
