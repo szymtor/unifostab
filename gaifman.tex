@@ -1,7 +1,6 @@
 \section{Gaifman locality}\label{sec:gaifman}
 In this section, we extract from Gaifman's Locality Theorem~\cite{gaifman1982local} a technical lemma
-(\cref{pro:crossing} below), which will be used later on two different occasions (in the proofs of~\cref{thm:uqw-stable} and
-of~\cref{thm:vc-density}).
+(\cref{pro:crossing} below), which will be used later in two different settings: in the proofs of \cref{thm:vc-density} and of \cref{thm:uqw-stable}.
 
 
 
@@ -9,14 +8,17 @@ If $X,Y,S\subset V(G)$ are sets of vertices of a graph $G$
 and $r\in \N$, then we say that $X$ and $Y$ are  \emph{$r$-separated}
 by $S$  (in $G$) if every path between a vertex in $X$ and a vertex in 
 $Y$ of length at most~$r$ contains a vertex from $S$. If $G$ is a graph, $B\subset V(G)$ is a set of vertices,
-and $v,w\in V(G)^d$ are two tuples of vertices, then we say that 
-$v$ and $w$ have \emph{the same quantifier rank $q$ type} over $B$
-if $v$ and $w$ satisfy exactly the same formulas of quantifier rank $q$ with parameters from $B$.
+and $u,v\in V(G)^d$ are two tuples of vertices, then we say that 
+$u$ and $v$ have \emph{the same quantifier rank $q$ type} over $B$
+if $u$ and $v$ satisfy exactly the same formulas of quantifier rank $q$ with parameters from $B$.
+Precisely,
+for every $k\in \N$, every tuple $u\in B^{k}$ of $k$ elements of $B$, and every formula $\phi$ of quantifier rank $q$ and with $d+k$ free variables, we have that $\phi(u,w)$ holds if and only if $\phi(v,w)$ holds.
 
 
 
-The aim of this section is to prove the following technical lemma, which
-may be considered folklore (cf. Fig~\ref{fig:gaifman} for a graphical illustration). 
+
+In this section we prove the following technical lemma, which
+may be considered folklore. %(cf. Fig~\ref{fig:gaifman} for a graphical illustration). 
 
 
 \begin{lemma}\label{pro:crossing}	
@@ -66,6 +68,7 @@ have
 	 \end{enumerate}
 \end{lemma}
 
+\begin{comment}
 \begin{figure}[h!]
 	\centering
 		\includegraphics[scale=0.3,page=1]{pics}
@@ -81,6 +84,7 @@ have
 	}
 	\label{fig:gaifman}
 \end{figure}
+\end{comment}
 
 The rest of Section~\ref{sec:gaifman} is devoted to the proof of~\cref{pro:crossing}.
 We start by introducing some notation which will be used in this proof only.

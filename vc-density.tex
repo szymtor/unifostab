@@ -44,7 +44,7 @@ was first used in Drange et al.~\cite{drange2016kernelization} in the context of
 and then for nowhere dense classes in Eickmeyer et al.~\cite{eickmeyer2016neighborhood}. 
 Let us recall the necessary definitions.
 
-Let $G$ be a graph and let $B\subseteq V(G)$ be a subset of vertices. For vertices $v\in B$ and $u\in V(G)\setminus B$, a path $P$ connecting $u$ and $v$ is called {\em{$B$-avoiding}}
+Let $G$ be a graph and let $B\subseteq V(G)$ be a subset of vertices. For vertices $v\in B$ and $u\in V(G)$, a path $P$ connecting $u$ and $v$ is called {\em{$B$-avoiding}}
 if all its vertices apart from~$v$ do not belong to $B$. For a positive integer $r$ and $u\in V(G)$, the {\em{$r$-projection}} of $u$ on $B$, denoted $M^G_r(u,B)$, is the set of all vertices $v\in B$ that
 can be connected to $u$ by a $B$-avoiding path of length at most $r$. Note that for $u\in B$, we have $M^G_r(u,B)=\{b\}$.
 %
@@ -52,6 +52,7 @@ can be connected to $u$ by a $B$-avoiding path of length at most $r$. Note that 
 %$A$ to $\{0,1,\ldots,r,\infty\}$, defined as follows: for every $v\in A$, the value $\rho^G_r[u,A](v)$ is the length of a shortest $A$-avoiding path connecting $u$ and~$v$, and~$\infty$ in case this length
 %is larger than $r$. 
 %
+\begin{comment}
 \begin{figure}[h!]
 	\centering
 		\includegraphics[scale=0.35,page=2]{pics}
@@ -62,9 +63,10 @@ can be connected to $u$ by a $B$-avoiding path of length at most $r$. Note that 
 	}
 	\label{fig:gaifman}
 \end{figure}
+\end{comment}
 
 We define 
-\[\projnum_r(G,B)=|\{M_r^G(u,B)\colon u\in V(G)\setminus B\}|\]
+\[\projnum_r(G,B)=|\{M_r^G(u,B)\colon u\in V(G)\}|\]
 %\quad\textrm{and}\quad \projprof_r(G,A)=|\{\rho_r^G[u,A]\colon %u\in V(G)\setminus A\}|\]
 to be the number of different $r$-projections on $B$.
 In the sequel, we will need the following results from~\cite{drange2016kernelization,eickmeyer2016neighborhood}.
@@ -77,7 +79,7 @@ every $G\in \CCC$ and $X\subseteq V(G)$ there exists a set $\cl_r(X)$, called an
 \begin{enumerate}[(a)]
   \item $X\subseteq \cl_r(X)\subseteq V(G)$;
   \item $|\cl_r(X)|\leq c\cdot |X|$; and
-  \item $|M_r^G(u,\cl_r(X))|\leq c$ for each $u\in V(G)\setminus \cl_r(X)$.
+  \item $|M_r^G(u,\cl_r(X))|\leq c$ for each $u\in V(G)$.
 \end{enumerate}
 \end{lemma}
 
@@ -90,7 +92,7 @@ with the following properties:
 \begin{enumerate}[(a)]
   \item $X\subseteq \cl_r(X)\subseteq V(G)$;
   \item $|\cl_r(X)|\leq c\cdot |X|^{1+\epsilon}$; and
-  \item $|M_r^G(u,\cl_r(X))|\leq c\cdot |X|^{\epsilon}$ for each $u\in V(G)\setminus \cl_r(X)$.
+  \item $|M_r^G(u,\cl_r(X))|\leq c\cdot |X|^{\epsilon}$ for each $u\in V(G)$.
 \end{enumerate}
 \end{lemma}
 
