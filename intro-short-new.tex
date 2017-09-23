@@ -240,7 +240,7 @@ $\strA$. Then the set of \emph{$\psi$-types} or
 \emph{$\psi$-traces} over $A$ in 
 $\strA$ is the set
 \[S_\psi(\strA,A)=\{\{\tup a\ \in A^m : \strA\models\psi(\tup a,\tup b)\} : \tup b\in V(\strA)^n\}.\]
-The set $S_\psi(\strA,A)$ is also known as the {\em{Stone space}} of $\psi$ over $A\subseteq \strA$.
+The set $S_\psi(\strA,A)$ is also known as the {\em{Stone space}} induced by $\psi$ over $A\subseteq \strA$.
 
 It is known that in (infinite) model theory,
 measuring cardinality of Stone spaces can be used to characterize when a formula $\psi$ is stable on a class of models (i.e., does not define arbitrarily long ladders).
@@ -262,7 +262,7 @@ $A\subseteq V(G)$, we have $|S_\psi(A,G)|\leq c\cdot |A|^{n+\epsilon}.$
 \end{enumerate}
 \end{theorem}
 
-Intuitively, \cref{thm:vc-density} states the number
+Intuitively, \cref{thm:vc-density} states that the number
 of $\psi$-types over $A$ in a nowhere dense class 
 is bounded almost linearly in $|A|^n$, the total number number of $n$-tuples of vertices from $A$. 
 \cref{thm:vc-density} also generalizes the recent result of Bobkov~\cite{bobkov2017computations} that nowhere dense classes
@@ -294,23 +294,25 @@ are {\em{dp-minimal}}, a notion introduced by Shelah~\cite{shelah2014strongly} t
 %\Cref{thm:vc-density} shows a strong new connection 
 %	between first-order logic and the notions of bounded expansion
 %	and nowhere denseness.
-It is not difficult to see that this result also yields new dichotomies 
-characterizing classes which are nowhere dense  or have bounded expansion, obtained by combining~\cref{thm:vc-density}
-with the complementary result stated below.
+It is not difficult to see that \cref{thm:vc-density} also yields new
+characterizations of nowhere dense classes and classes of bounded expansion in terms of VC-density, as explained in the following complelemtary result.
 
 \begin{theorem}\label{thm:vc-density-lower-bound}
 Let $\CCC$ be a class of graphs which 
 is closed under taking subgraphs. 
-\begin{enumerate}
+\begin{enumerate}[(1)]
 \item If $\CCC$ is somewhere dense, then there is a formula 
 $\psi(x,y)$ such that for every $n\in \N$ there are $G\in\CCC$ and $A\subseteq V(G)$ 
-with $|A|\geq n$ and $|S_\psi(A,G)|=2^{|A|}$. 
+with $|A|=n$ and $S_\psi(A,G)=2^{A}$. 
 \item If $\CCC$ has unbounded expansion, then there is a formula 
-$\psi(x,y)$ such that for every function $f:\N\rightarrow \N$ 
-there are $G\in\CCC$ and $A\subseteq V(G)$ 
-with $|S_\psi(A,G)|>f(|\psi|)\cdot |A|$. 
+$\psi(x,y)$ such that for every $c\in \mathbb{R}$ there exist $G\in\CCC$ and $A\subseteq V(G)$ with $|S_\psi(A,G)|>c|A|$. 
 \end{enumerate}
 \end{theorem}
+
+\paragraph{Organization.} In \cref{sec:uqw} we recall standard concepts from the theory of sparse graphs and prove \cref{thm:new-uqw}.
+\cref{sec:gaifman} we discuss Gaifman locality for first-order logic and derive some tools that will be used later.
+Then, in \cref{sec:stable} we prove \cref{thm:new-stable}, whereas in \cref{sec:types} we prove \cref{thm:vc-density} and \cref{thm:vc-density-lower-bound}.
+
 %\end{change}
 
 %\pagebreak
