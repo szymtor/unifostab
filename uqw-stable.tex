@@ -17,141 +17,14 @@ Thus \cref{thm:uqw-stable} is implied by \cref{thm:new-stable} (stated in \cref{
 of any formula that depends only on the size of an excluded clique minor on a levels bounded in terms of formula's quantifier rank and number of free variables. At the end of the proof we argue that
 the obtained bounds in fact also imply the stronger statement of \cref{thm:new-stable}, but for the clarity of presentation we find it more instructive to work with the cleaner formulation of \cref{thm:uqw-stable}.
 
-The plan is as follows. In \cref{sec:uqw-tuples} we formulate a variant of uniform quasi-wideness tailored to tuples of vertices. Using this and Gaifman's Locality Theorem, we prove \cref{thm:uqw-stable} in \cref{sec:uqw-stable}.
+% The plan is as follows. In \cref{sec:uqw-tuples} we formulate a variant of uniform quasi-wideness tailored to tuples of vertices. Using this and Gaifman's Locality Theorem, we prove \cref{thm:uqw-stable} in \cref{sec:uqw-stable}.
 
 
-\subsection{Uniform quasi-widness for tuples}\label{sec:uqw-tuples}
-Fix a graph $G$, the dimension $d\in\N$, and the radius $r\in \N$.
-If $S\subset V(G)$ is a set of vertices and $A\subset V(G)^d$ is a set of $d$-tuples of vertices,
-then we say that $A$ is \emph{mutually $r$-independent} in $G-S$ 
-if for every two distinct $(u_1,\ldots,u_d),(v_1,\ldots,v_d)\in A$
-and for all $1\le i,j\le d$, the distance between the vertices $u_i$ and $v_j$ in the graph $G-S$
-is larger than $r$. Throughout this section we use the convention that if $x\in S$, then the distance in $G-S$ between $x$ and any vertex, including~$x$ itself, is infinity. 
-For instance, in the definition above, the tuples from $A$ may contain vertices of~$S$, and such a vertex is considered infinitely far from every vertex.
-
-We now prove the following proposition, which can be viewed as an extension of uniform quasi-wideness to tuples.
-The proof is based on translating the approach of Podewski and Ziegler~\cite{podewski1978stable} to the finite.
-
-\begin{proposition}\label{prop:uqw-tuples}
-	Let $\cal C$ be a uniformly quasi-wide class of graphs and $d\in\N$ be an integer.
-	Then there are functions $N^d\colon \N\times\N\to\N$ and $s^d\colon \N\to\N$
-	such that for all $r,m\in\N$ and all subsets $A\subset V(G)^d$
-	with $|A|\ge N^d(r,m)$ there  is a set $S\subset V(G)$
-	of size $|S|\le s^d(r)$ and a subset $B\subset A$ of size $|B|\ge m$ which is mutually $r$-independent in $G-S$. Moreover, $N^d$ is polynomial in the second argument and $s^d$ is polynomial. 
-\end{proposition}
-
-The rest of this section is devoted to the proof of \cref{prop:uqw-tuples}.
-Fix a uniformly quasi-wide class $\cal C$ and functions $N\colon \N\times\N\to \N$
-	and $s\colon \N\to\N$ as in the definition of uniform quasi-wideness.
-	Let $d\in \N$ be a fixed dimension.
-		For a fixed graph $G\in \cal C$  and
-	  coordinate $i\in\set{1,\ldots,d}$, let $\pi_i$ denote the projection from $V(G)^d$ onto the $i$th coordinate.
-
-	
 
 
-\begin{lemma}\label{lem:step1} For any $r,m\in \N$ there is an integer $K(r,m)$ such that
-	for any given $A\subset V(G)^d$ with $|A|\ge K(r,m)$,
-	there is a set $B\subset A$ with $|B|\ge m$ and a set $S\subset V(G)$ with $|S|\le d\cdot s(r)$, 
-	such that for each coordinate $i\in\set{1,\ldots,d}$ and all distinct $\bar x,\bar y\in B$,
- $\pi_i(\bar x)$ and $\pi_i(\bar y)$ are at distance greater than $r$ in $G-S$. 
-\end{lemma}
-\begin{proof}
-We will iteratively apply the following claim.
 
-%Let $f\colon \N\to \N$ be defined as $f(m)=N(r,m)\cdot m$ for $m\in\N$.
-
-\begin{claim}\label{claim:ith-coord}
-Fix a coordinate $i\in\set{1,\ldots,d}$, an integer $m'\in\N$, and a  set $A'\subset V(G)^d$ with  $|A'|\ge N(r,m')\cdot m'$.
-Then there is a set $B'\subset D$ with $|B'|\ge m'$
-and a set $S'\subset V(G)$ with $|S'|\le  s(r)$, such that for all distinct $\bar x,\bar y\in B$,
- $\pi_i(\bar x)$ and $\pi_i(\bar y)$ are at distance greater than $r$ in $G-S$. 
- %\marginpar{observe that we prove something stronger here: if we choose elements of $S$, then these are equal on each coordinate and this will be needed in the later lemma.}
-\end{claim}
-\begin{clproof}
-We consider two cases.
-
-If $\pi_i(A')\subset V(G)$ has at least $N(r,m')$ elements, then we apply the definition of uniform quasi-wideness to $\pi_i(A')\subset V(G)$. This yields sets $S'\subset V(G)$ and $B''\subset \pi_i(A')$
-such that $|B''|\ge m'$, $|S'|\le s(r)$, and $B''$ is $r$-independent in $G-S'$. 
-Let $B'\subseteq A'$ be a subset of tuples constructed as follows: for each $u\in B''$, include in $B'$ one arbitrarily chosen tuple $\bar x\in A'$ such that $\pi_i(\bar x)=u$.
-Clearly $|B'|=|B''|\ge m'$ and for all distinct $\bar x,\bar y\in B'$, we have that $\pi_i(\bar x)$ and $\pi_i(\bar y)$ are distinct and at distance greater than $r$ in $G-S$; this is because $B''$ is $r$-independent
-in $G-S$. Hence $B'$ and $S'$ satisfy all the required properties.
-
-If $\pi_i(A')$ has less than $N(r,m')$ elements, then choose the element $a\in\pi_i(A')$ whose inverse image $\pi_i^{-1}(\set a)\cap A'$ has the largest cardinality. Let $S'=\set{a}$ 
-and let $B'=\pi_i^{-1}(\set a)$. Then $$|B'|\ge \frac{|A'|}{|\pi_i(A')|}\ge \frac{|A'|}{N(r,m')}\ge \frac {N(r,m')\cdot m'}{N(r,m')}=m',$$
-and $|S'|=1$. Observe that $\pi_i(\bar x)=a$ for all $\bar x\in A'$. As $a\in S$, by the adopted convention, $\pi_i(\bar x)$ and $\pi_i(\bar y)$ are at infinite distance for all distinct $\bar x,\bar y\in B$.
-\end{clproof}
-
-We proceed with the proof of \cref{lem:step1}.
-Let $f(m')=N(r,m')\cdot m'$ for $m'\in\N$; by $f^k$ we denote the $k$-fold composition of $f$ with itself.
-Let $A\subset V(G)^d$ be such that $|A|\ge f^d(m)$. 
-Define $B_0=A$, $S_0=\emptyset$, and for $i=1,\ldots,d$,
-let $B_{i}$ and $S_i$ be the $B'$ and $S'$ obtained from \cref{claim:ith-coord} applied to the set of tuples $B_{i-1}\subset V(G)^d$, the coordinate $i$, and $m'=f^{d-i}(m)$. 
-The invariant is that $|B_i|\ge f^{d-i}(m)$.
-In particular, 
-taking $B=B_d$ and $S=S_1\cup\ldots \cup S_d$, we obtain that $|B|\ge m$ and $|S|\le d\cdot s(r)$, and, by construction, $\pi_i(B)$
-is $r$-independent in $G-S$ for every coordinate $i\in\set{1,\ldots,d}$. Letting $K(r,m)=f^d(m)$ yields the lemma.
-\end{proof}
-
-
-\begin{lemma}\label{lem:step2}
-	Let $B\subset V(G)^d$ and $S\subset V(G)$ be such that 
-  %\begin{itemize}
-	%\item
-   for all $i\in \set{1,\ldots,d}$,
-	$\pi_i(B)$ is $2r$-independent in $G-S$.
-  % \item for each tuple $\bar a\in B$, the set of entries of $\bar a$ is $r$-independent in $G-S$.
-%	\end{itemize}
-	Then there is a set $C$ with $C\subset B$ 
-	such that $C$ is mutually $r$-independent in $G-S$
-	and $|C|\geq\frac{|B|}{d^2+1}$.
-\end{lemma}
-\begin{proof}
-We construct a sequence $C_0\subset C_1\subset \ldots$ of subsets of $B$ which are mutually $r$-independent in $G-S$, as follows.
-
-We start with $C_0=\emptyset$. Suppose that $C_s\subset B$ is 
- already constructed for some $s\ge 0$
- and is mutually $r$-independent in $G-S$; we construct $C_{s+1}$. With each element $a\in B-C_s$,
-we associate an arbitrarily chosen function $f_a\colon \set{1,\ldots,d}^2\to C_s\cup \set{\bot}$
-with the following properties:
-\begin{itemize}
-	\item If $f_a(i,j)=b$ then the $i$th coordinate of $a$
-	and the $j$th coordinate of $b$ are at distance at most $r$
-	in $G-S$.
-	\item If $f_a(i,j)=\bot$ then there is no element $b\in C_s$ 
-	such that the $i$th coordinate of $a$ and the $j$th coordinate of $b$ are at distance at most $r$ in $G-S$.	
-\end{itemize}
-Observe that whenever $a_1, a_2$ are two distinct elements of $B-C_s$,
-then for all $i,j\in \set{1,\ldots,d}^2$, the values $f_{a_1}(i,j)$ and $f_{a_2}(i,j)$
-cannot be equal to the same element $b\in C_s$:
-otherwise, we would have that the $i$th coordinate of $a_1$
-and the $i$th coordinate of $a_2$ are at distance at most~$2r$
-in $G-S$, which is impossible by the assumption on $B$.
-In particular, if $|B-C_s|> |C_s|\cdot d^2$
-then there must be some element  $a\in B-C_s$  
-such that $f_a(i,j)=\bot$  for all $i,j\in\set{1,\ldots,d}$.
-Let $C_{s+1}=C_s\cup \set a$.
-By construction, $C_{s+1}$ is mutually $r$-independent in $G-S$.
-
-We may repeat the construction as long as $|B|>|C_s|\cdot (d^2+1)=s\cdot (d^2+1)$, and we stop when this inequality no longer holds. Define the set $C$ as the last constructed set $C_s$.
-By construction, $|C_s|=s\ge 
-\frac{|B|}{d^2+1}$.	
-\end{proof}
-
-To finish the proof of \cref{prop:uqw-tuples},
-given a set $A\subset V(G)^d$ and integers $r,m\in\N$,
-first apply 
-\cref{lem:step1} 
-  with $r'=2r$ and
- $m'= m\cdot (d^2+1)$.
- Assuming that $|A|\ge K(r',m')$, 
-we obtain a set $B\subset A$ with $|B|\ge m\cdot (d^2+1)$ and a set $S\subset V(G)$ with $|S|\le s(2r)$.
-Apply \cref{lem:step2} to $B$ and $S$, yielding a set $C\subset B$ which is mutually $r$-independent in $G-S$ and has size at least $m$. This concludes the proof of \cref{prop:uqw-tuples},
-where the obtained bounds are $N^d(r,m)=K(r',m')=K(2r,m\cdot (d^2+1))$ and $s^d(r)=d\cdot s(2r)$.
-
-
-\subsection{Excluding long ladders}
-\label{sec:uqw-stable}
+% \subsection{Excluding long ladders}
+% \label{sec:uqw-stable}
 
 
 
@@ -178,7 +51,8 @@ a partitioning of its
 free variables $\bar x$ into tuples $\bar y$ and $\bar z$.
 For $d=|\bar x|$,
 let $N^d(\cdot,\cdot)$ and $s^d(\cdot)$ be functions yielded by \cref{prop:uqw-tuples}.
-Let $T(\cdot,\cdot,\cdot)$ and $r(\cdot)$ be the functions given by \cref{pro:crossing}.
+Let $p,r\in \N$ be the numbers given by \cref{lem:types}, and let
+$T(\cdot,\cdot,\cdot)$ be the function given by \cref{lem:types}.
 
 We show that 
 every $\phi$-ladder in a graph $G\in\cal C$ has length smaller than $\ell$. 
@@ -220,16 +94,18 @@ such that for all $i,j$ such that $w_i,w_j\in B$
 % % %  and $d^{>2r}(v,w)$ expresses the property that $\set{v,w}$ is $2r$-independent.
 % % 	\end{itemize}
 % \end{theorem}
-With each tuple $v_i\in B$ we associate its $(q,S)$-type, as described in~\cref{pro:crossing}.
+With each tuple $v_i\in B$ we associate
+$\tp^p(v_i/S)$, its
+quantifier rank $p$ type over $S$, as described in~\cref{lem:types}.
 Since $B$ has at least $m>2T(q,d,|S|)$ elements, by
 a variant of the pigeonhole principle, there are $i,j,e$ 
-with $i<e<j$ such that $ w_i,w_e,w_j\in B$ and $v_i$ and $v_j$ have the same $(q,S)$-local types. 
+with $i<e<j$ such that $ w_i,w_e,w_j\in B$ and $v_i$ and $v_j$ have the same quantifier rank $p$ types over $S$.
 Let $M=w_e(X)$ and let $N=w_i(X)\cup w_j(X)$.
 Then $M$ and $N$ are $r$-separated by $S$,
 since $w_i$ and $w_j$ are
 mutually $r$-independent in $G-S$.
 
-From~\cref{pro:crossing} it follows that $w_i$ and $w_j$ have the same quantifier rank $q$ type over $M$.
+From~\cref{lem:types} it follows that $w_i$ and $w_j$ have the same quantifier rank $q$ type over $M$.
 In particular, $\phi(u_e, w_i)$ holds in $G$ if and only if 
 $\phi(u_e, w_j)$ holds in $G$,
 contradicting the assumption that $u_1,\ldots, u_k$ and $ v_1,\ldots, v_k$ form a $\phi$-ladder. This finishes the proof of \cref{thm:uqw-stable}.
@@ -241,11 +117,11 @@ contradicting the assumption that $u_1,\ldots, u_k$ and $ v_1,\ldots, v_k$ form 
 
 We conclude by proving \cref{thm:new-stable}, promised in \cref{sec:intro}, which follows by tracking the precise dependencies on the parameters in the proof of \cref{thm:uqw-stable}.
 
-\begin{proof}[of \cref{thm:new-stable}]
-  Let $r(\cdot)$ be the function described in~\cref{pro:crossing}. We 
-  define the function~$g(\cdot)$ from the statement of the theorem by $g(q)=10\cdot r(q)$.
+\begin{proof}[of \cref{thm:new-stable}]We 
+  define the function~$g(\cdot)$ from the statement of the theorem as follows. Fix $q\in \N$.  
+  Let $p,r$ be the numbers described in~\cref{lem:types}. Define $g(q)\coloneqq 10\cdot r$.
 	Let $\phi$ be the given formula of quantifier rank $q$ and with  free variables $X$, partitioned into $Y$ and $Z$.
-  Denote $r=r(q)$. From now on we consider only graphs $G$ such that $K_t\not\minor_{10r} G$.
+ From now on we consider only graphs $G$ such that $K_t\not\minor_{10r} G$.
 
 We first examine \cref{prop:uqw-tuples}, and in particular the dependence of the yielded functions 
 $N^d(\cdot,\cdot)$ and $s^d(\cdot)$ on the assumed quasi-wideness properties of the class $\CCC$.

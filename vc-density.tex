@@ -10,33 +10,24 @@ We first concentrate on proving \Cref{thm:vc-density}.
 From now on we fix a formula  $\phi(\tup x,\tup y)$ where
 $\tup x$ is an $m$-tuple and $\tup y$ is an $n$-tuple of variables.
 
-For a graph $G$, a set of  vertices $A\subset V(G)$, and a tuple $\tup v\in V(G)^n$,
-denote
-\[\phi(A,\tup v)=\setof{\tup a \in A^m }{ G\models\phi(\tup a,\tup v)}.\]
-We call $\phi(A,\tup v)$ the \emph{$\phi$-type} of $\tup v$ \emph{over} $A$, and
-$A$ is sometimes called the \emph{parameter set}.
-For $W\subset V(G)$, denote
-\[S_\phi(A,W)=\setof{\phi(A,\tup v)}{ \tup v\in W^n}.\]
-Note that $S_\phi(A,W)$ is \emph{not} symmetric in $A$ and $W$.
-We write $S_\phi(A,G)$ as a shorthand for $S_\phi(A,V(G))$. 
-The set $S_\phi(A,G)$ is therefore the set of all $\phi$-types of $n$-tuples 
-of vertices of $G$ over the parameter set $A$.
+% For a graph $G$, a set of  vertices $A\subset V(G)$, and a tuple $\tup v\in V(G)^n$,
+% denote
+% \[\phi(A,\tup v)=\setof{\tup a \in A^m }{ G\models\phi(\tup a,\tup v)}.\]
+% We call $\phi(A,\tup v)$ the \emph{$\phi$-type} of $\tup v$ \emph{over} $A$, and
+% $A$ is sometimes called the \emph{parameter set}.
+% For $W\subset V(G)$, denote
+% \[S_\phi(A,W)=\setof{\tp^\phi_G(\bar v/A)}{ \tup v\in W^n}.\]
+% Note that $S_\phi(A,W)$ is \emph{not} symmetric in $A$ and $W$.
+% We write $S_\phi(A,G)$ as a shorthand for $S_\phi(A,V(G))$.
+% The set $S_\phi(A,G)$ is therefore the set of all $\phi$-types of $n$-tuples
+% of vertices of $G$ over the parameter set $A$.
 Our goal is to prove that if $G\in \CCC$, where $\CCC$ is a nowhere dense class,
-then for every $\varepsilon>0$ we have  $|S_\phi(A,G)|\le \Oof(|A|^{n+\varepsilon})$, and 
-if $\CCC$ is moreover of bounded expansion, then in fact $|S_\phi(A,G)|\le \Oof(|A|^n)$.
+then for every $\varepsilon>0$ we have  $|S^\phi(G/A)|\le \Oof(|A|^{n+\varepsilon})$, and 
+if $\CCC$ is moreover of bounded expansion, then in fact $|S^\phi(G/A)|\le \Oof(|A|^n)$.
 
-First, observe that if $A\subseteq B$, then the number of types
-over $A$ cannot be larger than the number of types over $B$. 
 
-\begin{lemma}\label{lem:types-over-B}
-Let $G$ be a graph and let $A\subseteq B\subseteq V(G)$. Then 
-$|S_\phi(A,G)|\leq |S_\phi(B,G)|$. 
-\end{lemma}
-\begin{proof}
-Observe that whenever $\phi(A,\tup v)\neq \phi(A,\tup w)$, we also have $\phi(B,\tup v)\neq \phi(B,\tup w)$.
-\end{proof}
-
-The idea is to first enlarge the set $A$ to a set $B$, called
+To prove~\cref{thm:vc-density},
+we will first enlarge the set $A$ to a set $B$, called
 an \emph{$r$-closure of $A$}, such 
 that the connections of elements from $V(G)\setminus B$ 
 towards $B$ are well controlled. This approach
@@ -47,6 +38,9 @@ Let us recall the necessary definitions.
 Let $G$ be a graph and let $B\subseteq V(G)$ be a subset of vertices. For vertices $v\in B$ and $u\in V(G)$, a path $P$ connecting $u$ and $v$ is called {\em{$B$-avoiding}}
 if all its vertices apart from~$v$ do not belong to $B$. For a positive integer $r$ and $u\in V(G)$, the {\em{$r$-projection}} of $u$ on $B$, denoted $M^G_r(u,B)$, is the set of all vertices $v\in B$ that
 can be connected to $u$ by a $B$-avoiding path of length at most $r$. Note that for $u\in B$, we have $M^G_r(u,B)=\{b\}$.
+Equivalently, $M^G_r(u,B)$ is the inclusion-minimal
+subset of $B$ which $r$-separates $u$ from $B$.
+
 %
 %The {\em{$r$-projection profile}} of a vertex $u\in V(G)\setminus A$ on $A$ is a function $\rho^G_r[u,A]$ mapping vertices of
 %$A$ to $\{0,1,\ldots,r,\infty\}$, defined as follows: for every $v\in A$, the value $\rho^G_r[u,A](v)$ is the length of a shortest $A$-avoiding path connecting $u$ and~$v$, and~$\infty$ in case this length
@@ -171,19 +165,27 @@ Then there exists a polynomial $p(\cdot)$, depending only on $\CCC$ and the fixe
 $C\subset B\subseteq V(G)$, the following holds.
 For every set of vertices $W\subseteq V(G)$ such that 
 $M_r^G(u,B)\subseteq C$ for all $u\in W$, 
-we have $|S_\phi(B,W)|\le p(|C|)$.
+we have $|S^\phi(W/B)|\le p(|C|)$.
 \end{lemma}
 \begin{proof}
 Let $q$ be the quantifier rank of the formula $\phi$.
-Let $r\in \N$ and~$T\from \N\times \N\times \N\to \N$  
-be as described in~\cref{pro:crossing} for the quantifier rank $q$.
+Let $p,r\in \N$ be as in~\cref{lem:types}.
+% ~$T\from \N\times \N\times \N\to \N$
+% be as described in~\cref{pro:crossing} for the quantifier rank $q$.
 
 Let $N^d\colon \N\times\N\to\N$ and $s^d\colon \N\to\N$ be
 the functions for $\CCC$ described in \Cref{prop:uqw-tuples}. 
 Let $s=s^n(2r)$, that is, we apply the function $s^d(\cdot)$ to
-parameters $d=n$ and $2r$, and let $k\coloneqq T(q,n,s)$. In the parlance of~\cref{pro:crossing},
-$k$ is an upper bound on the number of $(q,S)$-local types of vertices in any graph~$G$,
-for any fixed $S\subset V(G)$ with $|S|\le s$. Recall that according
+parameters $d=n$ and $2r$, and let $k\coloneqq T(q,d,s)$,
+where $T$ is the function from~\cref{lem:types}.
+That is, $k$ is an upper bound on the number 
+of quantifier-rank $p$ types of $d$-tuples of vertices, with parameters from a set of size $s$.
+Note that  $k$ is computable from $q,d$ and $s$.
+% As noted
+% $\coloneqq T(q,n,s)$. In the parlance of~\cref{pro:crossing},
+% $k$ is an upper bound on the number of $(q,S)$-local types of vertices in any graph~$G$,
+% for any fixed $S\subset V(G)$ with $|S|\le s$.
+ Recall that according
 to \Cref{prop:uqw-tuples}, the function $N^d(\cdot,\cdot)$ is polynomial in the second
 argument. 
 
@@ -213,11 +215,11 @@ $M_r^G(u,B)\subseteq C$ for all $u\in W$, it follows that the set of all vertice
 set $B$ are $r$-separated by~$S$.
 
 Since $|Z|\geq k+1$, there are  distinct $\tup v,\tup w\in Z$ such that 
-$\tup v$ and $\tup w$ have the same $(q,S)$-local types.
-From~\cref{pro:crossing}~\cref{c:confusing} it follows that $\tup v$ and $\tup w$
-have the same quantifier rank $q$ type over~$B$.
-In particular we have $\phi(B,\tup v)=\phi(B,\tup w)$, a contradiction with $\tup v,\tup w\in Y$ and the definition of $Y$. 
-This proves $|Y|<N^n(r,k+c+1)$, hence $|S_\phi(B,W)|=|Y|<p(c)$ for $p(c)= N^n(r,k+c+1)$.
+$\tup v$ and $\tup w$ have the same quantifier rank $q$ type over $S$.
+From~\cref{lem:types} it follows that $\tup v$ and $\tup w$
+have the same quantifier rank $q$ type over~$B$,
+i.e., $\tp^q(\bar v/B)=\tp^q(\bar w/B)$. Since $\tup v,\tup w\in Y$, this contradicts the definition of $Y$. 
+This proves $|Y|<N^n(r,k+c+1)$, hence $|S^\phi(W/B)|=|Y|<p(c)$ for $p(c)= N^n(r,k+c+1)$.
 \end{proof}
 
 We now use all the above tools to prove \Cref{thm:vc-density}. We repeat its statement for convenience.
@@ -229,9 +231,9 @@ $\tup x$ is an $m$-tuple and $\tup y$ is an $n$-tuple of variables.
 \begin{enumerate}[(1)]
 \item If $\CCC$ is nowhere dense, then for every $\epsilon>0$ 
 there exists a constant~$c$ such that for every $G\in \CCC$ and every nonempty
-$A\subseteq V(G)$, we have $|S_\psi(A,G)|\leq c\cdot |A|^{n+\epsilon}.$
+$A\subseteq V(G)$, we have $|S^\psi(G/A)|\leq c\cdot |A|^{n+\epsilon}.$
 
-\item If $\CCC$ has bounded expansion, then there exists a constant~$c$ such that for every $G\in \CCC$ and every nonempty $A\subseteq V(G)$, we have $|S_\psi(A,G)|\leq c\cdot |A|^n$.
+\item If $\CCC$ has bounded expansion, then there exists a constant~$c$ such that for every $G\in \CCC$ and every nonempty $A\subseteq V(G)$, we have $|S^\psi(G/A)|\leq c\cdot |A|^n$.
 \end{enumerate}
 \end{theorem}
 
@@ -258,7 +260,7 @@ $$\projnum_r(G,B)\leq c_2\cdot |B|^{1+\epsilon'}\leq
 c_2\cdot (c_1\cdot |A|^{1+\epsilon'})^{1+\epsilon'}=c_1^{1+\epsilon'}c_2\cdot|A|^{1+2\epsilon'+\epsilon'^2}.$$
 As $A\subseteq B$, 
 according to \Cref{lem:types-over-B} it suffices to bound the
-number $|S_\phi(B,G)|$. 
+number $|S^\phi(G/B)|$. 
 
 We define an equivalence relation $\sim_r$ on 
 $V(G)$ by $u\sim_r v$ iff 
@@ -270,14 +272,14 @@ where $u_i\in \kappa_i$ is any representative of the
 equivalence class $\kappa_i$. Observe that $C\subseteq B$ with
 $|C|\leq n\cdot c_1\cdot |A|^{\epsilon'}$. 
 Then, according to \Cref{lem:num-types-same-class}, 
-we have $|S_\phi(B,\bigcup_{1\leq i\leq n}\kappa_i)|\leq
+we have $|S^\phi(\bigcup_{1\leq i\leq n}\kappa_i/B)|\leq
 c_0\cdot |C|^d$. 
 
 As we have at most $\mu_r(G,B)^n$ choices for 
 $\kappa_1,\ldots, \kappa_n$, we may bound the total 
 number of types as follows:
 \begin{align*}
-|S_\phi(A,G)| & \leq |S_\phi(B,G)|\leq \mu_r(G,B)^n \cdot c_0\cdot |C|^d\\
+|S^\phi(G/A)| & \leq |S^\phi(G/B)|\leq \mu_r(G,B)^n \cdot c_0\cdot |C|^d\\
 & \leq \left(c_1^{1+\epsilon'}c_2|A|^{1+2\epsilon'+\epsilon'^2}\right)^n\cdot c_0\left(nc_1|A|^{\epsilon'}\right)^d\\
 & = c_0c_1^{(1+\epsilon')n+d}c_2^nn^d|A|^{n+(2n+d)\epsilon'+n\epsilon'^2} = c_0c_1^{(1+\epsilon')n+d}c_2^nn^d|A|^{n+\epsilon}.
 \end{align*}
@@ -294,9 +296,9 @@ is closed under taking subgraphs.
 \begin{enumerate}[(1)]
 \item If $\CCC$ is somewhere dense, then there is a formula 
 $\psi(x,y)$ such that for every $n\in \N$ there are $G\in\CCC$ and $A\subseteq V(G)$ 
-with $|A|=n$ and $S_\psi(A,G)=2^{A}$. 
+with $|A|=n$ and $S^\psi(G/A)=2^{A}$. 
 \item If $\CCC$ has unbounded expansion, then there is a formula 
-$\psi(x,y)$ such that for every $c\in \mathbb{R}$ there exist $G\in\CCC$ and $A\subseteq V(G)$ with $|S_\psi(A,G)|>c|A|$. 
+$\psi(x,y)$ such that for every $c\in \mathbb{R}$ there exist $G\in\CCC$ and $A\subseteq V(G)$ with $|S^\psi(G/A)|>c|A|$. 
 \end{enumerate}
 \end{theorem}
 
@@ -356,7 +358,7 @@ according to \Cref{lem:lower-nd}, there exists an integer $r_0$
 such that $\mathcal{G}_{r_0}\subseteq \CCC$. In particular, for every $n\in \N$ the $r_0$-subdivision of graph $P(n)$ is contained in $\CCC$.
 Now consider 
 the formula $\psi(x,y)$ stating that $x$ and~$y$ are at distance at most $r_0$. Then for every $n\in \N$ we have 
-$S_\psi(P(n),A)=2^{|A|}$, where $A\subseteq V(P(n))$ denotes the set $\{v_1,\ldots, v_n\}$. This implies the first statement
+$S^\psi(P(n)/A)=2^{|A|}$, where $A\subseteq V(P(n))$ denotes the set $\{v_1,\ldots, v_n\}$. This implies the first statement
 of the theorem.
 
 For the second claim, we use the contrapositive of \Cref{lem:top-bnd-exp}: since $\CCC$ has unbounded expansion, for some $r\in \N$ 

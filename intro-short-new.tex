@@ -112,8 +112,8 @@ Moreover, given~$G$ and $A$, such sets $S$ and $B$ can be computed in time $\Oof
 
 Let us remark
 that even though the techniques employed to prove \cref{thm:new-uqw} are inspired by methods from stability theory, 
-at the end we use only very simple graph theoretic notions. In particular, as asserted in the last sentence of the theorem, the
-proof can easily be turned into an efficient algorithm.
+at the end we use only very simple graph theoretic notions. In particular, as asserted in the last part of the statement, the
+proof  be turned into an efficient algorithm.
 
 \paragraph{Stability.}
 
@@ -239,13 +239,13 @@ Let $\strA$ be a structure and let $A$ be a set of elements of
 $\strA$. Then the set of \emph{$\psi$-types} or 
 \emph{$\psi$-traces} over $A$ in 
 $\strA$ is the set
-\[S_\psi(\strA,A)=\{\{\tup a\ \in A^m : \strA\models\psi(\tup a,\tup b)\} : \tup b\in V(\strA)^n\}.\]
-The set $S_\psi(\strA,A)$ is also known as the {\em{Stone space}} induced by $\psi$ over $A\subseteq \strA$.
+\[S^\psi(\strA/A)=\{\{\tup a\ \in A^m : \strA\models\psi(\tup a,\tup b)\} : \tup b\in V(\strA)^n\}.\]
+The set $S^\psi(\strA/A)$ is also known as the {\em{Stone space}} induced by $\psi$ over $A\subseteq \strA$.
 
 It is known that in (infinite) model theory,
 measuring cardinality of Stone spaces can be used to characterize when a formula $\psi$ is stable on a class of models (i.e., does not define arbitrarily long ladders).
 In a nutshell, this is the case if and only if for every model $\strA$ of interest and every infinite set of its elements $A$, say of cardinality at most $\kappa$ for a cardinal $\kappa$,
-the cardinality of $S_\psi(\strA,A)$ is at most $\kappa$. We refer to~\cite{}\todo{Citation needed} for more information.
+the cardinality of $S^\psi(\strA/A)$ is at most $\kappa$. We refer to~\cite{pillay} for more information.
 
 We prove the following theorem concerning the number of
 types in sparse graph classes.
@@ -256,17 +256,19 @@ $\tup x$ is an $m$-tuple and $\tup y$ is an $n$-tuple of variables.
 \begin{enumerate}
 \item If $\CCC$ is nowhere dense, then for every $\epsilon>0$ 
 there exists a constant~$c$ such that for every $G\in \CCC$ and every nonempty
-$A\subseteq V(G)$, we have $|S_\psi(A,G)|\leq c\cdot |A|^{n+\epsilon}.$
+$A\subseteq V(G)$, we have $|S^\psi(G/A)|\leq c\cdot |A|^{n+\epsilon}.$
 
-\item If $\CCC$ has bounded expansion, then there exists a constant~$c$ such that for every $G\in \CCC$ and every nonempty $A\subseteq V(G)$, we have $|S_\psi(A,G)|\leq c\cdot |A|^n$.
+\item If $\CCC$ has bounded expansion, then there exists a constant~$c$ such that for every $G\in \CCC$ and every nonempty $A\subseteq V(G)$, we have $|S^\psi(G/A)|\leq c\cdot |A|^n$.
 \end{enumerate}
 \end{theorem}
 
 Intuitively, \cref{thm:vc-density} states that the number
 of $\psi$-types over $A$ in a nowhere dense class 
 is bounded almost linearly in $|A|^n$, the total number number of $n$-tuples of vertices from $A$. 
-\cref{thm:vc-density} also generalizes the recent result of Bobkov~\cite{bobkov2017computations} that nowhere dense classes
-are {\em{dp-minimal}}, a notion introduced by Shelah~\cite{shelah2014strongly} that we will not use here.
+\cref{thm:vc-density} 
+also generalizes the recent result of Bobkov~\cite{bobkov2017computations} that nowhere dense classes
+are {\em{dp-minimal}}, a notion introduced by Shelah~\cite{shelah2014strongly} that we will not use here (see~\cite{dolich2011} for the connection
+with dp-minimality).
 
 %Formulated in terms of VC-density, for every nowhere 
 %dense class of graphs and every first-order formula $\psi(\tup x,\tup y)$
@@ -303,9 +305,9 @@ is closed under taking subgraphs.
 \begin{enumerate}[(1)]
 \item If $\CCC$ is somewhere dense, then there is a formula 
 $\psi(x,y)$ such that for every $n\in \N$ there are $G\in\CCC$ and $A\subseteq V(G)$ 
-with $|A|=n$ and $S_\psi(A,G)=2^{A}$. 
+with $|A|=n$ and $S^\psi(G/A)=2^{A}$. 
 \item If $\CCC$ has unbounded expansion, then there is a formula 
-$\psi(x,y)$ such that for every $c\in \mathbb{R}$ there exist $G\in\CCC$ and $A\subseteq V(G)$ with $|S_\psi(A,G)|>c|A|$. 
+$\psi(x,y)$ such that for every $c\in \mathbb{R}$ there exist $G\in\CCC$ and $A\subseteq V(G)$ with $|S^\psi(G/A)|>c|A|$. 
 \end{enumerate}
 \end{theorem}
 
