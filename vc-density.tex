@@ -200,7 +200,7 @@ mutually $2r$-independent in $G-S$.
 %on each coordinate that contains an element of $S$ we have 
 %equality for all tuples. We now need a lemma that this is fine.} 
 
-Consider function $\pi\from V(G)\to 2^C$
+Consider function $\pi\from V(G)\to P(C)$
 defined as
  $\pi(v)\coloneqq M_r^{G-S}(v,B)$; note that $\pi(v)=\emptyset$ whenever $v\in S$.
  Then, for distinct $\tup v,\tup w\in X$
@@ -296,7 +296,7 @@ is closed under taking subgraphs.
 \begin{enumerate}[(1)]
 \item If $\CCC$ is somewhere dense, then there is a formula 
 $\psi(x,y)$ such that for every $n\in \N$ there are $G\in\CCC$ and $A\subseteq V(G)$ 
-with $|A|=n$ and $S^\psi(G/A)=2^{A}$. 
+with $|A|=n$ and $S^\psi(G/A)=P(A)$. 
 \item If $\CCC$ has unbounded expansion, then there is a formula 
 $\psi(x,y)$ such that for every $c\in \mathbb{R}$ there exist $G\in\CCC$ and $A\subseteq V(G)$ with $|S^\psi(G/A)|>c|A|$. 
 \end{enumerate}
@@ -358,7 +358,7 @@ according to \Cref{lem:lower-nd}, there exists an integer $r_0$
 such that $\mathcal{G}_{r_0}\subseteq \CCC$. In particular, for every $n\in \N$ the $r_0$-subdivision of graph $P(n)$ is contained in $\CCC$.
 Now consider 
 the formula $\psi(x,y)$ stating that $x$ and~$y$ are at distance at most $r_0$. Then for every $n\in \N$ we have 
-$S^\psi(P(n)/A)=2^{|A|}$, where $A\subseteq V(P(n))$ denotes the set $\{v_1,\ldots, v_n\}$. This implies the first statement
+$S^\psi(P(n)/A)=P(A)$, where $A\subseteq V(P(n))$ denotes the set $\{v_1,\ldots, v_n\}$. This implies the first statement
 of the theorem.
 
 For the second claim, we use the contrapositive of \Cref{lem:top-bnd-exp}: since $\CCC$ has unbounded expansion, for some $r\in \N$ 

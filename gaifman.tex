@@ -39,10 +39,13 @@ a fixed set of colors. If $C$ is a color then the formula $C(x)$ holds in a vert
 
 Finally, we will consider \emph{formulas with parameters}
 from a set  $A$ which is a set of vertices of some graph.
-Such a formula is formally a formula $\phi(\bar y\bar z)$
-with a partitioning of its free variables into two sets $\bar y$ and $\bar z$, and a valuation $\bar wA^{|\bar z|}$ of the free variables $\bar z$ in $A$.
-The remaining, unvaluated free variables of $\phi$
-are then the  free variables of the resulting formula with parameters. 
+Such a formula is formally a formula $\phi(\bar y,\bar z)$
+with a partitioning of its free variables into two sets $\bar y$ and $\bar z$,
+and a valuation $\bar w\in A^{|\bar z|}$ of the free variables $\bar z$ in $A$. 
+We denote the resulting formula with parameters by $\phi(\bar y,\bar w)$, and say that its free variables 
+are $\bar y$. For a valuation $\bar u\in A^{|\bar y|}$,
+we write $G,\bar u\models \phi(\bar y,\bar w)$
+if $G,\bar u\bar w\models \phi(\bar y,\bar z)$.
 
 
 
@@ -77,7 +80,7 @@ are then the  free variables of the resulting formula with parameters.
 % We first define formulas with \emph{parameters} from a set of vertices.
 Fix a formula $\phi(\bar y,\bar z)$ together with a distinguished partitioning of its free variables into $\bar y$ and $\bar z$.
 % , called the \emph{object} variables and the \emph{parameter} variables, respectively.
-Let $G=(V,E)$ be a graph, $A\subset V$ and $\bar v\in A^{|\bar z|}$ a tuple of length $|\bar z|$ of elements in~$A$.
+Let $G=(V,E)$ be a graph, $A\subset V$.
 % By $\phi(\bar y,\bar v)$ we formally mean the
 % pair $(\phi(\bar y,\bar z),\bar v)$,
 % We call $\phi(\bar y,\bar v)$  a \emph{formula with parameters from $A$}.
@@ -89,7 +92,8 @@ Let $G=(V,E)$ be a graph, $A\subset V$ and $\bar v\in A^{|\bar z|}$ a tuple of l
 % The set of free variables of $\phi(\bar y,\bar v)$ is $\bar y$, and its \emph{quantifier rank}
 % is  the quantifier rank of $\phi(\bar y,\bar z)$
 % (i.e., the maximal nesting of quantifiers).
-If $\bar u\in V^{|\bar y|}$ is another tuple, then the 
+If $\bar u\in V^{|\bar y|}$ is a tuple of 
+nodes of length $|\bar y|$, then the 
 \emph{$\phi$-type of $\bar u$ over $A$},
 denoted $\tp^\phi_G(\bar u/A)$,
 is the set of all
@@ -99,11 +103,14 @@ replaced by the variables $\bar z$,
 such that $G,\bar u\models \phi(\bar y,\bar v)$.
 Therefore, up to  bijection, we have the following identification:
 $$\tp^\phi_G(\bar u/A)\quad\leftrightarrow\quad\setof{\bar v\in  A^{|\bar z|}}{G, \bar u\bar v\models \phi(\bar y,\bar z)}.$$
+In other words, $\tp^\phi_G(\bar u/A)$ corresponds to the
+neighborhood of $\bar u\in V^{|\bar y|}$ in the bipartite graph with parts $V^{|\bar y|}$ and $A^{|\bar z|}$,
+and edge relation defined by $\phi(\bar y,\bar z)$.
 
 
 If $q\in \N$ is a number and $\bar u\in  V^{d}$
 is a tuple of some length $d$, then by $\tp^q_G(\bar u/A)$  we denote the set of all formulas $\phi(\bar y,\bar v)$
-of quantifier rank $q$ with parameters from $A$,
+of quantifier rank $q$ with parameters $\bar v$ from $A$,
 such that $G,\bar u\models \phi(\bar y,\bar v)$.
 Therefore, up to  bijection, we have the following identification:
 $$\tp^q_G(\bar u/A)\quad\leftrightarrow\quad\set{tp^\phi(\bar u/A)}_{\phi(\bar y,\bar z)},$$
@@ -111,7 +118,8 @@ where $\phi(\bar y,\bar z)$ ranges over all formulas of quantifier rank $q$, and
 where $|\bar y|=d$. 
 In particular, the set $\tp^q_G(\bar u/A)$ is infinite.
 It is not difficult to see, however, that in the case when $A$ is finite,
-the set $\tp^q_G(\bar u/A)$ is uniquely determined by its finite subset, since up to syntactic equivalence, there are only finitely many formulas of quantifier rank $q$, with $|\bar u|$ free variables, and with parameters from $A$.
+the set $\tp^q_G(\bar u/A)$ is uniquely determined by its finite subset, since up to syntactic equivalence, there are only finitely many formulas of quantifier rank $q$ with $|\bar u|$ free variables and  parameters from $A$
+(we can assume that each such formula has $|A|+|\bar u|$ free variables).
 Moreover, the set of all possible types 
 $\tp^q_G(\bar u/A)$ is bounded by some number 
 depending in a computable way only from 
@@ -150,7 +158,7 @@ $q,|\bar u|$ and $|A|$.
 % (one can bound $|\bar z|$ by $|A|$
 % and note that there are only finitely many  formulas $\phi(\bar y,\bar z)$ of quantifier rank $q$, up to semantic equivalence).
 
-In  case when $\Delta$ is either a formula $\phi$ with a distinguished partitioning of its free variables, or a number $q$,
+In  case when $\Delta$ is either a formula $\phi(\bar y,\bar z)$ with a distinguished partitioning of its free variables, or a number $q$,
 we simply write $\tp^\Delta(\bar u/A)$ if the graph $G$
 is clear from the context. %, or  write $\tp^\Delta[G,\bar u, A]$
 %if the graph $G$ needs to be explicated. 
@@ -235,8 +243,7 @@ $Y$ of length at most~$r$ contains a vertex from $S$.
 % Precisely,
 % for every $k\in \N$, every tuple $u\in B^{k}$ of $k$ elements of $B$, and every formula $\phi$ of quantifier rank $q$ and with $d+k$ free variables, we have that $\phi(u,w)$ holds if and only if $\phi(v,w)$ holds.
 
-The rest of~\cref{sec:gaifman} is to devoted to the proof of the following  lemma, which, as we shall see 
-is a consequence, and also a common generalization, of Gaifman locality of first order logic and a Feferman-Vaught type  lemma.
+The rest of~\cref{sec:gaifman} is to devoted to the proof of the following  lemma.
 
 
 
@@ -248,9 +255,9 @@ one can compute numbers $p,r$ with the following properties.	For any graph $G=(V
 	such that $A$  and $B$ are $r$-separated by~$S$,
 	for every tuple $\bar u\in B^{d}$, 
 	the type $\tp^q(\bar u/A)$
-	is computable from  $\tp^{p}(\bar u/S)$ and $G$ and $S$.
+	is computable from  $\tp^{p}(\bar u/S)$, and $G$ and $S$.
   Moreover, there is a computable function $T\from \N\times\N\times\N\to\N$
-  such that $|\setof{\tp^{p}(\bar u/S)}{\bar u\in B^d}|\le T(q,d,|S|)$.
+  such that $|\setof{\tp^{q}(\bar u/A)}{\bar u\in B^d}|\le T(q,d,|S|)$.
   
   
 		%
@@ -320,8 +327,7 @@ and that the number of quantifier rank $p$ types of $d$-tuples of elements over 
 % In other words, the conclusion of the lemma says that whether a tuple $\bar u\in B^{\bar y}$ satisfies a formula of quantifier rank $q$ with parameters from $A$ depends only on $\tp^q(\bar u/S)$
 % (and on $G$ and $S$).
 
-
- We first recall the two classical results on top of which we built upon.
+\cref{lem:types} is a consequence of Gaifman locality of first order logic and a Feferman-Vaught type  lemma, which we recall now.
 \medskip
 
 % For a valuation $\bar u\in A^{\bar x}$ and number $r\in \N$, denote by
@@ -333,8 +339,9 @@ and that the number of quantifier rank $p$ types of $d$-tuples of elements over 
   Let $G=(V,E)$ be a graph colored by a fixed number of colors, $A\subset V$ a set of vertices and $d\in \N$ a number.
   Then, for every tuple $\bar u\in V^d$, the type  $\tp^q(\bar u)$ is computable from $G$ and $\tp^q(B^r(\bar u))$, where $r=7^q$.
 \end{lemma}
-Note that~\ref{lem:gaif} is a special case of~\cref{lem:types},
-for $s=0$ and $A,S=\emptyset$.
+\cref{lem:gaif} is an immediate corollary of the main result in the paper of Gaifman~\cite{gaifman1982local}.
+
+% Note that~\ref{lem:gaif} is a special case of~\cref{lem:types}, for $s=0$ and $A,S=\emptyset$.
 
 % \begin{lemma}\label{lem:fv}
 %   Let $G=(V,E)$ and $H=(W,F)$ be two graphs with disjoint vertex sets.
@@ -403,7 +410,7 @@ For any given number $q\in\N$ one can compute
 	such that $A$  and $B$ are $r$-separated by $S$,
 	for every tuple $\bar u\in B^{d}$, 
 	the type $\tp^q_G(\bar u/A)$
-	is computable from  $\tp^{p}[B^r_{G^S}(\bar u), \bar u]$ and $G$ and $S$.  
+	is computable from  $\tp^{q}[B^r_{G^S}(\bar u), \bar u]$ and $G$ and $S$.  
 		%
 	% and any $\bar u,\bar v\in B^{\bar y}$, the following implication holds:
 	% $$\text{if\quad}\tp^q(\bar u/S)=\tp^q(\bar v/S)\text{\quad then\quad}
@@ -420,7 +427,7 @@ where $\psi$ specifies that $x_1,\ldots,x_r,x$ form a path
 starting in one of the vertices in $\bar u$, ending in $x$,
 and omitting all vertices in $S$ (we enumerate all elements of $S$ as parameters).
 
-In what follows, we prove the stronger variant,~\cref{lem:types1}.
+It remains to prove~\cref{lem:types1}.
 % We will use slightly stronger variants
 % of~\cref{lem:gaif}
 % and~\cref{lem:fv}, where the  graphs are colored with a fixed number of colors; the  types computed in the statements then depend also on the number of colors.
@@ -452,12 +459,12 @@ In particular, we may apply the Feferman-Vaught lemma (\cref{lem:fv}).
 The following diagram illustrates the computation chain:
 \begin{align*}
 	\tp^q[B^r_{G^S}(\bar u), \bar u]
-  \quad\stackrel{\textrm{FV}}{\longrightarrow}\quad
-	\tp^q[B^r_{G^S}(\bar u\bar w), \bar u\bar w] \quad\stackrel{\textrm{G}}\longrightarrow\quad
+  \quad\stackrel{\textrm{(FV)}}{\longrightarrow}\quad
+	\tp^q[B^r_{G^S}(\bar u\bar w), \bar u\bar w] \quad\stackrel{\textrm{(G)}}\longrightarrow\quad
 	\tp^q[G^S, \bar u\bar w] \quad\longrightarrow\quad
 	\tp^q[G, \bar u\bar w]
 \end{align*}
-The arrow $a\longrightarrow b$ signifies that $b$ is computable from $a$, as well as from $G$ and $S$.
+An arrow $a\longrightarrow b$ signifies that $b$ is computable from $a$, as well as from $G$ and $S$.
 The first arrow is by applying Feferman-Vaught's lemma, the second arrow is by applying Gaifman's lemma,~\cref{lem:gaif}.
 The last arrow follows from a simple rewriting, as provided by the following lemma.
 
