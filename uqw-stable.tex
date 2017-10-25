@@ -49,66 +49,45 @@ that any uniformly quasi-wide  class of graphs $\CCC$ is stable.
 Fix a formula $\phi(\bar y,\bar z)$ of quantifier rank $q$ and
 a partitioning of its 
 free variables $\bar x$ into tuples $\bar y$ and $\bar z$.
-For $d=|\bar x|$,
-let $N^d(\cdot,\cdot)$ and $s^d(\cdot)$ be functions yielded by \cref{prop:uqw-tuples}.
-Let $p,r\in \N$ be the numbers given by \cref{lem:types}, and let
-$T(\cdot,\cdot,\cdot)$ be the function given by \cref{lem:types}.
+For $d=|\bar x|=|\bar y|+|\bar z|$,
+let $N^d(\cdot,\cdot)$ and $s^d(\cdot)$ be functions yielded by \cref{prop:uqw-tuples}. Let $s=s^d(2r)$, and 
+% Let $p,r\in \N$ be the numbers given by \cref{lem:types}, and let
+% $T(\cdot,\cdot,\cdot)$ be the function given by \cref{lem:types}.
+let $T$ be the number given by~\cref{cor:bound}.
+Let $\ell=N^d(2r, T+1)$.
 
 We show that 
-every $\phi$-ladder in a graph $G\in\cal C$ has length smaller than $\ell$. 
-For the sake of contradiction, assume that there is a graph $G\in\cal C$, a number $k\ge \ell$,
-and tuples $u_1,\ldots,u_k\in V(G)^{|\bar y|}$ and $ v_1,\ldots, v_k\in V(G)^{|\bar z|}$
-which form a $\phi$-ladder in $G$.
-Denote $w_i=(u_i, v_i)$, for $i=1,\ldots,k$.
-	Let $A=\set{ w_i\colon i=1,\ldots,k}\subset V(G)^X$; note that $|A|=k$.
-Applying \cref{prop:uqw-tuples} to the set $A$, radius $2r$, and target size $m$
-		 yields a set $S\subset V(G)$ with $|S|\le s^d(2r)$
-	and a set $B\subset A$ with $|B|\geq m$ 
-such that for all $i,j$ such that $w_i,w_j\in B$
-	and $w_i\neq w_j$,
-	the tuples $u_i$ and $v_j$ are $2r$-independent in $G-S$.
-		Let $M=\bigcup_{w\in B} w(Y)$
-		and let $N=\bigcup_{w\in B} w(Z)$.
-	 Then $M$ and $N$ are $r$-separated by $S$.
-	
-% Replacing $A$ by $B$, we may assume that $\bar u_1,\ldots,\bar u_m\in V(G)^{\bar u}$ and $\bar v_1,\ldots,\bar v_k\in V(G)^{\bar v}$
-% form a $\phi$-ladder of length $m$ in $G$, and
-% that $A$ is totally $2r$-independent in $G-S$.
-%
-%
-% An \emph{$q$-local formula} $\phi(\bar x)$ is a
-% formula such that for every colored graph $G$ and tuple of vertices $\bar a\in V(G)^{\bar x}$, the following equivalence holds:
-% $$G,\bar a\models \phi\qquad\textit {if and only if }\qquad G[N^{r}(\bar a)],\bar a\models \phi.$$
-%
-% \begin{theorem}\label{thm:gaifman}
-% 	Let $\phi(\bar x)$ be a formula over the signature of colored graphs of quantifier rank $q$.
-% 	There is a  number $r\le 7^{q}$
-% 	% , and $s\le q+|\bar x|$,
-% 	such that $\phi$ is equivalent to a Boolean combination of sentences and $q$-local formulas $\psi^{(r)}(\bar x)$.% the following:
-% % 	\begin{itemize}
-% % 		\item $q$-local formulas ;
-% % 		\item sentences.%  of the form $$\exists y_1,\ldots,y_s
-% % % \bigwedge_{1\le i\le s} \alpha^{(r)}(y_i)\land
-% % % \bigwedge_{1\le i<j\le s} d^{>2r}(y_i,y_j),$$
-% % % where $\alpha^{(r)}(y)$ is $q$-local and in one variable,
-% % %  and $d^{>2r}(v,w)$ expresses the property that $\set{v,w}$ is $2r$-independent.
-% % 	\end{itemize}
-% \end{theorem}
-With each tuple $v_i\in B$ we associate
-$\tp^p(v_i/S)$, its
-quantifier rank $p$ type over $S$, as described in~\cref{lem:types}.
-Since $B$ has at least $m>2T(q,d,|S|)$ elements, by
-a variant of the pigeonhole principle, there are $i,j,e$ 
-with $i<e<j$ such that $ w_i,w_e,w_j\in B$ and $v_i$ and $v_j$ have the same quantifier rank $p$ types over $S$.
-Let $M=w_e(X)$ and let $N=w_i(X)\cup w_j(X)$.
-Then $M$ and $N$ are $r$-separated by $S$,
-since $w_i$ and $w_j$ are
-mutually $r$-independent in $G-S$.
+every $\phi$-ladder in a graph $G\in\cal C$ has length less than $\ell$.
 
-From~\cref{lem:types} it follows that $w_i$ and $w_j$ have the same quantifier rank $q$ type over $M$.
-In particular, $\phi(u_e, w_i)$ holds in $G$ if and only if 
-$\phi(u_e, w_j)$ holds in $G$,
-contradicting the assumption that $u_1,\ldots, u_k$ and $ v_1,\ldots, v_k$ form a $\phi$-ladder. This finishes the proof of \cref{thm:uqw-stable}.
+
+For the sake of contradiction, assume that there is a graph $G\in\cal C$, a number $k\ge  \ell$,
+and tuples $\bar u_1,\ldots,\bar u_k\in V(G)^{|\bar y|}$ and $ \bar v_1,\ldots, \bar v_k\in V(G)^{|\bar z|}$
+which form a $\phi$-ladder in $G$, i.e., 
+$\phi(\bar u_i,\bar v_j)$ holds in $G$ if and only if $i\le j$.
+% Denote $\bar w_i=\bar u_i \bar v_i$, for $i=1,\ldots,k$.
+	Let $A=\setof{ \bar u_i \bar v_i}{i=1,\ldots,k}\subset V(G)^X$; note that $|A|\ge \ell$.
+Applying \cref{prop:uqw-tuples} to the set $A$, radius $2r$, and target size $m=T+1$
+		 yields a set $S\subset V(G)$ with $|S|\le s$
+	and a set $B\subset A$ with $|B|\geq T+1$ 
+  of mutually $2r$-independent tuples in $G-S$.
+  Let $J\subset {1,\ldots,k}$
+  be the set of indices corresponding to $B$,
+  i.e., $J=\setof{j}{\bar u_j\bar v_j\in B}$.
+  
+  
+
+  
+  
+		Let
+    $N$
+    be the set of vertices occurring in   the  tuples $\bar v_j$ with $j\in J$.% Then $M$ and $N$ are $r$-separated by $S$.
+    Since $|J|=|B|\geq T+1$, by~\cref{cor:bound}, there are 
+    $i,j\in J$ with $i<j$ and $\tp^q(\bar u_i/N)=
+    \tp^q(\bar u_j/N)$.
+    In particular, $\phi(\bar u_i,\bar v_i)$ holds in $G$
+    if and only if $\phi(\bar u_j,\bar v_i)$ holds in $G$.
+    This is the contradiction, since the former  holds as $i\le i$, and the latter does not hold as $\neg (j\le i)$.
+This finishes the proof of \cref{thm:uqw-stable}.
 \end{proof}
 
 
@@ -117,24 +96,14 @@ contradicting the assumption that $u_1,\ldots, u_k$ and $ v_1,\ldots, v_k$ form 
 
 We conclude by proving \cref{thm:new-stable}, promised in \cref{sec:intro}, which follows by tracking the precise dependencies on the parameters in the proof of \cref{thm:uqw-stable}.
 
-\begin{proof}[of \cref{thm:new-stable}]We 
+\begin{proof}[of \cref{thm:new-stable}]\todo{Fix}We 
   define the function~$g(\cdot)$ from the statement of the theorem as follows. Fix $q\in \N$.  
   Let $p,r$ be the numbers described in~\cref{lem:types}. Define $g(q)\coloneqq 10\cdot r$.
-	Let $\phi$ be the given formula of quantifier rank $q$ and with  free variables $X$, partitioned into $Y$ and $Z$.
+	Let $\phi$ be the given formula of quantifier rank $q$ and with $d$  free variables, partitioned into $\bar y$ and $\bar z$.
  From now on we consider only graphs $G$ such that $K_t\not\minor_{10r} G$.
+By~\cref{rem:local-tuples},
+this implies the statement $\textrm{UQW}(d,r)$.
 
-We first examine \cref{prop:uqw-tuples}, and in particular the dependence of the yielded functions 
-$N^d(\cdot,\cdot)$ and $s^d(\cdot)$ on the assumed quasi-wideness properties of the class $\CCC$.
-Precisely, having assumed that the underlying class $\CCC$ is quasi-wide with functions $N(\cdot,\cdot)$ and $s(\cdot)$,
-we have~obtained:
-$$
-N^d(2r,m)=K(4r,m(d^2+1))\qquad\textrm{and}\qquad s^d(2r)=d\cdot s(4r),
-$$
-where $K(4r,m')$ is the $d$-fold composition of the function $f(m')=N(4r,m')\cdot m'$.
-Thus, when establishing the values of $N^d(2r,m)$ and $s^d(2r)$, we refer to the quasi-wideness of $\CCC$ only by using numbers $s(4r)$ and $N(4r,m')$ for $m'\in \N$.
-By \cref{thm:new-uqw}, it suffices to assume that $K_t\not\minor_{10r} G$ to have $s(4r)\leq t$ and $N(4r,m')\leq c(r,t)\cdot (m')^{(8t+1)^{2rt}}$ for some computable function $c(r,t)$.
-Hence, this supposition alone, instead of full quasi-wideness of $\CCC$, is sufficient to claim that the conclusion of \cref{thm:new-uqw} holds with
-$s^d(2r)$ bounded by a computable function of $t$, $d$, and $q$, and $N^d(2r,m)$ bounded by a computable function of $m$, $t$, $d$, and $q$.
 
 	% In the proof of \cref{thm:uqw-stable} we have introduced the following parameters:
 %   \begin{eqnarray*}

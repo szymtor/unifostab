@@ -234,13 +234,13 @@ a first-order definable property, for every constant $r$.
 VC-density in model theory studies the asymptotic growth 
 of arbitrary definable families. More precisely, 
 let $\psi(\tup x,\tup y)$ be a first-order formula, where 
-$\tup x$ is an $m$-tuple and $\tup y$ is an $n$-tuple of variables. 
-Let $\strA$ be a structure and let $A$ be a set of elements of
+$\tup x$ is an $m$-tuple of \emph{object variables} and $\tup y$ is an $n$-tuple of \emph{parameter variables} variables. 
+Let $\strA$ be a structure and let $B$ be a set of elements of
 $\strA$. Then the set of \emph{$\psi$-types} or 
 \emph{$\psi$-traces} over $A$ in 
 $\strA$ is the set
-\[S^\psi(\strA/A)=\{\{\tup a\ \in A^m : \strA\models\psi(\tup a,\tup b)\} : \tup b\in V(\strA)^n\}.\]
-The set $S^\psi(\strA/A)$ is also known as the {\em{Stone space}} induced by $\psi$ over $A\subseteq \strA$.
+\[S^\psi(\strA/B)=\{\{\tup b\ \in B^n : \strA\models\psi(\tup a,\tup b)\} : \tup a\in V(\strA)^m\}.\]
+The set $S^\psi(\strA/B)$ is also known as the {\em{Stone space}} induced by $\psi$ over $B\subseteq \strA$.
 
 It is known that in (infinite) model theory,
 measuring cardinality of Stone spaces can be used to characterize when a formula $\psi$ is stable on a class of models (i.e., does not define arbitrarily long ladders).

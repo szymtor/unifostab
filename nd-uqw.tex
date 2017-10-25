@@ -839,3 +839,34 @@ first apply
 we obtain a set $B\subset A$ with $|B|\ge m\cdot (d^2+1)$ and a set $S\subset V(G)$ with $|S|\le s(2r)$.
 Apply \cref{lem:step2} to $B$ and $S$, yielding a set $C\subset B$ which is mutually $r$-independent in $G-S$ and has size at least $m$. This concludes the proof of \cref{prop:uqw-tuples},
 where the obtained bounds are $N^d(r,m)=K(r',m')=K(2r,m\cdot (d^2+1))$ and $s^d(r)=d\cdot s(2r)$.
+
+
+\begin{remark}\label{rem:local-tuples}
+  A detailed analysis of the presented proof
+  allows to obtain a stronger statement than in
+   \cref{prop:uqw-tuples}, which we now describe.
+   For $d,r,m\in\N$,
+  let
+    $\textrm{UQW}(d,r)$ denote the following statement:
+   \begin{quote}\itshape There exists a constant $s^d_r\in \N$ and a polynomial $N^d_r\from\N\to\N$ such that 
+      for all $m\in \N$ and all subsets 
+     $A\subset V(G)^d$ with $|A|\ge N^d_r(m)$ there is a set $S\subset V(G)$ of size $|S|\le s^d_r$ and a subset $B\subset A$ of size $|B|\ge m$ which is mutually $r$-independent in $G-S$.
+   \end{quote}   
+   Our proof shows that  the statement $\textrm{UQW}(d,r)$
+   can be concluded from the statement $\textrm{UQW}(1,4r)$.
+     
+This is because in our proof,  we have~obtained:
+  $$
+  N^d_{2r}(m)=(N_{4r})^d(m(d^2+1))\qquad\textrm{and}\qquad s^d_{2r}=d\cdot s(4r).
+  $$
+  Thus, when establishing the values of $N^d_{2r}(m)$ and $s^d_{2r}$, we refer to the quasi-wideness of $\CCC$ only by using numbers $s_{4r}$ and $N_{4r}(m')$ for $m'\in \N$.
+  
+  On the other hand, by \cref{thm:new-uqw}, the statement $\textrm{UQW}(1,4r)$
+  follows from the existence of a number $t\in\N$ such that $K_t\not\minor_{10r} G$ for $G\in \CCC$.
+  To summarize, for all $r\in\N$, the existence of a number $t\in\N$ such that $K_t\not\minor_{10r} G$ for $G\in \CCC$ implies the statement $\textrm{UQW}(d,r)$,
+  for all $d\in\N$.
+    %
+  % By \cref{thm:new-uqw}, it suffices to assume that $K_t\not\minor_{10r} G$ to have $s(4r)\leq t$ and $N(4r,m')\leq c(r,t)\cdot (m')^{(8t+1)^{2rt}}$ for some computable function $c(r,t)$.
+  % Hence, this supposition alone, instead of full quasi-wideness of $\CCC$, is sufficient to claim that the conclusion of \cref{thm:new-uqw} holds with
+  % $s^d(2r)$ bounded by a computable function of $t$, $d$, and $q$, and $N^d(2r,m)$ bounded by a computable function of $m$, $t$, $d$, and $q$.
+\end{remark}

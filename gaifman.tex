@@ -78,7 +78,8 @@ if $G,\bar u\bar w\models \phi(\bar y,\bar z)$.
 \paragraph{Types}
 \newcommand{\tp}{\mathrm{tp}}
 % We first define formulas with \emph{parameters} from a set of vertices.
-Fix a formula $\phi(\bar y,\bar z)$ together with a distinguished partitioning of its free variables into $\bar y$ and $\bar z$.
+Fix a formula $\phi(\bar y,\bar z)$ together with a distinguished partitioning of its free variables into 
+\emph{object variables} $\bar y$ and \emph{parameter variables} $\bar z$. 
 % , called the \emph{object} variables and the \emph{parameter} variables, respectively.
 Let $G=(V,E)$ be a graph, $A\subset V$.
 % By $\phi(\bar y,\bar v)$ we formally mean the
@@ -99,13 +100,13 @@ denoted $\tp^\phi_G(\bar u/A)$,
 is the set of all
 formulas  $\phi(\bar y,\bar v)$ 
 with parameters $\bar v$ from $A$
-replaced by the variables $\bar z$,
+replaced by the parameter variables $\bar z$,
 such that $G,\bar u\models \phi(\bar y,\bar v)$.
 Therefore, up to  bijection, we have the following identification:
 $$\tp^\phi_G(\bar u/A)\quad\leftrightarrow\quad\setof{\bar v\in  A^{|\bar z|}}{G, \bar u\bar v\models \phi(\bar y,\bar z)}.$$
-In other words, $\tp^\phi_G(\bar u/A)$ corresponds to the
-neighborhood of $\bar u\in V^{|\bar y|}$ in the bipartite graph with parts $V^{|\bar y|}$ and $A^{|\bar z|}$,
-and edge relation defined by $\phi(\bar y,\bar z)$.
+% In other words, $\tp^\phi_G(\bar u/A)$ corresponds to the
+% neighborhood of $\bar u\in V^{|\bar y|}$ in the bipartite graph with parts $V^{|\bar y|}$ and $A^{|\bar z|}$,
+% and edge relation defined by $\phi(\bar y,\bar z)$.
 
 
 If $q\in \N$ is a number and $\bar u\in  V^{d}$
@@ -231,7 +232,16 @@ $|S_\phi(G/A)|\leq |S_\phi(G/B)|$.
 If $X,Y,S\subset V(G)$ are sets of vertices of a graph $G$ 
 and $r\in \N$, then we say that $X$ and $Y$ are  \emph{$r$-separated}
 by $S$  (in $G$) if every path between a vertex in $X$ and a vertex in 
-$Y$ of length at most~$r$ contains a vertex from $S$.
+$Y$ of length at most~$r$ contains a vertex from $S$ (cf.~Fig.~\ref{fig:sep}).
+
+\begin{figure}[h!]
+	\centering
+		\includegraphics[scale=0.35,page=1]{pics}
+	\caption{The sets $A$ and $B$ are $2$-separated by $S$.
+	}
+	\label{fig:sep}
+\end{figure}
+
 % If $\bar u\in V^{\bar y}$ is a valuation of some set of variables $\bar y$ in a set $V$, then we say
 % that $X$ and $\bar y$ are $r$-separated by $S$
 % if $X$ and $Y$ are $r$-separated by $S$, where $Y$ is the range of $\bar y$.
@@ -243,7 +253,7 @@ $Y$ of length at most~$r$ contains a vertex from $S$.
 % Precisely,
 % for every $k\in \N$, every tuple $u\in B^{k}$ of $k$ elements of $B$, and every formula $\phi$ of quantifier rank $q$ and with $d+k$ free variables, we have that $\phi(u,w)$ holds if and only if $\phi(v,w)$ holds.
 
-The rest of~\cref{sec:gaifman} is to devoted to the proof of the following  lemma.
+The following lemma is the main result of~\cref{sec:gaifman}.
 
 
 
@@ -253,12 +263,15 @@ The rest of~\cref{sec:gaifman} is to devoted to the proof of the following  lemm
 For any given number $q$
 one can compute numbers $p,r$ with the following properties.	For any graph $G=(V,E)$ and sets of vertices $A,B,S\subset V$	
 	such that $A$  and $B$ are $r$-separated by~$S$,
-	for every tuple $\bar u\in B^{d}$, 
-	the type $\tp^q(\bar u/A)$
+	for every tuple $\bar u\in A^{d}$, 
+	the type $\tp^q(\bar u/B)$
 	is computable from  $\tp^{p}(\bar u/S)$, and $G$ and $S$.
-  Moreover, there is a computable function $T\from \N\times\N\times\N\to\N$
-  such that $|\setof{\tp^{q}(\bar u/A)}{\bar u\in B^d}|\le T(q,d,|S|)$.
+ 
   
+    %
+  % Moreover, there is a computable function $T\from \N\times\N\times\N\to\N$
+  % such that $|\setof{\tp^{q}(\bar u/A)}{\bar u\in B^d}|\le T(q,d,|S|)$.
+  %
   
 		%
 	% and any $\bar u,\bar v\in B^{\bar y}$, the following implication holds:
@@ -266,9 +279,23 @@ one can compute numbers $p,r$ with the following properties.	For any graph $G=(V
 	% 	\tp^q(\bar u/A)=\tp^q(\bar v/A).$$
 \end{lemma}
 
-The \emph{moreover} part of the lemma is an immediate consequence of the fact that $p$
-is computable from $q$ by the first part of the lemma,
-and that the number of quantifier rank $p$ types of $d$-tuples of elements over a set of parameters of  size $s$ is bounded by a value computable from $p,q,s$. Therefore, we only need to prove the first part of the lemma.
+We say that a tuple $\bar u$ of vertices  is $r$-\emph{separated} from $B$ by $S$ if its underlying set of vertices is $r$-separated from $B$ by $S$.
+
+\begin{corollary}\label{cor:bound}
+There is a number
+  $T$ computable from $q,d$ and $s$
+  such that for any $S\subset V(G)$ with $|S|\le s$
+    and set $U\subset V(G)^d$
+  of $d$-tuples, each of which is  $r$-separated from $B$ by $S$, the inequality 
+     $|\setof{\tp^q(\bar u/B)}{u\in U}|\le T$ holds.
+\end{corollary}
+
+\cref{cor:bound}  follows from~\cref{lem:types} by taking  $A$ to be
+the set of all vertices which occur in a tuple in $U$.
+Since $q$ is computable from $p$
+and that the number of quantifier rank $p$ types of $d$-tuples of elements over a set of parameters of  size $s$ is bounded by a value computable from $p,q,s$, the corollary follows. 
+
+
 
 
 %
@@ -327,7 +354,8 @@ and that the number of quantifier rank $p$ types of $d$-tuples of elements over 
 % In other words, the conclusion of the lemma says that whether a tuple $\bar u\in B^{\bar y}$ satisfies a formula of quantifier rank $q$ with parameters from $A$ depends only on $\tp^q(\bar u/S)$
 % (and on $G$ and $S$).
 
-\cref{lem:types} is a consequence of Gaifman locality of first order logic and a Feferman-Vaught type  lemma, which we recall now.
+\medskip The rest of~\cref{sec:gaifman} is devoted to the proof of~\cref{lem:types}.
+The lemma is a consequence of Gaifman locality of first order logic and a Feferman-Vaught type  lemma, which we recall now.
 \medskip
 
 % For a valuation $\bar u\in A^{\bar x}$ and number $r\in \N$, denote by
@@ -367,8 +395,8 @@ and that the number of quantifier rank $p$ types of $d$-tuples of elements over 
  is computable from $\tp^q_G(\bar u)$
  and $\tp^q_H(\bar v)$.
 \end{lemma}
-\begin{proof}[Proof sketch]The proof proceeds by applying the following, well-known characterization of $\tp^q_G(\bar w/A)$ in terms of Ehrenfeucht-Fra\"iss\'e games:
-$\tp^q_{G_1}(\bar w_1/A)=\tp^q_{G_2}(\bar w_2/A)$
+\begin{proof}[Proof sketch]The proof proceeds by applying the following, well-known characterization of $\tp^q_G(\bar w)$ in terms of Ehrenfeucht-Fra\"iss\'e games:
+$\tp^q_{G_1}(\bar w_1)=\tp^q_{G_2}(\bar w_2)$
 if and only if spoiler has a strategy to survive for $q$-rounds in a certain pebble game.
 To prove the lemma, we combine two strategies of spoiler.
 \end{proof}
@@ -385,14 +413,12 @@ may be colored by family of colors contained in $\set {C_s}_{s\in S}$.
 A sequence of elements of $S\cup\set\ast$,
 where $\ast$ is a fixed placeholder symbol,
 will be called an \emph{$S$-specification}.
-If $H$ is any (colored) graph with vertex set $V-S$,
+If $H$ is any (colored) graph with vertex set contained in $V-S$,
 and $\bar u\in V^d$ is a $d$-tuple of vertices,
 define the {$S$-specification} of $\bar u$
-as the tuple $\bar s\in (S\cup\set\ast)^d$ obtained from $\bar u$ by replacing the vertices in $V-S$ by a fixed placeholder~$\ast$.
-
-
-If $H$ and $\bar u$ are as above and $\bar u$ contains some vertices from $S$,
-then we define $\tp^q_H(\bar u)$ as the
+as the tuple $\bar s\in (S\cup\set\ast)^d$ obtained from $\bar u$ by replacing the vertices in $V-S$ by the symbol~$\ast$.
+% If $H$ and $\bar u$ are as above,
+ Define $\tp^q[H,\bar u]$ as the
 pair consisting of the following components:
 \begin{itemize}
 	\item The type $\tp^q_H(\bar v)$,
@@ -403,14 +429,15 @@ pair consisting of the following components:
 
 We will prove the following strengthening of~\cref{lem:types}:
 
-\begin{lemma}[Gaifman locality $\lor$ Feferman-Vaught]\label{lem:types1}
+\begin{lemma}%[Gaifman locality $\lor$ Feferman-Vaught]
+  \label{lem:types1}
 For any given number $q\in\N$ one can compute 
  a number $r\in\N$ with the following property.
 	For any graph $G=(V,E)$, sets of vertices $A,B,S\subset V$	
 	such that $A$  and $B$ are $r$-separated by $S$,
-	for every tuple $\bar u\in B^{d}$, 
-	the type $\tp^q_G(\bar u/A)$
-	is computable from  $\tp^{q}[B^r_{G^S}(\bar u), \bar u]$ and $G$ and $S$.  
+	for every tuple $\bar u\in A^{d}$, 
+	the type $\tp^q_G(\bar u/B)$
+	is computable from  $\tp^{q}[B^r_{G^S}(\bar u), \bar u]$, and $G$ and $S$.  
 		%
 	% and any $\bar u,\bar v\in B^{\bar y}$, the following implication holds:
 	% $$\text{if\quad}\tp^q(\bar u/S)=\tp^q(\bar v/S)\text{\quad then\quad}
@@ -418,7 +445,7 @@ For any given number $q\in\N$ one can compute
 \end{lemma}
 
 To show that~\cref{lem:types1} implies~\cref{lem:types}, define $p$ as $q\cdot r$. It suffices to show that
-$\tp^{q}[B^r_{G^S}(\bar u), \bar u]$ is computable from $\tp_G^p(\bar u/S)$. This is the case, since
+$\tp^{q}[B^r_{G^S}(\bar u), \bar u]$ is computable from $\tp_G^p(\bar u/S)$, and $G$ and $S$. This is the case, since
 a formula $\phi(\bar y)$
 can be relativized to $B^r_{G^S}(\bar u)$
 by replacing each quantifier $\exists x$ by a formula
@@ -439,34 +466,35 @@ It remains to prove~\cref{lem:types1}.
 We prove the lemma for $r=7^q$. 
 Fix $G,A,B,S$  as in the statement of the lemma.
 % and a formula $\phi(\bar y,\bar w)$  of quantifier rank $q$ with parameters $\bar w$ from $B$.
-Fix a tuple $\bar w\in B^\ell$ of some length.
+Fix a tuple $\bar w\in A^\ell$ of some length.
 To prove the lemma, it is enough to show that
-for any   $\bar u\in A^d$,
+for any   $\bar u\in B^d$,
 the type
-$\tp^q[G,\bar u\bar w]$ is computable from $\tp^q[B^r_{G^S}(\bar u), \bar u]$,
+$\tp^q_G(\bar u\bar w)$ is computable from $\tp^q[B^r_{G^S}(\bar u), \bar u]$,
 and from 
 $G,S$ and $\tp^q(\bar w)$, which are fixed.
-Note that the colored graph $B^r_{G^S}(\bar u\bar w)$
-is the disjoint union of the colored graphs 
-$B^r_{G^S}(\bar u)$ and $B^r_{G^S}(\bar w)$,
-since $\bar u$ and $\bar w$ are $r$-separated by $S$.
-In particular, we may apply the Feferman-Vaught lemma (\cref{lem:fv}).
+% In particular, we may apply the Feferman-Vaught Lemma (\cref{lem:fv}).
 % By $G^S(\bar u)$ we denote the
 % colored subgraph of $G^S$
 % induced by the set of vertices reachable (in $G^S$) from any vertex in $\bar u$. Similarly we define $G^S(\bar w)$.
 % Note that $G^S(\bar u\bar w)$ is the disjoint union of graphs $G^S(\bar u)\cup G^S(\bar w)$,
 % since
-The following diagram illustrates the computation chain:
+The following sequence illustrates the computation chain,
+where an arrow $a\longrightarrow b$ signifies that $b$ is computable from $a$, as well as from $G$ and $S$:
 \begin{align*}
 	\tp^q[B^r_{G^S}(\bar u), \bar u]
   \quad\stackrel{\textrm{(FV)}}{\longrightarrow}\quad
 	\tp^q[B^r_{G^S}(\bar u\bar w), \bar u\bar w] \quad\stackrel{\textrm{(G)}}\longrightarrow\quad
 	\tp^q[G^S, \bar u\bar w] \quad\longrightarrow\quad
-	\tp^q[G, \bar u\bar w]
+	\tp^q_G(\bar u\bar w)
 \end{align*}
-An arrow $a\longrightarrow b$ signifies that $b$ is computable from $a$, as well as from $G$ and $S$.
-The first arrow is by applying Feferman-Vaught's lemma, the second arrow is by applying Gaifman's lemma,~\cref{lem:gaif}.
-The last arrow follows from a simple rewriting, as provided by the following lemma.
+The first arrow is by applying Feferman-Vaught's lemma,
+as the colored graph $B^r_{G^S}(\bar u\bar w)$
+is the disjoint union of the colored graphs 
+$B^r_{G^S}(\bar u)$ and $B^r_{G^S}(\bar w)$,
+and $\bar u$ and $\bar w$ are $r$-separated by $S$.
+The second arrow is by applying Gaifman's lemma,~\cref{lem:gaif}.
+The last arrow follows from formula rewriting, as provided by the following lemma.
 
 \begin{lemma}\label{lem:rewrite}
   Let $\phi$ be a formula
@@ -500,8 +528,8 @@ By a simple induction on the structure of $\phi$.
 %    By~\cref{lem:gaif}, this proves
 %    \eqref{eq:types}, finishing the proof of~\cref{lem:gaif}.
 
-\cref{lem:rewrite} applied to $k=|\bar u\bar w|$ implies that 
-$\tp^q[G, \bar u\bar w]$ is computable from
+\cref{lem:rewrite}, applied to $k=|\bar u\bar w|$, implies that 
+$\tp^q_G(\bar u\bar w)$ is computable from
 	$\tp^q[G^S, \bar u\bar w]$, finishing the proof of~\cref{lem:types1}.	
 \end{proof}
 
