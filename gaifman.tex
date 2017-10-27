@@ -229,6 +229,11 @@ $|S_\phi(G/A)|\leq |S_\phi(G/B)|$.
 
 
 \subsection{Locality}
+Recall that if $A,B,S$ are sets of vertices of a graph $G$ and $r\in\N$,
+then $A$ and $B$ are $r$-separated
+if every path from $A$ to $B$ of length at most $r$ contains a vertex in $S$ (cf.~Fig.~\ref{fig:sep}).
+
+\begin{comment}
 If $X,Y,S\subset V(G)$ are sets of vertices of a graph $G$ 
 and $r\in \N$, then we say that $X$ and $Y$ are  \emph{$r$-separated}
 by $S$  (in $G$) if every path between a vertex in $X$ and a vertex in 
@@ -241,6 +246,7 @@ $Y$ of length at most~$r$ contains a vertex from $S$ (cf.~Fig.~\ref{fig:sep}).
 	}
 	\label{fig:sep}
 \end{figure}
+\end{comment}
 
 % If $\bar u\in V^{\bar y}$ is a valuation of some set of variables $\bar y$ in a set $V$, then we say
 % that $X$ and $\bar y$ are $r$-separated by $S$
@@ -279,21 +285,23 @@ one can compute numbers $p,r$ with the following properties.	For any graph $G=(V
 	% 	\tp^q(\bar u/A)=\tp^q(\bar v/A).$$
 \end{lemma}
 
-We say that a tuple $\bar u$ of vertices  is $r$-\emph{separated} from $B$ by $S$ if its underlying set of vertices is $r$-separated from $B$ by $S$.
+
+We will  only use the following consequence of~\cref{lem:types}.
 
 \begin{corollary}\label{cor:bound}
-There is a number
-  $T$ computable from $q,d$ and $s$
-  such that for any $S\subset V(G)$ with $|S|\le s$
-    and set $U\subset V(G)^d$
-  of $d$-tuples, each of which is  $r$-separated from $B$ by $S$, the inequality 
-     $|\setof{\tp^q(\bar u/B)}{u\in U}|\le T$ holds.
+For every formula $\phi(\bar x,\bar y)$ 
+and number $s\in \N$
+there exist numbers $T,r\in \N$,
+where $r$ is computable from $\phi$, and $T$ is computable from $\phi$ and $s$,
+  such that for all $A,B,S\subset V(G)$ 
+  where $|S|\le s$ and $S$ $r$-separates $A$ from $B$, the inequality 
+  $|S^\phi(B/A)|\le T$ holds.
 \end{corollary}
-
-\cref{cor:bound}  follows from~\cref{lem:types} by taking  $A$ to be
-the set of all vertices which occur in a tuple in $U$.
-Since $q$ is computable from $p$
-and that the number of quantifier rank $p$ types of $d$-tuples of elements over a set of parameters of  size $s$ is bounded by a value computable from $p,q,s$, the corollary follows. 
+\begin{proof}
+ Apply~\cref{lem:types} to $q$ being the quantifier rank of $\phi$ and $d=|\bar x|$. Let 
+  $p$ be  computed from $q$ as in the lemma.
+ Then $|S^\phi(B/A)|$ is bounded by the number of quantifier rank $p$ types of $d$-tuples of elements over a set of parameters of size $s$, and this number  is bounded by a value computable from $p,d$ and $s$.
+\end{proof}
 
 
 
@@ -355,7 +363,8 @@ and that the number of quantifier rank $p$ types of $d$-tuples of elements over 
 % (and on $G$ and $S$).
 
 \medskip The rest of~\cref{sec:gaifman} is devoted to the proof of~\cref{lem:types}.
-The lemma is a consequence of Gaifman locality of first order logic and a Feferman-Vaught type  lemma, which we recall now.
+The lemma is a consequence of two fundamental lemmas about first order logic:
+Gaifman's locality result, and a Feferman-Vaught type  lemma. We recall these results now.
 \medskip
 
 % For a valuation $\bar u\in A^{\bar x}$ and number $r\in \N$, denote by
@@ -395,8 +404,8 @@ The lemma is a consequence of Gaifman locality of first order logic and a Feferm
  is computable from $\tp^q_G(\bar u)$
  and $\tp^q_H(\bar v)$.
 \end{lemma}
-\begin{proof}[Proof sketch]The proof proceeds by applying the following, well-known characterization of $\tp^q_G(\bar w)$ in terms of Ehrenfeucht-Fra\"iss\'e games:
-$\tp^q_{G_1}(\bar w_1)=\tp^q_{G_2}(\bar w_2)$
+\begin{proof}[sketch]The proof proceeds by applying the following, well-known characterization of $\tp^q_G(\bar w)$ in terms of Ehrenfeucht-Fra\"iss\'e games:
+$\tp^q_{G}(\bar w_1)=\tp^q_{G}(\bar w_2)$
 if and only if spoiler has a strategy to survive for $q$-rounds in a certain pebble game.
 To prove the lemma, we combine two strategies of spoiler.
 \end{proof}
@@ -407,7 +416,7 @@ Fix a graph $G=(V,E)$.
 For a set of vertices $S\subset V$,
 we define a colored graph denoted $G^S$, which is 
 the subgraph of $G$ induced by $V-S$,
-in which additionally, for every vertex $s\in S$, every vertex $v\in V-S$ which is a neighbor of  $s$ in $G$ is colored by color $C_s$. In particular, every vertex of $G_S$
+in which additionally, for every vertex $s\in S$, every vertex $v\in V-S$ which is a neighbor of  $s$ in $G$ is colored by color $C_s$. In particular, every vertex of $G^S$
 may be colored by family of colors contained in $\set {C_s}_{s\in S}$.
 
 A sequence of elements of $S\cup\set\ast$,
@@ -437,7 +446,12 @@ For any given number $q\in\N$ one can compute
 	such that $A$  and $B$ are $r$-separated by $S$,
 	for every tuple $\bar u\in A^{d}$, 
 	the type $\tp^q_G(\bar u/B)$
-	is computable from  $\tp^{q}[B^r_{G^S}(\bar u), \bar u]$, and $G$ and $S$.  
+	is computable from $G,S$ and $\tp^{q}[B^r_S(\bar u), \bar u]$, where $B^r_S(\bar u)$ denotes the 
+	colored subgraph of $G^S$ induced by the set of vertices reachable from a vertex in $\bar u$
+	by a path of length at most $r$.
+	
+	
+	
 		%
 	% and any $\bar u,\bar v\in B^{\bar y}$, the following implication holds:
 	% $$\text{if\quad}\tp^q(\bar u/S)=\tp^q(\bar v/S)\text{\quad then\quad}
@@ -445,14 +459,14 @@ For any given number $q\in\N$ one can compute
 \end{lemma}
 
 To show that~\cref{lem:types1} implies~\cref{lem:types}, define $p$ as $q\cdot r$. It suffices to show that
-$\tp^{q}[B^r_{G^S}(\bar u), \bar u]$ is computable from $\tp_G^p(\bar u/S)$, and $G$ and $S$. This is the case, since
+$\tp^{q}[B^r_S(\bar u), \bar u]$ is computable from $\tp_G^p(\bar u/S)$, and $G$ and $S$. This is the case, since
 a formula $\phi(\bar y)$
-can be relativized to $B^r_{G^S}(\bar u)$
+can be relativized to $B^r_S(\bar u)$
 by replacing each quantifier $\exists x$ by a formula
 $\exists x\exists x_1\ldots\exists x_r\psi (x,x_1,\ldots,x_r)$,
 where $\psi$ specifies that $x_1,\ldots,x_r,x$ form a path
 starting in one of the vertices in $\bar u$, ending in $x$,
-and omitting all vertices in $S$ (we enumerate all elements of $S$ as parameters).
+and omitting all vertices in $S$, which are enumerated as parameters.
 
 It remains to prove~\cref{lem:types1}.
 % We will use slightly stronger variants
@@ -470,7 +484,7 @@ Fix a tuple $\bar w\in A^\ell$ of some length.
 To prove the lemma, it is enough to show that
 for any   $\bar u\in B^d$,
 the type
-$\tp^q_G(\bar u\bar w)$ is computable from $\tp^q[B^r_{G^S}(\bar u), \bar u]$,
+$\tp^q_G(\bar u\bar w)$ is computable from $\tp^q[B^r_S(\bar u), \bar u]$,
 and from 
 $G,S$ and $\tp^q(\bar w)$, which are fixed.
 % In particular, we may apply the Feferman-Vaught Lemma (\cref{lem:fv}).
@@ -480,18 +494,18 @@ $G,S$ and $\tp^q(\bar w)$, which are fixed.
 % Note that $G^S(\bar u\bar w)$ is the disjoint union of graphs $G^S(\bar u)\cup G^S(\bar w)$,
 % since
 The following sequence illustrates the computation chain,
-where an arrow $a\longrightarrow b$ signifies that $b$ is computable from $a$, as well as from $G$ and $S$:
+where an arrow $a\rightarrow b$ signifies that $b$ is computable given $a$, $G$ and $S$:
 \begin{align*}
-	\tp^q[B^r_{G^S}(\bar u), \bar u]
-  \quad\stackrel{\textrm{(FV)}}{\longrightarrow}\quad
-	\tp^q[B^r_{G^S}(\bar u\bar w), \bar u\bar w] \quad\stackrel{\textrm{(G)}}\longrightarrow\quad
-	\tp^q[G^S, \bar u\bar w] \quad\longrightarrow\quad
-	\tp^q_G(\bar u\bar w)
+	\tp^q[B^r_S(\bar u), \bar u]
+  \quad\stackrel{\textrm{(\ref{lem:fv})}}{\longrightarrow}\quad
+	\tp^q[B^r_S(\bar u\bar w), \bar u\bar w] \quad\stackrel{\textrm{(\ref{lem:gaif})}}\longrightarrow\quad
+	\tp^q[G^S, \bar u\bar w] \quad\stackrel{\textrm{(\ref{lem:rewrite})}}\longrightarrow\quad
+	\tp^q_G(\bar u\bar w).
 \end{align*}
 The first arrow is by applying Feferman-Vaught's lemma,
-as the colored graph $B^r_{G^S}(\bar u\bar w)$
+as the colored graph $B^r_S(\bar u\bar w)$
 is the disjoint union of the colored graphs 
-$B^r_{G^S}(\bar u)$ and $B^r_{G^S}(\bar w)$,
+$B^r_S(\bar u)$ and $B^r_S(\bar w)$,
 and $\bar u$ and $\bar w$ are $r$-separated by $S$.
 The second arrow is by applying Gaifman's lemma,~\cref{lem:gaif}.
 The last arrow follows from formula rewriting, as provided by the following lemma.

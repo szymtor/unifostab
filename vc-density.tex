@@ -41,7 +41,7 @@ Let $G$ be a graph and let $B\subseteq V(G)$ be a subset of vertices. For vertic
 if all its vertices apart from~$v$ do not belong to $B$. For a positive integer $r$ and $u\in V(G)$, the {\em{$r$-projection}} of $u$ on $B$, denoted $M^G_r(u,B)$, is the set of all vertices $v\in B$ that
 can be connected to $u$ by a $B$-avoiding path of length at most $r$. Note that for $u\in B$, we have $M^G_r(u,B)=\{b\}$.
 Equivalently, $M^G_r(u,B)$ is the inclusion-minimal
-subset of $B$ which $r$-separates $u$ from $B$.
+subset of $B$ which $r$-separates $u$ from $B$ (cf.~Fig.~\ref{fig:projection}).
 
 %
 %The {\em{$r$-projection profile}} of a vertex $u\in V(G)\setminus A$ on $A$ is a function $\rho^G_r[u,A]$ mapping vertices of
@@ -54,10 +54,10 @@ subset of $B$ which $r$-separates $u$ from $B$.
 		\includegraphics[scale=0.35,page=2]{pics}
 	\caption{The  $r$-projection of $u$ on $B$
 	(here $r=2$)
-	is the minimal (inclusion-wise) set  $S\subset B$
+	is the minimal set  $S\subset B$
 	which $r$-separates $ u$ from $B$.
 	}
-	\label{fig:gaifman}
+	\label{fig:projection}
 \end{figure}
 % \end{comment}
 
@@ -71,26 +71,32 @@ We will use the following results from~\cite{drange2016kernelization,eickmeyer20
 \begin{lemma}[\cite{drange2016kernelization}]\label{lem:closure-be}
 Let $\CCC$ be a class of bounded expansion. 
 Then for every $r\in \N$ there is a constant $c\in \N$ such that for
-every $G\in \CCC$ and $X\subseteq V(G)$ there exists a set $\cl_r(X)$, called an {\em{$r$-closure}} of $X$, with the following properties. 
+every $G\in \CCC$ and $A\subseteq V(G)$ there exists a set $\cl_r(A)$, called an {\em{$r$-closure}} of $A$, with the following properties. 
 \begin{enumerate}[(a)]
-  \item $X\subseteq \cl_r(X)\subseteq V(G)$;
-  \item $|\cl_r(X)|\leq c\cdot |X|$; 
-  \item $|M_r^G(u,\cl_r(X))|\leq c$ for each $u\in V(G)$; and
-  \item $|\setof{M_r^G(u,\cl_r(X))}{u\in V(G)}|\leq c\cdot |\cl_r(X)|$.
+  \item $A\subseteq \cl_r(A)\subseteq V(G)$;
+  \item $|\cl_r(A)|\leq c\cdot |A|$; 
+  \item $|M_r^G(u,\cl_r(A))|\leq c$ for each $u\in V(G)$;
+  \end{enumerate}
+  moreover, for every set $B\subset V(G)$, 
+  \begin{enumerate}[(d)]
+  \item $|\setof{M_r^G(u,B)}{u\in V(G)}|\leq c\cdot |B|$.
 \end{enumerate}
 \end{lemma}
 
 \begin{lemma}[\cite{eickmeyer2016neighborhood}]\label{lem:closure-nd}
 Let $\CCC$ be a nowhere dense class. 
-Then for every $r\in\N$ and $\epsilon>0$ there is a 
-constant $c\in\N$ such that for every $G\in \CCC$ and $X\subseteq V(G)$ there exists a set 
-$\cl_r(X)$,  called an {\em{$r$-closure}} of $X$, 
+Then for every $r\in\N$ and $\delta>0$ there is a 
+constant $c\in\N$ such that for every $G\in \CCC$ and $A\subseteq V(G)$ there exists a set 
+$\cl_r(A)$,  called an {\em{$r$-closure}} of $A$, 
 with the following properties: 
 \begin{enumerate}[(a)]
-  \item $X\subseteq \cl_r(X)\subseteq V(G)$;
-  \item $|\cl_r(X)|\leq c\cdot |X|^{1+\epsilon}$; 
-  \item $|M_r^G(u,\cl_r(X))|\leq c\cdot |X|^{\epsilon}$ for each $u\in V(G)$; and
-  \item $|\setof{M_r^G(u,\cl_r(X))}{u\in V(G)}|\leq c\cdot |\cl_r(X)|^{1+\epsilon}$.
+  \item $A\subseteq \cl_r(A)\subseteq V(G)$;
+  \item $|\cl_r(A)|\leq c\cdot |A|^{1+\delta}$; 
+  \item $|M_r^G(u,\cl_r(A))|\leq c\cdot |A|^{\delta}$ for each $u\in V(G)$.
+  \end{enumerate}
+  moreover, for every set $B\subset V(G)$, 
+  \begin{enumerate}[(d)]  
+  \item $|\setof{M_r^G(u,B)}{u\in V(G)}|\leq c\cdot |B|^{1+\delta}$.
 \end{enumerate}
 \end{lemma}
 
@@ -127,7 +133,7 @@ However, adding singleton projections for vertices of $B$ to the definition only
 We  now prove~\cref{thm:vc-density}, whose statement we repeat for convenience. 
 \setcounter{theorem}{2}
 \begin{theorem}
-Let $\CCC$ be a class of graphs and let $\phi(\tup x,\tup y)$ be a first-order formula with distinguished object variables $\bar x$ and parameter variables $\bar y$, and let $\ell=|\bar x|$. Then:
+Let $\CCC$ be a class of graphs and let $\phi(\tup x,\tup y)$ be a first order formula with distinguished object variables $\bar x$ and parameter variables $\bar y$, and let $\ell=|\bar x|$. Then:
 \begin{enumerate}[(1)]
 \item If $\CCC$ is nowhere dense, then for every $\epsilon>0$ 
 there exists a constant~$c$ such that for every $G\in \CCC$ and every nonempty
@@ -152,44 +158,29 @@ $A\subseteq V(G)$ the inequality $|S^\phi(G/A)|\leq c\cdot |A|^{\ell+\epsilon}$ 
 %  such that $f(n)=\Uof(g(n))$'', meaning that
 %  there is an $n$ such that
 %   $|f(n)|>c\cdot |g(n)|$, where the constant $c$ is chosen sufficiently large so that the following contradiction will be obtained.
- 
+ To focus attention, we present the proof only the nowhere dense case $(1)$;
+ the proof in the bounded expansion case $(2)$ 
+ can be obtained by replacing  all the parameters $\epsilon,\delta,\epsilon_1,\epsilon_2$ below by~$0$.
 	
   Fix a first order formula $\phi(\bar x,\bar y)$, where $\bar x$ is the distinguished $\ell$-tuple of object variables.
     By \emph{tuples} below we refer to tuples of length $\ell$.
-	   Fix a real $\epsilon$ which is positive if $\cal C$
-	   is nowhere dense and equal to $0$ if $\cal C$ has bounded expansion.	   
-	   We show that $|S^\phi(G/A)|$ is $\Oof(|A|^{\ell+\epsilon})$.
+	   Fix a positive real $\epsilon$. 	   We show that $|S^\phi(G/A)|$ is $\Oof(|A|^{\ell+\epsilon})$.
+
 	   \medskip
 	   
 	   
 	   
 In the proof below, $d$ denotes a positive integer 
-depending on ${\cal C},\ell,\phi$ only (and not on $G, A$ and $\epsilon$), which will be specified later.
-Similarly, $\delta,\epsilon_1,\epsilon_2,\epsilon_3$ denote  reals which 
-will be specified later.
-These values, as well as the constants hidden in the $\Oof$ notation, depend
- on $\epsilon,\cal C, \ell$ and $\phi$, but not on $G$ and $A$.
- In the case of nowhere dense classes the  parameters $\delta,\epsilon_1,\epsilon_2,\epsilon_3$ are positive. The case of bounded expansion classes is the simpler, degenerate  case, where $\epsilon,\delta,\epsilon_1,\epsilon_2,\epsilon_3$  are taken to be $0$. To focus attention, we consider only the nowhere dense case below.
- 
-The parameters $\delta$ and $\epsilon_1$ are chosen so that 
-%
-%
-%  $(1+\delta)^2<\frac{\ell+\epsilon}{\ell+d}$.
-%  In particular, $\delta d+(\delta+1)\ell\le
-%  (\delta+1)(d+\ell)<
-%  \frac{\ell+\epsilon}{1+d}$.
-% The parameter $\epsilon_1$ is such that
-% $\delta d+(\delta+1)\ell<\ell+\epsilon_1<\frac{\ell+\epsilon}{1+d}$.
-%  In particular,
-%  $\delta\ell\le \delta(d+\ell)\le $
-% The parameter $\epsilon_1$ will be such that $\cdots$
-% 	% $1+\delta<1+\epsilon_1<\frac{1+\epsilon/\ell}{1+\delta}$.
-% 	In particular,
-	 $ (\ell+\epsilon_1)(1+\delta)%\le 	 \ell(1+\epsilon_1)(1+\delta) 
+depending on ${\cal C},\ell,\phi$ only (and not on $G, A$ and $\epsilon$), and will be specified later. We choose\footnote{Pick $\delta$ so that	 $\delta((1+\delta)(d+\ell)+\ell)<\epsilon$. Then $\delta(d+\ell)+\ell<\frac{\ell+\epsilon}{1+\delta}$. Pick $\epsilon_1$ so that $\delta(d+\ell)+\ell<\ell+\epsilon_1<\frac{\ell+\epsilon}{1+\delta}$.} positive reals
+$\delta,\epsilon_1$  such that 
+	 $(\ell+\epsilon_1)(1+\delta) 
 	 \le
-	 \ell+\epsilon$ and $\epsilon_1>\delta(d+\ell)\ge \delta\ell$.
-	 It is easy to check\footnote{Pick $\delta$ so that 
-	 $\delta((1+\delta)(d+\ell)+\ell)<\epsilon$. Then $\delta(d+\ell)+\ell<\frac{\ell+\epsilon}{1+\delta}$. Pick $\epsilon_1$ so that $\delta(d+\ell)+\ell<\ell+\epsilon_1<\frac{\ell+\epsilon}{1+\delta}$.} that there exist such positive reals $\delta$ and $\epsilon_1$. 
+	 \ell+\epsilon$ and $\epsilon_1>\delta(d+\ell)> \delta\ell$.	 
+The constants hidden in the $\Oof$ notation below depend
+ on $\epsilon,\delta,\epsilon_1,\cal C, \ell$ and $\phi$, but not on $G$ and $A$.
+
+ 
+
  
 
 \medskip
@@ -257,7 +248,7 @@ Let $G\in\cal C$ be a graph, $A\subset V(G)$ a set of vertices.
 % \end{claim}
 	Let $q$ be the quantifier rank of $\phi$ and let 
 $p,r$ be the numbers obtained from~\cref{lem:types}.
-Let $B$ be the $r$-closure of $A$, as obtained from~\cref{lem:closure-nd} applied to  $\delta$ in place of $\epsilon$.
+Let $B=\cl_r(A)$ be the $r$-closure of $A$, as obtained from~\cref{lem:closure-nd}.
 % , where $\delta>0$ is such that $(1+\delta)^2<1+\epsilon/\ell$. In particular, $\delta<\epsilon/\ell$.
  % $\delta<\epsilon/\ell$ which will be specified later.
   The total number of distinct $r$-projections onto $B$ 
@@ -265,7 +256,7 @@ Let $B$ be the $r$-closure of $A$, as obtained from~\cref{lem:closure-nd} applie
   	   Figure~\ref{fig:sketch} serves as  an illustration to the steps of the proof in the case $\ell=1$.
   	   \begin{figure}[h!]
   	   	\centering
-  	   		\includegraphics[scale=0.35,page=4]{pics}
+  	   		\includegraphics[scale=0.346,page=4]{pics}
   			\caption{The proof of~\cref{thm:vc-density} in case $\ell=1$. 
   The logical implications flow from right to left,
   but our description below proceeds in the other direction.
@@ -490,7 +481,7 @@ We now use all the above tools to prove \Cref{thm:vc-density}. We repeat its sta
 
 \setcounter{theorem}{2}
 \begin{theorem}
-Let $\CCC$ be a class of graphs and let $\phi(\tup x,\tup y)$ be a first-order formula, where 
+Let $\CCC$ be a class of graphs and let $\phi(\tup x,\tup y)$ be a first order formula, where 
 $\tup x$ is an $k$-tuple and $\tup y$ is an $\ell$-tuple of variables. 
 \begin{enumerate}[(1)]
 \item If $\CCC$ is nowhere dense, then for every $\epsilon>0$ 

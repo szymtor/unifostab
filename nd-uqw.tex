@@ -32,14 +32,21 @@ $r\in \N$ and all $H\minor_rG$ with $G\in\CCC$, the edge density
 of $H$, i.e. $|E(H)|/|V(H)|$, is bounded by $d(r)$. Note that every 
 class of bounded expansion is nowhere dense. The converse is not necessarily true in general~\cite{sparsity}.
 
+% A set $B\subseteq V(G)$ is called {\em{$r$-independent}} in a graph $G$ if  $\dist_G(u,v)>r$ for all
+% distinct $u,v\in B$.
+
+ 
+
 A set $B\subseteq V(G)$ is called {\em{$r$-independent}} in a graph $G$ if  $\dist_G(u,v)>r$ for all
-distinct $u,v\in B$.
-A class $\CCC$ of graphs is \emph{uniformly quasi-wide} if there are
-functions $N\colon \N\times\N\rightarrow \N$ and $s:\N\rightarrow \N$ such
-that for all $r,m\in \N$, all graphs $G\in \CCC$, and all subsets $A\subseteq V(G)$ of size $\abs{A}\geq N(r,m)$, there is a set
-$S\subseteq V(G)$ of size $\abs{S}\leq s(r)$ and a set
-$B\subseteq A\setminus S$ of size $\abs{B}\geq m$ which is $r$-independent in
-$G-S$. 
+distinct $u,v\in B$. 
+A class $\CCC$ of graphs is \emph{uniformly quasi-wide} if for every $r\in \N$ there is a number $s_r\in \N$
+and a function $N_r\from\N\to\N$ such that
+for all $m\in \N$, all graphs $G\in \CCC$, and all subsets $A\subseteq V(G)$ of size $\abs{A}\geq N_r(m)$, there is a set
+$S\subseteq V(G)$ of size $\abs{S}\leq s_r$ and a set
+$B\subseteq A-S$ of size $\abs{B}\geq m$ 
+which is $r$-independent in $G-S$.
+
+
 
 \paragraph{General strategy.}
 Our proof follows the same lines as the original proof of Ne\v set\v ril and Ossona de Mendez, with the difference that in the key technical lemma (\cref{lem:apex} below), 
@@ -403,7 +410,7 @@ and $a_i\in B_i$.
 Hence, the graphs $B_j$, for $j\in \set{1,\ldots,k}$, define a depth-$2$ minor model of $K_k$ in $G$. Since $K_t\not\minor_{2}G$, this implies that $k<t$, proving~\cref{thm:alternation-rank-type-tree}.
 \end{proof}
 
-We proceed to prove~\cref{lem:apex}. 
+We continue with the proof of~\cref{lem:apex}. 
 Fix integers $\ell\ge t^8$ and~$m$, and define $h=m+\ell$.
 Let $A$ be a $1$-independent set in $G$
 of size at least $h^{2t}$.
@@ -707,45 +714,149 @@ This finishes the proof of~\cref{thm:new-uqw}.
 
 
 \section{Uniform quasi-widness for tuples}\label{sec:uqw-tuples}
-We now formulate and prove an extension of~\cref{thm:new-uqw}, namely \cref{prop:uqw-tuples},
+We now formulate and prove an extension of~\cref{thm:new-uqw}, namely \cref{thm:uqw-tuples},
 which applies to sets of tuples of vertices, rather than sets of vertices. This more general result will be used later on in the paper. 
 The result and its proof are essentially adaptations to the finite of their infinite analogues introduced by Podewski and Ziegler (cf.~\cite{podewski1978stable},  Corollary 3),
 modulo the numerical bounds.
 
-First, we generalize the notion of independence to sets of tuples of vertices.
-Fix a graph $G$, the dimension $d\in\N$, and the radius $r\in \N$.
-If $S\subset V(G)$ is a set of vertices and $A\subset V(G)^d$ is a set of $d$-tuples of vertices,
-then we say that $A$ is \emph{mutually $r$-independent} in $G-S$ 
-if for every two distinct $(u_1,\ldots,u_d),(v_1,\ldots,v_d)\in A$
-and for all $1\le i,j\le d$, the distance between the vertices $u_i$ and $v_j$ in the graph $G-S$
-is larger than $r$. Throughout this section we use the convention that if $x\in S$, then the distance in $G-S$ between $x$ and any vertex, including~$x$ itself, is infinity. 
-For instance, in the definition above, the tuples from $A$ may contain vertices of~$S$, and such a vertex is considered infinitely far from every vertex.
 
-We now prove the following proposition, which can be viewed as an extension of uniform quasi-wideness to tuples.
+
+
+
+
+
+
+We generalize the notion of independence to sets of tuples of vertices.
+Fix a graph $G$ and a number $r\in \N$.
+Recall that two tuples $\bar u,\bar v$ of vertices of $G$ are $r$-separated by $S\subset V(G)$ if every path from a vertex in $\bar u$ to a vertex in $\bar v$ of length at most $r$ passes through $S$.
+
+If $S\subset V(G)$ is a set of vertices and $A\subset V(G)^d$ is a set of $d$-tuples of vertices, for some $d\in\N$,
+then we say that $A$ is \emph{mutually $r$-independent} in $G-S$ 
+if any two distinct $\bar u,\bar v\in A$
+are $r$-separated by $S$ in $G$.
+%  Throughout this section we use the convention that if $x\in S$, then the distance in $G-S$ between $x$ and any vertex, including~$x$ itself, is infinity.
+% For instance, in the definition above, the tuples from $A$ may contain vertices of~$S$, and such a vertex is considered infinitely far from every vertex.
+
+\medskip
+\newcommand{\uqw}{\mathrm{UQW}}
+\newcommand{\puqw}{\mathrm{PUQW}}
+Fix a class $\cal C$ and numbers $r,d\in\N$.
+For a function $N\from\N\to\N$
+and number $s\in\N$,
+we say that $\cal C$ satisfies the property
+$\uqw^d_r(N,s)$ if the following condition holds:
+   \begin{quote}\itshape 
+      for all $m\in \N$ and all subsets 
+     $A\subset V(G)^d$ with $|A|\ge N(m)$ there is a set $S\subset V(G)$ of size $|S|\le s$ and a subset $B\subset A$ of size $|B|\ge m$ which is mutually $r$-independent in $G-S$.
+   \end{quote}   
+    We say that $\cal C$ satisfies the property $\uqw^d_r$ if  $\cal C$ satisfies $\uqw^d_r(N,s)$ for 
+	some $N\from\N\to\N$ and $s\in\N$.
+	If moreover $N$ can be taken polynomial,
+	then we say that $\cal C$ satisfies the property $\puqw^d_r$.
+	When $d=1$, we omit it from the superscripts.
+
+  Note that there is a slight discrepancy 
+  in the definition of uniform quasi-wideness 
+  and the property of satisfying $\uqw_r$, for all $r\in \N$,
+  which is due to the fact that in the original definition,
+  the set $B$ must be disjoint from $S$,
+  whereas in the property $\uqw_r$, we may always assume that $S\subset B$. This distinction is inessential, since $|S|\le s_r$ for some constant $s_r$,
+  so passing from one definition to the other requires 
+  modifying the function $N_r$ by an additive constant $s_r$.
+In particular, a class of graphs $\cal C$ is uniformly quasi-wide if and only if it 
+	satisfies $\uqw_r$, for all $r\in \N$.  
+	Furthermore,
+	\cref{thm:new-uqw}
+	states that for every fixed $r\in\N$, if there is a number $t\in\N$
+	such that $K_t\not\minor_{\lfloor 9r/2\rfloor} G$ for all $G\in \cal C$,
+	then $\cal C$ satisfies $\puqw_r$,
+	and more precisely $\uqw_r(N_r,s_r)$
+	for a polynomial $N_r\from\N\to\N$ and number $s_r\in \N$, where $N_r$ and $s_r$ can be computed from $r$ and $t$.
+	
+	The following result provides a generalization to higher dimensions $d>1$.
+	
+	% and 	\cref{thm:}
+	
+	
+	
+ %
+%
+%
+%
+% Let $\uqw^d_r$ denote the following statement concerning a class of graphs $\cal C$:
+%    \begin{quote}\itshape There exists a constant $s^d_r\in \N$ and a polynomial $N^d_r\from\N\to\N$ such that
+%       for all $m\in \N$ and all subsets
+%      $A\subset V(G)^d$ with $|A|\ge N^d_r(m)$ there is a set $S\subset V(G)$ of size $|S|\le s^d_r$ and a subset $B\subset A$ of size $|B|\ge m$ which is mutually $r$-independent in $G-S$.
+%    \end{quote}
+%
+% In the case $d=1$ we write simply $\uqw_r$
+% instead of $\uqw^1_r$, and
+% $s^1_r$ and $N^1_r$ are denoted $s_r$ and $N_r$, respectively.
+%
+% Therefore, \cref{thm:new-uqw}
+% states that if there is a number $t\in\N$
+% such that $K_t\not\minor_{\lfloor 9r/2\rfloor} G$ for all $G\in \cal C$,
+% then $\cal C$ satisfies $\uqw_r$.
+% Moreover, the proof is effective,
+% meaning that  $s_r$ and $N_r$
+% can be computed, given $t$.
+% The following result provides a generalization to $\uqw^d_r$, for $d>1$.
+
+\begin{theorem}\label{thm:uqw-tuples}If $\cal C$
+	is a nowhere dense class of graphs,
+	then for all $r,d\in\N$,
+	the class $\cal C$ satisfies
+	 $\puqw^d_r$.
+	More precisely, for any class of graphs $\cal C$ and numbers $r,t\in\N$,
+	if  	$K_t\not\minor_{18r} G$ for all $G\in \cal C$,
+then for all $d\in \N$ the class $\cal C$ satisfies $\uqw^d_{r}(N^d_r,s^d_r,)$	for 
+some number $s^d_r\in \N$ and polynomial $N^d_r\from \N\to\N$ that can be computed given $r,t$ and $d$.
+\end{theorem}
+
+
+\cref{thm:uqw-tuples} is an immediate consequence  of~\cref{thm:new-uqw} and of the following result.
 
 \begin{proposition}\label{prop:uqw-tuples}
-	Let $\cal C$ be a uniformly quasi-wide class of graphs and $d\in\N$ be an integer.
-	Then there are functions $N^d\colon \N\times\N\to\N$ and $s^d\colon \N\to\N$
-	such that for all $r,m\in\N$ and all subsets $A\subset V(G)^d$
-	with $|A|\ge N^d(r,m)$ there  is a set $S\subset V(G)$
-	of size $|S|\le s^d(r)$ and a subset $B\subset A$ of size $|B|\ge m$ which is mutually $r$-independent in $G-S$. Moreover, $N^d$ is polynomial in the second argument and $s^d$ is polynomial. 
+% 	Let $\cal C$ be a uniformly quasi-wide class of graphs and $d\in\N$ be an integer.
+% 	Then, for every $d,r\in\N$,
+% 	$\cal C$ satisfies
+% 	$\puqw^d_r$.
+% More precisely,
+For all $r,d\in\N$,
+if $\cal C$ satisfies $\uqw_{2r}(N_{2r},s_{2r})$ 
+for some $s_{2r}\in\N$ and $N_{2r}\in \N$,
+then $\cal C$
+satisfies $\uqw^d_r(N^d_r,s^d_r)$
+for  $s^d_r=d\cdot s_{2r}$ and 
+a function $N^d_r$ defined by  $N^d_r=T_d(N_{2r},s_{2r})$, for some 
+term operation $T_d$ using $+,\times, N_{2r}, s_{2r}$, which is computable from $d$.
+	% Then there are functions $N^d\colon \N\times\N\to\N$ and $s^d\colon \N\to\N$
+	% such that for all $r,m\in\N$ and all subsets $A\subset V(G)^d$
+	% with $|A|\ge N^d(r,m)$ there  is a set $S\subset V(G)$
+	% of size $|S|\le s^d(r)$ and a subset $B\subset A$ of size $|B|\ge m$ which is mutually $r$-independent in $G-S$. Moreover, $N^d$ is polynomial in the second argument and $s^d$ is polynomial.
 \end{proposition}
+% Combining with~\cref{thm:new-uqw} yields the following.
+
 
 The rest of this section is devoted to the proof of \cref{prop:uqw-tuples}.
-Fix a uniformly quasi-wide class $\cal C$ and functions $N\colon \N\times\N\to \N$
-	and $s\colon \N\to\N$ as in the definition of uniform quasi-wideness.
+Fix a class $\cal C$
+such that $\uqw_{2r}(N_{2r},s_{2r})$ holds for some number $s_{2r}\in \N$ and  function $N_{2r}\from \N\to \N$.
+In the proof below, we will invoke the property $\uqw_{2r}$,
+but also the property $\uqw_r$, which also holds for $\cal C$, as witnessed e.g. by the function $N_r\coloneqq N_{2r}$ and constant $s_r\coloneqq s_{2r}$. 
+
+\medskip
+
 	Let $d\in \N$ be a fixed dimension.
 		For a fixed graph $G\in \cal C$  and
 	  coordinate $i\in\set{1,\ldots,d}$, let $\pi_i$ denote the projection from $V(G)^d$ onto the $i$th coordinate.
 
 	
 
-
-\begin{lemma}\label{lem:step1} For any $r,m\in \N$ there is an integer $K(r,m)$ such that
-	for any given $A\subset V(G)^d$ with $|A|\ge K(r,m)$,
-	there is a set $B\subset A$ with $|B|\ge m$ and a set $S\subset V(G)$ with $|S|\le d\cdot s(r)$, 
+\begin{lemma}\label{lem:step1} For any $r,m\in \N$ there is an integer $K_r(m)$ such that
+	for any given $A\subset V(G)^d$ with $|A|\ge K_r(m)$,
+	there is a set $B\subset A$ with $|B|\ge m$ and a set $S\subset V(G)$ with $|S|\le d\cdot s_r$, 
 	such that for each coordinate $i\in\set{1,\ldots,d}$ and all distinct $\bar x,\bar y\in B$,
- $\pi_i(\bar x)$ and $\pi_i(\bar y)$ are at distance greater than $r$ in $G-S$. 
+ $\pi_i(\bar x)$ and $\pi_i(\bar y)$ are $r$-separated by $S$. 
 \end{lemma}
 \begin{proof}
 We will iteratively apply the following claim.
@@ -753,35 +864,37 @@ We will iteratively apply the following claim.
 %Let $f\colon \N\to \N$ be defined as $f(m)=N(r,m)\cdot m$ for $m\in\N$.
 
 \begin{claim}\label{claim:ith-coord}
-Fix a coordinate $i\in\set{1,\ldots,d}$, an integer $m'\in\N$, and a  set $A'\subset V(G)^d$ with  $|A'|\ge N(r,m')\cdot m'$.
-Then there is a set $B'\subset D$ with $|B'|\ge m'$
-and a set $S'\subset V(G)$ with $|S'|\le  s(r)$, such that for all distinct $\bar x,\bar y\in B$,
- $\pi_i(\bar x)$ and $\pi_i(\bar y)$ are at distance greater than $r$ in $G-S$. 
+Fix a coordinate $i\in\set{1,\ldots,d}$, an integer $m'\in\N$, and a  set $A'\subset V(G)^d$ with  $|A'|\ge N_r(m')\cdot m'$.
+Then there is a set $B'\subset A'$ with $|B'|\ge m'$
+and a set $S'\subset V(G)$ with $|S'|\le  s_r$, such that for all distinct $\bar x,\bar y\in B$,
+ $\pi_i(\bar x)$ and $\pi_i(\bar y)$ are $r$-separated by $S$.
  %\marginpar{observe that we prove something stronger here: if we choose elements of $S$, then these are equal on each coordinate and this will be needed in the later lemma.}
 \end{claim}
 \begin{clproof}
-We consider two cases.
+We consider two cases, depending on whether $|\pi_i(A')|\ge N_r(m')$.
 
-If $\pi_i(A')\subset V(G)$ has at least $N(r,m')$ elements, then we apply the definition of uniform quasi-wideness to $\pi_i(A')\subset V(G)$. This yields sets $S'\subset V(G)$ and $B''\subset \pi_i(A')$
-such that $|B''|\ge m'$, $|S'|\le s(r)$, and $B''$ is $r$-independent in $G-S'$. 
+\smallskip
+If $\pi_i(A')\subset V(G)$ has at least $N_r(m')$ elements, then we apply the property $\uqw_r$  to the set  $\pi_i(A')\subset V(G)$. This yields sets $S'\subset V(G)$ and $B''\subset \pi_i(A')$
+such that $|B''|\ge m'$, $|S'|\le s_r$, and $B''$ is $r$-independent in $G-S'$. 
 Let $B'\subseteq A'$ be a subset of tuples constructed as follows: for each $u\in B''$, include in $B'$ one arbitrarily chosen tuple $\bar x\in A'$ such that $\pi_i(\bar x)=u$.
-Clearly $|B'|=|B''|\ge m'$ and for all distinct $\bar x,\bar y\in B'$, we have that $\pi_i(\bar x)$ and $\pi_i(\bar y)$ are distinct and at distance greater than $r$ in $G-S$; this is because $B''$ is $r$-independent
+Clearly $|B'|=|B''|\ge m'$ and for all distinct $\bar x,\bar y\in B'$, we have that $\pi_i(\bar x)$ and $\pi_i(\bar y)$ are distinct and $r$-separated by $S$; this is because $B''$ is $r$-independent
 in $G-S$. Hence $B'$ and $S'$ satisfy all the required properties.
 
-If $\pi_i(A')$ has less than $N(r,m')$ elements, then choose the element $a\in\pi_i(A')$ whose inverse image $\pi_i^{-1}(\set a)\cap A'$ has the largest cardinality. Let $S'=\set{a}$ 
-and let $B'=\pi_i^{-1}(\set a)$. Then $$|B'|\ge \frac{|A'|}{|\pi_i(A')|}\ge \frac{|A'|}{N(r,m')}\ge \frac {N(r,m')\cdot m'}{N(r,m')}=m',$$
-and $|S'|=1$. Observe that $\pi_i(\bar x)=a$ for all $\bar x\in A'$. As $a\in S$, by the adopted convention, $\pi_i(\bar x)$ and $\pi_i(\bar y)$ are at infinite distance for all distinct $\bar x,\bar y\in B$.
+If $\pi_i(A')$ has less than $N_r(m')$ elements, then choose the element $a\in\pi_i(A')$ whose inverse image $\pi_i^{-1}(\set a)\cap A'$ has the largest cardinality. Let $S'=\set{a}$ 
+and let $B'=\pi_i^{-1}(\set a)$. Then $$|B'|\ge \frac{|A'|}{|\pi_i(A')|}\ge \frac{|A'|}{N_r(m')}\ge \frac {N_r(m')\cdot m'}{N_r(m')}=m',$$
+and $|S'|=1$. 
+% Observe that $\pi_i(\bar x)=a$ for all $\bar x\in A'$. As $a\in S$, by the adopted convention, $\pi_i(\bar x)$ and $\pi_i(\bar y)$ are at infinite distance for all distinct $\bar x,\bar y\in B$.
 \end{clproof}
 
 We proceed with the proof of \cref{lem:step1}.
-Let $f(m')=N(r,m')\cdot m'$ for $m'\in\N$; by $f^k$ we denote the $k$-fold composition of $f$ with itself.
+Let $f(m')=N_r(m')\cdot m'$ for $m'\in\N$; by $f^k$ we denote the $k$-fold composition of $f$ with itself.
 Let $A\subset V(G)^d$ be such that $|A|\ge f^d(m)$. 
 Define $B_0=A$, $S_0=\emptyset$, and for $i=1,\ldots,d$,
 let $B_{i}$ and $S_i$ be the $B'$ and $S'$ obtained from \cref{claim:ith-coord} applied to the set of tuples $B_{i-1}\subset V(G)^d$, the coordinate $i$, and $m'=f^{d-i}(m)$. 
 The invariant is that $|B_i|\ge f^{d-i}(m)$.
 In particular, 
-taking $B=B_d$ and $S=S_1\cup\ldots \cup S_d$, we obtain that $|B|\ge m$ and $|S|\le d\cdot s(r)$, and, by construction, $\pi_i(B)$
-is $r$-independent in $G-S$ for every coordinate $i\in\set{1,\ldots,d}$. Letting $K(r,m)=f^d(m)$ yields the lemma.
+taking $B=B_d$ and $S=S_1\cup\ldots \cup S_d$, we obtain that $|B|\ge m$ and $|S|\le d\cdot s_r$, and, by construction, $\pi_i(B)$
+is $r$-independent in $G-S$ for every coordinate $i\in\set{1,\ldots,d}$. Letting $K_r(m)=f^d(m)$ yields the lemma.
 \end{proof}
 
 
@@ -807,17 +920,15 @@ we associate an arbitrarily chosen function $f_a\colon \set{1,\ldots,d}^2\to C_s
 with the following properties:
 \begin{itemize}
 	\item If $f_a(i,j)=b$ then the $i$th coordinate of $a$
-	and the $j$th coordinate of $b$ are at distance at most $r$
-	in $G-S$.
+	and the $j$th coordinate of $b$ are not $r$-separated by $S$.
 	\item If $f_a(i,j)=\bot$ then there is no element $b\in C_s$ 
-	such that the $i$th coordinate of $a$ and the $j$th coordinate of $b$ are at distance at most $r$ in $G-S$.	
+	such that the $i$th coordinate of $a$ and the $j$th coordinate of $b$ are at not $r$-separated by $S$.
 \end{itemize}
 Observe that whenever $a_1, a_2$ are two distinct elements of $B-C_s$,
 then for all $i,j\in \set{1,\ldots,d}^2$, the values $f_{a_1}(i,j)$ and $f_{a_2}(i,j)$
 cannot be equal to the same element $b\in C_s$:
 otherwise, we would have that the $i$th coordinate of $a_1$
-and the $i$th coordinate of $a_2$ are at distance at most~$2r$
-in $G-S$, which is impossible by the assumption on $B$.
+and the $i$th coordinate of $a_2$ are not $2r$-separated by $S$, which is impossible by the assumption on $B$.
 In particular, if $|B-C_s|> |C_s|\cdot d^2$
 then there must be some element  $a\in B-C_s$  
 such that $f_a(i,j)=\bot$  for all $i,j\in\set{1,\ldots,d}$.
@@ -835,12 +946,12 @@ first apply
 \cref{lem:step1} 
   with $r'=2r$ and
  $m'= m\cdot (d^2+1)$.
- Assuming that $|A|\ge K(r',m')$, 
-we obtain a set $B\subset A$ with $|B|\ge m\cdot (d^2+1)$ and a set $S\subset V(G)$ with $|S|\le s(2r)$.
+ Assuming that $|A|\ge K_{r'}(m')$, 
+we obtain a set $B\subset A$ with $|B|\ge m\cdot (d^2+1)$ and a set $S\subset V(G)$ with $|S|\le s_{2r}$.
 Apply \cref{lem:step2} to $B$ and $S$, yielding a set $C\subset B$ which is mutually $r$-independent in $G-S$ and has size at least $m$. This concludes the proof of \cref{prop:uqw-tuples},
-where the obtained bounds are $N^d(r,m)=K(r',m')=K(2r,m\cdot (d^2+1))$ and $s^d(r)=d\cdot s(2r)$.
+where the obtained bounds are $N^d_r(m)=K_{r'}(m')=K_{2r}(m\cdot (d^2+1))$ and $s^d_r=d\cdot s_{2r}$.
 
-
+\begin{comment}
 \begin{remark}\label{rem:local-tuples}
   A detailed analysis of the presented proof
   allows to obtain a stronger statement than in
@@ -857,7 +968,7 @@ where the obtained bounds are $N^d(r,m)=K(r',m')=K(2r,m\cdot (d^2+1))$ and $s^d(
      
 This is because in our proof,  we have~obtained:
   $$
-  N^d_{2r}(m)=(N_{4r})^d(m(d^2+1))\qquad\textrm{and}\qquad s^d_{2r}=d\cdot s(4r).
+  N^d_{2r}(m)=(N_{4r})^d(m(d^2+1))\qquad\textrm{and}\qquad s^d_{2r}=d\cdot s_{4r}.
   $$
   Thus, when establishing the values of $N^d_{2r}(m)$ and $s^d_{2r}$, we refer to the quasi-wideness of $\CCC$ only by using numbers $s_{4r}$ and $N_{4r}(m')$ for $m'\in \N$.
   
@@ -870,3 +981,4 @@ This is because in our proof,  we have~obtained:
   % Hence, this supposition alone, instead of full quasi-wideness of $\CCC$, is sufficient to claim that the conclusion of \cref{thm:new-uqw} holds with
   % $s^d(2r)$ bounded by a computable function of $t$, $d$, and $q$, and $N^d(2r,m)$ bounded by a computable function of $m$, $t$, $d$, and $q$.
 \end{remark}
+\end{comment}

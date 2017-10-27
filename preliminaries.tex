@@ -84,18 +84,18 @@ times as stated above can be found in the arXiv version of that paper.
 
 In order to prove the above bounds, we used methods from model
 theory, more precisely, from stability theory. Stability is a strong tameness
-property of first-order formulas, on which Shelah built his famous 
+property of first order formulas, on which Shelah built his famous 
 classification theory~\cite{shelah1990classification}.
 
 
-\paragraph{First-order logic and stability.}
-For extensive background on first-order logic, we refer the reader
+\paragraph{first order logic and stability.}
+For extensive background on first order logic, we refer the reader
 to~\cite{hodges1993model}. For our purpose, it suffices to define
-first-order logic over the vocabulary of graphs (with constant symbols
+first order logic over the vocabulary of graphs (with constant symbols
 from a given parameter set).
  
 Let $A$ be a set. We call $L(A)\coloneqq\{E\hspace{0.3mm}\}\cup A$ the \emph{vocabulary}
-of graphs with parameters from $A$. \emph{First-order formulas} over $L(A)$ are
+of graphs with parameters from $A$. \emph{first order formulas} over $L(A)$ are
 formed from atomic formulas~$x=y$ and $E(x,y)$, where $x,y$ are variables (we
 assume that we have an infinite supply of variables) or elements of $A$ treated
 as constant symbols, by the usual Boolean
@@ -125,7 +125,7 @@ $y_i$ in $\phi$ is replaced by the constant symbol $v_i$.
 We usually write $\tup{x}$ for a tuple $(x_1,\ldots, x_k)$ of variables. 
 Usually, the length of the tuple is understood from the context. 
 
-A first-order formula $\psi(\tup{x},\tup{y})$ has the \emph{$k$-order property}
+A first order formula $\psi(\tup{x},\tup{y})$ has the \emph{$k$-order property}
 over a graph $G$ if there are tuples $\tup{a}_1,\ldots, \tup{a}_k, \tup{b}_1,\ldots, \tup{b}_k$
 of elements of $G$ such that \[\psi(\tup{a}_i,\tup{b}_j)\Longleftrightarrow i\leq j.\]
 A class of graph $\CCC$ is \emph{stable} if for every formula $\psi(\tup{x},\tup{y})$ there
@@ -157,7 +157,7 @@ sequences in stable classes of graphs.
 
 \begin{theorem}[Malliaris and Shelah~\cite{malliaris2014regularity}, Theorem 3.5, Item (2)]\label{thm:malshelah}
   Let $\CCC$ be a stable class of graphs and let $\Delta$ be a finite
-  set of first-order formulas.  There is a polynomial $p(x)$ such that
+  set of first order formulas.  There is a polynomial $p(x)$ such that
   for all $G\in \CCC$, every positive integer $m$ and every sequence
   $(v_1,\ldots, v_\ell)$ of vertices of $G$ of length $\ell=p(m)$, there
   exists a sub-sequence $(v_{i_1},\ldots, v_{i_m})$ of
@@ -168,7 +168,7 @@ sequences in stable classes of graphs.
 
 \begin{theorem}\label{thm:extract_indiscernibles}
   Let $\CCC$ be a stable class of graphs and let $\Delta$ be a finite
-  set of first-order formulas.  There is a polynomial $p(x)$ such that
+  set of first order formulas.  There is a polynomial $p(x)$ such that
   for all $G\in \CCC$, every positive integer $m$ and every sequence
   $(v_1,\ldots, v_\ell)$ of vertices of $G$ of length $\ell=p(m)$, there
   exists a sub-sequence $(v_{i_1},\ldots, v_{i_m})$ of
@@ -205,13 +205,13 @@ For a graph $G$, the VC-dimension of $G$ is defined as the VC-dimension
 of the set family $\{N[v]\colon v\in V(G)\}$ over the set $V(G)$.
 
 Adler and Adler's result implies that any class of structures
-obtained from $\CCC$ by means of a first-order interpretation has VC-dimension
+obtained from $\CCC$ by means of a first order interpretation has VC-dimension
 bounded by a constant depending only on $\CCC$ and the interpretation.
 In particular, the following is an immediate corollary of the results of Adler and Adler.
 
 \begin{theorem}[\cite{adler2014interpreting}]\label{thm:adler}
   Let $\CCC$ be a nowhere dense class of graphs and let $\phi(x,y)$ be
-  a first-order formula over the signature of graphs,
+  a first order formula over the signature of graphs,
   such that for all $G \in \CCC$ and $u,v\in
   V(G)$ it holds that $G\models\phi(u,v)$ if and only if $G\models\phi(v,u)$. 
   For $G\in \CCC$, let $G_\phi$ be the graph with
@@ -220,7 +220,7 @@ In particular, the following is an immediate corollary of the results of Adler a
   $\CCC$ and $\phi$ such that $G_\phi$ has VC-dimension at most $c$.
 \end{theorem}
 
-By applying \Cref{thm:adler} to the first-order formula 
+By applying \Cref{thm:adler} to the first order formula 
 expressing that $\dist(u,v)\leq r$,
 we immediately obtain the following.
 
