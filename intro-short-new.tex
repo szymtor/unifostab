@@ -1,4 +1,4 @@
-\section{Introduction and contributions}\label{sec:intro}
+\section{Introduction}\label{sec:intro}
 
 Nowhere dense classes of graphs were introduced 
 by Ne\v set\v ril and Ossona de 
@@ -9,20 +9,20 @@ familiar classes of sparse graphs, such as planar graphs, graphs
 of bounded treewidth,  graphs of bounded degree, and, in fact, 
 all classes that exclude a fixed 
 topological minor.
-Formally, a class $\CCC$ of graphs is {\em{nowhere dense}} if there is a function $t\colon \N\to \N$ such that for every $r\in \N$, no graph $G$ in~$\CCC$ contains the clique $K_{t(r)}$ on $t(r)$ vertices  as an {\em{$r$-shallow minor}},
+Formally, a class $\CCC$ of graphs is {\em{nowhere dense}} if there is a function $t\colon \N\to \N$ such that for every $r\in \N$, no graph $G$ in~$\CCC$ contains the clique $K_{t(r)}$ on $t(r)$ vertices  as  {\em{depth-$r$ minor}},
 i.e., as a subgraph of a graph obtained from $G$ by contracting mutually disjoint  subgraphs of radius at most $r$ to single vertices.
 Classes of bounded expansion~\cite{nevsetvril2008grad} 
 are important subclasses 
 of nowhere dense graph classes which are defined by the existence of a bound of 
-the edge density of all $r$-shallow minors of graphs in the class, for every fixed $r$.
+the edge density of all depth-$r$ minors of graphs in the class, for every fixed $r$.
 
 
 The concept of nowhere denseness
 turns out to be very robust, as witnessed by the fact that it is equivalent 
 to multiple other concepts studied in different areas of mathematics. 
 For instance,  nowhere dense graph classes can be characterized 
-by bounds on the density of (topological) shallow 
-minors~\cite{nevsetvril2010first,nevsetvril2011nowhere},
+by bounds on the density of (topological) 
+minors at bounded depth~\cite{nevsetvril2010first,nevsetvril2011nowhere},
 by uniform quasi-wideness~\cite{nevsetvril2011nowhere} (a notion introduced by
 Dawar~\cite{dawar2010homomorphism} in his study of homomorphism
 preservation properties), by low tree-depth
@@ -41,20 +41,22 @@ this combination in order to prove that every
 first order sentence can be decided in time 
 $\Oof(n^{1+\epsilon})$ for $n$-vertex graphs from a fixed nowhere dense class of graphs, and for any fixed real $\epsilon>0$. This result culminates a long line of research concerning the model checking problem for 
 sparse graph classes~\cite{}.
+\medskip
 
 In this paper, we continue the study of the 
 interplay of combinatorial and logical properties
 of nowhere dense graph classes, and provide
-new combinatorial bounds on several
+new upper bounds on several
 quantities appearing in the logical study of nowhere dense graphs.
 Namely, for every nowhere dense class of graphs, we provide (1) an upper bound on the \emph{ladder index} of a first order formula
 (2) a polynomial upper bound on the 
 functions related to \emph{uniform quasi-wideness},
-and (3) an optimal bound on the \emph{vc-density} of first order formulas. The bounds similar to (1) and (2)
-where known (cf.~\cite{adler2014interpreting} and \cite{siebertz2016polynomial}, respectively), but they are not computable,
-as the proofs relied on nonconstructive arguments -- notably the compactness theorem for first order logic. 
-Our proofs are constructive and provide effective bounds.
-The result (3) is completely new, and is the main contribution of this paper. We now discuss the relevant background from logic and model theory, motivating our results. 
+and (3) an optimal bound on the \emph{vc-density} of first order formulas. Bounds similar to (1) and (2)
+where known: %(cf.~\cite{adler2014interpreting} and \cite{siebertz2016polynomial}, respectively).
+for (1), there is a bound which relies on 
+ nonconstructive arguments, notably the compactness theorem for first order logic, and is therefore not effectively computable, contrary to our bound. For (2), two bounds are known:
+ either a non-elementary bound, or a polynomial bound, but where the degree of the polynomial is not effectively computable. Our bound is given by an explicit polynomial.
+The result (3) is completely new, and is the main contribution of this paper. We now discuss the relevant background from logic and model theory, in order to motivate and state our results.
 
 
 
@@ -123,7 +125,7 @@ The result (3) is completely new, and is the main contribution of this paper. We
   is to draw certain dividing lines
   specifying  the abstract properties of 
   logical structures which allow the development 
-  of a good structure theory. There are many such dividing lines, depending on the specifics of the desired theory. One such dividing line encloses the class of \emph{stable structures}, another line encloses the larger class of \emph{dependent structures} (also called \emph{nip}). Recently, \emph{vc-minimality} and \emph{vc-density} have attracted a lot of interest in this context~\cite{}. 
+  of a good structure theory. There are many such dividing lines, depending on the specifics of the desired theory. One such dividing line encloses the class of \emph{stable structures}, another line encloses the larger class of \emph{dependent structures} (also called \emph{NIP}). Recently, \emph{VC-minimality} and \emph{VC-density} have attracted a lot of interest in this context~\cite{}. 
   A general theme in this area is that the existence of a manageable structure is strongly related to
   the non-existence of certain forbidden patterns in the structure on one hand,
 and on the other hand, to bounds on certain cardinalities
@@ -197,7 +199,7 @@ first order logic~\cite{gaifman1982local}. The following theorem summarizes our 
 \begin{theorem}\label{thm:new-stable}
   There are computable functions $f\colon \N^3\to\N$ and $g\colon\N\to\N$ with the following property.
 Suppose $\phi(\bar x,\bar y)$ is a formula of quantifier rank $q$ and with $d$ free variables,
-and $G$ is a graph omitting $K_t$ as a $g(q)$-shallow minor. Then the ladder index of $\phi(\bar x,\bar y)$ in $G$ is at most $f(q,d,t)$.
+and $G$ is a graph omitting $K_t$ as a depth-$g(q)$ minor. Then the ladder index of $\phi(\bar x,\bar y)$ in $G$ is at most $f(q,d,t)$.
 \end{theorem}
 Note that in particular, \cref{thm:new-stable} implies that every nowhere dense graph is stable, which was the main conclusion of the paper by Adler and Adler~\cite{adler2014interpreting}. 
  
@@ -544,11 +546,11 @@ An important notion which permeates our proofs
 is a graph theoretical notion which we call \emph{local separation}.
 Let $G$ be a graph, $S\subset V(G)$ a set of vertices,
 and let $r\in \N$ be a number. We say that two  sets of vertices $A$ and $B$  are \emph{$r$-separated} by $S$ (in $G$) if every path from a vertex in $A$ to a vertex in $B$
-of length at most $r$ contains a vertex from $S$.
-In particular, this is the case if $S$ contains either $a$ or $b$.
-We lift this notion to sets or tuples of vertices,
-and say e.g. that $A$ and $B$ are $r$-separated by $S$
-if for every $a\in A$ and $b\in B$, $a$ and $b$ are $r$-separated by $S$
+of length at most $r$ contains a vertex from $S$. 
+% In particular, this is the case if $S$ contains either $a$ or $b$
+% We lift this notion to sets or tuples of vertices,
+% and say e.g. that $A$ and $B$ are $r$-separated by $S$
+% if for every $a\in A$ and $b\in B$, $a$ and $b$ are $r$-separated by $S$
 % if $x$ and $y$ are either sets, tuples, or single vertices, then we  say that $x$ and $y$ are
 %  $r$-separated by $S$ if for every vertex $a$ occurring in $x$ and every vertex $b$ occurring in $y$,
 %  $a$ and $b$ are $r$-separated by $S$
@@ -567,7 +569,7 @@ $r$-separation can be thought of as a local analogue of forking independence, fo
 A key lemma concerning $r$-separation (cf.~\cref{cor:bound}) states that if $A$
 and $B$ are $r$-separated by a set $S$ of size $s$,
 then for any fixed formula $\phi(\bar x,\bar y)$,
-the set  $\{\{\tup b\ \in B^{|\bar x|} : \strA\models\phi(\tup a,\tup b)\} : \tup a\in A^{|\bar y|}\}$ has cardinality bounded by a constant depending on $s$ and $\phi$ only (and not on $G,A,B$). This elementary result combines  Gaifman's locality property and a Feferman-Vaught lemma. This, in combination with the polynomial bounds 
+the set  $\{\{\tup b\ \in B^{|\bar x|} : \strA\models\phi(\tup a,\tup b)\} : \tup a\in A^{|\bar y|}\}$ has cardinality bounded by a constant depending on $s$ and $\phi$ only (and not on $G,A,$ and $B$). This elementary result combines  Gaifman's locality property and a Feferman-Vaught lemma. This, in combination with the polynomial bounds 
 for uniform quasi-wideness (\cref{thm:new-uqw}, and its extension to tuples~\cref{thm:uqw-tuples}), as well as the previous results on neighborhood complexity~\cite{eickmeyer2016neighborhood,DrangeDFKLPPRVS16} are the main ingredients of our main result,~\cref{thm:vc-density}.
 
 %

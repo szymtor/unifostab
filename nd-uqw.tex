@@ -1,4 +1,4 @@
-\section{From nowhere denseness to uniform quasi-wideness}\label{sec:uqw}
+\section{Bounds for uniform quasi-wideness}\label{sec:uqw}
 
 In this section we prove \cref{thm:new-uqw}. 
 % In the presentation we focus on proving the existential statement, and at the end we briefly argue how the proof can be turned into an algorithm with the promised running time.
@@ -75,9 +75,46 @@ The case of $r=1$ follows immediately from Ramsey's theorem.
 It turns out that the case $r=2$ is substantially more difficult.
 We start by formulating and proving the main technical result needed for proving the case $r=2$.
 
-\subsection{The main technical lemma}
 
-We need the following bounds on the edge density
+
+
+
+
+
+\subsection{The main technical lemma}
+\label{sec:main-tech}
+
+The following, Ramsey-like result is the main technical lemma used in the proof of~\cref{thm:new-uqw}. 
+
+\begin{lemma}\label{lem:apex}
+Let $\ell,m,t\in \N$ and assume $\ell\geq t^{8}$. 
+If~$G$ is a graph and $A$ is a $1$-independent set in~$G$
+with at least $(m+\ell)^{2t}$ elements,
+then at least one of the following conditions hold:
+\begin{itemize}
+  \item $K_t\minor_{4} G$,
+\item  $A$ contains a $2$-independent set of size $m$, 
+\item  some vertex $v$ of $G$
+has at least $\ell^{1/8}$ neighbors in $A$.
+\end{itemize}
+Moreover, if $K_t\not\minor_4G$, the
+structures described in the other two cases (a $2$-independent set 
+of size~$m$, or a vertex $v$ as above) can be 
+computed in time $\Oof_t(|A|\cdot |E(G)|)$. 
+\end{lemma}
+We remark that a statement similar to that of \cref{lem:apex}
+can be obtained by employing Ramsey's theorem, as has been done in~\cite{nevsetvril2011nowhere}. This, however, 
+%yields
+%in place of the bound $(m+\ell)^{2t}$ 
+%a bound of the form $R(m,\underbrace{q,q,\ldots,q}_{k\text{ times}})$,
+%where $k\sim\ell^{1/8}$ and $R(m_1,\ldots,m_c)$
+%is the Ramsey number for $c$ colors.
+%In particular, this 
+does not give a bound which is polynomial in $m+\ell$, and thus cannot be used to prove~\cref{thm:new-uqw}.
+
+\medskip
+\cref{sec:main-tech} is devoted to the proof of~\cref{lem:apex}.
+We will use the following bounds on the edge density
 of graphs with excluded shallow minors obtained
 by Alon et al.~\cite{alon2003turan}. 
 
@@ -117,7 +154,7 @@ Let $G$ be a graph, let $H\minor_aG$ and let
 $J\minor_bH$. Then $J\minor_cG$. 
 \end{lemma}
 
-We need to prove one more technical lemma. 
+We will need one more technical lemma.
 
 \begin{lemma}\label{lem:diversity}
   Let $G$ be a graph such that $K_t\not\minor_4G$ for some
@@ -177,35 +214,8 @@ Now, let ${\cal F}=\set{N(v)\cap A\colon v\in V(G)}$.
    a contradiction.
 \end{proof}
 
-Our main tool is the following Ramsey-like result which we prove
-next. 
 
-\begin{lemma}\label{lem:apex}
-Let $\ell,m,t\in \N$ and assume $\ell\geq t^{8}$. 
-If~$G$ is a graph and $A$ is a $1$-independent set in~$G$
-with at least $(m+\ell)^{2t}$ elements,
-then at least one of the following conditions hold:
-\begin{itemize}
-  \item $K_t\minor_{4} G$,
-\item  $A$ contains a $2$-independent set of size $m$, 
-\item  some vertex $v$ of $G$
-has at least $\ell^{1/8}$ neighbors in $A$.
-\end{itemize}
-Moreover, if $K_t\not\minor_4G$, the
-structures described in the other two cases (a $2$-independent set 
-of size~$m$, or a vertex $v$ as above) can be 
-computed in time $\Oof_t(|A|\cdot |E(G)|)$. 
-\end{lemma}
 
-We remark that a statement similar to that of \cref{lem:apex}
-can be obtained by employing Ramsey's theorem, as has been done in~\cite{nevsetvril2011nowhere}. This, however, 
-%yields
-%in place of the bound $(m+\ell)^{2t}$ 
-%a bound of the form $R(m,\underbrace{q,q,\ldots,q}_{k\text{ times}})$,
-%where $k\sim\ell^{1/8}$ and $R(m_1,\ldots,m_c)$
-%is the Ramsey number for $c$ colors.
-%In particular, this 
-does not give a bound which is polynomial in $m+\ell$, and thus cannot be used to prove~\cref{thm:new-uqw}.
 
 %\paragraph*{Neighborhood complexity.} Let us first recall the following result of Gajarsk\'y et al.~\cite{gajarsky2017kernelization}
 %which provides an upper bound on the number of distinct neighborhoods in terms of density of shallow minors. 
@@ -319,7 +329,7 @@ does not give a bound which is polynomial in $m+\ell$, and thus cannot be used t
 
 
 
-\paragraph*{Proof of \cref{lem:apex}.} We proceed with the proof of \cref{lem:apex}, which spans the whole remainder of this section.
+\paragraph*{Proof of \cref{lem:apex}.} We proceed with the proof of \cref{lem:apex}, which spans the  remainder of~\cref{sec:main-tech}.
 We will arrange the elements of $A$ in a binary tree
 and prove that the tree contains a long path. From this path, we will 
 extract the set $A'$. In stability theory, similar trees are called \emph{type trees} and they are used to extract long indiscernible sequences, see e.g.~\cite{malliaris2014regularity}. 
@@ -760,19 +770,23 @@ $\uqw^d_r(N,s)$ if the following condition holds:
   and the property of satisfying $\uqw_r$, for all $r\in \N$,
   which is due to the fact that in the original definition,
   the set $B$ must be disjoint from $S$,
-  whereas in the property $\uqw_r$, we may always assume that $S\subset B$. This distinction is inessential, since $|S|\le s_r$ for some constant $s_r$,
+  whereas in the property $\uqw_r$, 
+  some vertices of $S$ may belong to $B$. This distinction is inessential when it comes to dimension $1$, since $|S|\le s_r$ for some constant $s_r$,
   so passing from one definition to the other requires 
   modifying the function $N_r$ by an additive constant $s_r$.
 In particular, a class of graphs $\cal C$ is uniformly quasi-wide if and only if it 
 	satisfies $\uqw_r$, for all $r\in \N$.  
-	Furthermore,
-	\cref{thm:new-uqw}
+  However, generalizing to tuples of dimension $d$ requires the use of the definition above, where the tuples in $B$ are allowed to contain  vertices which occur $S$. For example, if the graph $G$ is a star with many arms and $A$ consists of all pairs of adjacent vertices in $G$, then $S$
+  needs to contain the central vertex of $G$,
+  and therefore $S$ will contain a vertex from every tuple in $A$. We may take $B$ to be equal to $A$ in this case.
+  
+\medskip
+	Using the above terminology, \cref{thm:new-uqw}
 	states that for every fixed $r\in\N$, if there is a number $t\in\N$
 	such that $K_t\not\minor_{\lfloor 9r/2\rfloor} G$ for all $G\in \cal C$,
 	then $\cal C$ satisfies $\puqw_r$,
 	and more precisely $\uqw_r(N_r,s_r)$
 	for a polynomial $N_r\from\N\to\N$ and number $s_r\in \N$, where $N_r$ and $s_r$ can be computed from $r$ and $t$.
-	
 	The following result provides a generalization to higher dimensions $d>1$.
 	
 	% and 	\cref{thm:}
