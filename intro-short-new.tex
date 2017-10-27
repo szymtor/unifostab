@@ -40,7 +40,7 @@ the result of Grohe, Kreutzer and the second author~\cite{grohe2014deciding} exp
 this combination in order to prove that every
 first order sentence can be decided in time 
 $\Oof(n^{1+\epsilon})$ for $n$-vertex graphs from a fixed nowhere dense class of graphs, and for any fixed real $\epsilon>0$. This result culminates a long line of research concerning the model checking problem for 
-sparse graph classes~\cite{}.
+sparse graph classes (see \cite{grokre11} for a survey).
 \medskip
 
 In this paper, we continue the study of the 
@@ -125,8 +125,8 @@ The result (3) is completely new, and is the main contribution of this paper. We
   is to draw certain dividing lines
   specifying  the abstract properties of 
   logical structures which allow the development 
-  of a good structure theory. There are many such dividing lines, depending on the specifics of the desired theory. One such dividing line encloses the class of \emph{stable structures}, another line encloses the larger class of \emph{dependent structures} (also called \emph{NIP}). Recently, \emph{VC-minimality} and \emph{VC-density} have attracted a lot of interest in this context~\cite{}. 
-  A general theme in this area is that the existence of a manageable structure is strongly related to
+  of a good structure theory. There are many such dividing lines, depending on the specifics of the desired theory. One such dividing line encloses the class of \emph{stable structures}, another line encloses the larger class of \emph{dependent structures} (also called \emph{NIP}). Recently, \emph{VC-minimality} and \emph{VC-density} have attracted a lot of interest in this context~\cite{aschenbrenner2016vapnik,bobkov2017computations,Guingona2013}.
+  A general theme in stability theory is that the existence of a manageable structure is strongly related to
   the non-existence of certain forbidden patterns in the structure on one hand,
 and on the other hand, to bounds on certain cardinalities
 of \emph{type sets}.  
@@ -352,12 +352,14 @@ Our main goal is to decrease the constant $d$ drastically (at the cost of increa
 The bounds~\eqref{eq:sauer-shelah} and \eqref{eq:nip} motivate the notion of \emph{VC-density}, a notion closely related to VC-dimension.
 % This motivates the following notion, which
 % describes the asymptotic growth of finite set families.
-The \emph{VC-density} of a set system $\cal F$
+The \emph{VC-density} (also called the 
+\emph{VC-exponent})
+of a set system $\cal F$
 on an infinite set $X$ is the infimum of all reals $\alpha>0$ such that 
 $|\setof{A\cap F}{F\in \cal F}|\in \Oof(|A|^\alpha)$, for all finite $A\subset X$. In analogy to the above definition,
 we may define the VC-density of a formula $\phi(\bar x,\bar y)$ over a class of structures~$\cal C$. The Sauer-Shelah Lemma
 implies that the VC-density (of a set system, or of a formula over a class of structures) is bounded from above by the VC-dimension. However, in many cases, the VC-density may be much smaller than the VC-dimension. Furthermore, it is the VC-density, rather than VC-dimension, that is actually relevant in combinatorial
-and algorithmic applications~\cite{matouvsek1998geometric}\todo{more}.
+and algorithmic applications~\cite{matouvsek1998geometric,Matousek:2004:BVI:1005787.1005789,Bronnimann1995}.
 %
 %Also the related notion of VC-density 
 %turned out to be a very important measure for 
