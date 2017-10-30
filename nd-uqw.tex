@@ -511,7 +511,7 @@ such that $|A_i|\ge m_{t-i}$,
  as follows. Start with $A_0=A$. We maintain a set $S$ of vertices of $G$ which is initially empty, and we maintain the invariant that $A_i$ is disjoint with $S$ at each step of the construction.
 
 For $i=0,1,2,\ldots$ do as follows.
-If $A_{i}$ contains a $2$-independent set of size $m$ in $G-S$, terminate.
+If $A_{i}$ contains a subset of size $m$ which is $2$-independent set in $G-S$, terminate.
  Otherwise, 
  apply~\cref{cor:apex} to the graph $G-S$ with $1$-independent set
  $A_{i}$ of size $|A_i|\ge m_{t-i}$. This yields a vertex $v_{i+1}$ of $G-S$
