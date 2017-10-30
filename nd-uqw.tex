@@ -60,7 +60,7 @@ We first prove a restricted variant,~\cref{lem:engine} below, in which we assume
 \cref{thm:new-uqw}, we apply the lemma iteratively for $r$ ranging from $1$ to the target value.
 
 \begin{lemma}\label{lem:engine}
-For every pair of integers $t,r\in \N$ there exists an integer $d<9r/2$ and a function $L\colon \N\to \N$ with $L(m)=\Oof_{r,t}{(m^{{(8t+1)}^{2rt}})}$ such that the following holds.
+For every pair of integers $t,r\in \N$ there exists an integer $d<9r/2$ and a function $L\colon \N\to \N$ with $L(m)=\Oof_{r,t}{(m^{{(4t+1)}^{2rt}})}$ such that the following holds.
 For each $m\in \N$, graph~$G$ with $K_t\not\minor_{d} G$, and
 $(r-1)$-independent set $A\subseteq V(G)$ of size at least $L(m)$, there is a set $S\subseteq V(G)-A$ of size at most $t$ such that $A$ contains a subset $A'$ of size $m$ which is $r$-independent in $G-S$.
 Moreover, if $r$ is odd then $S$ is empty, and if $r$ is even,
@@ -95,7 +95,7 @@ then at least one of the following conditions hold:
   \item $K_t\minor_{4} G$,
 \item  $A$ contains a $2$-independent set of size $m$, 
 \item  some vertex $v$ of $G$
-has at least $\ell^{1/8}$ neighbors in $A$.
+has at least $\ell^{1/4}$ neighbors in $A$.
 \end{itemize}
 Moreover, if $K_t\not\minor_4G$, the
 structures described in the other two cases (a $2$-independent set 
@@ -136,22 +136,20 @@ side. Furthermore, it is easy to check in the
 proof of Theorem 2.2 in~\cite{alon2003turan} 
 that $c_H\leq |V(H)|$
 in case $d=2$. Since the $1$-subdivision of $K_t$ has 
-less than $t^2$ vertices we can choose $c_t=t^2$ and
+$\binom{t+1}{2}$ vertices, we can take $c_{K_t}=\binom{t+1}{2}$ and
 conclude the following.   
 
 \begin{corollary}\label{crl:densitynd}
 Let $G$ be an $n$-vertex graph such that $K_t\not\minor_1 G$ for
-some constant $t\in \N$. Then $G$ has at most 
-$t^2\cdot n^{3/2}$ edges.
+some constant $t\in \N$. Then $G$ has at most
+$\binom{t+1}{2}\cdot n^{3/2}$ edges.
 \end{corollary}
 
-The following lemma will allow us to get a grip of 
-shallow minors at depth larger than $1$.
+We will use the following standard lemma saying that a shallow minor of a shallow minor is a shallow minor, where the parameters of shallowness are appropriately chosen.
 
 \begin{lemma}[adaptation of Proposition 4.11 in~\cite{sparsity}]\label{lem:combineminors}
-Let $a,b\in \N$ and let $c=\frac{(2a+1)(2b+1)-1}{2}$. 
-Let $G$ be a graph, let $H\minor_aG$ and let 
-$J\minor_bH$. Then $J\minor_cG$. 
+Suppose $J,H,G$ are graphs such that $H\minor_a G$ and $J\minor_b H$, for some $a,b\in \N$.
+Then $J\minor_c G$, where $c=2ab+a+b$.
 \end{lemma}
 
 We will need one more technical lemma.
@@ -160,8 +158,37 @@ We will need one more technical lemma.
   Let $G$ be a graph such that $K_t\not\minor_4G$ for some
   $t\in\N$ and let $A\subseteq V(G)$ with $|A|\geq t^{8}$. 
   Assume furthermore that every pair of elements of $A$ has a common neighbor in $V(G)\setminus A$.
-  Then there exists a vertex $v$ in $V(G)\setminus A$ which has at least $|A|^{1/8}$ neighbors in $A$.
+  Then there exists a vertex $v$ in $V(G)\setminus A$ which has at least $|A|^{1/4}$ neighbors in $A$.
 \end{lemma}
+\begin{proof}
+Denote $k=\max\{\,|N(w)\cap A|\ \colon\ w\in V(G)-A\,\}$; our goal is to prove that $k\geq |A|^{1/4}$.
+
+Let $B\subseteq V(G)-A$ be the set of those vertices outside of $A$ that have a  neighbor in $A$. 
+Construct a function $f\colon B\to A$ by a random procedure as follows:
+for each vertex $v\in B$, choose $f(v)$ uniformly and independently at random from the set $N(v)\cap A$.
+Next, for each $u\in A$ define branch set $I_u=G[\{u\}\cup f^{-1}(u)]$. Observe that since, by construction, $v$ and $f(v)$ are adjacent for all $v\in B$, each branch set $I_u$ has radius at most $1$,
+with $u$ being the central vertex. Also, the branch sets $\{I_u\}_{u\in A}$ are pairwise disjoint.
+Finally, construct a graph $H$ on vertex set $A$ by making distinct $u,v\in A$ adjacent in $H$ whenever there is an edge in $G$ between the branch sets $I_u$ and $I_v$.
+Then the branch sets $\{I_u\}_{u\in A}$ witness that $H$ is a $1$-shallow minor of $G$.
+
+For distinct $u,v\in A$, let us estimate the probability that the edge $uv$ appears in $H$.
+By assumption, there is a vertex $w\in B$ that is adjacent both to $u$ and to $v$. Observe that if it happens that $f(w)=u$ or $f(w)=v$, then $uv$ for sure becomes an edge in $H$. 
+Since $w$ has at most $k$ neighbors in $A$, the probability that $f(w)\in \{u,v\}$ is at least $\frac{2}{k}$.
+
+By the linearity of expectation, the expected number of edges in $H$ is at least $\binom{|A|}{2}\cdot \frac{2}{k}=\frac{|A|(|A|-1)}{k}$.
+Hence, for at least one run of the random experiment we have that $H$ indeed has at least this many edges. 
+On the other hand, observe that $K_t\not\minor_1 H$; indeed, since $H\minor_1 G$, by Lemma~\ref{lem:combineminors} we infer that $K_t\minor_1 H$ would imply $K_t\minor_4 G$, a contradiction with the assumptions on $G$.
+Then Corollary~\ref{crl:densitynd} implies $H$ has at most $\binom{t+1}{2}\cdot |A|^{3/2}$ edges.
+Observe that 
+$\binom{t+1}{2}\cdot |A|^{3/2}\leq 3t^2/4\cdot |A|^{3/2}\leq \frac{3}{4}|A|^{7/4}$,
+where the first inequality holds due to $t\geq 2$, while the second holds by the assumption that $|A|\geq t^8$.
+By combining the above bounds, we obtain
+$$\frac{|A|(|A|-1)}{k}\leq \frac{3}{4}|A|^{7/4},$$
+which implies $k\geq |A|^{1/4}$ due to $|A|\geq t^8\geq 64$.
+\end{proof}
+
+
+\begin{comment}
 \begin{proof}
 %Our approach to prove the lemma is inspired by 
 %the proof of Lemma 4.3 in~\cite{gajarsky2017kernelization}. 
@@ -213,7 +240,7 @@ Now, let ${\cal F}=\set{N(v)\cap A\colon v\in V(G)}$.
    $\binom{|A|}{2}/\binom{k}{2}> |A|^2/k^2\geq |A|^{7/4}$,
    a contradiction.
 \end{proof}
-
+\end{comment}
 
 
 
@@ -436,7 +463,7 @@ be the set of all vertices $\tau(u)$ such that $u\dau$ is a prefix of $w$. Then,
 Finally, consider the second case, i.e., there is a node $w$ in $\tau$ which contains at least $\ell$ letters~$\son$. Let 
 $Y$ be the set of all vertices $\tau(u)$ such that $u\son$ is a prefix of $w$. Then, by construction, $Y\subset A$ is a set of vertices which are mutually at distance exactly $2$ in $G$. 
 Since $K_t\not\minor_4 G$, by~\cref{lem:diversity} we infer that there is a vertex $v\in G$
-with at least $\ell^{1/8}$ neighbors in $Y$.
+with at least $\ell^{1/4}$ neighbors in $Y$.
 This finishes the proof of the first part of~\cref{lem:apex}.
 
 The proof above yields an algorithm which first constructs the tree $\tau$, by 
@@ -482,7 +509,7 @@ The precise calculations follow.
 
 \newcommand{\mbull}{\widehat{m}}
 
-Fix a number $\beta>8t$. For $k\ge 0$,
+Fix a number $\beta>4t$. For $k\ge 0$,
 define $m_k=((k+1)\cdot m)^{(2\beta)^k}$.
 In the following we will always assume that $m\geq t^8$. 
 We will apply~\cref{lem:apex} in the following form.
@@ -492,12 +519,12 @@ We will apply~\cref{lem:apex} in the following form.
 	then there exists a vertex $v$ of $G$ such that $|N_G(v)\cap A| \ge m_{k-1}$.
 \end{claim}
 \begin{clproof}
-Let $\ell=(k\cdot m)^{8\cdot(2\beta)^{k-1}}$.
+Let $\ell=(k\cdot m)^{4\cdot(2\beta)^{k-1}}$.
 Then $m\ge t^8$ implies that $\ell\ge t^8$.
 Observe that
-\[|A|\ge \left((k+1)\cdot m\right)^{(2\beta)^k}\ge\left ((m+ k\cdot m)^{8\cdot(2\beta)^{k-1}} \right)^{2t}
-\ge \left(m+(k\cdot m)^{8\cdot (2\beta)^{k-1}}\right)^{2t}=(m+\ell)^{2t}.\]
-Therefore, we may  apply \cref{lem:apex}, yielding a vertex $v$ with at least $\ell^{1/8}=(k\cdot m)^{(2\beta)^{k-1}}=m_{k-1}$ neighbors in~$A$.
+\[|A|\ge \left((k+1)\cdot m\right)^{(2\beta)^k}\ge\left ((m+ k\cdot m)^{4\cdot(2\beta)^{k-1}} \right)^{2t}
+\ge \left(m+(k\cdot m)^{4\cdot (2\beta)^{k-1}}\right)^{2t}=(m+\ell)^{2t}.\]
+Therefore, we may  apply \cref{lem:apex}, yielding a vertex $v$ with at least $\ell^{1/4}=(k\cdot m)^{(2\beta)^{k-1}}=m_{k-1}$ neighbors in~$A$.
 \end{clproof}
 
 %In the following we assume that $m\geq t^8$, since we may always ask for finding a $2$-independent set of size $t^8$ instead of $m$.
@@ -538,8 +565,8 @@ Choose any pairwise distinct vertices $w_1,\ldots,w_k\in A_k$ and observe that t
  
  
  This proves~\cref{lem:engine} in the case $r=2$, for the function $L(m)=m_t=((t+1)\cdot m)^{\beta^{2t}}$
- for $m\ge t^8$ and $L(m)=L(t^8)$ for $m<t^8$, where $\beta>8t$ is any fixed constant.
- It is easy to see that then $L_t(m)=L(m)\in \Oof_{t}{(m^{{(8t+1)}^{2t}})}$, provided we put $\beta=8t+1$.
+ for $m\ge t^8$ and $L(m)=L(t^8)$ for $m<t^8$, where $\beta>4t$ is any fixed constant.
+ It is easy to see that then $L_t(m)=L(m)\in \Oof_{t}{(m^{{(4t+1)}^{2t}})}$, provided we put $\beta=4t+1$.
  Also, the proof easily yields an algorithm constructing the sets~$A'$ and $S$,
  which amounts to applying at most $t$ times the algorithm of~\cref{lem:apex}.
  Hence, its running time  is $\Oof_{r,t}(|A|\cdot |E(G)|)$, as required.
@@ -556,7 +583,7 @@ From $K_t\not\minor_s G$ it follows that~$G'$ does not contain $K_t$ as a subgra
 if $|A|=|A'|\ge {m+t-2\choose t-1}$, then
  $A'$ contains a $1$-independent subset $B$ of size $m$,
  which corresponds to a $(2s+1)$-independent set in $G$ that is contained in $A$.
- Hence, the obtained bound is $L(m)={m+t-2\choose t-1}$, and we have already argued that then $L(m)\in \Oof_{r,t}{(m^{{(8t+1)}^{2t}})}$.
+ Hence, the obtained bound is $L(m)={m+t-2\choose t-1}$, and we have already argued that then $L(m)\in \Oof_{r,t}{(m^{{(4t+1)}^{2t}})}$.
  
  
  \paragraph{Even case.}
@@ -667,7 +694,7 @@ We now wrap up the proof of \cref{thm:new-uqw} by iteratively applying~\cref{lem
 
 \begin{proof}[of \cref{thm:new-uqw}]
 Fix integers $r,t$,  and a graph $G$ such that $K_t\not\minor_{d} G$,
-for $d=\lfloor 9r/2 \rfloor$. Let $\beta>8t$ be a fixed real. As in the proof of \cref{lem:engine}, without loss of generality suppose $m\geq t^8$.
+for $d=\lfloor 9r/2 \rfloor$. Let $\beta>4t$ be a fixed real. As in the proof of \cref{lem:engine}, without loss of generality suppose $m\geq t^8$.
  Denote $\gamma=\beta^{2t}$, and
 define the function $L(m)$ as $L(m)=((t+1)\cdot m)^\gamma$.
 
@@ -712,7 +739,7 @@ Hence, $|S|<t$.
 Define the function  $N:\N\to\N$
 as $N(m)=((t+1)m)^{\gamma^{r}}=((t+1)m)^{\beta^{2rt}}$
 for $m\ge t^8$  and $N(m)=N(t^8)$ for $m<t^8$.
-Note that $N(m)\in \Oof_{r,t}{(m^{{(8t+1)}^{2rt}})}$, provided we put $\beta=8t+1$.
+Note that $N(m)\in \Oof_{r,t}{(m^{{(4t+1)}^{2rt}})}$, provided we put $\beta=4t+1$.
 The argument above shows that if $|A|\ge N(m)$ then 
 there is a set $S\subset V(G)$, equal to $S_r$ above,
 and a set $B\subset A$, equal to $A_r$ above,
