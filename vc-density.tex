@@ -5,11 +5,10 @@ In this section we prove \Cref{thm:vc-density} and \Cref{thm:vc-density-lower-bo
 	and stronger bounds for classes which have bounded expansion. 
 	On the other hand, the complementary \Cref{thm:vc-density-lower-bound} shows that for subgraph-closed classes, in the absence of structural sparsity we cannot hope for such upper bounds.
 
-\paragraph*{Upper bounds for sparse classes.}
+\subsection{Upper bounds for sparse classes}
 We first prove \Cref{thm:vc-density}.
-From now on we fix a formula  $\phi(\tup x,\tup y)$
-with $\ell$ object variables
-
+% From now on we fix a formula  $\phi(\tup x,\tup y)$
+% with $\ell$ object variables.
 % For a graph $G$, a set of  vertices $A\subset V(G)$, and a tuple $\tup v\in V(G)^n$,
 % denote
 % \[\phi(A,\tup v)=\setof{\tup a \in A^m }{ G\models\phi(\tup a,\tup v)}.\]
@@ -22,15 +21,16 @@ with $\ell$ object variables
 % The set $S_\phi(A,G)$ is therefore the set of all $\phi$-types of $n$-tuples
 % of vertices of $G$ over the parameter set $A$.
 We show  that if $\CCC$ is a nowhere dense class,
-then for every $\varepsilon>0$ we have  $|S^\phi(G/A)|\le \Oof(|A|^{\ell+\varepsilon})$,
-for all $G\in \CCC$ and $A\subset V(G)$,
- and 
-if $\CCC$ is moreover of bounded expansion, then in fact $|S^\phi(G/A)|\le \Oof(|A|^\ell)$.
+then for every $\varepsilon>0$ 
+and every formula $\phi(\tup x,\tup y)$
+with $\ell$ free variables,
+  $|S^\phi(G/A)|\le \Oof(|A|^{\ell+\varepsilon})$,
+for all $G\in \CCC$ and $A\subset V(G)$.
+ Moreover, if $\CCC$  of bounded expansion, then in fact $|S^\phi(G/A)|\le \Oof(|A|^\ell)$ holds.
 
-
-To prove~\cref{thm:vc-density},
+In the proof of~\cref{thm:vc-density},
 we will first enlarge the set $A$ to a set $B$, called
-an \emph{$r$-closure of $A$}, such 
+an \emph{$r$-closure of~$A$} (where $r$ is chosen depending on $\phi$), such 
 that the connections of elements from $V(G)\setminus B$ 
 towards $B$ are well controlled. This approach
 was first used in Drange et al.~\cite{drange2016kernelization} in the context of classes of bounded expansion, 
@@ -129,22 +129,22 @@ We note that in~\cite{drange2016kernelization,eickmeyer2016neighborhood} project
 However, adding singleton projections for vertices of $B$ to the definition only adds $|B|$ possible projections of size $1$ each, so this does not influence the validity of the above results.
 
 
-\medskip
-We  now prove~\cref{thm:vc-density}, whose statement we repeat for convenience. 
-\setcounter{theorem}{2}
-\begin{theorem}
-Let $\CCC$ be a class of graphs and let $\phi(\tup x,\tup y)$ be a first order formula with distinguished object variables $\bar x$ and parameter variables $\bar y$, and let $\ell=|\bar x|$. Then:
-\begin{enumerate}[(1)]
-\item If $\CCC$ is nowhere dense, then for every $\epsilon>0$ 
-there exists a constant~$c$ such that for every $G\in \CCC$ and every nonempty
-$A\subseteq V(G)$ the inequality $|S^\phi(G/A)|\leq c\cdot |A|^{\ell+\epsilon}$ holds.
+% \medskip
+% We  now prove~\cref{thm:vc-density}, whose statement we repeat for convenience.
+% \setcounter{theorem}{2}
+% \begin{theorem}
+% Let $\CCC$ be a class of graphs and let $\phi(\tup x,\tup y)$ be a first order formula with distinguished object variables $\bar x$ and parameter variables $\bar y$, and let $\ell=|\bar x|$. Then:
+% \begin{enumerate}[(1)]
+% \item If $\CCC$ is nowhere dense, then for every $\epsilon>0$
+% there exists a constant~$c$ such that for every $G\in \CCC$ and every nonempty
+% $A\subseteq V(G)$ the inequality $|S^\phi(G/A)|\leq c\cdot |A|^{\ell+\epsilon}$ holds.
+%
+% \item If $\CCC$ has bounded expansion, then there exists a constant~$c$ such that for every $G\in \CCC$ and every nonempty $A\subseteq V(G)$ the inequality $|S^\phi(G/A)|\leq c\cdot |A|^\ell$ holds.
+% \end{enumerate}
+% \end{theorem}
 
-\item If $\CCC$ has bounded expansion, then there exists a constant~$c$ such that for every $G\in \CCC$ and every nonempty $A\subseteq V(G)$ the inequality $|S^\phi(G/A)|\leq c\cdot |A|^\ell$ holds.
-\end{enumerate}
-\end{theorem}
 
-
-\begin{proof}
+\begin{proof}[of~\cref{thm:vc-density}]
 	% We only discuss the proof in the case of a nowhere dense class $\cal C$; the case of bounded expansion classes  is analogous, and can be obtained from the proof below
 % 	by replacing all the values $\epsilon,\delta,\epsilon_1,\epsilon_2,\epsilon_3$ below by $0$.
 %
@@ -158,26 +158,29 @@ $A\subseteq V(G)$ the inequality $|S^\phi(G/A)|\leq c\cdot |A|^{\ell+\epsilon}$ 
 %  such that $f(n)=\Uof(g(n))$'', meaning that
 %  there is an $n$ such that
 %   $|f(n)|>c\cdot |g(n)|$, where the constant $c$ is chosen sufficiently large so that the following contradiction will be obtained.
- To focus attention, we present the proof only the nowhere dense case $(1)$;
- the proof in the bounded expansion case $(2)$ 
+ To focus attention, we present the proof only the nowhere dense case, the proof in the bounded expansion case
  can be obtained by replacing  all the parameters $\epsilon,\delta,\epsilon_1,\epsilon_2$ below by~$0$.
-	
-  Fix a first order formula $\phi(\bar x,\bar y)$, where $\bar x$ is the distinguished $\ell$-tuple of object variables.
-    By \emph{tuples} below we refer to tuples of length $\ell$.
-	   Fix a positive real $\epsilon$. 	   We show that $|S^\phi(G/A)|$ is $\Oof(|A|^{\ell+\epsilon})$.
+
+ Let $\CCC$ be a nowhere dense class of graphs.
+  Fix a first order formula $\phi(\bar x,\bar y)$, where $\bar x$ is the distinguished $\ell$-tuple of object variables, and
+	   fix a positive real $\epsilon$. 	   We show that $|S^\phi(G/A)|$ is $\Oof(|A|^{\ell+\epsilon})$.
+     
+	   
 
 	   \medskip
 	   
 	   
 	   
 In the proof below, $d$ denotes a positive integer 
-depending on ${\cal C},\ell,\phi$ only (and not on $G, A$ and $\epsilon$), and will be specified later. We choose\footnote{Pick $\delta$ so that	 $\delta((1+\delta)(d+\ell)+\ell)<\epsilon$. Then $\delta(d+\ell)+\ell<\frac{\ell+\epsilon}{1+\delta}$. Pick $\epsilon_1$ so that $\delta(d+\ell)+\ell<\ell+\epsilon_1<\frac{\ell+\epsilon}{1+\delta}$.} positive reals
+depending on ${\cal C},\ell,\phi$ only (and not on $G, A$ and $\epsilon$), and will be specified later. We choose\footnote{Pick $\delta$ so that	 
+% $\delta((1+\delta)(d+\ell)+\ell)<\epsilon$. Then
+$\delta(d+\ell)+\ell<\frac{\ell+\epsilon}{1+\delta}$. Pick $\epsilon_1$ so that $\delta(d+\ell)+\ell<\ell+\epsilon_1<\frac{\ell+\epsilon}{1+\delta}$.} positive reals
 $\delta,\epsilon_1$  such that 
 	 $(\ell+\epsilon_1)(1+\delta) 
 	 \le
 	 \ell+\epsilon$ and $\epsilon_1>\delta(d+\ell)> \delta\ell$.	 
 The constants hidden in the $\Oof$ notation below depend
- on $\epsilon,\delta,\epsilon_1,\cal C, \ell$ and $\phi$, but not on $G$ and $A$.
+ on $\epsilon,\delta,\epsilon_1,\cal C, \ell$ and $\phi$, but not on $G$ and $A$.   By \emph{tuples} below we refer to tuples of length $\ell$.
 
  
 
@@ -301,10 +304,10 @@ for $\epsilon_2\coloneqq \epsilon_1-\delta\ell>0$.
 Since there are at most $|B|^{\ell(1+\delta)}$ distinct projections in total and $\ell(1+\delta)+\epsilon_2=\ell+\epsilon_1$,~\cref{claim3} implies~\cref{claim2}. It therefore remains to prove~\cref{claim3}.
 
 \medskip
-We  apply~\cref{prop:uqw-tuples} to the set of $\ell$-tuples $V$, for $m$ being largest integer such that $|V|\ge N^{\ell}(2r,m)$.
+We apply~\cref{thm:uqw-tuples} to the set of $\ell$-tuples $V$, for $m$ being largest integer such that $|V|\ge N^{\ell}_{2r}(m)$.
   As a conclusion, we obtain a set $U\subset V$  of $m$ tuples which are mutually $2r$-independent in $G-S$, for some set of vertices $S\subset V(G)$.
-  Let $d$ be the degree of a polynomial bounding 
-    the function $N^\ell(2r,-)$ from~\cref{prop:uqw-tuples},
+  Let $d$ be the degree of the polynomial 
+ $N^\ell_{2r}$ obtained from~\cref{thm:uqw-tuples},
     and let $s=s^{\ell}(2r)$ be the constant bounding the size of the set $S$.
       Note that $s$ is $\Oof(1)$ and $|V|$ is $\Oof(m^d)$.
   
@@ -541,17 +544,18 @@ number of types as follows:
 Hence, taking $c\coloneqq c_0c_1^{(1+\epsilon')\ell+d}c_2^\ell\ell^d$ finishes the proof.
 \end{proof}
 \end{comment}
-\paragraph*{Lower bounds for non-sparse classes.}
-We now move to the proof of \Cref{thm:vc-density-lower-bound}, which we also repeat for
-convenience.
-
+\subsection{Lower bounds for non-sparse classes}
+We now move to the proof of \Cref{thm:vc-density-lower-bound},
+which we repeat for convenience.
+\setcounter{theorem}{2}
+\todo{The formulations do not agree.}
 \begin{theorem}
 Let $\CCC$ be a class of graphs which 
 is closed under taking subgraphs. 
 \begin{enumerate}[(1)]
-\item If $\CCC$ is somewhere dense, then there is a number $r_0\in\N$ such that for the formula $\phi(x,y)$ expressing that the distance between $x$ and $y$ is at most $r$, and for every $n\in \N$ there are $G\in\CCC$ and $A\subseteq V(G)$ 
+\item If $\CCC$ is somewhere dense, then there is a number $r\in\N$ such that for the formula $\phi(x,y)$ expressing that the distance between $x$ and $y$ is at most $r$, and for every $n\in \N$ there are $G\in\CCC$ and $A\subseteq V(G)$ 
 with $|A|=n$ and $S^\phi(G/A)=P(A)$.
-\item If $\CCC$ has unbounded expansion, then there is a number $r_0\in\N$ such that for the formula $\phi(x,y)$ expressing that the distance between $x$ and $y$ is at most $r$, and every $c\in \mathbb{R}$ there exist $G\in\CCC$ and $A\subseteq V(G)$ with $|S^\phi(G/A)|>c|A|$. 
+\item If $\CCC$ has unbounded expansion, then there is a number $r\in\N$ such that for the formula $\phi(x,y)$ expressing that the distance between $x$ and $y$ is at most $r$, and every $c\in \mathbb{R}$ there exist $G\in\CCC$ and $A\subseteq V(G)$ with $|S^\phi(G/A)|>c|A|$. 
 \end{enumerate}
 \end{theorem}
 The rest of~\cref{sec:types} is devoted to the proof of~\cref{thm:vc-density-lower-bound}.

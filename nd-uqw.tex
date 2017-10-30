@@ -508,7 +508,7 @@ Assume that $|A|\ge m_t$. By induction, we
 of \mbox{$1$-independent} subsets of $G$
 of length at most $t$
 such that $|A_i|\ge m_{t-i}$,
- as follows. Start with $A_0=A$. We maintain a set $S$ of vertices of $G$ which is initially empty, and we maintain the invariant that $A_i$ is disjoint with $S$ at each step of the induction.
+ as follows. Start with $A_0=A$. We maintain a set $S$ of vertices of $G$ which is initially empty, and we maintain the invariant that $A_i$ is disjoint with $S$ at each step of the construction.
 
 For $i=0,1,2,\ldots$ do as follows.
 If $A_{i}$ contains a $2$-independent set of size $m$ in $G-S$, terminate.
@@ -519,7 +519,7 @@ If $A_{i}$ contains a $2$-independent set of size $m$ in $G-S$, terminate.
  $m_{t-i-1}$ vertices of $A_{i}$.
  Let $A_{i+1}$ consist of those vertices, and add $v_{i+1}$
  to the set~$S$.  
-  If $i\le t$, proceed by replacing $i$ by $i+1$.
+  Increment $i$ and repeat.
 
 \begin{claim}\label{claim:at-most-t}
 	The construction halts after less than $t$ steps.
