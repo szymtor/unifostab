@@ -94,7 +94,7 @@ The result (3) is completely new, and is the main contribution of this paper. We
 %\sebi{The proof of \Cref{thm:vc-density} is (again) based on Gaifman's locality
 %theorem for first order logic, which allows us to focus at local 
 %neighborhoods around the vertices $v\in V(G)$. 
-%Using the closure lemma of~\cite{DrangeDFKLPPRVS16} for
+%Using the closure lemma of~\cite{drange2016kernelization} for
 %classes of bounded expansion and its generalization to
 %nowhere dense classes~\cite{eickmeyer2016neighborhood}
 %together with uniform quasi-wideness,
@@ -415,7 +415,7 @@ and  $|S^\phi(G/B)|$ is called the \emph{neighborhood complexity} of $B$.
 Note that in principle, the cardinality $|S^\phi(G/B)|$ may reach $2^{|B|}$. 
 \cref{thm:vc-density} implies 
 that 
-% As shown in~\cite{DrangeDFKLPPRVS16}
+% As shown in~\cite{drange2016kernelization}
 for graph classes of bounded expansion,
 the neighborhood complexity $|S^\phi(G/B)|$ is $\Oof(|B|)$
 % In~\cite{eickmeyer2016neighborhood},
@@ -423,10 +423,10 @@ the neighborhood complexity $|S^\phi(G/B)|$ is $\Oof(|B|)$
 and that for nowhere dense graph classes,
 the neighborhood complexity $|S^\phi(G/B)|$ is $\Oof(|B|^{1+\epsilon})$,
  for any fixed $\epsilon>0$.
- These special cases have been proved earlier in \cite{DrangeDFKLPPRVS16} and in 
+ These special cases have been proved earlier in \cite{drange2016kernelization} and in 
  \cite{eickmeyer2016neighborhood}, respectively, and in fact our proof relies on them.  
  These results where used 
- to obtain small kernels for the domination set problem~\cite{DrangeDFKLPPRVS16,eickmeyer2016neighborhood}.
+ to obtain small kernels for the domination set problem~\cite{drange2016kernelization,eickmeyer2016neighborhood}.
   % Our result generalizes these results to arbitrary first order formulas $\phi$.
    \cref{thm:vc-density} may be contrasted with the following complementary result.
 
@@ -572,7 +572,7 @@ A key lemma concerning $r$-separation (cf.~\cref{cor:bound}) states that if $A$
 and $B$ are $r$-separated by a set $S$ of size $s$,
 then for any fixed formula $\phi(\bar x,\bar y)$,
 the set  $\{\{\tup b\ \in B^{|\bar x|} : \strA\models\phi(\tup a,\tup b)\} : \tup a\in A^{|\bar y|}\}$ has cardinality bounded by a constant depending on $s$ and $\phi$ only (and not on $G,A,$ and $B$). This elementary result combines  Gaifman's locality property and a Feferman-Vaught lemma. This, in combination with the polynomial bounds 
-for uniform quasi-wideness (\cref{thm:new-uqw}, and its extension to tuples~\cref{thm:uqw-tuples}), as well as the previous results on neighborhood complexity~\cite{eickmeyer2016neighborhood,DrangeDFKLPPRVS16} are the main ingredients of our main result,~\cref{thm:vc-density}.
+for uniform quasi-wideness (\cref{thm:new-uqw}, and its extension to tuples~\cref{thm:uqw-tuples}), as well as the previous results on neighborhood complexity~\cite{eickmeyer2016neighborhood,drange2016kernelization} are the main ingredients of our main result,~\cref{thm:vc-density}.
 
 %
 % \paragraph{Stability.}
