@@ -1,47 +1,19 @@
 \begin{abstract}
 \noindent 
-We study nowhere dense classes of graphs, recently introduced by Ne\v
-set\v ril and Ossona de
-Mendez~\cite{nevsetvril2010first,nevsetvril2011nowhere}.  Firstly, we
-provide a new proof for the fact that these classes are uniformly
-quasi-wide and improve previously known bounds on the functions
+We initiate the study of {\em{VC-density}} in nowhere dense classes of graphs; nowhere denseness 
+is an abstract notion of sparsity introduced by Ne\v set\v ril and Ossona de Mendez~\cite{nevsetvril2010first,nevsetvril2011nowhere}.
+Our main result states that for every nowhere dense class of graphs $\CCC$ and first order formula $\phi(\tup x,\tup y)$, 
+whenever one draws a graph $G\in \CCC$ and a parameter set $A\subseteq V(G)$, the number of different subsets of $A^{|\tup y|}$ that can be defined 
+as $\set{\tup v\in A^{|\tup y|}\, \colon\, G\models\phi(\bar u,\tup v)}$ for some valuation $\tup u$ of $\tup x$ in $G$
+is bounded by $\Oof(|A|^{|\tup x|+\epsilon})$, for every $\epsilon>0$. 
+This provides optimal bounds on the VC-density of first-order definable set systems in nowhere dense graph classes.
+
+We also give two new proofs of upper bounds on quantities in nowhere dense classes which are relevant for their logical treatment.
+Firstly, we provide a new proof of the fact that nowhere dense classes are uniformly
+quasi-wide, implying explicit, polynomial upper bounds on the functions
 relating the two notions.  Secondly, we give a new combinatorial proof
 of the result of Adler and Adler~\cite{adler2014interpreting} stating
-that nowhere dense classes of graphs are stable.  In contrast to the
-original proof, our proof is completely finitistic and yields explicit
-bounds for ladder indices of first-order formulas on nowhere dense
-classes of graphs.  Finally, we establish an optimal bound on the
-VC-density of families of first-order definable sets in nowhere 
-dense classes. More precisely, we prove that for every nowhere
-dense class of graphs the number of subsets over a parameter 
-set $A$ definable by a first-order formula $\phi(\tup x,\tup y)$
-with $n$ object
-variables $\tup y$ converges to $|A|^n$. 
-%
-%More precisely, let
-%$\CCC$ be a nowhere dense class of graphs and let
-%$\psi(\tup x,\tup y)$ be a first-order formula, where $\tup x$ is an
-%$m$-tuple and $\tup y$ is an $n$-tuple of variables.  For a graph $G$
-%and $A\subseteq V(G)$ let
-%$S_\psi(A,G)=\{\{\tup a\ \in A^m : G\models\psi(\tup a,\tup b)\} :
-%\tup b\in V(G)^n\}$.  We prove that
-%\[\limsup_{a\rightarrow \infty}\max_{\substack{G\in\CCC\\A\subseteq
-%    V(G), |A|=a}}\frac{\log |S_\psi(A,G)|}{\log a}\leq n.\]
-We want to highlight that the present paper
-can be read without any knowledge of model 
-theory beyond the basics of first-order logic.
-
-%
-% \sebi{Finally, let $\CCC$ be a nowhere dense class of graphs, let
-% $\epsilon>0$ and let $\psi(\tup x,y)$ be a first-order formula,
-% where~ $\tup x$ is an $m$-tuple of variables and $y$ is a single
-% variable. We prove that there is a constant $c$ such that for every
-% $G\in \CCC$ and every $A\subseteq V(G)$, the number of $\psi$-types
-% over $A$, that is,
-% $|S_\psi(A,G)|=|\{\{\tup a\ \in A^m : G\models\psi(\tup a,v)\} :
-% v\in V(G)\}|$, is bounded by $c\cdot |A|^{1+\epsilon}$.
-% \begin{change}{sz}Moreover, if $\CCC$ has bounded expansion, then
-%   the $\epsilon$ in the exponent can be dropped.\end{change} For
-% classes of graphs that are closed under taking subgraphs we derive
-% new characterizations of bounded expansion and nowhere denseness.}
+that every nowhere dense class of graphs is stable. In contrast to the previous proofs of the above results,
+our proofs are completely finitistic and constructive, and yield explicit and computable upper
+bounds on quantities related to uniform quasi-wideness (margins) and stability (ladder indices).
 \end{abstract}

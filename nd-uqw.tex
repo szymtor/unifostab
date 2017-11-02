@@ -27,7 +27,7 @@ $(I_u)_{u\in V(H)}$ of~$H$ in $G$ such that each $I_u$ has radius at most $r$.
 A class $\CCC$ of graphs is \emph{nowhere dense} if there is a function 
 $t\colon \N\rightarrow \N$ such that for all $r\in \N$ it holds that $K_{t(r)}\not\minor_r G$
 for all $G\in \CCC$, where $K_{t(r)}$ denotes the clique on $t(r)$ vertices.
-The class $\CCC$ moreover has \emph{bounded expansion}
+The class~$\CCC$ moreover has \emph{bounded expansion}
 if there is a function $d\colon\N\rightarrow\N$ such that for all 
 $r\in \N$ and all $H\minor_rG$ with $G\in\CCC$, the {\em{edge density}}
 of $H$, i.e. $|E(H)|/|V(H)|$, is bounded by $d(r)$. Note that every 
@@ -214,7 +214,7 @@ In stability theory, similar trees are called \emph{type trees} and they are use
   Let $G$ be a graph, $A\subset V(G)$ be a $1$-independent set in $G$,
   and $\bar a$ be any enumeration of $A$, that is, a sequence of length $|A|$ in which every element of $A$ appears exactly once.
   We define a binary tree $\tau$ which is 
-  labeled by vertices of $G$. The tree is defined by processing all elements of $\bar a$ sequentially. 
+  labeled by vertices of $G$. The tree is defined by processing all elements of~$\bar a$ sequentially. 
   We start with $\tau$ being the  tree with empty domain, and for each element $a$ of the sequence $\bar a$, processed in the order given by $\bar a$, 
   execute the following procedure which results in adding a node with label $a$ to $\tau$.
   
@@ -230,8 +230,8 @@ When processing the vertex $a$, do the following. Start with $w$ being the empty
 Define the
 \emph{depth} of $\tau$ as 
 the maximal depth of a node of $\tau$.
-For a word $w$, an \emph{alternation} in $w$ is any 
-position $\alpha$, $1\leq \alpha\leq |w|$, such that $w_\alpha\neq w_{\alpha-1}$; here, $w_\alpha$ denotes the $\alpha$th symbol of $w$, and $w_0$ is assumed to be $\dau$.
+For a word $w$, an \emph{alternation} in~$w$ is any 
+position $\alpha$, $1\leq \alpha\leq |w|$, such that $w_\alpha\neq w_{\alpha-1}$; here, $w_\alpha$ denotes the $\alpha$th symbol of~$w$, and~$w_0$ is assumed to be $\dau$.
 The \emph{alternation rank} of the tree $\tau$ is the maximum of the number of alternations in $w$, over all nodes $w$ of $\tau$.
 
 
@@ -255,7 +255,7 @@ Then $\tau$ has alternation rank at most $2t-1$.
 \begin{proof}
 	Let $w$ be a node of $\tau$ with at least $2k$ alternations, for some $k\in \N$.
 	Suppose $\alpha_1,\beta_1,\ldots,\alpha_k,\beta_k$ be the first $2k$ alternations of $w$.
-	By the assumption that $w_0=\dau$ we have that $w$ contains symbol $\son$ at all positions $\alpha_i$ for $i=1,\ldots,k$, and symbol $\dau$ at all positions $\beta_i$ for $i=1,\ldots,k$.
+	By the assumption that $w_0=\dau$ we have that~$w$ contains symbol $\son$ at all positions $\alpha_i$ for $i=1,\ldots,k$, and symbol $\dau$ at all positions $\beta_i$ for $i=1,\ldots,k$.
 	For each $i\in \set{1,\ldots,k}$, define $a_i\in V(G)$ to be the label in $\tau$ of the prefix of $w$ of length $\alpha_i-1$, and similarly define $b_i\in V(G)$ to be the label in $\tau$ of the prefix of $w$
 	of length $\beta_i-1$. 
 	It follows that for each $i\in \set{1,\ldots,k}$, the following assertions hold:
@@ -445,9 +445,9 @@ Then, provided $|A|=|A'|\ge L_t(m)$, where $L_t(m)$ is the function as defined i
  $A'$ contains a subset $B'$ of size $m$
 which is  $2$-independent in $G'-S'$, for some $S'\subset V(G')-A'$ of size less than $t$.
 Since $S'\cap A'=\emptyset$, each vertex of $S'$ originates from a single vertex of $G$ before the contractions yielding $G'$; thus, $S'$ corresponds to a
-set $S$ consisting of less than $t$ vertices of $G$ which are at distance at least $s+1$ from each vertex in $A$.
+set $S$ consisting of less than $t$ vertices of~$G$ which are at distance at least $s+1$ from each vertex in $A$.
 In turn, the set $B'$ corresponds to some subset $B$ of $A$
-which is $(2s+2)$-independent in $G-S$. Moreover, as in $G'$ each vertex of $S'$
+which is $(2s+2)$-independent in $G-S$. Moreover, as in $G'$ each vertex of~$S'$
 is a neighbor of each vertex of $B'$,  each vertex of $S$
 has distance exactly $s+1=r/2$ from each vertex of $B$.
 
@@ -573,7 +573,7 @@ When $d=1$, we omit it from the superscripts.
   modifying the function $N_r$ by an additive constant $s_r$.
 In particular, a class of graphs $\cal C$ is uniformly quasi-wide if and only if it 
 	satisfies $\uqw_r$, for all $r\in \N$.  
-  However, generalizing to tuples of dimension $d$ requires the use of the definition above, where the tuples in $B$ are allowed to contain  vertices which occur in $S$. 
+  However, generalizing to tuples of dimension $d$ requires the use of the definition above, where the tuples in~$B$ are allowed to contain  vertices which occur in $S$. 
   For example, if the graph $G$ is a star with many arms and $A$ consists of all pairs of adjacent vertices in $G$, then $S$
   needs to contain the central vertex of $G$,
   and therefore $S$ will contain a vertex from every tuple in $A$. We may take $B$ to be equal to $A$ in this case.
@@ -604,7 +604,7 @@ some number $s^d_r\in \N$ and polynomial $N^d_r\from \N\to\N$ that can be comput
 \begin{proposition}\label{prop:uqw-tuples}
 For all $r,d\in\N$,
 if $\cal C$ satisfies $\uqw_{2r}(N_{2r},s_{2r})$ 
-for some $s_{2r}\in\N$ and $N_{2r}\colon\N\to \N$,
+for some $s_{2r}\in\N$ and \mbox{$N_{2r}\colon\N\to \N$},
 then $\cal C$
 satisfies $\uqw^d_r(N^d_r,s^d_r)$
 for  $s^d_r=d\cdot s_{2r}$ and 
@@ -634,7 +634,7 @@ We also fix the function $f$ defined in the statement of \cref{prop:uqw-tuples}.
         %Note that in case $M$ contains more than one copy of some vertex $u$, any set $S$ that mutually $r$-separates $S$ has to contain $u$.
         %By a slight abuse of notation, for a single tuple $\bar{u}$ by $\pi_i(\bar{u})$ we denote the $i$th coordinate of $\bar{u}$.
 	
-	Our first goal is to find a large subset of tuples that are mutually $2r$-separated by some small $S$ on each coordinate separately.
+	Our first goal is to find a large subset of tuples that are mutually $2r$-separated by some small~$S$ on each coordinate separately.
 	Note that in the following statement we ask for $2r$-separation, instead of $r$-separation.
 
 \begin{lemma}\label{lem:step1} For all $r,m\in \N$ and $A\subset V(G)^d$ with $|A|\ge f^d(m)$,
@@ -667,7 +667,7 @@ Suppose now that $|\pi_i(A')|<N_{2r}(m')$.
 Then choose a vertex $a\in \pi_i(A')$ for which the pre-image $\pi_i^{-1}(a)$ has the largest cardinality.
 Since $|A'|\geq f(m')=m'\cdot N_{2r}(m')$, we have that 
 $$|\pi_i^{-1}(a)|\geq \frac{|A'|}{|\pi_i(A')|}\geq \frac{m'\cdot N_{2r}(m')}{N_{2r}(m')}=m'.$$
-Hence, provided we set $S'=\set{a}$ and $B'=\pi_i^{-1}(a)$, we have that $B'$ is mutually $2r$-separated by $S'$, $|B'|\geq m$, and $|S'|=1$.
+Hence, provided we set $S'=\set{a}$ and $B'=\pi_i^{-1}(a)$, we have that $B'$ is mutually $2r$-separated by~$S'$, $|B'|\geq m$, and $|S'|=1$.
 \end{clproof}
 
 We proceed with the proof of \cref{lem:step1}.

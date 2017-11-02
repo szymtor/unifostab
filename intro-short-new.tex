@@ -2,7 +2,7 @@
 
 Nowhere dense classes of graphs were introduced 
 by Ne\v set\v ril and Ossona de 
-Mendez~\cite{nevsetvril2008grad,nevsetvril2010first,nevsetvril2011nowhere} as a 
+Mendez~\cite{nevsetvril2010first,nevsetvril2011nowhere} as a 
 general and abstract model
 capturing uniform sparseness of graphs. These classes generalize many 
 familiar classes of sparse graphs, such as planar graphs, graphs 
@@ -35,11 +35,11 @@ of Ne\v{s}et\v{r}il and Ossona de Mendez~\cite{sparsity}.
 The combination of combinatorial and logical methods yields a powerful toolbox for the study
 of nowhere dense graph classes. In particular, 
 the result of Grohe, Kreutzer and the second author~\cite{grohe2014deciding} exploits 
-this combination in order to prove that a given
+this combination in order to prove that the truth of a given
 first order sentence $\varphi$ can be decided in time 
-$f(\varphi)\cdot n^{1+\epsilon}$ on $n$-vertex graphs from a fixed nowhere dense class of graphs $\CCC$, for any fixed real $\epsilon>0$ and some computable function $f$.
+$f(\varphi)\cdot n^{1+\epsilon}$ on $n$-vertex graphs from a fixed nowhere dense class of graphs $\CCC$, for any fixed real $\epsilon>0$ and some function $f$.
 On the other hand, provided $\CCC$ is closed under taking subgraphs, it is known that if $\CCC$ is not nowhere dense,
-then one cannot hope for such a result: there is no algorithm with running time of the form $f(\varphi)\cdot n^c$ for any constant $c$ under plausible complexity assumptions~\cite{dvovrak2013testing}.
+then one cannot hope for such a result: there is no algorithm with running time of the form $f(\varphi)\cdot n^c$ for any constant~$c$ under plausible complexity assumptions~\cite{dvovrak2013testing}.
 In the terminology of parameterized complexity, these results show that the notion of nowhere denseness exactly characterized subgraph-closed classes where model-checking first order logic
 is fixed-parameter tractable, and conclude a long line of research concerning the parameterized complexity of the model checking problem for sparse graph classes (see \cite{grokre11} for a survey).
 
@@ -132,8 +132,9 @@ We now discuss the relevant background from logic and model theory, in order to 
 % involving field extensions,  Galois duality, algebraic varieties, etc.
 % A meaningful notion of structure in number theory is most elusive.
 %
-  The goal of {stability theory},
-  initiated and developed by Shelah~\cite{shelah1990classification},
+  The goal of {stability theory}
+  %,
+  %initiated and developed by Shelah~\cite{shelah1990classification},
   is to draw certain dividing lines
   specifying  the abstract properties of 
   logical structures which allow the development 
@@ -161,7 +162,7 @@ the \emph{ladder index}
 of $\phi(\tup{x},\tup{y})$ in~$\str A$ (which may depend on the split of the
 variables, and may be $\infty$ for some infinite structures $\str A$). A class of structures $\CCC$ is \emph{stable} if
 the ladder index of every first order formula $\phi(\tup{x},\tup{y})$ over
-structures from $\CCC$ is bounded by a constant depending only on $\phi$ 
+structures from~$\CCC$ is bounded by a constant depending only on $\phi$ 
 and~$\CCC$. This notion can be applied to a single infinite structure $\str A$, by considering the class consisting of $\str A$ only.
 Examples of stable structures include $(\str N,=)$,
 the field of complex numbers $(\str C,+,\times,0,1)$,
@@ -230,7 +231,7 @@ Therefore,
 Shelah's result provides an upper bound on the number of types, albeit using infinite cardinals, elementary limits, and infinite parameter sets.
  The cardinality bound provided by \cref{thm:Shelah-stone-space},
  however, does not seem to  immediately translate to a result of finitary nature for classes of finite graphs. As we will see next,
- this can be in some sense done using the notions of {\em{VC-dimension}} and {\em{VC-density}}.
+ this can be done in some sense using the notions of {\em{VC-dimension}} and {\em{VC-density}}.
  
  %There is 
  %a certain related cardinality bound  of finitary nature
@@ -260,7 +261,7 @@ For a given structure $\str A$, parameter set $B\subseteq V(\str A)$, and formul
 we may consider the family $S^\phi(\str A/B)$ of subsets of $B^{|\tup y|}$ defined using equation~\eqref{eq:stone-def}.
 The \emph{VC-dimension} of $\phi(\bar x,\bar y)$ on $\str A$ is the VC-dimension of the family $S^\phi(\str A/V(\str A))$; that is, we take the whole domain to be the parameter set. 
 A formula $\phi(\bar x,\bar y)$ is \emph{dependent} on a class of structures $\cal C$
-if there is a bound $d\in\N$ such that the VC-dimension of $\phi(\bar x,\bar y)$ on $\str A$ is at most $d$ for all $\str A\in\cal C$. 
+if there is a bound $d\in\N$ such that the VC-dimension of $\phi(\bar x,\bar y)$ on $\str A$ is at most $d$ for all $\str A\in\cal C$.  \todo{This definition can only be right for classes which are closed under substructures.}
 It is immediate from the definitions  that if a formula $\phi(\bar x,\bar y)$ is stable over a  class $\cal C$, then it is also dependent on $\cal C$ (the bound being the ladder index). 
 A class of structures  $\cal C$ is {\em{dependent}} if every formula $\phi(\bar x,\bar y)$ is dependent over $\cal C$. 
 In particular, every stable class is dependent, and hence, by \cref{thm:adleradler}, every nowhere dense class of graphs is dependent.
@@ -316,7 +317,7 @@ combinatorics.
 
 \paragraph{The main result.}
 Our main result, \cref{thm:vc-density} stated below, improves the bound~\eqref{eq:nip} for classes of sparse graphs
-by providing essentially the optimum exponent.
+by providing essentially the optimum exponent.\todo{can we bring the result to one page?}
 
 \begin{theorem}\label{thm:vc-density}
 Let $\CCC$ be a class of graphs and let $\phi(\tup x,\tup y)$ be a first order formula
@@ -395,7 +396,7 @@ the function $N_r$ are non-elementary. Recently, Kreutzer, Rabinovich and the se
  However, the exact dependence of the degree of the polynomial on $r$ and on the class $\CCC$ itself
  was not specified in~\cite{siebertz2016polynomial}, as the existence of a polynomial bound is derived
 from non-constructive arguments used by Adler and Adler in~\cite{adler2014interpreting} when showing that every nowhere dense class of graphs
-is stable. We remark that polynomial bounds for uniform quasi-wideness are essential for some its applications:
+is stable. We remark that polynomial bounds for uniform quasi-wideness are essential for some of its applications:
 the fact that $N_r$ can be chosen to be polynomial was crucially used by Eickmeyer et al.~\cite{eickmeyer2016neighborhood} both to establish an almost linear upper bound on the
 $r$-neighborhood complexity in nowhere dense classes, and to develop an almost linear kernel for the {\sc{$r$-Dominating Set}} problem.
 We use this fact in our proof of \cref{thm:vc-density} as well.
@@ -472,4 +473,4 @@ In~\cref{sec:uqw-tuples} we formulate and prove the generalization of uniform qu
 %This result is new in the context of nowhere dense graph classes, and is an important tool for the further results.
 In \cref{sec:gaifman} we discuss Gaifman locality for first order logic and derive an elementary variant concerning local separators.
 In \cref{sec:types} we prove our main result, \cref{thm:vc-density}, and the corresponding lower bounds, \cref{thm:vc-density-lower-bound}.
-Finally, in \cref{sec:stable} we provide a constructive proof of the result of Adler and Adler, \cref{thm:new-stable}.
+Finally, in \cref{sec:stable} we provide a constructive proof of the result of Adler and Adler, \cref{thm:new-stable}.\todo{page break here?}

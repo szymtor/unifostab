@@ -1,4 +1,4 @@
-\section{From nowhere denseness to uniform quasi-wideness}\label{sec:uqw}
+\section{Bounds for uniform quasi-wideness}\label{sec:uqw}
 
 In this section we prove \cref{thm:new-uqw}. 
 % In the presentation we focus on proving the existential statement, and at the end we briefly argue how the proof can be turned into an algorithm with the promised running time.
@@ -14,30 +14,43 @@ $E(G)$ for its edge set.
 The {\em{distance}} between vertices $u$ and $v$ in $G$, denoted $\dist_G(u,v)$, is the length of a shortest path between $u$ and $v$ in~$G$.
 If there is no path between $u$ and $v$ in $G$, we put $\dist_G(u,v)=\infty$.
 The {\em{(open) neighborhood}} of a vertex $u$, denoted $N(u)$, is the set of neighbors of $u$, excluding $u$ itself.
-For a non-negative integer $r$, by $N_r[u]$ we denote the {\em{(closed) $r$-neighborhood}} of $u$ which comprises vertices at distance at most $r$ from $u$; note that $u$ is always contained in its closed $r$-neighborhood. The \emph{radius} of a graph $G$ is the least integer $r$ such that there is some vertex $v$ of $G$ with $N_r[v]=V(G)$.
+For a non-negative integer $r$, by $N_r[u]$ we denote the {\em{(closed) $r$-neighborhood}} of $u$ which comprises vertices at distance at most $r$ from $u$; 
+note that $u$ is always contained in its closed $r$-neighborhood. The \emph{radius} of a connected graph $G$ is the least integer $r$ such that there is some vertex $v$ of $G$ with $N_r[v]=V(G)$.
 
 
 A {\em{minor model}} of a graph $H$ in $G$ is a family $(I_u)_{u\in V(H)}$ of pairwise vertex-disjoint connected subgraphs of $G$, called {\em{branch sets}},
-such that whenever $uv$ is an edge in~$H$, there are $u'\in I_u$ and $v'\in I_v$ for which $u'v'$ 
+such that whenever $uv$ is an edge in~$H$, there are $u'\in V(I_u)$ and $v'\in V(I_v)$ for which $u'v'$ 
 is an edge in $G$.
 The graph $H$ is a {\em{depth-$r$ minor}} of $G$, denoted $H\minor_rG$, if there is a minor model
 $(I_u)_{u\in V(H)}$ of~$H$ in $G$ such that each $I_u$ has radius at most $r$.
 
 A class $\CCC$ of graphs is \emph{nowhere dense} if there is a function 
 $t\colon \N\rightarrow \N$ such that for all $r\in \N$ it holds that $K_{t(r)}\not\minor_r G$
-for all $G\in \CCC$, where $K_{t(r)}$ denotes the clique on $t(r)$ vertices. 
+for all $G\in \CCC$, where $K_{t(r)}$ denotes the clique on $t(r)$ vertices.
+The class~$\CCC$ moreover has \emph{bounded expansion}
+if there is a function $d\colon\N\rightarrow\N$ such that for all 
+$r\in \N$ and all $H\minor_rG$ with $G\in\CCC$, the {\em{edge density}}
+of $H$, i.e. $|E(H)|/|V(H)|$, is bounded by $d(r)$. Note that every 
+class of bounded expansion is nowhere dense. The converse is not necessarily true in general~\cite{sparsity}.
+
+% A set $B\subseteq V(G)$ is called {\em{$r$-independent}} in a graph $G$ if  $\dist_G(u,v)>r$ for all
+% distinct $u,v\in B$.
+
+ 
 
 A set $B\subseteq V(G)$ is called {\em{$r$-independent}} in a graph $G$ if  $\dist_G(u,v)>r$ for all
-distinct $u,v\in B$.
-A class $\CCC$ of graphs is \emph{uniformly quasi-wide} if there are
-functions $N\colon \N\times\N\rightarrow \N$ and $s:\N\rightarrow \N$ such
-that for all $r,m\in \N$, all graphs $G\in \CCC$, and all subsets $A\subseteq V(G)$ of size $\abs{A}\geq N(r,m)$, there is a set
-$S\subseteq V(G)$ of size $\abs{S}\leq s(r)$ and a set
-$B\subseteq A\setminus S$ of size $\abs{B}\geq m$ which is $r$-independent in
-$G-S$. 
+distinct $u,v\in B$. 
+A class $\CCC$ of graphs is \emph{uniformly quasi-wide} if for every $r\in \N$ there is a number $s_r\in \N$
+and a function $N_r\from\N\to\N$ such that
+for every $m\in \N$, graph $G\in \CCC$, and vertex subset $A\subseteq V(G)$ of size $\abs{A}\geq N_r(m)$, there is a set
+$S\subseteq V(G)$ of size $\abs{S}\leq s_r$ and a set
+$B\subseteq A-S$ of size $\abs{B}\geq m$ 
+which is $r$-independent in $G-S$.
+
+
 
 \paragraph{General strategy.}
-Our proof follows the same lines as the original proof of Ne\v set\v ril and Ossona de Mendez, with the difference that in the key technical lemma (\cref{lem:apex} below), 
+Our proof follows the same lines as the original proof of Ne\v set\v ril and Ossona de Mendez~\cite{nevsetvril2011nowhere}, with the difference that in the key technical lemma (\cref{lem:apex} below), 
 we improve the bounds significantly by replacing a Ramsey argument with a new combinatorial reasoning.
 The new argument essentially originates in the concept of {\em{branching index}} from stability theory. 
 %, 
@@ -48,125 +61,31 @@ We first prove a restricted variant,~\cref{lem:engine} below, in which we assume
 \cref{thm:new-uqw}, we apply the lemma iteratively for $r$ ranging from $1$ to the target value.
 
 \begin{lemma}\label{lem:engine}
-For every pair of integers $t,r\in \N$ there exists an integer $d<9r/2$ and a function $L\colon \N\to \N$ with $L(m)=\Oof_{r,t}{(m^{{(8t+1)}^{2rt}})}$ such that the following holds.
+For every pair of integers $t,r\in \N$ there exists an integer $d<9r/2$ and a function $L\colon \N\to \N$ with $L(m)=\Oof_{r,t}{(m^{{(4t+1)}^{2rt}})}$ such that the following holds.
 For each $m\in \N$, graph~$G$ with $K_t\not\minor_{d} G$, and
-$(r-1)$-independent set $A\subseteq V(G)$ of size at least $L(m)$, there is a set $S\subseteq V(G)-A$ of size at most $t$ such that $A$ contains a subset $A'$ of size $m$ which is $r$-independent in $G-S$.
+$(r-1)$-independent set $A\subseteq V(G)$ of size at least $L(m)$, there is a set $S\subseteq V(G)-A$ of size less than $t$ such that $A$ contains a subset $B$ of size $m$ which is $r$-independent in $G-S$.
 Moreover, if $r$ is odd then $S$ is empty, and if $r$ is even,
-then every vertex of $S$ is at distance exactly $r/2$ from every vertex of $A'$.
-Finally, given $G$ and $A$, the sets $A'$ and $S$ can be computed in time $\Oof_{r,t}(|A|\cdot |E(G)|)$.
+then every vertex of $S$ is at distance exactly $r/2$ from every vertex of $B$.
+Finally, given $G$ and $A$, the sets $B$ and $S$ can be computed in time $\Oof_{r,t}(|A|\cdot |E(G)|)$.
 \end{lemma}
 
 We prove~\cref{lem:engine} in \Cref{sec:engine}, but  a very rough sketch is as follows.
 The  case of general~$r$ reduces to the case $r=1$ or $r=2$, depending on the parity of $r$,
 by contracting the balls of radius $\lfloor \frac {r-1} 2\rfloor $ around the vertices in $A$ to single vertices.
-The case of $r=1$ follows immediately from Ramsey's theorem. 
-It turns out that the case $r=2$ is substantially more difficult.
+The case of $r=1$ follows immediately from Ramsey's theorem, as in~\cite{nevsetvril2011nowhere}.
+The case $r=2$ is substantially more difficult.
 We start by formulating and proving the main technical result needed for proving the case $r=2$.
 
+
+
+
+
+
+
 \subsection{The main technical lemma}
+\label{sec:main-tech}
 
-We need the following bounds on the edge density
-of graphs with excluded shallow minors obtained
-by Alon et al.~\cite{alon2003turan}. 
-
-\begin{lemma}[Theorem 2.2 in~\cite{alon2003turan}]\label{lem:densitynd}
-Let $H$ be a bipartite graph with maximum degree
-$d$ on one side. Then exists a constant $c_H$, depending 
-only on $H$, such that every $n$-vertex graph $G$
-excluding~$H$ as a subgraph has at most $c_H\cdot n^{2-1/d}$
-edges. 
-\end{lemma} 
-
-Observe that if $K_t\not\minor_1G$, then in particular
-the $1$-subdivision of $K_t$ is excluded as a subgraph
-of $G$ (the $1$-subdivision of a graph $H$ is obtained by 
-replacing every edge of $H$ by a path of length $2$). 
-Observe furthermore that the $1$-subdivision of 
-$K_t$ is a bipartite graph with maximum degree $2$ on one
-side. Furthermore, it is easy to check in the 
-proof of Theorem 2.2 in~\cite{alon2003turan} 
-that $c_H\leq |V(H)|$
-in case $d=2$. Since the $1$-subdivision of $K_t$ has 
-less than $t^2$ vertices we can choose $c_t=t^2$ and
-note the following corollary.   
-
-\begin{corollary}\label{crl:densitynd}
-Let $G$ be an $n$-vertex graph such that $K_t\not\minor_1 G$ for
-some constant $t\in \N$. Then $G$ has at most 
-$t^2\cdot n^{3/2}$ edges.
-\end{corollary}
-
-The following lemma ensures that we can take shallow
-minors of shallow minors and still control the situation. 
-
-\begin{lemma}[adaptation of Proposition 4.11 in~\cite{sparsity}]\label{lem:combineminors}
-Let $a,b\in \N$ and let $c=\frac{(2a+1)(2b+1)-1}{2}$. 
-Let $G$ be a graph, let $H\minor_aG$ and let 
-$J\minor_bH$. Then $J\minor_cG$. 
-\end{lemma}
-
-We need to prove one more technical lemma. 
-
-\begin{lemma}\label{lem:diversity}
-  Let $G$ be a graph such that $K_t\not\minor_4G$ for some
-  $t\in\N$ and let $A\subseteq V(G)$ with $|A|\geq t^{8}$. 
-  Assume furthermore that every pair of elements of $A$ has a common neighbor in $V(G)\setminus A$.
-  Then there exists a vertex $v$ in $V(G)\setminus A$ which has at least $|A|^{1/8}$ neighbors in $A$.
-\end{lemma}
-\begin{proof}
-%Our approach to prove the lemma is inspired by 
-%the proof of Lemma 4.3 in~\cite{gajarsky2017kernelization}. 
-We construct a depth-$1$ 
-minor~$H$ of $G$ with $|A|$ vertices as follows. Recall that a 
-minor model of a graph~$H$ in $G$ is a family $(I_u)_{u\in V(H)}$ of pairwise vertex-disjoint connected subgraphs of $G$
-such that whenever~$uv$ is an edge in~$H$, there 
-are $u'\in I_u$ and $v'\in I_v$ for which $u'v'$ 
-is an edge in $G$. 
-
-Let $G^0=G$, $V(H^0)=A$ and $I_u^0=G[\{u\}]$ for 
-all $u\in V(H)$. We iteratively define a sequence 
-$G^1,G^2,\ldots,G^\ell$ and $(I_u)^1_{u\in V(H)},
-\ldots, (I_u)^\ell_{u\in V(H)}$ of subgraphs of $G$ 
-of radius at most $1$ 
-as follows. Observe
-that for $0\leq i\leq \ell$, the sequence $(I_u)^i_{u\in V(H)}$
-uniquely defines a depth-$1$ minor $H^i\minor_1G$. 
-
-If $G^i$ and $(I_u)^i_{u\in V(H)}$ (with corresponding
-depth-$1$ minor $H^i$) have been 
-constructed, $0\leq i<\ell$, we proceed as follows. 
-If there is a vertex $v\in V(G^i)\setminus A$ with 
-$a,b\in A \cap N(v)$ and $ab\not\in E(H^i)$, then 
-remove $v$ from $G^i$ to obtain $G^{i+1}$ 
-and add $v$ to $I_a^i$ to obtain $I_a^{i+1}$ (this 
-adds the edge $ab$ to $E(H^{i+1})$). 
-For $u\neq a$ set $I_u^{i+1}=I_u$. We terminate
-in iteration $\ell$ if no such pair $a,b$ can be found 
-and let $H=H^\ell$. 
-
-By assumption, $K_t\not\minor_4 G$, which by 
-\Cref{lem:combineminors} implies $K_t\not\minor_1 H$. 
-This by \Cref{crl:densitynd} implies that $H$ has at most
-$t^2\cdot|A|^{3/2}$ edges. Our assumption $|A|\geq t^8$
-implies $t^2\cdot |A|^{3/2}\leq |A|^{7/4}$. 
-
-Now, let ${\cal F}=\set{N(v)\cap A\colon v\in V(G)}$. 
-  Let $k$ be the maximal cardinality of a set $F$ in ${\cal F}$.
-  Say that an unordered pair $\{a,b\}$ of distinct elements of $A$ is \emph{covered} by $F\in {\cal F}$
-  if  $a,b\in F$. Clearly, every $F\in {\cal F}$ can cover at most $\binom{k}{2}$ pairs. When we removed some $v\in V(G^i)$ to
-  introduce a new edge to $H^{i+1}$, we therefore potentially
-  created $\binom{k}{2}$ uncovered pairs. On the other hand, 
-  by assumption, each of the $\binom{|A|}{2}$ unordered pairs of
-   distinct elements of $A$ is covered in $G^0$ by some element 
-   $F\in {\cal F}$. We conclude that we have at least 
-   $\binom{|A|}{2}/\binom{k}{2}$ edges in $H$. 
-   This implies $k\geq |A|^{1/8}$, as otherwise
-   $\binom{|A|}{2}/\binom{k}{2}> |A|^2/k^2\geq |A|^{7/4}$,
-   a contradiction.
-\end{proof}
-
-Our main tool is the following Ramsey-like result which we prove
-next. 
+The following, Ramsey-like result is the main technical lemma used in the proof of~\cref{thm:new-uqw}. 
 
 \begin{lemma}\label{lem:apex}
 Let $\ell,m,t\in \N$ and assume $\ell\geq t^{8}$. 
@@ -177,14 +96,13 @@ then at least one of the following conditions hold:
   \item $K_t\minor_{4} G$,
 \item  $A$ contains a $2$-independent set of size $m$, 
 \item  some vertex $v$ of $G$
-has at least $\ell^{1/8}$ neighbors in $A$.
+has at least $\ell^{1/4}$ neighbors in $A$.
 \end{itemize}
 Moreover, if $K_t\not\minor_4G$, the
 structures described in the other two cases (a $2$-independent set 
 of size~$m$, or a vertex $v$ as above) can be 
 computed in time $\Oof_t(|A|\cdot |E(G)|)$. 
 \end{lemma}
-
 We remark that a statement similar to that of \cref{lem:apex}
 can be obtained by employing Ramsey's theorem, as has been done in~\cite{nevsetvril2011nowhere}. This, however, 
 %yields
@@ -195,127 +113,92 @@ can be obtained by employing Ramsey's theorem, as has been done in~\cite{nevsetv
 %In particular, this 
 does not give a bound which is polynomial in $m+\ell$, and thus cannot be used to prove~\cref{thm:new-uqw}.
 
-%\paragraph*{Neighborhood complexity.} Let us first recall the following result of Gajarsk\'y et al.~\cite{gajarsky2017kernelization}
-%which provides an upper bound on the number of distinct neighborhoods in terms of density of shallow minors. 
-%
-%\begin{lemma}[adaptation of Lemma 4.11 in \cite{gajarsky2017kernelization}]\label{lem:pre-diversity}
-%Let $G$ be a graph such that $K_t\not\minor_{1} G$ for some constant $t\in \N$ and let $a\in \N$. 
-%Let \[p\coloneqq \max
-%\left\{\frac{|E(H)|}{|V(H)|} : H\minor_1 G, |V(H)|= a\right\}.\] 
-%Then for all $A\subseteq V(G)$ with $|A|= a$ we have 
-%\[\abs{\{N(v)\cap A \colon v\in V(G)\}}\leq(2p)^t\cdot \abs{A}.\]
-%\end{lemma}
-%
-%Nowhere dense classes have small edge density as
-%first shown by Dvo\v{r}\'ak~\cite{dvorak2007asymptotical}. 
-%We apply the best currently known bounds due to 
-%Jiang~\cite{jiang2011compact}. 
-%
-%\begin{lemma}[adaptation of Theorem 1.6 in~\cite{jiang2011compact}]\label{lem:densityjiang}
-%Let $s\in\N$, $\epsilon<1/2$ and $r=\left\lfloor 10/\epsilon\right\rfloor$. There exists 
-%$n_0$ such that for all $n\geq n_0$, if $G$ is an 
-%$n$-vertex graph with $K_s\not\minor_rG$, 
-%then $G$ has less than $n^{1+\epsilon}$ many edges. 
-%\end{lemma}
-%
-%
-%\begin{corollary}\label{lem:diversity}
-%Let $G\in \CCC$ be a graph such that $K_t\not\minor_1G$ 
-%and $K_s\not\minor_{90t}G$ for
-%some constants $s,t\in\N$. Then 
-%there exists $n_0$ such that for all $A\subseteq V(G)$ 
-%with $|A|\geq n_0$ we have 
-%\[\abs{\{N(v)\cap A \colon v\in V(G)\}}\leq\abs{A}^{1+1/3}.\]
-%\end{corollary}
-%\begin{proof}
-%Let $H$ be the densest depth-$1$ minor of $G$ with 
-%$|A|$ vertices. Now apply \Cref{lem:densityjiang}
-%to the graph $H$ with parameters $s$, $1/(6t)$ and $r=30t$.
-%Observe that according to \Cref{lem:combineminors}, 
-%a depth-$30t$ minor of $H$ is a depth-$90t$ minor 
-%of $G$, hence the lemma can be applied to $H$ with 
-%parameter $s$. According to the lemma, there is 
-%$n_0$ depending only on $s$ and $t$ such that 
-%if $|A|\geq n_0$, then $H$ has at most $|A|^{1+1/(6t)}$
-%many edges, hence $p\coloneqq |E(H)|/|V(H)|\leq a^{1/(6t)}$. Without loss of generality assume 
-%that $n_0\geq 2^{6t}$. 
-%We now apply \Cref{lem:pre-diversity} to conclude that
-%\[\abs{\{N(v)\cap A \colon v\in V(G)\}}\leq(2p)^t\cdot \abs{A}\leq (2|A|^{1/(6t)})^t\cdot \abs{A}\leq n_0^{1/6}\cdot \abs{A}^{1+1/6}\leq \abs{A}^{1+1/3}.\]
-%\end{proof}
-%
-%We remark that the proof of \cref{lem:diversity} uses only the fact that
-%nowhere dense classes of graphs do not have dense 
-%shallow minors~\cite{dvorak2007asymptotical,jiang2011compact}, and does not rely on any non-constructive arguments from stability theory. In particular, $n_0$ depends in a computable manner on $s$ and $t$.
-%From \cref{lem:diversity} we derive the following.
+\medskip
+The remainder of this section is devoted to the proof of~\cref{lem:apex}.
+We will use the following bounds on the edge density
+of graphs with excluded shallow minors obtained
+by Alon et al.~\cite{alon2003turan}. 
 
+\begin{lemma}[Theorem 2.2 in~\cite{alon2003turan}]\label{lem:densitynd}
+Let $H$ be a bipartite graph with maximum degree
+$d$ on one side. Then there exists a constant $c_H$, depending 
+only on $H$, such that every $n$-vertex graph $G$
+excluding~$H$ as a subgraph has at most $c_H\cdot n^{2-1/d}$
+edges. 
+\end{lemma} 
 
+Observe that if $K_t\not\minor_1G$, then in particular
+the $1$-subdivision of $K_t$ is excluded as a subgraph
+of $G$ (the $1$-subdivision of a graph $H$ is obtained by 
+replacing every edge of $H$ by a path of length $2$). 
+Moreover, the $1$-subdivision of 
+$K_t$ is a bipartite graph with maximum degree $2$ on one
+side. Furthermore, it is easy to check in the 
+proof of Theorem 2.2 in~\cite{alon2003turan} 
+that $c_H\leq |V(H)|$
+in case $d=2$. Since the $1$-subdivision of $K_t$ has 
+$\binom{t+1}{2}$ vertices, we can choose $c_{K_t}=\binom{t+1}{2}$ and
+conclude the following.   
 
-\begin{comment}
-\begin{corollary}\label{cor:biversity}
-    For every positive real $\alpha<\frac 1 2$ and integer $t\in\N$ there exists an integer $\ell_0$ with the following property.
-  Let $G$ be a graph such that $K_t\not\minor_2 G$
-  and let
-  $A$ be a $1$-independent subset of $G$ with $|A|\ge \ell_0$ such that every pair of vertices in $A$ has a common neighbor in $G$.
-   Then there is a vertex $v\in G$
-  with at least $|A|^{\alpha}$ neighbors in $A$.
+\begin{corollary}\label{crl:densitynd}
+Let $G$ be an $n$-vertex graph such that $K_t\not\minor_1 G$ for
+some constant $t\in \N$. Then $G$ has at most
+$\binom{t+1}{2}\cdot n^{3/2}$ edges.
 \end{corollary}
-\begin{proof}\label{pf:}
-  Define $H$ to be the bipartite graph induced 
-  by $G$, with partite sets $A$ and $V(G)-A$; that is,  $v\in A$ and $w\in V(G)-A$ are adjacent in $H$ iff they are in $G$. 
-  We claim that $K_{2t^2}\not\minor_1 H$. Indeed, it is easy to see that 
-  since $H$ is bipartite, $K_{2t^2}\minor_1 H$ would imply that $H$ contains the 
-  complete bipartite graph $K_{t^2,t^2}$,  which, in turn, implying that $K_{t}\minor_2 G$, contrary to our assumption.  
-  
-  Let $\ell_0$
-    be the value $n_0$ from~\cref{lem:diversity} applied to $2t^2$ in place of $t$ and $\epsilon$ such that $(1-\epsilon)/2=\alpha$. Applying~\cref{cor:diversity} to $H,2t,\epsilon,\ell_0$, we conclude that if every pair of elements of $A$ has a common neighbor in $G$
-    (hence also in $H$), then there is a vertex $v$
-    of $H$ with at least $|A|^{\alpha}$ neighbors in~$A$.
+
+We will use the following standard lemma saying that a shallow minor of a shallow minor is a shallow minor, where the parameters of shallowness are appropriately chosen.
+
+\begin{lemma}[adaptation of Proposition 4.11 in~\cite{sparsity}]\label{lem:combineminors}
+Suppose $J,H,G$ are graphs such that $H\minor_a G$ and $J\minor_b H$, for some $a,b\in \N$.
+Then $J\minor_c G$, where $c=2ab+a+b$.
+\end{lemma}
+
+We will need one more technical lemma.
+
+\begin{lemma}\label{lem:diversity}
+  Let $G$ be a graph such that $K_t\not\minor_4G$ for some
+  $t\in\N$ and let $A\subseteq V(G)$ with $|A|\geq t^{8}$. 
+  Assume furthermore that every pair of elements of $A$ has a common neighbor in $V(G)\setminus A$.
+  Then there exists a vertex $v$ in $V(G)\setminus A$ which has at least $|A|^{1/4}$ neighbors in $A$.
+\end{lemma}
+\begin{proof}
+Denote $k=\max\{\,|N(w)\cap A|\ \colon\ w\in V(G)-A\,\}$; our goal is to prove that $k\geq |A|^{1/4}$.
+
+Let $B\subseteq V(G)-A$ be the set of those vertices outside of $A$ that have a  neighbor in $A$. 
+Construct a function $f\colon B\to A$ by a random procedure as follows:
+for each vertex $v\in B$, choose $f(v)$ uniformly and independently at random from the set $N(v)\cap A$.
+Next, for each $u\in A$ define branch set $I_u=G[\{u\}\cup f^{-1}(u)]$. Observe that since, by construction, $v$ and $f(v)$ are adjacent for all $v\in B$, each branch set $I_u$ has radius at most $1$,
+with $u$ being the central vertex. Also, the branch sets $\{I_u\}_{u\in A}$ are pairwise disjoint.
+Finally, construct a graph $H$ on vertex set $A$ by making distinct $u,v\in A$ adjacent in $H$ whenever there is an edge in $G$ between the branch sets $I_u$ and $I_v$.
+Then the branch sets $\{I_u\}_{u\in A}$ witness that $H$ is a $1$-shallow minor of $G$.
+
+For distinct $u,v\in A$, let us estimate the probability that the edge $uv$ appears in $H$.
+By assumption, there is a vertex $w\in B$ that is adjacent both to $u$ and to $v$. Observe that if it happens that $f(w)=u$ or $f(w)=v$, then $uv$ for sure becomes an edge in $H$. 
+Since $w$ has at most $k$ neighbors in $A$, the probability that $f(w)\in \{u,v\}$ is at least $\frac{2}{k}$.
+
+By the linearity of expectation, the expected number of edges in $H$ is at least $\binom{|A|}{2}\cdot \frac{2}{k}=\frac{|A|(|A|-1)}{k}$.
+Hence, for at least one run of the random experiment we have that $H$ indeed has at least this many edges. 
+On the other hand, observe that $K_t\not\minor_1 H$; indeed, since $H\minor_1 G$, by Lemma~\ref{lem:combineminors} we infer that $K_t\minor_1 H$ would imply $K_t\minor_4 G$, a contradiction with the assumptions on $G$.
+Then Corollary~\ref{crl:densitynd} implies $H$ has at most $\binom{t+1}{2}\cdot |A|^{3/2}$ edges.
+Observe that 
+$\binom{t+1}{2}\cdot |A|^{3/2}\leq 3t^2/4\cdot |A|^{3/2}\leq \frac{3}{4}|A|^{7/4}$,
+where the first inequality holds due to $t\geq 2$, while the second holds by the assumption that $|A|\geq t^8$.
+By combining the above bounds, we obtain
+$$\frac{|A|(|A|-1)}{k}\leq \frac{3}{4}|A|^{7/4},$$
+which implies $k\geq |A|^{1/4}$ due to $|A|\geq t^8\geq 64$.
 \end{proof}
-\end{comment}
 
-% \begin{corollary}\label{lem:gajarsky}
-% Let $G$ be a graph, let $s\in \N$, and suppose there is a constant $t\in \N$ such that $K_t\not\minor_{3s+1} G$.
-% Then for every $\epsilon>0$ there exists $n_0$, depending only on $\epsilon,t,s$, such that for each vertex subset $A\subseteq V(G)$ that is $(2s+1)$-independent in $G$ and satisfies $|A|\geq n_0$, it holds that
-% \[\abs{\{N_{s+1}[v]\cap A \colon v\in V(G)\}}\leq\abs{A}^{1+\epsilon}.\]
-% \end{corollary}
-% \begin{proof}
-% As $A$ is $(2s+1)$-independent, we have that the $s$-neighborhoods of vertices from $A$ are pairwise disjoint.
-% Obtain an $s$-shallow minor $H$ of $G$ by contracting $N_s[u]$ for each $u\in A$.
-% We implicitly identify each vertex $u\in A$ with the vertex of $H$ obtained from contracting $N_s[u]$, thus $A\subseteq V(H)$.
-% It is known that every $1$-shallow minor of $H$ is also a $(3s+1)$-shallow minor of $G$ (cf.~\cite[Proposition~4.1]{sparsity}), hence $K_t\not\minor_{1} H$.
-%
-% Let us fix $\epsilon>0$.
-% Take any $v\in V(G)$. If $v\in N_s[u]$ for some $u\in A$, then since $A$ is $(2s+1)$-independent, we have that $v$ is at distance larger than $2s+1$ from any other vertex of $A$.
-% Hence in this case we have $N_{s+1}[v]\cap A=\{u\}$ and there can be at most $|A|$ neighborhoods of this type.
-% Next, suppose $v\notin N_s[u]$ for any $u\in A$. Then by the construction of $H$ we have that $N_{s+1}[v]\cap A=N^H[v]\cap A$, where $N^H[v]$ is the neighborhood of $v$ in $H$.
-% Since $K_t\not\minor_{1} H$, by \cref{lem:diversity} we have that the number of such neighborhoods is at most $|A|^{1+\epsilon/2}$,
-% provided $|A|\geq n_0$ for some $n_0$ depending only on $t$ and $\varepsilon$.
-% Thus, we conclude that $\abs{\{N_{s+1}[v]\cap A \colon v\in V(G)\}}\leq |A|+|A|^{1+\epsilon/2}$, which is bounded by $|A|^{1+\epsilon}$ if we choose $n_0$ large enough.
-% \end{proof}
-%
-% %Observe that nowhere dense classes are closed under
-% %taking bounded depth minors, as stated in the following lemma.
-% %It is an immediate consequence of Proposition~4.1
-% %of~\cite{sparsity}.
-%
-% %\begin{lemma}
-% %Let $\CCC$ be a nowhere dense class of graphs and let $s\in \N$.
-% %Then also the class $\{H \minor_s G \colon G\in \CCC\}$ is nowhere dense.
-% %\end{lemma}
-
-
-
-
-
-\paragraph*{Proof of \cref{lem:apex}.} We proceed with the proof of \cref{lem:apex}, which spans the whole remainder of this section.
-We will arrange the elements of $A$ in a binary tree
-and prove that the tree contains a long path. From this path, we will 
-extract the set $A'$. In stability theory, similar trees are called \emph{type trees} and they are used to extract long indiscernible sequences, see e.g.~\cite{malliaris2014regularity}. 
+We proceed with the proof of \cref{lem:apex}.
+The idea is to arrange the elements of $A$ in a binary tree
+and prove that provided $A$ is large, this tree contains a long path. From this path, we will 
+extract the set $B$. 
+In stability theory, similar trees are called \emph{type trees} and they are used to extract long indiscernible sequences, see e.g.~\cite{malliaris2014regularity}. 
 
 
 \newcommand{\dau}{\mathrm{D}}
 \newcommand{\son}{\mathrm{S}}
 	
+	We will work with a two-symbol alphabet $\set{\dau,\son}$, for {\em{daughter}} and {\em{son}}.
 	We identify words in $\set{\dau,\son}^*$ with \emph{nodes}
 	of the infinite rooted binary tree. 
   The \emph{depth} of a node $w$ is the length of $w$.
@@ -324,38 +207,44 @@ extract the set $A'$. In stability theory, similar trees are called \emph{type t
 	and $w$ is the \emph{parent} of both $w\son$ and $w\dau$. A node $w'$ is a {\em{descendant}} of a node $w$ if $w'$ is a prefix of $w$ (possibly $w'=w$).
 	We consider
 	 finite, labeled, rooted, binary trees, which are called simply trees below, and are defined as follows.
-	 A \emph{tree} is a partial function $\tau\from \set{\dau,\son}^*\to U$ whose domain is a finite set of nodes, called the \emph{nodes of $\tau$}, which is closed under taking parents. If $v$ is a node of $\tau$, then $\tau(v)$ is called its \emph{label}.
+	 For a set of labels $U$, a ($U$-labeled) \emph{tree} is a partial function $\tau\from \set{\dau,\son}^*\to U$ whose domain is a finite set of nodes, 
+	 called the \emph{nodes of $\tau$}, which is closed under taking parents. 
+	 If $v$ is a node of $\tau$, then $\tau(v)$ is called its \emph{label}.
   
   Let $G$ be a graph, $A\subset V(G)$ be a $1$-independent set in $G$,
-  and $\bar a$ be an enumeration of $A$.
-We define  a binary tree $\tau$ which is 
-  labeled by vertices of $G$. The tree is defined by processing all elements of $\bar a$ sequentially. We start with $\tau$ being the  tree with empty domain, and for each element $a$ of the sequence $\bar a$, processed in the order given by $\bar a$, execute the following procedure which results in adding a node with label $a$ to $\tau$.
+  and $\bar a$ be any enumeration of $A$, that is, a sequence of length $|A|$ in which every element of $A$ appears exactly once.
+  We define a binary tree $\tau$ which is 
+  labeled by vertices of $G$. The tree is defined by processing all elements of~$\bar a$ sequentially. 
+  We start with $\tau$ being the  tree with empty domain, and for each element $a$ of the sequence $\bar a$, processed in the order given by $\bar a$, 
+  execute the following procedure which results in adding a node with label $a$ to $\tau$.
   
 When processing the vertex $a$, do the following. Start with $w$ being the empty word. While~$w$ is a node of $\tau$, repeat the following step: 
   if the distance from $a$ to $\tau(w)$ in the graph 
   $G$ is at most~$2$, replace $w$ by its son, otherwise, replace $w$ by its daughter.
   % Repeat the step, unless $\tau(w)$ is undefined.
   Once $w$ is not a node of $\tau$, extend $\tau$ by setting  $\tau(w)=a$. In this way, we have processed the element $a$, and now
-    proceed to the next element $a$ of $\bar a$, until all elements are processed. This ends the construction of $\tau$.
+    proceed to the next element of $\bar a$, until all elements are processed. This ends the construction of $\tau$.
+    Thus, $\tau$ is a tree labeled with vertices of $A$, and every vertex of $A$ appears exactly once in $\tau$.
 	
 
 Define the
 \emph{depth} of $\tau$ as 
 the maximal depth of a node of $\tau$.
-For a word $w$, define an \emph{alternation} to be 
-a position $i$ such that $w_i\neq w_{i-1}$, where $w_0$ is assumed to be $\dau$.
- The \emph{alternation rank} of the tree $\tau$ is the maximum of the number of alternations of $w$, over all nodes $w$ of $\tau$.
+For a word $w$, an \emph{alternation} in~$w$ is any 
+position $\alpha$, $1\leq \alpha\leq |w|$, such that $w_\alpha\neq w_{\alpha-1}$; here, $w_\alpha$ denotes the $\alpha$th symbol of~$w$, and~$w_0$ is assumed to be $\dau$.
+The \emph{alternation rank} of the tree $\tau$ is the maximum of the number of alternations in $w$, over all nodes $w$ of $\tau$.
 
 
 \begin{lemma}\label{lem:number-of-nodes}
 Let $h,t\ge 2$.	If $\tau$ has alternation rank at most $2t-1$ and depth at most $h-1$, then~$\tau$ has fewer than $h^{2t}$ nodes.
 \end{lemma}
 \begin{proof}		
-	To each node $w$ of $\tau$ assign 
-	the function $f_w\colon \set{1,\ldots,2t}\to\set{1,\ldots,h}$ defined as follows:
+	With each node $w$ of $\tau$ associate
+	function $f_w\colon \set{1,\ldots,2t}\to\set{1,\ldots,h}$ defined as follows:
 	$f_w$ maps each $i\in \set{1,\ldots,2t}$ to the $i$th alternation of $w$, provided $i$ is at most the number of alternations of $w$, and otherwise we put $f_w(i)=|w|+1$.
 	It is clear that the mapping $w\mapsto f_w$ for nodes $w$ of $\tau$ is injective
-and its image is contained in monotone functions, hence the domain of~$\tau$ 
+and its image is contained in monotone functions from $\set{1,\ldots,2t}$ to $\set{1,\ldots,h}$, whose number is less than $h^{2t}$.
+Hence, the domain of~$\tau$ 
 		has fewer than $h^{2t}$ elements.
 \end{proof}
 
@@ -365,31 +254,35 @@ Then $\tau$ has alternation rank at most $2t-1$.
 \end{lemma}
 \begin{proof}
 	Let $w$ be a node of $\tau$ with at least $2k$ alternations, for some $k\in \N$.
-	In particular, there are vertices $a_1,b_1,\ldots,a_k,b_k$ in $A$
-	such that for each $i\in \set{1,\ldots,k}$, 
-	the nodes in $\tau$ corresponding to $b_i,a_{i+1},b_{i+1},\ldots,a_k,b_k$ are  descendants of the son of the node which corresponds to $a_i$,
-	and the nodes corresponding to $a_{i+1},b_{i+1},\ldots,a_k,b_k$
-	are descendants of the daughter of the node which corresponds to $b_i$.
+	Suppose $\alpha_1,\beta_1,\ldots,\alpha_k,\beta_k$ be the first $2k$ alternations of $w$.
+	By the assumption that $w_0=\dau$ we have that~$w$ contains symbol $\son$ at all positions $\alpha_i$ for $i=1,\ldots,k$, and symbol $\dau$ at all positions $\beta_i$ for $i=1,\ldots,k$.
+	For each $i\in \set{1,\ldots,k}$, define $a_i\in V(G)$ to be the label in $\tau$ of the prefix of $w$ of length $\alpha_i-1$, and similarly define $b_i\in V(G)$ to be the label in $\tau$ of the prefix of $w$
+	of length $\beta_i-1$. 
+	It follows that for each $i\in \set{1,\ldots,k}$, the following assertions hold:
+	the nodes in $\tau$ with labels $b_i,a_{i+1},b_{i+1},\ldots,a_k,b_k$ are  descendants of the son of the node with label $a_i$,
+	and the nodes with labels $a_{i+1},b_{i+1},\ldots,a_k,b_k$
+	are descendants of the daughter of the node with label $b_i$.
 	
 	\begin{claim}\label{claim:minor}
-		For every pair $a_i,b_j$ with $1\le i\le j\le k$, there is a vertex $z_{ij}\not\in A$		which is a common neighbor of $a_i$ and $b_j$,
+		For every pair $a_i,b_j$ with $1\le i\le j\le k$, there is a vertex $z_{ij}\not\in A$	 which is a common neighbor of $a_i$ and $b_j$,
 		and is not a neighbor of any $b_s$ with $s\neq j$.
 	\end{claim}
 	\begin{clproof}
-		Note that since $i\le j$, the node of corresponding to $b_j$ is a descendant of the son of the node corresponding to $a_i$, hence we have $\dist_G(a_i,b_j)\le 2$ by the construction of $\tau$.
+		Note that since $i\le j$, the node with label $b_j$ is a descendant of the son of the node with label $a_i$, hence we have $\dist_G(a_i,b_j)\le 2$ by the construction of $\tau$.
 		However, we also have $\dist_G(a_i,b_j)>1$ since $A$
 		is $1$-independent. Therefore $\dist_G(a_i,b_j)=2$, so there is a vertex $z_{ij}$ which is a common neighbor of $a_i$ and $b_j$. 
 		Suppose that $z_{ij}$ was a neighbor of $b_s$, for some $s\neq j$. This would imply that $\dist_G(b_j,b_s)\le 2$, which is impossible, 
-since
-		 the nodes corresponding to $b_s$ and $b_j$ in $\tau$ are such that one is a descendant of the daughter of the other, implying that $\dist_G(b_s,b_j)>2$.
+because
+		 the nodes with labels $b_s$ and $b_j$ in $\tau$ are such that one is a descendant of the daughter of the other, implying that $\dist_G(b_s,b_j)>2$.
 	\end{clproof}
   
 Note that whenever $i\leq j$ and $i'\leq j'$ are such that $j\neq j'$, the vertices $z_{ij}$ and $z_{i'j'}$ are different, because $z_{ij}$ is adjacent to $b_{j}$ but not to $b_{j'}$, and the converse holds for $z_{i'j'}$.
 However, it may happen that $z_{ij}=z_{i'j}$ even if $i\neq i'$. This will not affect our further reasoning.
 
-For each $j\in\set{1,\ldots,k}$, define the graph $B_j$
-as the subgraph of $G$ induced by the set
+For each $j\in\set{1,\ldots,k}$, let $B_j$
+be the subgraph of $G$ induced by the set
 $\set{a_j,b_j}\cup\set{z_{ij}\colon 1\le i\le  j}$.
+Observe that $B_j$ is connected and has radius at most $2$, with $b_j$ being the central vertex.
 By \cref{thm:alternation-rank-type-tree} and the discussion from the previous paragraph, the graphs $B_j$ for $j\in \set{1,\ldots,k}$
 are pairwise disjoint.
 Moreover, for all $1\le i\le j\le k$, there is an edge between $B_i$
@@ -398,7 +291,7 @@ and $a_i\in B_i$.
 Hence, the graphs $B_j$, for $j\in \set{1,\ldots,k}$, define a depth-$2$ minor model of $K_k$ in $G$. Since $K_t\not\minor_{2}G$, this implies that $k<t$, proving~\cref{thm:alternation-rank-type-tree}.
 \end{proof}
 
-We proceed to prove~\cref{lem:apex}. 
+We continue with the proof of~\cref{lem:apex}. 
 Fix integers $\ell\ge t^8$ and~$m$, and define $h=m+\ell$.
 Let $A$ be a $1$-independent set in $G$
 of size at least $h^{2t}$.
@@ -412,12 +305,12 @@ which contains at least $m$ letters $\dau$, and let $X$
 be the set of all vertices $\tau(u)$ such that $u\dau$ is a prefix of $w$. Then, by construction, $X$ is a $2$-independent set in $G$ of size at least $m$, so the second case of the lemma holds.
 
 Finally, consider the second case, i.e., there is a node $w$ in $\tau$ which contains at least $\ell$ letters~$\son$. Let 
-$Y$ be the set of all vertices $\tau(u)$ such that $u\son$ is a prefix of $w$. Then, by construction, $Y\subset A$ is a set of vertices which are mutually at distance exactly $2$ in $G$. 
-Since $K_t\not\minor_4 G$, by~\cref{lem:diversity} we infer that there is a vertex $v\in G$
-with at least $\ell^{1/8}$ neighbors in $Y$.
-This finishes the proof of the first part of~\cref{lem:apex}.
+$Y$ be the set of all vertices $\tau(u)$ such that $u\son$ is a prefix of $w$. Then, by construction, $Y\subset A$ is a set of at least $\ell$ vertices which are mutually at distance exactly $2$ in $G$. 
+Since $K_t\not\minor_4 G$ and $\ell\geq t^8$, by~\cref{lem:diversity} we infer that there is a vertex $v\in G$
+with at least $\ell^{1/4}$ neighbors in $Y$.
+This finishes the proof of the existential part of~\cref{lem:apex}.
 
-The proof above yields an algorithm which first constructs the tree $\tau$, by 
+For the algorithmic part, the proof above yields an algorithm which first constructs the tree $\tau$, by 
 iteratively processing each vertex $w$ of $A$ and testing whether the distance between $w$ and each vertex processed already is equal to $2$.
 This amounts to running a breadth-first search from every vertex of $A$, which can be done in time $\Oof(|A|\cdot |E(G)|)$.
 Whenever a node with $2t$ alternations 
@@ -426,7 +319,7 @@ Whenever a node with least $m$ letters $\dau$ is added to~$\tau$,
 we have constructed an $m$-independent set. Whenever a node with at least $\ell$ letters $\son$ is added to $\tau$, as argued, there must be some vertex $v\in V(G)-A$ with at least $\ell^{1/8}$ neighbors in~$A$. 
 To find such a vertex, scan through all neighborhoods of vertices $v\in A$ in the graph $G$, and then select a vertex $w\in V(G)$
 which belongs to the largest number of those neighborhoods; this can be done in time $\Oof(|E(G)|)$.
-The overall running time is $\Oof(|A|\cdot |E(G)|)$, as required.\hfill$\square$
+The overall running time is $\Oof(|A|\cdot |E(G)|)$, as required.
 
 %This finishes the proof of~\cref{lem:apex}.
 
@@ -439,65 +332,65 @@ The overall running time is $\Oof(|A|\cdot |E(G)|)$, as required.\hfill$\square$
 
 With \cref{lem:apex} proved, we can proceed with~\cref{lem:engine}. 
 We start with the case $r=1$, then we move to the case $r=2$. 
-Next we show how the general case reduces to one of those two cases.
+Next, we show how the general case reduces to one of those two cases.
 % , and, finally, we deduce~\cref{thm:new-uqw} from~\cref{lem:engine}.
 
 \paragraph{Case $r=1$.}
-We put $d=0$, thus we assume that $K_t\not\minor_0 G$; that is, $G$ does not contain a clique of size $t$ as a subgraph. By Ramsey's Theorem, in every graph every set of size $\binom{m+t-2}{t-1}$ contains an
+We put $d=0$, thus we assume that $K_t\not\minor_0 G$; that is, $G$ does not contain a clique of size $t$ as a subgraph. By Ramsey's Theorem, in every graph every vertex subset of size $\binom{m+t-2}{t-1}$ contains an
 independent set of size $m$ or a clique of size $t$. Therefore, 
-taking $L(m)$ as the above binomial coefficient yields~\cref{lem:engine} in case $r=0$, for $S=\emptyset$. Note here that $\binom{m+t-2}{t-1}\in\Oof_{t}{(m^{{(8t+1)}^{2t}})}$.
+taking $L(m)$ to be the above binomial coefficient yields~\cref{lem:engine} in case $r=0$, for $S=\emptyset$. Note here that $\binom{m+t-2}{t-1}\in\Oof_{t}{(m^{{(4t+1)}^{2t}})}$.
 Moreover, such independent set or clique can be computed from $G$ and $A$ in time~$\Oof(|A|\cdot |E(G)|)$ by simulating the proof of Ramsey's theorem.
 
 \paragraph{Case $r=2$.}
 We put $d=2$, thus we assume that $K_t\not\minor_4 G$.
 We show that if $A$ is a sufficiently large $1$-independent set in a graph $G$ such that $K_t\not\minor_4 G$, 
-then there is a set of vertices~$S$ of size at most $t$ such that $A\setminus S$ contains a subset of size $m$ which is $2$-independent in $G-S$. 
+then there is a set of vertices~$S$ of size less than $t$ such that $A\setminus S$ contains a subset of size $m$ which is $2$-independent in $G-S$. 
 Here, by ``sufficiently large'' we mean of size of size at least $L(m)$, for $L(m)$ emerging from the proof.
 To this end, we shall iteratively apply \cref{lem:apex} as long as  it results in the third case, 
 yielding a vertex $v$ with many neighbors in $A$. In this case, we add $v$ vertex to the set $S$, and apply the lemma again,
 restricting $A$ to $A\cap N(v)$. 
-The precise calculations follow.
+Precise calculations follow.
 
 \newcommand{\mbull}{\widehat{m}}
 
-Fix a number $\beta>8t$. For $k\ge 0$,
+Fix a number $\beta>4t$. For $k\ge 0$,
 define $m_k=((k+1)\cdot m)^{(2\beta)^k}$.
 In the following we will always assume that $m\geq t^8$. 
 We will apply~\cref{lem:apex} in the following form.
 \begin{claim}\label{cor:apex}
 	If $G$ is a graph such that $K_t\not\minor_4 G$, and
-	$A\subset V(G)$ is an $1$-independent set in $G$ which does not contain a $2$-independent set of size $m$ and satisfies $|A|\ge m_k$,
-	then there exists a vertex $v$ of $G$ such that $|N_G(v)\cap A| \ge m_{k-1}$.
+	$A\subset V(G)$ is an $1$-independent set in $G$ which does not contain a $2$-independent set of size $m$ and satisfies $|A|\ge m_k$, for some $k\geq 1$,
+	then there exists a vertex $v\in V(G)-A$ such that $|N_G(v)\cap A| \ge m_{k-1}$.
 \end{claim}
 \begin{clproof}
-Let $\ell=(k\cdot m)^{8\cdot(2\beta)^{k-1}}$.
+Let $\ell=(k\cdot m)^{4\cdot(2\beta)^{k-1}}$.
 Then $m\ge t^8$ implies that $\ell\ge t^8$.
 Observe that
-\[|A|\ge \left((k+1)\cdot m\right)^{(2\beta)^k}\ge\left ((m+ k\cdot m)^{8\cdot(2\beta)^{k-1}} \right)^{2t}
-\ge \left(m+(k\cdot m)^{8\cdot (2\beta)^{k-1}}\right)^{2t}=(m+\ell)^{2t}.\]
-Therefore, we may  apply \cref{lem:apex}, yielding a vertex $v$ with at least $\ell^{1/8}=(k\cdot m)^{(2\beta)^{k-1}}=m_{k-1}$ neighbors in~$A$.
+\[|A|\ge \left((k+1)\cdot m\right)^{(2\beta)^k}\ge\left ((m+ k\cdot m)^{4\cdot(2\beta)^{k-1}} \right)^{2t}
+\ge \left(m+(k\cdot m)^{4\cdot (2\beta)^{k-1}}\right)^{2t}=(m+\ell)^{2t}.\]
+Therefore, we may  apply \cref{lem:apex}, yielding a vertex $v$ with at least $\ell^{1/4}=(k\cdot m)^{(2\beta)^{k-1}}=m_{k-1}$ neighbors in~$A$.
 \end{clproof}
 
 %In the following we assume that $m\geq t^8$, since we may always ask for finding a $2$-independent set of size $t^8$ instead of $m$.
 We will now find 
-a subset of $A$ of size $m$ which is $2$-independent in $G-S$, where $|S|\le t$.
+a subset of $A$ of size $m$ which is $2$-independent in $G-S$, for some $S$ with $|S|<t$.
 Assume that $|A|\ge m_t$. By induction, we
  construct a sequence  $A=A_0\supseteq A_1\supseteq\ldots$ 
-of \mbox{$1$-independent} subsets of $G$
+of \mbox{$1$-independent} vertex subsets of $G$
 of length at most $t$
 such that $|A_i|\ge m_{t-i}$,
- as follows. Start with $A_0=A$. We maintain a set $S$ of vertices of $G$ which is initially empty, and we maintain the invariant that $A_i$ is disjoint with $S$ at each step of the induction.
+ as follows. Start with $A_0=A$. We maintain a set $S$ of vertices of $G$ which is initially empty, and we maintain the invariant that $A_i$ is disjoint with $S$ at each step of the construction.
 
 For $i=0,1,2,\ldots$ do as follows.
-If $A_{i}$ contains a $2$-independent set of size $m$ in $G-S$, terminate.
+If $A_{i}$ contains a subset of size $m$ which is $2$-independent set in $G-S$, terminate.
  Otherwise, 
  apply~\cref{cor:apex} to the graph $G-S$ with $1$-independent set
- $A_{i}$ of size $|A_i|\ge m_{t-i}$. This yields a vertex $v_{i+1}$ of $G-S$
+ $A_{i}$ of size $|A_i|\ge m_{t-i}$. This yields a vertex $v_{i+1}\in V(G)-(S\cup A_i)$
  whose neighborhood in $G-S$ contains at least
  $m_{t-i-1}$ vertices of $A_{i}$.
- Let $A_{i+1}$ consist of those vertices, and add $v_{i+1}$
+ Define $A_{i+1}$ as the set of neighbors of $v_{i+1}$ in $A_i$, and add $v_{i+1}$
  to the set~$S$.  
-  If $i\le t$, proceed by replacing $i$ by $i+1$.
+  Increment $i$ and repeat.
 
 \begin{claim}\label{claim:at-most-t}
 	The construction halts after less than $t$ steps.
@@ -507,34 +400,35 @@ Suppose that the construction proceeds for $k\le t$ steps.
 By construction, each vertex~$v_i$, for $i\le k$, is adjacent in $G$
  to all the vertices of $A_{j}$, for each $i\le j\le k$. In particular, all the vertices $v_1,\ldots,v_k$ are adjacent to all the vertices of $A_{k}$
  and $|A_k|\ge m_{t-k}\ge m\ge t$.
-Choose any pairwise distinct vertices $w_1,\ldots,w_k\in A_k$ and observe that the connected subgraphs $\set{w_i,v_i}$ of~$G$ yield a depth-$1$ minor model of $K_k$ in $G$.
+Choose any pairwise distinct vertices $w_1,\ldots,w_k\in A_k$ and observe that the connected subgraphs $G[\set{w_i,v_i}]$ of~$G$ yield a depth-$1$ minor model of $K_k$ in $G$.
  Since $K_t\not\minor_2 G$, we must have $k<t$.
  \end{clproof}
  
- Therefore, at some step $k<t$ of the construction we must have obtained a $2$-independent subset $A'$ of $G-S$ of size $m$. Moreover, $|S|\le k<t$.
+ Therefore, at some step $k<t$ of the construction we must have obtained a $2$-independent subset $B$ of $G-S$ of size $m$. Moreover, $|S|\le k<t$.
  
  
  
- This proves~\cref{lem:engine} in the case $r=2$, for the function $L(m)=m_t=((t+1)\cdot m)^{\beta^{2t}}$
- for $m\ge t^8$ and $L(m)=L(t^8)$ for $m<t^8$, where $\beta>8t$ is any fixed constant.
- It is easy to see that then $L_t(m)=L(m)\in \Oof_{t}{(m^{{(8t+1)}^{2t}})}$, provided we put $\beta=8t+1$.
- Also, the proof easily yields an algorithm constructing the sets~$A'$ and $S$,
+ This proves~\cref{lem:engine} in the case $r=2$, for the function $L(m)$ defined as $L(m)=m_t=((t+1)\cdot m)^{\beta^{2t}}$
+ for $m\ge t^8$, and $L(m)=L(t^8)$ for $m<t^8$, where $\beta>4t$ is any fixed constant.
+ It is easy to see that then $L(m)\in \Oof_{t}{(m^{{(4t+1)}^{2t}})}$, provided we put $\beta=4t+1$.
+ Also, the proof easily yields an algorithm constructing the sets~$B$ and $S$,
  which amounts to applying at most $t$ times the algorithm of~\cref{lem:apex}.
  Hence, its running time  is $\Oof_{r,t}(|A|\cdot |E(G)|)$, as required.
 % \end{proof}
 
 
 \paragraph{Odd case.}
-We prove~\cref{lem:engine} in the case when $r=2s+1$, for some integer $s\geq 1$. We put $d=s=\frac{r-1}{2}$.
+We now prove~\cref{lem:engine} in the case when $r=2s+1$, for some integer $s\geq 1$. We put $d=s=\frac{r-1}{2}$.
 Let $G$ be a graph such that $K_t\not\minor_s G$, and 
  let $A$ be a $2s$-independent set in $G$. Consider the graph $G'$ obtained from $G$
 by contracting the (pairwise disjoint) balls of radius $s$ around each vertex $v\in A$.
- Let $A'$ denote the set of vertices of $G'$ corresponding to the contracted balls. There is a natural bijection between $A$ and $A'$.
+ Let $A'$ denote the set of vertices of $G'$ corresponding to the contracted balls. There is a natural correspondence (bijection) between $A$ and $A'$, where each vertex $v\in A$ is associated with the
+ vertex of $A'$ resulting from contracting the ball of radius $s$ around $v$.
 From $K_t\not\minor_s G$ it follows that~$G'$ does not contain $K_t$ as a subgraph. Applying the already proved case $r=1$ to $G'$ and $A'$, we conclude that 
-if $|A|=|A'|\ge {m+t-2\choose t-1}$, then
- $A'$ contains a $1$-independent subset $B$ of size $m$,
- which corresponds to a $(2s+1)$-independent set in $G$ that is contained in $A$.
- Hence, the obtained bound is $L(m)={m+t-2\choose t-1}$, and we have already argued that then $L(m)\in \Oof_{r,t}{(m^{{(8t+1)}^{2t}})}$.
+provided $|A|=|A'|\ge {m+t-2\choose t-1}$, the set
+ $A'$ contains a $1$-independent subset $B'$ of size $m$,
+ which corresponds to a $(2s+1)$-independent set $B$ in $G$ that is contained in $A$; thus, we may put $S=\emptyset$ again.
+ Hence, the obtained bound is $L(m)={m+t-2\choose t-1}$, and we have already argued that then $L(m)\in \Oof_{r,t}{(m^{{(4t+1)}^{2t}})}$.
  
  
  \paragraph{Even case.}
@@ -544,16 +438,16 @@ Let $G$  be such that
  $K_t\not\minor_{d} G$, and
 let $A$ be a $(2s+1)$-independent set in~$G$. Consider the graph $G'$ obtained from $G$
 by contracting the (pairwise disjoint) balls of radius $s$ around each vertex $v\in A$.
- Let $A'$ denote the set of vertices of $G'$ corresponding to the contracted balls. Again, there is a bijection between $A$ and $A'$. Note that
+ Let $A'$ denote the set of vertices of $G'$ corresponding to the contracted balls. Again, there is a natural correspondence (bijection) between $A$ and $A'$. Note that
 this time, $A'$ is a $1$-independent set in $G'$.
-From $K_t\not\minor_{9s+4} G$ it follows by \Cref{lem:combineminors} that $K_t\not\minor_4 G'$. Apply the already proved case $r=2$ to $G'$ and $A'$. 
-Then, if $|A|=|A'|\ge L_t(m)$, where $L_t(m)$ is the function as defined in the case $r=2$, then
+Since $G'\minor_s G$, from $K_t\not\minor_{9s+4} G$ it follows by \Cref{lem:combineminors} that $K_t\not\minor_4 G'$. Apply the already proved case $r=2$ to $G'$ and $A'$. 
+Then, provided $|A|=|A'|\ge L_t(m)$, where $L_t(m)$ is the function as defined in the case $r=2$, we infer that
  $A'$ contains a subset $B'$ of size $m$
-which is  $2$-independent in $G'-S'$, for some $S'\subset V(G')-A'$.
-The set $S'$ corresponds to some set of vertices $S\subset V(G)$
-which are at distance at least $s+1$ from each vertex in $A$,
-and the set  $B'$ corresponds to some subset $B$ of $A$
-which is $(2s+2)$-independent in $G-S$. Moreover, as each vertex of $S'$
+which is  $2$-independent in $G'-S'$, for some $S'\subset V(G')-A'$ of size less than $t$.
+Since $S'\cap A'=\emptyset$, each vertex of $S'$ originates from a single vertex of $G$ before the contractions yielding $G'$; thus, $S'$ corresponds to a
+set $S$ consisting of less than $t$ vertices of~$G$ which are at distance at least $s+1$ from each vertex in $A$.
+In turn, the set $B'$ corresponds to some subset $B$ of $A$
+which is $(2s+2)$-independent in $G-S$. Moreover, as in $G'$ each vertex of~$S'$
 is a neighbor of each vertex of $B'$,  each vertex of $S$
 has distance exactly $s+1=r/2$ from each vertex of $B$.
 
@@ -566,112 +460,42 @@ This yields a running time of  $\Oof_{r,t}(|A|\cdot |E(G)|)$.
   
 This finishes  the proof of~\cref{lem:engine}.
 
-%\begin{remark}
-%A more careful analysis of the case $r=2s+2$, in particular of the construction of $G'$ and the properties of $G'$ actually used in the proof of \cref{claim:minor},
-%shows that the bound of $d=5s+2$ may be decreased to $d=3s+2$. We refrain from giving the details for the sake of clarity of the argument.
-%\end{remark}
-
-%\begin{comment}
-%\begin{remark}
-%	It is not difficult to decrease the bound from $d=5s+2$ to $d= 3s+2$
-%	in the  case when $r=2s+2$. To do so, one would need to formulate~\cref{lem:apex}
-%	a bit more carefully, and replace the first possibility $K_t\minor_2 G$
-%	by the following condition, corresponding to the statement of~\cref{claim:minor}:
-%\begin{quote}
-%	There are vertices $a_1,b_1,\ldots,a_t,b_t\in A$ 
-%	such that for each $1\le i\le j\le t$, there is a vertex $z_{ij}\in V(G)-A$
-%	which is a neighbor of $a_i$ and $b_j$, but not of $b_s$, for $s\neq j$.	
-%\end{quote}
-%\end{remark}
-%\end{comment}
-
-
 \subsection{Proof of \cref{thm:new-uqw}}
 We now wrap up the proof of \cref{thm:new-uqw} by iteratively applying~\cref{lem:engine}.
 
-%\begin{lemma}\label{lem:ramsey2}
-%Let $G$ be a graph such that $K_t\not\minor_r G$. 
-%If $A$ is $2r$-independent and
-%has size at least $\binom{m+t-2}{t-1}$, then there exists
-%a subset $B\subseteq A$ of size at least $m$ which is a
-%$(2r+1)$-independent set. 
-%\end{lemma}
-%\begin{proof}
-%As $A$ is $2r$-independent, we can contract the $r$-neighborhood
-%of each $v\in A$. The corresponding elements $N_r[v]$ in the resulting 
-%depth-$r$ minor $H$ form a set $Z$ that is in \mbox{$1$-to-$1$} correspondence 
-%with $A$. By assumption, 
-%$H[Z]$ excludes $K_t$ as a subgraph, and hence by \cref{lem:ramsey1},
-%it contains an independent set $B'\subseteq Z$ of size $m$ in $H$. 
-%This set $B'$ corresponds to a $(2r+1)$-independent set $B\subseteq A$ of $G$. 
-%\end{proof}
-%
-%\begin{lemma}\label{lem:distance-apex}
-%Let $\CCC$ be a nowhere dense class of graphs. 
-%Let $n_0$ be the constant of for $\epsilon=1/3$. 
-%Assume $K_t\not\minor_{r+2} G$. 
-%Let $m\geq n_0$ be an integer. 
-%Let $A$ be a $(2r+1)$-independent set in $G$ of size at least $R(m,t)$. 
-%Then there is a subset $A'\subseteq A$ of size at least~$m$ and a 
-%a set $S\subseteq V(G)\setminus A$ of size at most $t-1$ such that
-%\begin{enumerate}
-%\item every vertex of $S$ is connected to a vertex at distance $r$ of $w$ for 
-%every $w\in A'$, and
-%\item $A'$ is $(2r+2)$-independent in $G-S$. 
-%\end{enumerate} 
-%\end{lemma}
-%\begin{proof}
-%As $A$ is $(2r+1)$-independent, we can contract the $r$-neighborhood
-%of each $v\in A$. The corresponding elements $N_r[v]$ in the resulting 
-%depth-$r$ minor $H$ form a set $Z$ that is in $1$-to-$1$ correspondence 
-%with $A$. As $A$
-%is $(2r+1)$-independent, $Z$ is independent in $H$. We now apply 
-%\cref{lem:iterate-apex} to $Z$ in $H$. Note that the depth-$2$ minor
-%we construct in \cref{thm:alternation-rank-type-tree} (now applied to $H$) 
-%uses as connecting vertices $z_{ij}$ original vertices of the graph and
-%not contracted vertices. Hence, when we apply the lemma, we may 
-%use the assumption that $K_t\not\minor_{r+2} G$ (in general, 
-%a depth-$2$ minor of a depth-$r$ minor may be a depth-$5r$ minor
-%of the original graph~see Proposition~4.1 of~\cite{sparsity}). 
-%Also, the vertices $v$ returned by 
-%\cref{lem:iterate-apex} correspond to vertices of the graph $G$ and not
-%to contracted neighborhoods. In particular, as $A$ is $(2r+1)$-independent, 
-%the vertices $v$ returned by the lemma have distance exactly $r$ to 
-%the vertices $w\in A$. The set $Z'$ returned by \cref{lem:iterate-apex}
-%for $H$ is $2$-independent in $H$, and hence the corresponding 
-%subset $B\subseteq A$ of $G$ is $(2r+2)$-independent. 
-%in $G$. 
-%\end{proof}
-
 \begin{proof}[of \cref{thm:new-uqw}]
 Fix integers $r,t$,  and a graph $G$ such that $K_t\not\minor_{d} G$,
-for $d=\lfloor 9r/2 \rfloor$. Let $\beta>8t$ be a fixed real. As in the proof of \cref{lem:engine}, without loss of generality suppose $m\geq t^8$.
- Denote $\gamma=\beta^{2t}$, and
+for $d=\lfloor 9r/2 \rfloor$. Let $\beta>4t$ be a fixed real. As in the proof of \cref{lem:engine}, we suppose $m\geq t^8$; this will be taken care by the final choice of the function $N(m)$.
+Denote $\gamma=\beta^{2t}$, and
 define the function $L(m)$ as $L(m)=((t+1)\cdot m)^\gamma$.
 
-Define the sequence $m_0,m_1,\ldots,m_r$ as follows:
-$$m_i=(t+1)^{\gamma^{r-i}}\cdot m^{\gamma^{r-i}}.$$ 
-Note that $m_r\geq m$ and $m_i=L(m_{i+1})$, for all $i\in \set{0,\ldots,r-1}$.
+Define sequence $m_0,m_1,\ldots,m_r$ as follows:
+\begin{eqnarray*}
+m_r & = & m\\
+m_i & = & L(m_{i+1}) \qquad \textrm{for }0\leq i<m.
+\end{eqnarray*}
+A straightforward induction yields that 
+$$m_i=(t+1)^{\frac{\gamma^{r-i}-1}{\gamma-1}}\cdot m^{\gamma^{r-i}}$$
+for all $i\in \set{0,\ldots,r}$.
 
-Suppose that $A$ is a set of vertices of $G$ such that $|A|\ge m_0=(t+1)^{\gamma^{r}}\cdot m^{\gamma^{r}}$. 
+Suppose that $A$ is a set of vertices of $G$ such that $|A|\ge m_0=(t+1)^{\frac{\gamma^{r}-1}{\gamma-1}}\cdot m^{\gamma^{r}}$. 
 We inductively construct sequences of sets $A= A_0\supseteq A_1\supseteq \ldots \supseteq A_r$ and $\emptyset=S_0\subseteq S_1\subseteq S_2\ldots$
 satisfying the following conditions:
 \begin{itemize}
-	\item $|A_i|\ge m_i \ge L(m_{i+1})$,
+	\item $|A_i|\ge m_i=L(m_{i+1})$,
 	\item $A_i\cap S_i=\emptyset$ and $A_i$ is $i$-independent in $G-S_i$.
 \end{itemize}
 To construct $A_{i+1}$ out of $A_i$, apply~\cref{lem:engine} to the graph $G-S_i$ and 
-the $i$-independent set $A_i$ of size at least $L(m_{i+1})$. This yields a set $S\subseteq V(G)$ which is disjoint from $S_i\cup A_i$, and a subset $A_{i+1}$ of $A_i$ of size 
+the $i$-independent set $A_i$ of size at least $L(m_{i+1})$. This yields a set $S\subseteq V(G)$ which is disjoint from $S_i\cup A_i$, and a subset $A_{i+1}$ of $A_i-S$ of size 
 at least $m_{i+1}$
 which is $(i+1)$-independent in $G-S_{i+1}$, where $S_{i+1}=S\cup S_i$. This completes the inductive construction.
 
-In particular,  $|A_r|\ge m$ and $A_r$ is a subset of $A$ which is $r$-independent in $G-S_r$.
-Observe that by construction, $|S_r|\le r t/2$, as in the odd steps, the constructed set $S$ is empty, and in the even steps, it has at most $t$ elements. 
+In particular,  $|A_r|\ge m_r=m$ and $A_r$ is a subset of $A$ which is $r$-independent in $G-S_r$.
+Observe that by construction, $|S_r|<r t/2$, as in the odd steps, the constructed set $S$ is empty, and in the even steps, it has less than $t$ elements. 
 We show that in fact we have $|S_r|<t$ using the following argument, similar to the one used in~\cref{claim:at-most-t}.
 
-
-By the last part of the statement of~\cref{lem:engine},  at the $i$th step of the construction, each vertex of the set $S$
-has distance exactly $i/2$ from all vertices in $A_{i+1}$ in the graph 
+By the last part of the statement of~\cref{lem:engine},  at the $i$th step of the construction, each vertex of the set $S$ obtained from \cref{lem:engine}
+is at distance exactly $i/2$ from all the vertices in $A_{i+1}$ in the graph 
 $G-S_i$. 
 For $a\in A_r$, let $\overline{N}(a)$ denote the $\lfloor r/2\rfloor$-neighborhood of $a$ in $G-S_r$; note that sets $\overline{N}(a)$ are pairwise disjoint.
 The above remark implies that each vertex $v$ of the final set $S_r$ has a neighbor in the set $\overline{N}(a)$ for each $a\in A_r$.
@@ -686,17 +510,267 @@ form a minor model of $K_t$ in $G$ at depth-$(\lfloor r/2\rfloor+1)$.
 This contradicts the assumption that $K_t\not\minor_d G$ for $d=\lfloor 9r/2 \rfloor$.
 Hence, $|S|<t$.
 
-
 Define the function  $N:\N\to\N$
-as $N(m)=((t+1)m)^{\gamma^{r}}=((t+1)m)^{\beta^{2rt}}$
-for $m\ge t^8$  and $N(m)=N(t^8)$ for $m<t^8$.
-Note that $N(m)\in \Oof_{r,t}{(m^{{(8t+1)}^{2rt}})}$, provided we put $\beta=8t+1$.
-The argument above shows that if $|A|\ge N(m)$ then 
+as $N(m)=(t+1)^{\frac{\gamma^{r}-1}{\gamma-1}}\cdot m^{\gamma^{r}}$
+for $m\ge t^8$ and $N(m)=N(t^8)$ for $m<t^8$; this justifies the assumption $m\geq t^8$ made in the beginning.
+Recalling that $\gamma=\beta^{2t}$ and putting $\beta=4t+1$, we
+note that $N(m)\in \Oof_{r,t}{(m^{{(4t+1)}^{2rt}})}$.
+The argument above shows that if $|A|\ge N(m)$, then 
 there is a set $S\subset V(G)$, equal to $S_r$ above,
 and a set $B\subset A$, equal to $A_r$ above,
 so that $B$ is $r$-independent in $G-S$.
-Given~$G$ and $A$, the sets~$S$ and $B$ can be computed by applying the algorithm given by~\cref{lem:engine} at most~$r$ times, so in time $\Oof_{r,t}(|A|\cdot |E(G)|)$.
+Given~$G$ and $A$, the sets~$S$ and $B$ can be computed by applying the algorithm of \cref{lem:engine} at most~$r$ times, so in time $\Oof_{r,t}(|A|\cdot |E(G)|)$.
 This finishes the proof of~\cref{thm:new-uqw}.
 \end{proof}
 
 
+
+\section{Uniform quasi-widness for tuples}\label{sec:uqw-tuples}
+We now formulate and prove an extension of~\cref{thm:new-uqw}
+which applies to sets of tuples of vertices, rather than sets of vertices. 
+This more general result will be used later on in the paper. 
+The result and its proof are essentially adaptations to the finite of their infinite analogues introduced by Podewski and Ziegler (cf.~\cite{podewski1978stable},  Corollary 3),
+modulo the numerical bounds.
+
+We generalize the notion of independence to sets of tuples of vertices.
+Fix a graph $G$ and a number $r\in \N$, and let $S\subseteq V(G)$ be a subset of vertices of $G$.
+We say that vertices $u$ and $v$ are {\em{$r$-separated}} by $S$ in $G$ if every path of length at most $r$ connecting $u$ and $v$ in $G$ passes through a vertex of $S$.
+We extend this notion to tuples:
+two tuples $\bar u,\bar v$ of vertices of $G$ are \emph{$r$-separated} by $S$ every vertex appearing in $\bar u$ is $r$-separated by $S$ from every vertex appearing in $\bar{v}$.
+Finally, if $A\subseteq V(G)^d$ is a set of $d$-tuples of vertices, for some $d\in\N$,
+then we say that $A$ is \emph{mutually $r$-separated} by $S$ in $G$ 
+if any two distinct $\bar u,\bar v\in A$ are $r$-separated by $S$ in $G$.
+
+\newcommand{\uqw}{\mathrm{UQW}}
+\newcommand{\puqw}{\mathrm{PUQW}}
+With these definitions set, we may introduce the notion of uniform quasi-wideness for tuples.
+
+\begin{definition}
+Fix a class $\cal C$ and numbers $r,d\in\N$.
+For a function $N\from\N\to\N$
+and number $s\in\N$,
+we say that $\cal C$ satisfies property
+$\uqw^d_r(N,s)$ if the following condition holds:
+   \begin{quote}\itshape 
+      for every $m\in \N$ and every subset 
+     $A\subseteq V(G)^d$ with $|A|\ge N(m)$, there is a set $S\subset V(G)$ with $|S|\le s$ and a subset $B\subset A$ with $|B|\ge m$ which is mutually $r$-separated by $S$ in $G$.
+   \end{quote}   
+    We say that $\cal C$ satisfies property $\uqw^d_r$ if  $\cal C$ satisfies $\uqw^d_r(N,s)$ for 
+	some $N\from\N\to\N$ and $s\in\N$.
+	If moreover one can take $N$ to be a polynomial,
+	then we say that $\cal C$ satisfies property $\puqw^d_r$.
+\end{definition}
+
+When $d=1$, we omit it from the superscripts.
+  Note that there is a slight discrepancy 
+  in the definition of uniform quasi-wideness 
+  and the property of satisfying $\uqw_r$, for all $r\in \N$.
+  This is due to the fact that in the original definition,
+  the set $B$ must be disjoint from $S$,
+  whereas in the property $\uqw_r$, 
+  some vertices of $S$ may belong to $B$. This distinction is inessential when it comes to dimension $1$, since $|S|\le s_r$ for some constant $s_r$,
+  so passing from one definition to the other requires 
+  modifying the function $N_r$ by an additive constant $s_r$.
+In particular, a class of graphs $\cal C$ is uniformly quasi-wide if and only if it 
+	satisfies $\uqw_r$, for all $r\in \N$.  
+  However, generalizing to tuples of dimension $d$ requires the use of the definition above, where the tuples in~$B$ are allowed to contain  vertices which occur in $S$. 
+  For example, if the graph $G$ is a star with many arms and $A$ consists of all pairs of adjacent vertices in $G$, then $S$
+  needs to contain the central vertex of $G$,
+  and therefore $S$ will contain a vertex from every tuple in $A$. We may take $B$ to be equal to $A$ in this case.
+  
+\medskip
+	Using the above terminology, \cref{thm:new-uqw}
+	states that for every fixed $r\in\N$, if there is a number $t\in\N$
+	such that $K_t\not\minor_{\lfloor 9r/2\rfloor} G$ for all $G\in \cal C$,
+	then $\cal C$ satisfies $\puqw_r$,
+	and more precisely $\uqw_r(N_r,s_r)$
+	for a polynomial $N_r\from\N\to\N$ and number $s_r\in \N$, where $N_r$ and $s_r$ can be computed from $r$ and $t$.
+	The following result provides a generalization to higher dimensions.
+
+\begin{theorem}\label{thm:uqw-tuples}If $\cal C$
+	is a nowhere dense class of graphs,
+	then for all $r,d\in\N$,
+	the class $\cal C$ satisfies
+	 $\puqw^d_r$.
+	More precisely, for any class of graphs $\cal C$ and numbers $r,t\in\N$,
+	if  	$K_t\not\minor_{18r} G$ for all $G\in \cal C$,
+then for all $d\in \N$ the class $\cal C$ satisfies $\uqw^d_{r}(N^d_r,s^d_r,)$	for 
+some number $s^d_r\in \N$ and polynomial $N^d_r\from \N\to\N$ that can be computed given $r$, $t$, and $d$.
+\end{theorem}
+
+
+\cref{thm:uqw-tuples} is an immediate consequence  of~\cref{thm:new-uqw} and of the following result.
+
+\begin{proposition}\label{prop:uqw-tuples}
+For all $r,d\in\N$,
+if $\cal C$ satisfies $\uqw_{2r}(N_{2r},s_{2r})$ 
+for some $s_{2r}\in\N$ and \mbox{$N_{2r}\colon\N\to \N$},
+then $\cal C$
+satisfies $\uqw^d_r(N^d_r,s^d_r)$
+for  $s^d_r=d\cdot s_{2r}$ and 
+function $N^d_r\colon \N\to \N$ defined as $N^d_r(m)=f^d((d^2+1)\cdot m)$, where $f(m')=m'\cdot N_{2r}(m')$ and $f^d$ is the $d$-fold composition of $f$ with itself.
+\end{proposition}
+
+
+The rest of this section is devoted to the proof of \cref{prop:uqw-tuples}.
+Fix a class $\cal C$
+such that $\uqw_{2r}(N_{2r},s_{2r})$ holds for some number $s_{2r}\in \N$ and  function $N_{2r}\from \N\to \N$.
+We also fix the function $f$ defined in the statement of \cref{prop:uqw-tuples}.
+
+%In the proof below, we will invoke property $\uqw_{2r}$ for $\cal C$,
+%but also property $\uqw_r$, which also holds for $\cal C$, as witnessed e.g. by the function $N_r(\cdot)\coloneqq N_{2r}(\cdot)$ and constant $s_r\coloneqq s_{2r}$.
+
+\medskip
+
+	Let us fix dimension $d\in \N$, radius $r\in \N$, and graph $G\in \cal C$.
+        For a coordinate $i\in\set{1,\ldots,d}$, by $\pi_i\colon V(G)^d\to V(G)$ we denote the {\em{projection}} onto the $i$th coordinate; that is,
+        for $\bar{x}\in V(G)^d$ by $\pi_i(\bar{x})$ we denote the $i$th coordinate of $\bar{x}$.
+        
+        %and set of tuples $A\subseteq V(G)^d$, by
+        %$\pi_i(A)$ we denote the {\em{multiset}} of vertices appearing on the $i$th coordinate of the tuples in $A$.
+        %That is, each tuple $\bar u\in A$ contributes with one element to $\pi_i(A)$, this element being the vertex on the $i$th coordinate of $\bar u$.
+        %The notion of mutual $r$-separation is naturally extended to multisets: a multiset $M$ of vertices of $G$ is {\em{mutually $r$-separated}} by a vertex subset $S\subseteq V(G)$ in $G$ if for
+        %any two distinct vertices $u,v$ drawn from $M$, it holds that $u$ and $v$ are $r$-separated by $S$ in $G$.
+        %Note that in case $M$ contains more than one copy of some vertex $u$, any set $S$ that mutually $r$-separates $S$ has to contain $u$.
+        %By a slight abuse of notation, for a single tuple $\bar{u}$ by $\pi_i(\bar{u})$ we denote the $i$th coordinate of $\bar{u}$.
+	
+	Our first goal is to find a large subset of tuples that are mutually $2r$-separated by some small~$S$ on each coordinate separately.
+	Note that in the following statement we ask for $2r$-separation, instead of $r$-separation.
+
+\begin{lemma}\label{lem:step1} For all $r,m\in \N$ and $A\subset V(G)^d$ with $|A|\ge f^d(m)$,
+	there is a set $B\subset A$ with $|B|\ge m$ and a set $S\subset V(G)$ with $|S|\le d\cdot s_{2r}$ 
+	such that for each coordinate $i\in\set{1,\ldots,d}$ and all distinct $\bar x,\bar y\in B$,
+        the vertices $\pi_i(\bar x)$ and $\pi_i(\bar y)$ are $2r$-separated by $S$. 
+\end{lemma}
+\begin{proof}
+We will iteratively apply the following claim.
+
+%Let $f\colon \N\to \N$ be defined as $f(m)=N(r,m)\cdot m$ for $m\in\N$.
+
+\begin{claim}\label{claim:ith-coord}
+Fix a coordinate $i\in\set{1,\ldots,d}$, an integer $m'\in\N$, and a  set $A'\subset V(G)^d$ with  $|A'|\ge f(m')$.
+Then there is a set $B'\subset A'$ with $|B'|\ge m'$
+and a set $S'\subset V(G)$ with $|S'|\le  s_{2r}$, such that for all distinct $\bar x,\bar y\in B$,
+the vertices $\pi_i(\bar x)$ and $\pi_i(\bar y)$ are $2r$-separated by $S$.
+\end{claim}
+\begin{clproof}
+We consider two cases, depending on whether $|\pi_i(A')|\geq N_{2r}(m')$.
+
+Suppose first that $\pi_i(A')$ contains at least $N_{2r}(m')$ distinct vertices.
+Then we may apply the property $\uqw_{2r}$ to $\pi_i(A')$, yielding sets $S'\subset V(G)$ and $X\subseteq \pi_i(A')$
+such that $|X|\ge m'$, $|S'|\le s_{2r}$, and $X$ is mutually $2r$-separated by $S'$ in $G$. 
+Let $B'\subseteq A'$ be a subset of tuples constructed as follows: for each $u\in X$, include in $B'$ one arbitrarily chosen tuple $\bar x\in A'$ such that the $i$th coordinate of $\bar x$ is $u$.
+Clearly $|B'|=|X|\ge m'$ and for all distinct $\bar x,\bar y\in B'$, we have that $\pi_i(\bar x)$ and $\pi_i(\bar y)$ are different and $2r$-separated by $S'$ in $G$; this is because $X$ is mutually $2r$-separated by $S'$
+in $G$. Hence $B'$ and $S'$ satisfy all the required properties.
+
+Suppose now that $|\pi_i(A')|<N_{2r}(m')$. 
+Then choose a vertex $a\in \pi_i(A')$ for which the pre-image $\pi_i^{-1}(a)$ has the largest cardinality.
+Since $|A'|\geq f(m')=m'\cdot N_{2r}(m')$, we have that 
+$$|\pi_i^{-1}(a)|\geq \frac{|A'|}{|\pi_i(A')|}\geq \frac{m'\cdot N_{2r}(m')}{N_{2r}(m')}=m'.$$
+Hence, provided we set $S'=\set{a}$ and $B'=\pi_i^{-1}(a)$, we have that $B'$ is mutually $2r$-separated by~$S'$, $|B'|\geq m$, and $|S'|=1$.
+\end{clproof}
+
+We proceed with the proof of \cref{lem:step1}.
+Let $A\subset V(G)^d$ be such that $|A|\ge f^d(m)$.
+We inductively define subsets $B_0\supseteq B_1\supseteq \ldots \supseteq B_d$ of $A$ and sets $S_1,\ldots,S_d\subseteq V(G)$ as follows.
+First put $B_0=A$. Then, for each $i=1,\ldots,d$,
+let $B_{i}$ and $S_i$ be the $B'$ and $S'$ obtained from \cref{claim:ith-coord} applied to the set of tuples $B_{i-1}\subset V(G)^d$, the coordinate $i$, and $m'=f^{d-i}(m)$. 
+It is straightforward to see that the following invariant holds for each $i\in \set{1,\ldots,d}$: $|B_i|\ge f^{d-i}(m)$ and for all $j\leq i$
+and distinct $\bar x,\bar y\in B_i$, the vertices $\pi_j(\bar x)$ and $\pi_j(\bar{y})$ are $2r$-separated by $S_1\cup\ldots\cup S_i$ in $G$.
+In particular, by taking $B=B_d$ and $S=S_1\cup\ldots \cup S_d$, we obtain that $|B|\ge m$, $|S|\le d\cdot s_{2r}$, and $B$ and $S$ satisfy the condition requested in the lemma statement.
+\end{proof}
+
+The next lemma will be used to turn mutual $2r$-separation on each coordinate to mutual $r$-separation of the whole tuple set.
+
+\begin{lemma}\label{lem:step2}
+	Let $B\subset V(G)^d$ and $S\subset V(G)$ be such that 
+   for each $i\in \set{1,\ldots,d}$ and all distinct $\bar{x},\bar{y}\in B$, the vertices $\pi_i(\bar{x})$ and $\pi_i(\bar{y})$ are $2r$-separated by $S$ in $G$.
+	Then there is a set $C$ with $C\subset B$ and $|C|\geq\frac{|B|}{d^2+1}$
+	such that $C$ is mutually $r$-separated by $S$ in $G$.
+\end{lemma}
+\begin{proof}
+Let $C$ be a maximal subset of $B$ that is mutually $r$-separated by $S$ in $G$.
+By the maximality of $C$, with each tuple $\bar a\in B-C$ we may associate a tuple $\bar b\in C$ and a pair of indices $(i,j)\in \set{1,\ldots,d}^2$ that witness that $a$ cannot be added to $C$, namely
+$\pi_i(\bar a)$ and $\pi_j(\bar b)$ are not $r$-separated by $S$ in $G$.
+Observe that two different tuples $\bar a,\bar a'\in B-C$ cannot be associated with exactly the same $\bar b\in C$ and same pair of indices $(i,j)$.
+Indeed, then both $\pi_i(\bar a)$ and $\pi_i(\bar a')$ would not be $r$-separated from $\pi_j(\bar b)$ by $S$ in $G$, 
+which would imply that $\pi_i(\bar a)$ and $\pi_i(\bar a')$ would not be $2r$-separated from each other by $S$,
+a contradiction with the assumption on $B$.
+Hence, $|B-C|$ is upper bounded by the number of tuples of the form $(\bar b,i,j)\in C\times \set{1,\ldots,d}^2$, which is $d^2|C|$.
+We conclude that $|B-C|\leq d^2|C|$, which implies $|C|\geq \frac{|B|}{d^2+1}$.
+\end{proof}
+
+\begin{comment}
+\begin{proof}
+We construct a sequence $C_0\subset C_1\subset \ldots$ of subsets of $B$ which are mutually $r$-independent in $G-S$, as follows.
+
+We start with $C_0=\emptyset$. Suppose that $C_s\subset B$ is 
+ already constructed for some $s\ge 0$
+ and is mutually $r$-independent in $G-S$; we construct $C_{s+1}$. With each element $a\in B-C_s$,
+we associate an arbitrarily chosen function $f_a\colon \set{1,\ldots,d}^2\to C_s\cup \set{\bot}$
+with the following properties:
+\begin{itemize}
+	\item If $f_a(i,j)=b$ then the $i$th coordinate of $a$
+	and the $j$th coordinate of $b$ are not $r$-separated by $S$.
+	\item If $f_a(i,j)=\bot$ then there is no element $b\in C_s$ 
+	such that the $i$th coordinate of $a$ and the $j$th coordinate of $b$ are at not $r$-separated by $S$.
+\end{itemize}
+Observe that whenever $a_1, a_2$ are two distinct elements of $B-C_s$,
+then for all $i,j\in \set{1,\ldots,d}^2$, the values $f_{a_1}(i,j)$ and $f_{a_2}(i,j)$
+cannot be equal to the same element $b\in C_s$:
+otherwise, we would have that the $i$th coordinate of $a_1$
+and the $i$th coordinate of $a_2$ are not $2r$-separated by $S$, which is impossible by the assumption on $B$.
+In particular, if $|B-C_s|> |C_s|\cdot d^2$
+then there must be some element  $a\in B-C_s$  
+such that $f_a(i,j)=\bot$  for all $i,j\in\set{1,\ldots,d}$.
+Let $C_{s+1}=C_s\cup \set a$.
+By construction, $C_{s+1}$ is mutually $r$-independent in $G-S$.
+
+We may repeat the construction as long as $|B|>|C_s|\cdot (d^2+1)=s\cdot (d^2+1)$, and we stop when this inequality no longer holds. Define the set $C$ as the last constructed set $C_s$.
+By construction, $|C_s|=s\ge 
+\frac{|B|}{d^2+1}$.	
+\end{proof}
+\end{comment}
+
+To finish the proof of \cref{prop:uqw-tuples},
+given a set $A\subset V(G)^d$ and integer $m\in\N$,
+first apply 
+\cref{lem:step1} 
+  with $m'= m\cdot (d^2+1)$.
+ Assuming that $|A|\ge f^d(m')$, 
+we obtain a set $B\subseteq A$ with $|B|\ge m\cdot (d^2+1)$ and a set $S\subset V(G)$ with $|S|\le d\cdot s_{2r}$,
+such that for each $i\in \set{1,\ldots,d}$ and all distinct $\bar{x},\bar{y}\in B$, the vertices $\pi_i(\bar{x})$ and $\pi_i(\bar{y})$ are $2r$-separated by $S$ in $G$. 
+Then, apply \cref{lem:step2} to $B$ and $S$, yielding a set $C\subset B$ which is mutually $r$-separated by $S$ and has size at least $m$. 
+This concludes the proof of \cref{prop:uqw-tuples}.
+
+\begin{comment}
+\begin{remark}\label{rem:local-tuples}
+  A detailed analysis of the presented proof
+  allows to obtain a stronger statement than in
+   \cref{prop:uqw-tuples}, which we now describe.
+   For $d,r,m\in\N$,
+  let
+    $\textrm{UQW}(d,r)$ denote the following statement:
+   \begin{quote}\itshape There exists a constant $s^d_r\in \N$ and a polynomial $N^d_r\from\N\to\N$ such that 
+      for all $m\in \N$ and all subsets 
+     $A\subset V(G)^d$ with $|A|\ge N^d_r(m)$ there is a set $S\subset V(G)$ of size $|S|\le s^d_r$ and a subset $B\subset A$ of size $|B|\ge m$ which is mutually $r$-independent in $G-S$.
+   \end{quote}   
+   Our proof shows that  the statement $\textrm{UQW}(d,r)$
+   can be concluded from the statement $\textrm{UQW}(1,4r)$.
+     
+This is because in our proof,  we have~obtained:
+  $$
+  N^d_{2r}(m)=(N_{4r})^d(m(d^2+1))\qquad\textrm{and}\qquad s^d_{2r}=d\cdot s_{4r}.
+  $$
+  Thus, when establishing the values of $N^d_{2r}(m)$ and $s^d_{2r}$, we refer to the quasi-wideness of $\CCC$ only by using numbers $s_{4r}$ and $N_{4r}(m')$ for $m'\in \N$.
+  
+  On the other hand, by \cref{thm:new-uqw}, the statement $\textrm{UQW}(1,4r)$
+  follows from the existence of a number $t\in\N$ such that $K_t\not\minor_{10r} G$ for $G\in \CCC$.
+  To summarize, for all $r\in\N$, the existence of a number $t\in\N$ such that $K_t\not\minor_{10r} G$ for $G\in \CCC$ implies the statement $\textrm{UQW}(d,r)$,
+  for all $d\in\N$.
+    %
+  % By \cref{thm:new-uqw}, it suffices to assume that $K_t\not\minor_{10r} G$ to have $s(4r)\leq t$ and $N(4r,m')\leq c(r,t)\cdot (m')^{(8t+1)^{2rt}}$ for some computable function $c(r,t)$.
+  % Hence, this supposition alone, instead of full quasi-wideness of $\CCC$, is sufficient to claim that the conclusion of \cref{thm:new-uqw} holds with
+  % $s^d(2r)$ bounded by a computable function of $t$, $d$, and $q$, and $N^d(2r,m)$ bounded by a computable function of $m$, $t$, $d$, and $q$.
+\end{remark}
+\end{comment}

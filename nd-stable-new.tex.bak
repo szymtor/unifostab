@@ -86,6 +86,7 @@ twoside=False]{geometry}
 \newtheoremwithcrefformat{conjecture}{Conjecture}
 \newtheoremwithcrefformat{corollary}{Corollary}
 \newseptheoremwithcrefformat{claim}{Claim}
+\newseptheoremwithcrefformat{goal}{Goal}
 \theorembodyfont{\upshape}
 \newtheoremwithcrefformat{example}{Example}
 \newtheoremwithcrefformat{remark}{Remark}
@@ -161,12 +162,13 @@ twoside=False]{geometry}
 \newcommand{\suchthat}{ \colon }
 \newcommand{\sth}{ \colon }
 \newcommand{\ie}{i.e.\@ }
+\newcommand{\Pow}{\mathcal{P}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\tup}[1]{\bar{#1}}
 \renewcommand{\phi}{\varphi}
 \renewcommand{\epsilon}{\varepsilon}
-\newcommand{\str}{\mathfrak}
+\newcommand{\str}{\mathbb}
 \newcommand{\strA}{\str{A}}
 \newcommand{\strB}{\str{B}}
 \newcommand{\FO}{\mathrm{FO}}
@@ -185,10 +187,15 @@ twoside=False]{geometry}
 \newcommand{\rg}{\mathrm{rg}}
 \newcommand{\from}{\colon}
 
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\geq}{\geqslant}
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+
 
 \newcounter{aux}
 
-\title{On Wideness and Stability
+\title{On the number of types in sparse graphs
 \thanks{
 The work of M.\ Pilipczuk and S.\ Siebertz is supported by the National Science Centre of 
 Poland via POLONEZ grant agreement UMO-2015/19/P/ST6/03998, 
@@ -210,7 +217,7 @@ Institute of Informatics, University of Warsaw, Poland\\[0.1cm]
 \maketitle
 \input{abstract-new}
 
-\begin{picture}(0,0) \put(397,-265)
+\begin{picture}(0,0) \put(397,-225)
 {\hbox{\includegraphics[scale=0.25]{flag_bw.jpg}}} \end{picture} 
 \vspace{-0.8cm}
 
@@ -218,9 +225,11 @@ Institute of Informatics, University of Warsaw, Poland\\[0.1cm]
 \input{intro-short-new}
 \input{nd-uqw}
 \input{gaifman}
-\input{uqw-stable}
-%\input{vc-power}
 \input{vc-density}
+\input{uqw-stable}
+
+
+
 
 
 \bibliographystyle{abbrv}
