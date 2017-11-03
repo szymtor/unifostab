@@ -461,9 +461,21 @@ This yields a running time of  $\Oof_{r,t}(|A|\cdot |E(G)|)$.
 This finishes  the proof of~\cref{lem:engine}.
 
 \subsection{Proof of \cref{thm:new-uqw}}
-We now wrap up the proof of \cref{thm:new-uqw} by iteratively applying~\cref{lem:engine}.
+We now wrap up the proof of \cref{thm:new-uqw} by iteratively applying~\cref{lem:engine}. We repeat the statement for convenience.
 
-\begin{proof}[of \cref{thm:new-uqw}]
+\setcounter{aux}{\thetheorem}
+\setcounter{theorem}{\theuqw}
+\begin{theorem}\label{thm:new-uqw}
+For all $r,t\in \N$ there is a polynomial  $N\colon \N\to \N$ with $N(m)=
+\Oof_{r,t}{(m^{{(4t+1)}^{2rt}})}$, such that the following holds.
+Let $G$ be a graph such that $K_t\not\minor_{\lfloor 9r/2\rfloor} G$, and
+let $A\subseteq V(G)$ be a vertex subset of size at least $N(m)$, for a given $m$.
+Then there exists a set $S\subseteq V(G)$ of size $|S|<t$ and a set $B\subseteq A\setminus S$ 
+of size $|B|\geq m$ which is $r$-independent in $G-S$.
+Moreover, given~$G$ and $A$, such sets $S$ and $B$ can be computed in time $\Oof_{r,t}(|A|\cdot |E(G)|)$. 
+\end{theorem}
+\setcounter{theorem}{\theaux}
+\begin{proof}
 Fix integers $r,t$,  and a graph $G$ such that $K_t\not\minor_{d} G$,
 for $d=\lfloor 9r/2 \rfloor$. Let $\beta>4t$ be a fixed real. As in the proof of \cref{lem:engine}, we suppose $m\geq t^8$; this will be taken care by the final choice of the function $N(m)$.
 Denote $\gamma=\beta^{2t}$, and
@@ -475,8 +487,9 @@ m_r & = & m\\
 m_i & = & L(m_{i+1}) \qquad \textrm{for }0\leq i<m.
 \end{eqnarray*}
 A straightforward induction yields that 
-$$m_i=(t+1)^{\frac{\gamma^{r-i}-1}{\gamma-1}}\cdot m^{\gamma^{r-i}}$$
-for all $i\in \set{0,\ldots,r}$.
+\begin{equation*}
+m_i=(t+1)^{\frac{\gamma^{r-i}-1}{\gamma-1}}\cdot m^{\gamma^{r-i}}\qquad \textrm{for all }i\in \set{0,\ldots,r}.
+\end{equation*}
 
 Suppose that $A$ is a set of vertices of $G$ such that $|A|\ge m_0=(t+1)^{\frac{\gamma^{r}-1}{\gamma-1}}\cdot m^{\gamma^{r}}$. 
 We inductively construct sequences of sets $A= A_0\supseteq A_1\supseteq \ldots \supseteq A_r$ and $\emptyset=S_0\subseteq S_1\subseteq S_2\ldots$

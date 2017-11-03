@@ -61,101 +61,30 @@ Contrary to these, our proofs are entirely combinatorial and effective, yielding
 
 We now discuss the relevant background from logic and model theory, in order to motivate and state our results.
 
-%Namely, for every nowhere dense class of graphs, we provide (1) an upper bound on the \emph{ladder index} of a first order formula
-%(2) a polynomial upper bound on the 
-%functions related to \emph{uniform quasi-wideness},
-%and (3) an optimal bound on the \emph{vc-density} of first order formulas. Bounds similar to (1) and (2)
-%where known: %(cf.~\cite{adler2014interpreting} and \cite{siebertz2016polynomial}, respectively).
-%for (1), there is a bound which relies on 
-% nonconstructive arguments, notably the compactness theorem for first order logic, and is therefore not effectively computable, contrary to our bound. For (2), two bounds are known:
-% either a non-elementary bound, or a polynomial bound, but where the degree of the polynomial is not effectively computable. Our bound is given by an explicit polynomial.
-%The result (3) is completely new, and is the main contribution of this paper. We now discuss the relevant background from logic and model theory, in order to motivate and state our results.
-
-
-
-
-
-
-
-
-
-
-% It is known that in (infinite) model theory,
-% measuring cardinality of Stone spaces can be used to characterize when a formula $\phi$ is stable on a class of models (i.e., does not define arbitrarily long ladders).
-% In a nutshell, this is the case if and only if for every model $\strA$ of interest and every infinite set of its elements $A$, say of cardinality at most $\kappa$ for a cardinal $\kappa$,
-% the cardinality of $S^\phi(\strA/A)$ is at most $\kappa$. We refer to~\cite{pillay} for more information.
-
-
-% Intuitively, \cref{thm:vc-density} states that the number
-% of $\phi$-types over $A$ in a nowhere dense class
-% is bounded almost linearly in $|A|^n$, the total number number of $n$-tuples of vertices from $A$.
-% \cref{thm:vc-density}
-% also generalizes the recent result of Bobkov~\cite{bobkov2017computations} that nowhere dense classes
-% are {\em{dp-minimal}}, a notion introduced by Shelah~\cite{shelah2014strongly} that we will not use here (see~\cite{dolich2011} for the connection
-% with dp-minimality).
-
-%Formulated in terms of VC-density, for every nowhere 
-%dense class of graphs and every first order formula $\phi(\tup x,\tup y)$
-%we have 
-%\[\limsup_{a\rightarrow \infty}\max_{\substack{G\in\CCC\\A\subseteq
-%    V(G), |A|=a}}\frac{\log |S_\phi(A,G)|}{\log a}\leq n.\]
-
-
-%
-%
-%\sebi{The proof of \Cref{thm:vc-density} is (again) based on Gaifman's locality
-%theorem for first order logic, which allows us to focus at local 
-%neighborhoods around the vertices $v\in V(G)$. 
-%Using the closure lemma of~\cite{drange2016kernelization} for
-%classes of bounded expansion and its generalization to
-%nowhere dense classes~\cite{eickmeyer2016neighborhood}
-%together with uniform quasi-wideness,
-%\begin{change}{sz}we are able to bound 
-%the number of interactions of vertices $v$ with the set $A$. \end{change}}
-%
-%
-%
-%
-%\begin{change}{sz}
-%\Cref{thm:vc-density} shows a strong new connection 
-%	between first order logic and the notions of bounded expansion
-%	and nowhere denseness.
-
-
 
 
 \paragraph{Model theory.}Our work is inspired by ideas from model theory,  more specifically, from \emph{stability theory}.
-% Its  focus is typically on \emph{infinite} logical structures,
-% including graphs, but more traditionally
-% vector spaces, fields, models of Peano arithmetic, etc. Vector spaces~enjoy a rather simple theory,  taught to students in linear algebra classes. Fields, studied~by~algebraists and algebraic geometers,
-% have a richer theory,
-% involving field extensions,  Galois duality, algebraic varieties, etc.
-% A meaningful notion of structure in number theory is most elusive.
-%
   The goal of {stability theory}
-  %,
-  %initiated and developed by Shelah~\cite{shelah1990classification},
   is to draw certain dividing lines
-  specifying  the abstract properties of 
+  specifying abstract properties of 
   logical structures which allow the development 
   of a good structure theory. There are many such dividing lines, depending on the specifics of the desired theory. One such dividing line encloses the class of \emph{stable structures}, 
-  another line encloses the larger class of \emph{dependent structures} (also called \emph{NIP}). 
-  %Recently, \emph{VC-minimality} and \emph{VC-density} have attracted a lot of interest in this context~\cite{aschenbrenner2016vapnik,bobkov2017computations,Guingona2013}.
-  A general theme in stability theory is that the existence of a manageable structure is strongly related to
+  another encloses the larger class of \emph{dependent structures} (also called \emph{NIP}). 
+  A general theme is that the existence of a manageable structure is strongly related to
   the non-existence of certain forbidden patterns on one hand,
 and on the other hand, to bounds on cardinalities
 of certain \emph{type sets}.  
-  We illustrate this phenomenon more concretely below.
+  Let us illustrate this phenomenon more concretely.
 
 For a first order formula 
 $\phi(\tup{x},\tup{y})$ 
  with free variables
 partitioned into  $\tup{x}$ and $\tup{y}$,
 a \emph{$\phi$-ladder}
-of length $n$ in a logical structure $\str A$ is a sequence $\tup{a}_1,\ldots, \tup{a}_{n},
-\tup{b}_1,\ldots, \tup{b}_{n}$ of tuples of elements of $\str A$ 
+of length $n$ in a logical structure $\str A$ is a sequence $\tup{u}_1,\ldots, \tup{u}_{n},
+\tup{v}_1,\ldots, \tup{v}_{n}$ of tuples of elements of $\str A$ 
 such that for all $1\leq i,j\le n$, we have
-$$\strA\models\phi(\tup{a}_i,\tup{b}_j)\Longleftrightarrow i\leq j.$$
+$$\strA\models\phi(\tup{u}_i,\tup{v}_j)\Longleftrightarrow i\leq j.$$
 The least  $n$ for which 
 there is no $\phi$-ladder of length $n$ is 
 the \emph{ladder index} 
@@ -170,7 +99,7 @@ as well as any vector space $V$ over the field of rationals, treated as a group 
 as they admit a linear ordering which is definable by a first order formula.
 Stable structures turn out to have more graspable  structure than unstable ones, as they can be equipped with various notions 
 useful for their study, such as
-\emph{ forking independence} (generalizing linear independence in vector spaces)
+\emph{forking independence} (generalizing linear independence in vector spaces)
 and \emph{rank} (generalizing dimension).
 We refer to the textbooks~\cite{}\todo{citations} for an introduction to stability theory.
 
@@ -190,7 +119,6 @@ this immediately implies  the following:
  
 The proof of Adler and Adler does not yield effective or computable upper bound on the 
 ladder index of a given formula for a given nowhere dense class of graphs, as it relies on the result of Podewski and Ziegler, which in turn invokes compactness for first order logic.
-%It is only shown that such an upper bound exist.
 
 \paragraph{Cardinality bounds.}
 One of the key insights provided by the work of Shelah is that stable classes can be characterized by admitting strong upper bounds on the cardinality of \emph{Stone spaces}.
@@ -209,9 +137,6 @@ The set $S^\phi(\strA/B)$ consists of all subsets of $B^{|\bar y|}$ that can be 
 
 Note that in principle, $S^\phi(\str A/B)$
 may be equal to $\Pow(B^{|\bar x|})$, and therefore have very large cardinality compared to $B$, even for very simple formulas. 
-%For example, consider the \emph{powerset graph} on base set $B$, which is the bipartite graph $P_B$  with parts $B$ and $\Pow(B)$ (the powerset), where a vertex $x\in B$
-%is connected to a set $y\subset B$ if and only if $x\in A$.
-%If $\phi(x,y)$ is the formula expressing that $x$ and $y$ are adjacent, then $S^\phi(P_B/B)=\Pow(B)$.
 The following characterization of Shelah shows that stable classes of structures are exactly those where this does not happen.\todo{citation}
 \begin{theorem}[TODO]\label{thm:Shelah-stone-space}
 A class of structures $\cal C$
@@ -232,13 +157,6 @@ Shelah's result provides an upper bound on the number of types, albeit using inf
  The cardinality bound provided by \cref{thm:Shelah-stone-space},
  however, does not seem to  immediately translate to a result of finitary nature for classes of finite graphs. As we will see next,
  this can be done in some sense using the notions of {\em{VC-dimension}} and {\em{VC-density}}.
- 
- %There is 
- %a certain related cardinality bound  of finitary nature
-%that can be obtained by relating stability  
- %to another notion introduced by Shelah, namely the dependence property, and the closely related notion of VC-dimension. %
-
-
 
 \paragraph{VC-dimension and VC-density.} The notion of VC-dimension was introduced by 
 Vapnik and Chervonenkis~\cite{chervonenkis1971theory} as a measure of complexity of set systems, or equivalently of hypergraphs.
@@ -256,13 +174,13 @@ The \emph{VC-dimension},
 of $\FFF$ is the maximum size of a subset $A\subseteq X$ that is shattered by
 $\FFF$.
 
-The notion of VC-dimension may be connected to the concepts from stability theory introduced by Shelah, as observed  by Laskowski~\cite{laskowski1992vapnik}.
+As observed by Laskowski~\cite{laskowski1992vapnik}, VC-dimension can be connected to concepts from stability theory introduced by Shelah.
 For a given structure $\str A$, parameter set $B\subseteq V(\str A)$, and formula $\phi(\bar x,\bar y)$,
 we may consider the family $S^\phi(\str A/B)$ of subsets of $B^{|\tup y|}$ defined using equation~\eqref{eq:stone-def}.
 The \emph{VC-dimension} of $\phi(\bar x,\bar y)$ on $\str A$ is the VC-dimension of the family $S^\phi(\str A/V(\str A))$; that is, we take the whole domain to be the parameter set. 
 A formula $\phi(\bar x,\bar y)$ is \emph{dependent} on a class of structures $\cal C$
-if there is a bound $d\in\N$ such that the VC-dimension of $\phi(\bar x,\bar y)$ on $\str A$ is at most $d$ for all $\str A\in\cal C$.  \todo{This definition can only be right for classes which are closed under substructures.}
-It is immediate from the definitions  that if a formula $\phi(\bar x,\bar y)$ is stable over a  class $\cal C$, then it is also dependent on $\cal C$ (the bound being the ladder index). 
+if there is a bound $d\in\N$ such that the VC-dimension of $\phi(\bar x,\bar y)$ on $\str A$ is at most $d$ for all $\str A\in\cal C$.
+It is immediate from the definitions  that if a formula $\phi(\bar x,\bar y)$ is stable over $\cal C$, then it is also dependent on $\cal C$ (the bound being the ladder index). 
 A class of structures  $\cal C$ is {\em{dependent}} if every formula $\phi(\bar x,\bar y)$ is dependent over $\cal C$. 
 In particular, every stable class is dependent, and hence, by \cref{thm:adleradler}, every nowhere dense class of graphs is dependent.
 Examples of infinite dependent structures (treated as singleton classes) include 
@@ -313,12 +231,12 @@ theory and to the surveys~\cite{furedi1991traces,matouvsek1998geometric}
 on uses of VC-density in
 combinatorics. 
 
-
-
 \paragraph{The main result.}
 Our main result, \cref{thm:vc-density} stated below, improves the bound~\eqref{eq:nip} for classes of sparse graphs
-by providing essentially the optimum exponent.\todo{can we bring the result to one page?}
+by providing essentially the optimum exponent.
 
+\newcounter{vcupper}
+\setcounter{vcupper}{\thetheorem}
 \begin{theorem}\label{thm:vc-density}
 Let $\CCC$ be a class of graphs and let $\phi(\tup x,\tup y)$ be a first order formula
 with free variables  partitioned  into object variables $\bar x$  and parameter variables $\bar y$. Let $\ell=|\bar x|$. Then:
@@ -329,6 +247,7 @@ $A\subseteq V(G)$, we have $|S^\phi(G/A)|\leq c\cdot |A|^{\ell+\epsilon}.$
 \item If $\CCC$ has bounded expansion, then there exists a constant~$c$ such that for every $G\in \CCC$ and every nonempty $A\subseteq V(G)$, we have $|S^\phi(G/A)|\leq c\cdot |A|^\ell$.
 \end{enumerate}
 \end{theorem} 
+
 In particular, \cref{thm:vc-density} implies that
 the VC-density of any fixed formula 
 $\phi(\bar x,\bar y)$ over any nowhere dense class of graphs is $|\bar x|$, the number of object variables in $\phi$.
@@ -340,6 +259,8 @@ this lower bound applies to any infinite class of graphs, even edgeless ones.
 We moreover show that, as long as we consider only subgraph-closed graph classes, the result of \cref{thm:vc-density} also cannot be improved in terms of generality.
 The following result is an easy corollary of known characterizations of obstructions to being nowhere dense, respectively having bounded expansion.
 
+\newcounter{vclower}
+\setcounter{vclower}{\thetheorem}
   \begin{theorem}\label{thm:vc-density-lower-bound}
   Let $\CCC$ be a class of graphs which 
   is closed under taking subgraphs. 
@@ -348,7 +269,7 @@ The following result is an easy corollary of known characterizations of obstruct
   $\phi(x,y)$ such that for every $n\in \N$ there are $G\in\CCC$ and $A\subseteq V(G)$ 
   with $|A|=n$ and $|S^\phi(G/A)|=2^{|A|}$. 
   \item If $\CCC$ has unbounded expansion, then there is a formula 
-  $\phi(x,y)$ such that for every $c\in \mathbb{R}$ there exist $G\in\CCC$ and $A\subseteq V(G)$ with $|S^\phi(G/A)|>c|A|$. 
+  $\phi(x,y)$ such that for every $c\in \mathbb{R}$ there exist $G\in\CCC$ and a nonempty $A\subseteq V(G)$ with $|S^\phi(G/A)|>c|A|$. 
   \end{enumerate}
   \end{theorem}
 
@@ -382,7 +303,6 @@ $B\subseteq A\setminus S$ of size $\abs{B}\geq m$ which is $r$-independent in
 $G-S$. Recall that a set $B\subseteq V(G)$ is {\em{$r$-independent}} in $G$ if all
 distinct $u,v\in B$ are at distance 
 larger than $r$ in $G$.
-%A class $\CCC$ is uniformly quasi-wide  if it is uniformly quasi-wide for all $r$.
 
 Ne\v{s}et\v{r}il and Ossona de Mendez proved that
 the notions of uniform quasi-wideness and nowhere denseness coincide for 
@@ -406,6 +326,8 @@ The new proof is considerably simpler than that of~\cite{siebertz2016polynomial}
 and gives explicit and computable bounds on the degree of the polynomial.
 More precisely, we prove the following theorem; here, the notation $\Oof_{r,t}(\cdot)$ hides computable factors depending on $r$ and $t$.
 
+\newcounter{uqw}
+\setcounter{uqw}{\thetheorem}
 \begin{theorem}\label{thm:new-uqw}
 For all $r,t\in \N$ there is a polynomial  $N\colon \N\to \N$ with $N(m)=
 \Oof_{r,t}{(m^{{(4t+1)}^{2rt}})}$, such that the following holds.
@@ -440,8 +362,8 @@ of length at most $r$ contains a vertex from $S$ (cf.~Fig.~\ref{fig:sep}).
  	}
  	\label{fig:sep}
  \end{figure}
-On one hand, taking $r=\infty$ in $r$-separation yields the familiar notion of a separator in graph theory.
-On the other hand, $r$-separation characterizes \emph{forking independence} in superflat graphs~\cite{ivanov}. Therefore,
+Observe that taking $r=\infty$ in $r$-separation yields the familiar notion of a separation in graph theory.
+From the perspective of stability, separation (for $r=\infty$) characterizes \emph{forking independence} in superflat graphs~\cite{ivanov}. Therefore,
 $r$-separation can be thought of as a local analogue of forking independence, for nowhere dense graph classes.
 
 A key lemma concerning $r$-separation (cf.~\cref{cor:bound}) states that if $A$
@@ -460,6 +382,8 @@ and replace the key non-constructive application of compactness with a combinato
 in the flavor served by our observations on $r$-separation (\cref{cor:bound}).
 The following theorem summarizes our result.
 
+\newcounter{stable}
+\setcounter{stable}{\thetheorem}
 \begin{theorem}\label{thm:new-stable}
 There are computable functions $f\colon \N^3\to\N$ and $g\colon\N\to\N$ with the following property.
 Suppose $\phi(\bar x,\bar y)$ is a formula of quantifier rank at most $q$ and with $d$ free variables.
