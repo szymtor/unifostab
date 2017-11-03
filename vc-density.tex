@@ -108,10 +108,24 @@ $p,r$ be the numbers obtained by applying \cref{lem:types} to $q$ and $\ell$.
 Let $B$ be an $r$-closure of $A$, given by~\cref{lem:closure-nd}.
   By~\cref{lem:closure-nd}, the total number of distinct $r$-projections onto $B$ 
   is at most $\Oof(|B|^{1+\delta})$, and each of these projections has size $\Oof(|B|^{\delta})$.
-  	   Figure~\ref{fig:sketch} serves as  an illustration to the steps of the proof in the case $\ell=1$.\todo{Change $\phi,\epsilon,X,Y,Z$ in the figure.}
+  	   Figure~\ref{fig:sketch} serves as  an illustration to the steps of the proof in the case $\ell=1$.
   	   \begin{figure}[h!]
   	   	\centering
   	   		\includegraphics[scale=0.346,page=4]{pics}
+          %code
+          % \noindent\textbf{Claim 1}. $X$ -- set of nodes\\
+%           with distinct $\varphi$-types over $B$.\\
+%           Then $|X|={\cal O}(|B|^{1+\varepsilon_1})$.
+%
+%           \medskip
+%           \noindent\textbf{Claim 2}. $Y\subseteq X$ -- set of nodes\\
+%           with the same projection $C$.\\
+%           Then $|Y|={\cal O}(|B|^{\varepsilon_2})$.
+%
+%           \medskip
+%           \noindent\textbf{Claim 3}. $Z\subseteq Y$\\
+%           mutually $2r$-separated by $S$.\\
+%           Then $|Z|={\cal O}(|C|)$.
   			\caption{The proof of~\cref{thm:vc-density} in case $\ell=1$. 
   The logical implications flow from right to left,
   but our description below proceeds in the other direction.
@@ -141,7 +155,7 @@ for $\epsilon_2\coloneqq \epsilon_1-\delta\ell>0$.
 If $Y$ is a set of tuples with pairwise different $\phi$-types over $B$, and each $u\in V$ has the same projection $C\subset B$, then $|Y|=\Oof(|B|^{\epsilon_2})$.
 \end{claim}
 Since there are at most $\Oof(|B|^{\ell(1+\delta)})$ different projections in total and $\ell(1+\delta)+\epsilon_2=\ell+\epsilon_1$, \cref{claim2} can be proved
-by summing the bound given by \cref{claim3} through all different projections $C$.
+by summing the bound given by \cref{claim3} through all different projections~$C$.
 It therefore remains to prove~\cref{claim3}.
 
 \medskip
@@ -209,7 +223,7 @@ for $n\in \N$, let $P(n)$ denote the graph with $n+2^n$
 vertices $V(P(n))\coloneqq \{v_1,\ldots, v_n\}\cup \{w_M \colon M\subseteq \{1,\ldots, n\}\}$ and edges $E(P(n))\coloneqq \{v_iw_M \colon 1\leq i\leq n,\, M\subseteq \{1,\ldots, n\},\, i\in M\}$. 
 If $\CCC$ is somewhere dense and closed under taking subgraphs, 
 according to \Cref{lem:lower-nd}, there exists an integer $r$ 
-such that $\mathcal{G}_{r}\subseteq \CCC$. In particular, for every $n\in \N$ the $(r-1)$-subdivision $P^{r}(n)$ of graph $P(n)$ is contained in $\CCC$.
+such that $\mathcal{G}_{r}\subseteq \CCC$. In particular, for every $n\in \N$ the $(r-1)$-subdivision $P^{r}(n)$ of the graph $P(n)$ is contained in $\CCC$.
 Now consider 
 the formula $\phi(x,y)$ stating that $x$ and~$y$ are at distance at most $r$. Then for every $n\in \N$ we have 
 $S^\phi(P^{r}(n)/A)=\Pow(A)$, where $A\subseteq V(P^{r}(n))$ denotes the set $\{v_1,\ldots, v_n\}$. This implies the first part
