@@ -58,16 +58,18 @@ such that $G,\bar u\models \phi(\bar x,\bar v)$.
 Note that since $\phi$ is fixed in this definition, formulas $\phi(\bar x,\bar v)$ belonging to the $\phi$-type of $\bar u$ are in one-to-one correspondence
 with tuples $\bar v\in A^{|\bar y|}$ satisfying $G,\bar u,\bar v\models \phi(\bar u,\bar v)$.
 Therefore, up to this bijection, we have the following identification:
-\begin{equation*}\label{eq:bijection}
+\begin{equation}\label{eq:bijection}
 \tp^\phi_G(\bar u/A)\quad\leftrightarrow\quad\setof{\bar v\in  A^{|\bar y|}}{G, \bar u\bar v\models \phi(\bar x,\bar y)}.
-\end{equation*}
+\end{equation}
 
 If $q\in \N$ is a number and $\bar u\in  V^{d}$
 is a tuple of some length $d$, then by $\tp^q_G(\bar u/A)$  we denote the set of all formulas $\phi(\bar x,\bar v)$
 of quantifier rank at most $q$, with parameters $\bar v$ from $A$, and with $|\bar x|=d$,
 such that $G,\bar u\models \phi(\bar y,\bar v)$.
 Therefore, up to the correspondence \eqref{eq:bijection}, we have the following identification:
-$$\tp^q_G(\bar u/A)\quad\leftrightarrow\quad\set{\tp^\phi(\bar u/A)}_{\phi(\bar x,\bar y)},$$
+\begin{equation*}
+\tp^q_G(\bar u/A)\quad\leftrightarrow\quad\set{\tp^\phi(\bar u/A)}_{\phi(\bar x,\bar y)},
+\end{equation*}
 where $\phi(\bar x,\bar y)$ ranges over all formulas of quantifier rank $q$, and all partitions of its free variables into two sets $\bar x,\bar y$,
 where $|\bar x|=d$. 
 In particular, the set $\tp^q_G(\bar u/A)$ is infinite.
@@ -268,11 +270,11 @@ where an arrow $a\rightarrow b$ signifies that $b$ is determined by $a$:
 	\tp^q[G^S, \bar u\bar w] \ \longrightarrow\ 
 	\tp^q_G(\bar u\bar w).
 \end{align*}
-The second arrow is by applying Feferman-Vaught's lemma,
+The second arrow follows from Feferman-Vaught's lemma, \cref{lem:fv},
 as the colored graph $N^r_S(\bar u\bar w)$
 is the disjoint union of the colored graphs 
 $N^r_S(\bar u)$ and $N^r_S(\bar w)$,
-and $\bar u$ and $\bar w$ are $r$-separated by $S$.
+because $\bar u$ and $\bar w$ are $r$-separated by $S$.
 The third arrow is directly implied by the Gaifman's lemma,~\cref{lem:gaif}.
 We are left with arguing the first and the last arrow, which both follow from simple rewriting arguments, presented below.
 

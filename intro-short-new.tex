@@ -39,7 +39,7 @@ this combination in order to prove that  a given
 first order sentence $\varphi$ can be evaluated in time 
 $f(\varphi)\cdot n^{1+\epsilon}$ on $n$-vertex graphs from a fixed nowhere dense class of graphs $\CCC$, for any fixed real $\epsilon>0$ and some function $f$.
 On the other hand, provided $\CCC$ is closed under taking subgraphs, it is known that if $\CCC$ is not nowhere dense,
-then one cannot hope for such a result: there is no algorithm with running time of the form $f(\varphi)\cdot n^c$ for any constant~$c$ under plausible complexity assumptions~\cite{dvovrak2013testing}.
+then there is no algorithm with running time of the form $f(\varphi)\cdot n^c$ for any constant~$c$ under plausible complexity assumptions~\cite{dvovrak2013testing}.
 In the terminology of parameterized complexity, these results show that the notion of nowhere denseness exactly characterized subgraph-closed classes where model-checking first order logic
 is fixed-parameter tractable, and conclude a long line of research concerning the parameterized complexity of the model checking problem for sparse graph classes (see \cite{grokre11} for a survey).
 
@@ -79,12 +79,12 @@ of certain \emph{type sets}.
 For a first order formula 
 $\phi(\tup{x},\tup{y})$ 
  with free variables
-partitioned into  $\tup{x}$ and $\tup{y}$,
+split into  $\tup{x}$ and $\tup{y}$,
 a \emph{$\phi$-ladder}
 of length $n$ in a logical structure $\str A$ is a sequence $\tup{u}_1,\ldots, \tup{u}_{n},
 \tup{v}_1,\ldots, \tup{v}_{n}$ of tuples of elements of $\str A$ 
 such that 
-$$\strA\models\phi(\tup{u}_i,\tup{v}_j)\Longleftrightarrow i\leq j\qquad \text {for all $1\leq i,j\le n$.}$$
+$$\strA\models\phi(\tup{u}_i,\tup{v}_j)\ \Longleftrightarrow\ i\leq j\qquad \text {for all $1\leq i,j\le n$.}$$
 The least  $n$ for which 
 there is no $\phi$-ladder of length $n$ is 
 the \emph{ladder index} 
@@ -103,15 +103,15 @@ useful for their study, such as
 and \emph{rank} (generalizing dimension).
 We refer to the textbooks~\cite{pillay,tent2012course} for an introduction to stability theory.
 
-  One of the properties studied in the early 
+  One of concepts studied in the early 
   years of stability theory is 
   a property of infinite graphs  called \emph{superflatness}, introduced by Podewski and Ziegler~\cite{podewski1978stable}.
   The definition of superflatness is the same as   of nowhere denseness, but 
    Podewski and Ziegler,
-  instead of applying it to an infinite class of finite graphs, apply it to a class consisting of a single infinite graph.
+  instead of applying it to an infinite class of finite graphs, apply it to a single infinite graph.
   The main result of~\cite{podewski1978stable} is that every superflat graph is stable.   
 As observed by Adler and Adler~\cite{adler2014interpreting}, 
-this immediately implies  the following:
+this directly implies  the following:
  \begin{theorem}[\cite{adler2014interpreting,podewski1978stable}]\label{thm:adleradler}
  	Every nowhere dense class of graphs is stable. Conversely, any stable class of finite graphs which is subgraph-closed  is nowhere dense.
  \end{theorem}
@@ -139,27 +139,27 @@ Note that in principle, $S^\phi(\str A/B)$
 may be equal to $\Pow(B^{|\bar x|})$, and therefore have very large cardinality compared to $B$, even for very simple formulas. 
 The following characterization due to Shelah 
 (cf. \cite[Theorem 2.2, Chapter II]{shelah1990classification})
-shows that for stable classes of structures this does not happen.
+shows that for stable classes this does not happen.
 \begin{theorem}\label{thm:Shelah-stone-space}
 A class of structures $\cal C$
 	is stable if and only if 
-	there exists 
+	there is 
 	an infinite cardinal $\kappa$
-	such that the following implication holds for all
+	such that the following holds for all
 	structures
 	$\str A$ in the elementary closure\footnote{The elementary closure of $\cal C$ is 
 	the class of all structures $\str A$
 	such that  every first order sentence $\phi$
 	which holds in $\str A$ also holds in some $\str B\in \cal C$. Equivalently, it is the class of 
-   models of the theory of $\cal C$.} of~$\cal C$, and for all $B\subset V(\str A)$:
+   models of the theory of $\cal C$.} of~$\cal C$, and all~$B\subset V(\str A)$:
 $$  \textit{if\quad}|B|\le \kappa\textit {\quad then\quad}
 |S^\phi(\str A/B)|\le \kappa.$$
 \end{theorem}
 Therefore,
 Shelah's result provides an upper bound on the number of types, albeit using infinite cardinals, elementary limits, and infinite parameter sets.
  The cardinality bound provided by \cref{thm:Shelah-stone-space},
- however, does not seem to  immediately translate to a result of finitary nature for classes of finite graphs. As we describe below,
- this can be done in some sense using the notions of {\em{VC-dimension}} and {\em{VC-density}}.
+ however, does not seem to  immediately translate to a result of finitary nature. As we describe below,
+ this can be done using the notions of {\em{VC-dimension}} and {\em{VC-density}}.
 
 \paragraph{VC-dimension and VC-density.} The notion of VC-dimension was introduced by 
 Vapnik and Chervonenkis~\cite{chervonenkis1971theory} as a measure of complexity of set systems, or equivalently of hypergraphs.
@@ -180,12 +180,12 @@ $\FFF$.
 As observed by Laskowski~\cite{laskowski1992vapnik}, VC-dimension can be connected to concepts from stability theory introduced by Shelah.
 For a given structure $\str A$, parameter set $B\subseteq V(\str A)$, and formula $\phi(\bar x,\bar y)$,
 we may consider the family $S^\phi(\str A/B)$ of subsets of $B^{|\tup y|}$ defined using equation~\eqref{eq:stone-def}.
-The \emph{VC-dimension} of $\phi(\bar x,\bar y)$ on $\str A$ is the VC-dimension of the family $S^\phi(\str A/V(\str A))$; that is, we take the whole domain to be the parameter set. 
+The \emph{VC-dimension} of $\phi(\bar x,\bar y)$ on $\str A$ is the VC-dimension of the family $S^\phi(\str A/V(\str A))$. 
 In other words, the VC-dimension of $\phi(\bar x,\bar y)$
 on $\str A$ is the largest cardinality of a finite
 set $I$ for which there exist families of tuples $(\bar u_i)_{i\in I}$ and $(\bar v_J)_{J\subset I}$
 of elements of $\str A$
-such that  $$\strA\models\phi(\tup{u}_i,\tup{v}_J)\Longleftrightarrow i\in J\qquad \text {for all $i\in I,J\subset I$.}$$
+such that  $$\strA\models\phi(\tup{u}_i,\tup{v}_J)\Longleftrightarrow i\in J\qquad \text {for all $i\in I$ and $J\subset I$.}$$
 A formula $\phi(\bar x,\bar y)$ is \emph{dependent} on a class of structures $\cal C$
 if there is a bound $d\in\N$ such that the VC-dimension of $\phi(\bar x,\bar y)$ on $\str A$ is at most $d$ for all $\str A\in\cal C$.
 It is immediate from the definitions  that if a formula $\phi(\bar x,\bar y)$ is stable over $\cal C$, then it is also dependent on $\cal C$ (the bound being the ladder index). 
@@ -369,7 +369,7 @@ and let $r\in \N$ be a number. We say that two  sets of vertices $A$ and $B$  ar
 of length at most $r$ contains a vertex from $S$ (cf.~Fig.~\ref{fig:sep}).
  \begin{figure}[h!]
  	\centering
- 		\includegraphics[scale=0.35,page=1]{pics}
+ 		\includegraphics[scale=0.3,page=1]{pics}
  	\caption{The sets $A$ and $B$ are $2$-separated by $S$.
  	}
  	\label{fig:sep}
@@ -411,5 +411,5 @@ In~\cref{sec:uqw-tuples} we formulate and prove the generalization of uniform qu
 In \cref{sec:gaifman} we discuss Gaifman locality for first order logic and derive an elementary variant concerning local separators.
 In \cref{sec:types} we prove our main result, \cref{thm:vc-density}, and the corresponding lower bounds, \cref{thm:vc-density-lower-bound}.
 Finally, in \cref{sec:stable} we provide a constructive proof of the result of Adler and Adler, \cref{thm:new-stable}.
-\clearpage
+%\clearpage
 % \todo{page break here?}

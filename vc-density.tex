@@ -136,9 +136,11 @@ Let $B$ be an $r$-closure of $A$, given by~\cref{lem:closure-nd}.
 	\setcounter{claim}{0}
 	
 The first step is to reduce the statement to the following claim.
+
 \begin{claim}\label{claim2}
 If $X$ is a set of tuples with pairwise different $\phi$-types over $B$, then $|X|=\Oof(|B|^{\ell+\epsilon_1})$.
 \end{claim}	
+
 \cref{claim2} implies that $|S^\phi(G/B)|=\Oof(|B|^{\ell+\epsilon_1})$, 
 which is bounded by $\Oof(|A|^{(\ell+\epsilon_1)(1+\delta)})$ since $|B|=\Oof(|A|^{1+\delta})$. As $(\ell+\epsilon_1)(1+\delta)\le \ell+\epsilon$, this shows that $|S^\phi(G/B)|=\Oof(|A|^{\ell+\epsilon})$.
 Then \cref{lem:types-over-B} implies that also $|S^\phi(G/A)|=\Oof(|A|^{\ell+\epsilon})$, and we are done. Therefore, it remains to prove~\cref{claim2}.
@@ -151,9 +153,11 @@ $C_i=M^G_r(w_i, B)$. Note that there are at most
 $\Oof(|B|^{\ell(1+\delta)})$ different projections of tuples in total, and each projection has size $\Oof(|B|^\delta)$.
 To prove~\cref{claim2}, we consider the special case when all the tuples have the same projection, say $C\subset B$, and  obtain a stronger conclusion,
 for $\epsilon_2\coloneqq \epsilon_1-\delta\ell>0$.
+
 \begin{claim}\label{claim3}
 If $Y$ is a set of tuples with pairwise different $\phi$-types over $B$, and each $u\in V$ has the same projection $C\subset B$, then $|Y|=\Oof(|B|^{\epsilon_2})$.
 \end{claim}
+
 Since there are at most $\Oof(|B|^{\ell(1+\delta)})$ different projections in total and $\ell(1+\delta)+\epsilon_2=\ell+\epsilon_1$, \cref{claim2} can be proved
 by summing the bound given by \cref{claim3} through all different projections~$C$.
 It therefore remains to prove~\cref{claim3}.
@@ -164,11 +168,11 @@ We apply~\cref{thm:uqw-tuples} to the set of $\ell$-tuples $Y$, for $m$ being th
   As a conclusion, we obtain a set $Z\subseteq Y$ of $m$ tuples that is mutually $2r$-separated by $S$ in $G$, for some set of vertices $S\subseteq V(G)$ of size $s\coloneqq s^{\ell}_{2r}$.
   Let $d$ be the degree of the polynomial $N^\ell_{2r}(\cdot)$ obtained from~\cref{thm:uqw-tuples}.
   Note that $s=\Oof(1)$ and $|Y|=\Oof(m^d)$.
-  
-  
+    
   \begin{claim}\label{claim4}
 It holds that $|Z|=\Oof(|C|)$.
   \end{claim}
+  
   We first show how~\cref{claim4} implies~\cref{claim3}.
   Since $m=|Z|=\Oof(|C|)$,
   and $|C|=\Oof(|B|^\delta)$,
