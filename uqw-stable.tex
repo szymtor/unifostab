@@ -44,7 +44,7 @@ every $\phi$-ladder in a graph $G\in\cal C$ has length smaller than $\ell$.
 For the sake of contradiction, assume that there is a graph $G\in\cal C$, a number $k\ge  \ell$,
 and tuples $\bar u_1,\ldots,\bar u_k\in V(G)^{|\bar x|}$ and $ \bar v_1,\ldots, \bar v_k\in V(G)^{|\bar y|}$
 which form a $\phi$-ladder in $G$, i.e., 
-$\phi(\bar u_i,\bar v_j)$ holds in $G$ if and only if $i\le j$.
+$\phi(\bar u_i,\bar v_j)$ holds in~$G$ if and only if $i\le j$.
 	Let $A=\setof{ \bar u_i \bar v_i}{i=1,\ldots,k}\subset V(G)^d$. Note that $|A|=k\ge N^d_r(2T+1)$, since tuples $\bar u_i$ have to be pairwise different.
   
 Applying property  $\uqw^d_r(N^d_r,s^d_r)$ to the set $A$, radius $r$, and target size $m=T+1$
@@ -57,8 +57,8 @@ Applying property  $\uqw^d_r(N^d_r,s^d_r)$ to the set $A$, radius $r$, and targe
   
   Since $|J|=2T+1$, we may partition $J$ into $J_1\uplus J_2$ with $|J_1|=T+1$ so that the following condition holds:
   for each $i,i'\in J_1$ satisfying $i<i'$, there exists $j\in J_2$ with $i<j<i'$. Indeed, it suffices to order the indices of $J$ and put every second index to $J_1$, and every other to $J_2$.
-  Let $X$ be the set of vertices appearing in the tuples $\bar u_i$ with $i\in J_1$, and let $Y$ be the set of vertices appearing in the tuples $\bar v_j$ with $j\in J_2$.
-  Since the tuples of $B$ are mutually $r$-separated by $S$ in $G$, it follows that $X$ and $Y$ are $r$-separated by $S$.
+  Let~$X$ be the set of vertices appearing in the tuples $\bar u_i$ with $i\in J_1$, and let $Y$ be the set of vertices appearing in the tuples $\bar v_j$ with $j\in J_2$.
+  Since the tuples of $B$ are mutually $r$-separated by $S$ in~$G$, it follows that $X$ and $Y$ are $r$-separated by $S$.
   As $|J_1|=T+1$, by \cref{cor:bound} we infer that there are distinct indices $i,i'\in J_1$, say $i<i'$, such that $\tp^\phi(\bar u_i/Y)=
     \tp^\phi(\bar u_{i'}/Y)$. This implies that for each $j\in J_2$, we have $G,\bar u_i,\bar v_j\models \phi(\bar x,\bar y)$ if and only if $G,\bar u_{i'},\bar v_j\models \phi(\bar x,\bar y)$.
     However, there is an index $j\in J_2$ such that $i<j<i'$, and for this index we should have $G,\bar u_i,\bar v_j\models \phi(\bar x,\bar y)$ and $G,\bar u_{i'},\bar v_j\not\models \phi(\bar x,\bar y)$

@@ -86,7 +86,7 @@ we simply write $\tp^\Delta(\bar u/A)$ if the graph $G$
 is clear from the context.
 In the case $A=\emptyset$, we omit it from the notation, 
 and simply write $\tp^\Delta(\bar u)$ or $\tp^\Delta_G(\bar u)$.
-Observe that in particular, if $\Delta=q$ and $A=\emptyset$, then $\tp^q_G(\bar u)$ consists of all first order formulas $\phi(\bar x)$ of quantifier rank at most $q$ and with $|\bar x|=|\bar u|$
+Observe that in particular, if $\Delta=q$ and $A=\emptyset$, then $\tp^q_G(\bar u)$ consists of all first order formulas $\phi(\bar x)$ of quantifier rank at most~$q$ and with $|\bar x|=|\bar u|$
 such that $G,\bar u\models \phi(\bar x)$. This coincides with the standard notion of the FO type of quantifier rank $q$ of the tuple $\bar u$.
 
 \begin{example}
@@ -280,8 +280,8 @@ We are left with arguing the first and the last arrow, which both follow from si
 
 \medskip
 For the first arrow, obviously already $\tp^0_G(\bar u/S)$ determines the $S$-signature of $\bar u$. Let $\bar s$ be any enumeration of $S$.
-To see that $\tp^p_G(\bar u/S)$ determines $\tp^{t}_{N^r_S(\bar v)}(\bar v)$, where $\bar v$ is $\bar u$ with vertices of $S$ removed, take any formula $\phi(\bar x)$ with $|\bar x|=|\bar v|$.
-Let $\phi'(\bar x,\bar s)$ be the formula with parameters $\bar s$ from $S$ that is syntactically derived from $\phi(\bar x)$ as follows: 
+To see that $\tp^p_G(\bar u/S)$ determines $\tp^{t}_{N^r_S(\bar v)}(\bar v)$, where $\bar v$ is $\bar u$ with vertices of~$S$ removed, take any formula $\phi(\bar x)$ with $|\bar x|=|\bar v|$.
+Let $\phi'(\bar x,\bar s)$ be the formula with parameters~$\bar s$ from $S$ that is syntactically derived from $\phi(\bar x)$ as follows: 
 to every quantification $\exists y$ in $\phi(\bar x)$ we add a guard $\delta(y,\bar s)$ stating that there is a path from some element of $\bar x$ to $y$ that has length at most $r$ and does not pass through
 any vertex of $\bar s$; it is easy to see that there is such a guard $\delta(y,\bar s)$ with quantifier rank $r$.
 Then $\phi'(\bar x,\bar s)$ has quantifier rank at most $t+r=p$, and it is straightforward to see that for every $\bar v\in (A-S)^{|\bar v|}$, we have $G,\bar v\models \phi'(\bar x,\bar s)$ if and only if
@@ -306,9 +306,9 @@ The argument for the last arrow is provided by the following claim.
 \end{claim}
 \begin{clproof}[Sketch]
 The proof proceeds by a straightforward induction on the structure of the formula $\phi$.
-In essence, every quantification $\exists y$ of a vertex $y$ in $G$ is replaced by quantification of $y$ in $G-S$ plus a disjunction over $s\in S$ of formulas where we assume $y=s$.
-Atomic formulas of the form $E(x,y)$ and $x=y$ have to be replaced accordingly. Say for $E(x,y)$: if both $x$ and $y$ are assumed to be in $G-S$, then we leave $E(x,y)$ intact;
-if $x$ is assumed to be in $S$ (say we assume $x=s$) and $y$ is assumed to be in $G-S$, then we substitute $E(x,y)$ by $C_s(y)$; and if both $x$ and $y$ are assumed to be in $S$, then 
+In essence, every quantification $\exists y$ of a vertex~$y$ in $G$ is replaced by quantification of $y$ in $G-S$ plus a disjunction over $s\in S$ of formulas where we assume $y=s$.
+Atomic formulas of the form $E(x,y)$ and $x=y$ have to be replaced accordingly. Say for $E(x,y)$: if both~$x$ and~$y$ are assumed to be in $G-S$, then we leave $E(x,y)$ intact;
+if $x$ is assumed to be in $S$ (say we assume $x=s$) and $y$ is assumed to be in $G-S$, then we substitute $E(x,y)$ by $C_s(y)$; and if both~$x$ and~$y$ are assumed to be in $S$, then 
 we replace $E(x,y)$ by $\bot$ or $\top$ depending on whether the vertices assumed to be equal to $x$ and $y$ are adjacent or not.
 We leave the details to the reader.
 \end{clproof}
