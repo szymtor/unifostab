@@ -1,4 +1,4 @@
-\section{Packing and covering by definable sets}
+\section{Packing and traversal numbers for nowhere dense graphs}
 In this section, we give an application 
 of~\cref{thm:vc-density}, proving a 
 duality result for nowhere dense graph classes.
@@ -10,12 +10,11 @@ and the \emph{transversality} of $\cal F$, denoted
 $\tau(\cal F)$ is the smallest cardinality of a traversal.
 Note that if $\cal G$ is a finite set system, then
 $\nu({\cal G})\le \tau(\cal G)$. 
-The set system $\cal F$ has the \emph{Erd{\"o}s-Pósa property} if there is a function $f\from\N\to\N$ such that every finite subfamily $\cal G$ of $\cal F$
+The set system $\cal F$ has the \emph{Erd{\H o}s-P\'{o}sa property} if there is a function $f\from\N\to\N$ such that every finite subfamily $\cal G$ of $\cal F$
 satisfies $\tau({\cal G})\le f(\nu(\cal G))$. 
 
-We prove that set systems defined by first order formulas in nowhere dense graph classes have the Erd{\H o}s-P{\'o}sa property, in the following sense.
+We prove that set systems defined by first order formulas in nowhere dense graph classes have the Erd{\H o}s-P\'{o}sa property, in the following sense.
 
-\todo{wrong thm number}
 \begin{theorem}\label{thm:erdos-posa}
 	Fix a nowhere dense class of graphs $\CCC$ and a 
 	formula $\phi(x,y)$ with free variables $x,y$.
@@ -29,7 +28,7 @@ Then~$\tau({\cal G})\le f(\nu(\cal G))$.
 
 
 We will apply the following result of Matou{\v s}ek,
-which relies on the celebrated proof of Alon and Kleitman~\cite{alon-kleitman} of the conjecture of Hardwiger and Debrunner. 
+ whose proof relies on the  proof of Alon and Kleitman~\cite{ALON1992103} of the conjecture of Hardwiger and Debrunner. 
 In the result of Matou{\v s}ek, the family $\cal F$ is infinite. By $\pi_{\cal F}^*(m)$ we denote the \emph{dual shatter function}, which can be defined as the maximal number 
 of occupied cells in the Venn diagram of $m$ elements of $\cal F$.
 
@@ -61,7 +60,7 @@ of occupied cells in the Venn diagram of $m$ elements of $\cal F$.
 % \end{corollary}
 
 
-\begin{proof}\label{thm:erdos-posa}
+\begin{proof}
 	A graph $G$ %with a distinguished set of vertices $A\subset V(G)$ 
 	defines a relational structure which we denote 
 	$\str A_{G}$, with universe $V(G)$,
@@ -70,8 +69,7 @@ of occupied cells in the Venn diagram of $m$ elements of $\cal F$.
 	and with a binary relation $\sim$ which is the complete relation.
 	
 	To avoid set-theoretic problems, we assume that all graphs $G\in \CCC$ have integers as vertices, and that two graphs $G,H$ have disjoint vertex sets.
-	
-	Define the structure $\str A_{\CCC}$ as the disjoint union of all structures $\str A_{G}$,
+		Define the structure $\str A_{\CCC}$ as the disjoint union of all structures $\str A_{G}$,
 	for all graphs $G\in \CCC$. Therefore, $\str A_{\CCC}$
 	is a structure with a binary relation symbol $E$,
 	% a unary relation symbol $U$ and 
