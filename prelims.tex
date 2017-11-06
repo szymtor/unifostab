@@ -37,18 +37,18 @@ class of bounded expansion is nowhere dense. The converse is not necessarily tru
 
 A set $B\subseteq V(G)$ is called {\em{$r$-independent}} in a graph $G$ if  $\dist_G(u,v)>r$ for all
 distinct $u,v\in B$. 
-A class $\CCC$ of graphs is \emph{uniformly quasi-wide} if for every $r\in \N$ there is a number $s_r\in \N$
-and a function $N_r\from\N\to\N$ such that
-for every $m\in \N$, graph $G\in \CCC$, and vertex subset $A\subseteq V(G)$ of size $\abs{A}\geq N_r(m)$, there is a set
-$S\subseteq V(G)$ of size $\abs{S}\leq s_r$ and a set
+A class $\CCC$ of graphs is \emph{uniformly quasi-wide} if for every $r\in \N$ there is a number $s\in \N$
+and a function $N\from\N\to\N$ such that
+for every $m\in \N$, graph $G\in \CCC$, and vertex subset $A\subseteq V(G)$ of size $\abs{A}\geq N(m)$, there is a set
+$S\subseteq V(G)$ of size $\abs{S}\leq s$ and a set
 $B\subseteq A-S$ of size $\abs{B}\geq m$ 
 which is $r$-independent in $G-S$.
 Recall that Ne\v set\v ril and Ossona de 
 Mendez proved~\cite{nevsetvril2011nowhere} that nowhere dense graph classes are exactly the same as uniformly quasi-wide classes. 
-The following result of Kreutzer, Rabinovich and the second author
+The following result of Kreutzer, Rabinovich and the second author~\cite{siebertz2016polynomial}
 improves their result, by showing that the function $N$ can be taken polynomial:
 
-\begin{theorem}\label{thm:krs}
+\begin{theorem}[\cite{siebertz2016polynomial}]\label{thm:krs}
 For every nowhere dense class $\CCC$
 and for all $r\in \N$ there is a polynomial $N\from \N\to\N$ 
 and a number $s\in \N$ such that the following holds.
@@ -56,4 +56,6 @@ Let be $G\in \CCC$ be aa graph and let $A\subset V(G)$ be a vertex subset of siz
 Then there exists a set $S\subset V(G)$ of size $|S|<s$
 and a set $B\subset A-S$ of size $|B|\ge m$ which is $r$-independent in $G-S$.	
 \end{theorem}
+
+As we mentioned, the proof of Kreutzer et al.~\cite{siebertz2016polynomial} relies on non-constructive arguments and does not yield explicit bounds on $s$ and (the degree of) $N$. 
 In the next section, we discuss a further strengthening of this result, by providing explicit bounds on the function $N$ and the number $s$.
