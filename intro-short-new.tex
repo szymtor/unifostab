@@ -392,25 +392,32 @@ This elementary result combines Gaifman's locality of first order logic (cf.~\ci
 for uniform quasi-wideness (\cref{thm:new-uqw}, and its extension to tuples~\cref{thm:uqw-tuples}), 
 as well as the previous results on neighborhood complexity~\cite{drange2016kernelization,eickmeyer2016neighborhood}, are the main ingredients of our main result,~\cref{thm:vc-density}.
 
-% \paragraph{A duality theorem.}
-% As an application of our main result,~\cref{thm:vc-density}, we prove the following
-% Erd{\H o}s-P{\`o}sa like result
-% \begin{theorem}\label{thm:erdos-posa}
-% 	Fix a nowhere dense class of graphs $\CCC$ and a
-% 	formula $\phi(x,y)$ with free variables $x,y$.
-% 	 % where $x$ is a single variable and $\bar y$ is a tuple of variables.
-% 	There is a function $f\from \N\to\N$ with the following property.
-% 	Let $G\in \CCC$ be a graph and let $\cal G$
-% 	be a family of subsets of $V(G)$ consisting of sets of the form $\setof{b\in V(G)}{\phi(a, b)}$, where~$a\in V(G)$.
-% Then~$\tau({\cal G})\le f(\nu(\cal G))$.
-% \end{theorem}
+\paragraph{A duality theorem.}
+As an example application of our main result,~\cref{thm:vc-density}, we prove the following
+ result.
+\begin{restatable}{theorem}{erdosposa}\label{thm:erdos-posa}
+	Fix a nowhere dense class of graphs $\CCC$ and a
+	formula $\phi(x,y)$ with free variables $x,y$.
+	 % where $x$ is a single variable and $\bar y$ is a tuple of variables.
+	There is a function $f\from \N\to\N$ with the following property.
+	Let $G\in \CCC$ be a graph and let $\cal G$
+	be a family of subsets of $V(G)$ consisting of sets of the form $\setof{b\in V(G)}{\phi(a, b)}$, where~$a\in V(G)$.
+Then~$\tau({\cal G})\le f(\nu(\cal G))$.
+\end{restatable}
+\noindent Above, $\tau(\cal G)$ denotes the \emph{transversality} of $\cal G$, i.e., the least number of elements of a set $X$ which intersects every set in $\cal G$,
+and $\nu(\cal G)$ denotes the \emph{packing number} of $\cal G$, i.e., the largest number of pairwise-disjoint subsets of $\cal G$.~\cref{thm:erdos-posa} is an immediate consequence of the bound given by~\cref{thm:vc-density} and a result of Matou{\v s}ek~\cite{Matousek:2004:BVI:1005787.1005789}.
+
+We remark that a similar, but incomparable result
+is proved by Bousquet and Thomass{\'e}~\cite{BousquetT15}.
+In their result, the assumption on $\CCC$ is weaker, since they just require that it has \emph{bounded distance VC-dimension}, 
+but the assumption on   $\cal G$ is stronger, as it is required to be the set of all balls of a fixed radius.
 
 
 
 
 
 \paragraph{Stability.}
-Finally, we observe that we can use all the gathered tools to give a constructive proof of the result of Adler and Adler~\cite{adler2014interpreting}
+Finally, we observe that we can apply our  tools to give a constructive proof of the result of Adler and Adler~\cite{adler2014interpreting}
 that every nowhere dense class is stable, which yields computable upper bounds on ladder indices.
 More precisely, we translate the approach of Podewski and Ziegler~\cite{podewski1978stable} to the finite
 and replace the key non-constructive application of compactness with a combinatorial argument based on Gaifman's locality,
