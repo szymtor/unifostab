@@ -1,0 +1,106 @@
+\section{Packing and covering by definable sets}
+In this section, we give an application 
+of~\cref{thm:vc-density}, proving a 
+duality result for nowhere dense graph classes.
+
+A \emph{set system} is a family  $\cal F$ of subsets of a set $X$.
+Its  \emph{packing} is a subfamily of $\cal F$ of pairwise disjoint subsets, and its \emph{traversal} (or \emph{hitting set}) is a subset of $X$ which intersects every member of $\cal F$.
+The \emph{packing number} of~$\cal F$, denoted $\nu(\cal F)$ is the largest cardinality of a packing,
+and the \emph{transversality} of $\cal F$, denoted
+$\tau(\cal F)$ is the smallest cardinality of a traversal.
+Note that if $\cal G$ is a finite set system, then
+$\nu({\cal G})\le \tau(\cal G)$. 
+The set system $\cal F$ has the \emph{Erd{\"o}s-Pósa property} if there is a function $f\from\N\to\N$ such that every finite subfamily $\cal G$ of $\cal F$
+satisfies $\tau({\cal G})\le f(\nu(\cal G))$. 
+
+We prove that set systems defined by first order formulas in nowhere dense graph classes have the Erd{\H o}s-P{\'o}sa property, in the following sense.
+
+\todo{wrong thm number}
+\begin{theorem}\label{thm:erdos-posa}
+	Fix a nowhere dense class of graphs $\CCC$ and a 
+	formula $\phi(x,y)$ with free variables $x,y$.
+	 % where $x$ is a single variable and $\bar y$ is a tuple of variables.
+	There is a function $f\from \N\to\N$ with the following property.
+	Let $G\in \CCC$ be a graph and let $\cal G$
+	be a family of subsets of $V(G)$ consisting of sets of the form $\setof{b\in V(G)}{\phi(a, b)}$, where~$a\in V(G)$.
+Then~$\tau({\cal G})\le f(\nu(\cal G))$.
+\end{theorem}
+
+
+
+We will apply the following result of Matou{\v s}ek,
+which relies on the celebrated proof of Alon and Kleitman~\cite{alon-kleitman} of the conjecture of Hardwiger and Debrunner. 
+In the result of Matou{\v s}ek, the family $\cal F$ is infinite. By $\pi_{\cal F}^*(m)$ we denote the \emph{dual shatter function}, which can be defined as the maximal number 
+of occupied cells in the Venn diagram of $m$ elements of $\cal F$.
+
+
+\begin{theorem}\label{thm:pq}
+	Let $\cal F$ be a set system with $\pi^*_{\cal F}(m)=o(m^k)$,
+	for some integer $k$, and let $p\ge k$.
+	There is a constant $T$ such that the following holds for every finite family $\cal G\subset \cal F$: 
+	if $\cal G$ has the $(p,k)$-property, meaning that 
+	among every $p$ sets in $\cal G$ some $k$ intersect, then $\tau ({\cal G})\le T$.
+\end{theorem}
+
+%
+% The dual of a set system $\cal F$ with base set $X$ is the set system $\cal F^*$, with base set $\cal F$
+% and elements of the form $x^*$, where for $x\in X$, the set $x^*\subset \cal F$ is defined so that $F\in x^*$ if and only if $x\in F$,
+% for $F\in \cal F$.  The \emph{shatter function} of $\cal F$ is the function $\pi_{\cal F}$
+% defined so that $\pi_{\cal F}(m)$ is the maximal size of a family $\setof{A\cap F}{F\in \cal F}$,
+% for $A$ ranging over subsets of $X$ of size $m$.
+% Note that $\pi_{\cal F^*}=\pi_{\cal F}^*$, i.e.,
+% the dual shatter function of $\cal F$ is the shatter function of the dual of $\cal F$. By dualizing~\cref{thm:pq}, we get:
+%
+% \begin{corollary}\label{cor:dual-pq}
+% 	Let $\cal F$ be a set system with base set $X$, with $\pi_{\cal F}(m)=o(m^k)$,
+% 	for some integer $k$, and let $p\ge k$.
+% 	There is a constant $T$ such that the following holds for every finite set $Y\subset X$:
+% 	if
+% 	among every $p$ elements of $Y$, some $k$ are contained in a single element of $\cal F$, then $Y$
+% 	is contained in a union of $T$ elements of $\cal F$.
+% \end{corollary}
+
+
+\begin{proof}\label{thm:erdos-posa}
+	A graph $G$ %with a distinguished set of vertices $A\subset V(G)$ 
+	defines a relational structure which we denote 
+	$\str A_{G}$, with universe $V(G)$,
+	a binary relation $E$ interpreted as $\setof{(v,w)}{v,w\in V(G),vw\in E(G)}$,  
+	% a unary predicate $U$ whose interpretation is the set $A$,
+	and with a binary relation $\sim$ which is the complete relation.
+	
+	To avoid set-theoretic problems, we assume that all graphs $G\in \CCC$ have integers as vertices, and that two graphs $G,H$ have disjoint vertex sets.
+	
+	Define the structure $\str A_{\CCC}$ as the disjoint union of all structures $\str A_{G}$,
+	for all graphs $G\in \CCC$. Therefore, $\str A_{\CCC}$
+	is a structure with a binary relation symbol $E$,
+	% a unary relation symbol $U$ and 
+	a binary relation symbol $\sim$. Let $\cal F$ denote the
+	family of subsets of $V(\str A_{\CCC})$
+which are of the form
+$\setof{b\in V(\str A_{\CCC})} {\phi(a,b)\land a\sim b}$, where $a$ ranges over  $V(\str A_{\CCC})$.
+
+The following is obtained from~\cref{thm:vc-density} by symbol pushing.
+\begin{claim}
+	The dual shatter function of the family $\cal F$ satisfies	$\pi^*_{\cal F}(m)=O(m^{1+\epsilon})$,
+	 for every fixed $\epsilon>0$.
+In particular, $\pi^*_{\cal F}(m)=o(m^{2})$.
+\end{claim}
+
+To prove~\cref{thm:erdos-posa},
+consider the function $f\from \N \to \N$
+defined so that $f(\nu)$ is the value $T$ obtained from~\cref{thm:pq} applied to $\cal F$, to $k=2$ and $p=\nu+1$.
+
+Suppose now that $G\in \CCC$ is a graph and $\GGG$
+is a family of subsets of $V(G)$ consisting of sets of the form $\setof{b\in V(G)}{\phi(a,b)}$, for $a\in V(G)$.
+We identify $\GGG$ with a subfamily of $\FFF$ in the natural way, by treating a set $\setof{b\in V(G)}{\phi(a,b)}$
+as the set $\setof{b\in V(\str A_{\cal C})}{\phi(a,b)\land a\sim b}$,
+where $b$ is the element of $V(G)=V(\str A_G)\subset V(\str A_{\CCC})$.
+
+Let $\nu$ be the packing number of $\GGG$.
+In particular, for every $\nu+1$ subsets of $\GGG$
+there exists a vertex $v\in V(G)$
+which is contained in two elements of $\GGG$.
+Hence, $\GGG$ is a $(p,2)$-family for $p=\nu+1$.
+By~\cref{thm:pq}, $\tau(\GGG)\le T=f(\nu)=f(\nu(G))$,  as required.
+\end{proof}

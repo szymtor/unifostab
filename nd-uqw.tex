@@ -1,57 +1,36 @@
 \section{Bounds for uniform quasi-wideness}\label{sec:uqw}
 
-In this section we prove \cref{thm:new-uqw}. 
-% In the presentation we focus on proving the existential statement, and at the end we briefly argue how the proof can be turned into an algorithm with the promised running time.
-We first recall some basic notions from graph theory. 
-
-\paragraph*{Preliminaries.}
-All graphs in this paper are finite, undirected and simple, that is, 
-they do not have loops or parallel edges. Our notation is standard,
-we refer to~\cite{diestel2012graph} for more background on 
-graph theory. 
-We write $V(G)$ for the vertex set of a graph $G$ and
-$E(G)$ for its edge set. 
-The {\em{distance}} between vertices $u$ and $v$ in $G$, denoted $\dist_G(u,v)$, is the length of a shortest path between $u$ and $v$ in~$G$.
-If there is no path between $u$ and $v$ in $G$, we put $\dist_G(u,v)=\infty$.
-The {\em{(open) neighborhood}} of a vertex $u$, denoted $N(u)$, is the set of neighbors of $u$, excluding $u$ itself.
-For a non-negative integer $r$, by $N_r[u]$ we denote the {\em{(closed) $r$-neighborhood}} of $u$ which comprises vertices at distance at most $r$ from $u$; 
-note that $u$ is always contained in its closed $r$-neighborhood. The \emph{radius} of a connected graph $G$ is the least integer $r$ such that there is some vertex $v$ of $G$ with $N_r[v]=V(G)$.
 
 
-A {\em{minor model}} of a graph $H$ in $G$ is a family $(I_u)_{u\in V(H)}$ of pairwise vertex-disjoint connected subgraphs of $G$, called {\em{branch sets}},
-such that whenever $uv$ is an edge in~$H$, there are $u'\in V(I_u)$ and $v'\in V(I_v)$ for which $u'v'$ 
-is an edge in $G$.
-The graph $H$ is a {\em{depth-$r$ minor}} of $G$, denoted $H\minor_rG$, if there is a minor model
-$(I_u)_{u\in V(H)}$ of~$H$ in $G$ such that each $I_u$ has radius at most $r$.
+In this section we prove \cref{thm:new-uqw},
+which we recall below.
+\puqwthm*%
+\noindent\cref{thm:new-uqw} immediately implies~\cref{thm:krs},
+and strengthens it in several ways. Most crucially, 
+it provides an explicit polynomial $N$ and bound $s$,
+whereas the bounds in~\cref{thm:krs} rely on non-constructive arguments. We note that~\cref{thm:krs} is sufficient to prove our main result,~\cref{thm:vc-density}, but is required in our proof of~\cref{thm:new-stable}, which is the effective 
+variant of the result of Adler and Adler.
 
-A class $\CCC$ of graphs is \emph{nowhere dense} if there is a function 
-$t\colon \N\rightarrow \N$ such that for all $r\in \N$ it holds that $K_{t(r)}\not\minor_r G$
-for all $G\in \CCC$, where $K_{t(r)}$ denotes the clique on $t(r)$ vertices.
-The class~$\CCC$ moreover has \emph{bounded expansion}
-if there is a function $d\colon\N\rightarrow\N$ such that for all 
-$r\in \N$ and all $H\minor_rG$ with $G\in\CCC$, the {\em{edge density}}
-of $H$, i.e. $|E(H)|/|V(H)|$, is bounded by $d(r)$. Note that every 
-class of bounded expansion is nowhere dense. The converse is not necessarily true in general~\cite{sparsity}.
 
-% A set $B\subseteq V(G)$ is called {\em{$r$-independent}} in a graph $G$ if  $\dist_G(u,v)>r$ for all
-% distinct $u,v\in B$.
 
- 
 
-A set $B\subseteq V(G)$ is called {\em{$r$-independent}} in a graph $G$ if  $\dist_G(u,v)>r$ for all
-distinct $u,v\in B$. 
-A class $\CCC$ of graphs is \emph{uniformly quasi-wide} if for every $r\in \N$ there is a number $s_r\in \N$
-and a function $N_r\from\N\to\N$ such that
-for every $m\in \N$, graph $G\in \CCC$, and vertex subset $A\subseteq V(G)$ of size $\abs{A}\geq N_r(m)$, there is a set
-$S\subseteq V(G)$ of size $\abs{S}\leq s_r$ and a set
-$B\subseteq A-S$ of size $\abs{B}\geq m$ 
-which is $r$-independent in $G-S$.
+%
+% \setcounter{theorem}{}
+% \begin{theorem}\label{thm:new-uqw}
+% For all $r,t\in \N$ there is a polynomial  $N\colon \N\to \N$ with $N(m)=
+% \Oof_{r,t}{(m^{{(4t+1)}^{2rt}})}$, such that the following holds.
+% Let $G$ be a graph such that $K_t\not\minor_{\lfloor 9r/2\rfloor} G$, and
+% let $A\subseteq V(G)$ be a vertex subset of size at least $N(m)$, for a given $m$.
+% Then there exists a set $S\subseteq V(G)$ of size $|S|<t$ and a set $B\subseteq A\setminus S$
+% of size $|B|\geq m$ which is $r$-independent in $G-S$.
+% Moreover, given~$G$ and $A$, such sets $S$ and $B$ can be computed in time $\Oof_{r,t}(|A|\cdot |E(G)|)$.
+% \end{theorem}
 
 
 
 \paragraph{General strategy.}
 Our proof follows the same lines as the original proof of Ne\v set\v ril and Ossona de Mendez~\cite{nevsetvril2011nowhere}, with the difference that in the key technical lemma (\cref{lem:apex} below), 
-we improve the bounds significantly by replacing a Ramsey argument with a new combinatorial reasoning.
+we improve the bounds significantly by replacing a Ramsey argument with a refined combinatorial analysis.
 The new argument essentially originates in the concept of {\em{branching index}} from stability theory. 
 %, 
 %and also uses the almost linear bound on neighborhood complexity in nowhere dense graph classes, due to Gajarsk\'y et al.~\cite{gajarsky2017kernelization}. \marginpar{no longer}
@@ -612,7 +591,8 @@ some number $s^d_r\in \N$ and polynomial $N^d_r\from \N\to\N$ that can be comput
 \end{theorem}
 
 
-\cref{thm:uqw-tuples} is an immediate consequence  of~\cref{thm:new-uqw} and of the following result.
+\cref{thm:uqw-tuples} is an immediate consequence  of~\cref{thm:new-uqw} (or~\cref{thm:krs} if only the first part of the statement is concerned)
+and of the following result.
 
 \begin{proposition}\label{prop:uqw-tuples}
 For all $r,d\in\N$,
@@ -625,7 +605,7 @@ function $N^d_r\colon \N\to \N$ defined as $N^d_r(m)=f^d((d^2+1)\cdot m)$, where
 \end{proposition}
 
 
-The rest of this section is devoted to the proof of \cref{prop:uqw-tuples}.
+The rest of~\cref{sec:uqw-tuples} is devoted to the proof of \cref{prop:uqw-tuples}.
 Fix a class $\cal C$
 such that $\uqw_{2r}(N_{2r},s_{2r})$ holds for some number $s_{2r}\in \N$ and  function $N_{2r}\from \N\to \N$.
 We also fix the function $f$ defined in the statement of \cref{prop:uqw-tuples}.
