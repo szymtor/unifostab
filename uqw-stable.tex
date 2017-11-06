@@ -4,15 +4,15 @@ As mentioned, Adler and Adler~\cite{adler2014interpreting},
 proved that every nowhere dense class of graphs is stable. In this section,
 we prove its effective variant,~\cref{thm:new-stable}, which 
 we repeat for convenience.
-
-\setcounter{aux}{\thetheorem}
-\setcounter{theorem}{\thestable}
-\begin{theorem}
-There are computable functions $f\colon \N^3\to\N$ and $g\colon\N\to\N$ with the following property.
-Suppose $\phi(\bar x,\bar y)$ is a formula of quantifier rank at most $q$ and with $d$ free variables.
-Suppose further that $G$ is a graph excluding $K_t$ as a depth-$g(q)$ minor. Then the ladder index of $\phi(\bar x,\bar y)$ in $G$ is at most $f(q,d,t)$.
-\end{theorem}
-\setcounter{theorem}{\theaux}
+%\newstable*
+ \setcounter{aux}{\thetheorem}
+ \setcounter{theorem}{\thestable}
+ \begin{theorem}
+ There are computable functions $f\colon \N^3\to\N$ and $g\colon\N\to\N$ with the following property.
+ Suppose $\phi(\bar x,\bar y)$ is a formula of quantifier rank at most $q$ and with $d$ free variables.
+ Suppose further that $G$ is a graph excluding $K_t$ as a depth-$g(q)$ minor. Then the ladder index of $\phi(\bar x,\bar y)$ in $G$ is at most $f(q,d,t)$.
+ \end{theorem}
+ \setcounter{theorem}{\theaux}
 
 Recall that a class $\cal C$ is stable if and only if for every first order formula $\varphi(\bar x,\bar y)$, 
 its ladder index over graphs from $\cal C$ is bounded by a constant depending only on $\cal C$ and $\varphi$;

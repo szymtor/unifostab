@@ -247,9 +247,10 @@ combinatorics.
 Our main result, \cref{thm:vc-density} stated below, improves the bound~\eqref{eq:nip} for classes of sparse graphs
 by providing essentially the optimum exponent.
 
-\newcounter{vcupper}
-\setcounter{vcupper}{\thetheorem}
-\begin{theorem}\label{thm:vc-density}
+ \newcounter{vcupper}
+ \setcounter{vcupper}{\thetheorem}
+ \begin{theorem}\label{thm:vc-density}
+%\begin{restatable}{theorem}{vcupper}\label{thm:vc-density}
 Let $\CCC$ be a class of graphs and let $\phi(\tup x,\tup y)$ be a first order formula
 with free variables  partitioned  into object variables $\bar x$  and parameter variables $\bar y$. Let $\ell=|\bar x|$. Then:
 \begin{enumerate}[(1)]
@@ -258,7 +259,8 @@ there exists a constant~$c$ such that for every $G\in \CCC$ and every nonempty
 $A\subseteq V(G)$, we have $|S^\phi(G/A)|\leq c\cdot |A|^{\ell+\epsilon}.$
 \item If $\CCC$ has bounded expansion, then there exists a constant~$c$ such that for every $G\in \CCC$ and every nonempty $A\subseteq V(G)$, we have $|S^\phi(G/A)|\leq c\cdot |A|^\ell$.
 \end{enumerate}
-\end{theorem} 
+%\end{restatable}
+ \end{theorem}
 
 In particular, \cref{thm:vc-density} implies that
 the VC-density of any fixed formula 
@@ -271,9 +273,10 @@ this lower bound applies to any infinite class of graphs, even edgeless ones.
 We moreover show that, as long as we consider only subgraph-closed graph classes, the result of \cref{thm:vc-density} also cannot be improved in terms of generality.
 The following result is an easy corollary of known characterizations of obstructions to being nowhere dense, respectively having bounded expansion.
 
-\newcounter{vclower}
-\setcounter{vclower}{\thetheorem}
-  \begin{theorem}\label{thm:vc-density-lower-bound}
+ \newcounter{vclower}
+ \setcounter{vclower}{\thetheorem}
+   \begin{theorem}\label{thm:vc-density-lower-bound}
+  %\begin{restatable}{theorem}{vclower}\label{thm:vc-density-lower-bound}
   Let $\CCC$ be a class of graphs which 
   is closed under taking subgraphs. 
   \begin{enumerate}[(1)]
@@ -283,8 +286,8 @@ The following result is an easy corollary of known characterizations of obstruct
   \item If $\CCC$ has unbounded expansion, then there is a formula 
   $\phi(x,y)$ such that for every $c\in \mathbb{R}$ there exist $G\in\CCC$ and a nonempty $A\subseteq V(G)$ with $|S^\phi(G/A)|>c|A|$. 
   \end{enumerate}
-  \end{theorem}
-
+  %\end{restatable}  
+\end{theorem}
 
 \paragraph{Neighborhood complexity.}
 To illustrate \cref{thm:vc-density}, consider the case when
@@ -308,9 +311,9 @@ introduced by Dawar~\cite{dawar2010homomorphism}
 in the context of homomorphism preservation theorems.
 
 Formally, a class of graphs $\CCC$  is \emph{uniformly quasi-wide} if for each integer $r\in\N$ there is a function
- $N_r\from \N\rightarrow \N$ and a constant  $s_r\in \N$ such
-that for every $m\in \N$, graph $G\in \CCC$, and vertex subset $A\subseteq V(G)$ of size $\abs{A}\geq N_r(m)$,
-there is a set $S\subseteq V(G)$ of size $\abs{S}\leq s_r$ and a set
+ $N\from \N\rightarrow \N$ and a constant  $s\in \N$ such
+that for every $m\in \N$, graph $G\in \CCC$, and vertex subset $A\subseteq V(G)$ of size $\abs{A}\geq N(m)$,
+there is a set $S\subseteq V(G)$ of size $\abs{S}\leq s$ and a set
 $B\subseteq A\setminus S$ of size $\abs{B}\geq m$ which is $r$-independent in
 $G-S$. Recall that a set $B\subseteq V(G)$ is {\em{$r$-independent}} in $G$ if all
 distinct $u,v\in B$ are at distance 
@@ -341,6 +344,10 @@ More precisely, we prove the following theorem; here, the notation $\Oof_{r,t}(\
 \newcounter{uqw}
 \setcounter{uqw}{\thetheorem}
 \begin{theorem}\label{thm:new-uqw}
+% \newcounter{uqw}
+% \setcounter{uqw}{\thetheorem}
+% \begin{theorem}\label{thm:new-uqw}
+%\begin{restatable}{theorem}{puqwthm}\label{thm:new-uqw}
 For all $r,t\in \N$ there is a polynomial  $N\colon \N\to \N$ with $N(m)=
 \Oof_{r,t}{(m^{{(4t+1)}^{2rt}})}$, such that the following holds.
 Let $G$ be a graph such that $K_t\not\minor_{\lfloor 9r/2\rfloor} G$, and
@@ -387,21 +394,51 @@ This elementary result combines Gaifman's locality of first order logic (cf.~\ci
 for uniform quasi-wideness (\cref{thm:new-uqw}, and its extension to tuples~\cref{thm:uqw-tuples}), 
 as well as the previous results on neighborhood complexity~\cite{drange2016kernelization,eickmeyer2016neighborhood}, are the main ingredients of our main result,~\cref{thm:vc-density}.
 
+\paragraph{A duality theorem.}
+As an example application of our main result,~\cref{thm:vc-density}, we prove the following
+ result.
+ 
+\newcounter{ep}
+\setcounter{ep}{\thetheorem}
+\begin{theorem}\label{thm:erdos-posa}
+%\begin{restatable}{theorem}{erdosposa}\label{thm:erdos-posa}
+	Fix a nowhere dense class of graphs $\CCC$ and a 
+	formula $\phi(x,y)$ with two free variables $x,y$.
+	Then there is a function $f\from \N\to\N$ with the following property.
+	Let $G\in \CCC$ be a graph and let $\cal G$
+	be a family of subsets of $V(G)$ consisting of sets of the form $\setof{v\in V(G)}{\phi(u, v)}$, where~$u$ is some vertex of $V(G)$.
+Then~$\tau({\cal G})\le f(\nu(\cal G))$.
+%\end{restatable}
+\end{theorem}
+\noindent Above, $\tau(\cal G)$ denotes the \emph{transversality} of $\cal G$, i.e., the least number of elements of a set $X$ which intersects every set in $\cal G$,
+and $\nu(\cal G)$ denotes the \emph{packing number} of $\cal G$, i.e., the largest number of pairwise-disjoint subsets of $\cal G$.~\cref{thm:erdos-posa} is an immediate consequence of the bound given by~\cref{thm:vc-density} and a result of Matou{\v s}ek~\cite{Matousek:2004:BVI:1005787.1005789}.
+
+We remark that a similar, but incomparable result
+is proved by Bousquet and Thomass{\'e}~\cite{BousquetT15}.
+In their result, the assumption on $\CCC$ is weaker, since they just require that it has \emph{bounded distance VC-dimension}, 
+but the assumption on   $\cal G$ is stronger, as it is required to be the set of all balls of a fixed radius.
+
+
+
+
+
 \paragraph{Stability.}
-Finally, we observe that we can use all the gathered tools to give a constructive proof of the result of Adler and Adler~\cite{adler2014interpreting}
+Finally, we observe that we can apply our  tools to give a constructive proof of the result of Adler and Adler~\cite{adler2014interpreting}
 that every nowhere dense class is stable, which yields computable upper bounds on ladder indices.
 More precisely, we translate the approach of Podewski and Ziegler~\cite{podewski1978stable} to the finite
 and replace the key non-constructive application of compactness with a combinatorial argument based on Gaifman's locality,
 in the flavor served by our observations on $r$-separation (\cref{cor:bound}).
 The following theorem summarizes our result.
 
-\newcounter{stable}
-\setcounter{stable}{\thetheorem}
-\begin{theorem}\label{thm:new-stable}
+ \newcounter{stable}
+ \setcounter{stable}{\thetheorem}
+%\begin{restatable}{theorem}{newstable}\label{thm:new-stable}
+ \begin{theorem}\label{thm:new-stable}
 There are computable functions $f\colon \N^3\to\N$ and $g\colon\N\to\N$ with the following property.
 Suppose $\phi(\bar x,\bar y)$ is a formula of quantifier rank at most $q$ and with $d$ free variables.
 Suppose further that $G$ is a graph excluding $K_t$ as a depth-$g(q)$ minor. Then the ladder index of $\phi(\bar x,\bar y)$ in $G$ is at most $f(q,d,t)$.
-\end{theorem}
+ \end{theorem}
+%\end{restatable}
 
 %Note that in particular, \cref{thm:new-stable} implies that every nowhere dense graph is stable, which was the main conclusion of the paper by Adler and Adler~\cite{adler2014interpreting}. 
 
@@ -418,5 +455,5 @@ Finally, in \cref{sec:stable} we provide a constructive proof of the result of A
 thank Patrice Ossona de Mendez for pointing us to the
 question of studying VC-density of nowhere dense graph
 classes.
-\pagebreak
+%\pagebreak
 % \todo{page break here?}

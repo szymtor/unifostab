@@ -8,20 +8,22 @@ In this section we prove \Cref{thm:vc-density} and \Cref{thm:vc-density-lower-bo
 \subsection{Upper bounds for sparse classes}
 We first prove \Cref{thm:vc-density}, which we recall for convenience.
 
-\setcounter{aux}{\thetheorem}
-\setcounter{theorem}{\thevcupper}
-\begin{theorem}\label{thm:vc-density-recall}
-Let $\CCC$ be a class of graphs and let $\phi(\tup x,\tup y)$ be a first order formula
-with free variables  partitioned  into object variables $\bar x$  and parameter variables $\bar y$. Let $\ell=|\bar x|$. Then:
-\begin{enumerate}[(1)]
-\item If $\CCC$ is nowhere dense, then for every $\epsilon>0$ 
-there exists a constant~$c$ such that for every $G\in \CCC$ and every nonempty
-$A\subseteq V(G)$, we have $|S^\phi(G/A)|\leq c\cdot |A|^{\ell+\epsilon}.$
-\item If $\CCC$ has bounded expansion, then there exists a constant~$c$ such that for every $G\in \CCC$ and every nonempty $A\subseteq V(G)$, we have $|S^\phi(G/A)|\leq c\cdot |A|^\ell$.
-\end{enumerate}
-\end{theorem} 
+%\vcupper*
+ \setcounter{aux}{\thetheorem}
+ \setcounter{theorem}{\thevcupper}
+ \begin{theorem}\label{thm:vc-density-recall}
+ Let $\CCC$ be a class of graphs and let $\phi(\tup x,\tup y)$ be a first order formula
+ with free variables  partitioned  into object variables $\bar x$  and parameter variables $\bar y$. Let $\ell=|\bar x|$. Then:
+ \begin{enumerate}[(1)]
+ \item If $\CCC$ is nowhere dense, then for every $\epsilon>0$
+ there exists a constant~$c$ such that for every $G\in \CCC$ and every nonempty
+ $A\subseteq V(G)$, we have $|S^\phi(G/A)|\leq c\cdot |A|^{\ell+\epsilon}.$
+ \item If $\CCC$ has bounded expansion, then there exists a constant~$c$ such that for every $G\in \CCC$ and every nonempty $A\subseteq V(G)$, we have $|S^\phi(G/A)|\leq c\cdot |A|^\ell$.
+ \end{enumerate}
+ \end{theorem}
+ \setcounter{theorem}{\theaux}
 We remark that the theorem holds also for colored graphs, in the following sense.
-A class of graphs  whose vertices and edges are colored by a fixed finite number of colors is nowhere dense if the underlying class of graphs obtained by forgetting the colors is nowhere dense. Then~\cref{thm:vc-density-recall} holds also for such classes of colored graphs, with the same proof (all graph theoretic notions
+A class of graphs  whose vertices and edges are colored by a fixed finite number of colors is nowhere dense if the underlying class of graphs obtained by forgetting the colors is nowhere dense. Then~\cref{thm:vc-density} holds also for such classes of colored graphs, with the same proof (all graph theoretic notions
 are applied to the underlying colorless graphs; only the definition of types takes the colors into account. The results of~\cref{sec:gaifman} then need to be lifted to edge- and vertex-colored graphs).
 
 \medskip
@@ -201,20 +203,22 @@ whose statement we repeat for convenience.
 
 
 
-\setcounter{aux}{\thetheorem}
+ \setcounter{aux}{\thetheorem}
 \setcounter{theorem}{\thevclower}
-\begin{theorem}
-  Let $\CCC$ be a class of graphs which 
-  is closed under taking subgraphs. 
-  \begin{enumerate}[(1)]
-  \item If $\CCC$ is not nowhere dense, then there is a formula 
-  $\phi(x,y)$ such that for every $n\in \N$ there are $G\in\CCC$ and $A\subseteq V(G)$ 
-  with $|A|=n$ and $|S^\phi(G/A)|=2^{|A|}$. 
-  \item If $\CCC$ has unbounded expansion, then there is a formula 
-  $\phi(x,y)$ such that for every $c\in \mathbb{R}$ there exist $G\in\CCC$ and a nonempty $A\subseteq V(G)$ with $|S^\phi(G/A)|>c|A|$. 
-  \end{enumerate}
-\end{theorem}
-\setcounter{theorem}{\theaux}
+ \begin{theorem}
+   Let $\CCC$ be a class of graphs which
+   is closed under taking subgraphs.
+   \begin{enumerate}[(1)]
+   \item If $\CCC$ is not nowhere dense, then there is a formula
+   $\phi(x,y)$ such that for every $n\in \N$ there are $G\in\CCC$ and $A\subseteq V(G)$
+   with $|A|=n$ and $|S^\phi(G/A)|=2^{|A|}$.
+   \item If $\CCC$ has unbounded expansion, then there is a formula
+   $\phi(x,y)$ such that for every $c\in \mathbb{R}$ there exist $G\in\CCC$ and a nonempty $A\subseteq V(G)$ with $|S^\phi(G/A)|>c|A|$.
+   \end{enumerate}
+ \end{theorem}
+ \setcounter{theorem}{\theaux}
+%\vclower*
+
 \begin{proof}
 The first part follows easily from the following lemma.
 Let $\mathcal{G}_r$ be the class of $(r-1)$-subdivisions of all 
