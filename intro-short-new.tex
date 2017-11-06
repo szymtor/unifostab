@@ -340,7 +340,8 @@ More precisely, we prove the following theorem; here, the notation $\Oof_{r,t}(\
 
 \newcounter{uqw}
 \setcounter{uqw}{\thetheorem}
-\begin{theorem}\label{thm:new-uqw}
+% \begin{theorem}\label{thm:new-uqw}
+\begin{restatable}{theorem}{puqwthm}
 For all $r,t\in \N$ there is a polynomial  $N\colon \N\to \N$ with $N(m)=
 \Oof_{r,t}{(m^{{(4t+1)}^{2rt}})}$, such that the following holds.
 Let $G$ be a graph such that $K_t\not\minor_{\lfloor 9r/2\rfloor} G$, and
@@ -348,7 +349,8 @@ let $A\subseteq V(G)$ be a vertex subset of size at least $N(m)$, for a given $m
 Then there exists a set $S\subseteq V(G)$ of size $|S|<t$ and a set $B\subseteq A\setminus S$ 
 of size $|B|\geq m$ which is $r$-independent in $G-S$.
 Moreover, given~$G$ and $A$, such sets $S$ and $B$ can be computed in time $\Oof_{r,t}(|A|\cdot |E(G)|)$. 
-\end{theorem}
+\end{restatable}
+% \end{theorem}
 
 We remark
 that even though the techniques employed to prove \cref{thm:new-uqw} are inspired by methods from stability theory, 
@@ -405,10 +407,12 @@ Suppose further that $G$ is a graph excluding $K_t$ as a depth-$g(q)$ minor. The
 
 %Note that in particular, \cref{thm:new-stable} implies that every nowhere dense graph is stable, which was the main conclusion of the paper by Adler and Adler~\cite{adler2014interpreting}. 
 
-\paragraph{Organization.} In \cref{sec:uqw} we recall standard concepts from the theory of sparse graphs and prove \cref{thm:new-uqw}, improving the previously known bounds and making them constructive.
-In~\cref{sec:uqw-tuples} we formulate and prove the generalization of uniform quasi-wideness to tuples,~\cref{thm:uqw-tuples}. 
+\paragraph{Organization.} In \cref{sec:prelim} we recall some standard concepts from the theory of sparse graphs.
+In~\cref{sec:uqw} we  prove \cref{thm:new-uqw}, improving the previously known bounds and making them constructive. We remark that this result is not needed in the proof of our main result,~\cref{thm:vc-density}. The following two sections
+ contain the main tools needed in the proof of the main result:
+in~\cref{sec:uqw-tuples} we formulate and prove the generalization of uniform quasi-wideness to tuples,~\cref{thm:uqw-tuples}, and 
 %This result is new in the context of nowhere dense graph classes, and is an important tool for the further results.
-In \cref{sec:gaifman} we discuss Gaifman locality for first order logic and derive an elementary variant concerning local separators.
+in \cref{sec:gaifman} we discuss Gaifman locality for first order logic and derive an elementary variant concerning local separators. 
 In \cref{sec:types} we prove our main result, \cref{thm:vc-density}, and the corresponding lower bounds, \cref{thm:vc-density-lower-bound}.
 Finally, in \cref{sec:stable} we provide a constructive proof of the result of Adler and Adler, \cref{thm:new-stable}.
 
@@ -416,5 +420,5 @@ Finally, in \cref{sec:stable} we provide a constructive proof of the result of A
 thank Patrice Ossona de Mendez for pointing us to the
 question of studying VC-density of nowhere dense graph
 classes.
-%\clearpage
+\pagebreak
 % \todo{page break here?}
