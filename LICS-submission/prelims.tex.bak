@@ -1,0 +1,67 @@
+\section{Preliminaries}\label{sec:prelim}
+We  recall some basic notions from graph theory. 
+
+\medskip
+All graphs in this paper are finite, undirected and simple, that is, 
+they do not have loops or parallel edges. Our notation is standard,
+we refer to~\cite{diestel2012graph} for more background on 
+graph theory. 
+We write $V(G)$ for the vertex set of a graph $G$ and
+$E(G)$ for its edge set. 
+The {\em{distance}} between vertices $u$ and~$v$ in $G$, denoted $\dist_G(u,v)$, is the length of a shortest path between $u$ and $v$ in~$G$.
+If there is no path between $u$ and $v$ in~$G$, we put $\dist_G(u,v)=\infty$.
+The {\em{(open) neighborhood}} of a vertex~$u$, denoted $N(u)$, is the set of neighbors of $u$, excluding~$u$ itself.
+For a non-negative integer $r$, by $N_r[u]$ we denote the {\em{(closed) $r$-neighborhood}} of $u$ which comprises vertices at distance at most $r$ from $u$; 
+note that $u$ is always contained in its closed $r$-neighborhood. The \emph{radius} of a connected graph~$G$ is the least integer $r$ such that there is some vertex $v$ of $G$ with $N_r[v]=V(G)$.
+
+
+A {\em{minor model}} of a graph $H$ in $G$ is a family $(I_u)_{u\in V(H)}$ of pairwise vertex-disjoint connected subgraphs of $G$, called {\em{branch sets}},
+such that whenever $uv$ is an edge in~$H$, there are $u'\in V(I_u)$ and $v'\in V(I_v)$ for which $u'v'$ 
+is an edge in~$G$.
+The graph $H$ is a {\em{depth-$r$ minor}} of $G$, denoted $H\minor_rG$, if there is a minor model
+$(I_u)_{u\in V(H)}$ of~$H$ in $G$ such that each $I_u$ has radius at most $r$.
+
+A class $\CCC$ of graphs is \emph{nowhere dense} if there is a function 
+$t\colon \N\rightarrow \N$ such that for all $r\in \N$ it holds that $K_{t(r)}\not\minor_r G$
+for all $G\in \CCC$, where $K_{t(r)}$ denotes the clique on $t(r)$ vertices.
+%The class~$\CCC$ moreover has \emph{bounded expansion}
+%if there is a function $d\colon\N\rightarrow\N$ such that for all 
+%$r\in \N$ and all $H\minor_rG$ with $G\in\CCC$, the {\em{edge density}}
+%of $H$, i.e. $|E(H)|/|V(H)|$, is bounded by $d(r)$. Note that every 
+%class of bounded expansion is nowhere dense. The converse is not necessarily true in general~\cite{sparsity}.
+
+% A set $B\subseteq V(G)$ is called {\em{$r$-independent}} in a graph $G$ if  $\dist_G(u,v)>r$ for all
+% distinct $u,v\in B$.
+
+ 
+
+A set $B\subseteq V(G)$ is called {\em{$r$-independent}} in a graph $G$ if  $\dist_G(u,v)>r$ for all
+distinct $u,v\in B$. 
+A class $\CCC$ of graphs is \emph{uniformly quasi-wide} if for every $r\in \N$ there is a number $s\in \N$
+and a function $N\from\N\to\N$ such that
+for every $m\in \N$, graph $G\in \CCC$, and vertex subset $A\subseteq V(G)$ of size $\abs{A}\geq N(m)$, there is a set
+$S\subseteq V(G)$ of size $\abs{S}\leq s$ and a set
+$B\subseteq A-S$ of size $\abs{B}\geq m$ 
+which is $r$-independent in $G-S$.
+Recall that Ne\v set\v ril and Ossona de 
+Mendez proved~\cite{nevsetvril2010first} that nowhere dense graph classes are exactly the same as uniformly quasi-wide classes. 
+
+
+
+As mentioned in the introduction, Kreutzer, Rabinovich and the second author
+ proved that for each radius $r$, we may always choose the function~$N$ to be a polynomial~\cite{siebertz2016polynomial}. 
+%
+%The following result of Kreutzer, Rabinovich and the second author~\cite{siebertz2016polynomial}
+%improves their result, by showing that the function $N$ can be taken polynomial:
+%
+%\begin{theorem}[\cite{siebertz2016polynomial}]\label{thm:krs}
+%For every nowhere dense class $\CCC$
+%and for all $r\in \N$ there is a polynomial $N\from \N\to\N$ 
+%and a number $s\in \N$ such that the following holds.
+%Let be $G\in \CCC$ be aa graph and let $A\subset V(G)$ be a vertex subset of size at least $N(m)$, for a given $m$.
+%Then there exists a set $S\subset V(G)$ of size $|S|<s$
+%and a set $B\subset A-S$ of size $|B|\ge m$ which is $r$-independent in $G-S$.	
+%\end{theorem}
+%
+However, the proof of Kreutzer et al.~\cite{siebertz2016polynomial} relies on non-constructive arguments and does not yield explicit bounds on the degree of $N$. 
+In the next section, we discuss a further strengthening of this result, by providing explicit, computable bounds on $N$ and $s$.

@@ -1,0 +1,8 @@
+\item If $\CCC$ has bounded expansion, then there exists a constant~$c$ such that for every $G\in \CCC$ and every nonempty $A\subseteq V(G)$, we have $|S^\phi(G/A)|\leq c\cdot |A|^\ell$.
+\end{enumerate}
+
+, respectively having bounded expansion
+
+\item If $\CCC$ has unbounded expansion, then there is a formula 
+  $\phi(x,y)$ such that for every $c\in \mathbb{R}$ there exist $G\in\CCC$ and a nonempty $A\subseteq V(G)$ with $|S^\phi(G/A)|>c|A|$. 
+  \end{enumerate}
