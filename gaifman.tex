@@ -1,8 +1,14 @@
-\section{Types and locality}\label{sec:gaifman}
-In this section, we develop auxiliary tools concerning first order logic on graphs, 
-in particular we develop a convenient abstraction for Gaifman's locality property that can be easily combined with the notion of $r$-separation.
-We begin by recalling some standard notions from logic.
+%\section{Types and locality}\label{sec:gaifman}
+\section{Bounds on the number of types}\label{sec:types}
 
+In this section we prove Theorem~\ref{thm:vc-density} and Theorem~\ref{thm:vc-density-lower-bound}. Let us quickly recall the required notions from
+logic. 
+%
+%
+%In this section, we develop auxiliary tools concerning first order logic on graphs, 
+%in particular we develop a convenient abstraction for Gaifman's locality property that can be easily combined with the notion of $r$-separation.
+%We begin by recalling some standard notions from logic.
+%
 \subsection{Logical notions}
 
 \paragraph{Formulas.}
@@ -15,16 +21,16 @@ $\bar x$. (Formally, the free variables form a set.
 To ease notation, we identify this set with a tuple by fixing any its enumeration.)
 If $\bar w\in V^{|\bar x|}$ is a tuple of vertices of some graph $G=(V,E)$ (treated as a valuation of the free variables $\bar x$), then we write $G,\bar w\models \phi(\bar x)$
 to denote that the valuation $\bar w$ satisfies the formula $\phi$ in the graph $G$.
-The following example should clarify our notation.
-
-\begin{example}\label{ex:dist-formula}
-The formula
-$$\phi(x,y)\equiv \exists z_1\, \exists z_2\, (E(x,z_1)\lor (x=z_1))\land (E(z_1,z_2)\lor (z_1=z_2))\land (E(z_2,y)\lor (z_2=y))$$
-with free variables $x,t$ expresses that $x$ and $y$ are at distance at most $3$.
-That is, for two vertices $u,v$ of a graph $G$,
-the relation $G,u,v\models \phi(x,y)$ holds 
-if and only if the distance between $u$ and $v$ is at most $3$ in $G$.
-\end{example}
+%The following example should clarify our notation.
+%
+%\begin{example}\label{ex:dist-formula}
+%The formula
+%$$\phi(x,y)\equiv \exists z_1\, \exists z_2\, (E(x,z_1)\lor (x=z_1))\land (E(z_1,z_2)\lor (z_1=z_2))\land (E(z_2,y)\lor (z_2=y))$$
+%with free variables $x,t$ expresses that $x$ and $y$ are at distance at most $3$.
+%That is, for two vertices $u,v$ of a graph $G$,
+%the relation $G,u,v\models \phi(x,y)$ holds 
+%if and only if the distance between $u$ and $v$ is at most $3$ in $G$.
+%\end{example}
 
 We will consider also \emph{colored graphs},
 where we have a fixed set of colors $\Lambda$ and every vertex is assigned a subset of colors from 
@@ -55,61 +61,63 @@ formulas $\phi(\bar x,\bar v)$,
 with parameters $\bar v\in A^{|\bar y|}$
 replacing the parameter variables $\bar z$,
 such that $G,\bar u\models \phi(\bar x,\bar v)$.
-Note that since $\phi$ is fixed in this definition, formulas $\phi(\bar x,\bar v)$ belonging to the $\phi$-type of $\bar u$ are in one-to-one correspondence
-with tuples $\bar v\in A^{|\bar y|}$ satisfying $G,\bar u,\bar v\models \phi(\bar u,\bar v)$.
-Therefore, up to this bijection, we have the following identification:
-\begin{equation}\label{eq:bijection}
-\tp^\phi_G(\bar u/A)\quad\leftrightarrow\quad\setof{\bar v\in  A^{|\bar y|}}{G, \bar u\bar v\models \phi(\bar x,\bar y)}.
-\end{equation}
+%Note that since $\phi$ is fixed in this definition, formulas $\phi(\bar x,\bar v)$ belonging to the $\phi$-type of $\bar u$ are in one-to-one correspondence
+%with tuples $\bar v\in A^{|\bar y|}$ satisfying $G,\bar u,\bar v\models \phi(\bar u,\bar v)$.
+%Therefore, up to this bijection, we have the following identification:
+%\begin{equation}\label{eq:bijection}
+%\tp^\phi_G(\bar u/A)\quad\leftrightarrow\quad\setof{\bar v\in  A^{|\bar y|}}{G, \bar u\bar v\models \phi(\bar x,\bar y)}.
+%\end{equation}
 
-If $q\in \N$ is a number and $\bar u\in  V^{d}$
-is a tuple of some length $d$, then by $\tp^q_G(\bar u/A)$  we denote the set of all formulas $\phi(\bar x,\bar v)$
-of quantifier rank at most $q$, with parameters $\bar v$ from $A$, and with $|\bar x|=d$,
-such that $G,\bar u\models \phi(\bar y,\bar v)$.
-Therefore, up to the correspondence \eqref{eq:bijection}, we have the following identification:
-\begin{equation*}
-\tp^q_G(\bar u/A)\quad\leftrightarrow\quad\set{\tp^\phi(\bar u/A)}_{\phi(\bar x,\bar y)},
-\end{equation*}
-where $\phi(\bar x,\bar y)$ ranges over all formulas of quantifier rank $q$, and all partitions of its free variables into two sets $\bar x,\bar y$,
-where $|\bar x|=d$. 
-In particular, the set $\tp^q_G(\bar u/A)$ is infinite.
-It is not difficult to see, however, that in the case when $A$ is finite,
-the set $\tp^q_G(\bar u/A)$ is uniquely determined by its finite subset, since up to syntactic equivalence, 
-there are only finitely many formulas of quantifier rank $q$ with $|\bar u|$ free variables and parameters from $A$
-(we can assume that each such formula has $|A|+|\bar u|$ free variables).
-In particular, the set of all possible types 
-$\tp^q_G(\bar u/A)$ has cardinality upper bounded by some number 
- computable from $q,|\bar u|$ and $|A|$.
+%If $q\in \N$ is a number and $\bar u\in  V^{d}$
+%is a tuple of some length~$d$, then by $\tp^q_G(\bar u/A)$  we denote the set of all formulas $\phi(\bar x,\bar v)$
+%of quantifier rank at most $q$, with parameters $\bar v$ from $A$, and with $|\bar x|=d$,
+%such that $G,\bar u\models \phi(\bar y,\bar v)$.
+%Therefore, up to the correspondence \eqref{eq:bijection}, we have the following identification:
+%\begin{equation*}
+%\tp^q_G(\bar u/A)\quad\leftrightarrow\quad\set{\tp^\phi(\bar u/A)}_{\phi(\bar x,\bar y)},
+%\end{equation*}
+%where $\phi(\bar x,\bar y)$ ranges over all formulas of quantifier rank $q$, and all partitions of its free variables into two sets $\bar x,\bar y$,
+%where $|\bar x|=d$. 
+%In particular, the set $\tp^q_G(\bar u/A)$ is infinite.
+%It is not difficult to see, however, that in the case when $A$ is finite,
+%the set $\tp^q_G(\bar u/A)$ is uniquely determined by its finite subset, since up to syntactic equivalence, 
+%there are only finitely many formulas of quantifier rank $q$ with $|\bar u|$ free variables and parameters from $A$
+%(we can assume that each such formula has $|A|+|\bar u|$ free variables).
+%In particular, the set of all possible types 
+%$\tp^q_G(\bar u/A)$ has cardinality upper bounded by some number 
+% computable from $q,|\bar u|$ and $|A|$.
 
-When $\Delta$ is either a formula $\phi(\bar x,\bar y)$ with a distinguished partitioning of its free variables, or a number $q$,
-we simply write $\tp^\Delta(\bar u/A)$ if the graph $G$
-is clear from the context.
-In the case $A=\emptyset$, we omit it from the notation, 
-and simply write $\tp^\Delta(\bar u)$ or $\tp^\Delta_G(\bar u)$.
-Observe that in particular, if $\Delta=q$ and $A=\emptyset$, then $\tp^q_G(\bar u)$ consists of all first order formulas $\phi(\bar x)$ of quantifier rank at most~$q$ and with $|\bar x|=|\bar u|$
-such that $G,\bar u\models \phi(\bar x)$. This coincides with the standard notion of the first order type of quantifier rank $q$ of the tuple $\bar u$.
-
-\begin{example}
-Let $\phi(x,y)$	be the formula from~\cref{ex:dist-formula}, denoting that the distance between~$x$ and $y$ is at most $3$.
-We  partition  the free variables of $\phi$
-into $x$ and $y$.
-Let $A$ be a subset of vertices of a graph $G=(V,E)$
-and $u\in V$ be a single vertex.
-The $\phi$-type of $u$ over $A$
-corresponds, via the said bijection, to the set of those vertices in $A$
-whose distance from $u$ is at most $3$ in $G$.
-\end{example}
+%When $\Delta$ is either a formula $\phi(\bar x,\bar y)$ with a distinguished partitioning of its free variables, or a number $q$,
+%we simply write $\tp^\Delta(\bar u/A)$ if the graph $G$
+%is clear from the context.
+%In the case $A=\emptyset$, we omit it from the notation, 
+%and simply write $\tp^\Delta(\bar u)$ or $\tp^\Delta_G(\bar u)$.
+%Observe that in particular, if $\Delta=q$ and $A=\emptyset$, then $\tp^q_G(\bar u)$ consists of all first order formulas $\phi(\bar x)$ of quantifier rank at most~$q$ and with $|\bar x|=|\bar u|$
+%such that $G,\bar u\models \phi(\bar x)$. This coincides with the standard notion of the first order type of quantifier rank $q$ of the tuple $\bar u$.
+%
+%\begin{example}
+%Let $\phi(x,y)$	be the formula from~\autoref{ex:dist-formula}, denoting that the distance between~$x$ and $y$ is at most $3$.
+%We  partition  the free variables of $\phi$
+%into $x$ and $y$.
+%Let $A$ be a subset of vertices of a graph $G=(V,E)$
+%and $u\in V$ be a single vertex.
+%The $\phi$-type of $u$ over $A$
+%corresponds, via the said bijection, to the set of those vertices in $A$
+%whose distance from $u$ is at most $3$ in $G$.
+%\end{example}
 
 For a fixed formula $\phi(\bar y,\bar z)$,  graph $G=(V,E)$ and sets $A,W\subset V$, define
  $S^\phi(W/A)$ as the set of all $\phi$-types of tuples from $W$ over $A$ in $G$; that is, 
 \begin{equation*}
 S^\phi(W/A)=\setof{\tp^\phi_G(\bar u/A)}{\bar u\in W^{|\bar y|}}.
 \end{equation*}
-Although not visible in the notation, the set $S^\phi(W/A)$ depends on the chosen partitioning $\bar x,\bar y$ of the free variables of $\phi$.
+Although not visible in the notation, the set $S^\phi(W/A)$ depends on the chosen partitioning $\bar x,\bar y$ of the free variables of~$\phi$.
 In case $W=V(G)$ we write $S^{\phi}_d(G/A)$ instead of $S^{\phi}_d(W/A)$.
-Note that this definitions differs syntactically from the one given in \cref{sec:intro}, as here $S^{\phi}(G/A)$ consists of $\phi$-types, and not of subsets of tuples.
-However, as we argued, there is a one-to-one correspondence between them, as expressed in~\eqref{eq:bijection}.
-
+Note that this definitions differs syntactically from the one given in \autoref{sec:intro}, as here $S^{\phi}(G/A)$ consists of $\phi$-types, and not of subsets of tuples.
+However, %as we argued, 
+it is easy to see that there is a one-to-one correspondence between 
+the two notions. %them, as expressed in~\eqref{eq:bijection}.
+%
 The following lemma is immediate.
 \begin{lemma}\label{lem:types-over-B}
 Let $G$ be a graph and let $A\subseteq B\subseteq V(G)$. Then for each formula $\phi(\bar x,\bar y)$, it holds that
@@ -125,12 +133,12 @@ Equivalently, there is a function $h\colon A\to B$ such that $g=h\circ f$.
 
 Recall that if $A,B,S$ are subsets of vertices of a graph $G$ and $r\in\N$,
 then $A$ and $B$ are $r$-separated by $S$ in $G$
-if every path from $A$ to $B$ of length at most $r$ contains a vertex from $S$.
+if every path from $A$ to $B$ of length at most $r$ contains a vertex from~$S$.
 
 \medskip
-The following lemma is the main result of this section. 
+The following lemma is the main result of this subsection. 
 
-\begin{lemma}\label{lem:types}
+\begin{lemma}[$\star$]\label{lem:types}
 For any given numbers $q$ and $d$
 one can compute numbers $p$ and $r$ with the following properties.
 Let $G=(V,E)$ be a fixed graph and let $A,B,S\subset V$ be fixed subsets of its vertices
@@ -138,9 +146,9 @@ such that $A$ and $B$ are $r$-separated by~$S$ in $G$.
 Then, for tuples $\bar u\in A^{d}$, the type $\tp^q(\bar u/B)$ is determined by the type $\tp^{p}(\bar u/S)$.
 \end{lemma}
 
-We will only use the following consequence of~\cref{lem:types}.
-
-\begin{corollary}\label{cor:bound}
+%We will only use the following consequence of~Theorem~\ref{lem:types}.
+%
+\begin{corollary}[$\star$]\label{cor:bound}
 For every formula $\phi(\bar x,\bar y)$ 
 and number $s\in \N$
 there exist numbers $T,r\in \N$,
@@ -148,202 +156,202 @@ where~$r$ is computable from $\phi$ and $T$ is computable from $\phi$ and $s$,
   such that the following holds. For every graph $G$ and vertex subsets $A,B,S\subset V(G)$ 
   where~$S$ has at most $s$ vertices and $r$-separates $A$ from $B$, we have $|S^\phi(A/B)|\le T$.
 \end{corollary}
-\begin{proof}
-Apply~\cref{lem:types} to $q$ being the quantifier rank of $\phi$ and $d=|\bar x|$, yielding numbers $p$ and $r$.
-By~\cref{lem:types} we have $|S^\phi(A/B)|\leq |S^\phi(A/S)|$.
-However, $|S^\phi(A/S)|$ is the number of quantifier rank $p$ types of $d$-tuples of elements over a set of parameters of size $s$, and, as we argued, this number is bounded by a value computable from $p$, $d$, and $s$.
-\end{proof}
-
-The remainder of this section is devoted to the proof of~\cref{lem:types}.
-This result is a consequence of two fundamental properties of first order logic:
-Gaifman's locality and Feferman-Vaught compositionality. We recall these results now.
-The following statement is an immediate corollary of the main result in a paper of Gaifman~\cite{gaifman1982local}.
-
-\begin{lemma}[Gaifman locality,~\cite{gaifman1982local}]\label{lem:gaif}
-  For all numbers $d,q\in \N$ there exists a number $t\in \N$, computable from $d$ and $q$, such that the following holds.
-  Let $G=(V,E)$ be a graph colored by a fixed set colors, and $A\subset V$ be a set of vertices of $G$.
-  Then, for tuples $\bar u\in V^d$, the type  $\tp^q(\bar u)$ is determined by the type $\tp^{t}(B^r(\bar u))$, where $r=7^q$.
-\end{lemma}
-
-The next result expresses compositionality of first order logic. Its proof is a standard application of Ehrenfeucht-Fra\"iss\'e games, so we only sketch it for completeness.
-
-\begin{lemma}[Feferman-Vaught]\label{lem:fv}
-  Let $G,H$ be two fixed vertex-disjoint graphs colored by a fixed set of colors $\Lambda$, and let 
-  $c,d\in\N$  be numbers.
-  Then, for valuations $\bar u\in V(G)^{c}$ and $\bar v\in V(H)^{d}$, 
- the type 
- $\tp^q_{G\cup H}(\bar u\bar v)$
- is determined by the pair of types $\tp^q_G(\bar u)$ and $\tp^q_H(\bar v)$.
-\end{lemma}
-\begin{proof}[sketch]The proof proceeds by applying the following, well-known characterization of $\tp^q_G(\bar w)$ in terms of Ehrenfeucht-Fra\"iss\'e games:
-$\tp^q_{G}(\bar w)=\tp^q_{G}(\bar w')$
-if and only if duplicator has a strategy to survive for $q$-rounds in a certain pebble game.
-To prove the lemma, we combine two strategies of duplicator: one on $G$ and one on $H$.
-\end{proof}
-
-Before proving~\cref{lem:types}, we introduce the following notions.
-Fix a graph $G=(V,E)$.
-For a set of vertices $S\subset V$, define the color set $\Lambda_S=\{C_s\colon s\in S\}$, where we put one color $C_s$ for each vertex $s\in S$.
-Define a graph $G^S$ colored with $\Lambda_S$, which is 
-the subgraph of $G$ induced by $V-S$
-in which, additionally, for every vertex $s\in S$, every vertex $v\in V-S$ which is a neighbor of $s$ in $G$ is colored by color $C_s$. 
-In other words, every vertex $v$ of $G^S$ is colored with a subset of colors from $\Lambda_S$ corresponding to the neighborhood of $v$ in $S$.
-
-A sequence of elements of $S\cup\set\star$,
-where $\star$ is a fixed placeholder symbol,
-will be called an \emph{$S$-signature}.
-If $H$ is any (colored) graph with vertex set contained in $V-S$,
-and $\bar u\in V^d$ is a $d$-tuple of vertices,
-define the {$S$-signature} of $\bar u$
-as the tuple $\bar s\in (S\cup\set\star)^d$ obtained from $\bar u$ by replacing the vertices in $V-S$ by the symbol~$\star$.
-Define $\tp^q[H,\bar u]$ as the
-pair consisting of the following components:
-\begin{itemize}
-	\item the type $\tp^q_H(\bar v)$,
-	where $\bar v$ is the tuple obtained from $\bar u$
-	by removing the vertices which belong to $S$; and
-	\item the $S$-signature of $\bar u$.
-\end{itemize}
-
-Given a graph $G$, a subset of its vertices $S$, and a tuple of vertices $\bar u$,
-by $N^r_S(\bar u)$ we denote the subgraph of $G^S$ induced by the set of vertices reachable from a vertex in $\bar u$ by a path of length at most $r$
-in $G-S$ (the graph $G$ is implicit in the notation $N^r_S(\bar u)$). Note that $N^r_S(\bar u)$ is a colored graph, with colors inherited from $G^S$.
-
-\begin{comment}
-We will prove the following strengthening of~\cref{lem:types}:
-
-\begin{lemma}%[Gaifman locality $\lor$ Feferman-Vaught]
-  \label{lem:types1}
-For any given number $q\in\N$ one can compute 
- a number $r\in\N$ with the following property.
-	For any graph $G=(V,E)$, sets of vertices $A,B,S\subset V$	
-	such that $A$  and $B$ are $r$-separated by $S$,
-	for every tuple $\bar u\in A^{d}$, 
-	the type $\tp^q_G(\bar u/B)$
-	is computable from $\tp^{q}[B^r_S(\bar u), \bar u]$, and $G$ and $S$.
-	
-	
-	
-		%
-	% and any $\bar u,\bar v\in B^{\bar y}$, the following implication holds:
-	% $$\text{if\quad}\tp^q(\bar u/S)=\tp^q(\bar v/S)\text{\quad then\quad}
-	% 	\tp^q(\bar u/A)=\tp^q(\bar v/A).$$
-\end{lemma}
-
-To show that~\cref{lem:types1} implies~\cref{lem:types}, define $p$ as $q\cdot r$. It suffices to show that
-$\tp^{q}[B^r_S(\bar u), \bar u]$ is computable from $\tp_G^p(\bar u/S)$, and $G$ and $S$. This is the case, since
-a formula $\phi(\bar y)$
-can be relativized to $B^r_S(\bar u)$
-by replacing each quantifier $\exists x$ by a formula
-$\exists x\exists x_1\ldots\exists x_r\psi (x,x_1,\ldots,x_r)$,
-where $\psi$ specifies that $x_1,\ldots,x_r,x$ form a path
-starting in one of the vertices in $\bar u$, ending in $x$,
-and omitting all vertices in $S$, which are enumerated as parameters.
-
-It remains to prove~\cref{lem:types1}.
-% We will use slightly stronger variants
-% of~\cref{lem:gaif}
-% and~\cref{lem:fv}, where the  graphs are colored with a fixed number of colors; the  types computed in the statements then depend also on the number of colors.
-\end{comment}
-
-
-With all these definitions and results in place, we may proceed to the proof of \cref{lem:types}.
-
-\begin{proof}[of~\cref{lem:types}]
-We prove the lemma for $r=7^q$.
-Let $t$ be the constant given by Gaifman's lemma, \cref{lem:gaif}, for $q$ and $d$, and let $p=t+r$.
-
-Fix $G,A,B,S$ as in the statement of the lemma, and fix a tuple $\bar w\in B^\ell$, for some length $\ell$.
-To prove the lemma, it is enough to show that
-for tuples $\bar u\in A^d$,
-the type $\tp^q_G(\bar u\bar w)$ is determined by the type $\tp^p(\bar u/S)$.
-Indeed, applying this to every tuple $\bar w$ of parameters from $B$ implies that $\tp^q_G(\bar u/B)$ is determined by $\tp^q_G(\bar u/S)$, as requested.
-
-We will prove the following sequence of determinations,
-where an arrow $a\rightarrow b$ signifies that $b$ is determined by $a$:
-\begin{align*}
-	\tp^p_G(\bar u/S)
-  \ \longrightarrow\ 
-	\tp^{t}[N^r_S(\bar u), \bar u]
-  \ \stackrel{\textrm{(\ref{lem:fv})}}{\longrightarrow}\ 
-	\tp^{t}[N^r_S(\bar u\bar w), \bar u\bar w] \ \stackrel{\textrm{(\ref{lem:gaif})}}\longrightarrow\ 
-	\tp^q[G^S, \bar u\bar w] \ \longrightarrow\ 
-	\tp^q_G(\bar u\bar w).
-\end{align*}
-The second arrow follows from Feferman-Vaught's lemma, \cref{lem:fv},
-as the colored graph $N^r_S(\bar u\bar w)$
-is the disjoint union of the colored graphs 
-$N^r_S(\bar u)$ and $N^r_S(\bar w)$,
-because $\bar u$ and $\bar w$ are $r$-separated by $S$.
-The third arrow is directly implied by the Gaifman's lemma,~\cref{lem:gaif}.
-We are left with arguing the first and the last arrow, which both follow from simple rewriting arguments, presented below.
-
-\medskip
-For the first arrow, obviously already $\tp^0_G(\bar u/S)$ determines the $S$-signature of $\bar u$. Let $\bar s$ be any enumeration of $S$.
-To see that $\tp^p_G(\bar u/S)$ determines $\tp^{t}_{N^r_S(\bar v)}(\bar v)$, where $\bar v$ is $\bar u$ with vertices of~$S$ removed, take any formula $\phi(\bar x)$ with $|\bar x|=|\bar v|$.
-Let $\phi'(\bar x,\bar s)$ be the formula with parameters~$\bar s$ from $S$ that is syntactically derived from $\phi(\bar x)$ as follows: 
-to every quantification $\exists y$ in $\phi(\bar x)$ we add a guard $\delta(y,\bar s)$ stating that there is a path from some element of $\bar x$ to $y$ that has length at most $r$ and does not pass through
-any vertex of $\bar s$; it is easy to see that there is such a guard $\delta(y,\bar s)$ with quantifier rank $r$.
-Then $\phi'(\bar x,\bar s)$ has quantifier rank at most $t+r=p$, and it is straightforward to see that for every $\bar v\in (A-S)^{|\bar v|}$, we have $G,\bar v\models \phi'(\bar x,\bar s)$ if and only if
-$N^r_S(\bar v),\bar v\models \phi(\bar x)$. Therefore, to check whether $\phi(\bar x)$ belongs to $\tp^{t}_{N^r_S(\bar v)}(\bar v)$ it suffices to check 
-whether $\phi'(\bar x,\bar s)$ belongs to $\tp^p_G(\bar u/S)$, so the latter type determines the former.
-
-\medskip
-
-The argument for the last arrow is provided by the following claim.
-
-\begin{claim}\label{cl:rewrite}
-  Let $\phi$ be a formula
-  with $k$ free variables and quantifier rank at most $q$, 
-  and let $\sigma$ be an $S$-signature of length $k$.
-  One can compute a formula $\phi^S$ of quantifier rank at most $q$
-  whose free variables correspond to the $\star$'s in $\sigma$,
-  such that for every tuple $\bar v$ of elements of $G$
-  whose $S$-signature is~$\sigma$,
-   $\phi(\bar v)$ holds in $G$
-  if and only if $\phi^S(\bar v^S)$ holds in $G^S$, where $\bar v^S$ is obtained from $\bar v$ by removing 
-  those elements that belong to $S$.
-\end{claim}
-\begin{clproof}[Sketch]
-The proof proceeds by a straightforward induction on the structure of the formula $\phi$.
-In essence, every quantification $\exists y$ of a vertex~$y$ in $G$ is replaced by quantification of $y$ in $G-S$ plus a disjunction over $s\in S$ of formulas where we assume $y=s$.
-Atomic formulas of the form $E(x,y)$ and $x=y$ have to be replaced accordingly. Say for $E(x,y)$: if both~$x$ and~$y$ are assumed to be in $G-S$, then we leave $E(x,y)$ intact;
-if $x$ is assumed to be in $S$ (say we assume $x=s$) and $y$ is assumed to be in $G-S$, then we substitute $E(x,y)$ by $C_s(y)$; and if both~$x$ and~$y$ are assumed to be in $S$, then 
-we replace $E(x,y)$ by $\bot$ or $\top$ depending on whether the vertices assumed to be equal to $x$ and $y$ are adjacent or not.
-We leave the details to the reader.
-\end{clproof}
-\begin{comment}
-\begin{clproof}
-The proof proceeds by induction on the structure of the formula $\phi$. 
-
-If $\phi$ is an atomic formula $E(x,x')$ or $x=x'$, then the formula $\phi^S$ is constructed by case analysis. If $\alpha(x),\alpha(x')\in Y$ then $\phi^S$
-is obtained from $\phi$ by substituting the variables $x,x'$ with variables from $Y$ according to~$\alpha$. If  $\alpha(x),\alpha(x')\in S$ then $\phi'$ is the truth value $\bot$ or $\top$ of 
-the formula $\phi$ in the graph $G$ under the valuation which maps $x$ to $\alpha(x)$ and $x'$ to $\alpha(x')$. 
-Finally, suppose that $\alpha(x)=y\in Y$ and $\alpha(x')=s\in S$. If $\phi$ is $E(x,x')$ then $\phi'$ is the formula $C_{s}(y)$, and if $\phi$ is $x=x'$ then $\phi'$ is the formula $\bot$.
- 
-For the inductive step, we consider two cases.
-If $\phi$ is a boolean combination of formulas $\phi_1,\ldots,\phi_k$, then 
-apply the inductive assumption to each formula $\phi_i$,
-yielding formulas $\phi_1',\ldots,\phi_k'$. Then let $\phi'$ be the analogous boolean combination of the formulas $\phi_1',\ldots,\phi_k'$.
-
-Finally, suppose that $\phi$ is of the form $\exists x\, \psi$, where   $Y$ are the free variables of $\phi$ and $x\not \in Y$.
- For $w$ being either the variable $x$ 
-or an element $s\in S$, 
-let $\psi^w$ be the formula obtained from the inductive assumption applied to the formula $\psi$ 
-and pre-valuation $\alpha$ extended to a valuation which maps  $x$ to $w$. 
-Then let $\phi'$
-be the formula $\exists x\, \psi^x \lor \bigvee_{v\in S}\psi^v$.
-The case of $\forall$ is dual.
-
-In each case, it follows from the inductive assumption that $\phi'$ 
-satisfies the required condition.
-\end{clproof}
-\end{comment}
-
-\cref{cl:rewrite}, applied to $k=|\bar u\bar w|$, implies that 
-$\tp^q_G(\bar u\bar w)$ is determined by $\tp^q[G^S, \bar u\bar w]$, finishing the proof of~\cref{lem:types}.	
-\end{proof}
-
-We remark that in all the results of this section, whenever some type determines some other type, it is actually true that the latter type can be {\em{computed}} given the former type together with the graph $G$ 
-and, if applicable, also the set of vertices $S$. For Gaifman's locality lemma, the effectiveness follows from the original proof of Gaifman~\cite{gaifman1982local}, and it is not hard to see that the proof of the Feferman-Vaught lemma (\cref{lem:fv}) can be also made effective. By examining our proofs, one can readily verify that all the stated determination relations can be made effective in this sense.
+%\begin{proof}
+%Apply~Theorem~\ref{lem:types} to $q$ being the quantifier rank of $\phi$ and $d=|\bar x|$, yielding numbers $p$ and $r$.
+%By~Theorem~\ref{lem:types} we have $|S^\phi(A/B)|\leq |S^\phi(A/S)|$.
+%However, $|S^\phi(A/S)|$ is the number of quantifier rank $p$ types of $d$-tuples of elements over a set of parameters of size $s$, and, as we argued, this number is bounded by a value computable from $p$, $d$, and $s$.
+%\end{proof}
+%
+%The remainder of this section is devoted to the proof of~Theorem~\ref{lem:types}.
+%This result is a consequence of two fundamental properties of first order logic:
+%Gaifman's locality and Feferman-Vaught compositionality. We recall these results now.
+%The following statement is an immediate corollary of the main result in a paper of Gaifman~\cite{gaifman1982local}.
+%
+%\begin{lemma}[Gaifman locality,~\cite{gaifman1982local}]\label{lem:gaif}
+%  For all numbers $d,q\in \N$ there exists a number $t\in \N$, computable from $d$ and $q$, such that the following holds.
+%  Let $G=(V,E)$ be a graph colored by a fixed set colors, and $A\subset V$ be a set of vertices of $G$.
+%  Then, for tuples $\bar u\in V^d$, the type  $\tp^q(\bar u)$ is determined by the type $\tp^{t}(B^r(\bar u))$, where $r=7^q$.
+%\end{lemma}
+%
+%The next result expresses compositionality of first order logic. Its proof is a standard application of Ehrenfeucht-Fra\"iss\'e games, so we only sketch it for completeness.
+%
+%\begin{lemma}[Feferman-Vaught]\label{lem:fv}
+%  Let $G,H$ be two fixed vertex-disjoint graphs colored by a fixed set of colors $\Lambda$, and let 
+%  $c,d\in\N$  be numbers.
+%  Then, for valuations $\bar u\in V(G)^{c}$ and $\bar v\in V(H)^{d}$, 
+% the type 
+% $\tp^q_{G\cup H}(\bar u\bar v)$
+% is determined by the pair of types $\tp^q_G(\bar u)$ and $\tp^q_H(\bar v)$.
+%\end{lemma}
+%\begin{proof}[sketch]The proof proceeds by applying the following, well-known characterization of $\tp^q_G(\bar w)$ in terms of Ehrenfeucht-Fra\"iss\'e games:
+%$\tp^q_{G}(\bar w)=\tp^q_{G}(\bar w')$
+%if and only if duplicator has a strategy to survive for $q$-rounds in a certain pebble game.
+%To prove the lemma, we combine two strategies of duplicator: one on $G$ and one on $H$.
+%\end{proof}
+%
+%Before proving~Theorem~\ref{lem:types}, we introduce the following notions.
+%Fix a graph $G=(V,E)$.
+%For a set of vertices $S\subset V$, define the color set $\Lambda_S=\{C_s\colon s\in S\}$, where we put one color $C_s$ for each vertex $s\in S$.
+%Define a graph $G^S$ colored with $\Lambda_S$, which is 
+%the subgraph of $G$ induced by $V-S$
+%in which, additionally, for every vertex $s\in S$, every vertex $v\in V-S$ which is a neighbor of $s$ in $G$ is colored by color $C_s$. 
+%In other words, every vertex $v$ of $G^S$ is colored with a subset of colors from $\Lambda_S$ corresponding to the neighborhood of $v$ in $S$.
+%
+%A sequence of elements of $S\cup\set\star$,
+%where $\star$ is a fixed placeholder symbol,
+%will be called an \emph{$S$-signature}.
+%If $H$ is any (colored) graph with vertex set contained in $V-S$,
+%and $\bar u\in V^d$ is a $d$-tuple of vertices,
+%define the {$S$-signature} of $\bar u$
+%as the tuple $\bar s\in (S\cup\set\star)^d$ obtained from $\bar u$ by replacing the vertices in $V-S$ by the symbol~$\star$.
+%Define $\tp^q[H,\bar u]$ as the
+%pair consisting of the following components:
+%\begin{itemize}
+%	\item the type $\tp^q_H(\bar v)$,
+%	where $\bar v$ is the tuple obtained from $\bar u$
+%	by removing the vertices which belong to $S$; and
+%	\item the $S$-signature of $\bar u$.
+%\end{itemize}
+%
+%Given a graph $G$, a subset of its vertices $S$, and a tuple of vertices $\bar u$,
+%by $N^r_S(\bar u)$ we denote the subgraph of $G^S$ induced by the set of vertices reachable from a vertex in $\bar u$ by a path of length at most $r$
+%in $G-S$ (the graph $G$ is implicit in the notation $N^r_S(\bar u)$). Note that $N^r_S(\bar u)$ is a colored graph, with colors inherited from $G^S$.
+%
+%\begin{comment}
+%We will prove the following strengthening of~Theorem~\ref{lem:types}:
+%
+%\begin{lemma}%[Gaifman locality $\lor$ Feferman-Vaught]
+%  \label{lem:types1}
+%For any given number $q\in\N$ one can compute 
+% a number $r\in\N$ with the following property.
+%	For any graph $G=(V,E)$, sets of vertices $A,B,S\subset V$	
+%	such that $A$  and $B$ are $r$-separated by $S$,
+%	for every tuple $\bar u\in A^{d}$, 
+%	the type $\tp^q_G(\bar u/B)$
+%	is computable from $\tp^{q}[B^r_S(\bar u), \bar u]$, and $G$ and $S$.
+%	
+%	
+%	
+%		%
+%	% and any $\bar u,\bar v\in B^{\bar y}$, the following implication holds:
+%	% $$\text{if\quad}\tp^q(\bar u/S)=\tp^q(\bar v/S)\text{\quad then\quad}
+%	% 	\tp^q(\bar u/A)=\tp^q(\bar v/A).$$
+%\end{lemma}
+%
+%To show that~Theorem~\ref{lem:types1} implies~Theorem~\ref{lem:types}, define $p$ as $q\cdot r$. It suffices to show that
+%$\tp^{q}[B^r_S(\bar u), \bar u]$ is computable from $\tp_G^p(\bar u/S)$, and $G$ and $S$. This is the case, since
+%a formula $\phi(\bar y)$
+%can be relativized to $B^r_S(\bar u)$
+%by replacing each quantifier $\exists x$ by a formula
+%$\exists x\exists x_1\ldots\exists x_r\psi (x,x_1,\ldots,x_r)$,
+%where $\psi$ specifies that $x_1,\ldots,x_r,x$ form a path
+%starting in one of the vertices in $\bar u$, ending in $x$,
+%and omitting all vertices in $S$, which are enumerated as parameters.
+%
+%It remains to prove~Theorem~\ref{lem:types1}.
+%% We will use slightly stronger variants
+%% of~Theorem~\ref{lem:gaif}
+%% and~Theorem~\ref{lem:fv}, where the  graphs are colored with a fixed number of colors; the  types computed in the statements then depend also on the number of colors.
+%\end{comment}
+%
+%
+%With all these definitions and results in place, we may proceed to the proof of Theorem~\ref{lem:types}.
+%
+%\begin{proof}[of~Theorem~\ref{lem:types}]
+%We prove the lemma for $r=7^q$.
+%Let $t$ be the constant given by Gaifman's lemma, Theorem~\ref{lem:gaif}, for $q$ and $d$, and let $p=t+r$.
+%
+%Fix $G,A,B,S$ as in the statement of the lemma, and fix a tuple $\bar w\in B^\ell$, for some length $\ell$.
+%To prove the lemma, it is enough to show that
+%for tuples $\bar u\in A^d$,
+%the type $\tp^q_G(\bar u\bar w)$ is determined by the type $\tp^p(\bar u/S)$.
+%Indeed, applying this to every tuple $\bar w$ of parameters from $B$ implies that $\tp^q_G(\bar u/B)$ is determined by $\tp^q_G(\bar u/S)$, as requested.
+%
+%We will prove the following sequence of determinations,
+%where an arrow $a\rightarrow b$ signifies that $b$ is determined by $a$:
+%\begin{align*}
+%	\tp^p_G(\bar u/S)
+%  \ \longrightarrow\ 
+%	\tp^{t}[N^r_S(\bar u), \bar u]
+%  \ \stackrel{\textrm{(\ref{lem:fv})}}{\longrightarrow}\ 
+%	\tp^{t}[N^r_S(\bar u\bar w), \bar u\bar w] \ \stackrel{\textrm{(\ref{lem:gaif})}}\longrightarrow\ 
+%	\tp^q[G^S, \bar u\bar w] \ \longrightarrow\ 
+%	\tp^q_G(\bar u\bar w).
+%\end{align*}
+%The second arrow follows from Feferman-Vaught's lemma, Theorem~\ref{lem:fv},
+%as the colored graph $N^r_S(\bar u\bar w)$
+%is the disjoint union of the colored graphs 
+%$N^r_S(\bar u)$ and $N^r_S(\bar w)$,
+%because $\bar u$ and $\bar w$ are $r$-separated by $S$.
+%The third arrow is directly implied by the Gaifman's lemma,~Theorem~\ref{lem:gaif}.
+%We are left with arguing the first and the last arrow, which both follow from simple rewriting arguments, presented below.
+%
+%\medskip
+%For the first arrow, obviously already $\tp^0_G(\bar u/S)$ determines the $S$-signature of $\bar u$. Let $\bar s$ be any enumeration of $S$.
+%To see that $\tp^p_G(\bar u/S)$ determines $\tp^{t}_{N^r_S(\bar v)}(\bar v)$, where $\bar v$ is $\bar u$ with vertices of~$S$ removed, take any formula $\phi(\bar x)$ with $|\bar x|=|\bar v|$.
+%Let $\phi'(\bar x,\bar s)$ be the formula with parameters~$\bar s$ from $S$ that is syntactically derived from $\phi(\bar x)$ as follows: 
+%to every quantification $\exists y$ in $\phi(\bar x)$ we add a guard $\delta(y,\bar s)$ stating that there is a path from some element of $\bar x$ to $y$ that has length at most $r$ and does not pass through
+%any vertex of $\bar s$; it is easy to see that there is such a guard $\delta(y,\bar s)$ with quantifier rank $r$.
+%Then $\phi'(\bar x,\bar s)$ has quantifier rank at most $t+r=p$, and it is straightforward to see that for every $\bar v\in (A-S)^{|\bar v|}$, we have $G,\bar v\models \phi'(\bar x,\bar s)$ if and only if
+%$N^r_S(\bar v),\bar v\models \phi(\bar x)$. Therefore, to check whether $\phi(\bar x)$ belongs to $\tp^{t}_{N^r_S(\bar v)}(\bar v)$ it suffices to check 
+%whether $\phi'(\bar x,\bar s)$ belongs to $\tp^p_G(\bar u/S)$, so the latter type determines the former.
+%
+%\medskip
+%
+%The argument for the last arrow is provided by the following claim.
+%
+%\begin{claim}\label{cl:rewrite}
+%  Let $\phi$ be a formula
+%  with $k$ free variables and quantifier rank at most $q$, 
+%  and let $\sigma$ be an $S$-signature of length $k$.
+%  One can compute a formula $\phi^S$ of quantifier rank at most $q$
+%  whose free variables correspond to the $\star$'s in $\sigma$,
+%  such that for every tuple $\bar v$ of elements of $G$
+%  whose $S$-signature is~$\sigma$,
+%   $\phi(\bar v)$ holds in $G$
+%  if and only if $\phi^S(\bar v^S)$ holds in $G^S$, where $\bar v^S$ is obtained from $\bar v$ by removing 
+%  those elements that belong to $S$.
+%\end{claim}
+%\begin{clproof}[Sketch]
+%The proof proceeds by a straightforward induction on the structure of the formula $\phi$.
+%In essence, every quantification $\exists y$ of a vertex~$y$ in $G$ is replaced by quantification of $y$ in $G-S$ plus a disjunction over $s\in S$ of formulas where we assume $y=s$.
+%Atomic formulas of the form $E(x,y)$ and $x=y$ have to be replaced accordingly. Say for $E(x,y)$: if both~$x$ and~$y$ are assumed to be in $G-S$, then we leave $E(x,y)$ intact;
+%if $x$ is assumed to be in $S$ (say we assume $x=s$) and $y$ is assumed to be in $G-S$, then we substitute $E(x,y)$ by $C_s(y)$; and if both~$x$ and~$y$ are assumed to be in $S$, then 
+%we replace $E(x,y)$ by $\bot$ or $\top$ depending on whether the vertices assumed to be equal to $x$ and $y$ are adjacent or not.
+%We leave the details to the reader.
+%\end{clproof}
+%\begin{comment}
+%\begin{clproof}
+%The proof proceeds by induction on the structure of the formula $\phi$. 
+%
+%If $\phi$ is an atomic formula $E(x,x')$ or $x=x'$, then the formula $\phi^S$ is constructed by case analysis. If $\alpha(x),\alpha(x')\in Y$ then $\phi^S$
+%is obtained from $\phi$ by substituting the variables $x,x'$ with variables from $Y$ according to~$\alpha$. If  $\alpha(x),\alpha(x')\in S$ then $\phi'$ is the truth value $\bot$ or $\top$ of 
+%the formula $\phi$ in the graph $G$ under the valuation which maps $x$ to $\alpha(x)$ and $x'$ to $\alpha(x')$. 
+%Finally, suppose that $\alpha(x)=y\in Y$ and $\alpha(x')=s\in S$. If $\phi$ is $E(x,x')$ then $\phi'$ is the formula $C_{s}(y)$, and if $\phi$ is $x=x'$ then $\phi'$ is the formula $\bot$.
+% 
+%For the inductive step, we consider two cases.
+%If $\phi$ is a boolean combination of formulas $\phi_1,\ldots,\phi_k$, then 
+%apply the inductive assumption to each formula $\phi_i$,
+%yielding formulas $\phi_1',\ldots,\phi_k'$. Then let $\phi'$ be the analogous boolean combination of the formulas $\phi_1',\ldots,\phi_k'$.
+%
+%Finally, suppose that $\phi$ is of the form $\exists x\, \psi$, where   $Y$ are the free variables of $\phi$ and $x\not \in Y$.
+% For $w$ being either the variable $x$ 
+%or an element $s\in S$, 
+%let $\psi^w$ be the formula obtained from the inductive assumption applied to the formula $\psi$ 
+%and pre-valuation $\alpha$ extended to a valuation which maps  $x$ to $w$. 
+%Then let $\phi'$
+%be the formula $\exists x\, \psi^x \lor \bigvee_{v\in S}\psi^v$.
+%The case of $\forall$ is dual.
+%
+%In each case, it follows from the inductive assumption that $\phi'$ 
+%satisfies the required condition.
+%\end{clproof}
+%\end{comment}
+%
+%\autoref{cl:rewrite}, applied to $k=|\bar u\bar w|$, implies that 
+%$\tp^q_G(\bar u\bar w)$ is determined by $\tp^q[G^S, \bar u\bar w]$, finishing the proof of~Theorem~\ref{lem:types}.	
+%\end{proof}
+%
+%We remark that in all the results of this section, whenever some type determines some other type, it is actually true that the latter type can be {\em{computed}} given the former type together with the graph $G$ 
+%and, if applicable, also the set of vertices $S$. For Gaifman's locality lemma, the effectiveness follows from the original proof of Gaifman~\cite{gaifman1982local}, and it is not hard to see that the proof of the Feferman-Vaught lemma (Theorem~\ref{lem:fv}) can be also made effective. By examining our proofs, one can readily verify that all the stated determination relations can be made effective in this sense.
 

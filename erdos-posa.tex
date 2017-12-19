@@ -1,6 +1,6 @@
 \section{Packing and traversal numbers for nowhere dense graphs}\label{sec:ep}
 In this section, we give an application 
-of~\cref{thm:vc-density}, proving a 
+of~\autoref{thm:vc-density}, proving a 
 duality result for nowhere dense graph classes.
 
 A \emph{set system} is a family  $\cal F$ of subsets of a set $X$.
@@ -15,8 +15,8 @@ satisfies $\tau({\cal G})\le f(\nu(\cal G))$.
 
 We prove that set systems defined by first order formulas in nowhere dense graph classes have the Erd{\H o}s-P\'{o}sa property, in the following sense.
 
- \setcounter{aux}{\thetheorem}
- \setcounter{theorem}{\theep}
+% \setcounter{aux}{\thetheorem}
+% \setcounter{theorem}{\theep}
 \begin{theorem}
 	Fix a nowhere dense class of graphs $\CCC$ and a 
 	formula $\phi(x,y)$ with two free variables $x,y$.
@@ -25,7 +25,7 @@ We prove that set systems defined by first order formulas in nowhere dense graph
 	be a family of subsets of $V(G)$ consisting of sets of the form $\setof{v\in V(G)}{\phi(u, v)}$, where~$u$ is some vertex of $V(G)$.
 Then~$\tau({\cal G})\le f(\nu(\cal G))$.
 \end{theorem}
- \setcounter{theorem}{\theaux}
+% \setcounter{theorem}{\theaux}
 
 %\erdosposa*
 % \begin{theorem}\label{thm:erdos-posa}
@@ -51,20 +51,20 @@ of occupied cells in the Venn diagram of $m$ sets in $\cal F$.
 	if $\cal G$ has the $(p,k)$-property, meaning that 
 	among every $p$ sets in $\cal G$ some $k$ have a non-empty intersection, then $\tau ({\cal G})\le T$.
 \end{theorem}
-\begin{proof}[of \cref{thm:erdos-posa}]
+\begin{proof}[of \autoref{thm:erdos-posa}]
 For a graph $G$, define the set system ${\cal F}_G$ on the ground set $V(G)$ as
 $${\cal F}_G = \setof{\setof{v\in V(G)}{\phi(u, v)}}{u\in V(G)}.$$
 Let then $\cal F$ be the disjoint union of set systems ${\cal F}_G$ for $G\in \CCC$. That is, 
 the ground set of $\cal F$ is the disjoint union of the vertex sets $V(G)$ for $G\in \CCC$, and for each $G\in \CCC$ we add to ${\cal F}$
 a copy of ${\cal F}_G$ over the copy of relevant $V(G)$.
-Then the following claim follows directly from~\cref{thm:vc-density}.
+Then the following claim follows directly from~\autoref{thm:vc-density}.
 
 \begin{claim}
 The dual shatter function of $\cal F$ satisfies $\pi^*_{\cal F}(m)=\Oof(m^{1+\epsilon})$,
 for every fixed $\epsilon>0$. In particular, $\pi^*_{\cal F}(m)=o(m^{2})$.
 \end{claim}
 
-Consider the function $f\from \N \to \N$ defined so that $f(\nu)$ is the value $T$ obtained from~\cref{thm:pq} applied to $\cal F$, $k=2$, and $p=\nu+1$.
+Consider the function $f\from \N \to \N$ defined so that $f(\nu)$ is the value $T$ obtained from~\autoref{thm:pq} applied to $\cal F$, $k=2$, and $p=\nu+1$.
 Suppose now that $G\in \CCC$ is a graph and $\GGG\subseteq \FFF_G$
 is a family of subsets of $V(G)$ consisting of sets of the form $\{v\in V(G)\,\colon\,\phi(u,v)\}$, where $u$ is some vertex of $G$.
 We identify $\GGG$ with a subfamily of $\FFF$ in the natural way, following the embedding of $\FFF_G$ into $\FFF$ used in the construction of the latter.
@@ -73,5 +73,5 @@ In particular, for every $\nu+1$ subsets of $\GGG$
 there is a vertex $v\in V(G)$
 which is contained in two elements of~$\GGG$.
 Hence, $\GGG$ is a $(p,2)$-family for $p=\nu+1$.
-By~\cref{thm:pq}, $\tau(\GGG)\le T=f(\nu)=f(\nu(\GGG))$, as required.
+By~\autoref{thm:pq}, $\tau(\GGG)\le T=f(\nu)=f(\nu(\GGG))$, as required.
 \end{proof}
