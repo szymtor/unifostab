@@ -102,7 +102,7 @@ However, adding singleton projections for vertices of $B$ to the definition only
 
 We proceed with the proof of \autoref{thm:vc-density}.
 % To focus attention, we present the proof only for the nowhere dense case (first statement). The proof in the bounded expansion case (second statement)
-% can be obtained by replacing all the parameters $\epsilon,\delta,\epsilon_1,\epsilon_2$ below by~$0$, and substituting the usage of \autoref{lem:closure-nd} with \autoref{lem:closure-be}.
+% can be obtained by replacing all the parameters $\epsilon,\delta,\epsilon_1,\epsilon_2$ below by~$0$, and substituting the usage of Theorem~\ref{lem:closure-nd} with Theorem~\ref{lem:closure-be}.
 %
  Let us fix: a nowhere dense class of graphs $\CCC$, a graph $G\in \CCC$, a vertex subset $A\subseteq V(G)$, a real $\epsilon>0$, and 
  a first order formula $\phi(\bar x,\bar y)$, where $\bar x$ is the distinguished $\ell$-tuple of object variables.
@@ -118,9 +118,9 @@ The constants hidden in the $\Oof(\cdot)$ notation below depend
  on $\epsilon,\delta,\epsilon_1,\cal C, \ell$ and $\phi$, but not on $G$ and $A$.   By \emph{tuples} below we refer to tuples of length $\ell$.
 
 	Let $q$ be the quantifier rank of $\phi$ and let 
-$p,r$ be the numbers obtained by applying \autoref{lem:types} to $q$ and $\ell$.
-Let $B$ be an $r$-closure of $A$, given by~\autoref{lem:closure-nd}.
-  By~\autoref{lem:closure-nd}, the total number of distinct $r$-projections onto $B$ 
+$p,r$ be the numbers obtained by applying Lemma~\ref{lem:types} to $q$ and $\ell$.
+Let $B$ be an $r$-closure of $A$, given by Lemma~\ref{lem:closure-nd}.
+  By Lemma~\ref{lem:closure-nd}, the total number of distinct $r$-projections onto $B$ 
   is at most $\Oof(|B|^{1+\delta})$, and each of these projections has size $\Oof(|B|^{\delta})$.
 %  	   Figure~\ref{fig:sketch} serves as  an illustration to the steps of the proof in the case $\ell=1$.
 %  	   \begin{figure}[h!]
@@ -159,7 +159,7 @@ Claim~\ref{claim2} implies that $|S^\phi(G/B)|=\Oof(|B|^{\ell+\epsilon_1})$,
 which is bounded by $\Oof(|A|^{(\ell+\epsilon_1)(1+\delta)})$ since $|B|=\Oof(|A|^{1+\delta})$. 
 
 As $(\ell+\epsilon_1)(1+\delta)\le \ell+\epsilon$, this shows that $|S^\phi(G/B)|=\Oof(|A|^{\ell+\epsilon})$.
-Then \autoref{lem:types-over-B} implies that also $|S^\phi(G/A)|=\Oof(|A|^{\ell+\epsilon})$, and we are done. Therefore, it remains to prove Claim~\ref{claim2}.
+Then Theorem~\ref{lem:types-over-B} implies that also $|S^\phi(G/A)|=\Oof(|A|^{\ell+\epsilon})$, and we are done. Therefore, it remains to prove Claim~\ref{claim2}.
 
 \medskip
 
@@ -245,7 +245,7 @@ It holds that $|Z|=\Oof(|C|)$.
 %for $n\in \N$, let $P(n)$ denote the graph with $n+2^n$ 
 %vertices $V(P(n))\coloneqq \{v_1,\ldots, v_n\}\cup \{w_M \colon M\subseteq \{1,\ldots, n\}\}$ and edges $E(P(n))\coloneqq \{v_iw_M \colon 1\leq i\leq n,\, M\subseteq \{1,\ldots, n\},\, i\in M\}$. 
 %If $\CCC$ is somewhere dense and closed under taking subgraphs, 
-%according to \autoref{lem:lower-nd}, there exists an integer $r$ 
+%according to Theorem~\ref{lem:lower-nd}, there exists an integer $r$ 
 %such that $\mathcal{G}_{r}\subseteq \CCC$. In particular, for every $n\in \N$ the $(r-1)$-subdivision $P^{r}(n)$ of the graph $P(n)$ is contained in $\CCC$.
 %Now consider 
 %the formula $\phi(x,y)$ stating that $x$ and~$y$ are at distance at most $r$. Then for every $n\in \N$ we have 
@@ -288,9 +288,9 @@ It holds that $|Z|=\Oof(|C|)$.
 %$$\frac{|E(H)|}{|V(H)|}\leq (2r + 1)\cdot \max \left\{\nu_1(G)^4\cdot \log^2\nu_1(G),\nu_2(G),\ldots, \nu_{\left\lceil r+\frac{1}{2}\right\rceil}(G)\right\}.$$
 %\end{lemma}
 %
-%For the second part of~\autoref{thm:vc-density-lower-bound}, we use the contrapositive of \autoref{lem:top-bnd-exp}. Since $\CCC$ has unbounded expansion, for some $r\in \N$ 
+%For the second part of~\autoref{thm:vc-density-lower-bound}, we use the contrapositive of Theorem~\ref{lem:top-bnd-exp}. Since $\CCC$ has unbounded expansion, for some $r\in \N$ 
 %we have that the value $|E(H)|/|V(H)|$ is unbounded among depth-$r$ topological minors $H$ of graphs from $\CCC$.
-%By applying \autoref{lem:lower-be}, we find that for some $q\leq r$ the value
+%By applying Theorem~\ref{lem:lower-be}, we find that for some $q\leq r$ the value
 %$\nu_{q}(G)$ is unbounded when $G$ ranges over all graphs from $\CCC$. 
 %Since $\CCC$ is closed under taking subgraph, we infer that also the ratio 
 %$\frac{|\{N_q^G[v]\cap A \colon v\in V(G)\}|}{|A|}$ is unbounded when~$G$ ranges over graphs from $\CCC$ and $A$ ranges over nonempty subsets of $V(G)$.
