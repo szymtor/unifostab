@@ -28,7 +28,7 @@ variant of the result of Adler and Adler, Theorem~\ref{thm:new-stable}.
 %
 %\paragraph{General strategy.}
 Our proof follows the same lines as the original proof of Ne\v set\v ril and Ossona de Mendez~\cite{nevsetvril2010first}, with the difference that in the key technical lemma (Lemma 3.5 of~\cite{nevsetvril2010first}) %(Theorem~\ref{lem:apex} below), 
-we improve the bounds significantly by replacing a Ramsey argument with a refined combinatorial analysis (Theorem~\ref{lem:apex} below).
+we improve the bounds significantly by replacing a Ramsey argument with a refined combinatorial analysis (Lemma~\ref{lem:apex} below).
 The new argument essentially originates in the concept of {\em{branching index}} from stability theory. 
 %, 
 %and also uses the almost linear bound on neighborhood complexity in nowhere dense graph classes, due to Gajarsk\'y et al.~\cite{gajarsky2017kernelization}. \marginpar{no longer}
@@ -85,17 +85,17 @@ structures described in the other two cases (a $2$-independent set
 of size~$m$, or a vertex $v$ as above) can be 
 computed in time $\Oof_t(|A|\cdot |E(G)|)$. 
 \end{lemma}
-We remark that a statement similar to that of Theorem~\ref{lem:apex}
-can be obtained by employing Ramsey's theorem, as has been done in~\cite{nevsetvril2010first}. This, however, 
-%yields
-%in place of the bound $(m+\ell)^{2t}$ 
-%a bound of the form $R(m,\underbrace{q,q,\ldots,q}_{k\text{ times}})$,
-%where $k\sim\ell^{1/8}$ and $R(m_1,\ldots,m_c)$
-%is the Ramsey number for $c$ colors.
-%In particular, this 
-does not give a bound which is polynomial in $m+\ell$, and thus cannot be used to prove~Theorem~\ref{thm:new-uqw}.
-%
-%\medskip
+%We remark that a statement similar to that of Theorem~\ref{lem:apex}
+%can be obtained by employing Ramsey's theorem, as has been done in~\cite{nevsetvril2010first}. This, however, 
+%%yields
+%%in place of the bound $(m+\ell)^{2t}$ 
+%%a bound of the form $R(m,\underbrace{q,q,\ldots,q}_{k\text{ times}})$,
+%%where $k\sim\ell^{1/8}$ and $R(m_1,\ldots,m_c)$
+%%is the Ramsey number for $c$ colors.
+%%In particular, this 
+%does not give a bound which is polynomial in $m+\ell$, and thus cannot be used to prove~Theorem~\ref{thm:new-uqw}.
+%%
+%%\medskip
 The remainder of this section is devoted to the proof of~Theorem~\ref{lem:apex}.
 %We will use the following bounds on the edge density
 %of graphs with excluded shallow minors obtained
@@ -527,9 +527,8 @@ This more general result will be used later on in the paper.
 The result and its proof are essentially adaptations to the finite of their infinite analogues introduced by Podewski and Ziegler (cf.~\cite{podewski1978stable},  Corollary 3),
 modulo the numerical bounds.
 
-We generalize the notion of independence to sets of tuples of vertices.
 Fix a graph $G$ and a number $r\in \N$, and let $S\subseteq V(G)$ be a subset of vertices of $G$.
-We say that vertices $u$ and $v$ are {\em{$r$-separated}} by $S$ in $G$ if every path of length at most $r$ connecting $u$ and $v$ in $G$ passes through a vertex of $S$.
+We say that vertices $u$ and $v$ are {\em{$r$-separated}} by $S$ in $G$ if every path of length at most~$r$ connecting $u$ and $v$ in $G$ passes through a vertex of $S$.
 We extend this notion to tuples:
 two tuples $\bar u,\bar v$ of vertices of $G$ are \emph{$r$-separated} by $S$ every vertex appearing in $\bar u$ is $r$-separated by $S$ from every vertex appearing in $\bar{v}$.
 Finally, if $A\subseteq V(G)^d$ is a set of $d$-tuples of vertices, for some $d\in\N$,
@@ -556,19 +555,19 @@ $\uqw^d_r(N,s)$ if the following condition holds:
 	then we say that $\cal C$ satisfies property $\puqw^d_r$.
 \end{definition}
 
-When $d=1$, we omit it from the superscripts.
-  Note that there is a slight discrepancy 
-  in the definition of uniform quasi-wideness 
-  and the property of satisfying $\uqw_r$, for all $r\in \N$.
-  This is due to the fact that in the original definition,
-  the set $B$ must be disjoint from $S$,
-  whereas in the property $\uqw_r$, 
-  some vertices of $S$ may belong to $B$. This distinction is inessential when it comes to dimension $1$, since $|S|\le s_r$ for some constant $s_r$,
-  so passing from one definition to the other requires 
-  modifying the function $N_r$ by an additive constant~$s_r$.
-In particular, a class of graphs $\cal C$ is uniformly quasi-wide if and only if it 
-	satisfies $\uqw_r$, for all $r\in \N$.  
-  However, generalizing to tuples of dimension $d$ requires the use of the definition above, where the tuples in~$B$ are allowed to contain  vertices which occur in $S$. 
+%When $d=1$, we omit it from the superscripts.
+%  Note that there is a slight discrepancy 
+%  in the definition of uniform quasi-wideness 
+%  and the property of satisfying $\uqw_r$, for all $r\in \N$.
+%  This is due to the fact that in the original definition,
+%  the set $B$ must be disjoint from $S$,
+%  whereas in the property $\uqw_r$, 
+%  some vertices of $S$ may belong to $B$. This distinction is inessential when it comes to dimension $1$, since $|S|\le s_r$ for some constant $s_r$,
+%  so passing from one definition to the other requires 
+%  modifying the function $N_r$ by an additive constant~$s_r$.
+%In particular, a class of graphs $\cal C$ is uniformly quasi-wide if and only if it 
+%	satisfies $\uqw_r$, for all $r\in \N$.  
+%  However, generalizing to tuples of dimension $d$ requires the use of the definition above, where the tuples in~$B$ are allowed to contain  vertices which occur in $S$. 
 %  For example, if the graph $G$ is a star with many arms and $A$ consists of all pairs of adjacent vertices in $G$, then $S$
 %  needs to contain the central vertex of $G$,
 %  and therefore $S$ will contain a vertex from every tuple in $A$. We may take $B$ to be equal to $A$ in this case.

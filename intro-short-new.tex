@@ -40,7 +40,7 @@ first order sentence $\varphi$ can be evaluated in time
 $f(\varphi)\cdot n^{1+\epsilon}$ on $n$-vertex graphs from a fixed nowhere dense class of graphs $\CCC$, for any fixed real $\epsilon>0$ and some function $f$.
 On the other hand, provided $\CCC$ is closed under taking subgraphs, it is known that if $\CCC$ is not nowhere dense,
 then there is no algorithm with running time of the form $f(\varphi)\cdot n^c$ for any constant~$c$ under plausible complexity assumptions~\cite{dvovrak2013testing}.
-In the terminology of parameterized complexity, these results show that the notion of nowhere denseness exactly characterized subgraph-closed classes where model-checking first order logic
+In the terminology of parameterized complexity, these results show that the notion of nowhere denseness exactly characterizes subgraph-closed classes where model-checking first order logic
 is fixed-parameter tractable, and conclude a long line of research concerning the parameterized complexity of the model checking problem for sparse graph classes (see \cite{grokre11} for a survey). 
 
 
@@ -95,14 +95,14 @@ variables, and may be $\infty$ for some infinite structures $\str A$). A class o
 the ladder index of every first order formula $\phi(\tup{x},\tup{y})$ over
 structures from~$\CCC$ is bounded by a constant depending only on $\phi$ 
 and~$\CCC$. This notion can be applied to a single infinite structure $\str A$, by considering the class consisting of $\str A$ only.
-%Examples of stable structures include $(\str N,=)$,
-%the field of complex numbers $(\str C,+,\times,0,1)$,
-%as well as any vector space $V$ over the field of rationals, treated as a group with addition. On the other hand, $(\str Q,\le)$ and the field of reals $(\str R,+,\times,0,1)$ are not stable,
-%as they admit a linear ordering which is definable by a first order formula.
-%Stable structures turn out to have more graspable  structure than unstable ones, as they can be equipped with various notions 
-%useful for their study, such as
-%\emph{forking independence} (generalizing linear independence in vector spaces)
-%and \emph{rank} (generalizing dimension).
+Examples of stable structures include $(\str N,=)$,
+the field of complex numbers $(\str C,+,\times,0,1)$,
+as well as any vector space $V$ over the field of rationals, treated as a group with addition. On the other hand, $(\str Q,\le)$ and the field of reals $(\str R,+,\times,0,1)$ are not stable,
+as they admit a linear ordering which is definable by a first order formula.
+Stable structures turn out to have more graspable  structure than unstable ones, as they can be equipped with various notions 
+useful for their study, such as
+\emph{forking independence} (generalizing linear independence in vector spaces)
+and \emph{rank} (generalizing dimension).
 We refer to the textbooks~\cite{pillay,tent2012course} for an introduction to stability theory.
 
   One of concepts studied in the early 
@@ -200,16 +200,15 @@ if there is a bound $d\in\N$ such that the VC-dimension of $\phi(\bar x,\bar y)$
 It is immediate from the definitions  that if a formula $\phi(\bar x,\bar y)$ is stable over $\cal C$, then it is also dependent on $\cal C$ (the bound being the ladder index). 
 A class of structures  $\cal C$ is {\em{dependent}} if every formula $\phi(\bar x,\bar y)$ is dependent over $\cal C$. 
 In particular, every stable class is dependent, and hence, by Theorem~\ref{thm:adleradler}, every nowhere dense class of graphs is dependent.
-%Examples of infinite dependent structures (treated as singleton classes) include 
-%$(\mathbb Q,\le )$ and the field of reals $(\mathbb R,\times,+,0,1)$. 
+Examples of infinite dependent structures (treated as singleton classes) include 
+$(\mathbb Q,\le )$ and the field of reals $(\mathbb R,\times,+,0,1)$. 
 
 One of the main properties of VC-dimension is that it implies polynomial upper bounds on the number of different ``traces'' that a set system can have on a given parameter set.
 This is made precise by the well-known Sauer-Shelah Lemma, stated as follows.
 \begin{theorem}[Sauer-Shelah Lemma, \cite{chervonenkis1971theory,sauer1972density, shelah1972combinatorial}]\label{thm:sauer-shelah}
   For any family $\FFF$ of subsets of a set $X$, if the VC-dimension of $\FFF$ is $d$,
   then for every finite $A\subset X$,
-\[|\setof{A\cap F}{F\in {\cal F}}|\le c\cdot |A|^d, \] 
-where $c$ is a universal constant.
+\[|\setof{A\cap F}{F\in {\cal F}}|\le \sum_{i\geq 0}^d \binom{|A|}{i}\leq |A|^d+1.\] 
 \end{theorem}
 In particular, this implies that 
 in a dependent class of structures $\cal C$, 
@@ -217,7 +216,7 @@ for every formula $\phi(\bar x,\bar y)$
 there exists some constant $d\in \N$
 such that
 \begin{equation}\label{eq:nip}
-|S^\phi(\str A/B)|\le c\cdot |B|^d,	
+|S^\phi(\str A/B)|\le |B|^d+1,	
 \end{equation}
 for all $\str A\in\cal C$ and finite $B\subset V(\str A)$.
 %Unlike~Theorem~\ref{thm:Shelah-stone-space}, 
@@ -245,10 +244,48 @@ for all $\str A\in \cal C$ and all finite $B\subset V(\str A)$.
  % of VC-densities of set families $S^\phi(\str A/B)$, for $\str A\in \cal C$ and finite parameter sets $B\subseteq V(\str A)$.
 The Sauer-Shelah Lemma
 implies that the VC-density (of a set system, or of a formula over a class of structures) is bounded from above by the VC-dimension. 
-However, in many cases, the VC-density may be much smaller than the VC-dimension. Furthermore, it is the VC-density, rather than VC-dimension, that is actually relevant in combinatorial
-and algorithmic applications~\cite{Bronnimann1995,matouvsek1998geometric,Matousek:2004:BVI:1005787.1005789}. %, see also \autoref{sec:ep}.
+However, in many cases, the VC-density may be much smaller than the VC-dimension. 
+
+Furthermore, it is the VC-density, rather than VC-di\-men\-sion, that is actually relevant in combinatorial
+and algorithmic applications~\cite{Bronnimann1995,matouvsek1998geometric,Matousek:2004:BVI:1005787.1005789,chervonenkis1971theory,blumer1989learnability}. %, see also \autoref{sec:ep}.
+Let us give an example from statistical learning theory. 
+In the framework of \emph{probably approximately correct learning} 
+(PAC learning, introduced in~\cite{valiant1984theory}), a
+learning algorithm receives random samples and must 
+select a generalization function (called the hypothesis) from 
+a certain class of possible 
+functions. Let $A$ be a set and let $\mathcal{C}\subset 2^A$
+be a family of subsets of $A$, also referred to as a concept
+class. For a function $m(\epsilon,\delta)$, the concept 
+class $\mathcal{C}$ is PAC-learnable with sample size 
+$m(\epsilon,\delta)$ if there exists an algorithm, which given
+$\epsilon$ and $\delta$, draws $m(\epsilon,\delta)$ random
+examples of an unknown target concept $C\in\mathcal{C}$
+and computes a hypothesis that with high 
+probability has low generalization error.
+
+It is shown in \cite{chervonenkis1971theory,blumer1989learnability} 
+that for every $\epsilon>0$ and $\delta<1$, given 
+$m(\epsilon,\delta)=\max\{\frac{4}{\epsilon}\log \frac{2}{\delta},
+\frac{8d}{\epsilon}\log \frac{13}{\epsilon}\}$ independent
+random examples from a hypothesis space of VC-dimension~$d$, 
+with probability at least $1-\delta$, every hypothesis that
+is consistent with all examples has error at most~$\epsilon$ (that
+is, every concept class of VC-dimension~$d$ 
+is PAC learnable with sample size $m(\epsilon,\delta)$). 
+The sample size $m=m(\epsilon, \delta)$ is chosen such that 
+\mbox{$2\Phi(2m)\cdot
+2^{-\epsilon m/2}\leq \delta$}, where $\Phi(2m)$ denotes the 
+maximum number of distinct intersections of the concept class
+with any subset of the instance space of size at most $2m$. 
+Using the bounds of Theorem~\ref{thm:sauer-shelah} leads to
+the above sample size $m(\epsilon,\delta)$, and any improved 
+bounds for $\Phi(2m)$ on a particular concept class
+immediately lead to smaller sampling sizes required for
+producing a good hypothesis. 
+
 We refer to~\cite{aschenbrenner2016vapnik} for an overview of 
-applications of VC-dimension and VC-density in model
+further applications of VC-dimension and VC-density in model
 theory and to the surveys~\cite{furedi1991traces,matouvsek1998geometric} 
 on uses of VC-density in
 combinatorics. 
@@ -293,9 +330,17 @@ The following result is an easy corollary of known characterizations of obstruct
 
 We prove in the appended full version of the paper that a similar
 characterization theorem can be proved for bounded
-expansion classes of graphs. More precisely, if $\CCC$ has bounded expansion, then there exists a constant~$c$ such that for every $G\in \CCC$ and every nonempty $A\subseteq V(G)$, we have $|S^\phi(G/A)|\leq c\cdot |A|^\ell$. Conversely, if $\CCC$ has unbounded 
-expansion, then there is a formula 
-  $\phi(x,y)$ such that for every $c\in \mathbb{R}$ there exist $G\in\CCC$ and a nonempty $A\subseteq V(G)$ with $|S^\phi(G/A)|>c|A|$. 
+expansion classes of graphs (all proofs that are omitted
+in the conference version due 
+to space constraints are marked with a $\star$ and can be 
+found in the appendix). More precisely, we show that 
+if $\CCC$ has bounded 
+expansion, then there exists a constant~$c$ such that for every 
+$G\in \CCC$ and every nonempty $A\subseteq V(G)$, we have 
+$|S^\phi(G/A)|\leq c\cdot |A|^\ell$. Conversely, if $\CCC$ has 
+unbounded expansion, then there is a formula $\phi(x,y)$ such 
+that for every $c\in \mathbb{R}$ there exist $G\in\CCC$ and 
+a nonempty $A\subseteq V(G)$ with $|S^\phi(G/A)|>c|A|$. 
 
 \paragraph{Neighborhood complexity.}
 To illustrate Theorem~\ref{thm:vc-density}, consider the case when
@@ -310,7 +355,7 @@ Note that these results are special cases of Theorem~\ref{thm:vc-density}.
 The study of $r$-neighborhood complexity on classes of bounded expansion and nowhere dense classes was motivated by algorithmic questions from the field of parameterized complexity.
 More precisely, the usage of this notion was crucial for the development of a linear kernel for the {\sc{$r$-Dominating Set}} problem on any class of bounded expansion~\cite{drange2016kernelization},
 and of an almost linear kernel for this problem on any nowhere dense class~\cite{eickmeyer2016neighborhood}.
-We will use the results of~\cite{drange2016kernelization,eickmeyer2016neighborhood,reidl2016characterising} on $r$-neighborhood complexity in sparse graphs in our proof of Theorem~\ref{thm:vc-density}.
+We will use the results of~\cite{drange2016kernelization,eickmeyer2016neighborhood} on $r$-neighborhood complexity in sparse graphs in our proof of Theorem~\ref{thm:vc-density}.
 
 \paragraph{Uniform quasi-wideness.}
 One of the main tools used in our proof 
@@ -407,7 +452,8 @@ as well as the previous results on neighborhood complexity~\cite{drange2016kerne
 
 \paragraph{A duality theorem.}
 As an example application of our main result,~Theorem~\ref{thm:vc-density}, we state the following
- result.
+ result. Below, $\tau(\cal G)$ denotes the \emph{transversality} of $\cal G$, i.e., the least number of elements of a set $X$ which intersects every set in~$\cal G$,
+and $\nu(\cal G)$ denotes the \emph{packing number} of $\cal G$, i.e., the largest number of pairwise-disjoint subsets of $\cal G$.
  
 %\newcounter{ep}
 %\setcounter{ep}{\thetheorem}
@@ -422,9 +468,8 @@ Then~$\tau({\cal G})\le f(\nu(\cal G))$.
 %\end{restatable}
 \end{theorem}
 
-Above, $\tau(\cal G)$ denotes the \emph{transversality} of $\cal G$, i.e., the least number of elements of a set $X$ which intersects every set in~$\cal G$,
-and $\nu(\cal G)$ denotes the \emph{packing number} of $\cal G$, i.e., the largest number of pairwise-disjoint subsets of $\cal G$.~Theorem~\ref{thm:erdos-posa} is an immediate consequence of the bound given by~Theorem~\ref{thm:vc-density} and a result of Matou{\v s}ek~\cite{Matousek:2004:BVI:1005787.1005789}.
-
+Theorem~\ref{thm:erdos-posa} is an immediate consequence of the bound given by~Theorem~\ref{thm:vc-density} and a result of Matou{\v s}ek~\cite{Matousek:2004:BVI:1005787.1005789}.
+%
 We remark that a similar, but incomparable result
 is proved by Bousquet and Thomass{\'e}~\cite{BousquetT15}.
 In their result, the assumption on $\CCC$ is weaker, since they just require that it has \emph{bounded distance VC-dimension}, 
@@ -470,11 +515,6 @@ thank Patrice Ossona de Mendez for pointing us to the
 question of studying VC-density of nowhere dense graph
 classes.
 
-
-TODO: MAKE SURE THAT 
-THE INTRODUCTION DEFINES ALL THE NECESSARY NOTIONS.
-In particular, define $S^\phi(A/B)$
-for any $A\subset V(\str A)$.
 
 %\pagebreak
 % \todo{page break here?}

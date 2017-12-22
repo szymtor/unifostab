@@ -2,7 +2,7 @@
 \section{Bounds for stability}\label{sec:stable}
 Adler and Adler~\cite{adler2014interpreting}, 
 proved that every nowhere dense class of graphs is stable. In this section,
-we prove its effective variant,~\autoref{thm:new-stable}.
+we prove its effective variant,~Theorem~\ref{thm:new-stable}.
 %, which 
 %we repeat for convenience.
 %\newstable*
@@ -18,21 +18,21 @@ we prove its effective variant,~\autoref{thm:new-stable}.
 %Recall that a class $\cal C$ is stable if and only if for every first order formula $\varphi(\bar x,\bar y)$, 
 %its ladder index over graphs from $\cal C$ is bounded by a constant depending only on $\cal C$ and $\varphi$;
 %see \autoref{sec:intro} to recall the background on stability.
-%Thus the result of Adler and Adler is implied by \autoref{thm:new-stable},
-%and is weaker in the following sense: \autoref{thm:new-stable} asserts in addition that there is a computable bounds on the ladder index
+%Thus the result of Adler and Adler is implied by Theorem~\ref{thm:new-stable},
+%and is weaker in the following sense: Theorem~\ref{thm:new-stable} asserts in addition that there is a computable bounds on the ladder index
 %of any formula that depends only on the size of an excluded clique minor at depth bounded in terms of formula's quantifier rank and number of free variables. 
-%We now prove~\autoref{thm:new-stable}.
-
-\begin{proof}[Proof of~\autoref{thm:new-stable}]
+%We now prove~Theorem~\ref{thm:new-stable}.
+\vspace{-2mm}
+\begin{proof}[Proof of~Theorem~\ref{thm:new-stable}]
 Fix a formula $\phi(\bar x,\bar y)$ of quantifier rank $q$ and
 a partitioning of its 
-free variables into  $\bar y$ and $\bar z$.
+free variables into  $\bar x$ and $\bar y$.
 Let $d=|\bar x|+|\bar y|$ be the total number of free variables of $\phi$.
 Let $r\in \N$ be the number given by~\autoref{cor:bound},
 which depends on $\phi$ only.
 Let $\cal C$ be the class of all graphs 
 such that  $K_t\not\minor_{18r} G$.
-Then, by~\autoref{thm:uqw-tuples}, 
+Then, by~Theorem~\ref{thm:uqw-tuples}, 
 $\cal C$ satisfies $\uqw^d_{r}(N^d_{r},s^d_r)$,
 for some  polynomial  $N^d_r\from\N\to\N$ and number $s=s^d_r\in \N$ computable from $d,t,r$.
 Let $T$ be the number given by~\autoref{cor:bound} for $\phi$ and $s$.
@@ -40,7 +40,6 @@ Let $T$ be the number given by~\autoref{cor:bound} for $\phi$ and $s$.
 $\ell=N^d_r(2T+1)$.
 We show that 
 every $\phi$-ladder in a graph $G\in\cal C$ has length smaller than $\ell$.
-
 
 For the sake of contradiction, assume that there is a graph $G\in\cal C$
 and tuples $\bar u_1,\ldots,\bar u_\ell\in V(G)^{|\bar x|}$ and $ \bar v_1,\ldots, \bar v_\ell\in V(G)^{|\bar y|}$
@@ -66,5 +65,5 @@ Applying property  $\uqw^d_r(N^d_r,s^d_r)$ to the set $A$, radius $r$, and targe
     by the definition of a ladder. This contradiction concludes the proof.
 \end{proof}
 
-%We remark that~\autoref{thm:new-stable} also holds for classes of edge- and vertex-colored graphs, with the same proof, but using 
+%We remark that~Theorem~\ref{thm:new-stable} also holds for classes of edge- and vertex-colored graphs, with the same proof, but using 
 %a version of the results in~\autoref{sec:gaifman} lifted to edge- and vertex-colored graphs.

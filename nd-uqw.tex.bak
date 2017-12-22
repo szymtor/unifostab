@@ -2,15 +2,15 @@
 
 
 
-%In this section we prove \autoref{thm:new-uqw}, which strengthens \autoref{thm:krs} by providing an explicit polynomial $N$ and bound $s$,
-%whereas the bounds in~\autoref{thm:krs} rely on non-constructive arguments. 
-%We note that~\autoref{thm:krs} is sufficient to prove our main result,~\autoref{thm:vc-density}, but is required in our proof of~\autoref{thm:new-stable}, which is the effective 
-%variant of the result of Adler and Adler, \autoref{thm:new-stable}.
+%In this section we prove Theorem~\ref{thm:new-uqw}, which strengthens Theorem~\ref{thm:krs} by providing an explicit polynomial $N$ and bound $s$,
+%whereas the bounds in~Theorem~\ref{thm:krs} rely on non-constructive arguments. 
+%We note that~Theorem~\ref{thm:krs} is sufficient to prove our main result,~Theorem~\ref{thm:vc-density}, but is required in our proof of~Theorem~\ref{thm:new-stable}, which is the effective 
+%variant of the result of Adler and Adler, Theorem~\ref{thm:new-stable}.
 
-In this section we prove \autoref{thm:new-uqw}, which strengthens the 
+In this section we prove Theorem~\ref{thm:new-uqw}, which strengthens the 
 result of Kreutzer et al.~\cite{siebertz2016polynomial} by providing an explicit polynomial $N$ and bound $s$. 
-We remark that the result of Kreutzer et al.~is sufficient to prove our main result, \autoref{thm:vc-density}, but is required in our proof of~\autoref{thm:new-stable}, which is the effective 
-variant of the result of Adler and Adler, \autoref{thm:new-stable}.
+We remark that the result of Kreutzer et al.~is sufficient to prove our main result, Theorem~\ref{thm:vc-density}, but is required in our proof of~Theorem~\ref{thm:new-stable}, which is the effective 
+variant of the result of Adler and Adler, Theorem~\ref{thm:new-stable}.
 %
 %
 % \setcounter{theorem}{}
@@ -27,19 +27,19 @@ variant of the result of Adler and Adler, \autoref{thm:new-stable}.
 %
 %
 %\paragraph{General strategy.}
-Our proof follows the same lines as the original proof of Ne\v set\v ril and Ossona de Mendez~\cite{nevsetvril2010first}, with the difference that in the key technical lemma (Lemma 3.5 of~\cite{nevsetvril2010first}) %(\autoref{lem:apex} below), 
-we improve the bounds significantly by replacing a Ramsey argument with a refined combinatorial analysis (\autoref{lem:apex} below).
+Our proof follows the same lines as the original proof of Ne\v set\v ril and Ossona de Mendez~\cite{nevsetvril2010first}, with the difference that in the key technical lemma (Lemma 3.5 of~\cite{nevsetvril2010first}) %(Theorem~\ref{lem:apex} below), 
+we improve the bounds significantly by replacing a Ramsey argument with a refined combinatorial analysis (Lemma~\ref{lem:apex} below).
 The new argument essentially originates in the concept of {\em{branching index}} from stability theory. 
 %, 
 %and also uses the almost linear bound on neighborhood complexity in nowhere dense graph classes, due to Gajarsk\'y et al.~\cite{gajarsky2017kernelization}. \marginpar{no longer}
-%For sake of completeness, we present the entire proof of~\autoref{thm:new-uqw}.
+%For sake of completeness, we present the entire proof of~Theorem~\ref{thm:new-uqw}.
 Due to space constraints we present only the proof of 
 the key lemma and refer to the appended full version
 for a complete proof of the main theorem. 
 
 %
-%We first prove a restricted variant,~\autoref{lem:engine} below, in which we assume that $A$ is already $(r-1)$-independent. Then, in order to derive
-%\autoref{thm:new-uqw}, we apply the lemma iteratively for $r$ ranging from $1$ to the target value.
+%We first prove a restricted variant,~Theorem~\ref{lem:engine} below, in which we assume that $A$ is already $(r-1)$-independent. Then, in order to derive
+%Theorem~\ref{thm:new-uqw}, we apply the lemma iteratively for $r$ ranging from $1$ to the target value.
 %
 %\begin{lemma}\label{lem:engine}
 %For every pair of integers $t,r\in \N$ there exists an integer $d<9r/2$ and a function $L\colon \N\to \N$ with $L(m)=\Oof_{r,t}{(m^{{(4t+1)}^{2rt}})}$ such that the following holds.
@@ -50,7 +50,7 @@ for a complete proof of the main theorem.
 %Finally, given $G$ and $A$, the sets $B$ and $S$ can be computed in time $\Oof_{r,t}(|A|\cdot |E(G)|)$.
 %\end{lemma}
 %
-%We prove~\autoref{lem:engine} in \autoref{sec:engine}, but  a very rough sketch is as follows.
+%We prove~Theorem~\ref{lem:engine} in \autoref{sec:engine}, but  a very rough sketch is as follows.
 %The  case of general~$r$ reduces to the case $r=1$ or $r=2$, depending on the parity of $r$,
 %by contracting the balls of radius $\lfloor \frac {r-1} 2\rfloor $ around the vertices in $A$ to single vertices.
 %The case of $r=1$ follows immediately from Ramsey's theorem, as in~\cite{nevsetvril2011nowhere}.
@@ -66,7 +66,7 @@ for a complete proof of the main theorem.
 %\subsection{The main technical lemma}
 %\label{sec:main-tech}
 %
-%The following, Ramsey-like result is the main technical lemma used in the proof of~\autoref{thm:new-uqw}. 
+%The following, Ramsey-like result is the main technical lemma used in the proof of~Theorem~\ref{thm:new-uqw}. 
 
 
 \begin{lemma}\label{lem:apex}
@@ -85,18 +85,18 @@ structures described in the other two cases (a $2$-independent set
 of size~$m$, or a vertex $v$ as above) can be 
 computed in time $\Oof_t(|A|\cdot |E(G)|)$. 
 \end{lemma}
-We remark that a statement similar to that of \autoref{lem:apex}
-can be obtained by employing Ramsey's theorem, as has been done in~\cite{nevsetvril2010first}. This, however, 
-%yields
-%in place of the bound $(m+\ell)^{2t}$ 
-%a bound of the form $R(m,\underbrace{q,q,\ldots,q}_{k\text{ times}})$,
-%where $k\sim\ell^{1/8}$ and $R(m_1,\ldots,m_c)$
-%is the Ramsey number for $c$ colors.
-%In particular, this 
-does not give a bound which is polynomial in $m+\ell$, and thus cannot be used to prove~\autoref{thm:new-uqw}.
-%
-%\medskip
-The remainder of this section is devoted to the proof of~\autoref{lem:apex}.
+%We remark that a statement similar to that of Theorem~\ref{lem:apex}
+%can be obtained by employing Ramsey's theorem, as has been done in~\cite{nevsetvril2010first}. This, however, 
+%%yields
+%%in place of the bound $(m+\ell)^{2t}$ 
+%%a bound of the form $R(m,\underbrace{q,q,\ldots,q}_{k\text{ times}})$,
+%%where $k\sim\ell^{1/8}$ and $R(m_1,\ldots,m_c)$
+%%is the Ramsey number for $c$ colors.
+%%In particular, this 
+%does not give a bound which is polynomial in $m+\ell$, and thus cannot be used to prove~Theorem~\ref{thm:new-uqw}.
+%%
+%%\medskip
+The remainder of this section is devoted to the proof of~Theorem~\ref{lem:apex}.
 %We will use the following bounds on the edge density
 %of graphs with excluded shallow minors obtained
 %by Alon et al.~\cite{alon2003turan}. 
@@ -170,7 +170,7 @@ We will need one more technical lemma.
 %which implies $k\geq |A|^{1/4}$ due to $|A|\geq t^8\geq 64$.
 %\end{proof}
 
-We proceed with the proof of \autoref{lem:apex}.
+We proceed with the proof of Theorem~\ref{lem:apex}.
 The idea is to arrange the elements of $A$ in a binary tree
 and prove that provided $A$ is large, this tree contains a long path. From this path, we will 
 extract the set $B$. 
@@ -264,20 +264,20 @@ For each $j\in\set{1,\ldots,k}$, let $B_j$
 be the subgraph of $G$ induced by the set
 $\set{a_j,b_j}\cup\set{z_{ij}\colon 1\le i\le  j}$.
 Observe that~$B_j$ is connected and has radius at most $2$, with $b_j$ being the central vertex.
-By \autoref{thm:alternation-rank-type-tree} and the discussion from the previous paragraph, the graphs $B_j$ for $j\in \set{1,\ldots,k}$
+By Theorem~\ref{thm:alternation-rank-type-tree} and the discussion from the previous paragraph, the graphs $B_j$ for $j\in \set{1,\ldots,k}$
 are pairwise disjoint.
 Moreover, for all $1\le i\le j\le k$, there is an edge between $B_i$
 and $B_j$, namely, the edge between $z_{ij}\in B_j$
 and $a_i\in B_i$.
-Hence, the graphs $B_j$, for $j\in \set{1,\ldots,k}$, define a depth-$2$ minor model of $K_k$ in $G$. Since $K_t\not\minor_{2}G$, this implies that $k<t$, proving~\autoref{thm:alternation-rank-type-tree}.
+Hence, the graphs $B_j$, for $j\in \set{1,\ldots,k}$, define a depth-$2$ minor model of $K_k$ in $G$. Since $K_t\not\minor_{2}G$, this implies that $k<t$, proving~Theorem~\ref{thm:alternation-rank-type-tree}.
 \end{proof}
 
-We continue with the proof of~\autoref{lem:apex}. 
+We continue with the proof of~Theorem~\ref{lem:apex}. 
 Fix integers $\ell\ge t^8$ and~$m$, and define $h=m+\ell$.
 Let $A$ be a $1$-independent set in $G$
 of size at least $h^{2t}$.
 
-Suppose that the first case of \autoref{lem:apex} does not hold. In particular $K_t\not\minor_2 G$, so by \autoref{thm:alternation-rank-type-tree},~$\tau$ has alternation rank at most $2t-1$. From \autoref{lem:number-of-nodes} 
+Suppose that the first case of Theorem~\ref{lem:apex} does not hold. In particular $K_t\not\minor_2 G$, so by Theorem~\ref{thm:alternation-rank-type-tree},~$\tau$ has alternation rank at most $2t-1$. From Theorem~\ref{lem:number-of-nodes} 
 we conclude that $\tau$  has depth at least~$h$.
 As $h=m+\ell$, it follows that either $\tau$  has a node $w$ which contains at least $m$ letters~$\dau$, or $\tau$ has a node $w$ which contains  at least $\ell$ letters $\son$.
 
@@ -287,9 +287,9 @@ be the set of all vertices $\tau(u)$ such that $u\dau$ is a prefix of $w$. Then,
 
 Finally, consider the second case, i.e., there is a node $w$ in $\tau$ which contains at least $\ell$ letters~$\son$. Let 
 $Y$ be the set of all vertices $\tau(u)$ such that $u\son$ is a prefix of $w$. Then, by construction, $Y\subset A$ is a set of at least $\ell$ vertices which are mutually at distance exactly $2$ in $G$. 
-Since $K_t\not\minor_4 G$ and $\ell\geq t^8$, by~\autoref{lem:diversity} we infer that there is a vertex $v\in G$
+Since $K_t\not\minor_4 G$ and $\ell\geq t^8$, by~Theorem~\ref{lem:diversity} we infer that there is a vertex $v\in G$
 with at least $\ell^{1/4}$ neighbors in $Y$.
-This finishes the proof of the existential part of~\autoref{lem:apex}.
+This finishes the proof of the existential part of~Theorem~\ref{lem:apex}.
 We defer the proof of the algorithmic statement of the lemma to the appendix.
 %, the proof above yields an algorithm which first constructs the tree $\tau$, by 
 %iteratively processing each vertex $w$ of $A$ and testing whether the distance between $w$ and each vertex processed already is equal to~$2$.
@@ -302,24 +302,24 @@ We defer the proof of the algorithmic statement of the lemma to the appendix.
 %which belongs to the largest number of those neighborhoods; this can be done in time $\Oof(|E(G)|)$.
 %The overall running time is $\Oof(|A|\cdot |E(G)|)$, as required.
 
-%This finishes the proof of~\autoref{lem:apex}.
+%This finishes the proof of~Theorem~\ref{lem:apex}.
 
-%\subsection{Proof of~\autoref{lem:engine}}
+%\subsection{Proof of~Theorem~\ref{lem:engine}}
 %\label{sec:engine}
-%% To prove~\autoref{lem:engine}, we distinguish two special cases: the case of $r=1$ and the case $r=2$. The case of general $r$ then reduces to one of these two cases, depending on the parity of $r$, by observing that a $(2s+1)$-independent set $A$ in $G$
+%% To prove~Theorem~\ref{lem:engine}, we distinguish two special cases: the case of $r=1$ and the case $r=2$. The case of general $r$ then reduces to one of these two cases, depending on the parity of $r$, by observing that a $(2s+1)$-independent set $A$ in $G$
 %% induces a $1$-independent set in $G$ with the balls of radius $s$ around the vertices of $A$ contracted, and,
 %% similarly, a $(2s+2)$-independent set $A$ in $G$
 %% induces a $2$-independent set in $G$ with the balls of radius $s$ around the vertices of $A$ contracted.
 
-%With \autoref{lem:apex} proved, we can proceed with~\autoref{lem:engine}. 
+%With Theorem~\ref{lem:apex} proved, we can proceed with~Theorem~\ref{lem:engine}. 
 %We start with the case $r=1$, then we move to the case $r=2$. 
 %Next, we show how the general case reduces to one of those two cases.
-%% , and, finally, we deduce~\autoref{thm:new-uqw} from~\autoref{lem:engine}.
+%% , and, finally, we deduce~Theorem~\ref{thm:new-uqw} from~Theorem~\ref{lem:engine}.
 %
 %\paragraph{Case $r=1$.}
 %We put $d=0$, thus we assume that $K_t\not\minor_0 G$; that is, $G$ does not contain a clique of size $t$ as a subgraph. By Ramsey's Theorem, in every graph every vertex subset of size $\binom{m+t-2}{t-1}$ contains an
 %independent set of size $m$ or a clique of size $t$. Therefore, 
-%taking $L(m)$ to be the above binomial coefficient yields~\autoref{lem:engine} in case $r=0$, for $S=\emptyset$. Note here that $\binom{m+t-2}{t-1}\in\Oof_{t}{(m^{{(4t+1)}^{2t}})}$.
+%taking $L(m)$ to be the above binomial coefficient yields~Theorem~\ref{lem:engine} in case $r=0$, for $S=\emptyset$. Note here that $\binom{m+t-2}{t-1}\in\Oof_{t}{(m^{{(4t+1)}^{2t}})}$.
 %Moreover, such independent set or clique can be computed from $G$ and $A$ in time~$\Oof(|A|\cdot |E(G)|)$ by simulating the proof of Ramsey's theorem.
 %
 %\paragraph{Case $r=2$.}
@@ -327,7 +327,7 @@ We defer the proof of the algorithmic statement of the lemma to the appendix.
 %We show that if $A$ is a sufficiently large $1$-independent set in a graph $G$ such that $K_t\not\minor_4 G$, 
 %then there is a set of vertices~$S$ of size less than $t$ such that $A\setminus S$ contains a subset of size $m$ which is $2$-independent in $G-S$. 
 %Here, by ``sufficiently large'' we mean of size of size at least $L(m)$, for $L(m)$ emerging from the proof.
-%To this end, we shall iteratively apply \autoref{lem:apex} as long as  it results in the third case, 
+%To this end, we shall iteratively apply Theorem~\ref{lem:apex} as long as  it results in the third case, 
 %yielding a vertex $v$ with many neighbors in $A$. In this case, we add $v$ vertex to the set $S$, and apply the lemma again,
 %restricting $A$ to $A\cap N(v)$. 
 %Precise calculations follow.
@@ -337,7 +337,7 @@ We defer the proof of the algorithmic statement of the lemma to the appendix.
 %Fix a number $\beta>4t$. For $k\ge 0$,
 %define $m_k=((k+1)\cdot m)^{(2\beta)^k}$.
 %In the following we will always assume that $m\geq t^8$. 
-%We will apply~\autoref{lem:apex} in the following form.
+%We will apply~Theorem~\ref{lem:apex} in the following form.
 %\begin{claim}\label{cor:apex}
 %	If $G$ is a graph such that $K_t\not\minor_4 G$, and
 %	$A\subset V(G)$ is an $1$-independent set in $G$ which does not contain a $2$-independent set of size $m$ and satisfies $|A|\ge m_k$, for some $k\geq 1$,
@@ -349,7 +349,7 @@ We defer the proof of the algorithmic statement of the lemma to the appendix.
 %Observe that
 %\[|A|\ge \left((k+1)\cdot m\right)^{(2\beta)^k}\ge\left ((m+ k\cdot m)^{4\cdot(2\beta)^{k-1}} \right)^{2t}
 %\ge \left(m+(k\cdot m)^{4\cdot (2\beta)^{k-1}}\right)^{2t}=(m+\ell)^{2t}.\]
-%Therefore, we may  apply \autoref{lem:apex}, yielding a vertex $v$ with at least $\ell^{1/4}=(k\cdot m)^{(2\beta)^{k-1}}=m_{k-1}$ neighbors in~$A$.
+%Therefore, we may  apply Theorem~\ref{lem:apex}, yielding a vertex $v$ with at least $\ell^{1/4}=(k\cdot m)^{(2\beta)^{k-1}}=m_{k-1}$ neighbors in~$A$.
 %\end{clproof}
 %
 %%In the following we assume that $m\geq t^8$, since we may always ask for finding a $2$-independent set of size $t^8$ instead of $m$.
@@ -389,17 +389,17 @@ We defer the proof of the algorithmic statement of the lemma to the appendix.
 % 
 % 
 % 
-% This proves~\autoref{lem:engine} in the case $r=2$, for the function $L(m)$ defined as $L(m)=m_t=((t+1)\cdot m)^{\beta^{2t}}$
+% This proves~Theorem~\ref{lem:engine} in the case $r=2$, for the function $L(m)$ defined as $L(m)=m_t=((t+1)\cdot m)^{\beta^{2t}}$
 % for $m\ge t^8$, and $L(m)=L(t^8)$ for $m<t^8$, where $\beta>4t$ is any fixed constant.
 % It is easy to see that then $L(m)\in \Oof_{t}{(m^{{(4t+1)}^{2t}})}$, provided we put $\beta=4t+1$.
 % Also, the proof easily yields an algorithm constructing the sets~$B$ and $S$,
-% which amounts to applying at most $t$ times the algorithm of~\autoref{lem:apex}.
+% which amounts to applying at most $t$ times the algorithm of~Theorem~\ref{lem:apex}.
 % Hence, its running time  is $\Oof_{r,t}(|A|\cdot |E(G)|)$, as required.
 %% \end{proof}
 %
 %
 %\paragraph{Odd case.}
-%We now prove~\autoref{lem:engine} in the case when $r=2s+1$, for some integer $s\geq 1$. We put $d=s=\frac{r-1}{2}$.
+%We now prove~Theorem~\ref{lem:engine} in the case when $r=2s+1$, for some integer $s\geq 1$. We put $d=s=\frac{r-1}{2}$.
 %Let $G$ be a graph such that $K_t\not\minor_s G$, and 
 % let $A$ be a $2s$-independent set in $G$. Consider the graph $G'$ obtained from $G$
 %by contracting the (pairwise disjoint) balls of radius $s$ around each vertex $v\in A$.
@@ -414,14 +414,14 @@ We defer the proof of the algorithmic statement of the lemma to the appendix.
 % 
 % \paragraph{Even case.}
 % Finally,
-% we prove~\autoref{lem:engine} in the case $r=2s+2$, for some integer $s\geq 1$. We put $d=9s+4=9r/2-5$.
+% we prove~Theorem~\ref{lem:engine} in the case $r=2s+2$, for some integer $s\geq 1$. We put $d=9s+4=9r/2-5$.
 %Let $G$  be such that 
 % $K_t\not\minor_{d} G$, and
 %let $A$ be a $(2s+1)$-independent set in~$G$. Consider the graph $G'$ obtained from $G$
 %by contracting the (pairwise disjoint) balls of radius $s$ around each vertex $v\in A$.
 % Let $A'$ denote the set of vertices of $G'$ corresponding to the contracted balls. Again, there is a natural correspondence (bijection) between $A$ and $A'$. Note that
 %this time, $A'$ is a $1$-independent set in $G'$.
-%Since $G'\minor_s G$, from $K_t\not\minor_{9s+4} G$ it follows by \autoref{lem:combineminors} that $K_t\not\minor_4 G'$. Apply the already proved case $r=2$ to $G'$ and $A'$. 
+%Since $G'\minor_s G$, from $K_t\not\minor_{9s+4} G$ it follows by Theorem~\ref{lem:combineminors} that $K_t\not\minor_4 G'$. Apply the already proved case $r=2$ to $G'$ and $A'$. 
 %Then, provided $|A|=|A'|\ge L_t(m)$, where $L_t(m)$ is the function as defined in the case $r=2$, we infer that
 % $A'$ contains a subset $B'$ of size $m$
 %which is  $2$-independent in $G'-S'$, for some $S'\subset V(G')-A'$ of size less than $t$.
@@ -439,10 +439,10 @@ We defer the proof of the algorithmic statement of the lemma to the appendix.
 %This yields a running time of  $\Oof_{r,t}(|A|\cdot |E(G)|)$.
 % \medskip
 %  
-%This finishes  the proof of~\autoref{lem:engine}.
+%This finishes  the proof of~Theorem~\ref{lem:engine}.
 %
-%\subsection{Proof of \autoref{thm:new-uqw}}
-%We now wrap up the proof of \autoref{thm:new-uqw} by iteratively applying~\autoref{lem:engine}. 
+%\subsection{Proof of Theorem~\ref{thm:new-uqw}}
+%We now wrap up the proof of Theorem~\ref{thm:new-uqw} by iteratively applying~Theorem~\ref{lem:engine}. 
 %We repeat the statement for convenience.
 %
 %% \setcounter{aux}{\thetheorem}
@@ -459,7 +459,7 @@ We defer the proof of the algorithmic statement of the lemma to the appendix.
 %% \setcounter{theorem}{\theaux}
 %\begin{proof}
 %Fix integers $r,t$,  and a graph $G$ such that $K_t\not\minor_{d} G$,
-%for $d=\lfloor 9r/2 \rfloor$. Let $\beta>4t$ be a fixed real. As in the proof of \autoref{lem:engine}, we suppose $m\geq t^8$; this will be taken care by the final choice of the function $N(m)$.
+%for $d=\lfloor 9r/2 \rfloor$. Let $\beta>4t$ be a fixed real. As in the proof of Theorem~\ref{lem:engine}, we suppose $m\geq t^8$; this will be taken care by the final choice of the function $N(m)$.
 %Denote $\gamma=\beta^{2t}$, and
 %define the function $L(m)$ as $L(m)=((t+1)\cdot m)^\gamma$.
 %
@@ -480,7 +480,7 @@ We defer the proof of the algorithmic statement of the lemma to the appendix.
 %	\item $|A_i|\ge m_i=L(m_{i+1})$,
 %	\item $A_i\cap S_i=\emptyset$ and $A_i$ is $i$-independent in $G-S_i$.
 %\end{itemize}
-%To construct $A_{i+1}$ out of $A_i$, apply~\autoref{lem:engine} to the graph $G-S_i$ and 
+%To construct $A_{i+1}$ out of $A_i$, apply~Theorem~\ref{lem:engine} to the graph $G-S_i$ and 
 %the $i$-independent set $A_i$ of size at least $L(m_{i+1})$. This yields a set $S\subseteq V(G)$ which is disjoint from $S_i\cup A_i$, and a subset $A_{i+1}$ of $A_i-S$ of size 
 %at least $m_{i+1}$
 %which is $(i+1)$-independent in $G-S_{i+1}$, where $S_{i+1}=S\cup S_i$. This completes the inductive construction.
@@ -489,7 +489,7 @@ We defer the proof of the algorithmic statement of the lemma to the appendix.
 %Observe that by construction, $|S_r|<r t/2$, as in the odd steps, the constructed set $S$ is empty, and in the even steps, it has less than $t$ elements. 
 %We show that in fact we have $|S_r|<t$ using the following argument, similar to the one used in~\autoref{claim:at-most-t}.
 %
-%By the last part of the statement of~\autoref{lem:engine},  at the $i$th step of the construction, each vertex of the set $S$ obtained from \autoref{lem:engine}
+%By the last part of the statement of~Theorem~\ref{lem:engine},  at the $i$th step of the construction, each vertex of the set $S$ obtained from Theorem~\ref{lem:engine}
 %is at distance exactly $i/2$ from all the vertices in $A_{i+1}$ in the graph 
 %$G-S_i$. 
 %For $a\in A_r$, let $\overline{N}(a)$ denote the $\lfloor r/2\rfloor$-neighborhood of $a$ in $G-S_r$; note that sets $\overline{N}(a)$ are pairwise disjoint.
@@ -514,22 +514,21 @@ We defer the proof of the algorithmic statement of the lemma to the appendix.
 %there is a set $S\subset V(G)$, equal to $S_r$ above,
 %and a set $B\subset A$, equal to $A_r$ above,
 %so that $B$ is $r$-independent in $G-S$.
-%Given~$G$ and $A$, the sets~$S$ and $B$ can be computed by applying the algorithm of \autoref{lem:engine} at most~$r$ times, so in time $\Oof_{r,t}(|A|\cdot |E(G)|)$.
-%This finishes the proof of~\autoref{thm:new-uqw}.
+%Given~$G$ and $A$, the sets~$S$ and $B$ can be computed by applying the algorithm of Theorem~\ref{lem:engine} at most~$r$ times, so in time $\Oof_{r,t}(|A|\cdot |E(G)|)$.
+%This finishes the proof of~Theorem~\ref{thm:new-uqw}.
 %\end{proof}
 
 
 
 \subsection{Uniform quasi-widness for tuples}\label{sec:uqw-tuples}
-We now formulate and prove an extension of~\autoref{thm:new-uqw}
+We now formulate and prove an extension of~Theorem~\ref{thm:new-uqw}
 which applies to sets of tuples of vertices, rather than sets of vertices. 
 This more general result will be used later on in the paper. 
 The result and its proof are essentially adaptations to the finite of their infinite analogues introduced by Podewski and Ziegler (cf.~\cite{podewski1978stable},  Corollary 3),
 modulo the numerical bounds.
 
-We generalize the notion of independence to sets of tuples of vertices.
 Fix a graph $G$ and a number $r\in \N$, and let $S\subseteq V(G)$ be a subset of vertices of $G$.
-We say that vertices $u$ and $v$ are {\em{$r$-separated}} by $S$ in $G$ if every path of length at most $r$ connecting $u$ and $v$ in $G$ passes through a vertex of $S$.
+We say that vertices $u$ and $v$ are {\em{$r$-separated}} by $S$ in $G$ if every path of length at most~$r$ connecting $u$ and $v$ in $G$ passes through a vertex of $S$.
 We extend this notion to tuples:
 two tuples $\bar u,\bar v$ of vertices of $G$ are \emph{$r$-separated} by $S$ every vertex appearing in $\bar u$ is $r$-separated by $S$ from every vertex appearing in $\bar{v}$.
 Finally, if $A\subseteq V(G)^d$ is a set of $d$-tuples of vertices, for some $d\in\N$,
@@ -556,31 +555,31 @@ $\uqw^d_r(N,s)$ if the following condition holds:
 	then we say that $\cal C$ satisfies property $\puqw^d_r$.
 \end{definition}
 
-When $d=1$, we omit it from the superscripts.
-  Note that there is a slight discrepancy 
-  in the definition of uniform quasi-wideness 
-  and the property of satisfying $\uqw_r$, for all $r\in \N$.
-  This is due to the fact that in the original definition,
-  the set $B$ must be disjoint from $S$,
-  whereas in the property $\uqw_r$, 
-  some vertices of $S$ may belong to $B$. This distinction is inessential when it comes to dimension $1$, since $|S|\le s_r$ for some constant $s_r$,
-  so passing from one definition to the other requires 
-  modifying the function $N_r$ by an additive constant~$s_r$.
-In particular, a class of graphs $\cal C$ is uniformly quasi-wide if and only if it 
-	satisfies $\uqw_r$, for all $r\in \N$.  
-  However, generalizing to tuples of dimension $d$ requires the use of the definition above, where the tuples in~$B$ are allowed to contain  vertices which occur in $S$. 
+%When $d=1$, we omit it from the superscripts.
+%  Note that there is a slight discrepancy 
+%  in the definition of uniform quasi-wideness 
+%  and the property of satisfying $\uqw_r$, for all $r\in \N$.
+%  This is due to the fact that in the original definition,
+%  the set $B$ must be disjoint from $S$,
+%  whereas in the property $\uqw_r$, 
+%  some vertices of $S$ may belong to $B$. This distinction is inessential when it comes to dimension $1$, since $|S|\le s_r$ for some constant $s_r$,
+%  so passing from one definition to the other requires 
+%  modifying the function $N_r$ by an additive constant~$s_r$.
+%In particular, a class of graphs $\cal C$ is uniformly quasi-wide if and only if it 
+%	satisfies $\uqw_r$, for all $r\in \N$.  
+%  However, generalizing to tuples of dimension $d$ requires the use of the definition above, where the tuples in~$B$ are allowed to contain  vertices which occur in $S$. 
 %  For example, if the graph $G$ is a star with many arms and $A$ consists of all pairs of adjacent vertices in $G$, then $S$
 %  needs to contain the central vertex of $G$,
 %  and therefore $S$ will contain a vertex from every tuple in $A$. We may take $B$ to be equal to $A$ in this case.
   
 %\medskip
-%	Using the above terminology, \autoref{thm:new-uqw}
+%	Using the above terminology, Theorem~\ref{thm:new-uqw}
 %	states that for every fixed $r\in\N$, if there is a number $t\in\N$
 %	such that $K_t\not\minor_{\lfloor 9r/2\rfloor} G$ for all $G\in \cal C$,
 %	then $\cal C$ satisfies $\puqw_r$,
 %	and more precisely $\uqw_r(N_r,s_r)$
 %	for a polynomial $N_r\from\N\to\N$ and number $s_r\in \N$, where $N_r$ and $s_r$ can be computed from $r$ and $t$.
-	The following result provides a generalization of \autoref{thm:new-uqw}to higher dimensions.
+	The following result provides a generalization of Theorem~\ref{thm:new-uqw} to higher dimensions.
 
 \begin{theorem}[$\star$]\label{thm:uqw-tuples}If $\cal C$
 	is a nowhere dense class of graphs,
@@ -588,13 +587,13 @@ In particular, a class of graphs $\cal C$ is uniformly quasi-wide if and only if
 	the class $\cal C$ satisfies
 	 $\puqw^d_r$.
 	More precisely, for any class of graphs $\cal C$ and numbers $r,t\in\N$,
-	if  	$K_t\not\minor_{18r} G$ for all $G\in \cal C$,
+	if  	${K_t\not\minor_{18r} G}$ for all $G\in \cal C$,
 then for all $d\in \N$ the class $\cal C$ satisfies $\uqw^d_{r}(N^d_r,s^d_r,)$	for 
 some number $s^d_r\in \N$ and polynomial $N^d_r\from \N\to\N$ that can be computed given $r$, $t$, and $d$.
 \end{theorem}
 
 %
-%\autoref{thm:uqw-tuples} is an immediate consequence  of~\autoref{thm:new-uqw} (or~\autoref{thm:krs} if only the first part of the statement is concerned)
+%Theorem~\ref{thm:uqw-tuples} is an immediate consequence  of~Theorem~\ref{thm:new-uqw} (or~Theorem~\ref{thm:krs} if only the first part of the statement is concerned)
 %and of the following result.
 %
 %\begin{proposition}\label{prop:uqw-tuples}
@@ -666,7 +665,7 @@ some number $s^d_r\in \N$ and polynomial $N^d_r\from \N\to\N$ that can be comput
 %Hence, provided we set $S'=\set{a}$ and $B'=\pi_i^{-1}(a)$, we have that $B'$ is mutually $2r$-separated by~$S'$, $|B'|\geq m$, and $|S'|=1$.
 %\end{clproof}
 %
-%We proceed with the proof of \autoref{lem:step1}.
+%We proceed with the proof of Theorem~\ref{lem:step1}.
 %Let $A\subset V(G)^d$ be such that $|A|\ge f^d(m)$.
 %We inductively define subsets $B_0\supseteq B_1\supseteq \ldots \supseteq B_d$ of $A$ and sets $S_1,\ldots,S_d\subseteq V(G)$ as follows.
 %First put $B_0=A$. Then, for each $i=1,\ldots,d$,
@@ -731,12 +730,12 @@ some number $s^d_r\in \N$ and polynomial $N^d_r\from \N\to\N$ that can be comput
 %To finish the proof of \autoref{prop:uqw-tuples},
 %given a set $A\subset V(G)^d$ and integer $m\in\N$,
 %first apply 
-%\autoref{lem:step1} 
+%Theorem~\ref{lem:step1} 
 %  with $m'= m\cdot (d^2+1)$.
 % Assuming that $|A|\ge f^d(m')$, 
 %we obtain a set $B\subseteq A$ with $|B|\ge m\cdot (d^2+1)$ and a set $S\subset V(G)$ with $|S|\le d\cdot s_{2r}$,
 %such that for each $i\in \set{1,\ldots,d}$ and all distinct $\bar{x},\bar{y}\in B$, the vertices $\pi_i(\bar{x})$ and $\pi_i(\bar{y})$ are $2r$-separated by $S$ in $G$. 
-%Then, apply \autoref{lem:step2} to $B$ and $S$, yielding a set $C\subset B$ which is mutually $r$-separated by $S$ and has size at least $m$. 
+%Then, apply Theorem~\ref{lem:step2} to $B$ and $S$, yielding a set $C\subset B$ which is mutually $r$-separated by $S$ and has size at least $m$. 
 %This concludes the proof of \autoref{prop:uqw-tuples}.
 %
 %\begin{comment}
@@ -760,13 +759,13 @@ some number $s^d_r\in \N$ and polynomial $N^d_r\from \N\to\N$ that can be comput
 %  $$
 %  Thus, when establishing the values of $N^d_{2r}(m)$ and $s^d_{2r}$, we refer to the quasi-wideness of $\CCC$ only by using numbers $s_{4r}$ and $N_{4r}(m')$ for $m'\in \N$.
 %  
-%  On the other hand, by \autoref{thm:new-uqw}, the statement $\textrm{UQW}(1,4r)$
+%  On the other hand, by Theorem~\ref{thm:new-uqw}, the statement $\textrm{UQW}(1,4r)$
 %  follows from the existence of a number $t\in\N$ such that $K_t\not\minor_{10r} G$ for $G\in \CCC$.
 %  To summarize, for all $r\in\N$, the existence of a number $t\in\N$ such that $K_t\not\minor_{10r} G$ for $G\in \CCC$ implies the statement $\textrm{UQW}(d,r)$,
 %  for all $d\in\N$.
 %    %
-%  % By \autoref{thm:new-uqw}, it suffices to assume that $K_t\not\minor_{10r} G$ to have $s(4r)\leq t$ and $N(4r,m')\leq c(r,t)\cdot (m')^{(8t+1)^{2rt}}$ for some computable function $c(r,t)$.
-%  % Hence, this supposition alone, instead of full quasi-wideness of $\CCC$, is sufficient to claim that the conclusion of \autoref{thm:new-uqw} holds with
+%  % By Theorem~\ref{thm:new-uqw}, it suffices to assume that $K_t\not\minor_{10r} G$ to have $s(4r)\leq t$ and $N(4r,m')\leq c(r,t)\cdot (m')^{(8t+1)^{2rt}}$ for some computable function $c(r,t)$.
+%  % Hence, this supposition alone, instead of full quasi-wideness of $\CCC$, is sufficient to claim that the conclusion of Theorem~\ref{thm:new-uqw} holds with
 %  % $s^d(2r)$ bounded by a computable function of $t$, $d$, and $q$, and $N^d(2r,m)$ bounded by a computable function of $m$, $t$, $d$, and $q$.
 %\end{remark}
 %\end{comment}

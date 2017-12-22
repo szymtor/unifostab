@@ -1,6 +1,8 @@
 %\section{Bounds on the number of types}\label{sec:types}
 \subsection{Bounds on the number of types}%\label{sec:types}
 
+
+
 We now come to the proof of \autoref{thm:vc-density}.
 %
 %In this section we prove \autoref{thm:vc-density} and \autoref{thm:vc-density-lower-bound}.
@@ -91,8 +93,8 @@ with the following properties:
   \item $|M_r^G(u,B)|\leq c\cdot |A|^{\delta}$ for each $u\in V(G)$.
   \end{enumerate}
   Moreover, for every set $X\subset V(G)$, it holds that
-  \begin{enumerate}%[(d)]  
-  \item $|\setof{M_r^G(u,X)}{u\in V(G)}|\leq c\cdot |X|^{1+\delta}$.
+  \begin{enumerate}  
+  \item[4.] $|\setof{M_r^G(u,X)}{u\in V(G)}|\leq c\cdot |X|^{1+\delta}$.
 \end{enumerate}
 \end{lemma}
 
@@ -122,31 +124,32 @@ $p,r$ be the numbers obtained by applying Lemma~\ref{lem:types} to $q$ and $\ell
 Let $B$ be an $r$-closure of $A$, given by Lemma~\ref{lem:closure-nd}.
   By Lemma~\ref{lem:closure-nd}, the total number of distinct $r$-projections onto $B$ 
   is at most $\Oof(|B|^{1+\delta})$, and each of these projections has size $\Oof(|B|^{\delta})$.
-%  	   Figure~\ref{fig:sketch} serves as  an illustration to the steps of the proof in the case $\ell=1$.
-%  	   \begin{figure}[h!]
-%  	   	\centering
-%  	   		\includegraphics[scale=0.346,page=4]{pics}
-%          %code
-%          % \noindent\textbf{Claim 1}. $X$ -- set of nodes\\
-%%           with distinct $\varphi$-types over $B$.\\
-%%           Then $|X|={\cal O}(|B|^{1+\varepsilon_1})$.
-%%
-%%           \medskip
-%%           \noindent\textbf{Claim 2}. $Y\subseteq X$ -- set of nodes\\
-%%           with the same projection $C$.\\
-%%           Then $|Y|={\cal O}(|B|^{\varepsilon_2})$.
-%%
-%%           \medskip
-%%           \noindent\textbf{Claim 3}. $Z\subseteq Y$\\
-%%           mutually $2r$-separated by $S$.\\
-%%           Then $|Z|={\cal O}(|C|)$.
-%  			\caption{The proof of~\autoref{thm:vc-density} in case $\ell=1$. 
-%  The logical implications flow from right to left,
-%  but our description below proceeds in the other direction.
-%  			}
-%  	   	\label{fig:sketch}
-%  	   \end{figure}
-	%
+%
+  	   Figure~\ref{fig:sketch} serves as  an illustration to the steps of the proof in the case $\ell=1$.
+  	   \begin{figure*}[h!]
+  	   	\centering
+  	   		\includegraphics[width=\textwidth,page=4]{pics}
+          %code
+          % \noindent\textbf{Claim 1}. $X$ -- set of nodes\\
+%           with distinct $\varphi$-types over $B$.\\
+%           Then $|X|={\cal O}(|B|^{1+\varepsilon_1})$.
+%
+%           \medskip
+%           \noindent\textbf{Claim 2}. $Y\subseteq X$ -- set of nodes\\
+%           with the same projection $C$.\\
+%           Then $|Y|={\cal O}(|B|^{\varepsilon_2})$.
+%
+%           \medskip
+%           \noindent\textbf{Claim 3}. $Z\subseteq Y$\\
+%           mutually $2r$-separated by $S$.\\
+%           Then $|Z|={\cal O}(|C|)$.
+  			\caption{The proof of~\autoref{thm:vc-density} in case $\ell=1$. 
+  The logical implications flow from right to left,
+  but our description below proceeds in the other direction.
+  			}
+  	   	\label{fig:sketch}
+  	   \end{figure*}	
+	
 	\setcounter{claim}{0}
 %	
 The first step is to reduce the statement to the following claim.

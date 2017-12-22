@@ -60,6 +60,8 @@ Logic in Computer Science (LICS)}{July 9--12, 2018}{Oxford, Great Britain}
 \usepackage{subcaption} %% For complex figures with subfigures/subcaptions
                         %% http://ctan.org/pkg/subcaption
                         
+\usepackage[absolute]{textpos}
+                        
 \input{macros}
 
 \begin{document}
@@ -74,7 +76,13 @@ which has received funding from the European Union's Horizon 2020 research and
 innovation programme (Marie Sk\l odowska-Curie grant agreement No.\ 665778). The work of Sz.~Toru{\'n}czyk is supported by the National Science Centre of Poland grant 2016/21/D/ST6/01485.
 M. Pilipczuk is supported by the Foundation for Polish Science (FNP) via the START stipend programme. 
 \\
-\includegraphics[scale=0.25]{flag_bw.jpg}}             %% \titlenote is optional;
+\mbox{}
+\begin{textblock}{5}(6.3, 13.4)
+\includegraphics[width=45px]{flag_bw}%
+\end{textblock}
+%
+}
+%% \titlenote is optional;
                                         %% can be repeated if necessary;
                                         %% contents suppressed with 'anonymous'
 %\subtitle{Subtitle}                     %% \subtitle is optional
@@ -95,9 +103,7 @@ M. Pilipczuk is supported by the Foundation for Polish Science (FNP) via the STA
 
 
 %% Author with single affiliation.
-\author{Micha\l~Pilipczuk}
-\author{Sebastian Siebertz}
-\author{Szymon Toru{\'n}czyk}
+\author{Micha\l~Pilipczuk, Sebastian Siebertz, and Szymon Toru{\'n}czyk}
 %\authornote{with author1 note}          %% \authornote is optional;
                                         %% can be repeated if necessary
 %\orcid{nnnn-nnnn-nnnn-nnnn}             %% \orcid is optional
@@ -186,8 +192,10 @@ M. Pilipczuk is supported by the Foundation for Polish Science (FNP) via the STA
 %% environment and commands, and keywords command.
 \maketitle
 
+
+
 \input{intro-short-new}
-\input{prelims}
+% \input{prelims}
 \input{nd-uqw}
 \input{gaifman}
 \input{vc-density}
