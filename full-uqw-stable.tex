@@ -1,0 +1,69 @@
+
+\section{Bounds for stability}\label{sec:stable}
+As mentioned, Adler and Adler~\cite{adler2014interpreting}, 
+proved that every nowhere dense class of graphs is stable. In this section,
+we prove its effective variant,~Theorem~\ref{thm:new-stable}, which 
+we repeat for convenience.
+%\newstable*
+ \setcounter{aux}{\thetheorem}
+ \setcounter{theorem}{\thestable}
+ \begin{theorem}
+ There are computable functions $f\colon \N^3\to\N$ and $g\colon\N\to\N$ with the following property.
+ Suppose $\phi(\bar x,\bar y)$ is a formula of quantifier rank at most $q$ and with $d$ free variables.
+ Suppose further that $G$ is a graph excluding $K_t$ as a depth-$g(q)$ minor. Then the ladder index of $\phi(\bar x,\bar y)$ in $G$ is at most $f(q,d,t)$.
+ \end{theorem}
+ \setcounter{theorem}{\theaux}
+
+Recall that a class $\cal C$ is stable if and only if for every first order formula $\varphi(\bar x,\bar y)$, 
+its ladder index over graphs from $\cal C$ is bounded by a constant depending only on $\cal C$ and $\varphi$;
+see Section~\ref{sec:intro} to recall the background on stability.
+Thus the result of Adler and Adler is implied by Theorem~\ref{thm:new-stable},
+and is weaker in the following sense: Theorem~\ref{thm:new-stable} asserts in addition that there is a computable bounds on the ladder index
+of any formula that depends only on the size of an excluded clique minor at depth bounded in terms of formula's quantifier rank and number of free variables. 
+We now prove~Theorem~\ref{thm:new-stable}.
+
+\begin{proof}[of~Theorem~\ref{thm:new-stable}]
+Fix a formula $\phi(\bar x,\bar y)$ of quantifier rank $q$ and
+a partitioning of its 
+free variables into  $\bar y$ and $\bar z$.
+Let $d=|\bar x|+|\bar y|$ be the total number of free variables of $\phi$.
+Let $r\in \N$ be the number given by~Corollary~\ref{cor:bound},
+which depends on $\phi$ only.
+Let $\cal C$ be the class of all graphs 
+such that  $K_t\not\minor_{18r} G$.
+Then, by~Theorem~\ref{thm:uqw-tuples}, 
+$\cal C$ satisfies $\uqw^d_{r}(N^d_{r},s^d_r)$,
+for some  polynomial  $N^d_r\from\N\to\N$ and number $s=s^d_r\in \N$ computable from $d,t,r$.
+Let $T$ be the number given by~Corollary~\ref{cor:bound} for $\phi$ and $s$.
+ Finally, let 
+$\ell=N^d_r(2T+1)$.
+We show that 
+every $\phi$-ladder in a graph $G\in\cal C$ has length smaller than $\ell$.
+
+
+For the sake of contradiction, assume that there is a graph $G\in\cal C$
+and tuples $\bar u_1,\ldots,\bar u_\ell\in V(G)^{|\bar x|}$ and $ \bar v_1,\ldots, \bar v_\ell\in V(G)^{|\bar y|}$
+which form a $\phi$-ladder in $G$, i.e., 
+$\phi(\bar u_i,\bar v_j)$ holds in~$G$ if and only if $i\le j$.
+	Let $A=\setof{ \bar u_i \bar v_i}{i=1,\ldots,\ell}\subset V(G)^d$. Note that $|A|=\ell\ge N^d_r(2T+1)$, since tuples $\bar u_i$ have to be pairwise different.
+  
+Applying property  $\uqw^d_r(N^d_r,s^d_r)$ to the set $A$, radius $r$, and target size $m=2T+1$
+		 yields a set $S\subset V(G)$ with $|S|\le s$
+	and a set $B\subset A$ with $|B|\geq 2T+1$ 
+  of tuples which are  mutually $r$-separated by $S$  in $G$.
+  Let $J\subseteq \set{1,\ldots,\ell}$
+  be the set of indices corresponding to $B$,
+  i.e., $J=\set{j\colon\bar u_j\bar v_j\in B}$.
+  
+  Since $|J|=2T+1$, we may partition $J$ into $J_1\uplus J_2$ with $|J_1|=T+1$ so that the following condition holds:
+  for each $i,k\in J_1$ satisfying $i<k$, there exists $j\in J_2$ with $i<j<k$. Indeed, it suffices to order the indices of $J$ and put every second index to $J_1$, and every other to $J_2$.
+  Let~$X$ be the set of vertices appearing in the tuples $\bar u_i$ with $i\in J_1$, and let $Y$ be the set of vertices appearing in the tuples $\bar v_j$ with $j\in J_2$.
+  Since the tuples of $B$ are mutually $r$-separated by $S$ in~$G$, it follows that $X$ and $Y$ are $r$-separated by $S$.
+  As $|J_1|=T+1$, by Corollary~\ref{cor:bound} we infer that there are distinct indices $i,k\in J_1$, say $i<k$, such that $\tp^\phi(\bar u_i/Y)=
+    \tp^\phi(\bar u_{k}/Y)$. This implies that for each $j\in J_2$, we have $G,\bar u_i,\bar v_j\models \phi(\bar x,\bar y)$ if and only if $G,\bar u_{k},\bar v_j\models \phi(\bar x,\bar y)$.
+    However, there is an index $j\in J_2$ such that $i<j<k$, and for this index we should have $G,\bar u_i,\bar v_j\models \phi(\bar x,\bar y)$ and $G,\bar u_{k},\bar v_j\not\models \phi(\bar x,\bar y)$
+    by the definition of a ladder. This contradiction concludes the proof.
+\end{proof}
+
+We remark that~Theorem~\ref{thm:new-stable} also holds for classes of edge- and vertex-colored graphs, with the same proof, but using 
+a version of the results in~Section~\ref{sec:gaifman} lifted to edge- and vertex-colored graphs.
