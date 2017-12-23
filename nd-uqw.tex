@@ -96,7 +96,7 @@ computed in time $\Oof_t(|A|\cdot |E(G)|)$.
 %does not give a bound which is polynomial in $m+\ell$, and thus cannot be used to prove~Theorem~\ref{thm:new-uqw}.
 %%
 %%\medskip
-The remainder of this section is devoted to the proof of~Theorem~\ref{lem:apex}.
+The remainder of this section is devoted to the proof of Lemma~\ref{lem:apex}.
 %We will use the following bounds on the edge density
 %of graphs with excluded shallow minors obtained
 %by Alon et al.~\cite{alon2003turan}. 
@@ -170,7 +170,7 @@ We will need one more technical lemma.
 %which implies $k\geq |A|^{1/4}$ due to $|A|\geq t^8\geq 64$.
 %\end{proof}
 
-We proceed with the proof of Theorem~\ref{lem:apex}.
+We proceed with the proof of Lemma~\ref{lem:apex}.
 The idea is to arrange the elements of $A$ in a binary tree
 and prove that provided $A$ is large, this tree contains a long path. From this path, we will 
 extract the set $B$. 
@@ -264,22 +264,22 @@ For each $j\in\set{1,\ldots,k}$, let $B_j$
 be the subgraph of $G$ induced by the set
 $\set{a_j,b_j}\cup\set{z_{ij}\colon 1\le i\le  j}$.
 Observe that~$B_j$ is connected and has radius at most $2$, with $b_j$ being the central vertex.
-By Theorem~\ref{thm:alternation-rank-type-tree} and the discussion from the previous paragraph, the graphs $B_j$ for $j\in \set{1,\ldots,k}$
+By Claim~\ref{claim:minor} and the discussion from the previous paragraph, the graphs $B_j$ for $j\in \set{1,\ldots,k}$
 are pairwise disjoint.
-Moreover, for all $1\le i\le j\le k$, there is an edge between $B_i$
+Moreover, for all $1\le i\le j\le k$, there is an edge between~$B_i$
 and $B_j$, namely, the edge between $z_{ij}\in B_j$
 and $a_i\in B_i$.
-Hence, the graphs $B_j$, for $j\in \set{1,\ldots,k}$, define a depth-$2$ minor model of $K_k$ in $G$. Since $K_t\not\minor_{2}G$, this implies that $k<t$, proving~Theorem~\ref{thm:alternation-rank-type-tree}.
+Hence, the graphs $B_j$, for $j\in \set{1,\ldots,k}$, define a depth-$2$ minor model of $K_k$ in $G$. Since $K_t\not\minor_{2}G$, this implies that $k<t$, proving Lemma~\ref{thm:alternation-rank-type-tree}.
 \end{proof}
 
-We continue with the proof of~Theorem~\ref{lem:apex}. 
+We continue with the proof of Lemma~\ref{lem:apex}. 
 Fix integers $\ell\ge t^8$ and~$m$, and define $h=m+\ell$.
 Let $A$ be a $1$-independent set in $G$
 of size at least $h^{2t}$.
 
-Suppose that the first case of Theorem~\ref{lem:apex} does not hold. In particular $K_t\not\minor_2 G$, so by Theorem~\ref{thm:alternation-rank-type-tree},~$\tau$ has alternation rank at most $2t-1$. From Theorem~\ref{lem:number-of-nodes} 
+Suppose that the first case of Lemma~\ref{lem:apex} does not hold. In particular $K_t\not\minor_2 G$, so by Lemma~\ref{thm:alternation-rank-type-tree},~$\tau$ has alternation rank at most $2t-1$. From Lemma~\ref{lem:number-of-nodes} 
 we conclude that $\tau$  has depth at least~$h$.
-As $h=m+\ell$, it follows that either $\tau$  has a node $w$ which contains at least $m$ letters~$\dau$, or $\tau$ has a node $w$ which contains  at least $\ell$ letters $\son$.
+As $h=m+\ell$, it follows that either $\tau$  has a node~$w$ which contains at least $m$ letters~$\dau$, or $\tau$ has a node~$w$ which contains  at least $\ell$ letters $\son$.
 
 Consider the first case, i.e., there is a node $w$ of $\tau$
 which contains at least $m$ letters $\dau$, and let $X$
@@ -287,9 +287,9 @@ be the set of all vertices $\tau(u)$ such that $u\dau$ is a prefix of $w$. Then,
 
 Finally, consider the second case, i.e., there is a node $w$ in $\tau$ which contains at least $\ell$ letters~$\son$. Let 
 $Y$ be the set of all vertices $\tau(u)$ such that $u\son$ is a prefix of $w$. Then, by construction, $Y\subset A$ is a set of at least $\ell$ vertices which are mutually at distance exactly $2$ in $G$. 
-Since $K_t\not\minor_4 G$ and $\ell\geq t^8$, by~Theorem~\ref{lem:diversity} we infer that there is a vertex $v\in G$
+Since $K_t\not\minor_4 G$ and $\ell\geq t^8$, by Lemma~\ref{lem:diversity} we infer that there is a vertex $v\in G$
 with at least $\ell^{1/4}$ neighbors in $Y$.
-This finishes the proof of the existential part of~Theorem~\ref{lem:apex}.
+This finishes the proof of the existential part of Lemma~\ref{lem:apex}.
 We defer the proof of the algorithmic statement of the lemma to the appendix.
 %, the proof above yields an algorithm which first constructs the tree $\tau$, by 
 %iteratively processing each vertex $w$ of $A$ and testing whether the distance between $w$ and each vertex processed already is equal to~$2$.
