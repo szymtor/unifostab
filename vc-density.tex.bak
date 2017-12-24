@@ -204,11 +204,11 @@ It holds that $|Z|=\Oof(|C|)$.
   Let $Z_0\subset Z$ be the set of 
   those tuples in $Z$ which are $r$-separated by $S$ from $B$ in $G$,
   and let $Z_1=Z-Z_0$ be the remaining  tuples.
-  Since tuples from $Z_0$ have pairwise different $\phi$-types over $B$, and each of them is $r$-separated by~$S$ from~$B$ in $G$, by~\autoref{cor:bound} we infer that $|Z_0|=\Oof(1)$.  
+  Since tuples from $Z_0$ have pairwise different $\phi$-types over $B$, and each of them is $r$-separated by~$S$ from~$B$ in $G$, by Corollary~\ref{cor:bound} we infer that $|Z_0|=\Oof(1)$.  
  On the other hand, by the definition of $Z_1$, with each tuple~$\bar u\in Z_1$ we may associate a vertex $b(\bar u)\in C$ which is not $r$-separated from~$\bar u$ by $S$ in $G$.
  Since the set $U$ is mutually $2r$-separated by~$S$ in $G$, it follows that for any two different tuples $\bar u,\bar v\in Z_1$ we have $b(\bar u)\neq b(\bar v)$.
  Hence $b(\cdot)$ is an injection from $Z_1$ to $C$, which proves that $|Z_1|\leq |C|$.
- To conclude, we have $|Z|=|Z_0|+|Z_1|=\Oof(1)+\Oof(|C|)=\Oof(|C|)$. This finishes the proof of Claim~\ref{claim4} and ends the proof of~\autoref{thm:vc-density}.
+ To conclude, we have $|Z|=|Z_0|+|Z_1|=\Oof(1)+\Oof(|C|)=\Oof(|C|)$. This finishes the proof of Claim~\ref{claim4} and ends the proof of Theorem~\ref{thm:vc-density}.
 
   
 %\subsection{Lower bounds for non-sparse classes}

@@ -266,7 +266,7 @@ $\set{a_j,b_j}\cup\set{z_{ij}\colon 1\le i\le  j}$.
 Observe that~$B_j$ is connected and has radius at most $2$, with $b_j$ being the central vertex.
 By Claim~\ref{claim:minor} and the discussion from the previous paragraph, the graphs $B_j$ for $j\in \set{1,\ldots,k}$
 are pairwise disjoint.
-Moreover, for all $1\le i\le j\le k$, there is an edge between $B_i$
+Moreover, for all $1\le i\le j\le k$, there is an edge between~$B_i$
 and $B_j$, namely, the edge between $z_{ij}\in B_j$
 and $a_i\in B_i$.
 Hence, the graphs $B_j$, for $j\in \set{1,\ldots,k}$, define a depth-$2$ minor model of $K_k$ in $G$. Since $K_t\not\minor_{2}G$, this implies that $k<t$, proving Lemma~\ref{thm:alternation-rank-type-tree}.
@@ -279,7 +279,7 @@ of size at least $h^{2t}$.
 
 Suppose that the first case of Lemma~\ref{lem:apex} does not hold. In particular $K_t\not\minor_2 G$, so by Lemma~\ref{thm:alternation-rank-type-tree},~$\tau$ has alternation rank at most $2t-1$. From Lemma~\ref{lem:number-of-nodes} 
 we conclude that $\tau$  has depth at least~$h$.
-As $h=m+\ell$, it follows that either $\tau$  has a node $w$ which contains at least $m$ letters~$\dau$, or $\tau$ has a node $w$ which contains  at least $\ell$ letters $\son$.
+As $h=m+\ell$, it follows that either $\tau$  has a node~$w$ which contains at least $m$ letters~$\dau$, or $\tau$ has a node~$w$ which contains  at least $\ell$ letters $\son$.
 
 Consider the first case, i.e., there is a node $w$ of $\tau$
 which contains at least $m$ letters $\dau$, and let $X$

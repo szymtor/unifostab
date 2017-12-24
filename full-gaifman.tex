@@ -20,8 +20,8 @@ The following example should clarify our notation.
 \begin{example}\label{ex:dist-formula}
 The formula
 \begin{align*}
-(x,y)\equiv \exists z_1\, \exists z_2\, & (E(x,z_1)\lor (x=z_1))\land (E(z_1,z_2) \\
-& \lor (z_1=z_2))\land (E(z_2,y)\lor (z_2=y))
+(x,y)\equiv \exists z_1\, \exists z_2\, & (E(x,z_1)\lor (x=z_1))\land (E(z_1,z_2) 
+ \lor (z_1=z_2))\land (E(z_2,y)\lor (z_2=y))
 \end{align*}
 with free variables $x,t$ expresses that $x$ and $y$ are at distance at most $3$.
 That is, for two vertices $u,v$ of a graph $G$,
@@ -152,9 +152,9 @@ where~$r$ is computable from $\phi$ and $T$ is computable from $\phi$ and $s$,
   where~$S$ has at most $s$ vertices and $r$-separates $A$ from $B$, we have $|S^\phi(A/B)|\le T$.
 \end{corollary}
 \begin{proof}
-Apply~Lemma~\ref{lem:types} to $q$ being the quantifier rank of $\phi$ and $d=|\bar x|$, yielding numbers $p$ and $r$.
+Apply~Lemma~\ref{lem:types} to $q$ being the quantifier rank of $\phi$ and $d=|\bar x|$, yielding numbers~$p$ and~$r$.
 By~Lemma~\ref{lem:types} we have $|S^\phi(A/B)|\leq |S^\phi(A/S)|$.
-However, $|S^\phi(A/S)|$ is the number of quantifier rank $p$ types of $d$-tuples of elements over a set of parameters of size $s$, and, as we argued, this number is bounded by a value computable from $p$, $d$, and $s$.
+However, $|S^\phi(A/S)|$ is the number of quantifier rank~$p$ types of $d$-tuples of elements over a set of parameters of size $s$, and, as we argued, this number is bounded by a value computable from $p$, $d$, and $s$.
 \end{proof}
 
 The remainder of this section is devoted to the proof of~Lemma~\ref{lem:types}.
@@ -252,7 +252,7 @@ It remains to prove~Lemma~\ref{lem:types1}.
 
 With all these definitions and results in place, we may proceed to the proof of Lemma~\ref{lem:types}.
 
-\begin{proof}[of~Lemma~\ref{lem:types}]
+\begin{proof}[Proof of~Lemma~\ref{lem:types}]
 We prove the lemma for $r=7^q$.
 Let $t$ be the constant given by Gaifman's lemma, Lemma~\ref{lem:gaif}, for $q$ and $d$, and let $p=t+r$.
 
@@ -308,7 +308,7 @@ The argument for the last arrow is provided by the following claim.
   those elements that belong to $S$.
 \end{claim}
 \begin{clproof}[Sketch]
-The proof proceeds by a straightforward induction on the structure of the formula $\phi$.
+The proof proceeds by a straightforward induction on the structure of the formula~$\phi$.
 In essence, every quantification $\exists y$ of a vertex~$y$ in $G$ is replaced by quantification of $y$ in $G-S$ plus a disjunction over $s\in S$ of formulas where we assume $y=s$.
 Atomic formulas of the form $E(x,y)$ and $x=y$ have to be replaced accordingly. Say for $E(x,y)$: if both~$x$ and~$y$ are assumed to be in $G-S$, then we leave $E(x,y)$ intact;
 if $x$ is assumed to be in $S$ (say we assume $x=s$) and $y$ is assumed to be in $G-S$, then we substitute $E(x,y)$ by $C_s(y)$; and if both~$x$ and~$y$ are assumed to be in $S$, then 

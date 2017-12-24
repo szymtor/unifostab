@@ -4,7 +4,7 @@ ofTheorem~\ref{thm:vc-density}, proving a
 duality result for nowhere dense graph classes.
 
 A \emph{set system} is a family  $\cal F$ of subsets of a set $X$.
-Its  \emph{packing} is a subfamily of $\cal F$ of pairwise disjoint subsets, and its \emph{traversal} (or \emph{hitting set}) is a subset of $X$ which intersects every member of $\cal F$.
+Its  \emph{packing} is a subfamily of $\cal F$ of pairwise disjoint subsets, and its \emph{traversal} (or \emph{hitting set}) is a subset of $X$ which intersects every member of~$\cal F$.
 The \emph{packing number} of~$\cal F$, denoted $\nu(\cal F)$, is the largest cardinality of a packing in $\cal F$,
 and the \emph{transversality} of $\cal F$, denoted
 $\tau(\cal F)$, is the smallest cardinality of a traversal of $\cal F$.
@@ -15,8 +15,10 @@ satisfies $\tau({\cal G})\le f(\nu(\cal G))$.
 
 We prove that set systems defined by first order formulas in nowhere dense graph classes have the Erd{\H o}s-P\'{o}sa property, in the following sense.
 
- \setcounter{aux}{\thetheorem}
- \setcounter{theorem}{\theep}
+ \setcounter{aux}{\value{theorem}}
+ \setcounter{theorem}{\value{ep}}
+  \setcounter{auxsec}{\value{section}}
+ \setcounter{section}{1}
 \begin{theorem}
 	Fix a nowhere dense class of graphs $\CCC$ and a 
 	formula $\phi(x,y)$ with two free variables $x,y$.
@@ -25,7 +27,8 @@ We prove that set systems defined by first order formulas in nowhere dense graph
 	be a family of subsets of $V(G)$ consisting of sets of the form $\setof{v\in V(G)}{\phi(u, v)}$, where~$u$ is some vertex of $V(G)$.
 Then~$\tau({\cal G})\le f(\nu(\cal G))$.
 \end{theorem}
- \setcounter{theorem}{\theaux}
+ \setcounter{theorem}{\value{aux}}
+ \setcounter{section}{\value{auxsec}}
 
 %\erdosposa*
 % \begin{theorem}\label{thm:erdos-posa}
@@ -51,7 +54,7 @@ of occupied cells in the Venn diagram of $m$ sets in $\cal F$.
 	if $\cal G$ has the $(p,k)$-property, meaning that 
 	among every $p$ sets in $\cal G$ some $k$ have a non-empty intersection, then $\tau ({\cal G})\le T$.
 \end{theorem}
-\begin{proof}[of Lemma~\ref{thm:erdos-posa}]
+\begin{proof}[Proof of Lemma~\ref{thm:erdos-posa}]
 For a graph $G$, define the set system ${\cal F}_G$ on the ground set $V(G)$ as
 $${\cal F}_G = \setof{\setof{v\in V(G)}{\phi(u, v)}}{u\in V(G)}.$$
 Let then $\cal F$ be the disjoint union of set systems ${\cal F}_G$ for $G\in \CCC$. That is, 

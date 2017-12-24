@@ -36,7 +36,7 @@ Theorem~\ref{thm:new-uqw}, we apply the lemma iteratively for $r$ ranging from $
 For every pair of integers $t,r\in \N$ there exists an integer $d<9r/2$ and a function $L\colon \N\to \N$ with $L(m)=\Oof_{r,t}{(m^{{(4t+1)}^{2rt}})}$ such that the following holds.
 For each $m\in \N$, graph~$G$ with $K_t\not\minor_{d} G$, and
 $(r-1)$-independent set $A\subseteq V(G)$ of size at least $L(m)$, there is a set $S\subseteq V(G)-A$ of size less than $t$ such that $A$ contains a subset $B$ of size $m$ which is $r$-independent in $G-S$.
-Moreover, if $r$ is odd then $S$ is empty, and if $r$ is even,
+Moreover, if~$r$ is odd then $S$ is empty, and if $r$ is even,
 then every vertex of $S$ is at distance exactly $r/2$ from every vertex of $B$.
 Finally, given $G$ and $A$, the sets $B$ and $S$ can be computed in time $\Oof_{r,t}(|A|\cdot |E(G)|)$.
 \end{lemma}
@@ -102,7 +102,7 @@ edges.
 Observe that if $K_t\not\minor_1G$, then in particular
 the $1$-subdivision of $K_t$ is excluded as a subgraph
 of $G$ (the $1$-subdivision of a graph $H$ is obtained by 
-replacing every edge of $H$ by a path of length $2$). 
+replacing every edge of $H$ by a path of length~$2$). 
 Moreover, the $1$-subdivision of 
 $K_t$ is a bipartite graph with maximum degree $2$ on one
 side. Furthermore, it is easy to check in the 
@@ -181,14 +181,14 @@ In stability theory, similar trees are called \emph{type trees} and they are use
 	 finite, labeled, rooted, binary trees, which are called simply trees below, and are defined as follows.
 	 For a set of labels $U$, a ($U$-labeled) \emph{tree} is a partial function $\tau\from \set{\dau,\son}^*\to U$ whose domain is a finite set of nodes, 
 	 called the \emph{nodes of $\tau$}, which is closed under taking parents. 
-	 If $v$ is a node of $\tau$, then $\tau(v)$ is called its \emph{label}.
+	 If~$v$ is a node of $\tau$, then $\tau(v)$ is called its \emph{label}.
   
   Let $G$ be a graph, $A\subset V(G)$ be a $1$-independent set in $G$,
   and $\bar a$ be any enumeration of $A$, that is, a sequence of length $|A|$ in which every element of $A$ appears exactly once.
   We define a binary tree $\tau$ which is 
   labeled by vertices of $G$. The tree is defined by processing all elements of~$\bar a$ sequentially. 
   We start with $\tau$ being the  tree with empty domain, and for each element $a$ of the sequence $\bar a$, processed in the order given by $\bar a$, 
-  execute the following procedure which results in adding a node with label $a$ to $\tau$.
+  execute the following procedure which results in adding a node with label~$a$ to $\tau$.
   
 When processing the vertex $a$, do the following. Start with $w$ being the empty word. While~$w$ is a node of $\tau$, repeat the following step: 
   if the distance from $a$ to $\tau(w)$ in the graph 
@@ -227,11 +227,11 @@ Then $\tau$ has alternation rank at most $2t-1$.
 \begin{proof}
 	Let $w$ be a node of $\tau$ with at least $2k$ alternations, for some $k\in \N$.
 	Suppose $\alpha_1,\beta_1,\ldots,\alpha_k,\beta_k$ be the first $2k$ alternations of $w$.
-	By the assumption that $w_0=\dau$ we have that~$w$ contains symbol $\son$ at all positions $\alpha_i$ for $i=1,\ldots,k$, and symbol $\dau$ at all positions $\beta_i$ for $i=1,\ldots,k$.
+	By the assumption that $w_0=\dau$ we have that~$w$ contains symbol~$\son$ at all positions $\alpha_i$ for $i=1,\ldots,k$, and symbol~$\dau$ at all positions $\beta_i$ for $i=1,\ldots,k$.
 	For each $i\in \set{1,\ldots,k}$, define $a_i\in V(G)$ to be the label in $\tau$ of the prefix of $w$ of length $\alpha_i-1$, and similarly define $b_i\in V(G)$ to be the label in $\tau$ of the prefix of $w$
 	of length $\beta_i-1$. 
 	It follows that for each $i\in \set{1,\ldots,k}$, the following assertions hold:
-	the nodes in $\tau$ with labels $b_i,a_{i+1},b_{i+1},\ldots,a_k,b_k$ are  descendants of the son of the node with label $a_i$,
+	the nodes in $\tau$ with labels $b_i,a_{i+1},b_{i+1},\ldots,a_k,b_k$ are  descendants of the son of the node with label~$a_i$,
 	and the nodes with labels $a_{i+1},b_{i+1},\ldots,a_k,b_k$
 	are descendants of the daughter of the node with label $b_i$.
 	
@@ -240,7 +240,7 @@ Then $\tau$ has alternation rank at most $2t-1$.
 		and is not a neighbor of any $b_s$ with $s\neq j$.
 	\end{claim}
 	\begin{clproof}
-		Note that since $i\le j$, the node with label $b_j$ is a descendant of the son of the node with label $a_i$, hence we have $\dist_G(a_i,b_j)\le 2$ by the construction of $\tau$.
+		Note that since $i\le j$, the node with label $b_j$ is a descendant of the son of the node with label~$a_i$, hence we have $\dist_G(a_i,b_j)\le 2$ by the construction of $\tau$.
 		However, we also have $\dist_G(a_i,b_j)>1$ since $A$
 		is $1$-independent. Therefore $\dist_G(a_i,b_j)=2$, so there is a vertex $z_{ij}$ which is a common neighbor of $a_i$ and $b_j$. 
 		Suppose that $z_{ij}$ was a neighbor of $b_s$, for some $s\neq j$. This would imply that $\dist_G(b_j,b_s)\le 2$, which is impossible, 
@@ -270,7 +270,7 @@ of size at least $h^{2t}$.
 
 Suppose that the first case of Lemma~\ref{lem:apex} does not hold. In particular $K_t\not\minor_2 G$, so by Theorem~\ref{thm:alternation-rank-type-tree},~$\tau$ has alternation rank at most $2t-1$. From Lemma~\ref{lem:number-of-nodes} 
 we conclude that $\tau$  has depth at least~$h$.
-As $h=m+\ell$, it follows that either $\tau$  has a node $w$ which contains at least $m$ letters~$\dau$, or $\tau$ has a node $w$ which contains  at least $\ell$ letters $\son$.
+As $h=m+\ell$, it follows that either $\tau$  has a node~$w$ which contains at least $m$ letters~$\dau$, or $\tau$ has a node~$w$ which contains  at least $\ell$ letters $\son$.
 
 Consider the first case, i.e., there is a node $w$ of $\tau$
 which contains at least $m$ letters $\dau$, and let $X$
@@ -282,13 +282,13 @@ Since $K_t\not\minor_4 G$ and $\ell\geq t^8$, by~Lemma~\ref{lem:diversity} we in
 with at least $\ell^{1/4}$ neighbors in $Y$.
 This finishes the proof of the existential part of~Lemma~\ref{lem:apex}.
 
-For the algorithmic part, the proof above yields an algorithm which first constructs the tree $\tau$, by 
+For the algorithmic part, the proof above yields an algorithm which first constructs the tree~$\tau$, by 
 iteratively processing each vertex $w$ of $A$ and testing whether the distance between $w$ and each vertex processed already is equal to $2$.
 This amounts to running a breadth-first search from every vertex of $A$, which can be done in time $\Oof(|A|\cdot |E(G)|)$.
 Whenever a node with $2t$ alternations 
 is inserted to $\tau$, we can exhibit in $G$ a depth-$2$ minor model of $K_t$.
-Whenever a node with least $m$ letters $\dau$ is added to~$\tau$,
-we have constructed an $m$-independent set. Whenever a node with at least $\ell$ letters $\son$ is added to $\tau$, as argued, there must be some vertex $v\in V(G)-A$ with at least $\ell^{1/8}$ neighbors in~$A$. 
+Whenever a node with least~$m$ letters $\dau$ is added to~$\tau$,
+we have constructed an $m$-independent set. Whenever a node with at least~$\ell$ letters~$\son$ is added to $\tau$, as argued, there must be some vertex $v\in V(G)-A$ with at least $\ell^{1/8}$ neighbors in~$A$. 
 To find such a vertex, scan through all neighborhoods of vertices $v\in A$ in the graph $G$, and then select a vertex $w\in V(G)$
 which belongs to the largest number of those neighborhoods; this can be done in time $\Oof(|E(G)|)$.
 The overall running time is $\Oof(|A|\cdot |E(G)|)$, as required.
@@ -380,7 +380,7 @@ Choose any pairwise distinct vertices $w_1,\ldots,w_k\in A_k$ and observe that t
  Since $K_t\not\minor_2 G$, we must have $k<t$.
  \end{clproof}
  
- Therefore, at some step $k<t$ of the construction we must have obtained a $2$-independent subset $B$ of $G-S$ of size $m$. Moreover, $|S|\le k<t$.
+ Therefore, at some step $k<t$ of the construction we must have obtained a $2$-independent subset~$B$ of $G-S$ of size $m$. Moreover, $|S|\le k<t$.
  
  
  
@@ -402,7 +402,7 @@ by contracting the (pairwise disjoint) balls of radius $s$ around each vertex $v
  vertex of $A'$ resulting from contracting the ball of radius $s$ around $v$.
 From $K_t\not\minor_s G$ it follows that~$G'$ does not contain $K_t$ as a subgraph. Applying the already proved case $r=1$ to $G'$ and $A'$, we conclude that 
 provided $|A|=|A'|\ge {m+t-2\choose t-1}$, the set
- $A'$ contains a $1$-independent subset $B'$ of size $m$,
+ $A'$ contains a $1$-independent subset $B'$ of size~$m$,
  which corresponds to a $(2s+1)$-independent set $B$ in $G$ that is contained in $A$; thus, we may put $S=\emptyset$ again.
  Hence, the obtained bound is $L(m)={m+t-2\choose t-1}$, and we have already argued that then $L(m)\in \Oof_{r,t}{(m^{{(4t+1)}^{2t}})}$.
  
@@ -440,8 +440,10 @@ This finishes  the proof of~Lemma~\ref{lem:engine}.
 We now wrap up the proof of Theorem~\ref{thm:new-uqw} by iteratively applying~Lemma~\ref{lem:engine}. 
 We repeat the statement for convenience.
 
- \setcounter{aux}{\thetheorem}
- \setcounter{theorem}{\theuqw}
+ \setcounter{aux}{\value{theorem}}
+ \setcounter{theorem}{\value{uqw}}
+  \setcounter{auxsec}{\value{section}}
+ \setcounter{section}{1}
  \begin{theorem}
  For all $r,t\in \N$ there is a polynomial  $N\colon \N\to \N$ with $N(m)=
  \Oof_{r,t}{(m^{{(4t+1)}^{2rt}})}$, such that the following holds.
@@ -451,7 +453,8 @@ We repeat the statement for convenience.
  of size $|B|\geq m$ which is $r$-independent in $G-S$.
  Moreover, given~$G$ and $A$, such sets $S$ and $B$ can be computed in time $\Oof_{r,t}(|A|\cdot |E(G)|)$.
  \end{theorem}
- \setcounter{theorem}{\theaux}
+ \setcounter{theorem}{\value{aux}}
+ \setcounter{section}{\value{auxsec}}
 \begin{proof}
 Fix integers $r,t$,  and a graph $G$ such that $K_t\not\minor_{d} G$,
 for $d=\lfloor 9r/2 \rfloor$. Let $\beta>4t$ be a fixed real. As in the proof of Lemma~\ref{lem:engine}, we suppose $m\geq t^8$; this will be taken care by the final choice of the function $N(m)$.
@@ -650,7 +653,7 @@ We consider two cases, depending on whether $|\pi_i(A')|\geq N_{2r}(m')$.
 Suppose first that $\pi_i(A')$ contains at least $N_{2r}(m')$ distinct vertices.
 Then we may apply the property $\uqw_{2r}$ to $\pi_i(A')$, yielding sets $S'\subset V(G)$ and $X\subseteq \pi_i(A')$
 such that $|X|\ge m'$, $|S'|\le s_{2r}$, and $X$ is mutually $2r$-separated by $S'$ in $G$. 
-Let $B'\subseteq A'$ be a subset of tuples constructed as follows: for each $u\in X$, include in $B'$ one arbitrarily chosen tuple $\bar x\in A'$ such that the $i$th coordinate of $\bar x$ is $u$.
+Let $B'\subseteq A'$ be a subset of tuples constructed as follows: for each $u\in X$, include in $B'$ one arbitrarily chosen tuple $\bar x\in A'$ such that the $i$th coordinate of $\bar x$ is~$u$.
 Clearly $|B'|=|X|\ge m'$ and for all distinct $\bar x,\bar y\in B'$, we have that $\pi_i(\bar x)$ and $\pi_i(\bar y)$ are different and $2r$-separated by $S'$ in $G$; this is because $X$ is mutually $2r$-separated by $S'$
 in $G$. Hence $B'$ and $S'$ satisfy all the required properties.
 

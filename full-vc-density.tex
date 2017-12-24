@@ -8,9 +8,13 @@ In this section we prove Theorem~\ref{thm:vc-density} and Theorem~\ref{thm:vc-de
 \subsection{Upper bounds for sparse classes}
 We first prove Theorem~\ref{thm:vc-density}, which we recall for convenience.
 
+\pagebreak
+
 %\vcupper*
- \setcounter{aux}{\thetheorem}
- \setcounter{theorem}{\thevcupper}
+ \setcounter{aux}{\value{theorem}}
+ \setcounter{theorem}{\value{vcupper}}
+ \setcounter{auxsec}{\value{section}}
+ \setcounter{section}{1}
  \begin{theorem}\label{thm:vc-density-recall}
  Let $\CCC$ be a class of graphs and let $\phi(\tup x,\tup y)$ be a first order formula
  with free variables  partitioned  into object variables $\bar x$  and parameter variables $\bar y$. Let $\ell=|\bar x|$. Then:
@@ -22,6 +26,7 @@ We first prove Theorem~\ref{thm:vc-density}, which we recall for convenience.
  \end{enumerate}
  \end{theorem}
  \setcounter{theorem}{\theaux}
+  \setcounter{section}{\value{auxsec}}
 We remark that the theorem holds also for colored graphs, in the following sense.
 A class of graphs  whose vertices and edges are colored by a fixed finite number of colors is nowhere dense if the underlying class of graphs obtained by forgetting the colors is nowhere dense. 
 Then~Theorem~\ref{thm:vc-density} holds also for such classes of colored graphs, with the same proof. Namely, all graph theoretic notions
@@ -39,7 +44,7 @@ was first used in Drange et al.~\cite{drange2016kernelization} in the context of
 and then for nowhere dense classes in Eickmeyer et al.~\cite{eickmeyer2016neighborhood}. 
 We start by recalling these notions.
 
-Let $G$ be a graph and let $B\subseteq V(G)$ be a subset of vertices. For vertices $v\in B$ and $u\in V(G)$, a path $P$ leading from $u$ to $v$ is called {\em{$B$-avoiding}}
+Let $G$ be a graph and let $B\subseteq V(G)$ be a subset of vertices. For vertices $v\in B$ and $u\in V(G)$, a path~$P$ leading from $u$ to $v$ is called {\em{$B$-avoiding}}
 if all its vertices apart from~$v$ do not belong to~$B$. Note that if $u\in B$, then there is only one $B$-avoiding path leading from $u$, namely the one-vertex path where $u=v$.
 For a positive integer $r$ and $u\in V(G)$, the {\em{$r$-projection}} of $u$ on $B$, denoted $M^G_r(u,B)$, is the set of all vertices $v\in B$ such that there is
 a $B$-avoiding path of length at most $r$ leading from $u$ to $v$. Note that for $u\in B$, we have $M^G_r(u,B)=\{b\}$.
@@ -70,7 +75,7 @@ every $G\in \CCC$ and $A\subseteq V(G)$ there exists a set $B$, called an {\em{$
   \end{enumerate}
   Moreover, for every set $X\subset V(G)$, it holds that
   \begin{enumerate}
-  \item[4.] $|\setof{M_r^G(u,X)}{u\in V(G)}|\leq c\cdot |X|$.
+  \item[(4)] $|\setof{M_r^G(u,X)}{u\in V(G)}|\leq c\cdot |X|$.
 \end{enumerate}
 \end{lemma}
 
@@ -87,7 +92,7 @@ with the following properties:
   \end{enumerate}
   Moreover, for every set $X\subset V(G)$, it holds that
   \begin{enumerate}
-  \item[4.] $|\setof{M_r^G(u,X)}{u\in V(G)}|\leq c\cdot |X|^{1+\delta}$.
+  \item[(4)] $|\setof{M_r^G(u,X)}{u\in V(G)}|\leq c\cdot |X|^{1+\delta}$.
 \end{enumerate}
 \end{lemma}
 
@@ -174,7 +179,7 @@ It therefore remains to prove~Claim~\ref{claim3}.
 \medskip
 
 We apply~Theorem~\ref{thm:uqw-tuples} to the set of $\ell$-tuples $Y$, for $m$ being the largest integer such that $|Y|\ge N^{\ell}_{2r}(m)$.
-  As a conclusion, we obtain a set $Z\subseteq Y$ of $m$ tuples that is mutually $2r$-separated by $S$ in $G$, for some set of vertices $S\subseteq V(G)$ of size $s\coloneqq s^{\ell}_{2r}$.
+  As a conclusion, we obtain a set $Z\subseteq Y$ of $m$ tuples that is mutually $2r$-separated by $S$ in~$G$, for some set of vertices $S\subseteq V(G)$ of size $s\coloneqq s^{\ell}_{2r}$.
   Let $d$ be the degree of the polynomial $N^\ell_{2r}(\cdot)$ obtained from~Theorem~\ref{thm:uqw-tuples}.
   Note that $s=\Oof(1)$ and $|Y|=\Oof(m^d)$.
     
@@ -203,10 +208,12 @@ It holds that $|Z|=\Oof(|C|)$.
 We now move to the proof of Theorem~\ref{thm:vc-density-lower-bound},
 whose statement we repeat for convenience.
 
+\pagebreak
 
-
- \setcounter{aux}{\thetheorem}
-\setcounter{theorem}{\thevclower}
+ \setcounter{aux}{\value{theorem}}
+\setcounter{theorem}{\value{vclower}}
+ \setcounter{auxsec}{\value{section}}
+ \setcounter{section}{1}
  \begin{theorem}
    Let $\CCC$ be a class of graphs which
    is closed under taking subgraphs.
@@ -218,7 +225,9 @@ whose statement we repeat for convenience.
    $\phi(x,y)$ such that for every $c\in \mathbb{R}$ there exist $G\in\CCC$ and a nonempty $A\subseteq V(G)$ with $|S^\phi(G/A)|>c|A|$.
    \end{enumerate}
  \end{theorem}
- \setcounter{theorem}{\theaux}
+ \setcounter{theorem}{\value{aux}}
+ \setcounter{section}{\value{auxsec}}
+ 
 %\vclower*
 
 \begin{proof}
@@ -236,7 +245,7 @@ exists a positive integer $r$ such that $\mathcal{G}_{r}\subseteq \CCC$.
 
 To prove the first statement of Theorem~\ref{thm:vc-density-lower-bound}, 
 for $n\in \N$, let $P(n)$ denote the graph with $n+2^n$ 
-vertices $V(P(n))\coloneqq \{v_1,\ldots, v_n\}\cup \{w_M \colon M\subseteq \{1,\ldots, n\}\}$ and edges $E(P(n))\coloneqq \{v_iw_M \colon 1\leq i\leq n,\, M\subseteq \{1,\ldots, n\},\, i\in M\}$. 
+vertices $V(P(n))\coloneqq \{v_1,\ldots, v_n\}\cup \{w_M \colon M\subseteq \{1,\ldots, n\}\}$ and edges $E(P(n))\coloneqq \{v_iw_M \colon 1\leq i\leq n,$ $M\subseteq \{1,\ldots, n\},\, i\in M\}$. 
 If $\CCC$ is somewhere dense and closed under taking subgraphs, 
 according to Lemma~\ref{lem:lower-nd}, there exists an integer $r$ 
 such that $\mathcal{G}_{r}\subseteq \CCC$. In particular, for every $n\in \N$ the $(r-1)$-subdivision $P^{r}(n)$ of the graph $P(n)$ is contained in $\CCC$.

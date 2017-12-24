@@ -28,14 +28,14 @@ Fix a formula $\phi(\bar x,\bar y)$ of quantifier rank $q$ and
 a partitioning of its 
 free variables into  $\bar x$ and $\bar y$.
 Let $d=|\bar x|+|\bar y|$ be the total number of free variables of $\phi$.
-Let $r\in \N$ be the number given by~\autoref{cor:bound},
+Let $r\in \N$ be the number given by Corollary~\ref{cor:bound},
 which depends on $\phi$ only.
 Let $\cal C$ be the class of all graphs 
 such that  $K_t\not\minor_{18r} G$.
 Then, by~Theorem~\ref{thm:uqw-tuples}, 
 $\cal C$ satisfies $\uqw^d_{r}(N^d_{r},s^d_r)$,
 for some  polynomial  $N^d_r\from\N\to\N$ and number $s=s^d_r\in \N$ computable from $d,t,r$.
-Let $T$ be the number given by~\autoref{cor:bound} for $\phi$ and $s$.
+Let $T$ be the number given by Corollary~\ref{cor:bound} for $\phi$ and $s$.
  Finally, let 
 $\ell=N^d_r(2T+1)$.
 We show that 
@@ -59,7 +59,7 @@ Applying property  $\uqw^d_r(N^d_r,s^d_r)$ to the set $A$, radius $r$, and targe
   for each $i,k\in J_1$ satisfying $i<k$, there exists $j\in J_2$ with $i<j<k$. Indeed, it suffices to order the indices of $J$ and put every second index to $J_1$, and every other to $J_2$.
   Let~$X$ be the set of vertices appearing in the tuples $\bar u_i$ with $i\in J_1$, and let $Y$ be the set of vertices appearing in the tuples $\bar v_j$ with $j\in J_2$.
   Since the tuples of $B$ are mutually $r$-separated by $S$ in~$G$, it follows that $X$ and $Y$ are $r$-separated by $S$.
-  As $|J_1|=T+1$, by \autoref{cor:bound} we infer that there are distinct indices $i,k\in J_1$, say $i<k$, such that $\tp^\phi(\bar u_i/Y)=
+  As $|J_1|=T+1$, by Corollary~\ref{cor:bound} we infer that there are distinct indices $i,k\in J_1$, say $i<k$, such that $\tp^\phi(\bar u_i/Y)=
     \tp^\phi(\bar u_{k}/Y)$. This implies that for each $j\in J_2$, we have $G,\bar u_i,\bar v_j\models \phi(\bar x,\bar y)$ if and only if $G,\bar u_{k},\bar v_j\models \phi(\bar x,\bar y)$.
     However, there is an index $j\in J_2$ such that $i<j<k$, and for this index we should have $G,\bar u_i,\bar v_j\models \phi(\bar x,\bar y)$ and $G,\bar u_{k},\bar v_j\not\models \phi(\bar x,\bar y)$
     by the definition of a ladder. This contradiction concludes the proof.

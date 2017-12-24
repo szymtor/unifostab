@@ -9,8 +9,8 @@ familiar classes of sparse graphs, such as planar graphs, graphs
 of bounded treewidth,  graphs of bounded degree, and, in fact, 
 all classes that exclude a fixed 
 topological minor.
-Formally, a class $\CCC$ of graphs is {\em{nowhere dense}} if there is a function $t\colon \N\to \N$ such that for every $r\in \N$, 
-no graph $G$ in~$\CCC$ contains the clique $K_{t(r)}$ on $t(r)$ vertices  as  {\em{depth-$r$ minor}},
+Formally, a class~$\CCC$ of graphs is {\em{nowhere dense}} if there is a function $t\colon \N\to \N$ such that for every $r\in \N$, 
+no graph~$G$ in~$\CCC$ contains the clique $K_{t(r)}$ on $t(r)$ vertices  as  {\em{depth-$r$ minor}},
 i.e., as a subgraph of a graph obtained from $G$ by contracting mutually disjoint  subgraphs of radius at most $r$ to single vertices.
 The more restricted notion of {\em{bounded expansion}} requires in addition that for every fixed $r$, there is a constant (depending on $r$) upper bound on the ratio 
 between the number of edges and the number of vertices in depth-$r$ minors of graphs from $\CCC$.
@@ -123,16 +123,14 @@ ladder index of a given formula for a given nowhere dense class of graphs, as it
 \paragraph{Cardinality bounds.}
 One of the key insights provided by the work of Shelah is that stable classes can be characterized by admitting strong upper bounds on the cardinality of \emph{Stone spaces}.
 For a first order formula $\phi(\tup x,\tup y)$ 
-with free variables partitioned into \emph{object variables} $\bar x$ and \emph{parameter variables} $\tup y$, a logical structure $\str A$,
+with free variables partitioned into \emph{object variables} $\bar x$ and \emph{parameter variables}~$\tup y$, a logical structure $\str A$,
 and a subset of its domain $B$, define
 the set of \emph{$\phi$-types} with parameters from~$B$, which are realized in 
 $\strA$, as follows\footnote{Here, $S^\phi(\str A/B)$ is the set  of types which are \emph{realized} in $\str A$. In model theory,
 one usually works with the larger class of \emph{complete types}. This distinction will not be relevant here.}:
 \begin{equation}\label{eq:stone-def}
-\begin{split}
-S^\phi (\strA/B) & = 
-  \left\{\big\{\tup v\ \in B^{|\bar y|}\, \colon\, \strA\models\phi(\tup u,\tup v)\big\} \colon\, \tup u\in V(\strA)^{|\bar x|}\right\}\ \\ & \subset\  \Pow(B^{|\bar y|}).
- \end{split}
+S^\phi (\strA/B)  = 
+  \left\{\big\{\tup v\ \in B^{|\bar y|}\, \colon\, \strA\models\phi(\tup u,\tup v)\big\} \colon\, \tup u\in V(\strA)^{|\bar x|}\right\}\  \subset\  \Pow(B^{|\bar y|}).
 \end{equation}
 Here, $V(\strA)$ denotes the domain of $\strA$ and $\Pow(X)$ denotes the powerset of $X$.
 Putting the above definition in words, every tuple $\tup u\in V(\strA)^{|\bar x|}$ defines the set of those tuples $\tup v\in B^{|\bar y|}$ for which $\phi(\tup u,\tup v)$ holds.
@@ -141,7 +139,7 @@ The set $S^\phi(\strA/B)$ consists of all subsets of $B^{|\bar y|}$ that can be 
 Note that in principle, $S^\phi(\str A/B)$
 may be equal to $\Pow(B^{|\bar x|})$, and therefore have very large cardinality compared to $B$, even for very simple formulas. 
 The following characterization due to Shelah 
-(cf. \cite[Theorem 2.2, Chapter II]{shelah1990classification})
+(cf.~\cite[Theorem 2.2, Chapter II]{shelah1990classification})
 shows that for stable classes this does not happen.
 \begin{theorem}\label{thm:Shelah-stone-space}
 A class of structures $\cal C$
@@ -175,7 +173,7 @@ Formally, VC-dimension is defined as follows.
 Let $X$ be a set and let  $\FFF\subseteq \Pow(X)$ 
 be a family of subsets of $X$.
 A subset $A\subseteq X$ is \emph{shattered by $\FFF$} if
-$\{A\cap F\colon F\in \FFF\}=\Pow(A)$; that is, every subset of $A$ can be obtained as the intersection of some set from $\FFF$ with $A$. 
+$\{A\cap F\colon F\in \FFF\}=\Pow(A)$; that is, every subset of~$A$ can be obtained as the intersection of some set from $\FFF$ with $A$. 
 The \emph{VC-dimension},
 of $\FFF$ is the maximum size of a subset $A\subseteq X$ that is shattered by
 $\FFF$.
@@ -271,7 +269,7 @@ The sample size $m=m(\epsilon, \delta)$ is chosen such that
 2^{-\epsilon m/2}\leq \delta$}, where $\Phi(2m)$ denotes the 
 maximum number of distinct intersections of the concept class
 with any subset of the instance space of size at most $2m$. 
-Using the bounds of Theorem~\ref{thm:sauer-shelah} leads to
+Using the bound of Theorem~\ref{thm:sauer-shelah} leads to
 the above sample size $m(\epsilon,\delta)$, and any improved 
 bounds for $\Phi(2m)$ on a particular concept class
 immediately lead to smaller sampling sizes required for
@@ -288,7 +286,8 @@ Our main result, Theorem~\ref{thm:vc-density} stated below, improves the bound~\
 by providing essentially the optimum exponent.
 
  \newcounter{vcupper}
- \setcounter{vcupper}{\thetheorem}
+ \setcounter{vcupper}{\value{theorem}}
+ 
  \begin{theorem}\label{thm:vc-density}
 %\begin{restatable}{theorem}{vcupper}\label{thm:vc-density}
 Let $\CCC$ be a class of graphs and let $\phi(\tup x,\tup y)$ be a first order formula
@@ -313,8 +312,10 @@ this lower bound applies to any infinite class of graphs, even edgeless ones.
 We moreover show that, as long as we consider only subgraph-closed graph classes, the result of Theorem~\ref{thm:vc-density} also cannot be improved in terms of generality.
 The following result is an easy corollary of known characterizations of obstructions to being nowhere dense, respectively having bounded expansion.
 
+\pagebreak
+
  \newcounter{vclower}
- \setcounter{vclower}{\thetheorem}
+ \setcounter{vclower}{\value{theorem}}
    \begin{theorem}\label{thm:vc-density-lower-bound}
   %\begin{restatable}{theorem}{vclower}\label{thm:vc-density-lower-bound}
   Let $\CCC$ be a class of graphs which 
@@ -381,11 +382,12 @@ The new proof is considerably simpler than that of~\cite{siebertz2016polynomial}
 and gives explicit and computable bounds on the degree of the polynomial.
 More precisely, we prove the following theorem; here, the notation $\Oof_{r,t}(\cdot)$ hides computable factors depending on $r$ and $t$.
 
+\pagebreak
 \newcounter{uqw}
-\setcounter{uqw}{\thetheorem}
+\setcounter{uqw}{\value{theorem}}
 \begin{theorem}\label{thm:new-uqw}
 % \newcounter{uqw}
-% \setcounter{uqw}{\thetheorem}
+% \setcounter{uqw}{\value{theorem}}
 % \begin{theorem}\label{thm:new-uqw}
 %\begin{restatable}{theorem}{puqwthm}\label{thm:new-uqw}
 For all $r,t\in \N$ there is a polynomial  $N\colon \N\to \N$ with $N(m)=
@@ -440,7 +442,7 @@ As an example application of our main result,~Theorem~\ref{thm:vc-density}, we p
 and $\nu(\cal G)$ denotes the \emph{packing number} of $\cal G$, i.e., the largest number of pairwise-disjoint subsets of $\cal G$.
  
 \newcounter{ep}
-\setcounter{ep}{\thetheorem}
+\setcounter{ep}{\value{theorem}}
 \begin{theorem}\label{thm:erdos-posa}
 %\begin{restatable}{theorem}{erdosposa}\label{thm:erdos-posa}
 	Fix a nowhere dense class of graphs $\CCC$ and a 
@@ -471,7 +473,7 @@ in the flavor served by our observations on $r$-separation (Corollary~\ref{cor:b
 The following theorem summarizes our result.
 
  \newcounter{stable}
- \setcounter{stable}{\thetheorem}
+ \setcounter{stable}{\value{theorem}}
 %\begin{restatable}{theorem}{newstable}\label{thm:new-stable}
  \begin{theorem}\label{thm:new-stable}
 There are computable functions $f\colon \N^3\to\N$ and $g\colon\N\to\N$ with the following property.
