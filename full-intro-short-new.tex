@@ -217,25 +217,24 @@ Together with~Theorem~\ref{thm:adleradler}, this implies that for every nowhere 
 and every first order formula $\phi(\bar x,\bar y)$,
 there exists a constant $d\in\N$ such that~\eqref{eq:nip} holds. 
 
-However, the VC-dimension $d$ may be enormous and it highly depends on $\cal C$ and the formula $\phi(\bar x,\bar y)$.
-This suggests investigating quantitative bounds of the form \eqref{eq:nip} for exponents smaller than the VC-dimension $d$, as it is conceivable that the combination of bounding VC-dimension and applying
-Sauer-Shelah Lemma yields a suboptimal upper bound. Our main goal is to decrease this exponent drastically in the setting of nowhere dense graph classes.
-
-The above discussion motivates the notion of \emph{VC-density}, a notion closely related to VC-dimension.
-The \emph{VC-density} (also called the 
+However, it is conceivable that the combination of 
+bounding VC-dimension and applying the
+Sauer-Shelah Lemma yields a suboptimal upper bound of the form 
+\eqref{eq:nip}, which 
+motivates the notion of \emph{VC-density}, a notion closely related to 
+VC-dimension. The \emph{VC-density} (also called the 
 \emph{VC-exponent})
 of a set system $\cal F$
 on an infinite set $X$ is the infimum of all reals $\alpha>0$ such that 
 $|\setof{A\cap F}{F\in \cal F}|\in \Oof(|A|^\alpha)$, for all finite $A\subset X$. 
-% In other words, this is the best exponent one could use in an application of the Sauer-
 Similarly, the VC-density of a formula $\phi(\bar x,\bar y)$ over a class of structures~$\cal C$
 is the infimum of all reals $\alpha>0$
 such that $|S^\phi(\str A/B)|\in \Oof(|B|^\alpha)$,
 for all $\str A\in \cal C$ and all finite $B\subset V(\str A)$.
- % of VC-densities of set families $S^\phi(\str A/B)$, for $\str A\in \cal C$ and finite parameter sets $B\subseteq V(\str A)$.
 The Sauer-Shelah Lemma
 implies that the VC-density (of a set system, or of a formula over a class of structures) is bounded from above by the VC-dimension. 
-However, in many cases, the VC-density may be much smaller than the VC-dimension. 
+However, in many cases, the VC-density may be much smaller than the VC-dimension and
+our main goal is to decrease this exponent drastically in the setting of nowhere dense graph classes.
 
 Furthermore, it is the VC-density, rather than VC-di\-men\-sion, that is actually relevant in combinatorial
 and algorithmic applications~\cite{Bronnimann1995,matouvsek1998geometric,Matousek:2004:BVI:1005787.1005789,chervonenkis1971theory,blumer1989learnability}. %, see also \autoref{sec:ep}.
@@ -252,31 +251,43 @@ class $\mathcal{C}$ is PAC-learnable with sample size
 $m(\epsilon,\delta)$ if there exists an algorithm, which given
 $\epsilon$ and $\delta$, draws $m(\epsilon,\delta)$ random
 examples of an unknown target concept $C\in\mathcal{C}$
-and computes a hypothesis that with high 
-probability has low generalization error.
+and computes a hypothesis that with probability at least $1-\delta$
+has an average error at most $\epsilon$. 
 
 It is shown in \cite{chervonenkis1971theory,blumer1989learnability} 
-that for every $\epsilon>0$ and $\delta<1$, given 
-$m(\epsilon,\delta)=\max\{\frac{4}{\epsilon}\log \frac{2}{\delta},
-\frac{8d}{\epsilon}\log \frac{13}{\epsilon}\}$ independent
-random examples from a hypothesis space of VC-dimension~$d$, 
-with probability at least $1-\delta$, every hypothesis that
-is consistent with all examples has error at most~$\epsilon$ (that
-is, every concept class of VC-dimension~$d$ 
-is PAC learnable with sample size $m(\epsilon,\delta)$). 
-The sample size $m=m(\epsilon, \delta)$ is chosen such that 
+that every concept class $\Cc$ is PAC-learnable with sample size
+$m(\epsilon,\delta)=\max\left\{\frac{4}{\epsilon}\log \frac{2}{\delta},
+\frac{8d}{\epsilon}\log \frac{13}{\epsilon}\right\}$, where $d$ is the
+VC-dimension of the hypothesis space. 
+The proof of this fact given in~\cite{blumer1989learnability} shows
+that it suffices to choose the sample size $m=m(\epsilon, \delta)$ 
+such that 
 \mbox{$2\Phi(2m)\cdot
 2^{-\epsilon m/2}\leq \delta$}, where $\Phi(2m)$ denotes the 
 maximum number of distinct intersections of the concept class
 with any subset of the instance space of size at most $2m$. 
-Using the bound of Theorem~\ref{thm:sauer-shelah} leads to
-the above sample size $m(\epsilon,\delta)$, and any improved 
-bounds for $\Phi(2m)$ on a particular concept class
-immediately lead to smaller sampling sizes required for
-producing a good hypothesis. 
+Using the bounds of Theorem~\ref{thm:sauer-shelah} leads to
+the above sample size $m(\epsilon,\delta)$. 
+
+The following framework for learning in a logical setting was introduced
+by Grohe and Tur\'an in~\cite{grohe2004learnability}. We assume
+that the ground set of examples $A$ are elements, or more generally, 
+tuples of elements, of a finite structure $\strA$, and concepts are 
+first-order definable set systems exactly as defined in~(\ref{eq:stone-def}).
+Grohe and Tur\'an proved that all definable set systems over classes 
+of bounded local clique-width have bounded VC-dimension, and are hence
+PAC learnable. Adler and Adler~\cite{adler2014interpreting} then observed
+that over a subgraph closed class of structures, definable concepts are 
+PAC-learnable if and only if the class is nowhere dense. Our improved
+bounds on the number of types realized in a nowhere dense graph class, 
+which we discuss next,
+immediately lead to much smaller sampling sizes required for PAC learning 
+first-order definable concepts on nowhere dense
+graph classes. Recent advances in this framework were also reported
+in~\cite{grohe2017learning,grohe2017learning2}.
 
 We refer to~\cite{aschenbrenner2016vapnik} for an overview of 
-applications of VC-dimension and VC-density in model
+further applications of VC-dimension and VC-density in model
 theory and to the surveys~\cite{furedi1991traces,matouvsek1998geometric} 
 on uses of VC-density in
 combinatorics. 
