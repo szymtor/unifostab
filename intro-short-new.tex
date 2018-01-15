@@ -226,45 +226,55 @@ Together with Theorem~\ref{thm:adleradler}, this implies that for every nowhere 
 and every first order formula $\phi(\bar x,\bar y)$,
 there exists a constant \mbox{$d\in\N$} such that~\eqref{eq:nip} holds. 
 
-However, it is conceivable that the combination of 
+For many structure classes $\cal C$ the combination of 
 bounding VC-dimension and applying the
 Sauer-Shelah Lemma yields a suboptimal upper bound of the form 
-\eqref{eq:nip}, which 
+\eqref{eq:nip}. This 
 motivates the notion of \emph{VC-density}, a notion closely related to 
 VC-dimension. The \emph{VC-density} (also called the 
 \emph{VC-exponent})
 of a set system $\cal F$
 on an infinite set $X$ is the infimum of all reals $\alpha>0$ such that 
-$|\setof{A\cap F}{F\in \cal F}|\in \Oof(|A|^\alpha)$, for all finite $A\subset X$. 
+$|\setof{A\cap F}{F\in \cal F}|\in \Oof(|A|^\alpha)$, for all finite $A\subset X$
+(where the constants hidden in the $\Oof$ notation may depend on $\alpha$). 
 Similarly, the VC-density of a formula $\phi(\bar x,\bar y)$ over a class of structures~$\cal C$
 is the infimum of all reals $\alpha>0$
 such that $|S^\phi(\str A/B)|\in \Oof(|B|^\alpha)$,
 for all $\str A\in \cal C$ and all finite $B\subset V(\str A)$.
 The Sauer-Shelah Lemma
 implies that the VC-density (of a set system, or of a formula over a class of structures) is bounded from above by the VC-dimension. 
-However, in many cases, the VC-density may be much smaller than the VC-dimension and
-our main goal is to decrease this exponent drastically in the setting of nowhere dense graph classes.
+Our main result, Theorem \ref{thm:vc-density} below, provides optimal bounds on the VC-density in the setting of nowhere dense graph classes. In particular, we show that the VC-density of a formula $\phi(\bar x,\bar y)$ over a nowhere dense class $\cal C$ is bounded by $|\bar x|$.
 
-Furthermore, it is the VC-density, rather than VC-di\-men\-sion, that is actually relevant in combinatorial
+\paragraph{Motivation.}
+The motivation for finding bounds on the VC-density  comes from the fact that it is this quantity, rather than VC-di\-men\-sion, that is actually relevant in combinatorial
 and algorithmic applications~\cite{Bronnimann1995,matouvsek1998geometric,Matousek:2004:BVI:1005787.1005789,chervonenkis1971theory,blumer1989learnability}. %, see also \autoref{sec:ep}.
 Let us give an example from statistical learning theory. 
 In the framework of \emph{probably approximately correct learning} 
-(PAC learning, introduced in~\cite{valiant1984theory}), a
-learning algorithm receives random samples and must 
-select a generalization function (called the hypothesis) from 
-a certain class of possible 
-functions. Let $A$ be a set and let $\mathcal{C}\subset 2^A$
-be a family of subsets of $A$, also referred to as a concept
-class. For a function $m(\epsilon,\delta)$, the concept 
-class $\mathcal{C}$ is PAC-learnable with sample size 
-$m(\epsilon,\delta)$ if there exists an algorithm, which given
-$\epsilon$ and $\delta$, draws $m(\epsilon,\delta)$ random
-examples of an unknown target concept $C\in\mathcal{C}$
-and computes a hypothesis that with probability at least $1-\delta$
-has an average error at most $\epsilon$. 
+(PAC learning, introduced by Valiant in~\cite{valiant1984theory}), a
+learning algorithm receives a random sample $X$ of elements of a universe $\Omega$
+and the restriction  $f|_X\from X\to\set{0,1}$
+of an unknown function $f\from \Omega\to\set{0,1}$.
+The goal is
+to produce a function
+$f'\from \Omega\to\set{0,1}$
+from a certain class of possible 
+functions $\cal C\subset 2^\Omega$,
+called the \emph{concept class}, so that $f'$  coincides with $f$ on a set of inputs from $\Omega$
+of large probability, for any fixed probability distribution on~$\Omega$.
+
+More formally, 
+ for a function $m(\epsilon,\delta)$, the concept 
+class $\mathcal{C}$ is \emph{PAC-learnable} with sample size 
+$m(\epsilon,\delta)$ if there is an algorithm,
+such that for every $f\from \Omega\to\set{0,1}$, probability distribution on~$\Omega$, and numbers $\epsilon,\delta>0$,
+the algorithm given  $\epsilon$ and $\delta$
+and  the restriction of $f$ to a random sample $X\subset \Omega$ of size  $|X|\le m(\epsilon,\delta)$,
+produces a function $f'\from \Omega\to \set{0,1}$, 
+so that with probability at least $1-\delta$
+(with respect to the random sample $X\subset \Omega$),  $\textrm{Pr}_{x\in\Omega}[f'(x)\neq f(x)]\le \epsilon$.
 
 It is shown in \cite{chervonenkis1971theory,blumer1989learnability} 
-that every concept class $\Cc$ is PAC-learnable with sample size
+that every concept class $\CCC$ is PAC-learnable with sample size
 $m(\epsilon,\delta)=\max\left\{\frac{4}{\epsilon}\log \frac{2}{\delta},
 \frac{8d}{\epsilon}\log \frac{13}{\epsilon}\right\}$, where $d$ is the
 VC-dimension of the hypothesis space. 
@@ -277,6 +287,9 @@ maximum number of distinct intersections of the concept class
 with any subset of the instance space of size at most $2m$. 
 Using the bounds of Theorem~\ref{thm:sauer-shelah} leads to
 the above sample size $m(\epsilon,\delta)$. 
+
+%TODO:write explicitly how this relates to VC-density. 
+
 
 The following framework for learning in a logical setting was introduced
 by Grohe and Tur\'an in~\cite{grohe2004learnability}. We assume
@@ -292,9 +305,10 @@ bounds on the number of types realized in a nowhere dense graph class,
 which we discuss next,
 immediately lead to much smaller sampling sizes required for PAC learning 
 first-order definable concepts on nowhere dense
-graph classes. Recent advances in this framework were also reported
-in~\cite{grohe2017learning,grohe2017learning2}.
+graph classes. We note that~\cite{grohe2017learning,grohe2017learning2}
+provide further advances in this framework, which are however orthogonal to ours.
 
+In Theorem~\ref{thm:erdos-posa} below we give another example where bounds on the VC-density yield bounds on certain combinatorial quantities.
 We refer to~\cite{aschenbrenner2016vapnik} for an overview of 
 further applications of VC-dimension and VC-density in model
 theory and to the surveys~\cite{furedi1991traces,matouvsek1998geometric} 
