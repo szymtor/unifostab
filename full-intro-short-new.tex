@@ -236,56 +236,17 @@ implies that the VC-density (of a set system, or of a formula over a class of st
 However, in many cases, the VC-density may be much smaller than the VC-dimension and
 our main goal is to decrease this exponent drastically in the setting of nowhere dense graph classes.
 
-Furthermore, it is the VC-density, rather than VC-di\-men\-sion, that is actually relevant in combinatorial
+The motivation for finding bounds on the VC-density  comes from the fact that it is this quantity, rather than VC-di\-men\-sion, that is actually relevant in combinatorial
 and algorithmic applications~\cite{Bronnimann1995,matouvsek1998geometric,Matousek:2004:BVI:1005787.1005789,chervonenkis1971theory,blumer1989learnability}. %, see also \autoref{sec:ep}.
-Let us give an example from statistical learning theory. 
-In the framework of \emph{probably approximately correct learning} 
-(PAC learning, introduced in~\cite{valiant1984theory}), a
-learning algorithm receives random samples and must 
-select a generalization function (called the hypothesis) from 
-a certain class of possible 
-functions. Let $A$ be a set and let $\mathcal{C}\subset 2^A$
-be a family of subsets of $A$, also referred to as a concept
-class. For a function $m(\epsilon,\delta)$, the concept 
-class $\mathcal{C}$ is PAC-learnable with sample size 
-$m(\epsilon,\delta)$ if there exists an algorithm, which given
-$\epsilon$ and $\delta$, draws $m(\epsilon,\delta)$ random
-examples of an unknown target concept $C\in\mathcal{C}$
-and computes a hypothesis that with probability at least $1-\delta$
-has an average error at most $\epsilon$. 
-
-It is shown in \cite{chervonenkis1971theory,blumer1989learnability} 
-that every concept class $\mathcal{C}$ is PAC-learnable with sample size
-$m(\epsilon,\delta)=\max\left\{\frac{4}{\epsilon}\log \frac{2}{\delta},
-\frac{8d}{\epsilon}\log \frac{13}{\epsilon}\right\}$, where $d$ is the
-VC-dimension of the hypothesis space. 
-The proof of this fact given in~\cite{blumer1989learnability} shows
-that it suffices to choose the sample size $m=m(\epsilon, \delta)$ 
-such that 
-\mbox{$2\Phi(2m)\cdot
-2^{-\epsilon m/2}\leq \delta$}, where $\Phi(2m)$ denotes the 
-maximum number of distinct intersections of the concept class
-with any subset of the instance space of size at most $2m$. 
-Using the bounds of Theorem~\ref{thm:sauer-shelah} leads to
-the above sample size $m(\epsilon,\delta)$. 
-
-The following framework for learning in a logical setting was introduced
-by Grohe and Tur\'an in~\cite{grohe2004learnability}. We assume
-that the ground set of examples $A$ are elements, or more generally, 
-tuples of elements, of a finite structure $\strA$, and concepts are 
-first-order definable set systems exactly as defined in~(\ref{eq:stone-def}).
-Grohe and Tur\'an proved that all definable set systems over classes 
-of bounded local clique-width have bounded VC-dimension, and are hence
-PAC learnable. Adler and Adler~\cite{adler2014interpreting} then observed
-that over a subgraph closed class of structures, definable concepts are 
-PAC-learnable if and only if the class is nowhere dense. Our improved
-bounds on the number of types realized in a nowhere dense graph class, 
-which we discuss next,
-immediately lead to much smaller sampling sizes required for PAC learning 
-first-order definable concepts on nowhere dense
-graph classes. Recent advances in this framework were also reported
-in~\cite{grohe2017learning,grohe2017learning2}.
-
+For example in the framework of \emph{probably approximately correct learning} 
+(PAC learning, introduced by Valiant in~\cite{valiant1984theory}), the size of 
+the random sample required as the training set is determined by the VC-density of the concept class 
+rather than by its VC-dimension 
+(see~\cite{blumer1989learnability}, Lemma~7). 
+We refer to the work of Grohe and Tur\'an in~\cite{grohe2004learnability}
+and Adler and Adler~\cite{adler2014interpreting} for more background on 
+learning definable concepts. 
+In Theorem~\ref{thm:erdos-posa} below we give another example where bounds on the VC-density yield bounds on certain combinatorial quantities.
 We refer to~\cite{aschenbrenner2016vapnik} for an overview of 
 further applications of VC-dimension and VC-density in model
 theory and to the surveys~\cite{furedi1991traces,matouvsek1998geometric} 
