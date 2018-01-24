@@ -31,7 +31,8 @@ Logic in Computer Science (LICS)}{July 9--12, 2018}{Oxford, Great Britain}
 %\copyrightyear{2017}           %% If different from \acmYear
 
 %% Bibliography style
-\bibliographystyle{ACM-Reference-Format}
+%\bibliographystyle{ACM-Reference-Format}
+\bibliographystyle{abbrvnamed}
 %% Citation style
 %\citestyle{acmauthoryear}  %% For author/year citations
 %\citestyle{acmnumeric}     %% For numeric citations
