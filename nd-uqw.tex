@@ -194,7 +194,7 @@ In stability theory, similar trees are called \emph{type trees} and they are use
 	 finite, labeled, rooted, binary trees, which are called simply trees below, and are defined as follows.
 	 For a set of labels $U$, a ($U$-labeled) \emph{tree} is a partial function $\tau\from \set{\dau,\son}^*\to U$ whose domain is a finite set of nodes, 
 	 called the \emph{nodes of $\tau$}, which is closed under taking parents. 
-	 If $v$ is a node of $\tau$, then $\tau(v)$ is called its \emph{label}.
+	 If $v$ is a node of $\tau$, then $\tau(v)$ its \emph{label}.
   
   Let $G$ be a graph, $A\subset V(G)$ be a $1$-independent set in $G$,
   and $\bar a$ be any enumeration of $A$, that is, a sequence of length $|A|$ in which every element of $A$ appears exactly once.
@@ -203,7 +203,7 @@ In stability theory, similar trees are called \emph{type trees} and they are use
 
   We start with $\tau$ being the  tree with empty domain, and for each element $a$ of the sequence $\bar a$, processed in the order given by $\bar a$, 
   execute the following procedure which results in adding a node with label $a$ to $\tau$.
-  
+  %
 When processing the vertex $a$, do the following. Start with~$w$ being the empty word. While~$w$ is a node of $\tau$, repeat the following step: 
   if the distance from $a$ to $\tau(w)$ in the graph~$G$ is at most~$2$, replace $w$ by its son, otherwise, replace~$w$ by its daughter.
   % Repeat the step, unless $\tau(w)$ is undefined.
@@ -229,7 +229,7 @@ Let $h,t\ge 2$.	If $\tau$ has alternation rank at most $2t-1$ and depth at most 
 	$f_w$ maps each $i\in \set{1,\ldots,2t}$ to the $i$th alternation of $w$, provided $i$ is at most the number of alternations of $w$, and otherwise we put $f_w(i)=|w|+1$.
 	It is clear that the mapping $w\mapsto f_w$ for nodes $w$ of $\tau$ is injective
 and its image is contained in monotone functions from $\set{1,\ldots,2t}$ to $\set{1,\ldots,h}$, whose number is less than $h^{2t}$.
-Hence, the domain of~$\tau$ 
+Hence, of~$\tau$ 
 		has fewer than $h^{2t}$ elements.
 \end{proof}
 
@@ -280,7 +280,7 @@ We continue with the proof of Lemma~\ref{lem:apex}.
 Fix integers $\ell\ge t^8$ and~$m$, and define $h=m+\ell$.
 Let $A$ be a $1$-independent set in $G$
 of size at least $h^{2t}$.
-
+%
 Suppose that the first case of Lemma~\ref{lem:apex} does not hold. In particular $K_t\not\minor_2 G$, so by Lemma~\ref{thm:alternation-rank-type-tree},~$\tau$ has alternation rank at most $2t-1$. From Lemma~\ref{lem:number-of-nodes} 
 we conclude that $\tau$  has depth at least~$h$.
 As $h=m+\ell$, it follows that either $\tau$  has a node~$w$ which contains at least $m$ letters~$\dau$, or $\tau$ has a node~$w$ which contains  at least $\ell$ letters~$\son$.
@@ -294,7 +294,7 @@ $Y$ be the set of all vertices $\tau(u)$ such that $u\son$ is a prefix of $w$. T
 Since $K_t\not\minor_4 G$ and $\ell\geq t^8$, by Lemma~\ref{lem:diversity} we infer that there is a vertex $v\in G$
 with at least $\ell^{1/4}$ neighbors in $Y$.
 This finishes the proof of the existential part of Lemma~\ref{lem:apex}.
-We defer the proof of the algorithmic statement of the lemma to the full version of the paper.
+We defer the proof of the algorithmic statement of the lemma to the full version.
 %, the proof above yields an algorithm which first constructs the tree $\tau$, by 
 %iteratively processing each vertex $w$ of $A$ and testing whether the distance between $w$ and each vertex processed already is equal to~$2$.
 %This amounts to running a breadth-first search from every vertex of $A$, which can be done in time $\Oof(|A|\cdot |E(G)|)$.
