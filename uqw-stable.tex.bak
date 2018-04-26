@@ -22,7 +22,7 @@ we prove its effective variant,~Theorem~\ref{thm:new-stable}.
 %and is weaker in the following sense: Theorem~\ref{thm:new-stable} asserts in addition that there is a computable bounds on the ladder index
 %of any formula that depends only on the size of an excluded clique minor at depth bounded in terms of formula's quantifier rank and number of free variables. 
 %We now prove~Theorem~\ref{thm:new-stable}.
-\vspace{-2mm}
+
 \begin{proof}[Proof of~Theorem~\ref{thm:new-stable}]
 Fix a formula $\phi(\bar x,\bar y)$ of quantifier rank $q$ and
 a partitioning of its 
@@ -52,13 +52,13 @@ Applying property  $\uqw^d_r(N^d_r,s^d_r)$ to the set $A$, radius $r$, and targe
 	and a set $B\subset A$ with $|B|\geq 2T+1$ 
   of tuples which are  mutually $r$-separated by $S$  in $G$.
   Let $J\subseteq \set{1,\ldots,\ell}$
-  be the set of indices corresponding to $B$,
+  be the set of indices corresponding to~$B$,
   i.e., $J=\set{j\colon\bar u_j\bar v_j\in B}$.
   
   Since $|J|=2T+1$, we may partition $J$ into $J_1\uplus J_2$ with $|J_1|=T+1$ so that the following condition holds:
-  for each $i,k\in J_1$ satisfying $i<k$, there exists $j\in J_2$ with $i<j<k$. Indeed, it suffices to order the indices of $J$ and put every second index to $J_1$, and every other to $J_2$.
+  for each $i,k\in J_1$ satisfying $i<k$, there exists $j\in J_2$ with $i<j<k$. Indeed, it suffices to order the indices of $J$ and put every second index to $J_1$, and every other to~$J_2$.
   Let~$X$ be the set of vertices appearing in the tuples $\bar u_i$ with $i\in J_1$, and let $Y$ be the set of vertices appearing in the tuples $\bar v_j$ with $j\in J_2$.
-  Since the tuples of $B$ are mutually $r$-separated by $S$ in~$G$, it follows that $X$ and $Y$ are $r$-separated by $S$.
+  Since the tuples of $B$ are mutually $r$-separated by~$S$ in~$G$, it follows that $X$ and $Y$ are $r$-separated by~$S$.
   As $|J_1|=T+1$, by Corollary~\ref{cor:bound} we infer that there are distinct indices $i,k\in J_1$, say $i<k$, such that $\tp^\phi(\bar u_i/Y)=
     \tp^\phi(\bar u_{k}/Y)$. This implies that for each $j\in J_2$, we have $G,\bar u_i,\bar v_j\models \phi(\bar x,\bar y)$ if and only if $G,\bar u_{k},\bar v_j\models \phi(\bar x,\bar y)$.
     However, there is an index $j\in J_2$ such that $i<j<k$, and for this index we should have $G,\bar u_i,\bar v_j\models \phi(\bar x,\bar y)$ and $G,\bar u_{k},\bar v_j\not\models \phi(\bar x,\bar y)$

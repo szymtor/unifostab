@@ -38,7 +38,7 @@ the result of Grohe, Kreutzer and the second author~\cite{grohe2014deciding} exp
 this combination in order to prove that  a given
 first order sentence $\varphi$ can be evaluated in time 
 $f(\varphi)\cdot n^{1+\epsilon}$ on $n$-vertex graphs from a fixed nowhere dense class of graphs $\CCC$, for any fixed real $\epsilon>0$ and some function $f$.
-On the other hand, provided $\CCC$ is closed under taking subgraphs, it is known that if $\CCC$ is not nowhere dense,
+On the other hand, provided~$\CCC$ is closed under taking subgraphs, it is known that if $\CCC$ is not nowhere dense,
 then there is no algorithm with running time of the form $f(\varphi)\cdot n^c$ for any constant~$c$ under plausible complexity assumptions~\cite{dvovrak2013testing}.
 In the terminology of parameterized complexity, these results show that the notion of nowhere denseness exactly characterizes subgraph-closed classes where model-checking first order logic
 is fixed-parameter tractable, and conclude a long line of research concerning the parameterized complexity of the model checking problem for sparse graph classes (see \cite{grokre11} for a survey). 
@@ -160,9 +160,9 @@ A class of structures $\cal C$
 \mbox{\textit{if} $|B|\le \kappa$, \textit{then} $
 |S^\phi(\str A/B)|\le \kappa$.}
 %\end{theorem}
-Therefore,
+Therefore
 Shelah's result provides an upper bound on the number of types, albeit using infinite cardinals, elementary limits, and infinite parameter sets.
- The cardinality bound provided by the above characterization %Theorem~\ref{thm:Shelah-stone-space},
+ The cardinality bound provided by the above characterization, %Theorem~\ref{thm:Shelah-stone-space},
  however, does not seem to  immediately translate to a result of finitary nature. As we describe below,
  this can be done using the notions of {\em{VC-dimension}} and {\em{VC-density}}.
 
@@ -170,7 +170,7 @@ Shelah's result provides an upper bound on the number of types, albeit using inf
 Vapnik and Chervonenkis~\cite{chervonenkis1971theory} 
 as a measure of complexity of set systems, or equivalently of 
 hypergraphs, and independently by Shelah~\cite{shelah1971stability} 
-under the name of dependence (equivalence of the two notions
+under the name of dependence (the equivalence of the two notions
 was observed by Laskowski~\cite{laskowski1992vapnik}).
 %Over the years it
 %has found important applications in many areas of
@@ -182,9 +182,9 @@ Let $X$ be a set and let  $\FFF\subseteq \Pow(X)$
 be a family of subsets of $X$.
 A subset $A\subseteq X$ is \emph{shattered by $\FFF$} if
 $\{A\cap F\colon F\in \FFF\}=\Pow(A)$; that is, every subset of $A$ can be obtained as the intersection of some set from $\FFF$ with $A$. 
-The \emph{VC-dimension},
+The \emph{VC-dimension}
 of $\FFF$ is the maximum size of a subset $A\subseteq X$ that is shattered by
-$\FFF$.
+$\FFF$ (or $\infty$ if there is no bound on the size of shattered subsets).
 
 %As observed by Laskowski~\cite{laskowski1992vapnik}, VC-dimension can be connected to concepts from stability theory introduced by Shelah.
 For a given structure $\str A$, parameter set $B\subseteq V(\str A)$, and formula $\phi(\bar x,\bar y)$,
@@ -192,12 +192,12 @@ we may consider the family $S^\phi(\str A/B)$ of subsets of $B^{|\tup y|}$ defin
 The \emph{VC-dimension} of $\phi(\bar x,\bar y)$ on $\str A$ is the VC-dimension of the family $S^\phi(\str A/V(\str A))$. 
 In other words, the VC-dimension of $\phi(\bar x,\bar y)$
 on $\str A$ is the largest cardinality of a finite
-set $I$ for which there exist families of tuples $(\bar u_i)_{i\in I}$ and $(\bar v_J)_{J\subset I}$
+set $I$ for which there exist families of tuples $(\bar u_J)_{J\subseteq I}$ and $(\bar v_i)_{i\in I}$
 of elements of $\str A$
-such that  $$\strA\models\phi(\tup{u}_i,\tup{v}_J)\Longleftrightarrow i\in J\qquad \text {for all $i\in I$ and $J\subset I$.}$$
+such that  $$\strA\models\phi(\tup{u}_J,\tup{v}_i)\Longleftrightarrow i\in J\qquad \text {for all $i\in I$ and $J\subset I$.}$$
 A formula $\phi(\bar x,\bar y)$ is \emph{dependent} on a class of structures $\cal C$
 if there is a bound $d\in\N$ such that the VC-dimension of $\phi(\bar x,\bar y)$ on $\str A$ is at most $d$ for all $\str A\in\cal C$.
-It is immediate from the definitions  that if a formula $\phi(\bar x,\bar y)$ is stable over $\cal C$, then it is also dependent on $\cal C$ (the bound being the ladder index). 
+It is immediate from the definitions  that if a formula $\phi(\bar x,\bar y)$ is stable over $\cal C$, then it is also dependent on~$\cal C$ (the bound being the ladder index). 
 A class of structures  $\cal C$ is {\em{dependent}} if every formula $\phi(\bar x,\bar y)$ is dependent over $\cal C$. 
 In particular, every stable class is dependent, and hence, by Theorem~\ref{thm:adleradler}, every nowhere dense class of graphs is dependent.
 Examples of infinite dependent structures (treated as singleton classes) include 
@@ -206,12 +206,12 @@ $(\mathbb Q,\le )$ and the field of reals $(\mathbb R,\times,+,0,1)$.
 One of the main properties of VC-dimension is that it implies polynomial upper bounds on the number of different ``traces'' that a set system can have on a given parameter set.
 This is made precise by the well-known Sauer-Shelah Lemma, stated as follows.
 \begin{theorem}[Sauer-Shelah Lemma, \cite{chervonenkis1971theory,sauer1972density, shelah1972combinatorial}]\label{thm:sauer-shelah}
-  For any family $\FFF$ of subsets of a set $X$, if the VC-dimension of $\FFF$ is $d$,
+  For any family~$\FFF$ of subsets of a set $X$, if the VC-dimension of $\FFF$ is $d$,
   then for every finite $A\subset X$,
 \[|\setof{A\cap F}{F\in {\cal F}}|\le \sum_{i\geq 0}^d \binom{|A|}{i}\leq |A|^d+1.\] 
 \end{theorem}
 In particular, this implies that 
-in a dependent class of structures $\cal C$, 
+in a dependent class of structures~$\cal C$, 
 for every formula $\phi(\bar x,\bar y)$
 there exists some constant $d\in \N$
 such that
@@ -236,7 +236,7 @@ VC-dimension. The \emph{VC-density} (also called the
 of a set system $\cal F$
 on an infinite set $X$ is the infimum of all reals $\alpha>0$ such that 
 $|\setof{A\cap F}{F\in \cal F}|\in \Oof(|A|^\alpha)$, for all finite $A\subset X$
-(where the constants hidden in the $\Oof$ notation may depend on $\alpha$). 
+(where the constants hidden in the~$\Oof$ notation may depend on $\alpha$). 
 Similarly, the VC-density of a formula $\phi(\bar x,\bar y)$ over a class of structures~$\cal C$
 is the infimum of all reals $\alpha>0$
 such that $|S^\phi(\str A/B)|\in \Oof(|B|^\alpha)$,
@@ -301,13 +301,14 @@ The following result is an easy corollary of known characterizations of obstruct
   %\end{restatable}  
 \end{theorem}
 
-We prove in the appended full version of the paper that a similar
-characterization theorem can be proved for bounded
-expansion classes of graphs (all proofs that are omitted
-in the conference version due 
-to space constraints are marked with a $\star$ and can be 
-found in the appendix). More precisely, we show that 
-if $\CCC$ has bounded 
+%We prove in the appended full version of the paper that a similar
+%characterization theorem can be proved for bounded
+%expansion classes of graphs (all proofs that are omitted
+%in the conference version due 
+%to space constraints are marked with a $\star$ and can be 
+%found in the appendix). More precisely, we show that 
+A similar characterization theorem can be proved for bounded
+expansion classes of graphs. We show that if $\CCC$ has bounded 
 expansion, then there exists a constant~$c$ such that for every 
 $G\in \CCC$ and every nonempty $A\subseteq V(G)$, we have 
 $|S^\phi(G/A)|\leq c\cdot |A|^\ell$. Conversely, if $\CCC$ has 
@@ -400,8 +401,9 @@ This more general result turns out to be necessary in the proof of Theorem~\ref{
 \paragraph{Local separation.}
 A simple, albeit important notion which permeates our proofs
 is a graph theoretic concept of \emph{local separation}.
-Let $G$ be a graph, $S\subset V(G)$ a set of vertices,
-and let $r\in \N$ be a number. We say that two  sets of vertices $A$ and $B$  are \emph{$r$-separated} by $S$ (in $G$) if every path from a vertex in $A$ to a vertex in $B$
+
+Let~$G$ be a graph, $S\subset V(G)$ a set of vertices,
+and let $r\in \N$ be a number. We say that two  sets of vertices $A$ and $B$  are \emph{$r$-separated} by~$S$ (in $G$) if every path from a vertex in $A$ to a vertex in $B$
 of length at most $r$ contains a vertex from $S$. % (cf.~Fig.~\ref{fig:sep}).
 % \begin{figure}[h!]
 % 	\centering
@@ -486,7 +488,12 @@ Suppose further that $G$ is a graph excluding $K_t$ as a depth-$g(q)$ minor. The
 \paragraph{Acknowledgments.} We would like to
 thank Patrice Ossona de Mendez for pointing us to the
 question of studying VC-density of nowhere dense graph
-classes.
+classes. 
+
+Due to space constraints not all proofs can be 
+presented in the conference version of the paper, 
+missing proofs are marked with~$(\star)$ The full version 
+of the paper is available online~\cite{l2017number}.
 
 
 %\pagebreak

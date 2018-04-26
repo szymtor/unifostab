@@ -3,7 +3,7 @@
 
 
 
-We now come to the proof of \autoref{thm:vc-density}.
+We now come to the proof of Theorem~\ref{thm:vc-density}.
 %
 %In this section we prove \autoref{thm:vc-density} and \autoref{thm:vc-density-lower-bound}.
 %	Recall that \autoref{thm:vc-density} provides upper bounds on the number of types in classes of graphs which are nowhere dense, 
@@ -37,7 +37,7 @@ We now come to the proof of \autoref{thm:vc-density}.
 %The proof of~\autoref{thm:vc-density} spans the remainder of this section.
 In the proof, we will
 will first enlarge the set $A$ to a set $B$, called
-an \emph{$r$-closure of~$A$} (where $r$ is chosen depending on $\phi$), such 
+an \emph{$r$-closure of~$A$} (where~$r$ is chosen depending on $\phi$), such 
 that the connections of elements from $V(G)-B$ 
 toward $B$ are well controlled. This approach
 was first used in Drange et al.~\cite{drange2016kernelization} in the context of classes of bounded expansion, 
@@ -45,8 +45,8 @@ and then for nowhere dense classes in Eickmeyer et al.~\cite{eickmeyer2016neighb
 We start by recalling these notions.
 
 Let $G$ be a graph and let $B\subseteq V(G)$ be a subset of vertices. For vertices $v\in B$ and $u\in V(G)$, a path $P$ leading from $u$ to $v$ is called {\em{$B$-avoiding}}
-if all its vertices apart from~$v$ do not belong to~$B$. Note that if $u\in B$, then there is only one $B$-avoiding path leading from $u$, namely the one-vertex path where $u=v$.
-For a positive integer $r$ and $u\in V(G)$, the {\em{$r$-projection}} of $u$ on $B$, denoted $M^G_r(u,B)$, is the set of all vertices $v\in B$ such that there is
+if all its vertices apart from~$v$ do not belong to~$B$. Note that if $u\in B$, then there is only one $B$-avoiding path leading from~$u$, namely the one-vertex path where $u=v$.
+For a positive integer~$r$ and $u\in V(G)$, the {\em{$r$-projection}} of $u$ on $B$, denoted $M^G_r(u,B)$, is the set of all vertices $v\in B$ such that there is
 a $B$-avoiding path of length at most $r$ leading from $u$ to $v$. Note that for $u\in B$, we have $M^G_r(u,B)=\{b\}$.
 Equivalently, $M^G_r(u,B)$ is the unique inclusion-minimal
 subset of $B$ which $r$-separates $u$ from $B$.
@@ -102,11 +102,11 @@ We note that in~\cite{drange2016kernelization,eickmeyer2016neighborhood} project
 However, adding singleton projections for vertices of $B$ to the definition only adds $|B|$ possible projections of size $1$ each, so this does not influence the validity of the above results.
 
 
-We proceed with the proof of \autoref{thm:vc-density}.
+We proceed with the proof of Theorem~\ref{thm:vc-density}.
 % To focus attention, we present the proof only for the nowhere dense case (first statement). The proof in the bounded expansion case (second statement)
 % can be obtained by replacing all the parameters $\epsilon,\delta,\epsilon_1,\epsilon_2$ below by~$0$, and substituting the usage of Theorem~\ref{lem:closure-nd} with Theorem~\ref{lem:closure-be}.
 %
- Let us fix: a nowhere dense class of graphs $\CCC$, a graph $G\in \CCC$, a vertex subset $A\subseteq V(G)$, a real $\epsilon>0$, and 
+ Let us fix: a nowhere dense class of graphs $\CCC$, a graph $G\in \CCC$, a vertex set $A\subseteq V(G)$, a real~$\epsilon>0$, and 
  a first order formula $\phi(\bar x,\bar y)$, where $\bar x$ is the distinguished $\ell$-tuple of object variables.
  Our goal is to show that $|S^\phi(G/A)|=\Oof(|A|^{\ell+\epsilon})$.
  	   
@@ -143,7 +143,7 @@ Let $B$ be an $r$-closure of $A$, given by Lemma~\ref{lem:closure-nd}.
 %           \noindent\textbf{Claim 3}. $Z\subseteq Y$\\
 %           mutually $2r$-separated by $S$.\\
 %           Then $|Z|={\cal O}(|C|)$.
-  			\caption{The proof of~\autoref{thm:vc-density} in case $\ell=1$. 
+  			\caption{The proof of Theorem~\ref{thm:vc-density} in case $\ell=1$. 
   The logical implications flow from right to left,
   but our description below proceeds in the other direction.
   			}
@@ -155,7 +155,7 @@ Let $B$ be an $r$-closure of $A$, given by Lemma~\ref{lem:closure-nd}.
 The first step is to reduce the statement to the following claim.
 
 \begin{claim}\label{claim2}
-If $X$ is a set of tuples with pairwise different $\phi$-types over $B$, then $|X|=\Oof(|B|^{\ell+\epsilon_1})$.
+If $X$ is a set of tuples with pairwise different $\phi$-types over~$B$, then $|X|=\Oof(|B|^{\ell+\epsilon_1})$.
 \end{claim}	
 
 Claim~\ref{claim2} implies that $|S^\phi(G/B)|=\Oof(|B|^{\ell+\epsilon_1})$, 
@@ -163,7 +163,7 @@ which is bounded by $\Oof(|A|^{(\ell+\epsilon_1)(1+\delta)})$ since $|B|=\Oof(|A
 
 As $(\ell+\epsilon_1)(1+\delta)\le \ell+\epsilon$, this shows that $|S^\phi(G/B)|=\Oof(|A|^{\ell+\epsilon})$.
 Since $A\subset B$, 
-we have $|S^\phi(G/A)|\le |S^\phi(W/B)|$ so
+we have $|S^\phi(G/A)|\le |S^\phi(G/B)|$ so
  $|S^\phi(G/A)|=\Oof(|A|^{\ell+\epsilon})$, and we are done. Therefore, it remains to prove Claim~\ref{claim2}.
 
 \medskip
@@ -176,7 +176,7 @@ To prove Claim~\ref{claim2}, we consider the special case when all the tuples ha
 for $\epsilon_2\coloneqq \epsilon_1-\delta\ell>0$.
 
 \begin{claim}\label{claim3}
-If $Y$ is a set of tuples with pairwise different $\phi$-types over $B$, and each $u\in V$ has the same projection $C\subset B$, then $|Y|=\Oof(|B|^{\epsilon_2})$.
+If $Y$ is a set of tuples with pairwise different $\phi$-types over $B$, and each $u\in Y$ has the same projection $C\subset B$, then $|Y|=\Oof(|B|^{\epsilon_2})$.
 \end{claim}
 
 Since there are at most $\Oof(|B|^{\ell(1+\delta)})$ different projections in total and $\ell(1+\delta)+\epsilon_2=\ell+\epsilon_1$, Claim~\ref{claim2} can be proved
@@ -185,9 +185,9 @@ It therefore remains to prove Claim~\ref{claim3}.
 
 \medskip
 
-We apply~\autoref{thm:uqw-tuples} to the set of $\ell$-tuples $Y$, for $m$ being the largest integer such that $|Y|\ge N^{\ell}_{2r}(m)$.
+We apply Theorem~\ref{thm:uqw-tuples} to the set of $\ell$-tuples $Y$, for $m$ being the largest integer such that $|Y|\ge N^{\ell}_{2r}(m)$.
   As a conclusion, we obtain a set $Z\subseteq Y$ of $m$ tuples that is mutually $2r$-separated by $S$ in $G$, for some set of vertices $S\subseteq V(G)$ of size $s\coloneqq s^{\ell}_{2r}$.
-  Let $d$ be the degree of the polynomial $N^\ell_{2r}(\cdot)$ obtained from~\autoref{thm:uqw-tuples}.
+  Let $d$ be the degree of the polynomial $N^\ell_{2r}(\cdot)$ obtained from Theorem~\ref{thm:uqw-tuples}.
   Note that $s=\Oof(1)$ and $|Y|=\Oof(m^d)$.
     
   \begin{claim}\label{claim4}
@@ -206,7 +206,7 @@ It holds that $|Z|=\Oof(|C|)$.
   and let $Z_1=Z-Z_0$ be the remaining  tuples.
   Since tuples from $Z_0$ have pairwise different $\phi$-types over $B$, and each of them is $r$-separated by~$S$ from~$B$ in $G$, by Corollary~\ref{cor:bound} we infer that $|Z_0|=\Oof(1)$.  
  On the other hand, by the definition of $Z_1$, with each tuple~$\bar u\in Z_1$ we may associate a vertex $b(\bar u)\in C$ which is not $r$-separated from~$\bar u$ by $S$ in $G$.
- Since the set $U$ is mutually $2r$-separated by~$S$ in $G$, it follows that for any two different tuples $\bar u,\bar v\in Z_1$ we have $b(\bar u)\neq b(\bar v)$.
+ Since the set $Z$ is mutually $2r$-separated by~$S$ in $G$, it follows that for any two different tuples $\bar u,\bar v\in Z_1$ we have $b(\bar u)\neq b(\bar v)$.
  Hence $b(\cdot)$ is an injection from $Z_1$ to $C$, which proves that $|Z_1|\leq |C|$.
  To conclude, we have $|Z|=|Z_0|+|Z_1|=\Oof(1)+\Oof(|C|)=\Oof(|C|)$. This finishes the proof of Claim~\ref{claim4} and ends the proof of Theorem~\ref{thm:vc-density}.
 
