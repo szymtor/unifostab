@@ -10,8 +10,8 @@ of bounded treewidth,  graphs of bounded degree, and, in fact,
 all classes that exclude a fixed 
 topological minor.
 Formally, a class $\CCC$ of graphs is {\em{nowhere dense}} if there is a function $t\colon \N\to \N$ such that for every $r\in \N$, 
-no graph~$G$ in~$\CCC$ contains the clique $K_{t(r)}$ on $t(r)$ vertices  as  {\em{depth-$r$ minor}},
-i.e., as a subgraph of a graph obtained from $G$ by contracting mutually disjoint  subgraphs of radius at most~$r$ to single vertices.
+no graph~$G$ in~$\CCC$ contains the clique $K_{t(r)}$ on $t(r)$ vertices  as {\em{depth-$r$ minor}},
+i.e., as a subgraph of a graph obtained from $G$ by contracting mutually disjoint  subgraphs of radius at most~$r$ to single vertices. We write 
 The more restricted notion of {\em{bounded expansion}} requires in addition that for every fixed $r$, there is a constant (depending on $r$) upper bound on the ratio 
 between the number of edges and the number of vertices in depth-$r$ minors of graphs from $\CCC$.
 
@@ -369,6 +369,10 @@ In our quest for constructive arguments, we give a new construction giving polyn
 The new proof is considerably simpler than that of~\cite{siebertz2016polynomial}
 and gives explicit and computable bounds on the degree of the polynomial.
 More precisely, we prove the following theorem; here, the notation $\Oof_{r,t}(\cdot)$ hides computable factors depending on $r$ and $t$.
+Below, we write $K_t\not\minor_r G$ to denote that $G$ does not 
+contain $K_t$ as a depth-$r$ minor, i.e., as a subgraph of a graph 
+obtained from $G$ by contracting mutually disjoint  subgraphs of 
+radius at most~$r$ to single vertices.
 
 %\newcounter{uqw}
 %\setcounter{uqw}{\thetheorem}
