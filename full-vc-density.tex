@@ -254,51 +254,63 @@ $S^\phi(P^{r}(n)/A)=\Pow(A)$, where $A\subseteq V(P^{r}(n))$ denotes the set $\{
 of the theorem. 
 
 \medskip
-We now move to the  second part of~Theorem~\ref{thm:vc-density-lower-bound}.
-A graph $H$ is a \emph{topological depth-$r$ minor} of~$G$ if
-there is a mapping $\phi$ that maps vertices of~$H$ to 
-vertices of $G$ such that $\phi(u)\neq \phi(v)$ for 
-$u\neq v$, and edges of $H$ to paths in 
-$G$ such that if $uv\in E(H)$, then $\phi(uv)$
-is a path of length at most $2r+1$ between $u$ and $v$ in 
-$G$ and furthermore, if $uv, xy\in E(H)$, then 
-$\phi(uv)$ and $\phi(xy)$ are internally vertex
-disjoint. We write $H\minor_r^{\mathrm{t}} G$. 
-Note that the above definition makes sense for 
-half-integers, i.e., numbers $r$ for which $2r$ is an integer.
-
-It is well-known that classes of bounded expansion can be alternatively characterized by the sparsity of shallow topological minors.
-
-\begin{lemma}[Corollary 4.1 of \cite{sparsity}]\label{lem:top-bnd-exp}
-A class $\CCC$ of graphs has bounded expansion if and only 
-if for every $r\in \N$ there exists a constant $c_r$ such that $|E(H)|/|V(H)|\leq c_r$ for all graphs $H$ such that $H\minor_r^{\mathrm{t}} G $ for some $G\in \CCC$.
-\end{lemma}
-
+We now move to the  second part of~Theorem~\ref{thm:vc-density-lower-bound}. For this, we employ a result of Reidl et al.~\cite{reidl2016characterising}. 
+%
+%
+%A graph $H$ is a \emph{topological depth-$r$ minor} of~$G$ if
+%there is a mapping $\phi$ that maps vertices of~$H$ to 
+%vertices of $G$ such that $\phi(u)\neq \phi(v)$ for 
+%$u\neq v$, and edges of $H$ to paths in 
+%$G$ such that if $uv\in E(H)$, then $\phi(uv)$
+%is a path of length at most $2r+1$ between $u$ and $v$ in 
+%$G$ and furthermore, if $uv, xy\in E(H)$, then 
+%$\phi(uv)$ and $\phi(xy)$ are internally vertex
+%disjoint. We write $H\minor_r^{\mathrm{t}} G$. 
+%Note that the above definition makes sense for 
+%half-integers, i.e., numbers $r$ for which $2r$ is an integer.
+%
+%It is well-known that classes of bounded expansion can be alternatively characterized by the sparsity of shallow topological minors.
+%
+%\begin{lemma}[Corollary 4.1 of \cite{sparsity}]\label{lem:top-bnd-exp}
+%A class $\CCC$ of graphs has bounded expansion if and only 
+%if for every $r\in \N$ there exists a constant $c_r$ such that $|E(H)|/|V(H)|\leq c_r$ for all graphs $H$ such that $H\minor_r^{\mathrm{t}} G $ for some $G\in \CCC$.
+%\end{lemma}
+%
 For $r\in \N$ and a graph $G$, by $\nu_r(G)$ we denoted the
 \emph{normed $r$-neighborhood complexity} of $G$, as defined
 by Reidl et al.~\cite{reidl2016characterising}: 
 \begin{equation*}
 \nu_r(G)\coloneqq\max_{H\subseteq G,\,\emptyset\neq A\subseteq V(G)}\frac{|\{N_r^H[v]\cap A\, \colon\, v\in V(H)\}|}{|A|}.
 \end{equation*}
-We will need the following result relating edge density in shallow topological minors and normed neighborhood complexity.
 
-\begin{lemma}[Theorem 4 of \cite{reidl2016characterising}]\label{lem:lower-be}
-Let $G$ be a graph, $r$ be a half-integer, 
-and let $H\minor_r^{\mathrm{t}}G$. 
-Then 
-\begin{align*}
-\frac{|E(H)|}{|V(H)|}&\leq (2r + 1)\cdot \\
-& \max \left\{\nu_1(G)^4\cdot \log^2\nu_1(G),\nu_2(G),\ldots, \nu_{\left\lceil r+\frac{1}{2}\right\rceil}(G)\right\}.
-\end{align*}
+A class $\CCC$ of graphs is said to have bounded neighborhood 
+complexity if there exists a function~$f$ such that
+for every positive integer $r$ we have $\nu_r(G)\leq f(r)$
+for all $G\in\CCC$. 
+
+%We will need the following result relating edge density in shallow topological minors and normed neighborhood complexity.
+
+%\begin{lemma}[Theorem 1 of \cite{reidl2016characterising}]\label{lem:lower-be}
+%Let $G$ be a graph, $r$ be a half-integer, 
+%and let $H\minor_r^{\mathrm{t}}G$. 
+%Then 
+%\begin{align*}
+%\frac{|E(H)|}{|V(H)|}&\leq (2r + 1)\cdot \\
+%& \max \left\{\nu_1(G)^4\cdot \log^2\nu_1(G),\nu_2(G),\ldots, \nu_{\left\lceil r+\frac{1}{2}\right\rceil}(G)\right\}.
+%\end{align*}
+%\end{lemma}
+
+\begin{lemma}[Theorem 1 of \cite{reidl2016characterising}]\label{lem:lower-be}
+A class $\CCC$ of graphs has bounded expansion if and only if 
+it has bounded neighbourhood complexity.
 \end{lemma}
 
-For the second part of~Theorem~\ref{thm:vc-density-lower-bound}, we use the contrapositive of Lemma~\ref{lem:top-bnd-exp}. Since $\CCC$ has unbounded expansion, for some $r\in \N$ 
-we have that the value $|E(H)|/|V(H)|$ is unbounded among depth-$r$ topological minors $H$ of graphs from $\CCC$.
-By applying Lemma~\ref{lem:lower-be}, we find that for some $q\leq r$ the value
-$\nu_{q}(G)$ is unbounded when $G$ ranges over all graphs from $\CCC$. 
+For the second part of~Theorem~\ref{thm:vc-density-lower-bound}, we use the contrapositive of Lemma~\ref{lem:lower-be}. Since $\CCC$ has unbounded expansion, for some $r\in \N$ 
+the value $\nu_r(G)$ is unbounded among the graphs $G$ 
+from~$\CCC$.
 Since $\CCC$ is closed under taking subgraph, we infer that also the ratio 
-$\frac{|\{N_q^G[v]\cap A \colon v\in V(G)\}|}{|A|}$ is unbounded when~$G$ ranges over graphs from $\CCC$ and $A$ ranges over nonempty subsets of $V(G)$.
-This is equivalent to the sought assertion for the formula $\phi(x,y)$ expressing that $x$ and~$y$ are at distance at most $q$. 
+$\frac{|\{N_r^G[v]\cap A \colon v\in V(G)\}|}{|A|}$ is unbounded when~$G$ ranges over graphs from $\CCC$ and $A$ ranges over nonempty subsets of $V(G)$.
+This is equivalent to the sought assertion for the formula $\phi(x,y)$ expressing that $x$ and~$y$ are at distance at most $r$. 
 
 \mbox{}
 \end{proof}
