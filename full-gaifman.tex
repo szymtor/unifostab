@@ -196,6 +196,8 @@ Define a graph $G^S$ colored with $\Lambda_S$, which is
 the subgraph of $G$ induced by $V-S$
 in which, additionally, for every vertex $s\in S$, every vertex $v\in V-S$ that is a neighbor of $s$ in $G$ is colored by color $C_s$. 
 In other words, every vertex $v$ of $G^S$ is colored with a subset of colors from $\Lambda_S$ corresponding to the neighborhood of $v$ in $S$.
+The colored graph $G^S$ is called a \emph{plebeian companion} of 
+$G$ in~\cite{AjtaiG94}. 
 
 A sequence of elements of $S\cup\set\star$,
 where $\star$ is a fixed placeholder symbol,
@@ -298,9 +300,11 @@ whether $\phi'(\bar x,\bar s)$ belongs to $\tp^p_G(\bar u/S)$, so the latter typ
 
 \medskip
 
-The argument for the last arrow is provided by the following claim.
+The argument for the last arrow is provided by the following lemma. 
+Its proof can be found in~\cite{AjtaiG94} or more explicitly in~\cite{dawar2010homomorphism}. The proof in~\cite{dawar2010homomorphism} is constructive and one directly
+derives that the formula~$\phi^S$ is computable. 
 
-\begin{claim}\label{cl:rewrite}
+\begin{lemma}\label{cl:rewrite}
   Let $\phi$ be a formula
   with $k$ free variables and quantifier rank at most $q$, 
   and let $\sigma$ be an $S$-signature of length $k$.
@@ -311,44 +315,44 @@ The argument for the last arrow is provided by the following claim.
    $\phi(\bar v)$ holds in $G$
   if and only if $\phi^S(\bar v^S)$ holds in $G^S$, where $\bar v^S$ is obtained from $\bar v$ by removing 
   those elements that belong to $S$.
-\end{claim}
-\begin{clproof}[Sketch]
-The proof proceeds by a straightforward induction on the structure of the formula~$\phi$.
-In essence, every quantification $\exists y$ of a vertex~$y$ in $G$ is replaced by quantification of $y$ in $G-S$ plus a disjunction over $s\in S$ of formulas where we assume $y=s$.
-Atomic formulas of the form $E(x,y)$ and $x=y$ have to be replaced accordingly. Say for $E(x,y)$: if both~$x$ and~$y$ are assumed to be in $G-S$, then we leave $E(x,y)$ intact;
-if $x$ is assumed to be in $S$ (say we assume $x=s$) and $y$ is assumed to be in $G-S$, then we substitute $E(x,y)$ by $C_s(y)$; and if both~$x$ and~$y$ are assumed to be in $S$, then 
-we replace $E(x,y)$ by $\bot$ or $\top$ depending on whether the vertices assumed to be equal to $x$ and $y$ are adjacent or not.
-We leave the details to the reader.
-\end{clproof}
-\begin{comment}
-\begin{clproof}
-The proof proceeds by induction on the structure of the formula $\phi$. 
+\end{lemma}
+%\begin{clproof}[Sketch]
+%The proof proceeds by a straightforward induction on the structure of the formula~$\phi$.
+%In essence, every quantification $\exists y$ of a vertex~$y$ in $G$ is replaced by quantification of $y$ in $G-S$ plus a disjunction over $s\in S$ of formulas where we assume $y=s$.
+%Atomic formulas of the form $E(x,y)$ and $x=y$ have to be replaced accordingly. Say for $E(x,y)$: if both~$x$ and~$y$ are assumed to be in $G-S$, then we leave $E(x,y)$ intact;
+%if $x$ is assumed to be in $S$ (say we assume $x=s$) and $y$ is assumed to be in $G-S$, then we substitute $E(x,y)$ by $C_s(y)$; and if both~$x$ and~$y$ are assumed to be in $S$, then 
+%we replace $E(x,y)$ by $\bot$ or $\top$ depending on whether the vertices assumed to be equal to $x$ and $y$ are adjacent or not.
+%We leave the details to the reader.
+%\end{clproof}
+%\begin{comment}
+%\begin{clproof}
+%The proof proceeds by induction on the structure of the formula $\phi$. 
+%
+%If $\phi$ is an atomic formula $E(x,x')$ or $x=x'$, then the formula $\phi^S$ is constructed by case analysis. If $\alpha(x),\alpha(x')\in Y$ then $\phi^S$
+%is obtained from $\phi$ by substituting the variables $x,x'$ with variables from $Y$ according to~$\alpha$. If  $\alpha(x),\alpha(x')\in S$ then $\phi'$ is the truth value $\bot$ or $\top$ of 
+%the formula $\phi$ in the graph $G$ under the valuation which maps $x$ to $\alpha(x)$ and $x'$ to $\alpha(x')$. 
+%Finally, suppose that $\alpha(x)=y\in Y$ and $\alpha(x')=s\in S$. If $\phi$ is $E(x,x')$ then $\phi'$ is the formula $C_{s}(y)$, and if $\phi$ is $x=x'$ then $\phi'$ is the formula $\bot$.
+% 
+%For the inductive step, we consider two cases.
+%If $\phi$ is a boolean combination of formulas $\phi_1,\ldots,\phi_k$, then 
+%apply the inductive assumption to each formula $\phi_i$,
+%yielding formulas $\phi_1',\ldots,\phi_k'$. Then let $\phi'$ be the analogous boolean combination of the formulas $\phi_1',\ldots,\phi_k'$.
+%
+%Finally, suppose that $\phi$ is of the form $\exists x\, \psi$, where   $Y$ are the free variables of $\phi$ and $x\not \in Y$.
+% For $w$ being either the variable $x$ 
+%or an element $s\in S$, 
+%let $\psi^w$ be the formula obtained from the inductive assumption applied to the formula $\psi$ 
+%and pre-valuation $\alpha$ extended to a valuation which maps  $x$ to $w$. 
+%Then let $\phi'$
+%be the formula $\exists x\, \psi^x \lor \bigvee_{v\in S}\psi^v$.
+%The case of $\forall$ is dual.
+%
+%In each case, it follows from the inductive assumption that $\phi'$ 
+%satisfies the required condition.
+%\end{clproof}
+%\end{comment}
 
-If $\phi$ is an atomic formula $E(x,x')$ or $x=x'$, then the formula $\phi^S$ is constructed by case analysis. If $\alpha(x),\alpha(x')\in Y$ then $\phi^S$
-is obtained from $\phi$ by substituting the variables $x,x'$ with variables from $Y$ according to~$\alpha$. If  $\alpha(x),\alpha(x')\in S$ then $\phi'$ is the truth value $\bot$ or $\top$ of 
-the formula $\phi$ in the graph $G$ under the valuation which maps $x$ to $\alpha(x)$ and $x'$ to $\alpha(x')$. 
-Finally, suppose that $\alpha(x)=y\in Y$ and $\alpha(x')=s\in S$. If $\phi$ is $E(x,x')$ then $\phi'$ is the formula $C_{s}(y)$, and if $\phi$ is $x=x'$ then $\phi'$ is the formula $\bot$.
- 
-For the inductive step, we consider two cases.
-If $\phi$ is a boolean combination of formulas $\phi_1,\ldots,\phi_k$, then 
-apply the inductive assumption to each formula $\phi_i$,
-yielding formulas $\phi_1',\ldots,\phi_k'$. Then let $\phi'$ be the analogous boolean combination of the formulas $\phi_1',\ldots,\phi_k'$.
-
-Finally, suppose that $\phi$ is of the form $\exists x\, \psi$, where   $Y$ are the free variables of $\phi$ and $x\not \in Y$.
- For $w$ being either the variable $x$ 
-or an element $s\in S$, 
-let $\psi^w$ be the formula obtained from the inductive assumption applied to the formula $\psi$ 
-and pre-valuation $\alpha$ extended to a valuation which maps  $x$ to $w$. 
-Then let $\phi'$
-be the formula $\exists x\, \psi^x \lor \bigvee_{v\in S}\psi^v$.
-The case of $\forall$ is dual.
-
-In each case, it follows from the inductive assumption that $\phi'$ 
-satisfies the required condition.
-\end{clproof}
-\end{comment}
-
-Claim~\ref{cl:rewrite}, applied to $k=|\bar u\bar w|$, implies that 
+Lemma~\ref{cl:rewrite}, applied to $k=|\bar u\bar w|$, implies that 
 $\tp^q_G(\bar u\bar w)$ is determined by $\tp^q[G^S, \bar u\bar w]$, finishing the proof of~Lemma~\ref{lem:types}.	
 \end{proof}
 
